@@ -1,1 +1,1 @@
-<?php include_once(“Endless Stories.html”); ?>
+<?php include_once(“home.html”); ?>
