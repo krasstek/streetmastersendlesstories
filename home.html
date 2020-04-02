@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
 <style type="text/css">
@@ -414,6 +415,8 @@ $(document).on('keypress',function(e) {
         createStory();
     }
 });
+
+$(document).on("click", function(event) {createStory()})
     
 $( document ).ready(function() {
     
