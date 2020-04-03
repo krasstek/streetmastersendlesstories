@@ -579,22 +579,22 @@ for (i = alliesandrivals.length-1; i > 0; i--) {
     }
 
     let stages = [
-    {name:"Ashes of the Eternal", instory: 0},
-    {name:"Cashed Out", instory: 0},
-    {name:"Compromised", instory: 0},
-    {name:"Gone Ballistic", instory: 0},
-    {name:"One Step Ahead", instory: 0},
-    {name:"Original Copy", instory: 0},
-    {name:"Out of Time", instory: 0},
-    {name:"Poison the Well", instory: 0},
-    {name:"Right to Remain Silent", instory: 0},
-    {name:"Rude Awakening", instory: 0},
-    {name:"Running Wild", instory: 0},
-    {name:"Steel Memories", instory: 0},
-    {name:"Sudden Death", instory: 0},
-    {name:"Supply & Demand", instory: 0},
-    {name:"The Ceremony", instory: 0},
-    {name:"Under Destruction", instory: 0}
+    {name:"Ashes of the Eternal", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.`,false,false,false], stagepenalty: [`The fighter places 1 fire token in the space nearest to them.`,false,false,false], masterplan: randFrom(["actsofterror","personalpower"])},
+    {name:"Cashed Out", instory: 0, location: "base", bystander: "gambler", stagebonus: [`Each fighter may put a random defense token on a Frightened Gambler in their threat area.`,false,false,false], stagepenalty: [`Search the stage deck for a Pit Boss card and choose one fighter to draw it. Shuffle the stage deck.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])},
+    {name:"Compromised", instory: 0, location: "remote", bystander: "hostage", stagebonus: [`Each fighter may search the stage deck for 1 copy of Calming Words and add it to their fighter play area. Shuffle the stage deck.`,false,false,false], stagepenalty: [`Each fighter places 1 power on a different "Scared Staff" card.`,false,false,false], masterplan: randFrom(["actsofterror","kidnapping"])},
+    {name:"Gone Ballistic", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`One fighter may move 3 spaces toward the nearest objective token.`,false,false,false], stagepenalty: [`Search the stage deck for an additional objective card and put it into play. Shuffle the stage deck.`,false,false,false], masterplan: randFrom(["illegalgains","strengtheningforces"])},
+    {name:"One Step Ahead", instory: 0, location: "remote", bystander: "civilian", stagebonus: [`Each fighter may search the enemy deck for a Minion card to discard. Shuffle the enemy deck.`,false,false,false], stagepenalty: [`Each fighter must put their Objective card into the stage play area, and put the token in the corresponding space on the map.`,false,false,false], masterplan: randFrom(["personalpower","kidnapping"])},
+    {name:"Original Copy", instory: 0, location: "base", bystander: "scientist", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose a copy of Vandal Serum attached to a card in the Cloning Area. Return the selected card to Serum Supply.`,false,false,false], stagepenalty: [`Each fighter suffers 1 direct damage.  Then, if any fighter is on or adjacent to an objective space, remove this card from the game.`,true,true,false], masterplan: randFrom(["strengtheningforces","personalpower"])},
+    {name:"Out of Time", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`The fighters may choose to flip one objective to its inactive side.`,false,false,false], stagepenalty: [`The boss gains 1 random defense token for each Remnant engaged with a fighter.`,false,false,false], masterplan: randFrom(["strengtheningforces","personalpower"])},
+    {name:"Poison the Well", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`Remove each copy of Vandal Addict from the stage deck and remove them from the game. Shuffle the stage deck.`,false,false,false], stagepenalty: [`Each fighter searches the stage deck for 1 copy of Infected Rats and adds it to their Threat area. Shuffle the stage deck.`,false,false,false], masterplan: randFrom(["actsofterror","strengtheningforces"])},
+    {name:"Right to Remain Silent", instory: 0, location: "base", bystander: "captive", stagebonus: [`Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.`,false,false,false], stagepenalty: [`Add one power to Recoverd Intel.`,false,false,false], masterplan: randFrom(["illegalgains","kidnapping"])},
+    {name:"Rude Awakening", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Flip all objectives to their inactive side.`,false,false,false], stagepenalty: [`Each fighter places 1 damage on the Stage Rules card.`,false,false,false], masterplan: randFrom(["actsofterror","strengtheningforces"])},
+    {name:"Running Wild", instory: 0, location: "remote", bystander: "civilian", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".`,true,false,false],stagepenalty: [`Each Hero places 3 random defense tokens on the copy of "Hunt for the Idols" in their fighter play area. Each time a Hero searches, these defense tokens block successes and are discarded as normal.`,false,false,false], masterplan: randFrom(["illegalgains","personalpower"])},
+    {name:"Steel Memories", instory: 0, location: "base", bystander: "nameless goon", stagebonus: [`One fighter may move 3 spaces toward the nearest objective.`,false,false,false], stagepenalty: [`Each fighter must <b>Recruit</b>.`,false,false,false], masterplan: randFrom(["actsofterror","kidnapping"])},
+    {name:"Sudden Death", instory: 0, location: "neutral", bystander: "fighter", stagebonus: [`Put one random defense toke on each copy of "A New Challenger".`,false,false,false], stagepenalty: [`The active objective token nearest to the boss advances 4 spaces toward the boss and attacks.`,false,false,false], masterplan: randFrom(["kidnapping","strengtheningforces"])},
+    {name:"Supply & Demand", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objectve token it is carrying.`,false,false,false], stagepenalty: [`The boss gains 1 random defense token. Each fighter is dealt 1 direct damage.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])},
+    {name:"The Ceremony", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Flip 2 objective tokens to their inactive side.`,false,false,false], stagepenalty: [`Each fighter must either discard a card at random or place 1 power on "Oni's Vessel".`,false,false,false], masterplan: randFrom(["kidnapping","personalpower"])},
+    {name:"Under Destruction", instory: 0, location: "neutral", bystander: "construction worker", stagebonus: [`<b>Exhaust:</b> Move 1 power from a Time Bomb card to this card. Then, if there's 5 power on this card, remove it from the game.`,true,false,false], stagepenalty: [`Each fighter chooses a different objective and places 1 power on the chosen objective.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])}
     ];
     
     
@@ -609,15 +609,15 @@ for (i = alliesandrivals.length-1; i > 0; i--) {
     stages = cleanStages(stages);
 
 let enemies = [
-    {name:"Brotherhood", boss: "Dmitri", bosstitle: "callous mercenary", sex: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"]},
-    {name:"Cartel", boss: "Juan", bosstitle: "ruthless gangster", sex: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: "vicious gangers and hardened outcasts", threat: "levels his gun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"]},
-    {name:"Golden Dragons", boss: "Ah Long", bosstitle: "unrelenting martial arts master", sex: "male", desc: "the enterprise of martial artists, thugs, and businessmen", addressing: "weasels", minions: "ruthless triads and yakuza", threat: "lifts his hand, chi energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"]},
-    {name:"Kingdom", boss: "Kemono", bosstitle: "imposing green mutant", sex: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fist, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"]},
-    {name:"Kingdom", boss: "Jackal", bosstitle: "mad scientist", sex: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "mysterious ninja and clone puppets", threat: "lifts up an unnerving syringe", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"]},
-    {name:"Kingdom", boss: "Shadow", bosstitle: "ominous mastermind", sex: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, a dark blade materializing out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"]},
-    {name:"Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", sex: "female", desc: "the ancient, restless warriors", addressing: "warriors", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller","Pale Caller"]},
-    {name:"Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", sex: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, eldritch power crackling", minionnames: ["Yurei Ninja", "Kitsune"]},
-    {name:"Onyx League", boss: "Mack", bosstitle: "black-hearted overlord", sex: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"]}
+    {name:"Brotherhood", boss: "Dmitri", bosstitle: "callous mercenary", sex: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: ["N-40 Punisher","and put it into play"]},
+    {name:"Cartel", boss: "Juan", bosstitle: "ruthless gangster", sex: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: "vicious gangers and hardened outcasts", threat: "levels his gun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: ["On Alert","and put it into play"]},
+    {name:"Golden Dragons", boss: "Ah Long", bosstitle: "unrelenting martial arts master", sex: "male", desc: "the enterprise of martial artists, thugs, and businessmen", addressing: "weasels", minions: "ruthless triads and yakuza", threat: "lifts his hand, dark, malevolent energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"], preparedboss: ["Merciless Clutch", "and put it into play"]},
+    {name:"Kingdom", boss: "Kemono", bosstitle: "imposing green mutant", sex: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fist, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: ["Uncontrollable Surge","and put it into play"]},
+    {name:"Kingdom", boss: "Jackal", bosstitle: "mad scientist", sex: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "mysterious ninja and clone puppets", threat: "smiles, as her eyes start to glow malevolently, and your pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: ["Neural Invasion","and play it"]},
+    {name:"Kingdom", boss: "Shadow", bosstitle: "ominous mastermind", sex: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: ["Fan of Blades","and put it into play"]},
+    {name:"Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", sex: "female", desc: "the ancient, restless warriors", addressing: "warriors", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller","Pale Caller"], preparedboss: ["Decaying Blast","and play it"]},
+    {name:"Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", sex: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, eldritch power crackling", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: ["Eldritch Strike","and play it"]},
+    {name:"Onyx League", boss: "Mack", bosstitle: "black-hearted overlord", sex: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: ["Taking Aim","and put it into play"]}
     ];
 
 enemiescopy = enemies.slice(0,enemies.length)
@@ -719,10 +719,10 @@ let addressing = randFrom([enemy.addressing,"Global Gladiators","Gladiators"])
     return addressing
 }
 
-function genderPronoun(bossname, form) {
+function genderPronoun(sex, form) {
 let genderpronoun
 
-switch(bossname) {
+switch(sex) {
     case "male":
         switch(form) {
             case "subject": genderpronoun = "he";
@@ -792,65 +792,30 @@ function preGamePrologue(stage, enemy) {
     let latestscheme = latestScheme()
     
     let masterplan
-    
-    let actsofterror = ["actsofterror",`the vicious criminal syndicate ${enemy.name} believes they do not have to bow to the city government or even the
-    police force. ${enemy.boss} is going to let everyone know that the city has become a center of violence and crime where no-one is safe. `];
-    
-    let illegalgains = ["illegalgains",`the ${enemy.name}${possessiveSuffix(enemy.name)} vast network of crime and 
+
+    let vip = randFrom([["President", "White House"], ["Colonel", "Pentagon"], ["Mayor", "city hall"], ["Police Chief", "police station"], ["Citadel commander", "Citadel HQ"]])
+
+    switch(stage.masterplan) {
+    case "actsofterror": masterplan = `the vicious criminal syndicate ${enemy.name} believes they do not have to bow to the city government or even the
+    police force. ${enemy.boss} is going to let everyone know that the city has become a center of violence and crime where no-one is safe. `
+    break;
+    case "illegalgains": masterplan = `the ${possessiveSuffix(enemy.name)} vast network of crime and 
         ${(enemy.desc).replace("the","")} require substantial financial pipelines, and ${enemy.boss} is organizing a big score to fund
-        ${genderPronoun(enemy.sex, "possessive")} operations. `];
-    
-    let vip = [["President", "White House"], ["Colonel", "Pentagon"], ["Mayor", "city hall"], ["Police Chief", "police station"], ["Citadel commander", "Citadel HQ"]]
-    vip = randFrom(vip)
-    
-    let kidnapping = ["kidnapping", `the ${vip[1]} is not the exception to the rampant crimes related to the Kingdom these days. The ${vip[0]} has been kidnapped by the
-    ${enemy.minions} of ${enemy.boss}. Are you a bad enough dude to rescue the ${vip[0]}? `];
-
-    let strengtheningforces = ["strengtheningforces",`the ${enemy.bosstitle} ${enemy.boss} has been covertly making efforts to
-            strengthen the forces of the ${enemy.name}. Their plans must be thwarted before their forces become unstoppable.`]
-    
-    let personalpower = ["personalpower",`the ${enemy.bosstitle} ${enemy.boss} has moved across the region with ${genderPronoun(enemy.sex, "possessive")}
+        ${genderPronoun(enemy.sex, "possessive")} operations. `
+    break;
+    case "kidnapping": masterplan = `the ${vip[1]} is not the exception to the rampant crimes related to the Kingdom these days. The ${vip[0]} has been kidnapped by the
+    ${enemy.minions} of ${enemy.boss}. Are you a bad enough dude to rescue the ${vip[0]}? `
+    break;
+    case "strengtheningforces": masterplan = `the ${enemy.bosstitle} ${enemy.boss} has been covertly making efforts to
+            strengthen the forces of the ${enemy.name}. Their plans must be thwarted before their forces become unstoppable. `
+    break;
+    case "personalpower": masterplan = `the ${enemy.bosstitle} ${enemy.boss} has moved across the region with ${genderPronoun(enemy.sex, "possessive")}
         ${enemy.minions} in search for power. If ${genderPronoun(enemy.sex, "possessive")} power levels will near five figures, ${genderPronoun(enemy.sex, "subject")}
-        just might become invincible. `];
+        just might become invincible. `
+    }
 
-    switch(stage.name){
-        
-    case "Ashes of the Eternal": masterplan = (Math.random() < 0.5 ? actsofterror : personalpower)
-    break;
-    case "Cashed Out": masterplan = (Math.random() < 0.5 ? illegalgains : actsofterror)
-    break;
-    case "Compromised": masterplan = (Math.random() < 0.5 ? actsofterror : kidnapping)
-    break;
-    case "Gone Ballistic": masterplan = (Math.random() < 0.5 ? illegalgains : strengtheningforces)
-    break;
-    case "One Step Ahead": masterplan = (Math.random() < 0.5 ? personalpower : kidnapping)
-    break;
-    case "Original Copy": masterplan = (Math.random() < 0.5 ? strengtheningforces : personalpower)
-    break;
-    case "Out of Time": masterplan = (Math.random() < 0.5 ? strengtheningforces : personalpower)
-    break;
-    case "Poison the Well": masterplan = (Math.random() < 0.5 ? actsofterror : strengtheningforces)
-    break;
-    case "Right to Remain Silent": masterplan = (Math.random() < 0.5 ? illegalgains : kidnapping)
-    break;
-    case "Rude Awakening": masterplan = (Math.random() < 0.5 ? actsofterror : strengtheningforces)
-    break;
-    case "Running Wild": masterplan = (Math.random() < 0.5 ? personalpower : illegalgains)
-    break;
-    case "Steel Memories": masterplan = (Math.random() < 0.5 ? actsofterror : kidnapping)
-    break;
-    case "Sudden Death": masterplan = (Math.random() < 0.5 ? kidnapping : strengtheningforces)
-    break;
-    case "Supply & Demand": masterplan = (Math.random() < 0.5 ? illegalgains : actsofterror)
-    break;
-    case "The Ceremony": masterplan = (Math.random() < 0.5 ? kidnapping : personalpower)
-    break;
-    case "Under Destruction": masterplan = (Math.random() < 0.5 ? actsofterror : illegalgains)
-    break;
-    
-}
 
-    masterplan[1] = latestscheme + " " + masterplan[1]
+    masterplan = {storytext: latestscheme + " " + masterplan, vip: vip}
     
     return masterplan
 }
@@ -1195,7 +1160,7 @@ function possessiveSuffix (name) {
     
     let suffix = ((name).charAt((name).length-1) != "s" ? "'s" : "'")
     
-    return suffix
+    return name+suffix
 }
 
 function allyNamer (alliesandrivals, enemy, heronames) {
@@ -1218,7 +1183,7 @@ function defineKnowledge(i, story) {
     let knowledge
     
     switch (i) {
-    case 0: knowledge = (Math.random() < 0.5 ? "coldtrail" : "clueless")
+    case 0: knowledge = randFrom(["coldtrail","clueless"])
     break;
     case 1: case 3: case 5: case 7:
         knowledge = "hottrail"
@@ -1294,10 +1259,10 @@ function loseResult(stageindex, story, nextstage) {
         `${enemy.boss} ${enemy.threat} before ${nextenemy.boss} gestures for ${genderPronoun(enemy.sex,"object")} to stop. "No," ${genderPronoun(nextenemy.sex,"subject")} says. We have a better use for the Gladiators. 
         After all, who better to think ${finalboss.boss} would want than the Citadel's best?" ${minion} and ${nextenemy.boss} share an amused glance as ${enemy.boss} opens a secret passage. The three of them lead you to the unknown.`,
         `Cackling maniacally the whole time, ${enemy.boss} and ${genderPronoun(enemy.sex,"possessive")} ${enemy.minions} surround you, overwhelming you. Their constant attacks became too much for you, and soon you blacked out,
-        ${enemy.boss}${possessiveSuffix(enemy.boss)} haunting laughter echoing through your head all the while.`,
+        ${possessiveSuffix(enemy.boss)} haunting laughter echoing through your head all the while.`,
         `${enemy.boss} laughed quietly and sinisterly as he slowly licked a bleeding wound on ${genderPronoun(enemy.sex,"possessive")} hand. "${finalboss.boss == enemy.boss ? `I'm proud of you` : `${finalboss.boss} would be proud` }," ${genderPronoun(enemy.sex,"subject")} told the you were tied as
-        your vision faded. You barely heard ${enemy.boss}${possessiveSuffix(enemy.boss)} final command: "Take them to the ${nextenemy.name}!"`,
-        `You barely clear the site, and you find yourself immediately surrounded by ${enemy.boss}${possessiveSuffix(enemy.boss)} ${enemy.minions}. "You're due at the next stop," ${enemy.boss} said menacingly.
+        your vision faded. You barely heard ${possessiveSuffix(enemy.boss)} final command: "Take them to the ${nextenemy.name}!"`,
+        `You barely clear the site, and you find yourself immediately surrounded by ${possessiveSuffix(enemy.boss)} ${enemy.minions}. "You're due at the next stop," ${enemy.boss} said menacingly.
         "The ${nextenemy.name} still has some uses for you.`
         ]
     
@@ -1307,13 +1272,13 @@ function loseResult(stageindex, story, nextstage) {
         `You were unable to learn anything important before your retreat, and when you reconnect with Agent Fletch, he has a little time to debrief you.<br><br>While you were bumbling, the Citadel's efforts have paid off, and you have a little time to recover before you're
         sent off to your next target, where ${nextenemy.boss} has been seen.`,
         `You retreat and regroup nearby, having lost to ${enemy.boss} and ${genderPronoun(enemy.sex,"possessive")} forces. You overheard a lead, but it will be a struggle for you to catch up with the
-        ${finalboss.name}${possessiveSuffix(finalboss.name)} plans now.`,
+        ${possessiveSuffix(finalboss.name)} plans now.`,
         `You slowly awoke in a helicopter, confused how you wound up here. Agent Fletch leans towards you, shouting over the roar of the vehicle. "No idea what you thought you were doing down there. Now we must hurry to ${nextenemy.name}
         if we're to fix this!"`,
         `As you were regrouping some distance away, you saw your first welcome sight; Agent Fletch approached with a tablet under his arm. "Don't get comfy," Fletch said, booting up the tablet. "After this fiasco, we might recover if we rapidly strike at key
         targets, and hopefully throw the ${finalboss.name} off-balance."`,
         `Overwhelmed by the might of the ${enemy.name}, you're forced to flee with no real leads to follow up. However, after returning to HQ, the news reported on a situation that guides you on where to go next.`,
-        `After failing to contain the situation, you were forced to flee from ${enemy.name}${possessiveSuffix(enemy.name)} forces. Ashamed and frustrated, you have no choice but to return to the city and hope
+        `After failing to contain the situation, you were forced to flee from ${possessiveSuffix(enemy.name)} forces. Ashamed and frustrated, you have no choice but to return to the city and hope
         someone at the police department would hear you out. You can't think of any other option at this point.`
         ]
         
@@ -1339,7 +1304,7 @@ function loseResult(stageindex, story, nextstage) {
         `You slowly awoke in a helicopter, confused how you wound up here. Agent Fletch leans towards you, shouting over the roar of the vehicle. "No idea what you thought you were doing down there. Now we must hurry to the ${nextenemy.name}
         if we're to fix this!"`,
         `Overwhelmed by the might of the ${enemy.name}, you're manage to flee, clinging to your lives, and not a clue what to do next. After returning to HQ, the news reported on a situation that guides you on where to go next.`,
-        `Severy beaten by ${enemy.name}${possessiveSuffix(enemy.name)} forces, you barely espace. Ashamed and frustrated, you have no choice but to return to the city and hope
+        `Severy beaten by ${possessiveSuffix(enemy.name)} forces, you barely espace. Ashamed and frustrated, you have no choice but to return to the city and hope
         someone at the police department would hear you out. You can't think of any other option at this point.`
             ]
     }
@@ -1371,48 +1336,15 @@ function victoryResult(stageindex, story, nextstage) {
     
     let contact = randFrom(["He","She"])
     
-    let location
+    let location = story[stageindex].stage.location
     
-    let bystanders
+    let bystanders = story[stageindex].stage.bystander
     
     let clue
     
     let evilplace = evilPlace()
     
     let gizmo = randFrom(["data disc","keycard","tape recorder","floppy disc","microchip","communicator","dossier","cell phone","map","notepad","diskette","computer","magnetic tape"])
-    
-    
-    switch (story[stageindex].stage.name) {
-    case "Ashes of the Eternal": 
-    case "The Ceremony":
-    case "Out of Time": 
-    case "Rude Awakening": location = "cursed", bystanders = "unwitting acolyte"
-    break;
-    case "Cashed Out": location = "base", bystanders = "gambler"
-    break;
-    case "Compromised": location = "remote", bystanders = "hostage"
-    break;
-    case "Gone Ballistic": location = "neutral", bystanders = "hireling"
-    break;
-    case "One Step Ahead": location = "remote", bystanders = "civilian"
-    break;
-    case "Original Copy": location = "base",bystanders = "scientist"
-    break;
-    case "Poison the Well": location = "neutral", bystanders = "hireling"
-    break;
-    case "Right to Remain Silent": location = "base", bystanders = "captive"
-    break;
-    case "Supply & Demand": location = "neutral", bystanders = "hireling"
-    break;
-    case "Under Destruction": location = "neutral", bystanders = "construction worker"
-    break;
-    case "Running Wild": location = "remote", bystanders = "civilian"
-    break;
-    case "Steel Memories": location = "base", bystanders = "fighter"
-    break;
-    case "Sudden Death": location = "base", bystanders = "nameless goon"
-    break;
-    }
 
     let wanting = randFrom(["you are after","you want","","you pursuit","the Citadel is after","behind all this","all to familiar"])
     let finalcahoots = finalboss.name == nextenemy.name ? randFrom([finalboss.boss, (finalboss.desc.replace("the", "a certain"), finalboss.bosstitle)]) : randFrom([`the ${finalboss.name}`, `${finalboss.desc} ${wanting}`, `${finalboss.minions} ${wanting}`, `the ${finalboss.bosstitle} ${wanting}`, finalboss.boss])
@@ -1467,16 +1399,16 @@ function victoryResult(stageindex, story, nextstage) {
         `${enemy.boss} made a hasty retreat, but thanks to the information you got after the encounter, you have learned`,
         `"Thank you!" one of the ${bystanders}s said as ${lowerCaseInitial(contact)} approached, as the forces of ${enemy.boss} made their retreat. "I overheard what they're planning." ${contact} continues that `,
         `With the last of the ${enemy.minions} defeated, you turn to face ${enemy.boss} again. You're confident that if you could only get close to ${genderPronoun(enemy.sex,"object")}, you could end this game of cat and mouse. But ${genderPronoun(enemy.sex,"subject")} has disappeared into the thin air! You don't have the time to ponder this, as the intel from here tells`,
-        `After your victory over ${enemy.boss}${possessiveSuffix(enemy.boss)} goons and a short call to Agent Fletch, Citadel forces secure the area and begin their investigation with you. ${enemy.boss} might have slipped away, but among the debris of the fight, you find out`
+        `After your victory over ${possessiveSuffix(enemy.boss)} goons and a short call to Agent Fletch, Citadel forces secure the area and begin their investigation with you. ${enemy.boss} might have slipped away, but among the debris of the fight, you find out`
         ]
         
     if (location == "base") {
         gatherclues = gatherclues.concat([
         `With a hail of attacks, ${enemy.boss} and ${genderPronoun(enemy.sex,"possessive")} surviving cronies fled the encounter. Taking a moment to catch your breath, you managed to find the most conscious of the ${bystanders}s. "He never told us the plan!" ${lowerCaseInitial(contact)} cried.  "All I know is that`,
-        `Accessing ${enemy.boss}${possessiveSuffix(enemy.boss)} ${gizmo}, you are able to determine that`,
+        `Accessing ${possessiveSuffix(enemy.boss)} ${gizmo}, you are able to determine that`,
         `"You think you have won?"  ${enemy.boss} says you're closing in. "You have won nothing!" ${genderPronoun(enemy.sex,"subject")} produces a remote and presses a button. An explosion knocks you down, and the floor collapses beneath you as ${genderPronoun(enemy.sex,"subject")} escapes. You save who you can and ${minion} returns the favor by telling you that`,
         `With the Citadel on the way, you head deeper to find an array of computer screens. Sifting through files, you learn that`,
-        `Accessing ${enemy.boss}${possessiveSuffix(enemy.boss)} files, you were able to determine that `,
+        `Accessing ${possessiveSuffix(enemy.boss)} files, you were able to determine that `,
         `You snatch up a ${gizmo} and press the communications device in your ear.  "I've got some intel."  "Excellent," Agent Fletch responds.  "We'll see what data we can pull from it." Turns out`,
         `After the fight, with no sight of ${enemy.boss}, you couldn't help but wonder what ${genderPronoun(enemy.sex,"subject")} was trying to cover up with this. Inside you found a ${gizmo} with intel that ${enemy.boss} definitely didn't want you to find:`,
         ])
@@ -1494,9 +1426,9 @@ function victoryResult(stageindex, story, nextstage) {
     let planning = [`. You decide to pay them a visit.`, `. Agent Fletch suggests you continue your investigations there.`, `. A frightened ${bystanders} begs you to hurry up!`, `, and you think there really is no other option than to investigate.`, `. Perhaps it is time to visit ${nextenemy.boss}.`]
 
     let finalclue = randFrom([`where ${finalboss.boss} is waiting for you.`,`where your final showdown will go down!`, `the critical piece of information that leads you to the location of ${finalboss.boss}!`, `where ${finalboss.boss} is!`, `where the fight to end this will be.`, `the location where your ultimate destiny lies.`, `${nextenemy.boss} in fact is where all the clues were pointing at.`])
-    let finality = randFrom([``,`You're going to stop this once and for all.`,`You prepare for a fight this one last time.`,`This is it.`,`This is the end, at last.`,`No escape for ${finalboss.boss} now!`,`You can almost taste the victory`,`Everything has led to this moment.`,`It is in your hands now.`])
+    let finality = randFrom([``,`You're going to stop this once and for all.`,`You prepare for a fight this one last time.`,`This is it!`,`This is the end, at last.`,`No escape for ${finalboss.boss} now!`,`You can almost taste the victory!`,`Everything has led to this moment.`,`It is in your hands now.`,`The time has come for your final confrontation!`,`You know this, the final confrontation, won't be easy!`])
 
-    let victoryresult = (nextstage == 7) ? randFrom(gatherclues).replace(" that","").replace("continues","reveals") + " " + finalclue + " " + finality : randFrom(gatherclues) + " " + clue + randFrom(planning)
+    let victoryresult = (nextstage == 7) ? randFrom(gatherclues).replace(" that","").replace("continues","reveals") + " " + finalclue + "<br><br>" + finality : randFrom(gatherclues) + " " + clue + randFrom(planning)
     
     return victoryresult
 }
@@ -1545,8 +1477,8 @@ function getRandomMinions(enemy, enemies) {
     
 }
 
-function setUpInstructions(stageindex,enemy,rival,rival2,knowledge,stagebonus,stagemalus) {
-    
+function setUpInstructions(stageindex,enemy,rival,knowledge,stagebonus,stagemalus) {
+
     let addrival = knowledge == "hottrail" ? false : randFrom([true,false])
     
     let penalty = Math.max(0,Math.round(stageindex/3))
@@ -1570,31 +1502,9 @@ function setUpInstructions(stageindex,enemy,rival,rival2,knowledge,stagebonus,st
     let activate = false
     let rivalaggression = false
     
-    let preparedboss
+    let preparedboss = enemy.preparedboss
     
-    switch(enemy.boss) {
-        case "Ah Long": preparedboss = ["Invincible Armor", "and put it into play"];
-        break;
-        case "Dmitri": preparedboss = ["Trusty Kevlar", "and put it into play"];
-        break;
-        case "Jackal": preparedboss = ["Neural Invasion","and play it"];
-        break;
-        case "Juan": preparedboss = ["On Alert","and put it into play"];
-        break;
-        case "Kemono": preparedboss = ["Uncontrollable Surge","and put it into play"]
-        break;
-        case "Mack": preparedboss = ["Taking Aim","and put it into play"];
-        break;
-        case "Shadow": preparedboss = ["Prescience","and put it into play"];
-        break;
-        case "Tlazolteotl": preparedboss = ["Foul Prophecy","and play it"]
-        break;
-        case "Yokai": preparedboss = ["Shadow Swarm","and play it"];
-        break;
-        default: preparedboss = ["A defensive card","and play it"]
-    }
-    
-    let genericbonus = [["Each fighter may take a second mulligan.",false,false,false],["Each fighter gains 1 random defense token.",false,false,false],[`Search the enemy deck for ${preparedboss[0]} and discard it. Shuffle the enemy deck.`, false,false,false],["Each fighter may draw one loot card.",false,false,false]]
+    let genericbonus = [[`Put ${rival} (ally) into play.`,false,false,false],["Each fighter may take a second mulligan.",false,false,false],["Each fighter gains 1 random defense token.",false,false,false],[`Search the enemy deck for ${preparedboss[0]} and discard it. Shuffle the enemy deck.`, false,false,false],["Each fighter may draw one loot card.",false,false,false]]
     
     let angryrival = [[`${rival} gains 1 of each type of defense token. Place ${rival} (rival) within 3 spaces of a fighter. Activate ${rival} (rival).`,false,false,true],[`${rival} (rival) gains 1 random defense token and advances 2 spaces toward the nearest fighter.<br>`,true,true,true],[`${rival} (rival) gains 2 random defese tokens.<br>`,true,true,false]]
     
@@ -1650,17 +1560,16 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     let enemy = story[stageindex].enemy
     let stage = story[stageindex].stage
     let rival = allyNamer(alliesandrivals, enemy, heronames)
-    let rival2 = allyNamer(alliesandrivals, enemy, heronames)
     let competitor = []; do {competitor = randFrom(enemiescopy)} while (finalboss.name == competitor.name || enemy.name == competitor.name)
     let knowledge = defineKnowledge(stageindex, story)
     let minion = randFrom(enemy.minionnames)
     let pregame = stageindex == 0 ? pregameprologue : "";
     ((enemy.boss != finalboss.boss) && stageindex == 0) ? pregame = pregame + `Without ${randFrom(["intel","knowledge","information","a clue","a word","lowdown"])} on the current ${randFrom(["locale","location","whereabouts","position","scene","station","bearings"])} of ${finalboss.boss}, ${randFrom(["Citadel analysts","you","Agent Flecth and you"])} ${randFrom(["believe","consider","conclude","suppose","think","regard","assume","postulate","deem","surmise"])} ${enemy.boss} is the best source for more information.<br><br>` : ``
     let trail = pregame + randFrom(["Based on current intel","Chasing the clues","Following your leads", "In pursuit of clues", "After a little more intel-gathering", "Following this lead", "As you investigated further", "After searching for more intel","Following the intel you had","After searching for more information","Reviewing what you got"]);
-    let instructions
-    let rivalpresence
-    let rivalboost
-    let setup = `<b>${stage.name}: ${enemy.name} ${enemy.name == "Kingdom" ? `(${enemy.boss})` : "" }</b><br>`
+    let instructions = setUpInstructions(stageindex,enemy,rival,knowledge,stage.stagebonus,stage.stagepenalty)
+    let rivalpresence = instructions[1]
+    let rivalboost = instructions[2]
+    let setup = `<b>${stage.name}: ${enemy.name} ${enemy.name == "Kingdom" ? `(${enemy.boss})` : "" }</b><br>` + ((stage.name == "Original Copy") ? `Choose ${getRandomMinions(enemy, enemies)} deck as the minion.<br>` : ``) + instructions[0]
     let win = determineNextStage(stageindex, story, 1)
     let lose = determineNextStage(stageindex, story, 0)
     let winepilogue = (stageindex == 7 || stageindex == 8) ? `You have defeated the masterplan` : victoryResult(stageindex, story, win)
@@ -1671,31 +1580,27 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
 
     switch (stage.name) {
     case "Ashes of the Eternal":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.`,false,false,false],[`The fighter places 1 fire token in the space nearest to them.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {
         prologue = `${trail}, ${enemy.boss}, the boss of ${enemy.name} is invoking an evil entity at a remote ${evilPlace()}. You have decided to head there.<br><br>
-        And in the nick of time! When you arrive, the shrine has been set on fire to release the spirits. ${enemy.boss}${possessiveSuffix(enemy.boss)} goons are moving about the area, while the 
+        And in the nick of time! When you arrive, the shrine has been set on fire to release the spirits. ${possessiveSuffix(enemy.boss)} goons are moving about the area, while the 
         ${enemy.bosstitle} ${genderPronoun(enemy.sex,"reflexive")} observes${rivalpresence == true ? ` with ${rival} at ${genderPronoun(enemy.sex,"object")} side,` : ``}. You rush to intervene, and ${enemy.boss} calls to you: "Is there no way a crime boss could just
         this once have ${genderPronoun(enemy.sex,"possessive")} ${mysticalSynonym()} ritual finished in peace?"<br><br>${laconicStatement()}.`}
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, ${enemy.desc} of ${enemy.name} is invoking an evil entity at a remote ${evilPlace()}. You have decided to head there.<br><br>
-        Almost too late! When you arrive, the shrine is on fire, and the flames are getting higher! ${enemy.boss}${possessiveSuffix(enemy.boss)} goons are moving about the area, while the 
+        Almost too late! When you arrive, the shrine is on fire, and the flames are getting higher! ${possessiveSuffix(enemy.boss)} goons are moving about the area, while the 
         ${enemy.bosstitle} ${genderPronoun(enemy.sex,"reflexive")} observes. You rush to intervene, and ${enemy.boss} calls to you: "Your efforts are futile, my plans are too far in motion!". ${laconicStatement()}.`}
         else {prologue = `${trail}, ${enemy.boss} is trying to awaken the evil spirits of a remote shrine.<br><br>
         You arrive at your destination. You immediately notice ${enemy.boss} in the distance, ${rivalpresence == true ? `with ${rival} at ${genderPronoun(enemy.sex,"object")} side,` : ``} watching the
-        angry flames rising. ${rivalboost == true ? `${rival}${possessiveSuffix(rival)} eyes burn with hateful fire as if possessed!` : `You are in a dire hurry.`} "You again?!" ${enemy.boss} shouts, seeing you rush toward the flames. 
+        angry flames rising. ${rivalboost == true ? `${possessiveSuffix(rival)} eyes burn with hateful fire as if possessed!` : `You are in a dire hurry.`} "You again?!" ${enemy.boss} shouts, seeing you rush toward the flames. 
         "I was sure you would not have the time to bother me here, knowing what ${(finalboss.boss == enemy.boss) == true ? `other plans I have in motion` : `${finalboss.boss} is up to`}. Well, who doesn't need some exercise after a good old fashioned summoning?"<br><br>${laconicStatement()}.`}
     break;
     case "Cashed Out":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Each fighter may put a random defense token on a Frightened Gambler in their threat area.`,false,false,false],[`Search the stage deck for a Pit Boss card and choose one fighter to draw it. Shuffle the stage deck.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {prologue = `${trail} you locate the gambling den of the ${enemy.name}.<br><br>
         At the den, you poke around and eventually find your way to a set of double doors. Listening, you hear voices and burst in. ${enemy.boss} stands up from a private
         table to take you on. "A crime boss just can't take a break, huh?" ${genderPronoun(enemy.sex,"subject")} exclaims.`}
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, you were able to locate the gambling den that is owned and operated by members of the ${enemy.name}. With so many of their members in one place, you knew it was the best bet to get more information. You decided to pay them a visit, break up their 
-        operation and get some intel on the ${finalboss.boss}${possessiveSuffix(enemy.name)} plans.<br><br>
+        operation and get some intel on the ${possessiveSuffix(enemy.name)} plans.<br><br>
         When you arrived at the casino, you heard a commotion inside and - fearing you could lose the element of surprise - you busted in. Your hunch was right; ${enemy.boss} knew you were
         coming and was trying to clear the place out. "${rivalpresence == true ? `${rivalboost == true ? `Hold them off, ${rival}`: `Get the money, ${rival}`}` : `Get the money`}," ${genderPronoun(enemy.sex, "subject")} commanded, "${rivalboost == true ? `I'll get the money`: `I'll hold them off`}!"`}
         else {
@@ -1706,8 +1611,6 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     break;
     
     case "Compromised":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Each fighter may search the stage deck for 1 copy of Calming Words and add it to their fighter play area. Shuffle the stage deck.`,false,false,false],[`Each fighter places 1 power on a different "Scared Staff" card.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") { prologue = `${trail}, you have arrived at the offices just in the nick of time. The ${enemy.name} is ushering their ${enemy.minions} into the building, ready to take 
         hostages. You managed to slip ahead of them. "There's no escape!" ${enemy.boss} shouts out. "Achieving our goals requires your cooperation,
         and you will abide by our demands!". As panic ensues around the offices, you make your move.<br><br>"There you are", ${enemy.boss} said with a mixture of amusement and
@@ -1728,8 +1631,6 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     break;
     
     case "Gone Ballistic":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`One fighter may move 3 spaces toward the nearest objective token.`,false,false,false],[`Search the stage deck for an additional objective card and put it into play. Shuffle the stage deck.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {
         prologue = `${trail}, you ascertain that an arms deal set up by the ${enemy.minions} of ${enemy.boss} is going on in an abandoned warehouse.<br><br>
         You move quickly to the scene to get a drop on the ${enemy.name}. On location, you see that the trade isn't done yet, and you can prevent the whole deal. You
@@ -1747,8 +1648,6 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     break;
     
     case "One Step Ahead":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Each fighter may search the enemy deck for a Minion card to discard. Shuffle the enemy deck.`,false,false,false],[`Each fighter must put their Objective card into the stage play area, and put the token in the corresponding space on the map.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {prologue = `${trail}, you have affirmed that the minions of ${enemy.boss} have been using the mountain path you suspected to conceal their movements, so that's where you head to lay an ambush.
         Climbing the mountain is arduous, but you finally settle on a point where to hunker down to spring your attack.<br><br>
         As you see the forces of the ${enemy.name} rush around the bend, you leap out of your hiding spot with the ${enemy.minions} in disarray!`}
@@ -1767,9 +1666,6 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     break;
     
     case "Original Copy":
-        setup = setup + ` Choose ${getRandomMinions(enemy, enemies)} deck as the minion.<br>` 
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose a copy of Vandal Serum attached to a card in the Cloning Area. Return the selected card to Serum Supply.`,false,false,false],[`Each fighter suffers 1 direct damage.  Then, if any fighter is on or adjacent to an objective space, remove this card from the game.`,true,true,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail")
         {prologue = `${trail}, you located the facility. You are surprised to find the lab not heavily guarded, so slipping in is not necessarily challenging, and you take the elevator down to the large lab.
         You patiently wait while a lounge version of ${loungeMusic()} plays over the cheap speakers.<br><br>Inside, however, you are glad to find just who
@@ -1791,8 +1687,6 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     break;
     
     case "Out of Time":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`The fighters may choose to flip one objective to its inactive side.`,false,false,false],[`${enemy.boss} gains 1 random defense token for each Remnant engaged with a fighter.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {prologue = `${trail}, you find yourself nearing one more ${evilPlace()}, hoping to find ${enemy.boss}. Animated corpses are digging their way out the ground all around you,
         a large altar dominating the scene where ${enemy.bosstitle} of the ${enemy.name} stands. "Stop this while you can, ${enemy.boss}!" you shout over the rising winds. The ${enemy.minions} and their boss
         all turn to you, surprised to see you there. "And you are the ones who are going to make me?" ${genderPronoun(enemy.sex,"subject")} asks, between amusement and annoyance."<br><br>
@@ -1808,8 +1702,6 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     break;
     
     case "Poison the Well":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Remove each copy of Vandal Addict from the stage deck and remove them from the game. Shuffle the stage deck.`,false,false,false],[`Each fighter searches the stage deck for 1 copy of Infected Rats and adds it to their Threat area. Shuffle the stage deck.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {prologue = `${trail}, you affirm that ${enemy.boss} has a secret sewer lair. From your intel, Citadel analysts pieced together a map of the tunnels which, surprisingly,
         seem quite accurate.<br><br>
         You enter the marked chamber, and find yourself in what used to be a water treatment facility that seems now being used as some sort of insane science experiment. "You?" comes a voice,
@@ -1822,13 +1714,11 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         "You?" comes a voice, echoing from somewhere else in the chamber. "I had heard you were sticking your nose in my business. Well, your efforts have been wasted. We are almost done!" ${enemy.boss} ${(rivalpresence == true ? `and ${rival} setep` : `steps`)} out of the shadows, along with the ${enemy.name} goons.`}
         else {prologue = `You wake up, and the first thing you notice is the intense stench attacking your nostrils. You open your eyes, and as you focus, you can see ${enemy.boss} at a distance. You seem
         to be underground, in some kind of a crazy scientist setup, and ${enemy.minions} are moving canisters about big machinery.<br><br>"Oh, you're awake?!" ${enemy.boss} says, annoyed. "I was hoping you would
-        not come to your senses before our bath would be ready for you!" You don't think this would be good for your skin, so you diplomatically refuse. The ${enemy.name}${possessiveSuffix(enemy.name)}
+        not come to your senses before our bath would be ready for you!" You don't think this would be good for your skin, so you diplomatically refuse. The ${possessiveSuffix(enemy.name)}
         goons don't seem to respond to kind words alone${rivalpresence == true ? `,nor does their foreman ${rival}` : ``}${rivalboost == true ? `, who looks to be pumped up on Vandal` : ``}.`};
     break;
     
     case "Right to Remain Silent":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.`,false,false,false],[`Add one power to Recoverd Intel.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {prologue = `${trail}, you locate the kidnapped scouts along with ${enemy.boss} and ${genderPronoun(enemy.sex, "possessive")} cronies,
         the ${enemy.name}. Agent Fletch informs through your earpiece: "${finalboss.boss} cannot find out we're on to ${genderPronoun(finalboss.sex,"object")}, 
         but ${enemy.boss == finalboss.boss ? `soon ${genderPronoun(enemy.sex,"subject")} will`: `${enemy.boss} will surely relay anything useful forward` }. You must act fast, Global Gladiators!"<br><br>You were already on it!`}
@@ -1847,8 +1737,6 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     
     break;
     case "Rude Awakening":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Flip all objectives to their inactive side.`,false,false,false],[`Each fighter places 1 damage on the Stage Rules card.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {prologue = `${trail}, you finally find yourself at your destination, another ${evilPlace()}. You see a bunch of people all of them shambling about, all of them appearing broken and decayed.<br><br>
         You immediately notice ${enemy.boss}, directing a cabal of necromancers! "No! You shouldn't be here!" ${genderPronoun(enemy.sex,"subject")} exclaims. "Not yet, in any case.. no matter, soon you will join the horde!"`}
         else if (knowledge == "coldtrail") {
@@ -1863,26 +1751,22 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     break;
     
     case "Running Wild":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`<b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".`,true,false,false],[`Each Hero places 3 random defense tokens on the copy of "Hunt for the Idols" in their fighter play area. Each time a Hero searches, these defense tokens block successes and are discarded as normal.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {prologue = `${trail}, you find the ${enemy.minions} of ${enemy.name} in the forest, near a ruined shrine. ${enemy.boss} shouts to ${genderPronoun(enemy.sex,"possessive")}
         goons: "Search, you fools, search! It cannot take this long!"<br><br>${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} then notices your approach and further instructs ${genderPronoun(enemy.sex,"possessive")} goons: 
         "Just find them! I can hold these troublemakers!"<br><br>You inform ${enemy.boss} that whatever they are after, it probably belongs in a museum.`}
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, you find the ${enemy.minions} of ${enemy.name} have been seen in the forest, near a ruined shrine.<br><br>With help from the locals you have no trouble finding the general
-        area where the ${enemy.name}${possessiveSuffix(enemy.name)} searches are happening, but turns out they have been scouring the woods for days already. When you reach them,
+        area where the ${possessiveSuffix(enemy.name)} searches are happening, but turns out they have been scouring the woods for days already. When you reach them,
         you find ${enemy.boss} shouting to ${genderPronoun(enemy.sex,"possessive")} goons${rivalpresence == true ? ` and ${rival}`:``}: "The idols are near, I can feel it my bones!" ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} then notices your
         approach and ${enemy.threat}.`}
         else {prologue = `${trail}, you find the ${enemy.minions} of ${enemy.name} have been seen in the forest, near a ruined shrine. With help from the locals you have no trouble finding the general
-        area where the ${enemy.name}${possessiveSuffix(enemy.name)} searches are happening, but turns out they have been scouring the woods for weeks already, and are quite prepared.<br><br>
+        area where the ${possessiveSuffix(enemy.name)} searches are happening, but turns out they have been scouring the woods for weeks already, and are quite prepared.<br><br>
         When you reach them, you find ${enemy.boss} shouting to ${genderPronoun(enemy.sex,"possessive")} goons${rivalpresence == true ? ` and ${rival}`:``}: "The idols are near, I can feel it my bones!"
         ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} then notices your approach and ${enemy.threat}.`}
     break;
 
     case "Steel Memories":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`One fighter may move 3 spaces toward the nearest objective.`,false,false,false],[`Each fighter must <b>Recruit</b>.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
-        if (knowledge == "hottrail") {prologue = `${trail}, you accompany a squad of Citadel soldiers as they storm the ${enemy.name}${possessiveSuffix(enemy.name)} secret base. ${enemy.name} soldiers
+        if (knowledge == "hottrail") {prologue = `${trail}, you accompany a squad of Citadel soldiers as they storm the ${possessiveSuffix(enemy.name)} secret base. ${enemy.name} soldiers
         fall before you, and you make your way through the maze-like halls until you finally reach an elevator.<br><br>You wait patiently, while a lounge version of ${loungeMusic()} plays over the cheap speakers.
         When you arrive, ${enemy.boss} seems surprised. "I'm not surprised to see you here," ${genderPronoun(enemy.sex, "subject")} claims, contrary to your suspicions of having the element of surprise. "I have a message for you
         from ${finalboss.boss}, ${defineAddressing(enemy)}: nobody will leave this room alive!" ${laconicStatement()}.`
@@ -1900,34 +1784,30 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     break;
     
     case "Sudden Death":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Put one random defense toke on each copy of "A New Challenger".`,false,false,false],[`The active objective token nearest ${enemy.boss} advances 4 spaces toward ${enemy.boss} and attacks.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {
         prologue = `${trail}, you found that ${enemy.name == "Kingdom" ? "the Kingdom is ideed back to its previous practice: " : `the ${enemy.name} have indeed adopted the practices pioneered by the Kingdom: `}
         testing out new recruits in a savage melee where only the strong survive.<br><br>
         You infiltrate yet another underground fight club focused on bringing the most ruthless fighters out in a fight to death. You couldn't let that happen, and are determined shut
-        down the ${enemy.name}${possessiveSuffix(enemy.name)} efforts first hand!`
+        down the ${possessiveSuffix(enemy.name)} efforts first hand!`
         }
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, you have surmised that the ${enemy.bosstitle} ${enemy.boss} has been openly recruiting soldiers into the ${enemy.name}. As you 
         pushed the matter further, you found that ${enemy.name == "The Kingdom" ? "the Kingdom was back to its previous practice: " : (enemy.name) + " has adopted the same practices as the Kingdom: "}
         testing out new recruits in a savage melee where only the strong survive.<br><br>
         You infiltrate yet another underground fight club focused on bringing the most ruthless fighters out in a fight to death. You couldn't let that happen, and are determined shut down the
-        ${enemy.name}${possessiveSuffix(enemy.name)} efforts first hand!`
+        ${possessiveSuffix(enemy.name)} efforts first hand!`
         }
         else {
         prologue = `Hands tied behind your back, you are led by ${enemy.boss} and ${minion} into an oddly-placed urban clearing. The out-of-place streets are
         hosting several fighters, each of them sparring in deadly martial arts. "You're not worthy to walk on this ground," ${minion} growls, glaring at you with a deep-seated hatred.
         "And so", ${enemy.boss} interjects. "We will allow you the chance to prove your worth. ${finalboss.boss == enemy.boss? `I have developed a great interest in you.
         I would be pleased if you'd demonstrate it to my doubting minion.` : `${finalboss.boss} has taken great interest in you. Show us why that is.`}"<br><br>"This is unnecessary," ${minion} says quietly to ${enemy.boss}. "You play games with the trust of the ${finalboss.name == enemy.name ? "Master" : finalboss.name}."
-        ${enemy.boss} loosens your bonds, ignoring ${minion}${possessiveSuffix(minion)} words. You grab your wrists as they are free, rubbing the pain away, and watch as the other fighters turn toward ${enemy.boss},
+        ${enemy.boss} loosens your bonds, ignoring ${possessiveSuffix(minion)} words. You grab your wrists as they are free, rubbing the pain away, and watch as the other fighters turn toward ${enemy.boss},
         preparing for what you're assuming will be a fight to the death. The other fighters show no fear, their eyes looking only for glory${rivalboost == true ? `, and ${rival} looking especially eager to beat you to a pulp` : ``}.`
         }
     break;
     
     case "Supply & Demand":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objectve token it is carrying.`,false,false,false],[`${enemy.boss} gains 1 random defense token. Each fighter is dealt 1 direct damage.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {prologue = `${trail}, you are on to a black market trade conducted by the ${enemy.name}.<br><br>
         You have approached the site stealthily, and observe the ongoing trade. Standing nearby, the ${enemy.bosstitle} ${enemy.boss} watches over the activity. During their work, one of the
         soldiers drops his crate, a large amount of illegal drugs spilling out onto the concrete loading dock. You hear ${enemy.boss} roar in rage at the soldier's
@@ -1951,8 +1831,6 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     break;
     
     case "The Ceremony":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Flip 2 objective tokens to their inactive side.`,false,false,false],[`Each fighter must either discard a card at random or place 1 power on "Oni's Vessel".`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {prologue = `${trail}, you arrive at one more ${evilPlace()}. You wonder to yourself how many of these are still hidden around the country?<br><br>
         Once there, you find ${enemy.minions} busy arranging the unholy paraphernalia, with ${enemy.boss} in the midst of it all. "Get the interlopers!"
         ${genderPronoun(enemy.sex,"subject")} shouts. "I don't know if this will work, but it's worth the effort to try!"`
@@ -1972,8 +1850,6 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     break;
     
     case "Under Destruction":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`<b>Exhaust:</b> Move 1 power from a Time Bomb card to this card. Then, if there's 5 power on this card, remove it from the game.`,true,false,false],[`Each fighter chooses a different objective and places 1 power on the chosen objective.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge == "hottrail") {
         prologue = `${trail}, you find out the site that ${enemy.name} has targeted. According to the intel, the building being constructed is owned by the ${competitor.name} through shell corporations. You don't really mind ${competitor.desc} taking such a loss,
         but why is the ${enemy.name} so interested in this place?<br><br>
@@ -1982,7 +1858,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, you find out that the ${enemy.name} has been very busy setting up explosives to bring a construction site down. Unfortunately, you may have arrived too late..<br><br>
         "Arm the bombs and let's get out of here," a voice commands from behind a plastic sheet. When the sheet is thrown aside, ${enemy.boss} ${rivalpresence == true ? `and ${rival} step` : `steps`} into view. 
-        ${enemy.boss}${possessiveSuffix(enemy.boss)} eyes immediately dart from the placed explosives. Without hesitation, ${genderPronoun(enemy.sex,"subject")} attacks!${rivalboost == true ? ` "Leave
+        ${possessiveSuffix(enemy.boss)} eyes immediately dart from the placed explosives. Without hesitation, ${genderPronoun(enemy.sex,"subject")} attacks!${rivalboost == true ? ` "Leave
         something for me!" ${rival} shouts.` : ``}`}
         else {
         prologue = `You open your eyes and find yourself in.. an unfinished construction site? Suddenly, ${enemy.boss} steps out from the shadows. "Welcome, ${enemy.addressing}! 
@@ -2007,12 +1883,12 @@ let loseepilogue = "Defeat text"
 let pregameprologue = preGamePrologue(story[7].stage,story[7].enemy)
 
 for (i = 0; i < story.length-2; i++) {
-    cardtext = createPrologue(i, story, alliesandrivals, heronames, enemies, pregameprologue[1]);
+    cardtext = createPrologue(i, story, alliesandrivals, heronames, enemies, pregameprologue.storytext);
     cardtexts.push(cardtext)
 }
 
 for (i = 7; i < story.length; i++) {
-    cardtext = createFinale(i, story, alliesandrivals, heronames, enemies, pregameprologue[0]);
+    cardtext = createFinale(i, story, alliesandrivals, heronames, enemies, pregameprologue.vip);
     cardtexts.push(cardtext)
 }
 
@@ -2021,55 +1897,51 @@ return cardtexts
     
 }
 
-function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pregameprologue) {
+function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vip) {
     let finalboss = story[7].enemy
     let finalstage = story[7].stage
     let enemy = story[stageindex].enemy
     let stage = story[stageindex].stage
     let rival = allyNamer(alliesandrivals, enemy, heronames)
     let rival2 = allyNamer(alliesandrivals, enemy, heronames)
-    let competitor = enemies.length > 0 ? enemies[Math.floor(Math.random()*enemies.length)] : {name: `enemies of the ${enemy.name}`, des: "an ally of the Kingdom"}
+    let competitor = []; do {competitor = randFrom(enemiescopy)} while (finalboss.name == competitor.name || enemy.name == competitor.name)
     let knowledge = defineKnowledge(stageindex, story)
-    let masterplan = pregameprologue
+    let masterplan = stage.masterplan
     let minion = randFrom(enemy.minionnames)
     let trail = randFrom(["Based on current intel","Chasing the clues","Following your leads", "In pursuit of clues", "After a little more intel-gathering", "Following this lead", "As you investigated further", "After searching for more intel","Following the intel you had","After searching for more information"]);
-    let instructions
-    let rivalpresence
-    let rivalboost
-    let setup = `<b>${stage.name}: ${enemy.name} ${enemy.name == "Kingdom" ? `(${enemy.boss})` : "" }</b><br>`
+    let instructions = setUpInstructions(stageindex,enemy,rival,knowledge,stage.stagebonus,stage.stagepenalty)
+    let rivalpresence = instructions[1]
+    let rivalboost = instructions[2]
+    let setup = `<b>${stage.name}: ${enemy.name} ${enemy.name == "Kingdom" ? `(${enemy.boss})` : "" }</b><br>` + ((stage.name == "Original Copy") ? `Choose ${getRandomMinions(enemy, enemies)} deck as the minion.<br>` : ``) + instructions[0]
     let win = determineNextStage(stageindex, story, 1)
     let lose = determineNextStage(stageindex, story, 0)
-    let winepilogue = finalResult(masterplan,enemy,rival,1) + "<br><br>" + `${finalboss.boss != enemy.boss ? `You could not stop the ${finalboss.boss}, but your efforts were not in vain, as a threat as serious was neutralized. ` : ``}The fighters win this story.`
-    let loseepilogue = finalResult(masterplan,enemy,rival,0) + "<br><br>" + `The fighters lose this story.`
+    let winepilogue = finalResult(stage.masterplan,enemy,rival,vip,1) + "<br><br>" + `${finalboss.boss != enemy.boss ? `You could not stop the ${finalboss.boss}, but your efforts were not in vain, as a threat as serious was neutralized. ` : ``}The fighters win this story.`
+    let loseepilogue = finalResult(stage.masterplan,enemy,rival,vip,0) + "<br><br>" + `The fighters lose this story.`
     let gloat = gloatingList(enemy)
 
     switch (stage.name) {
     case "Ashes of the Eternal":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.`,false,false,false],[`The fighter places 1 fire token in the space nearest to them.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "actsofterror") {
-        prologue = `${trail}, you have learned that ${enemy.boss}, just to show that Citadel is powerless before the ${enemy.name}, has trapped the ${randFrom([`police chief's`,`President's`,`Colonel's`])} ${randFrom([`daughter`,`son`])} and all of their wedding guests inside the locale of the festivities - and unleashed a supernatural fire on them!<br><br>
+        prologue = `${trail}, you have learned that ${enemy.boss}, just to show that Citadel is powerless before the ${enemy.name}, has trapped the ${possessiveSuffix(vip[0])} ${randFrom([`daughter`,`son`])} and all of their wedding guests inside the locale of the festivities - and unleashed a supernatural fire on them!<br><br>
         "${gloat[0]}" ${enemy.boss} says${(rivalpresence == true && rivalboost == false) ? `, with ${rival} at ${genderPronoun(enemy.sex,"object")} side,` : ``}. "${gloat[1]}" You have to put out the fires and save the people inside - or the city will see the ${enemy.name} are in total control, and the Citadel cannot save them! And if you cannot, who can?
         ${rivalboost == true ? ` ${rival}, eyes burning with the unnatural fire, rushes to intercept you!` :``}`}
         else if (knowledge != "clueless" && masterplan == "personalpower") {
         prologue = `${trail}, it is clear ${enemy.desc} of ${enemy.name} is invoking an evil entity at a remote ${evilPlace()} to receive unfathomable power. You have decided to head there.<br><br>
-        Almost too late! When you arrive, ritual fires have been set, and the flames are getting higher! ${enemy.boss}${possessiveSuffix(enemy.boss)} minions${(rivalpresence == true  && rivalboost == false) ? ` and ${rival}` : ``} are working the ritual, while the 
+        Almost too late! When you arrive, ritual fires have been set, and the flames are getting higher! ${possessiveSuffix(enemy.boss)} minions${(rivalpresence == true  && rivalboost == false) ? ` and ${rival}` : ``} are working the ritual, while the 
         ${enemy.bosstitle} ${genderPronoun(enemy.sex,"reflexive")} draws in the ${mysticalSynonym()} power. You call out to ${genderPronoun(enemy.sex,"object")}: "Stop it now!" ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} looks at you. "${gloat[0]}" ${enemy.boss} answers. "${gloat[1]}"<br><br>
         You take that as a no, and begin to undo the ritual!${rivalboost == true ? ` ${rival}, as if possessed by the fiery demon force, rushes to intercept you!` :``}`}
         else {prologue = `${changeOfPlans(trail,finalboss,enemy,stage)}<br><br>
         You arrive at your destination. You immediately notice ${enemy.boss} in the distance, ${rivalpresence == true ? `with ${rival} at ${genderPronoun(enemy.sex,"object")} side,` : ``} watching the
-        angry flames rising. ${rivalboost == true ? `${rival}${possessiveSuffix(rival)} eyes burn with hateful fire!` : `You are in a dire hurry.`} "${gloat[0]}" ${enemy.boss} shouts, seeing you rush toward the flames. 
+        angry flames rising. ${rivalboost == true ? `${possessiveSuffix(rival)} eyes burn with hateful fire!` : `You are in a dire hurry.`} "${gloat[0]}" ${enemy.boss} shouts, seeing you rush toward the flames. 
         "${gloat[1]}`}
     break;
     
     case "Cashed Out":
-    instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Each fighter may put a random defense token on a Frightened Gambler in their threat area.`,false,false,false],[`Search the stage deck for a Pit Boss card and choose one fighter to draw it. Shuffle the stage deck.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "illegalgains") {
         prologue = `${trail}, you finally figure out the plan ${enemy.boss} has. ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} operates an extremely lucrative network casinoes and nightclubs that the ${enemy.name}
         uses as a front for criminal activities of all types, and funnels money to the organization's plans of world domination. It is completely shielded for any investigations by the traditional authorities, but
         as Citadel agents, you are not as restrained.<br><br>
-        You arrive at the headquarters, where your surroundings speak volumes about the vast wealth channeled into the ${enemy.name}${possessiveSuffix(enemy.name)} operations. ${enemy.boss} ${genderPronoun(enemy.sex,"reflexive")}
+        You arrive at the headquarters, where your surroundings speak volumes about the vast wealth channeled into the ${possessiveSuffix(enemy.name)} operations. ${enemy.boss} ${genderPronoun(enemy.sex,"reflexive")}
         comes to greet you. "Give it up, ${enemy.boss}!" you challenge ${genderPronoun(enemy.sex,"object")}. "${gloat[0]} the ${enemy.bosstitle} answers, and continues: "${gloat[1]}"`}
         else if (knowledge != "clueless" && masterplan == "actsofterror") {
         prologue = `${trail}, you finally figure out the plan ${enemy.boss} has. ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} operates an extremely lucrative network casinoes and nightclubs that the ${enemy.name}
@@ -2084,10 +1956,8 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
     break;
     
     case "Compromised":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Each fighter may search the stage deck for 1 copy of Calming Words and add it to their fighter play area. Shuffle the stage deck.`,false,false,false],[`Each fighter places 1 power on a different "Scared Staff" card.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "actsofterror") {
-        prologue = `${trail}, you have determined that the ${enemy.name} will take hostage the whole ${randFrom(["White House","city hall","police headquarters","Pentagon"])} in a show of power. 
+        prologue = `${trail}, you have determined that the ${enemy.name} will take hostage the whole ${vip[1]} in a show of power. 
         You have arrived at the location. Sounds of violence can be heard inside the building, followed by screams inside and out.
         "Call the police!" several fleeing employees shout, but you know it's futile. The chances of police having the gear or training to handle this properly is beyond unlikely.<br><br>
         You get past the ${enemy.minions} on guard, and face ${enemy.boss} ${genderPronoun(enemy.sex,"reflexive")}. "This ends here, ${enemy.boss}! I am not here to negotiate!" you call out. "${gloat[0]}" 
@@ -2106,8 +1976,6 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
     break;
     
     case "Gone Ballistic":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`One fighter may move 3 spaces toward the nearest objective token.`,false,false,false],[`Search the stage deck for an additional objective card and put it into play. Shuffle the stage deck.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "strengtheningforces") {
         prologue = `${trail}, you have found out that ${enemy.boss} is planning on buying enough firepower for ${enemy.name} goons to completely take over the city by force of might. The location is known, but Agent Fletch does
         not think the police is fast enough - or well enough trained - to take part in an operation against an opponent this dangerous.<br><br>
@@ -2129,10 +1997,8 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
     break;
     
     case "One Step Ahead":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Each fighter may search the deck for a Minion card to discard. Shuffle the enemy deck.`,false,false,false],[`Each fighter must put their Objective card into the stage play area, and put the token in the corresponding space on the map.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "kidnapping") {
-        prologue = `${trail}, you have confirmed that the minions of ${enemy.boss} have your rescue mark holed up in a remote mountain cave. Going by helicopter would surely
+        prologue = `${trail}, you have confirmed that the minions of ${enemy.boss} have the ${vip[0]} holed up in a remote mountain cave. Going by helicopter would surely
         alert the ${enemy.name}, so you must approach by foot. You start the arduous climb, and after a while you find ${enemy.boss} blocking your way.<br><br>
         "I didn't believe you had it in you to get this far! ${gloat[0]}" shouts ${enemy.boss}, and turns slightly. "${randFrom(enemy.minionnames)}! Just get to the cave and kill ${randFrom(["him","her"])}!" ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} turns back to you
         and continues: "${gloat[1]}"`}
@@ -2148,9 +2014,6 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
     break;
     
     case "Original Copy":
-        setup = setup + ` Choose ${getRandomMinions(enemy, enemies)} deck as the minion.<br>` 
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose a copy of Vandal Serum attached to a card in the Cloning Area. Return the selected card to Serum Supply.`,false,false,false],[`Each fighter suffers 1 direct damage.  Then, if any fighter is on or adjacent to an objective space, remove this card from the game.`,true,true,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "strengtheningforces")
         {prologue = `${trail}, you eventually find the exact location of the secret laboratory where ${enemy.boss} is growing ${genderPronoun(enemy.sex,"possessive")} army, and make your way to the hidden facility.
         You fight with the guards until you find your way to an elevator, and proceed down to the large lab. You patiently wait while a lounge version of
@@ -2170,15 +2033,13 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
         else 
         {prologue = `As you slowly regain consciousness, you notice an IV hooked up to your arm. Your strength has been completely drained and you are unable to even stand up.
         "${gloat[0]}," a voice called. "${gloat[1]}"<br><br>
-        Your simple recon mission had gone south, and now you have no idea how long you have been the hostage to your captors. As your vision clears, you see the voice belongs to ${enemy.boss}, the
+        You have no idea how long you have been the hostage to your captors. As your vision clears, you see the voice belongs to ${enemy.boss}, the
         notorious boss of ${enemy.name}, ${enemy.desc}. You also see that you are surrounded by sterile lab equipment and ominous test tubes occupied by shadowy figures${rivalpresence == true && rivalboost == false ? `, with ${rival} observing your vitals from a screen` : `` }. You
         suddenly feel a surge of strength return and yank out the IV. "Fine, let's do it the hard way!" ${rivalpresence == true && rivalboost == true ? `Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away.
         It stands, slowly, powerfully built, moving with graceful precision. It is the ultimate clone, ${rival.toUpperCase()}-EX!` : ``}`};
     break;
     
     case "Out of Time":
-    instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`The fighters may choose to flip one objective to its inactive side.`,false,false,false],[`${enemy.boss} gains 1 random defense token for each Remnant engaged with a fighter.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "strengtheningforces") {
         prologue = `${trail}, you have located the ${evilPlace() } where ${enemy.boss} will enact ${genderPronoun(enemy.sex,"possessive")} masterplan. Citadel agents escort you to the remote location. The
         world around you is nothing like the one you have lived in all of your life. ${enemy.boss} has apparently shifted the place to another dimension, one where the dark winds sting your skin and the
@@ -2197,27 +2058,23 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
     break;
     
     case "Poison the Well":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Remove each copy of Vandal Addict from the stage deck and remove them from the game. Shuffle the stage deck.`,false,false,false],[`Each fighter searches the stage deck for 1 copy of Infected Rats and adds it to their Threat area. Shuffle the stage deck.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "actsofterror") {
-        prologue = `${trail}, you were able to find your way to ${enemy.boss}${possessiveSuffix(enemy.boss)} secret sewer lair. As you enter a large chamber, you find what used to be a water treatment facility that is now being
+        prologue = `${trail}, you were able to find your way to ${possessiveSuffix(enemy.boss)} secret sewer lair. As you enter a large chamber, you find what used to be a water treatment facility that is now being
         used as some sort of insane science experiment. "${gloat[0]}" came a voice, echoing from somewhere else in the chamber.<br><br>
         The ${enemy.bosstitle} of the ${enemy.name} enters your view from the shadows and ${genderPronoun(enemy.sex,"subject")} continues: "${gloat[1]}
-        Once we get these pumps working, all the water in the city will be poisoned, and many, many people will die in a humiliating pandemic of super-diarrhea. But you won't be here to see it!"`}
+        Once we get these pumps working, all the water in the city will be tainted with Vandal, the everyone will be an addict. But you won't be here to see it!"`}
         else if (knowledge != "clueless" && masterplan == "strengtheningforces") {
-        prologue = `${trail}, you were able to find your way to ${enemy.boss}${possessiveSuffix(enemy.boss)} secret sewer lair. As you enter a large chamber, you find what used to be a water treatment facility that is now being
+        prologue = `${trail}, you were able to find your way to ${possessiveSuffix(enemy.boss)} secret sewer lair. As you enter a large chamber, you find what used to be a water treatment facility that is now being
         used as some sort of insane science experiment. "${gloat[0]}" came a voice, echoing from somewhere else in the chamber.<br><br>
         The ${enemy.bosstitle} of the ${enemy.name} enters your view from the shadows and ${genderPronoun(enemy.sex,"subject")} continues: "${gloat[1]}
         Once we get these pumps working, all the water in the city will be blessed by our new serum. The weak will die, and the surviving strong will join our ranks as thralls. So now you have a choice: join us, or die!"`}
         else {prologue = `You wake up, and the first thing you notice is the intense stench attacking your nostrils. You open your eyes, and as you focus, you can see ${enemy.boss} at a distance. You seem
         to be underground, in some kind of a crazy scientist setup, and ${enemy.minions} are moving canisters about big machinery.<br><br>"Oh, you're awake?!" ${enemy.boss} says, annoyed. "I was hoping you would
-        not come to your senses before our bath would be ready for you!" You don't think this would be good for your skin, so you diplomatically refuse. The ${enemy.name}${possessiveSuffix(enemy.name)}
+        not come to your senses before our bath would be ready for you!" You don't think this would be good for your skin, so you diplomatically refuse. The ${possessiveSuffix(enemy.name)}
         goons don't seem to respond to kind words alone${rivalpresence == true ? `,nor does their foreman ${rival}` : ``}${rivalboost == true ? `, who looks to be pumped up on Vandal` : ``}.`};
     break;
     
     case "Right to Remain Silent":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.`,false,false,false],[`Add one power to Recoverd Intel.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "illegalgains") {
         prologue = `${trail}, you find out that ${enemy.boss} has several prominent members from a number of tech and finance companies hostage, and are leveraging their position to extort ludicrous sums of untracable cash. 
         From your intel, Citadel analysts have pieced together the location of these hostages, and you move in.<br><br>
@@ -2227,18 +2084,16 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
         "${enemy.boss} is interrogating ${randFrom(["him","her"])} as we speak," Agent Fletch says. "You have to move in quick, before ${genderPronoun(enemy.sex,"subject")} gets any sensitive information! Some of
         their intel could threaten even the Citadel!"<br><br>
         You arrive to the scene to see several captives, with their faces covered. ${rivalpresence == true ? `${rival} is standing guard over the captives,` : `The enemies are on alert,`} and you don't know which one
-        is your mark. "${gloat[0]}", ${enemy.boss} greets you. "${gloat[1]}" ${laconicStatement()}.`} 
+        is the ${vip[0]}. "${gloat[0]}" ${enemy.boss} greets you. "${gloat[1]}"<br><br>${laconicStatement()}.`} 
         else {prologue = `"Finally awake?" That's the first thing you hear after the splash of stale water jolts you awake. 
         You have no idea how long you've been a hostage of the ${enemy.name}, ${enemy.desc} — but you'd guess it's been at least a few days.<br><br>
-        You've been enduring  their tortures as they've tried to get everything they could out of you. 
+        You've been enduring their tortures as they've tried to get everything they could out of you. 
         You've held out for now but don't know how long you'll be able to keep it up. ${enemy.boss} ${enemy.threat} as ${genderPronoun(enemy.sex, "subject")} stares at you down. "${gloat[0]}" Your silence is deafening as you stare at the floor. "${gloat[1]}" ${enemy.boss} sneers. 
         "I won't be gone for too long, ${defineAddressing(enemy)}. Don't get comfortable."<br><br>
         ${upperCaseInitial(genderPronoun(enemy.sex, "subject"))} exits, and ${rivalpresence == true ? `${rival} stays to guard over you.` : `as soon as the door closes behind ${genderPronoun(enemy.sex, "object")}, you begin working at your bonds.`}`};
     
     break;
     case "Rude Awakening":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Flip all objectives to their inactive side.`,false,false,false],[`Each fighter places 1 damage on the Stage Rules card.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "actsofterror") {
         prologue = `${trail}, you are on the way to the location of ${enemy.boss} with Agent Fletch. "According to Citadel analysts, the goal of the ${enemy.name} has all along been to sow fear and disarray to the city
         by using a ${mysticalSynonym()} ritual to swarm the city with the undead."
@@ -2260,8 +2115,6 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
     break;
     
     case "Running Wild":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`<b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".`,true,false,false],[`Each Hero places 3 random defense tokens on the copy of "Hunt for the Idols" in their fighter play area. Each time a Hero searches, these defense tokens block successes and are discarded as normal.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "personalpower") {
         prologue = `${trail}, you have determined that ${enemy.boss} is in a distant forest, after a collection of ancient idols of a lost, ancient temple that ${mysticalSynonym()} texts claim will grant immeasurable power to their keeper.<br><br>
         "You have to hurry, Gladiators," Agent Fletch says, shouting over the roar of the helicopter as you are flown to the target. "Our Citadel scouts report that ${enemy.name} goons have been
@@ -2273,7 +2126,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
         "You have to hurry, Gladiators," Agent Fletch says, shouting over the roar of the helicopter as you are flown to the target. "Our Citadel scouts report that ${enemy.name} goons have been
         seen in the area for some time now, and their power and reach will grow exponentally with the influx of cash from the black market after selling the artefacts!" He looks out the window and then nods to you. "This is your stop." You slide down the climbing rope and watch as the helicopter flies away. 
         Soon you find the ${enemy.minions} of ${enemy.name} in the forest."<br><br>
-        ${enemy.boss} notices notices your approach shouts in anger: "${gloat[0].substring(0, gloat[0].length - 1)}!" ${rivalpresence == true ? `, and ${rival} steps in your way`:``}`}
+        ${enemy.boss} notices notices your approach shouts in anger: "${gloat[0].substring(0, gloat[0].length - 1)}!" ${rivalpresence == true ? `, as ${rival} steps in your way.`:``}`}
         else {prologue = `${changeOfPlans(trail,finalboss,enemy,stage)}<br><br>
         With help from the locals you have no trouble finding the area with a ruined shrine where the ${enemy.name}${possessiveSuffix(enemy.name)} searches are happening, but turns out they have been scouring the woods for 
         weeks already, and are quite prepared.<br><br>
@@ -2282,12 +2135,10 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
     break;
     
      case "Steel Memories":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`One fighter may move 3 spaces toward the nearest objective.`,false,false,false],[`Each fighter must <b>Recruit</b>.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "actsofterror") {prologue = `${trail}, you have found out that ${enemy.boss} has managed to organize a 12 hour marathon of crimes of every imaginable sort, including murder,
         for this very night. Agent Fletch explains to you: "The ${enemy.name} has provided the people release for all the hatred, and violence, and aggression that they keep up inside them. You need to contain their mob,
-        before the mentality spreads any further and the city falls to anarchy!"<br><br>This has been ${enemy.boss}${possessiveSuffix(enemy.boss)} plan all along! You have no choice but to move in and subdue both the ${enemy.minions}, and any outsiders who have
-        fallen to ${enemy.boss}${possessiveSuffix(enemy.boss)} manipulations, or the city will never be the same again.`
+        before the mentality spreads any further and the city falls to anarchy!"<br><br>This has been ${possessiveSuffix(enemy.boss)} plan all along! You have no choice but to move in and subdue both the ${enemy.minions}, and treat any 
+        victims to ${possessiveSuffix(enemy.boss)} manipulations collateral damage, or the city will never be the same again.`
         }
         else if (knowledge != "clueless" && masterplan == "kidnapping") {
         prologue = `${trail}, you have found out where the secret base of the ${enemy.name} is located and rescue target is being held. You accompany a squad of Citadel soldiers as they storm the base.
@@ -2303,20 +2154,18 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
     break;
     
     case "Sudden Death":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Put one random defense toke on each copy of "A New Challenger".`,false,false,false],[`The active objective token nearest ${enemy.boss} advances 4 spaces toward ${enemy.boss} and attacks.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "kidnapping") {
         prologue = `${trail}, you found that ${enemy.boss} has kidnapped, along with the target of your rescue mission, a whole lot of people from all walks of life, and intends to make them fight to death
         for ${genderPronoun(enemy.sex,"possessive")} own entertainment! Agent Fletch informs you that you have the location of the ${enemy.name}${possessiveSuffix(enemy.name)} secret base. You head there with
         Citadel soldiers, who clear the upper levels while you find your way to an elevator, and proceed down to the heart of the complex. You patiently wait while a lounge version of
         ${loungeMusic()} plays over the cheap speakers.<br><br>
         There you find ${enemy.boss} in the middle of the captives. "So today's lesson is," ${genderPronoun(enemy.sex,"subject")} says. "You kill each other off till there's only one left.
-        Nothing's against the rules." You must put an end to this to rescue your mark! "All are welcome to participate!" says ${enemy.boss} as ${genderPronoun(enemy.sex,"subject")} turns to you.`
+        Nothing's against the rules." You must put an end to this to rescue the ${vip[0]}! "All are welcome to participate!" says ${enemy.boss} as ${genderPronoun(enemy.sex,"subject")} turns to you.`
         }
         else if (knowledge != "clueless" && masterplan == "strengtheningforces") {
         prologue = `${trail}, you have found out that ${enemy.bosstitle} ${enemy.boss} has been covertly organizing a new underground tournament under a mainstream event's shadow,
         recruiting soldiers into the ${enemy.name}. Citadel analysts say that this has the most extensive recruiting potential of any of the similar plots in the recent past.<br><br>
-        The ${enemy.name} is operating behind a legitimate event to hundreds of fighters from all over the globe. The winners are again offered prestigious positions as officers in the ${enemy.name}${possessiveSuffix(enemy.name)} armed forces. The winners who refuse this
+        The ${enemy.name} is operating behind a legitimate event to hundreds of fighters from all over the globe. The winners are again offered prestigious positions as officers in the ${possessiveSuffix(enemy.name)} armed forces. The winners who refuse this
         offer are naturally captured and killed. You can't let this happen. You once more infiltrate a network of underground street fights focused on bringing the most ruthless fighters out of the woodwork, and
         once more have no choice but to enter the fight and shut down the ${enemy.name} efforts first hand.`
         }
@@ -2325,17 +2174,15 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
         hosting several fighters, each of them sparring in deadly martial arts. "You're not worthy to walk on this ground," ${minion} growls, glaring at you with a deep-seated hatred.
         "And so", ${enemy.boss} interjects. "We will allow you the chance to prove your worth. ${finalboss.boss == enemy.boss? `I have developed a great interest in you.
         I would be pleased if you'd demonstrate it to my doubting minion.` : `${finalboss.boss} has taken great interest in you. Show us why that is.`}"<br><br>"This is unnecessary," ${minion} says quietly to ${enemy.boss}. "You play games with the trust of the ${finalboss.name == enemy.name ? "Master" : finalboss.name}."
-        ${enemy.boss} loosens your bonds, ignoring ${minion}${possessiveSuffix(minion)} words. You grab your wrists as they are free, rubbing the pain away, and watch as the other fighters turn toward ${enemy.boss},
+        ${enemy.boss} loosens your bonds, ignoring ${possessiveSuffix(minion)} words. You grab your wrists as they are free, rubbing the pain away, and watch as the other fighters turn toward ${enemy.boss},
         preparing for what you're assuming will be a fight to the death. The other fighters show no fear, their eyes looking only for glory${rivalboost == true ? `, and ${rival} looking especially eager to beat you to a pulp` : ``}.`
         }
     break;
     
     case "Supply & Demand":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objectve token it is carrying.`,false,false,false],[`${enemy.boss} gains 1 random defense token. Each fighter is dealt 1 direct damage.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "illegalgains") {
         prologue = `${trail}, you have found out that the ${enemy.name} is conducting an immense international drug deal with a Vandal-derivative drug load on a remote island.<br><br>
-        Agent Fletch sits behind the pilot's seat of the Citadel plane takes you to your location. "We're coming up on the ${enemy.name}${possessiveSuffix(enemy.name)} location," he says to you. 
+        Agent Fletch sits behind the pilot's seat of the Citadel plane takes you to your location. "We're coming up on the ${possessiveSuffix(enemy.name)} location," he says to you. 
         "I'll see if I can put her down over-" His words are interrupted as an explosion from an anti-air shell shakes the plane. "Nevermind, looks like you're jumping in!"
         Grabbing a parachute, you leap from the plane as it peels off and heads toward safety.<br><br>
         You land just outside the camp that was firing at the Citadel aircraft, and you hear gunfire in the distance. "We've reached the camp," you say to Fletch via your radio. 
@@ -2345,7 +2192,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
         else if (knowledge != "clueless" && masterplan == "actsofterror") {
         prologue = `${trail}, you find out that the ${enemy.desc} of the ${enemy.name} are planning to openly flood the streets of the city with free samples of a Vandal-derivative drug. Citadel analysts have determined the location and time of
         their plan, and you move in to intervene.<br><br>
-        A Citadel chopper drops you at the remote beach where the ${enemy.name}${possessiveSuffix(enemy.name)} distribution of product is taking place. "${gloat[0]}" ${enemy.boss} says. "${gloat[1]}" You have to stop the distribution here and now, or the city will experience unprecedented drug problems - and the people will know no-one can stop ${enemy.name}`
+        A Citadel chopper drops you at the remote beach where the ${possessiveSuffix(enemy.name)} distribution of product is taking place. "${gloat[0]}" ${enemy.boss} says. "${gloat[1]}" You have to stop the distribution here and now, or the city will fall into unimaginable drug problems - and the people will know no-one can stop the ${enemy.name}!`
         }
         else {
         prologue = `${changeOfPlans(trail,finalboss,enemy,stage)}<br><br>
@@ -2357,8 +2204,6 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
     break;
     
     case "The Ceremony":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`Flip 2 objective tokens to their inactive side.`,false,false,false],[`Each fighter must either discard a card at random or place 1 power on "Oni's Vessel".`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "personalpower") {prologue = `${trail}, you've determined where ${enemy.boss} will enact ${genderPronoun(enemy.sex,"possessive")} plan of receiving the ultimate power. You reach the ${evilPlace()}
         nestled deep in in the wilds where the ritual is to take place - to find ${enemy.boss} and ${genderPronoun(enemy.sex,"possessive")} forces already starting the ritual.<br><br>"${gloat[0]}" ${enemy.boss} calls with confidence, ${genderPronoun(enemy.sex,"possessive")} voice echoing off the stone walls.
         You see the main chamber of the temple has multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of ${mysticalSynonym()} images.
@@ -2368,18 +2213,16 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, pr
         to find ${enemy.boss} and ${genderPronoun(enemy.sex,"possessive")} forces already starting the ritual. You see the captive chained, too tightly for you to free ${randFrom(["him","her"])} without defeating the ${enemy.name} first.<br><br>
         "${gloat[0]}" ${enemy.boss} calls with confidence, ${genderPronoun(enemy.sex,"possessive")} voice echoing off the stone walls.
         You see the main chamber of the temple has multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of ${mysticalSynonym()} images.
-        Thinking that these may be part of the ritual, you quickly remove them from their pedestals. "${gloat[1]}" ${enemy.boss} finishes. ${upperCaseInitial(genderPronoun(enemy.sex,"possessive"))} force ${rivalpresence == true ? ` led by ${rival}`: ``}charge you while
+        Thinking that these may be part of the ritual, you quickly remove them from their pedestals. "${gloat[1]}" ${enemy.boss} finishes. ${upperCaseInitial(genderPronoun(enemy.sex,"possessive"))} forces ${rivalpresence == true ? ` led by ${rival}`: ``}charge you while
         ${genderPronoun(enemy.sex,"subject")} continues the ritual.<br><br>The time has come for your final confrontation!`}
         else {prologue = `${changeOfPlans(trail,finalboss,enemy,stage)}<br><br>
         ${trail}, you reach the ${evilPlace()} nestled deep in in the wilds - to find ${enemy.boss} and ${genderPronoun(enemy.sex,"possessive")} forces already starting the ritual.<br><br>"${gloat[0]}" ${enemy.boss} calls with confidence, ${genderPronoun(enemy.sex,"possessive")} voice echoing off the stone walls.
         You see the main chamber of the temple has multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of ${mysticalSynonym()} images.
-        Thinking that these may be part of the ritual, you quickly remove them from their pedestals. ${rivalpresence == true ? `${rivalboost == true ? `${rival}, possessed by a supernatural force, moves in to intercept you. ` : `${rival} eyes you from ${enemy.boss}${possessiveSuffix(enemy.boss)} side. `}` : ``}"Your efforts are futile!" ${enemy.boss} calls out. ${upperCaseInitial(genderPronoun(enemy.sex,"possessive"))} forces charge you while
+        Thinking that these may be part of the ritual, you quickly remove them from their pedestals. ${rivalpresence == true ? `${rivalboost == true ? `${rival}, possessed by a supernatural force, moves in to intercept you. ` : `${rival} eyes you from ${possessiveSuffix(enemy.boss)} side. `}` : ``}"Your efforts are futile!" ${enemy.boss} calls out. ${upperCaseInitial(genderPronoun(enemy.sex,"possessive"))} forces charge you while
         ${genderPronoun(enemy.sex,"subject")} continues the ritual.`}
     break;
     
     case "Under Destruction":
-        instructions = setUpInstructions(stageindex,enemy,rival,rival2,knowledge,[`<b>Exhaust:</b> Move 1 power from a Time Bomb card to this card. Then, if there's 5 power on this card, remove it from the game.`,true,false,false],[`Each fighter chooses a different objective and places 1 power on the chosen objective.`,false,false,false])
-        setup = setup + instructions[0]; rivalpresence = instructions[1]; rivalboost = instructions[2]
         if (knowledge != "clueless" && masterplan == "actsofterror") {
         prologue = `${trail}, you find out that ${enemy.boss} is going to bring the ${randFrom(["White House","Pentagon","police headquarters","Citadel HQ","city hall"])} down! ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} has set enough explosives inside a part of the building closed for renovation to bring down the whole
         building and much of the surrounding area, and it is happening right now. There is no-one but the Global Gladiators who can react with enough speed and
@@ -2428,12 +2271,12 @@ function changeOfPlans(trail,finalboss,enemy,stage) {
     return conclusion
 }
 
-function finalResult(masterplan, enemy, rival, result) {
+function finalResult(masterplan, enemy, rival, vip = null, result) {
     
     let neutralize
     
     switch (masterplan) {
-        case "kidnapping": neutralize = `hostage of the ${enemy.name} has been aquired`
+        case "kidnapping": neutralize = `${vip[0]} has been aquired from the ${enemy.name}`
         break;
         case "personalpower": neutralize = `power levels of the ${enemy.bosstitle} remain in check`
         break;
@@ -2451,11 +2294,11 @@ function finalResult(masterplan, enemy, rival, result) {
         `"You may have me," ${enemy.boss} says as the Citadel agents surround them. "But I am only one." Agent Fletch approaches. "Say goodbye to your precious ${enemy.name}," he says. ${randFrom([rival,randFrom(enemy.minionnames)])} laughs. "Who do you think you're working for?"`,
         `"You may have me," ${enemy.boss} says as the Citadel agents surround them. Suddenly, ${genderPronoun(enemy.sex,"subject")} starts to deteoriorate, and in mere seconds, there's nothing but dust left. Agent Fletch approaches. "It must have been a clone! At least the ${neutralize}, that's a victory in my books."`,
         `In a blinding flash, ${enemy.boss} disappears just as Agent Fletch approaches. "The ${neutralize}," you report. "We may have won the battle, but the war is not over," Agent Fletch says.`,
-        `You ensured that the ${neutralize}. As ${enemy.boss}${possessiveSuffix(enemy.boss)} minions flee, ${genderPronoun(enemy.sex,"subject")} wipes blood from ${genderPronoun(enemy.sex,"possessive")} mouth. "We're not done. This is MY city. The ${enemy.name} never forgets! So you better never show your face here again! With that, they quickly fled in the darkness.`,
+        `You ensured that the ${neutralize}. As ${possessiveSuffix(enemy.boss)} minions flee, ${genderPronoun(enemy.sex,"subject")} wipes blood from ${genderPronoun(enemy.sex,"possessive")} mouth. "We're not done. This is MY city. The ${enemy.name} never forgets! So you better never show your face here again! With that, they quickly fled in the darkness.`,
         `With each blow to ${enemy.boss}, ${genderPronoun(enemy.sex,"subject")} attempts to fight you off. Finally, ready to end it all, you swing with what will be your final attack, but suddenly there's blinding flash and  ${genderPronoun(enemy.sex,"subject")}'s gone.`,
         `With ${enemy.boss} defeated, Citadel soldiers secure the area and you return home. Now that the ${neutralize}, the mayor arranges a parade for the heroes of the city, and most of you get a medal!`,
-        `Suddenly, there's a blinding flash and ${enemy.boss}${possessiveSuffix(enemy.boss)} gone! It's all gone. Shockingly, you're back at Citadel HQ, surrounded by agents all going about their business. Did all that even happen?`,
-        `You are lying in the corner, exhausted, all enemies defeated - but their master is nowhere to be found. "You've done a hero's job, Gladiators. I guess you're through, huh?" Agent Fletch asks as he approaches you. "Finished," you answer wearily. "It's too bad we couldn't catch ${enemy.boss}. But then again, who could?"`,
+        `Suddenly, there's a blinding flash and ${possessiveSuffix(enemy.boss)} gone! It's all gone. Shockingly, you're back at Citadel HQ, surrounded by agents all going about their business. Did all that even happen?`,
+        `You are lying in the corner, exhausted, all enemies defeated - but their master is nowhere to be found. "You've done a hero's job, Gladiators. I guess you're through, huh?" Agent Fletch asks as he approaches you. "Finished," you answer wearily. "It's too bad we couldn't catch ${enemy.boss}. But then again, do we really ever?"`,
         `Your intense fight takes you to the edge of an unfathomably deep pit. Just as you're about to strike ${enemy.boss} down, ${genderPronoun(enemy.sex,"subject")} dives in, and that's the last you see of ${genderPronoun(enemy.sex,"object")}. For now!`,
         `You are sure you you have cornered ${enemy.boss} with no route of escape, when all of a sudden a sleek ${enemy.name} helicopter descends and ${genderPronoun(enemy.sex,"subject")} leaves, dangling from a ladder. "The ${neutralize}, but ${enemy.boss} slipped away," you report to Agent Fletch with your communicator.`,
         ]
@@ -2559,7 +2402,7 @@ function lastWords(enemy) {
         [`I got what everyone gets,`,`I got a lifetime`],
         [`Time..`,`To die.`],
         [`My only hope,`,`Is that the next team will do what I could not.`],
-        [`My only regret is that I failed to stop the ${enemy.name}${possessiveSuffix(enemy.name)} scheme,`,`And my failure has doomed the city.`],
+        [`My only regret is that I failed to stop the ${possessiveSuffix(enemy.name)} scheme,`,`And my failure has doomed the city.`],
         [`I can only think of all the innocent lives that will perish,`,`Because of this insane scheme I failed to thwart.`],
         [`I gave everything,`,`I have no regrets.`],
         [`When death comes,`,`It will come as an old friend.`],
@@ -2572,7 +2415,7 @@ function lastWords(enemy) {
 function lastThoughts(enemy) {
     let lastthoughts = [
         `You can only think of all the innocent lives that will perish because of this insane scheme you failed to thwart.`,
-        `Your only regret is that you failed to stop the ${enemy.name}${possessiveSuffix(enemy.name)} scheme, and your failure has doomed the city.`,
+        `Your only regret is that you failed to stop the ${possessiveSuffix(enemy.name)} scheme, and your failure has doomed the city.`,
         `From out of nowhere a thought crosses your mind: one day another Gladiator will rise and uses the power of ${randFrom(["Street Masters","Vandal","Dynasty Cells","Dark Matter"])} to light our darkest hour.`,
         `You can only think that if you'll close your eyes now, you're not going to wake up.`,
         `You think to yourself it's been a funny sort of day in a way.`,
