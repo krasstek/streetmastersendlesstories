@@ -591,7 +591,7 @@ for (i = alliesandrivals.length-1; i > 0; i--) {
     {name:"Rude Awakening", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Flip all objectives to their inactive side.`,false,false,false], stagepenalty: [`Each fighter places 1 damage on the Stage Rules card.`,false,false,false], masterplan: randFrom(["actsofterror","strengtheningforces"])},
     {name:"Running Wild", instory: 0, location: "remote", bystander: "civilian", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".`,true,false,false],stagepenalty: [`Each Hero places 3 random defense tokens on the copy of "Hunt for the Idols" in their fighter play area. Each time a Hero searches, these defense tokens block successes and are discarded as normal.`,false,false,false], masterplan: randFrom(["illegalgains","personalpower"])},
     {name:"Steel Memories", instory: 0, location: "base", bystander: "nameless goon", stagebonus: [`One fighter may move 3 spaces toward the nearest objective.`,false,false,false], stagepenalty: [`Each fighter must <b>Recruit</b>.`,false,false,false], masterplan: randFrom(["actsofterror","kidnapping"])},
-    {name:"Sudden Death", instory: 0, location: "neutral", bystander: "fighter", stagebonus: [`Put one random defense toke on each copy of "A New Challenger".`,false,false,false], stagepenalty: [`The active objective token nearest to the boss advances 4 spaces toward the boss and attacks.`,false,false,false], masterplan: randFrom(["kidnapping","strengtheningforces"])},
+    {name:"Sudden Death", instory: 0, location: "neutral", bystander: "fighter", stagebonus: [`Put one random defense token on each copy of "A New Challenger".`,false,false,false], stagepenalty: [`The active objective token nearest to the boss advances 4 spaces toward the boss and attacks.`,false,false,false], masterplan: randFrom(["kidnapping","strengtheningforces"])},
     {name:"Supply & Demand", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objectve token it is carrying.`,false,false,false], stagepenalty: [`The boss gains 1 random defense token. Each fighter is dealt 1 direct damage.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])},
     {name:"The Ceremony", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Flip 2 objective tokens to their inactive side.`,false,false,false], stagepenalty: [`Each fighter must either discard a card at random or place 1 power on "Oni's Vessel".`,false,false,false], masterplan: randFrom(["kidnapping","personalpower"])},
     {name:"Under Destruction", instory: 0, location: "neutral", bystander: "construction worker", stagebonus: [`<b>Exhaust:</b> Move 1 power from a Time Bomb card to this card. Then, if there's 5 power on this card, remove it from the game.`,true,false,false], stagepenalty: [`Each fighter chooses a different objective and places 1 power on the chosen objective.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])}
@@ -609,15 +609,15 @@ for (i = alliesandrivals.length-1; i > 0; i--) {
     stages = cleanStages(stages);
 
 let enemies = [
-    {name:"Brotherhood", boss: "Dmitri", bosstitle: "callous mercenary", sex: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: ["N-40 Punisher","and put it into play"]},
-    {name:"Cartel", boss: "Juan", bosstitle: "ruthless gangster", sex: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: "vicious gangers and hardened outcasts", threat: "levels his gun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: ["On Alert","and put it into play"]},
-    {name:"Golden Dragons", boss: "Ah Long", bosstitle: "unrelenting martial arts master", sex: "male", desc: "the enterprise of martial artists, thugs, and businessmen", addressing: "weasels", minions: "ruthless triads and yakuza", threat: "lifts his hand, dark, malevolent energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"], preparedboss: ["Merciless Clutch", "and put it into play"]},
-    {name:"Kingdom", boss: "Kemono", bosstitle: "imposing green mutant", sex: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fist, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: ["Uncontrollable Surge","and put it into play"]},
-    {name:"Kingdom", boss: "Jackal", bosstitle: "mad scientist", sex: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "mysterious ninja and clone puppets", threat: "smiles, as her eyes start to glow malevolently, and your pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: ["Neural Invasion","and play it"]},
-    {name:"Kingdom", boss: "Shadow", bosstitle: "ominous mastermind", sex: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: ["Fan of Blades","and put it into play"]},
-    {name:"Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", sex: "female", desc: "the ancient, restless warriors", addressing: "warriors", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller","Pale Caller"], preparedboss: ["Decaying Blast","and play it"]},
-    {name:"Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", sex: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, eldritch power crackling", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: ["Eldritch Strike","and play it"]},
-    {name:"Onyx League", boss: "Mack", bosstitle: "black-hearted overlord", sex: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: ["Taking Aim","and put it into play"]}
+    {name:"Brotherhood", boss: "Dmitri", bosstitle: "callous mercenary", sex: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar","and put it into play"],["N-40 Punisher","and put it into play"]]},
+    {name:"Cartel", boss: "Juan", bosstitle: "ruthless gangster", sex: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: "vicious gangers and hardened outcasts", threat: "levels his gun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert","and put it into play"]]},
+    {name:"Golden Dragons", boss: "Ah Long", bosstitle: "unrelenting martial arts master", sex: "male", desc: "the enterprise of martial artists, thugs, and businessmen", addressing: "weasels", minions: "ruthless triads and yakuza", threat: "lifts his hand, dark, malevolent energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"], preparedboss: [["Merciless Clutch", "and put it into play"]]},
+    {name:"Kingdom", boss: "Kemono", bosstitle: "imposing green mutant", sex: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fist, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge","and put it into play"]]},
+    {name:"Kingdom", boss: "Jackal", bosstitle: "mad scientist", sex: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "mysterious ninja and clone puppets", threat: "smiles, as her eyes start to glow malevolently, and your pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion","and play it"]]},
+    {name:"Kingdom", boss: "Shadow", bosstitle: "ominous mastermind", sex: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades","and put it into play"]]},
+    {name:"Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", sex: "female", desc: "the ancient, restless warriors", addressing: "warriors", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller","Pale Caller"], preparedboss: [["Decaying Blast","and play it"]]},
+    {name:"Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", sex: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, eldritch power crackling", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike","and play it"]]},
+    {name:"Onyx League", boss: "Mack", bosstitle: "black-hearted overlord", sex: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim","and put it into play"]]}
     ];
 
 enemiescopy = enemies.slice(0,enemies.length)
@@ -853,7 +853,7 @@ function storyNamer(finalboss,finalstage, number = 16){
     
     switch (finalboss.boss) {
         case "Ah Long":
-            bossadjectives = ["Heavenly","Phasing","Golden","Black","Merciless","Invincible"]
+            bossadjectives = ["Heavenly","Phasing","Golden","Black","Merciless","Invincible","Shadowy"]
             bossnouns = [["Dragon","Dragons"],["Businessman","Businessmen"],["Hook","Hooks"],["Karate","Karate"],["Kendo","Kendo"],["Jing Wu","Jing Wu"],["Punch","Punches"],["Triad","Triads"],["Yakuza","Yakuza"],["Monk","Monks"],["Typhoon","Typhoons"],["Kick","Kicks"],["Shadowson","Shadowsons"],["Clutch","Clutces"],["Katana","Katana"],["Staff","Staves"],["Knuckle-Duster","Knuckle-Dusters"]]
         break;
         case "Dmitri":
@@ -911,15 +911,15 @@ function storyNamer(finalboss,finalstage, number = 16){
             stagenouns = [["Dealer","Dealers"],["Grenade","Grenades"],["Gun","Guns"],["Mine","Mines"],["Rocket","Rockets"],["Sidearm","Sidearms"],["Supply","Supplies"],["Trigger","Triggers"],["Truck","Trucks"],["Vest","Vests"],["Weapon","Weapons"]]
         break;
         case "One Step Ahead": 
-            stageadjectives = ["Steep","Windy","Strong","Climbing"]
-            stagenouns = [["Mountain","Mountains"],["Step","Steps"],["Cliff","Cliffs"],["Grappling Hook","Grappling Hooks"],["Wind","Winds"],["Avalanche","Avalance"],["Vertigo","Vertigo"]]
+            stageadjectives = ["Atop","Underground","Steep","Windy","Strong","Climbing"]
+            stagenouns = [["Peak","Peaks"],["Cave","Caves"],["Mountain","Mountains"],["Step","Steps"],["Cliff","Cliffs"],["Grappling Hook","Grappling Hooks"],["Wind","Winds"],["Avalanche","Avalance"],["Vertigo","Vertigo"]]
         break;
         case "Original Copy": 
             stageadjectives = ["Duplicated","Mutated","Accelerated","Deadly","Regenerative","Experimental","Original","Dynasty"]
             stagenouns = [["Lab","Labs"],["Cell","Cells"],["Clone","Clones"],["Computer","Computers"],["Copy","Copies"],["Duplicate","Duplicates"],["Mutation","Mutations"],["Protocol","Protocols"],["Serum","Serums"],["Subject","Subjects"],["Test","Tests"],["Vandal","Vandal"],["Vat","Vats"]]
         break;
         case "Out of Time": 
-            stageadjectives = ["Afflicted","Putrid","Fallen","Profane","Dead","Dimensional","Hellish"]
+            stageadjectives = ["Afflicted","Putrid","Fallen","Profane","Dead","Dimensional","Hellish","Extradimensional"]
             stagenouns = [["Pit","Pits"],["World","Worlds"],["Spike","Spikes"],["Time","Time"],["Zombie","Zombies"],["Remnant","Remnants"],["Altar","Altars"],["Refuge","Refuges"],["Below","Below"],["Offering","Offerings"],["Undead","Undead"]]
         break;
         case "Poison the Well": 
@@ -927,7 +927,7 @@ function storyNamer(finalboss,finalstage, number = 16){
             stagenouns = [["Experiment","Experiment"],["Poison","Poison"],["Well","Wells"],["Sewer","Sewers"],["Vandal","Vandal"],["Vat","Vats"],["Addict","Addicts"],["Thrall","Thralls"],["City","City"],["Rat","Rats"],["Pursuit","Pursuit"]]
         break;
         case "Right to Remain Silent":
-            stageadjectives = ["Blindfolded","Escaped","Silent","Recovered","Armed","Sneaking","Captured"]
+            stageadjectives = ["Blindfolded","Escaped","Silent","Recovered","Armed","Sneaking","Captured","Interrogated"]
             stagenouns = [["Right","Rights"],["Captive","Captives"],["Intel","Intel"],["Prisoner","Prisoners"],["Guard","Guards"],["Tripwire","Tripwires"],["Interrogation","Interrogation"]]
         break;
         case "Rude Awakening":
@@ -939,11 +939,11 @@ function storyNamer(finalboss,finalstage, number = 16){
             stagenouns = [["Shrine","Shrines"],["Search","Search"],["Demon","Demons"],["Wild","Wilds"],["Key","Keys"],["Hunt","Hunt"],["Idol","Idols"],["Blessing","Blessings"],["Beyond","Beyond"],["Oni","Oni"],["Curse","Curses"],["Tree","Trees"],["Trail","Trail"],["Call","Call"]]
         break;
         case "Steel Memories":
-            stageadjectives = ["Steel","Fresh","True","Demoralizing","Upcoming","Surrounded","Dark","Brutal"]
-            stagenouns = [["Melee","Melee"],["Memory","Memories"],["Recruit","Recruits"],["Crowbar","Crowbars"],["Underdog","Underdogs"],["Edge","Edges"],["Defeat","Defeat"],["Finisher","Finisher"],["Challenger","Challengers"],["Contest","Contests"],["Challenge","Challenges"]]
+            stageadjectives = ["New","Steel","Fresh","True","Demoralizing","Upcoming","Surrounded","Dark","Brutal"]
+            stagenouns = [["Newcomer","Newcomers"],["Melee","Melee"],["Memory","Memories"],["Recruit","Recruits"],["Crowbar","Crowbars"],["Underdog","Underdogs"],["Edge","Edges"],["Defeat","Defeat"],["Finisher","Finisher"],["Challenger","Challengers"],["Contest","Contests"],["Challenge","Challenges"]]
         break;
         case "Sudden Death":
-            stageadjectives = ["Sudden","Culling","Personal","Mutual","New","Overconfident","Urban","Deadly","Ruthless","Underground","Brutal"]
+            stageadjectives = ["Boasting","Sudden","Culling","Personal","Mutual","New","Overconfident","Urban","Deadly","Ruthless","Underground","Brutal"]
             stagenouns = [["Death","Death"],["Vendetta","Vendetta"],["Assistance","Assistance"],["Cause","Causes"],["Challenger","Challengers"],["Competition","Competition"],["Tournament","Tournament"],["Contest","Contests"]]
         break;
         case "Supply & Demand":
@@ -951,8 +951,8 @@ function storyNamer(finalboss,finalstage, number = 16){
             stagenouns = [["Supply","Supplies"],["Demand","Demand"],["Crossfire","Crossfire"],[`Island`,`Islands`],["Drug","Drugs"],["Smuggler","Smugglers"],["Network","Networks"],["Kingpin","Kingpin"],["Drive-By","Drive-By"],["Contraband","Contraband"],["Island","Islands"],["Beach","Beaches"],["Camp","Camps"]]
         break;
         case "The Ceremony":
-            stageadjectives = ["Eldritch","Whispered","Unholy","Unclean","Ceremonial"]
-            stagenouns = [["Ceremony","Ceremony"],["Alignment","Alignment"],["Vessel","Vessels"],["Embrace","Embrace"],["Unclean","Unclean"],["Lure","Lures"],["Promise","Promises"],["Conduit","Conduits"],["Oni","Oni"],["Demon","Demons"],["Servant","Servants"]]
+            stageadjectives = ["Eldritch","Whispered","Unholy","Unclean","Ceremonial","Cursed","Lured","Promised"]
+            stagenouns = [["Ceremony","Ceremony"],["Alignment","Alignment"],["Vessel","Vessels"],["Embrace","Embrace"],["Lure","Lures"],["Promise","Promises"],["Conduit","Conduits"],["Oni","Oni"],["Demon","Demons"],["Servant","Servants"]]
         break;
         case "Under Destruction":
             stageadjectives = ["Risky","Collateral","Timed","Remote","Armed","Explosive","Demolished"]
@@ -1052,7 +1052,7 @@ stages = cleanStages(stages);
 
 do {
 
-(Math.random() < 0.75 ? 
+(Math.random() <= 0.75 ? 
     (randomstage = Math.floor(Math.random()*stages.length),
     storystages.push(stages[randomstage]),
     stages[randomstage].instory = stages[randomstage].instory + 1,
@@ -1316,8 +1316,8 @@ function loseResult(stageindex, story, nextstage) {
     
     if (goal == "ritual") {loseresult = `You were not able to stop ${enemy.boss} from completing the ritual!
     Standing in the middle of the temple, ${genderPronoun(enemy.sex,"subject")} rises up off the stone floor, the ${mysticalSynonym()} powers swirling around ${genderPronoun(enemy.sex,"object")}.
-    You watch as ${genderPronoun(enemy.sex,"possessive")} eyes burn, and ${genderPronoun(enemy.sex,"possessive")} body pulses with the ancient energies! 
-    ${story[altstage].stage.name != nextmission.name ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!`}`}
+    You watch as ${genderPronoun(enemy.sex,"possessive")} eyes burn, and ${genderPronoun(enemy.sex,"possessive")} body pulses with the ${mysticalSynonym()} energies! 
+    ${((story[altstage].stage.name != nextmission.name) && captivity.includes(nextmission.name)) ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!`}`}
     
     return loseresult
 }
@@ -1397,7 +1397,7 @@ function victoryResult(stageindex, story, nextstage) {
         `As you tie up the unconscious members of the ${enemy.name}, left on their own devices by ${enemy.boss}, you're shocked when ${minion} approaches you calmly. ${minion} - a double agent - informs you that `,
         `"Sir, we've captured one of the ${enemy.minions} and are holding them for questioning."  The technician got to Agent Fletch, and then paused for a moment.  "Find out what they are up to!" Fletch told the technician.  "By any means necessary!" ${minion} revealed that`,
         `${enemy.boss} made a hasty retreat, but thanks to the information you got after the encounter, you have learned`,
-        `"Thank you!" one of the ${bystanders}s said as ${lowerCaseInitial(contact)} approached, as the forces of ${enemy.boss} made their retreat. "I overheard what they're planning." ${contact} continues that `,
+        `"Thank you!" one of the ${bystanders}s said as ${lowerCaseInitial(contact)} approached, as the forces of ${enemy.boss} made their retreat. "I overheard what they're planning." ${contact} goes on to explain about `,
         `With the last of the ${enemy.minions} defeated, you turn to face ${enemy.boss} again. You're confident that if you could only get close to ${genderPronoun(enemy.sex,"object")}, you could end this game of cat and mouse. But ${genderPronoun(enemy.sex,"subject")} has disappeared into the thin air! You don't have the time to ponder this, as the intel from here tells`,
         `After your victory over ${possessiveSuffix(enemy.boss)} goons and a short call to Agent Fletch, Citadel forces secure the area and begin their investigation with you. ${enemy.boss} might have slipped away, but among the debris of the fight, you find out`
         ]
@@ -1502,7 +1502,7 @@ function setUpInstructions(stageindex,enemy,rival,knowledge,stagebonus,stagemalu
     let activate = false
     let rivalaggression = false
     
-    let preparedboss = enemy.preparedboss
+    let preparedboss = randFrom(enemy.preparedboss)
     
     let genericbonus = [[`Put ${rival} (ally) into play.`,false,false,false],["Each fighter may take a second mulligan.",false,false,false],["Each fighter gains 1 random defense token.",false,false,false],[`Search the enemy deck for ${preparedboss[0]} and discard it. Shuffle the enemy deck.`, false,false,false],["Each fighter may draw one loot card.",false,false,false]]
     
@@ -1588,8 +1588,8 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, ${enemy.desc} of ${enemy.name} is invoking an evil entity at a remote ${evilPlace()}. You have decided to head there.<br><br>
         Almost too late! When you arrive, the shrine is on fire, and the flames are getting higher! ${possessiveSuffix(enemy.boss)} goons are moving about the area, while the 
-        ${enemy.bosstitle} ${genderPronoun(enemy.sex,"reflexive")} observes. You rush to intervene, and ${enemy.boss} calls to you: "Your efforts are futile, my plans are too far in motion!". ${laconicStatement()}.`}
-        else {prologue = `${trail}, ${enemy.boss} is trying to awaken the evil spirits of a remote shrine.<br><br>
+        ${enemy.bosstitle} ${genderPronoun(enemy.sex,"reflexive")} observes. You rush to intervene, and ${enemy.boss} calls to you: "${gloat[0]}" and continues "${gloat[1]}" ${laconicStatement()}.`}
+        else {prologue = `${trail}, turns out ${enemy.boss} is trying to awaken the evil spirits of a remote shrine.<br><br>
         You arrive at your destination. You immediately notice ${enemy.boss} in the distance, ${rivalpresence == true ? `with ${rival} at ${genderPronoun(enemy.sex,"object")} side,` : ``} watching the
         angry flames rising. ${rivalboost == true ? `${possessiveSuffix(rival)} eyes burn with hateful fire as if possessed!` : `You are in a dire hurry.`} "You again?!" ${enemy.boss} shouts, seeing you rush toward the flames. 
         "I was sure you would not have the time to bother me here, knowing what ${(finalboss.boss == enemy.boss) == true ? `other plans I have in motion` : `${finalboss.boss} is up to`}. Well, who doesn't need some exercise after a good old fashioned summoning?"<br><br>${laconicStatement()}.`}
@@ -1618,7 +1618,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, you made your way to an office building, but when you arrive, you knew it's too late. Sounds of violence can be heard inside the building, followed by screams inside and out.
         "Call the police!" several fleeing employees shout, but you know it's futile. The chances of police having the gear or training to handle this properly is beyond unlikely.<br><br>You rush into the
-        building, heedless of all the warnings shouted at you. "Welcome!" You're greeted by ${rivalpresence == true ? `familiar faces` : `a familiar face` } that you hope to never see again. ${enemy.boss}, leader of the ${enemy.name} ${rivalpresence == true ? `is there with ${rival}` : enemy.threat}.
+        building, heedless of all the warnings shouted at you. "Welcome!" You're greeted by ${rivalpresence == true ? `familiar faces` : `a familiar face` } that you had hoped to never see again. ${enemy.boss}, leader of the ${enemy.name} ${rivalpresence == true ? `is there with ${rival}` : enemy.threat}.
         "Did you come to join the other hostages?"`}
         else {
         prologue = `${stageindex == 0 ? `You are preparing for a hard-earned vacation, but just as you are about to take your leave from Citadel HQ` : `${trail} you have nothing.
@@ -1662,7 +1662,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         you are face to face with ${enemy.boss} and his band of goons. The ${enemy.name} is here!<br><br>
         ${enemy.boss} seems as surprised to see you as you are to see him, and shouts to ${genderPronoun(enemy.sex, "possessive")} minions: "Hold! We are not here to fight them!" Then 
         ${genderPronoun(enemy.sex, "subject")} turns to you and says: "We have no quarrel with you this time, ${defineAddressing(enemy)}. We are here to meet ${rivalpresence == true ? rival : `a contact`} for a negotiation, that is all. 
-        Find the ${finalboss.name}, if you want to pick a fight.<br><br>You don't plan on letting these criminals get away. They'll have a fight in their hands whether they want it or not!`};
+        Find ${finalboss.name == enemy.name ? `someone else`: `the ${finalboss.name}`}, if you want to pick a fight.<br><br>You don't plan on letting these criminals get away. They'll have a fight in their hands whether they want it or not!`};
     break;
     
     case "Original Copy":
@@ -1675,7 +1675,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         {prologue = `${trail}, you made your way to the hidden facility. You defeated a few guards in your way and proceeded to take the elevator down to the large lab. You patiently wait while a lounge version of
         ${loungeMusic()} plays over the cheap speakers.<br><br>
         You finally reach a cavernous room filled with row upon row of glass containment tubes. Each tube has a motionless body in it; some of you recognized as opponents you'd faced before. ${rivalpresence == true ? `Suddenly, one of
-        the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It looks exactly like ${rival}!${rivalboost == true ? `It stands, slowly, powerfully built, moving with graceful precision. It is the ultimate clone, ${rival.toUpperCase()}-EX!` : ``} ` : ``}Standing at the far end of the room,
+        the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It looks exactly like ${rival}!${rivalboost == true ? ` It stands, slowly, powerfully built, moving with graceful precision. It is the ultimate clone, ${rival.toUpperCase()}-EX!` : ``} ` : ``}Standing at the far end of the room,
         you see ${enemy.boss} ${genderPronoun(enemy.sex,"reflexive")}. ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} looks at you and grins. ${upperCaseInitial(enemy.minions)} descend on you, emerging from the shadows.`}
         else 
         {prologue = `As you slowly regain consciousness, you notice an IV hooked up to your arm. Your strength has been completely drained and you are unable to even stand up.
@@ -1696,8 +1696,8 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         ${upperCaseInitial(enemy.bosstitle)} of the ${enemy.name} stands there, and turns ${genderPronoun(enemy.sex,"possessive")} gaze from the magic ${genderPronoun(enemy.sex,"subject")} is working on. "You cannot hope to
         contain this!" ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} gestures at ${rivalpresence == true ? rival : `the walking dead`} and the ${enemy.minions} of the ${enemy.name}. "Seize them!"<br><br>${laconicStatement()}.`}
         else {prologue = `You come to your senses as undead hands are gripping you and guiding you upwards to an ominous altar on a large pedestal in front of you. What ${mysticalSynonym()} sorcery had kept you
-        enthralled is weakening, and you put the zombie down. ${enemy.boss} looks down at you and shouts, as dark winds sting your skin and the very air around you smolders your throat and lungs:
-        "For once you Citadel lackeys could try to be useful! ${rivalpresence == true ? (rivalboost == true ? `${rival}, standing there, turns and faces you unnaturally black eyes. "Get the gladiators, a` : `Get them up here, ${rival}! A`) : `Get up here and die, a` }nd this all will be over sooner!"<br><br>
+        enthralled is weakening, and you put the zombie down. ${enemy.boss} looks down at you and shouts as dark winds sting your skin and the very air around you smolders your throat and lungs: ${gloat[0]}
+        and goes on: "${gloat[1]}${rivalpresence == true ? (rivalboost == true ? `" ${rival}, standing there, turns and faces you with unnaturally black eyes. "Get the gladiators, a` : ` Get them up here, ${rival}! A`) : ` Get up here and die, a` }nd this all will be over sooner!"<br><br>
         You still feel dizzy and uneasy and don't quite have your bearings at this ${evilPlace()}, but one thing you're certain of: you will not let ${enemy.boss} get away with this.`};
     break;
     
@@ -1963,7 +1963,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         You get past the ${enemy.minions} on guard, and face ${enemy.boss} ${genderPronoun(enemy.sex,"reflexive")}. "This ends here, ${enemy.boss}! I am not here to negotiate!" you call out. "${gloat[0]}" 
         ${genderPronoun(enemy.sex,"subject")} answers, "${gloat[1]}"`}
         else if (knowledge != "clueless" && masterplan == "kidnapping") {
-        prologue = `${trail}, turns out the ${enemy.name} have hidden your rescue target in plain sight, a public office building. 
+        prologue = `${trail}, turns out the ${enemy.name} have hidden ${vip[0]} in plain sight, a public office building. 
         The chances of police having the gear or training to handle this properly is beyond unlikely. So you move in on your own.<br><br>
         You get past the ${enemy.minions} on guard, and face ${enemy.boss} ${genderPronoun(enemy.sex,"reflexive")}. "This ends here, ${enemy.boss}! I am not here to negotiate!" you call out. "${gloat[0]}" 
         ${genderPronoun(enemy.sex,"subject")} answers, "${gloat[1]}"`}
@@ -2052,8 +2052,8 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         very air around you smolders your throat and lungs.  The sky is a boiling, writhing mass of clouds, each black as coal but glowing with an intense, blood-red heat. If there is a hell, this may as well be it.<br><br>
         You see ${enemy.boss}, not far away, continuing ${genderPronoun(enemy.sex,"possessive")} magic. "${gloat[0]}" ${enemy.boss} tells you. "${gloat[1]}" You stand ready, and know this is where it will all end.`}
         else {prologue = `You come to your senses as undead hands are gripping you and guiding you upwards to an ominous altar on a large pedestal in front of you. What ${mysticalSynonym()} sorcery had kept you
-        enthralled is weakening, and you put the zombie down. "${gloat[0]}", ${enemy.boss} looks down at you and shouts, as dark winds sting your skin and the very air around you smolders your throat and lungs:
-        "${gloat[1]} ${rivalpresence == true ? (rivalboost == true ? `" ${rival}, standing there, turns and faces you unnaturally black eyes. "Get the gladiators, a` : `"Get them up here, ${rival}! A`) : `Get up here and die, a` }nd this all will be over sooner!"<br><br>
+        enthralled is weakening, and you put the zombie down. "${gloat[0]}" ${enemy.boss} looks down at you and shouts, as dark winds sting your skin and the very air around you smolders your throat and lungs.
+        "${gloat[1]}${rivalpresence == true ? (rivalboost == true ? `" ${rival}, standing there, turns and faces you unnaturally black eyes. "Get the gladiators, a` : ` Get them up here, ${rival}! A`) : ` Get up here and die, a` }nd this all will be over sooner!"<br><br>
         You still feel dizzy and uneasy and don't quite have your bearings at this ${evilPlace()}, but one thing you're certain of: you will not let ${enemy.boss} get away with this.`};
     break;
     
@@ -2141,7 +2141,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         victims to ${possessiveSuffix(enemy.boss)} manipulations collateral damage, or the city will never be the same again.`
         }
         else if (knowledge != "clueless" && masterplan == "kidnapping") {
-        prologue = `${trail}, you have found out where the secret base of the ${enemy.name} is located and rescue target is being held. You accompany a squad of Citadel soldiers as they storm the base.
+        prologue = `${trail}, you have found out where the secret base of the ${enemy.name} is located and the ${vip[0]} is being held. You accompany a squad of Citadel soldiers as they storm the base.
         ${enemy.name} soldiers fall before you, and you make your way through the maze-like halls until you finally reach an elevator.
         You wait patiently, while a lounge version of ${loungeMusic()} plays over the cheap speakers.<br><br>
         When you arrive, ${enemy.boss} is waiting for you, standing ready. "${gloat[0]}" ${genderPronoun(enemy.sex, "subject")} says. "${gloat[1]}" ${laconicStatement()}.`
@@ -2209,7 +2209,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         You see the main chamber of the temple has multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of ${mysticalSynonym()} images.
         Thinking that these may be part of the ritual, you quickly remove them from their pedestals. "${gloat[1]}" ${enemy.boss} calls out. ${upperCaseInitial(genderPronoun(enemy.sex,"possessive"))} forces ${rivalpresence == true ? `led by ${rival} `: ``}charge you while
         ${genderPronoun(enemy.sex,"subject")} continues the ritual.<br><br>The time has come for your final confrontation!`}
-        else if (knowledge != "clueless" && masterplan == "kidnapping") {prologue = `${trail}, you've determined that ${enemy.boss} plans to sacrifice ${genderPronoun(enemy.sex,"possessive")} captive to appease a dark power in a certain ${evilPlace()}. You reach the location
+        else if (knowledge != "clueless" && masterplan == "kidnapping") {prologue = `${trail}, you've determined that ${enemy.boss} plans to sacrifice ${genderPronoun(enemy.sex,"possessive")} captive to appease a dark power ${genderPronoun(enemy.sex,"subject")} is indebted to at a certain ${evilPlace()}. You reach the location
         to find ${enemy.boss} and ${genderPronoun(enemy.sex,"possessive")} forces already starting the ritual. You see the captive chained, too tightly for you to free ${randFrom(["him","her"])} without defeating the ${enemy.name} first.<br><br>
         "${gloat[0]}" ${enemy.boss} calls with confidence, ${genderPronoun(enemy.sex,"possessive")} voice echoing off the stone walls.
         You see the main chamber of the temple has multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of ${mysticalSynonym()} images.
@@ -2252,10 +2252,10 @@ function changeOfPlans(trail,finalboss,enemy,stage) {
     
     
     let newintel = randFrom([
-        `There is no time for regrets, and you need to leave the failure of stopping ${finalboss.boss} behind. ${preGamePrologue(stage,enemy)[1]}`,
-        `Citadel analysts have gone over every bit of intel you have gathered on ${finalboss.boss}, but have nothing to go on. But there are more pressing concers. ${preGamePrologue(stage,enemy)[1]}`,
-        `While you may have lost the fight, the battle is far from over. ${preGamePrologue(stage,enemy)[1]}`,
-        `Focusing on ${finalboss.boss} has let other, just as devious issues grow. ${preGamePrologue(stage,enemy)[1]}`
+        `There is no time for regrets, and you need to leave the failure of stopping ${finalboss.boss} behind. ${preGamePrologue(stage,enemy).storytext}`,
+        `Citadel analysts have gone over every bit of intel you have gathered on ${finalboss.boss}, but have nothing to go on. But there are more pressing concers. ${preGamePrologue(stage,enemy).storytext}`,
+        `While you may have lost the fight, the battle is far from over. ${preGamePrologue(stage,enemy).storytext}`,
+        `Focusing on ${finalboss.boss} has let other, just as devious issues grow. ${preGamePrologue(stage,enemy).storytext}`
         ])
     
     let conclusion = randFrom([
@@ -2300,7 +2300,7 @@ function finalResult(masterplan, enemy, rival, vip = null, result) {
         `Suddenly, there's a blinding flash and ${possessiveSuffix(enemy.boss)} gone! It's all gone. Shockingly, you're back at Citadel HQ, surrounded by agents all going about their business. Did all that even happen?`,
         `You are lying in the corner, exhausted, all enemies defeated - but their master is nowhere to be found. "You've done a hero's job, Gladiators. I guess you're through, huh?" Agent Fletch asks as he approaches you. "Finished," you answer wearily. "It's too bad we couldn't catch ${enemy.boss}. But then again, do we really ever?"`,
         `Your intense fight takes you to the edge of an unfathomably deep pit. Just as you're about to strike ${enemy.boss} down, ${genderPronoun(enemy.sex,"subject")} dives in, and that's the last you see of ${genderPronoun(enemy.sex,"object")}. For now!`,
-        `You are sure you you have cornered ${enemy.boss} with no route of escape, when all of a sudden a sleek ${enemy.name} helicopter descends and ${genderPronoun(enemy.sex,"subject")} leaves, dangling from a ladder. "The ${neutralize}, but ${enemy.boss} slipped away," you report to Agent Fletch with your communicator.`,
+        `You are sure you have cornered ${enemy.boss} with no route of escape, when all of a sudden a sleek ${enemy.name} helicopter descends and ${genderPronoun(enemy.sex,"subject")} leaves, dangling from a ladder. "The ${neutralize}, but ${enemy.boss} slipped away," you report to Agent Fletch with your communicator.`,
         ]
     
     let finisher = randFrom(["Finish them","Show no mercy","End them","Put an end to this","Kill them, and send what remains to Agent Fletch","Wipe them out, all of them","Put a stop to this"])
@@ -2344,7 +2344,7 @@ function finalResult(masterplan, enemy, rival, vip = null, result) {
         `"${randFrom([`No more, ${enemy.boss}! Grant me mercy!" you shout.`,`${lastwords[0]}" ${heroSpeech()}, "${lastwords[1]}"`])} ${enemy.boss} ${enemy.threat}${randFrom([`. "I thought you were made of sterner stuff," ${genderPronoun(enemy.sex,"subject")} responds.`,`, and orders ${genderPronoun(enemy.sex,"possessive")} minions: "${finisher}!"`])}`,
         `${enemy.boss} has you pinned. Without a word, ${genderPronoun(enemy.sex,"subject")} ${enemy.threat}. With grim determination in ${genderPronoun(enemy.sex,"possessive")} eyes ${genderPronoun(enemy.sex,"subject")} ends your life.`,
         `"${defiance[0]}, ${enemy.boss}," you spit defiantly in the face of the victorious ${enemy.bosstitle}. "${defiance[1]}"<br><br>"${gloat[0]}" ${genderPronoun(enemy.sex,"subject")} answers. "${gloat[1]}"`,
-        `"${lastwords[0]}" ${heroSpeech()}, but ${enemy.boss} cuts you off by grabbing your throat. "${gloat[0]}", ${genderPronoun(enemy.sex,"subject")} says and starts to squeeze the life out of you. "${gloat[1]}"`
+        `"${lastwords[0]}" ${heroSpeech()}, but ${enemy.boss} cuts you off by grabbing your throat. "${gloat[0]}" ${genderPronoun(enemy.sex,"subject")} says and starts to squeeze the life out of you. "${gloat[1]}"`
         ]
 
     let finalresult
@@ -2450,7 +2450,7 @@ function gloatingList(enemy) {
         [`It looks like you have run out of luck,`,`How dare you challenge us?!`],
         [`Proud of yourself, ${randFrom([defineAddressing(enemy),"little Gladiator"])}?`,`Time to die!`],
         [`C'mon, Gladiator. I'm right here, but you've gotta hit straight!`,`Straight doesn't seem to be good enough! Now it's my turn!`],
-        [`Horror has a face,`,`And you must make a friend of horror. Horror and moral terror are your friends. If they are not, then they are enemies to be feared.`],
+        [`You must make a friend of horror,`,`Horror and moral terror are your friends. If they are not, then they are enemies to be feared.`],
         [`Now watch closely, everyone,`,`I'm going to show you how to kill a Global Gladiator.`],
         [`I don't blame myself,`,`You see, ${defineAddressing(enemy)}, most people never have to face the fact that, at the right time and the right place, they're capable of anything.`],
         [`There are times when I...`,`I look at people and I see nothing worth liking.`],
@@ -2467,7 +2467,7 @@ function gloatingList(enemy) {
         [`I was counting on you to come to try your pitiful mission, but I have news for you,`,`None of you will leave this place alive!`],
         [`I must possess all,`,`Or I possess nothing!`],
         [`I ache to smash you out of existence!`,`To drive your cursed face from my memories forever!`],
-        [`You can't win," you tell ${enemy.boss} wearily. "I've already won this this the old-fashioned way, the tried and true way:`,`I cheated!`],
+        [`You can't win," you tell ${enemy.boss} wearily. "I've already won this this the old-fashioned way, the tried and true way,`,`I cheated!`],
         [`I am the Alpha and the Omega. Death and Rebirth,`,`And, as you die, so will I be reborn!`],
         [`Welcome to your doom, ${defineAddressing(enemy)},`,`I would have waited an eternity for this!`],
         [`This is how it begins!`,`The ${enemy.name} triumphant at last!`],
