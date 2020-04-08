@@ -12,6 +12,10 @@
 
 <style type="text/css">
 
+:root{
+    --light-card-color: linear-gradient(0deg, rgba(140,130,124,1) 0%, rgba(222,205,195,1) 3%, rgb(240, 234, 231) 97%, rgba(140,130,124,1) 100%);
+}
+
 body {
     /*background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(151,53,36,1) 50%, rgba(0,0,0,1) 100%);*/
     font-family: 'Crimson Text', serif;
@@ -80,11 +84,9 @@ h1,h2 {
 }
 
 .card {
-    margin-bottom: 1mm;
-    margin-top: 1mm;
+    margin-bottom: 0.2mm;
     margin-left: 1mm;
-    float: left;
-    position: relative;
+    flex-grow: 1;
 }
 
 .titletext {
@@ -140,7 +142,7 @@ h1,h2 {
 }
 .storycardfront-prologue{
     height: 57.6mm;
-    background: linear-gradient(0deg, rgba(140,130,124,1) 0%, rgba(222,205,195,1) 3%, rgba(222,205,195,1) 97%, rgba(140,130,124,1) 100%);
+    background: var(--light-card-color);
     box-sizing: border-box;
     
 }
@@ -190,7 +192,7 @@ h1,h2 {
 
 .storycardback-epilogue-top{
     height: 36.6mm;
-    background: linear-gradient(0deg, rgba(140,130,124,1) 0%, rgba(222,205,195,1) 3%, rgba(222,205,195,1) 97%, rgba(140,130,124,1) 100%);
+    background: var(--light-card-color);
     color: black;
     font-family: 'IBM Plex Sans', sans-serif;
     font-style: italic;
@@ -270,7 +272,7 @@ h1,h2 {
 
 .storycardback-epilogue-bottom{
     height: 45.4mm;
-    background: linear-gradient(0deg, rgba(140,130,124,1) 0%, rgba(222,205,195,1) 3%, rgba(222,205,195,1) 97%, rgba(140,130,124,1) 100%);
+    background: var(--light-card-color);
     color: black;
     font-family: 'IBM Plex Sans', sans-serif;
     box-sizing: border-box;
@@ -858,7 +860,7 @@ function storyNamer(finalboss,finalstage, number = 16){
         break;
         case "Dmitri":
             bossadjectives = ["Punishing","Modified","Trusty","Steely","Loaded","Extra","Russian","Eastern","Military","Angry","Strong","Skilled","Loyal","Espionage","Undercover"]
-            bossnouns = [["Brotherhood","Brotherhood"],["Knife","Knives"],["Rocket Launcher","Rocket Launchers"],["Kevlar","Kevlar"],["Defense","Defenses"],["Hold","Holds"],["Ammo","Ammo"],["Mercenary","Mercenaries"],["Soldier","Soldiers"],["Spy","Spies"],["Honor","Honor"],["Hit","Hits"],["Sabotage","Sabotage"],["General","Generals"]]
+            bossnouns = [["Knife","Knives"],["Brotherhood","Brotherhood"],["Knife","Knives"],["Rocket","Rockets"],["Rocket Launcher","Rocket Launchers"],["Kevlar","Kevlar"],["Defense","Defenses"],["Hold","Holds"],["Ammo","Ammo"],["Mercenary","Mercenaries"],["Soldier","Soldiers"],["Spy","Spies"],["Honor","Honor"],["Hit","Hits"],["Sabotage","Sabotage"],["General","Generals"]]
         break;
         case "Jackal":
             bossadjectives = ["Broken","Neural","Dark","Wild","Mad","Insane","Genius","Torturous","Unbelievable","Scientific","Experimental"]
@@ -911,7 +913,7 @@ function storyNamer(finalboss,finalstage, number = 16){
             stagenouns = [["Dealer","Dealers"],["Grenade","Grenades"],["Gun","Guns"],["Mine","Mines"],["Rocket","Rockets"],["Sidearm","Sidearms"],["Supply","Supplies"],["Trigger","Triggers"],["Truck","Trucks"],["Vest","Vests"],["Weapon","Weapons"]]
         break;
         case "One Step Ahead": 
-            stageadjectives = ["Atop","Underground","Steep","Windy","Strong","Climbing"]
+            stageadjectives = ["High","Atop","Underground","Steep","Windy","Strong","Climbing"]
             stagenouns = [["Peak","Peaks"],["Cave","Caves"],["Mountain","Mountains"],["Step","Steps"],["Cliff","Cliffs"],["Grappling Hook","Grappling Hooks"],["Wind","Winds"],["Avalanche","Avalance"],["Vertigo","Vertigo"]]
         break;
         case "Original Copy": 
@@ -939,7 +941,7 @@ function storyNamer(finalboss,finalstage, number = 16){
             stagenouns = [["Shrine","Shrines"],["Search","Search"],["Demon","Demons"],["Wild","Wilds"],["Key","Keys"],["Hunt","Hunt"],["Idol","Idols"],["Blessing","Blessings"],["Beyond","Beyond"],["Oni","Oni"],["Curse","Curses"],["Tree","Trees"],["Trail","Trail"],["Call","Call"]]
         break;
         case "Steel Memories":
-            stageadjectives = ["New","Steel","Fresh","True","Demoralizing","Upcoming","Surrounded","Dark","Brutal"]
+            stageadjectives = ["New","Steel","Fresh","True","Demoralizing","Upcoming","Encircling","Dark","Brutal","Overwhelming"]
             stagenouns = [["Newcomer","Newcomers"],["Melee","Melee"],["Memory","Memories"],["Recruit","Recruits"],["Crowbar","Crowbars"],["Underdog","Underdogs"],["Edge","Edges"],["Defeat","Defeat"],["Finisher","Finisher"],["Challenger","Challengers"],["Contest","Contests"],["Challenge","Challenges"]]
         break;
         case "Sudden Death":
@@ -2080,7 +2082,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         From your intel, Citadel analysts have pieced together the location of these hostages, and you move in.<br><br>
         You have to rescue the captives - the power and reach of the ${enemy.name} will grow exponentially if the families cave in!`}
         else if (knowledge != "clueless" && masterplan == "kidnapping") {
-        prologue = `${trail}, you find out the location of the target of your rescue operation, who has been kidnapped by ${enemy.boss} and ${genderPronoun(enemy.sex, "possessive")} ${enemy.minions}.
+        prologue = `${trail}, you find out the location of the ${vip}, who has been kidnapped by ${enemy.boss} and ${genderPronoun(enemy.sex, "possessive")} ${enemy.minions}.
         "${enemy.boss} is interrogating ${randFrom(["him","her"])} as we speak," Agent Fletch says. "You have to move in quick, before ${genderPronoun(enemy.sex,"subject")} gets any sensitive information! Some of
         their intel could threaten even the Citadel!"<br><br>
         You arrive to the scene to see several captives, with their faces covered. ${rivalpresence == true ? `${rival} is standing guard over the captives,` : `The enemies are on alert,`} and you don't know which one
@@ -2155,7 +2157,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
     
     case "Sudden Death":
         if (knowledge != "clueless" && masterplan == "kidnapping") {
-        prologue = `${trail}, you found that ${enemy.boss} has kidnapped, along with the target of your rescue mission, a whole lot of people from all walks of life, and intends to make them fight to death
+        prologue = `${trail}, you found that ${enemy.boss} has kidnapped, along with the ${vip}, a whole lot of people from all walks of life, and intends to make them fight to death
         for ${genderPronoun(enemy.sex,"possessive")} own entertainment! Agent Fletch informs you that you have the location of the ${enemy.name}${possessiveSuffix(enemy.name)} secret base. You head there with
         Citadel soldiers, who clear the upper levels while you find your way to an elevator, and proceed down to the heart of the complex. You patiently wait while a lounge version of
         ${loungeMusic()} plays over the cheap speakers.<br><br>
