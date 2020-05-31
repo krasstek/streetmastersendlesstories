@@ -545,11 +545,14 @@ let alliesandrivals = [
         {name: "Ah Long"},
         {name: "Ah Long of Brook City"},
         {name: "Anastasia"},
+        {name: "Brandon"},
         {name: "Chan Chan"},
         {name: "Clinhylde Eight"},
         {name: "Darius"},
         {name: "Dmitri"},
         {name: "Drago"},
+        {name: "Gabriel"},
+        {name: "Genesis"},
         {name: "Hanzo"},
         {name: "Isabella"},
         {name: "Jackal"},
@@ -560,15 +563,21 @@ let alliesandrivals = [
         {name: "Khadath Ahemusei"},
         {name: "Leeta"},
         {name: "Lotus"},
+        {name: "Marionette Doll"},
         {name: "Mary Ann"},
+        {name: "Megan"},
         {name: "Mr. Apple"},
+        {name: "Natalia"},
+        {name: "Power Soldier"},
         {name: "Project X"},
         {name: "Sera O'Quinn"},
         {name: "Shadow"},
         {name: "Shin Yokai"},
         {name: "Star Knight Iri"},
         {name: "Tiger Azules"},
+        {name: "Tlatzolteotl"},
         {name: "Wan Bo"},
+        {name: "Ying Hua"},
         {name: "Ying Hua of Brook City"},
         {name: "Zane"}
         ];
@@ -591,7 +600,7 @@ for (i = alliesandrivals.length-1; i > 0; i--) {
     {name:"Poison the Well", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`Remove each copy of Vandal Addict from the stage deck and remove them from the game. Shuffle the stage deck.`,false,false,false], stagepenalty: [`Each fighter searches the stage deck for 1 copy of Infected Rats and adds it to their Threat area. Shuffle the stage deck.`,false,false,false], masterplan: randFrom(["actsofterror","strengtheningforces"])},
     {name:"Right to Remain Silent", instory: 0, location: "base", bystander: "captive", stagebonus: [`Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.`,false,false,false], stagepenalty: [`Add one power to Recoverd Intel.`,false,false,false], masterplan: randFrom(["illegalgains","kidnapping"])},
     {name:"Rude Awakening", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Flip all objectives to their inactive side.`,false,false,false], stagepenalty: [`Each fighter places 1 damage on the Stage Rules card.`,false,false,false], masterplan: randFrom(["actsofterror","strengtheningforces"])},
-    {name:"Running Wild", instory: 0, location: "remote", bystander: "civilian", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".`,true,false,false],stagepenalty: [`Each Hero places 3 random defense tokens on the copy of "Hunt for the Idols" in their fighter play area. Each time a Hero searches, these defense tokens block successes and are discarded as normal.`,false,false,false], masterplan: randFrom(["illegalgains","personalpower"])},
+    {name:"Running Wild", instory: 0, location: "remote", bystander: "civilian", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".`,false,false,false],stagepenalty: [`Each Hero places 3 random defense tokens on the copy of "Hunt for the Idols" in their fighter play area. Each time a Hero searches, these defense tokens block successes and are discarded as normal.`,false,false,false], masterplan: randFrom(["illegalgains","personalpower"])},
     {name:"Steel Memories", instory: 0, location: "base", bystander: "nameless goon", stagebonus: [`One fighter may move 3 spaces toward the nearest objective.`,false,false,false], stagepenalty: [`Each fighter must <b>Recruit</b>.`,false,false,false], masterplan: randFrom(["actsofterror","kidnapping"])},
     {name:"Sudden Death", instory: 0, location: "neutral", bystander: "fighter", stagebonus: [`Put one random defense token on each copy of "A New Challenger".`,false,false,false], stagepenalty: [`The active objective token nearest to the boss advances 4 spaces toward the boss and attacks.`,false,false,false], masterplan: randFrom(["kidnapping","strengtheningforces"])},
     {name:"Supply & Demand", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objectve token it is carrying.`,false,false,false], stagepenalty: [`The boss gains 1 random defense token. Each fighter is dealt 1 direct damage.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])},
@@ -1316,7 +1325,7 @@ function loseResult(stageindex, story, nextstage) {
     if ((story[altstage].stage.name != nextmission.name) && captivity.includes(nextmission.name)) {loseresult = randFrom(goingdown)}
     else {loseresult = randFrom(deusexmachina)}
     
-    if (goal == "ritual") {loseresult = `You were not able to stop ${enemy.boss} from completing the ritual!
+    if (goal == "ritual") {loseresult = `You were not able to stop ${enemy.boss} completing the ritual!
     Standing in the middle of the temple, ${genderPronoun(enemy.sex,"subject")} rises up off the stone floor, the ${mysticalSynonym()} powers swirling around ${genderPronoun(enemy.sex,"object")}.
     You watch as ${genderPronoun(enemy.sex,"possessive")} eyes burn, and ${genderPronoun(enemy.sex,"possessive")} body pulses with the ${mysticalSynonym()} energies! 
     ${((story[altstage].stage.name != nextmission.name) && captivity.includes(nextmission.name)) ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!`}`}
@@ -1590,7 +1599,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, ${enemy.desc} of ${enemy.name} is invoking an evil entity at a remote ${evilPlace()}. You have decided to head there.<br><br>
         Almost too late! When you arrive, the shrine is on fire, and the flames are getting higher! ${possessiveSuffix(enemy.boss)} goons are moving about the area, while the 
-        ${enemy.bosstitle} ${genderPronoun(enemy.sex,"reflexive")} observes. You rush to intervene, and ${enemy.boss} calls to you: "${gloat[0]}" and continues "${gloat[1]}" ${laconicStatement()}.`}
+        ${enemy.bosstitle} ${genderPronoun(enemy.sex,"reflexive")} observes. You rush to intervene, and ${enemy.boss} calls to you: "${gloat[0]}" and continues: "${gloat[1]}" ${laconicStatement()}.`}
         else {prologue = `${trail}, turns out ${enemy.boss} is trying to awaken the evil spirits of a remote shrine.<br><br>
         You arrive at your destination. You immediately notice ${enemy.boss} in the distance, ${rivalpresence == true ? `with ${rival} at ${genderPronoun(enemy.sex,"object")} side,` : ``} watching the
         angry flames rising. ${rivalboost == true ? `${possessiveSuffix(rival)} eyes burn with hateful fire as if possessed!` : `You are in a dire hurry.`} "You again?!" ${enemy.boss} shouts, seeing you rush toward the flames. 
@@ -1746,7 +1755,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         You immediately notice ${enemy.boss}, directing a cabal of necromancers${rivalpresence == true ? `, with ${rival} standing guard, ` : ``}!
         ${rivalpresence == true ? ` "Stop those Gladiators! Just a little more time, and we will both get what we came for," the leader of the ${enemy.name} spits.` : ` "Even you will fall to the power of death,
         ${defineAddressing(enemy)}!" ${genderPronoun(enemy.sex,"subject")} shouts, and the coven is surrounded by ${mysticalSynonym()} energy. You see even more  zombies climb out of the ground at their feet.`}`}
-        else {prologue = `${trail}, you find yourself at your destination, ${evilPlace()}. You see a veritable sea of people, all of them shambling about, all of them appearing broken and decayed.<br><br>
+        else {prologue = `${trail}, you find yourself at your destination, another ${evilPlace()}. You see a veritable sea of people, all of them shambling about, all of them appearing broken and decayed.<br><br>
         As you look over the zombies around you, you notice in the distance ${enemy.boss}, ${rivalpresence == true ? `with ${rival} standing guard, ` : ``}directing a cabal of necromancers!
         ${rivalpresence == true ? `"Stop those Gladiators! Just a little more time, and we will both get what we came for," the leader of the ${enemy.name} spits.` : `"You will never have time to stop me and
         ${finalboss.boss} both!" ${genderPronoun(enemy.sex, "subject")} shouts!`}${rivalboost == true ? ` ${rival}, looking like a corpse, hisses and lunges at you!` : ``}`}
@@ -1755,7 +1764,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
     case "Running Wild":
         if (knowledge == "hottrail") {prologue = `${trail}, you find the ${enemy.minions} of ${enemy.name} in the forest, near a ruined shrine. ${enemy.boss} shouts to ${genderPronoun(enemy.sex,"possessive")}
         goons: "Search, you fools, search! It cannot take this long!"<br><br>${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} then notices your approach and further instructs ${genderPronoun(enemy.sex,"possessive")} goons: 
-        "Just find them! I can hold these troublemakers!"<br><br>You inform ${enemy.boss} that whatever they are after, it probably belongs in a museum.`}
+        "Just find them! I can hold these troublemakers!"<br><br>You inform ${enemy.boss} that whatever they are after probably belongs in a museum.`}
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, you find the ${enemy.minions} of ${enemy.name} have been seen in the forest, near a ruined shrine.<br><br>With help from the locals you have no trouble finding the general
         area where the ${possessiveSuffix(enemy.name)} searches are happening, but turns out they have been scouring the woods for days already. When you reach them,
@@ -1928,7 +1937,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         "${gloat[0]}" ${enemy.boss} says${(rivalpresence == true && rivalboost == false) ? `, with ${rival} at ${genderPronoun(enemy.sex,"object")} side,` : ``}. "${gloat[1]}" You have to put out the fires and save the people inside - or the city will see the ${enemy.name} are in total control, and the Citadel cannot save them! And if you cannot, who can?
         ${rivalboost == true ? ` ${rival}, eyes burning with the unnatural fire, rushes to intercept you!` :``}`}
         else if (knowledge != "clueless" && masterplan == "personalpower") {
-        prologue = `${trail}, it is clear ${enemy.desc} of ${enemy.name} is invoking an evil entity at a remote ${evilPlace()} to receive unfathomable power. You have decided to head there.<br><br>
+        prologue = `${trail}, it is clear ${enemy.desc} of ${enemy.name} are invoking an evil entity at a remote ${evilPlace()} to imbue ${enemy.boss} with unfathomable power. You have decided to head there.<br><br>
         Almost too late! When you arrive, ritual fires have been set, and the flames are getting higher! ${possessiveSuffix(enemy.boss)} minions${(rivalpresence == true  && rivalboost == false) ? ` and ${rival}` : ``} are working the ritual, while the 
         ${enemy.bosstitle} ${genderPronoun(enemy.sex,"reflexive")} draws in the ${mysticalSynonym()} power. You call out to ${genderPronoun(enemy.sex,"object")}: "Stop it now!" ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} looks at you. "${gloat[0]}" ${enemy.boss} answers. "${gloat[1]}"<br><br>
         You take that as a no, and begin to undo the ritual!${rivalboost == true ? ` ${rival}, as if possessed by the fiery demon force, rushes to intercept you!` :``}`}
@@ -2007,7 +2016,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         else if (knowledge != "clueless" && masterplan == "personalpower") {
         prologue = `${trail}, you have confirmed that the minions of ${enemy.boss} have located a mountain cave that, under specific star conjunction, will bless a person of proper disposition and correct rites with ${mysticalSynonym()} powers. Going by helicopter would surely
         alert the ${enemy.name}, so you must approach by foot. You start the arduous climb, and after a while you find ${enemy.boss} blocking your way.<br><br>
-        "${randFrom(enemy.minionnames)}! Take the rest of the ${enemy.minions} and prepare the cave! I will come there when the stars are right!" ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} turns to you. "${gloat[0]}" ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} says eyeing you. "${gloat[1]}"`}
+        "${randFrom(enemy.minionnames)}! Take the rest of the ${enemy.minions} and prepare the cave! I will come there when the stars are right!" ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} turns to you. "${gloat[0]}" ${genderPronoun(enemy.sex,"subject")} says eyeing you. "${gloat[1]}"`}
         else {prologue = `${changeOfPlans(trail,finalboss,enemy,stage)}<br><br>
         You have confirmed that the minions of ${enemy.boss} are operating near a certain mountain cave. Going by helicopter would surely
         alert the ${enemy.name}, so you must approach by foot. You start the arduous climb, and after a while you find ${enemy.boss} blocking your way.<br><br>
@@ -2082,7 +2091,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         From your intel, Citadel analysts have pieced together the location of these hostages, and you move in.<br><br>
         You have to rescue the captives - the power and reach of the ${enemy.name} will grow exponentially if the families cave in!`}
         else if (knowledge != "clueless" && masterplan == "kidnapping") {
-        prologue = `${trail}, you find out the location of the ${vip}, who has been kidnapped by ${enemy.boss} and ${genderPronoun(enemy.sex, "possessive")} ${enemy.minions}.
+        prologue = `${trail}, you find out the location of the ${vip[0]}, who has been kidnapped by ${enemy.boss} and ${genderPronoun(enemy.sex, "possessive")} ${enemy.minions}.
         "${enemy.boss} is interrogating ${randFrom(["him","her"])} as we speak," Agent Fletch says. "You have to move in quick, before ${genderPronoun(enemy.sex,"subject")} gets any sensitive information! Some of
         their intel could threaten even the Citadel!"<br><br>
         You arrive to the scene to see several captives, with their faces covered. ${rivalpresence == true ? `${rival} is standing guard over the captives,` : `The enemies are on alert,`} and you don't know which one
@@ -2157,7 +2166,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
     
     case "Sudden Death":
         if (knowledge != "clueless" && masterplan == "kidnapping") {
-        prologue = `${trail}, you found that ${enemy.boss} has kidnapped, along with the ${vip}, a whole lot of people from all walks of life, and intends to make them fight to death
+        prologue = `${trail}, you found that ${enemy.boss} has kidnapped, along with the ${vip[0]}, a whole lot of people from all walks of life, and intends to make them fight to death
         for ${genderPronoun(enemy.sex,"possessive")} own entertainment! Agent Fletch informs you that you have the location of the ${enemy.name}${possessiveSuffix(enemy.name)} secret base. You head there with
         Citadel soldiers, who clear the upper levels while you find your way to an elevator, and proceed down to the heart of the complex. You patiently wait while a lounge version of
         ${loungeMusic()} plays over the cheap speakers.<br><br>
@@ -2194,7 +2203,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         else if (knowledge != "clueless" && masterplan == "actsofterror") {
         prologue = `${trail}, you find out that the ${enemy.desc} of the ${enemy.name} are planning to openly flood the streets of the city with free samples of a Vandal-derivative drug. Citadel analysts have determined the location and time of
         their plan, and you move in to intervene.<br><br>
-        A Citadel chopper drops you at the remote beach where the ${possessiveSuffix(enemy.name)} distribution of product is taking place. "${gloat[0]}" ${enemy.boss} says. "${gloat[1]}" You have to stop the distribution here and now, or the city will fall into unimaginable drug problems - and the people will know no-one can stop the ${enemy.name}!`
+        A Citadel chopper drops you at the remote beach where the ${possessiveSuffix(enemy.name)} distribution of product is taking place. "${gloat[0]}" ${enemy.boss} says. "${gloat[1]}" You have to stop the distribution here and now, or the city will fall into unimaginable social troubles - and the people will know no-one can stop the ${enemy.name}!`
         }
         else {
         prologue = `${changeOfPlans(trail,finalboss,enemy,stage)}<br><br>
@@ -2206,21 +2215,22 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
     break;
     
     case "The Ceremony":
+        let artefact = randomArtefact()
         if (knowledge != "clueless" && masterplan == "personalpower") {prologue = `${trail}, you've determined where ${enemy.boss} will enact ${genderPronoun(enemy.sex,"possessive")} plan of receiving the ultimate power. You reach the ${evilPlace()}
         nestled deep in in the wilds where the ritual is to take place - to find ${enemy.boss} and ${genderPronoun(enemy.sex,"possessive")} forces already starting the ritual.<br><br>"${gloat[0]}" ${enemy.boss} calls with confidence, ${genderPronoun(enemy.sex,"possessive")} voice echoing off the stone walls.
-        You see the main chamber of the temple has multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of ${mysticalSynonym()} images.
-        Thinking that these may be part of the ritual, you quickly remove them from their pedestals. "${gloat[1]}" ${enemy.boss} calls out. ${upperCaseInitial(genderPronoun(enemy.sex,"possessive"))} forces ${rivalpresence == true ? `led by ${rival} `: ``}charge you while
+        You see the temple is surrounded by multiple pedestals, each with a mysterious ${artefact} placed on top. The ${artefact}s are etched with a series of ${mysticalSynonym()} images.
+        Thinking that these may be part of the ritual, you must remove them from their pedestals. "${gloat[1]}" ${enemy.boss} calls out. ${upperCaseInitial(genderPronoun(enemy.sex,"possessive"))} forces ${rivalpresence == true ? `led by ${rival} `: ``}charge you while
         ${genderPronoun(enemy.sex,"subject")} continues the ritual.<br><br>The time has come for your final confrontation!`}
         else if (knowledge != "clueless" && masterplan == "kidnapping") {prologue = `${trail}, you've determined that ${enemy.boss} plans to sacrifice ${genderPronoun(enemy.sex,"possessive")} captive to appease a dark power ${genderPronoun(enemy.sex,"subject")} is indebted to at a certain ${evilPlace()}. You reach the location
         to find ${enemy.boss} and ${genderPronoun(enemy.sex,"possessive")} forces already starting the ritual. You see the captive chained, too tightly for you to free ${randFrom(["him","her"])} without defeating the ${enemy.name} first.<br><br>
         "${gloat[0]}" ${enemy.boss} calls with confidence, ${genderPronoun(enemy.sex,"possessive")} voice echoing off the stone walls.
-        You see the main chamber of the temple has multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of ${mysticalSynonym()} images.
-        Thinking that these may be part of the ritual, you quickly remove them from their pedestals. "${gloat[1]}" ${enemy.boss} finishes. ${upperCaseInitial(genderPronoun(enemy.sex,"possessive"))} forces ${rivalpresence == true ? ` led by ${rival}`: ``}charge you while
+        You see the temple is surrounded by multiple pedestals, each with a mysterious ${artefact} placed on top. The ${artefact}s are etched with a series of ${mysticalSynonym()} images.
+        Thinking that these may be part of the ritual, you must remove them from their pedestals. "${gloat[1]}" ${enemy.boss} finishes. ${upperCaseInitial(genderPronoun(enemy.sex,"possessive"))} forces ${rivalpresence == true ? ` led by ${rival} `: ``}charge you while
         ${genderPronoun(enemy.sex,"subject")} continues the ritual.<br><br>The time has come for your final confrontation!`}
         else {prologue = `${changeOfPlans(trail,finalboss,enemy,stage)}<br><br>
         ${trail}, you reach the ${evilPlace()} nestled deep in in the wilds - to find ${enemy.boss} and ${genderPronoun(enemy.sex,"possessive")} forces already starting the ritual.<br><br>"${gloat[0]}" ${enemy.boss} calls with confidence, ${genderPronoun(enemy.sex,"possessive")} voice echoing off the stone walls.
-        You see the main chamber of the temple has multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of ${mysticalSynonym()} images.
-        Thinking that these may be part of the ritual, you quickly remove them from their pedestals. ${rivalpresence == true ? `${rivalboost == true ? `${rival}, possessed by a supernatural force, moves in to intercept you. ` : `${rival} eyes you from ${possessiveSuffix(enemy.boss)} side. `}` : ``}"Your efforts are futile!" ${enemy.boss} calls out. ${upperCaseInitial(genderPronoun(enemy.sex,"possessive"))} forces charge you while
+        You see the temple is surrounded by multiple pedestals, each with a mysterious ${artefact} placed on top. The ${artefact}s are etched with a series of ${mysticalSynonym()} images.
+        Thinking that these may be part of the ritual, you must remove them from their pedestals. ${rivalpresence == true ? `${rivalboost == true ? `${rival}, possessed by a supernatural force, moves in to intercept you. ` : `${rival} eyes you from ${possessiveSuffix(enemy.boss)} side. `}` : ``}"Your efforts are futile!" ${enemy.boss} calls out. ${upperCaseInitial(genderPronoun(enemy.sex,"possessive"))} forces charge you while
         ${genderPronoun(enemy.sex,"subject")} continues the ritual.`}
     break;
     
@@ -2292,9 +2302,11 @@ function finalResult(masterplan, enemy, rival, vip = null, result) {
     }
     
     let winresult = [
+        `You have finally beaten the last of the minions of ${enemy.desc}, and try find their defeated boss. But ${genderPronoun(enemy.sex,"subject")} has disappeared! At least the ${neutralize}.`,
+        `"The ${neutralize}," you report to Agent Flecth. "But ${enemy.boss} is nowhere to be found."`,
         `"Gladiator?" Agent Fletch's voice sounds in your ear, small and tinny from your damaged communicator. "What's the status?" You press your finger to the comm button. "The ${neutralize}," you respond, breathing heavily. "${enemy.boss} has been defeated but is nowhere to be found. `,
         `"You may have me," ${enemy.boss} says as the Citadel agents surround them. "But I am only one." Agent Fletch approaches. "Say goodbye to your precious ${enemy.name}," he says. ${randFrom([rival,randFrom(enemy.minionnames)])} laughs. "Who do you think you're working for?"`,
-        `"You may have me," ${enemy.boss} says as the Citadel agents surround them. Suddenly, ${genderPronoun(enemy.sex,"subject")} starts to deteoriorate, and in mere seconds, there's nothing but dust left. Agent Fletch approaches. "It must have been a clone! At least the ${neutralize}, that's a victory in my books."`,
+        `"You may think you have me," ${enemy.boss} says as the Citadel agents surround them. Suddenly, ${genderPronoun(enemy.sex,"subject")} starts to deteoriorate, and in mere seconds, there's nothing but dust left. Agent Fletch approaches. "It must have been a clone! At least the ${neutralize}, that's a victory in my books."`,
         `In a blinding flash, ${enemy.boss} disappears just as Agent Fletch approaches. "The ${neutralize}," you report. "We may have won the battle, but the war is not over," Agent Fletch says.`,
         `You ensured that the ${neutralize}. As ${possessiveSuffix(enemy.boss)} minions flee, ${genderPronoun(enemy.sex,"subject")} wipes blood from ${genderPronoun(enemy.sex,"possessive")} mouth. "We're not done. This is MY city. The ${enemy.name} never forgets! So you better never show your face here again! With that, they quickly fled in the darkness.`,
         `With each blow to ${enemy.boss}, ${genderPronoun(enemy.sex,"subject")} attempts to fight you off. Finally, ready to end it all, you swing with what will be your final attack, but suddenly there's blinding flash and  ${genderPronoun(enemy.sex,"subject")}'s gone.`,
@@ -2527,6 +2539,9 @@ function laconicStatement() {
     return randFrom(laconicstatements)
 }
 
+function randomArtefact() {
+    randFrom("urn", "artefact", "relic", "vestige", "sculpture", "statue", "orb")
+}
 
 </script>
 
