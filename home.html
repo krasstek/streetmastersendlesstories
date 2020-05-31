@@ -6,381 +6,11 @@
 <link href="https://fonts.googleapis.com/css?family=Crimson+Text&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700&display=swap" rel="stylesheet">
+<link rel = "stylesheet" href = "style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
-<style type="text/css">
-
-:root{
-    --light-card-color: linear-gradient(0deg, rgba(140,130,124,1) 0%, rgba(222,205,195,1) 3%, rgb(240, 234, 231) 97%, rgba(140,130,124,1) 100%);
-}
-
-body {
-    /*background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(151,53,36,1) 50%, rgba(0,0,0,1) 100%);*/
-    font-family: 'Crimson Text', serif;
-}
-
-h1,h2 {
-    font-family: 'IBM Plex Sans Condensed', sans-serif;
-    font-style: italic;
-}
-
-.input {
-    background: rgb(223,199,128);
-    font-size: 22px;
-    font-weight: bold;
-    border: 2px solid black;
-    width: 16mm;
-    height: 16mm;
-    text-align: center;
-    float: right;
-}
-
-.button {
-    font-size: 16px;
-    font-weight: bold;
-    background: #e7aa3c;
-    border: 2px solid black;
- }
-
-.button:hover{
-    background: rgba(151,53,36,1);
-}
-
-.form {
-    border: 1.5mm solid black;
-    background: #d6d2ce;
-    position: relative;
-    width: 270mm;
-    margin: 3mm 25mm 10mm 0mm;
-    padding: 5mm;
-    box-sizing: border-box;
-}
-
-
-.upperbar{
-    width: 270mm;
-    background: #e7aa3c;
-    text-align: center;
-    position: relative;
-    border: 2mm solid black;
-    top: 3mm;
-    display: table-cell;
-    padding-top: 4mm;
-    box-sizing: border-box;
-}
-
-.boxtitle{
-    background: #e7aa3c;
-    position: relative;
-    border: 1.5mm solid black;
-    top: -6mm;
-    width: 200mm;
-    right: 6mm;
-    display: table-cell;
-    vertical-align: middle;
-    padding-left: 5mm;
-}
-
-.card {
-    margin-bottom: 0.2mm;
-    margin-left: 1mm;
-    flex-grow: 1;
-}
-
-.titletext {
-    color: white;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
-    bottom: 0;
-    position: relative;
-    box-sizing: border-box;
-    height: 10mm;
-    padding-top: 3mm;
-    padding-bottom: 1mm;
-    display: table-cell;
-    font-size: 24px;
-    border: 2pt solid transparent;
-}
-
-.story {
-    border: 1.5mm solid black;
-    background: #d6d2ce;
-    width: 50%;
-    float: right;
-}
-
-.storycardfront {
-    width: 63mm;
-    box-sizing: border-box;
-    font-family: 'IBM Plex Sans', sans-serif;
-    float: left;
-    margin-right: 0.2mm;
-}
-
-.storycard-divider {
-    height: 0.8mm;
-    background: linear-gradient(90deg, rgba(130,130,130,1) 0%, rgba(255,255,255,1) 37%, rgba(255,255,255,1) 53%, rgba(130,130,130,1) 100%);
-}
-
-.storycardfront-title{
-    background: linear-gradient(90deg, rgba(78,74,62,1) 0%, rgba(59,56,46,1) 10%, rgba(3,2,2,1) 100%);
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
-    height: 10mm;
-}
-.storycardfront-subtitle{
-    height: 3mm;
-    background: black;
-    font-style: italic;
-    font-size: 7px;
-    color: #d6d2ce;
-    box-sizing: border-box;
-    padding-left: 17mm;
-    padding-top: 0.5mm;
-    padding-right: 2mm;
-}
-.storycardfront-prologue{
-    height: 57.6mm;
-    background: var(--light-card-color);
-    box-sizing: border-box;
-    
-}
-
-.storycardfront-prologuetext{
-    padding: 3mm;
-    color: black;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-style: italic;
-    font-size: 8px;
-}
-
-.storycardfront-setup{
-    background: linear-gradient(90deg, rgba(78,74,62,1) 0%, rgba(59,56,46,1) 10%, rgba(3,2,2,1) 100%);
-    border-bottom-right-radius: 12px;
-    border-bottom-left-radius: 12px;
-    font-family: 'IBM Plex Sans Condensed', sans-serif;
-    height: 16mm; 
-    color: #d6d2ce;
-    box-sizing: border-box;
-    padding-left: 2mm;
-    padding-top: 1.5mm;
-    padding-bottom: 2mm;
-    padding-right: 2mm;
-    font-weight: 100;
-    position: relative;
-}
-
-.setuptext{
-    font-size: 8px;
-    position: relative;
-}
-
-.storycardback {
-    width: 63mm;
-    box-sizing: border-box;
-    font-family: 'IBM Plex Sans', sans-serif;
-    float: left;
-}
-
-.storycardback-bar-top{
-    background: linear-gradient(90deg, rgba(78,74,62,1) 0%, rgba(59,56,46,1) 10%, rgba(3,2,2,1) 100%);
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
-    height: 3mm;
-}
-
-.storycardback-epilogue-top{
-    height: 36.6mm;
-    background: var(--light-card-color);
-    color: black;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-style: italic;
-    box-sizing: border-box;
-}
-
-.storycardback-titlebar{
-    width: 63mm;
-    height: 6mm;
-    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 32%, 80.5% 32%, 75.5% 100%, 24.5% 100%, 19.5% 32%, 0% 32%);
-    background: linear-gradient(90deg, rgba(130,130,130,1) 0%, rgba(255,255,255,1) 37%, rgba(255,255,255,1) 53%, rgba(130,130,130,1) 100%);
-    position: relative;
-    z-index: 2;
-}
-
-.storycardback-epiloguetitle {
-    width: 63mm;
-    height: 5mm;
-    position: relative;
-    font-family: 'IBM Plex Sans Condensed', sans-serif;
-    font-size: 9px;
-    background: #30271B;
-    top: 0.4mm;
-    font-style: italic;
-    padding-top: 1mm;
-    padding-left: 23mm;
-    color: #d6d2ce;
-    box-sizing: border-box;
-    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 20%, 80% 20%, 75% 100%, 25% 100%, 20% 20%, 0% 20%);
-    z-index: 2;
-}
-
-.storycardback-winepiloguetext,
-.storycardback-loseepiloguetext {
-    box-sizing: border-box;
-    padding: 0.5mm 3mm 3mm 3mm;
-    color: black;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-style: italic;
-    position: relative;
-    bottom: 5mm;
-    font-size: 8px;
-}
-
-.storycardback-colorbar-back {
-    display: inline-block;
-    float: none;
-    width: 60.5mm;
-    height: 1.5mm;
-    background: linear-gradient(90deg, rgba(130,130,130,1) 0%, rgba(255,255,255,1) 37%, rgba(255,255,255,1) 53%, rgba(130,130,130,1) 100%);
-    position: relative;
-    left: 1mm;
-    bottom: 7mm;
-    -webkit-clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
-    z-index: 1;
-}
-
-.storycardback-colorbar-red,
-.storycardback-colorbar-green {
-    float: none;
-    width: 58mm;
-    height: 1mm;
-    position: relative;
-    left: 1.5mm;
-    -webkit-clip-path: polygon(0 0, 100% 0, 96% 100%, 4% 100%);
-    z-index: 1;
-
-}
-
-.storycardback-colorbar-red {
-     background: #c4331a;
-}
-
-.storycardback-colorbar-green {
-    background: #0a612b;
-}
-
-.storycardback-epilogue-bottom{
-    height: 45.4mm;
-    background: var(--light-card-color);
-    color: black;
-    font-family: 'IBM Plex Sans', sans-serif;
-    box-sizing: border-box;
-}
-
-.storycardback-bar-bottom{
-    background: linear-gradient(90deg, rgba(78,74,62,1) 0%, rgba(59,56,46,1) 10%, rgba(3,2,2,1) 100%);
-    border-bottom-right-radius: 12px;
-    border-bottom-left-radius: 12px;
-    height: 3mm; 
-    color: #d6d2ce;
-    font-size: 9px;
-    font-weight: 100;
-    position: relative;
-}
-
-.storycardback-bottomtitle{
-    background: #fffcf0;
-    height: 6mm;
-    width: 29mm;
-    position: relative;
-    left: 17mm;
-    bottom: 3mm;
-    box-sizing: border-box;
-    color: black;
-    font-style: italic;
-    font-weight: bold;
-    font-family: 'IBM Plex Sans Condensed', sans-serif;
-    padding-top: 1mm;
-    text-align: center;
-    font-size: 7px;
-    -webkit-clip-path: polygon(20.5% 0%, 79.5% 0%, 100% 100%, 0% 100%);
-    z-index: 1;
-}
-
-.circle-outer,
-.circle-middle,
-.circle-inner {
-    display: inline-block;
-    border-radius: 50%;
-    float: none;
-}
-
-.circle-outer {
-    height: 13mm;
-    width: 13mm;
-    background: linear-gradient(180deg, rgba(221,221,221,1) 0%, rgba(51,51,51,1) 100%);
-    margin-top: 3mm;
-    margin-left: 2.2mm;
-}
-
-.circle-middle {
-    height: 10.5mm;
-    width: 10.5mm;
-    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(0,0,0,1) 100%);
-    margin-top: 1.25mm;
-    margin-left: 1.25mm;
-}
-
-.circle-inner {
-    height: 10mm;
-    width: 10mm;
-    background: black;
-    margin-top: 0.25mm;
-    margin-left: 0.25mm;
-}
-
-.expansionicon{
-    position: absolute;
-    float: right;
-    bottom:2mm;
-    right: 2mm;
-    width: 4mm;
-    height: 2mm;
-}
-
-.infinity{
-    margin-left: 50mm;
-    float: right;
-}
-
-.infinity-before,
-.infinity-after {
-    position: absolute;
-    box-sizing: border-box;
-    width: 2mm;
-    height: 2mm;
-    border: 0.5mm solid white;
-    border-radius: 50px 50px 0px 50px;
-    transform: rotate(-45deg);
-}
-.infinity-after {
-    border-radius: 50px 50px 50px 0;
-    transform: rotate(45deg);
-    margin-left: 2mm;
-}
-
-.backbar {
-    height: 100%;
-    width: 100%;
-    /*width: 270mm;*/
-    background: white;
-    /*background: #f7edd9;*/
-    position: relative;
-    display: flex;
-    flex-flow: row wrap;
-}
-</style>
 </head>
 
 <body>
@@ -626,7 +256,7 @@ let enemies = [
     {name:"Kingdom", boss: "Kemono", bosstitle: "imposing green mutant", sex: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fist, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge","and put it into play"]]},
     {name:"Kingdom", boss: "Jackal", bosstitle: "mad scientist", sex: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "mysterious ninja and clone puppets", threat: "smiles, as her eyes start to glow malevolently, and your pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion","and play it"]]},
     {name:"Kingdom", boss: "Shadow", bosstitle: "ominous mastermind", sex: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades","and put it into play"]]},
-    {name:"Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", sex: "female", desc: "the ancient, restless warriors", addressing: "warriors", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller","Pale Caller"], preparedboss: [["Decaying Blast","and play it"]]},
+    {name:"Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", sex: "female", desc: "the ancient force of restless warriors", addressing: "warriors", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller","Pale Caller"], preparedboss: [["Decaying Blast","and play it"]]},
     {name:"Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", sex: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, eldritch power crackling", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike","and play it"]]},
     {name:"Onyx League", boss: "Mack", bosstitle: "black-hearted overlord", sex: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim","and put it into play"]]}
     ];
@@ -1358,7 +988,7 @@ function victoryResult(stageindex, story, nextstage) {
     let gizmo = randFrom(["data disc","keycard","tape recorder","floppy disc","microchip","communicator","dossier","cell phone","map","notepad","diskette","computer","magnetic tape"])
 
     let wanting = randFrom(["you are after","you want","","you pursuit","the Citadel is after","behind all this","all to familiar"])
-    let finalcahoots = finalboss.name == nextenemy.name ? randFrom([finalboss.boss, (finalboss.desc.replace("the", "a certain"), finalboss.bosstitle)]) : randFrom([`the ${finalboss.name}`, `${finalboss.desc} ${wanting}`, `${finalboss.minions} ${wanting}`, `the ${finalboss.bosstitle} ${wanting}`, finalboss.boss])
+    let finalcahoots = finalboss.name == nextenemy.name ? randFrom([finalboss.boss, (finalboss.desc.replace("the", "a certain"), finalboss.desc)]) : randFrom([`the ${finalboss.name}`, `${finalboss.desc} ${wanting}`, `${finalboss.minions} ${wanting}`, `the ${finalboss.bosstitle} ${wanting}`, finalboss.boss])
     let thiscahoots = enemy.name == nextenemy.name ? randFrom([enemy.boss, (enemy.desc.replace("the", "this very")),`this ${enemy.bosstitle}`]) : randFrom([`the ${enemy.name}`, (enemy.desc.replace("the", "this")), `these ${enemy.minions}`, `the ${enemy.bosstitle}`, enemy.boss])
     let cahoots = randFrom([finalcahoots,thiscahoots])
     let supposition = randFrom(["","supposedly ","rumored to be ","who to your understanding are ","who, according to Agent Fletch, are ","apparently ","probably ","believed to be ","most likely ","in all likelihood ",
@@ -1393,7 +1023,7 @@ function victoryResult(stageindex, story, nextstage) {
     break;
     case "Under Destruction": clue = `the ${nextenemy.name}${cahoots} - had been busy setting up an intricate series of explosives to bring a certain building down`
     break;
-    case "Running Wild": clue = `${nextenemy.minions} of the ${nextenemy.name}${cahoots}, are in a nearby labyrinthine forest, searching for something`
+    case "Running Wild": clue = `${nextenemy.minions} of the ${nextenemy.name}${cahoots} are in a nearby labyrinthine forest, searching for something`
     break;
     case "Steel Memories": clue =`${nextenemy.boss} has a secret underground base${cahoots}`
     break;
@@ -1680,8 +1310,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         if (knowledge == "hottrail")
         {prologue = `${trail}, you located the facility. You are surprised to find the lab not heavily guarded, so slipping in is not necessarily challenging, and you take the elevator down to the large lab.
         You patiently wait while a lounge version of ${loungeMusic()} plays over the cheap speakers.<br><br>Inside, however, you are glad to find just who
-        you came for. "Just get what we came for," ${enemy.boss} commands. "We need as much as possible!" While the ${enemy.name} are distracted, you are able to sneak
-        closer to inspect scattered documents nearby.`}
+        you came for. "Just get what we came for," ${enemy.boss} commands. "We need as much as possible!" Whatever it is they're after, you must stop them!`}
         else if (knowledge == "coldtrail") 
         {prologue = `${trail}, you made your way to the hidden facility. You defeated a few guards in your way and proceeded to take the elevator down to the large lab. You patiently wait while a lounge version of
         ${loungeMusic()} plays over the cheap speakers.<br><br>
@@ -1757,8 +1386,8 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         ${defineAddressing(enemy)}!" ${genderPronoun(enemy.sex,"subject")} shouts, and the coven is surrounded by ${mysticalSynonym()} energy. You see even more  zombies climb out of the ground at their feet.`}`}
         else {prologue = `${trail}, you find yourself at your destination, another ${evilPlace()}. You see a veritable sea of people, all of them shambling about, all of them appearing broken and decayed.<br><br>
         As you look over the zombies around you, you notice in the distance ${enemy.boss}, ${rivalpresence == true ? `with ${rival} standing guard, ` : ``}directing a cabal of necromancers!
-        ${rivalpresence == true ? `"Stop those Gladiators! Just a little more time, and we will both get what we came for," the leader of the ${enemy.name} spits.` : `"You will never have time to stop me and
-        ${finalboss.boss} both!" ${genderPronoun(enemy.sex, "subject")} shouts!`}${rivalboost == true ? ` ${rival}, looking like a corpse, hisses and lunges at you!` : ``}`}
+        ${rivalpresence == true ? `"Stop those Gladiators! Just a little more time, and we will both get what we came for," the leader of the ${enemy.name} spits.` : `"You will never 
+        ${finalboss.boss == enemy.boss? "discover my true intentions" : `have time to stop me and ${finalboss.boss} both`}!" ${genderPronoun(enemy.sex, "subject")} shouts!`}${rivalboost == true ? ` ${rival}, looking like a corpse, hisses and lunges at you!` : ``}`}
     break;
     
     case "Running Wild":
@@ -2308,7 +1937,7 @@ function finalResult(masterplan, enemy, rival, vip = null, result) {
         `"You may have me," ${enemy.boss} says as the Citadel agents surround them. "But I am only one." Agent Fletch approaches. "Say goodbye to your precious ${enemy.name}," he says. ${randFrom([rival,randFrom(enemy.minionnames)])} laughs. "Who do you think you're working for?"`,
         `"You may think you have me," ${enemy.boss} says as the Citadel agents surround them. Suddenly, ${genderPronoun(enemy.sex,"subject")} starts to deteoriorate, and in mere seconds, there's nothing but dust left. Agent Fletch approaches. "It must have been a clone! At least the ${neutralize}, that's a victory in my books."`,
         `In a blinding flash, ${enemy.boss} disappears just as Agent Fletch approaches. "The ${neutralize}," you report. "We may have won the battle, but the war is not over," Agent Fletch says.`,
-        `You ensured that the ${neutralize}. As ${possessiveSuffix(enemy.boss)} minions flee, ${genderPronoun(enemy.sex,"subject")} wipes blood from ${genderPronoun(enemy.sex,"possessive")} mouth. "We're not done. This is MY city. The ${enemy.name} never forgets! So you better never show your face here again! With that, they quickly fled in the darkness.`,
+        `You ensured that the ${neutralize}. As ${possessiveSuffix(enemy.boss)} minions flee, ${genderPronoun(enemy.sex,"subject")} wipes blood from ${genderPronoun(enemy.sex,"possessive")} mouth. "We're not done. This is MY city. The ${enemy.name} never forgets! So you better never show your face here again!" With that, they quickly fled in the darkness.`,
         `With each blow to ${enemy.boss}, ${genderPronoun(enemy.sex,"subject")} attempts to fight you off. Finally, ready to end it all, you swing with what will be your final attack, but suddenly there's blinding flash and  ${genderPronoun(enemy.sex,"subject")}'s gone.`,
         `With ${enemy.boss} defeated, Citadel soldiers secure the area and you return home. Now that the ${neutralize}, the mayor arranges a parade for the heroes of the city, and most of you get a medal!`,
         `Suddenly, there's a blinding flash and ${possessiveSuffix(enemy.boss)} gone! It's all gone. Shockingly, you're back at Citadel HQ, surrounded by agents all going about their business. Did all that even happen?`,
@@ -2540,7 +2169,7 @@ function laconicStatement() {
 }
 
 function randomArtefact() {
-    randFrom("urn", "artefact", "relic", "vestige", "sculpture", "statue", "orb")
+    return randFrom(["urn", "artefact", "relic", "vestige", "sculpture", "statue", "orb"])
 }
 
 </script>
