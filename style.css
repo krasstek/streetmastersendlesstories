@@ -2,12 +2,6 @@
     --light-card-color: linear-gradient(0deg, rgba(140,130,124,1) 0%, rgba(222,205,195,1) 3%, rgb(240, 234, 231) 97%, rgba(140,130,124,1) 100%);
 }
 
-@media print {  
-    @page {  
-      size:297mm 210mm;
-    }  
-}
-
 body {
     /*background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(151,53,36,1) 50%, rgba(0,0,0,1) 100%);*/
     font-family: 'Crimson Text', serif;
@@ -80,8 +74,15 @@ h1,h2 {
 .card {
     margin-bottom: 0.2mm;
     margin-left: 1mm;
-    flex-grow: 1;
 }
+
+@media print {
+    .card {
+        transform: scale(0.93);
+    }
+
+}
+
 
 .titletext {
     color: white;
@@ -197,6 +198,7 @@ h1,h2 {
     width: 63mm;
     height: 6mm;
     -webkit-clip-path: polygon(0 0, 100% 0%, 100% 32%, 80.5% 32%, 75.5% 100%, 24.5% 100%, 19.5% 32%, 0% 32%);
+    clip-path: polygon(0 0, 100% 0%, 100% 32%, 80.5% 32%, 75.5% 100%, 24.5% 100%, 19.5% 32%, 0% 32%);
     background: linear-gradient(90deg, rgba(130,130,130,1) 0%, rgba(255,255,255,1) 37%, rgba(255,255,255,1) 53%, rgba(130,130,130,1) 100%);
     position: relative;
     z-index: 2;
@@ -216,6 +218,7 @@ h1,h2 {
     color: #d6d2ce;
     box-sizing: border-box;
     -webkit-clip-path: polygon(0 0, 100% 0%, 100% 20%, 80% 20%, 75% 100%, 25% 100%, 20% 20%, 0% 20%);
+    clip-path: polygon(0 0, 100% 0%, 100% 20%, 80% 20%, 75% 100%, 25% 100%, 20% 20%, 0% 20%);
     z-index: 2;
 }
 
@@ -241,6 +244,7 @@ h1,h2 {
     left: 1mm;
     bottom: 7mm;
     -webkit-clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
     z-index: 1;
 }
 
@@ -252,6 +256,7 @@ h1,h2 {
     position: relative;
     left: 1.5mm;
     -webkit-clip-path: polygon(0 0, 100% 0, 96% 100%, 4% 100%);
+    clip-path: polygon(0 0, 100% 0, 96% 100%, 4% 100%);
     z-index: 1;
 
 }
@@ -299,6 +304,7 @@ h1,h2 {
     text-align: center;
     font-size: 7px;
     -webkit-clip-path: polygon(20.5% 0%, 79.5% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(20.5% 0%, 79.5% 0%, 100% 100%, 0% 100%);
     z-index: 1;
 }
 
@@ -370,7 +376,6 @@ h1,h2 {
     /*width: 270mm;*/
     background: white;
     /*background: #f7edd9;*/
-    position: relative;
     display: flex;
     flex-flow: row wrap;
 }

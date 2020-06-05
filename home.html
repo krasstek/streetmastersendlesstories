@@ -8,8 +8,8 @@
 <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700&display=swap" rel="stylesheet">
 <link rel = "stylesheet" href = "style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="js/paged.polyfill.js"></script>
 
 </head>
 
@@ -27,15 +27,15 @@
 </div>
 
 <div class=backbar>
-<div class = "card" id = "card1"></div>
-<div class = "card" id = "card2"></div>
-<div class = "card" id = "card3"></div>
-<div class = "card" id = "card4"></div>
-<div class = "card" id = "card5"></div>
-<div class = "card" id = "card6"></div>
-<div class = "card" id = "card7"></div>
-<div class = "card" id = "card8"></div>
-<div class = "card" id = "card9"></div>
+<div class = "card"></div>
+<div class = "card"></div>
+<div class = "card"></div>
+<div class = "card"></div>
+<div class = "card"></div>
+<div class = "card"></div>
+<div class = "card"></div>
+<div class = "card"></div>
+<div class = "card"></div>
 </div>
 </div>
 <script type="text/javascript">
@@ -52,11 +52,11 @@ $(document).on("click", function(event) {createStory()})
     
 $( document ).ready(function() {
     
-    let cardnumber = 1;
+    let cardnumber = 0;
     $(".card").each(function() {
         cardnumber++;
-    $(this).html(`<div class = "card" id = "card${cardnumber}">
-    
+    $(this).attr("id","card"+cardnumber);    
+    $(this).html(`
 <div class = "storycardfront">
 <div class = "storycardfront-title" id="storycardfront-title${cardnumber}">
     <div class = "circleicon" style="float: left">
@@ -100,8 +100,7 @@ $( document ).ready(function() {
         <div class = "storycardback-bottomtitle" id = "storycardback-bottomtitle${cardnumber}"></div>
 </div>
 </div>
-
-</div>`);
+`);
   });
     
 });
@@ -172,44 +171,44 @@ function createStory() {
     supportingcast = (_.uniq(supportingcast)).filter(function(el) { return el; });
         
 let alliesandrivals = [
-        {name: "Ah Long"},
-        {name: "Ah Long of Brook City"},
-        {name: "Anastasia"},
-        {name: "Brandon"},
-        {name: "Chan Chan"},
-        {name: "Clinhylde Eight"},
-        {name: "Darius"},
-        {name: "Dmitri"},
-        {name: "Drago"},
-        {name: "Gabriel"},
-        {name: "Genesis"},
-        {name: "Hanzo"},
-        {name: "Isabella"},
-        {name: "Jackal"},
-        {name: "James Wong"},
-        {name: "Jin"},
-        {name: "Juan"},
-        {name: "Kemono"},
-        {name: "Khadath Ahemusei"},
-        {name: "Leeta"},
-        {name: "Lotus"},
-        {name: "Marionette Doll"},
-        {name: "Mary Ann"},
-        {name: "Megan"},
-        {name: "Mr. Apple"},
-        {name: "Natalia"},
-        {name: "Power Soldier"},
-        {name: "Project X"},
-        {name: "Sera O'Quinn"},
-        {name: "Shadow"},
-        {name: "Shin Yokai"},
-        {name: "Star Knight Iri"},
-        {name: "Tiger Azules"},
-        {name: "Tlatzolteotl"},
-        {name: "Wan Bo"},
-        {name: "Ying Hua"},
-        {name: "Ying Hua of Brook City"},
-        {name: "Zane"}
+        {name: "Ah Long", keywords: ["Boss", "Golden Dragons", "Organized Crime", "Martial Arts Master", "Supernatural"]},
+        {name: "Ah Long of Brook City", keywords: ["Boss", "Brook City", "Golden Dragons", "Organized Crime"]},
+        {name: "Anastasia", keywords: ["Brotherhood", "Black Ops", "Gunslinger", "Soldier"]},
+        {name: "Brandon", keywords: ["Celebrity", "Fraud", "Global Gladiator", "Wanderer"]},
+        {name: "Chan Chan", keywords: ["Beast", "Celebrity", "Kingdom", "Insane"]},
+        {name: "Clinhyde Eight", keywords: ["Black Ops", "Indines", "Psychic","Toxic"]},
+        {name: "Darius", keywords: ["Ancient", "Kingdom", "Martial Arts Master", "Toxic"]},
+        {name: "Dmitri", keywords: ["Boss", "Black Ops", "Brotherhood", "Soldier"]},
+        {name: "Drago", keywords: ["Black Ops","Brotherhood","Pitfighter","Street"]},
+        {name: "Gabriel", keywords: ["Global Gladiator","Martial Arts Master","Street","Wanderer"]},
+        {name: "Genesis", keywords: ["Cifarelli","Organized Crime","Ransom City","Supernatural"]},
+        {name: "Hanzo", keywords: ["Ancient","Sensei","Wanderer","Weapon Master"]},
+        {name: "Isabella", keywords: ["Martial Arts Master","Wanderer"]},
+        {name: "Jackal", keywords: ["Insane","Kingdom","Psychic","Science"]},
+        {name: "James Wong", keywords: ["Black Ops","Brook City","Law Enforcement","Kingdom"]},
+        {name: "Jin", keywords: ["Golden Dragons", "Organized Crime", "Weapon Master"]},
+        {name: "Juan", keywords: ["Cartel","Fraud","Gunslinger","Street"]},
+        {name: "Kemono", keywords: ["Beast", "Kingdom","Pitfighter", "Supernatural"]},
+        {name: "Khadath Ahemusei", keywords: ["Indines","Science","Supernatural","Wanderer"]},
+        {name: "Leeta", keywords: ["Brook City","Ransom City","Street","Wanderer"]},
+        {name: "Lotus", keywords: ["Brook City","Golden Dragons","Organized Crime"]},
+        {name: "Marionette Doll", keywords: ["Kingdom","Martial Arts Master","Psychic"]},
+        {name: "Mary Ann", keywords: ["Ransom City","Sensei","Street"]},
+        {name: "Megan", keywords: ["Celebrity","Fraud","Global Gladiator","Wanderer"]},
+        {name: "Mr. Apple", keywords: ["Celebrity","Fraud","Sensei"]},
+        {name: "Natalia", keywords: ["Black Ops","Global Gladiator","Soldier","Wanderer"]},
+        {name: "Power Soldier", keywords: ["Beast","Kingdom","Martial Arts Master","Science"]},
+        {name: "Project X", keywords: ["Beast","Insane","Martial Arts Master","Science"]},
+        {name: "Sera O'Quinn", keywords: ["Boss","Celebrity","Insane","Organized Crime"]},
+        {name: "Shadow", keywords: ["Boss","Kingdom","Martial Arts Master","Supernatural"]},
+        {name: "Shin Yokai", keywords: ["Boss","Insane","Oni","Supernatural"]},
+        {name: "Star Knight Iri", keywords: ["Indines","Supernatural","Weapon Master","Soldier"]},
+        {name: "Tiger Azules", keywords: ["Aztec","Street","Supernatural"]},
+        {name: "Tlatzolteotl", keywords: ["Ancient","Aztec","Boss","Supernatural"]},
+        {name: "Wan Bo", keywords: ["Golden Dragons","Martial Arts Master","Supernatural","Weapon Master"]},
+        {name: "Ying Hua", keywords: ["Global Gladiator","Law Enforcement"]},
+        {name: "Ying Hua of Brook City", keywords: ["Brook City","Law Enforcement"]},
+        {name: "Zane", keywords: ["Pitfighter","Supernatural"]}
         ];
 
 for (i = alliesandrivals.length-1; i > 0; i--) {
@@ -1229,7 +1228,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, ${enemy.desc} of ${enemy.name} is invoking an evil entity at a remote ${evilPlace()}. You have decided to head there.<br><br>
         Almost too late! When you arrive, the shrine is on fire, and the flames are getting higher! ${possessiveSuffix(enemy.boss)} goons are moving about the area, while the 
-        ${enemy.bosstitle} ${genderPronoun(enemy.sex,"reflexive")} observes. You rush to intervene, and ${enemy.boss} calls to you: "${gloat[0]}" and continues: "${gloat[1]}" ${laconicStatement()}.`}
+        ${enemy.bosstitle} ${genderPronoun(enemy.sex,"reflexive")} observes. You rush to intervene, and ${enemy.boss} calls to you: "${gloat[0]}" and continues: "${gloat[1]}"<br><br>${laconicStatement()}.`}
         else {prologue = `${trail}, turns out ${enemy.boss} is trying to awaken the evil spirits of a remote shrine.<br><br>
         You arrive at your destination. You immediately notice ${enemy.boss} in the distance, ${rivalpresence == true ? `with ${rival} at ${genderPronoun(enemy.sex,"object")} side,` : ``} watching the
         angry flames rising. ${rivalboost == true ? `${possessiveSuffix(rival)} eyes burn with hateful fire as if possessed!` : `You are in a dire hurry.`} "You again?!" ${enemy.boss} shouts, seeing you rush toward the flames. 
@@ -1478,7 +1477,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, you have found out that ${enemy.boss} has unearthed tremendous supernatural power! You can see the sky turning rapidly to a reddish hue
         as you close in on your destination.<br><br>
-        You arrive, and barge toward the building in the center of it all. "${gloat[0]}!" ${enemy.boss}
+        You arrive, and barge toward the building in the center of it all. "${gloat[0]}" ${enemy.boss}
         shouts${rivalpresence == true ? `, with ${rival} at ${genderPronoun(enemy.sex, "possessive")} side` : ""}. "${gloat[1]} The ceremony is already underway!"<br><br>${laconicStatement()}.`}
         else {prologue = `${trail}, you realize you do not have the luxury of chasing your original goals right now.
         According to the intel ${enemy.boss} has unearthed tremendous supernatural power! You can see the sky funneling down with an intense, blood-red stream of power descending
@@ -1494,7 +1493,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies,p
         prologue = `${trail}, you find out the site that ${enemy.name} has targeted. According to the intel, the building being constructed is owned by the ${competitor.name} through shell corporations. You don't really mind ${competitor.desc} taking such a loss,
         but why is the ${enemy.name} so interested in this place?<br><br>
         You arrive at the scene, where ${enemy.boss} and ${genderPronoun(enemy.sex,"possessive")} ${enemy.minions} are busy setting the explosives. "Faster, ${randFrom(enemy.minionnames)}," ${enemy.boss}
-        shouts. "We need to be ready before those pesky.." Then ${genderPronoun(enemy.sex,"subject")} sees you, and ${genderPronoun(enemy.sex,"possessive")} face darkens.`}
+        shouts. "We need to be ready before those pesky Gladiators arrive." Then ${genderPronoun(enemy.sex,"subject")} sees you, and ${genderPronoun(enemy.sex,"possessive")} face darkens.`}
         else if (knowledge == "coldtrail") {
         prologue = `${trail}, you find out that the ${enemy.name} has been very busy setting up explosives to bring a construction site down. Unfortunately, you may have arrived too late..<br><br>
         "Arm the bombs and let's get out of here," a voice commands from behind a plastic sheet. When the sheet is thrown aside, ${enemy.boss} ${rivalpresence == true ? `and ${rival} step` : `steps`} into view. 
@@ -1620,14 +1619,14 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         prologue = `${trail}, you have found out that ${enemy.boss} is planning on buying enough firepower for ${enemy.name} goons to completely take over the city by force of might. The location is known, but Agent Fletch does
         not think the police is fast enough - or well enough trained - to take part in an operation against an opponent this dangerous.<br><br>
         You arrive at the warehouse and find ${enemy.boss} along with ${genderPronoun(enemy.sex,"possessive")} ${enemy.minions}. "${gloat[0]}" ${genderPronoun(enemy.sex,"subject")} says to you. "${gloat[1]}"
-        ${enemy.boss} ends ${genderPronoun(enemy.sex,"possessive")} gloating.
+        ${enemy.boss} ends ${genderPronoun(enemy.sex,"possessive")} gloating. ${rivalpresence == true ? `${rival}, part of the arms deal, moves in to get you.`:``}<br><br>
         You have to stop the ${enemy.name} here and now, or the city will not survive.`
         }
         else if (knowledge != "clueless" && masterplan == "illegalgains") {
         prologue = `${trail}, you have found out that the ${enemy.name} is funding their operation by conducting an immense international arms deal in an abandoned warehouse. Agent Fletch does not think the police is fast
         enough - or well enough trained - to take part in an operation against an opponent this dangerous.<br><br>
         You arrive at the warehouse and find ${enemy.boss} surrounded by ${genderPronoun(enemy.sex,"possessive")} goons preparing for the deal. "${gloat[0]}" ${genderPronoun(enemy.sex,"subject")} says. "${gloat[1]}
-        Grab a gun, ${randFrom(enemy.minionnames)}! Let's give them hell!"
+        Grab a gun, ${rivalpresence == true ? rival : randFrom(enemy.minionnames)}! Let's give them hell!"
         You have to stop the ${enemy.boss} here and now, or their reach and power will grow exponentially.`
         }
         else {prologue = `${changeOfPlans(trail,finalboss,enemy,stage)}<br><br>
@@ -1766,7 +1765,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         "You have to hurry, Gladiators," Agent Fletch says, shouting over the roar of the helicopter as you are flown to the target. "Our Citadel scouts report that ${enemy.name} goons have been
         seen in the area for some time now, and their power and reach will grow exponentally with the influx of cash from the black market after selling the artefacts!" He looks out the window and then nods to you. "This is your stop." You slide down the climbing rope and watch as the helicopter flies away. 
         Soon you find the ${enemy.minions} of ${enemy.name} in the forest."<br><br>
-        ${enemy.boss} notices notices your approach shouts in anger: "${gloat[0].substring(0, gloat[0].length - 1)}!" ${rivalpresence == true ? `, as ${rival} steps in your way.`:``}`}
+        ${enemy.boss} notices notices your approach. ""${gloat[0]}" the boss shouts in anger: "${gloat[1]}!" ${rivalpresence == true ? `, as ${rival} steps in your way.`:``}`}
         else {prologue = `${changeOfPlans(trail,finalboss,enemy,stage)}<br><br>
         With help from the locals you have no trouble finding the area with a ruined shrine where the ${enemy.name}${possessiveSuffix(enemy.name)} searches are happening, but turns out they have been scouring the woods for 
         weeks already, and are quite prepared.<br><br>
@@ -1939,7 +1938,7 @@ function finalResult(masterplan, enemy, rival, vip = null, result) {
         `In a blinding flash, ${enemy.boss} disappears just as Agent Fletch approaches. "The ${neutralize}," you report. "We may have won the battle, but the war is not over," Agent Fletch says.`,
         `You ensured that the ${neutralize}. As ${possessiveSuffix(enemy.boss)} minions flee, ${genderPronoun(enemy.sex,"subject")} wipes blood from ${genderPronoun(enemy.sex,"possessive")} mouth. "We're not done. This is MY city. The ${enemy.name} never forgets! So you better never show your face here again!" With that, they quickly fled in the darkness.`,
         `With each blow to ${enemy.boss}, ${genderPronoun(enemy.sex,"subject")} attempts to fight you off. Finally, ready to end it all, you swing with what will be your final attack, but suddenly there's blinding flash and  ${genderPronoun(enemy.sex,"subject")}'s gone.`,
-        `With ${enemy.boss} defeated, Citadel soldiers secure the area and you return home. Now that the ${neutralize}, the mayor arranges a parade for the heroes of the city, and most of you get a medal!`,
+        `With ${enemy.boss} defeated, Citadel soldiers secure the area and you return home. Now that the ${neutralize}, the Mayor arranges a parade for the heroes of the city, and most of you get a medal!`,
         `Suddenly, there's a blinding flash and ${possessiveSuffix(enemy.boss)} gone! It's all gone. Shockingly, you're back at Citadel HQ, surrounded by agents all going about their business. Did all that even happen?`,
         `You are lying in the corner, exhausted, all enemies defeated - but their master is nowhere to be found. "You've done a hero's job, Gladiators. I guess you're through, huh?" Agent Fletch asks as he approaches you. "Finished," you answer wearily. "It's too bad we couldn't catch ${enemy.boss}. But then again, do we really ever?"`,
         `Your intense fight takes you to the edge of an unfathomably deep pit. Just as you're about to strike ${enemy.boss} down, ${genderPronoun(enemy.sex,"subject")} dives in, and that's the last you see of ${genderPronoun(enemy.sex,"object")}. For now!`,
