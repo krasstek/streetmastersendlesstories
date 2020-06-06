@@ -2356,7 +2356,7 @@ let text
             `"The enemy of my enemy is my friend, and a friend with money is a friend indeed", ${group[0].name} tells you. You're wary of the Brotherhood, 
             but there is no job they wouldn't handle for the right price, and you can't deny their effectiveness.` : 
             `Your intel tells you that the mercenaries of the Brotherhood have been paid to make sure you will not interfere with ${possessiveSuffix(finalboss)} plans, 
-            and you can be certain you they will not stop until you do.`);
+            and you can be certain they will not stop until you do.`);
             break;
             case "Black Ops": text = (stance == "Ally" ? `Citadel has many spies and assassins in their contacts, and a ${group.length == 1 ? "single operative" : "team of specialists"} 
             has been assigned with you to eliminate the threat ${finalboss} poses.` : 
@@ -2446,7 +2446,7 @@ let text
             break;
             case "Street": text = (stance == "Ally" ? 
             `The streets have had enought of the constant threat the evil machinations of ${finalboss} and the ilk pose to the common people. 
-            A ${group.length == 1 ? "street tough" : "street gang"} has formed to aid you in taking ${genderPronoun(finalboss,"object")} out!` : 
+            A ${group.length == 1 ? "street tough" : "street gang"} has formed to aid you in taking ${finalboss} out!` : 
             `Your perpetual fights with ${finalboss} and the ilk pose a constant threat to the common people. 
             A ${group.length == 1 ? "street tough" : "street gang"} has decided you are the worse of two evils!`);
             break;
