@@ -18,15 +18,51 @@
 <h1>Street Masters - Endless Story Mode</h1>
 </div>
 
-<div class=form style = "display: none">
-<form>
-  <div class = "boxtitle"><span><h2>Number of Global Gladiators?</b></h2></span><input type="text" class="input" id="players" name="players" size="18", value = "0"/></div><br>
-  <input type="button" class="button" value="The Kingdom must fall!" onclick="createStory()">
-  <div id = "ourheroes"></div>
-</form>
-</div>
+<div class = "boxtitle"><span><h2>Number of Global Gladiators?</b></h2></span><input type="button" class="button" value="The Kingdom must fall!" onclick="createStory()"><input type="text" class="input" id="players" name="players" size="18", value = "2"/></div><br>
 
 <div class=backbar>
+<div class = "refcard">
+<div class = "storycardfront">
+    <div class = "storycardfront-title" id="storycardfront-title${cardnumber}">
+        <div class = "circleicon" style="float: left">
+            <span class="circle-outer"><span class="circle-middle"><span class="circle-inner"></span></span></span>
+        </div>
+        <div class="titletext"></div>
+    </div>
+    <div class = "storycard-divider"></div>
+    <div class = "refcard-subtitle"></div>
+    <div class = "storycard-divider"></div>
+    <div class = "storycardfront-prologue"><div class = "refcardfront-prologuetext"></div></div>
+    <div class = "storycard-divider"></div>
+    <div class = "storycardfront-setup">
+        <div class = "refcardsetuptext"></div>
+        <div class = "expansionicon">
+            <span class="infinity-before"></span><span class="infinity-after"></span>
+        </div>
+    </div>
+    </div>
+</div>
+<div class = "refcard">
+    <div class = "refcardback">
+        <div class = "storycardfront-title" id="storycardfront-title${cardnumber}">
+            <div class = "circleicon" style="float: left">
+                <span class="circle-outer"><span class="circle-middle"><span class="circle-inner"></span></span></span>
+            </div>
+            <div class="titletext"></div>
+        </div>
+        <div class = "storycard-divider"></div>
+        <div class = "refcard-subtitle"></div>
+        <div class = "storycard-divider"></div>
+        <div class = "storycardfront-prologue"><div class = "refcardfront-prologuetext"></div></div>
+        <div class = "storycard-divider"></div>
+        <div class = "storycardfront-setup">
+            <div class = "refcardsetuptext"></div>
+            <div class = "expansionicon">
+                <span class="infinity-before"></span><span class="infinity-after"></span>
+            </div>
+        </div>
+        </div>
+    </div>
 <div class = "card"></div>
 <div class = "card"></div>
 <div class = "card"></div>
@@ -48,7 +84,7 @@ $(document).on('keypress',function(e) {
     }
 });
 
-$(document).on("click", function(event) {createStory()})
+$(document).on("touch", function(event) {createStory()})
     
 $( document ).ready(function() {
     
@@ -113,23 +149,33 @@ function globalGladiators() {
     // {name: "", enemy: "", ally: "", rival: ""; stage: ""}
     
     let gladiators = [
-        {name: "Ah Long", enemy: ["Ah Long"/*, "The Kingdom"*/], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: ["Steel Memories"]},
+        {name: "Ah Long", enemy: "Ah Long"/*, "The Kingdom"*/, ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: ["Steel Memories"]},
         {name: "Axel", enemy: "Mack", ally: ["Mary Ann"], rival: ["Mary Ann"], stage: ["Under Destruction"]},
         {name: "Brandon", enemy: "Ah Long", ally: ["Isabella"], rival: ["Isabella"], stage: ["Cashed Out", "Steel Memories"]},
         {name: "Clint", enemy: "", ally: [""], rival: [""], stage: [""]},
         {name: "Dmitri", enemy: "", ally: [""], rival: ["Anastasia"], stage: ["Right to Remain Silent"]},
         {name: "Gabriel", enemy: "Jackal", ally: ["Drago"], rival: ["Drago"], stage: ["Original Copy"]},
+        {name: "Ikuchi", enemy: "Jackal", ally: ["Megan"], rival: [""], stage: ["Original Copy"]},
         {name: "Jackal", enemy: "Shadow", ally: ["Project X"], rival: ["Kemono", "Project X"], stage: ["Steel Memories"]},
         {name: "Juan", enemy: ""/*"The Kingdom"*/, ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: ["Compromised"]},
         {name: "Kemono", enemy: "", ally: ["Darius"], rival: ["Shadow", "Darius"], stage: ["Sudden Death"]},
+        {name: "Kenshin", enemy: "Ah Long", ally: ["Brandon"], rival: ["Shadow","Jackal","Kemono"], stage: ["Cashed Out"]},
         {name: "Kyoryu", enemy: ""/*"Any Enemy"*/, ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Sudden Death"]},
+        {name: "Mack", enemy: "Juan", ally: ["Leeta"], rival: ["Shadow"], stage: ["Sudden Death"]},
         {name: "Max", enemy: "", ally: [""], rival: [""], stage: ""},
-        {name: "Megan", enemy: ["The Brotherhood"/*, "Any Enemy"*/], ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"]},
-        {name: "Natalia", enemy: "The Brotherhood", ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"]},
-        {name: "Rhys", enemy: "The Onyx League", ally: ["Leeta"], rival: ["Leeta"], stage: ["Poison the Well"]},
-        {name: "Shadow", enemy: "The Cartel", ally: ["Shin Yokai"], rival: ["Ah Long", "Dmitri", "Shin Yokai", "Kemono"], stage: [""]/*"Any Stage"*/},
+        {name: "Megan", enemy: "Dmitri"/*, "Any Enemy"*/, ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"]},
+        {name: "Miss Matrix", enemy: "Ah Long", ally: ["Ying Hua"], rival: ["Ah Long","Kemono"], stage: ["Cashed Out"]},
+        {name: "Natalia", enemy: "Dmitri", ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"]},
+        {name: "Project X", enemy: ""/*The Kingdom"*/, ally: ["Natalia"], rival: ["Natalia","Jackal"], stage: ["Original Copy"]},
+        {name: "Rhys", enemy: "Mack", ally: ["Leeta"], rival: ["Leeta"], stage: ["Poison the Well"]},
+        {name: "Shadow", enemy: "Juan", ally: ["Shin Yokai"], rival: ["Ah Long", "Dmitri", "Shin Yokai", "Kemono"], stage: [""]/*"Any Stage"*/},
+        {name: "Selene", enemy: "Dmitri", ally: [""], rival: ["Genesis"], stage: ["Estate of Decay"]},
+        {name: "The Don", enemy: "Juan", ally: ["Gabriel"], rival: ["Juan", "Gabriel"], stage: ["Gone Ballistic"]},
+        {name: "The Proxy", enemy: "Juan", ally: ["Power Soldier"], rival: ["Power Soldier"], stage: ["Compromised"]},
         {name: "Tiger Azules", enemy: "", ally: [""], rival: [""], stage: ""},
-        {name: "Ying Hua", enemy: "The Golden Dragons", ally: ["Jin"], rival: ["Jin"], stage: ["Cashed Out"]}
+        {name: "Tlazolteotl", enemy: "Jackal", ally: ["Kemono"], rival: ["Kemono","Tlazolteotl"], stage: ["Original Copy"]},
+        {name: "Ying Hua", enemy: "Ah Long", ally: ["Jin"], rival: ["Jin"], stage: ["Cashed Out"]},
+        {name: "Yokai", enemy: "Shadow", ally: ["Marionette Doll"], rival: ["Marionette Doll"], stage: ["Steel Memories"]}
         ]        
         
     let globalgladiators = []
@@ -141,14 +187,6 @@ function globalGladiators() {
         globalgladiators.push(newgladiator)
         gladiators.splice(random,1)
     } 
-
-    let ourheroes = "This story is best experienced with "
-    for (i = 0; i < globalgladiators.length; i++) {
-        ourheroes = ourheroes + "<b>" + globalgladiators[i].name + "</b>" + (i == globalgladiators.length-2 ? " and " : ", ")
-    }
-
-    globalgladiators.length > 0 ? document.getElementById("ourheroes").innerHTML = ourheroes.substring(0, ourheroes.length - 2) + "." : ``
-
     return globalgladiators;
 }
 
@@ -159,37 +197,40 @@ function createStory() {
     let herostages = []
     let supportingcast = []
     let heronames = []
+    let heroenemies = []
 
     $(globalgladiators).each(function () {
         herostages = _.union(herostages, this.stage)
         supportingcast = _.union(supportingcast, this.ally)
         supportingcast = _.union(supportingcast, this.rival)
         heronames.push(this.name)
+        heroenemies.push(this.enemy)
         })
-        
+    
     herostages = (_.uniq(herostages)).filter(function(el) { return el; });
     supportingcast = (_.uniq(supportingcast)).filter(function(el) { return el; });
-        
+    heroenemies = (_.uniq(heroenemies)).filter(function(el) { return el; });
+
 let alliesandrivals = [
-        {name: "Ah Long", keywords: ["Boss", "Golden Dragons", "Organized Crime", "Martial Arts Master", "Supernatural"]},
+        {name: "Ah Long", keywords: ["Boss", "Golden Dragons", "Organized Crime", "Martial Arts Master", "Chi"]},
         {name: "Ah Long of Brook City", keywords: ["Boss", "Brook City", "Golden Dragons", "Organized Crime"]},
         {name: "Anastasia", keywords: ["Brotherhood", "Black Ops", "Gunslinger", "Soldier"]},
         {name: "Brandon", keywords: ["Celebrity", "Fraud", "Global Gladiator", "Wanderer"]},
-        {name: "Chan Chan", keywords: ["Beast", "Celebrity", "Kingdom", "Insane"]},
+        {name: "Chan Chan", keywords: ["Beast", "Martial Arts Master", "Kingdom", "Insane"]},
         {name: "Clinhyde Eight", keywords: ["Black Ops", "Indines", "Psychic","Toxic"]},
         {name: "Darius", keywords: ["Ancient", "Kingdom", "Martial Arts Master", "Toxic"]},
         {name: "Dmitri", keywords: ["Boss", "Black Ops", "Brotherhood", "Soldier"]},
         {name: "Drago", keywords: ["Black Ops","Brotherhood","Pitfighter","Street"]},
         {name: "Gabriel", keywords: ["Global Gladiator","Martial Arts Master","Street","Wanderer"]},
-        {name: "Genesis", keywords: ["Cifarelli","Organized Crime","Ransom City","Supernatural"]},
-        {name: "Hanzo", keywords: ["Ancient","Sensei","Wanderer","Weapon Master"]},
+        {name: "Genesis", keywords: ["Cifarelli","Organized Crime","Ransom City","Extraplanar"]},
+        {name: "Hanzo", keywords: ["Ancient","Sensei","Wanderer","Blade"]},
         {name: "Isabella", keywords: ["Martial Arts Master","Wanderer"]},
         {name: "Jackal", keywords: ["Insane","Kingdom","Psychic","Science"]},
         {name: "James Wong", keywords: ["Black Ops","Brook City","Law Enforcement","Kingdom"]},
-        {name: "Jin", keywords: ["Golden Dragons", "Organized Crime", "Weapon Master"]},
+        {name: "Jin", keywords: ["Golden Dragons", "Organized Crime", "Blade"]},
         {name: "Juan", keywords: ["Cartel","Fraud","Gunslinger","Street"]},
-        {name: "Kemono", keywords: ["Beast", "Kingdom","Pitfighter", "Supernatural"]},
-        {name: "Khadath Ahemusei", keywords: ["Indines","Science","Supernatural","Wanderer"]},
+        {name: "Kemono", keywords: ["Beast", "Kingdom","Pitfighter", "Chi"]},
+        {name: "Khadath Ahemusei", keywords: ["Indines","Science","Extraplanar","Wanderer"]},
         {name: "Leeta", keywords: ["Brook City","Ransom City","Street","Wanderer"]},
         {name: "Lotus", keywords: ["Brook City","Golden Dragons","Organized Crime"]},
         {name: "Marionette Doll", keywords: ["Kingdom","Martial Arts Master","Psychic"]},
@@ -197,18 +238,18 @@ let alliesandrivals = [
         {name: "Megan", keywords: ["Celebrity","Fraud","Global Gladiator","Wanderer"]},
         {name: "Mr. Apple", keywords: ["Celebrity","Fraud","Sensei"]},
         {name: "Natalia", keywords: ["Black Ops","Global Gladiator","Soldier","Wanderer"]},
-        {name: "Power Soldier", keywords: ["Beast","Kingdom","Martial Arts Master","Science"]},
-        {name: "Project X", keywords: ["Beast","Insane","Martial Arts Master","Science"]},
+        {name: "Power Soldier", keywords: ["Beast","Kingdom","Martial Arts Master"]},
+        {name: "Project X", keywords: ["Beast","Insane","Martial Arts Master"]},
         {name: "Sera O'Quinn", keywords: ["Boss","Celebrity","Insane","Organized Crime"]},
-        {name: "Shadow", keywords: ["Boss","Kingdom","Martial Arts Master","Supernatural"]},
-        {name: "Shin Yokai", keywords: ["Boss","Insane","Oni","Supernatural"]},
-        {name: "Star Knight Iri", keywords: ["Indines","Supernatural","Weapon Master","Soldier"]},
-        {name: "Tiger Azules", keywords: ["Aztec","Street","Supernatural"]},
-        {name: "Tlatzolteotl", keywords: ["Ancient","Aztec","Boss","Supernatural"]},
-        {name: "Wan Bo", keywords: ["Golden Dragons","Martial Arts Master","Supernatural","Weapon Master"]},
+        {name: "Shadow", keywords: ["Boss","Kingdom","Martial Arts Master","Chi"]},
+        {name: "Shin Yokai", keywords: ["Boss","Insane","Extraplanar","Chi"]},
+        {name: "Star Knight Iri", keywords: ["Indines","Extraplanar","Blade","Soldier"]},
+        {name: "Tiger Azules", keywords: ["Aztec","Street","Cartel","Celebrity"]},
+        {name: "Tlazolteotl", keywords: ["Ancient","Aztec","Boss","Extraplanar"]},
+        {name: "Wan Bo", keywords: ["Golden Dragons","Martial Arts Master","Chi"]},
         {name: "Ying Hua", keywords: ["Global Gladiator","Law Enforcement"]},
         {name: "Ying Hua of Brook City", keywords: ["Brook City","Law Enforcement"]},
-        {name: "Zane", keywords: ["Pitfighter","Supernatural"]}
+        {name: "Zane", keywords: ["Pitfighter","Chi"]}
         ];
 
 for (i = alliesandrivals.length-1; i > 0; i--) {
@@ -217,6 +258,31 @@ for (i = alliesandrivals.length-1; i > 0; i--) {
     
     }
     }
+
+let allymotivation = getMotivation(alliesandrivals)
+
+let allygroup = []
+while (allygroup.length < $("#players").val()) {
+        let random = Math.floor(Math.random()*alliesandrivals.length)
+        let ally = alliesandrivals[random]
+        if (ally.keywords.includes(allymotivation)) {
+        allygroup.push(ally)
+        alliesandrivals.splice(random,1)
+        }
+    }
+
+let rivalmotivation = getMotivation(alliesandrivals)
+
+let rivalgroup = []
+while (rivalgroup.length < $("#players").val()) {
+        let random = Math.floor(Math.random()*alliesandrivals.length)
+        let rival = alliesandrivals[random]
+        if (rival.keywords.includes(rivalmotivation)) {
+        rivalgroup.push(rival)
+        alliesandrivals.splice(random,1)
+        }
+    }
+
 
     let stages = [
     {name:"Ashes of the Eternal", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.`,false,false,false], stagepenalty: [`The fighter places 1 fire token in the space nearest to them.`,false,false,false], masterplan: randFrom(["actsofterror","personalpower"])},
@@ -268,7 +334,7 @@ stages = storystages[1].splice(0)
 
 storystages = storystages[0].splice(0)
 
-let storyenemies = storyEnemies(storystages, enemies);
+let storyenemies = storyEnemies(storystages, enemies, heroenemies);
 
 enemies = storyenemies[1].splice(0)
 
@@ -301,11 +367,25 @@ $(function() {
 });
 
 
-
 stageindex = 0
 $(".storycardfront-subtitle").each(function() {
     $(this).html((finalboss.name).toUpperCase() + ` STORY <span style="float:right">PART ${story[stageindex].chapter} PROLOGUE</span>`);
     stageindex++
+})
+
+$(".refcard-subtitle").each(function() {
+    $(this).html((finalboss.name).toUpperCase() + ` STORY <span style="float:right">CHARACTER REFERENCE</span>`);
+})
+
+let referencetext = referenceText(globalgladiators,allygroup,allymotivation,rivalgroup,rivalmotivation, finalboss.boss)
+
+$(`.refcardfront-prologuetext`).each(function(index) {
+    $(this).html(referencetext[0] + referencetext[index+1]);
+})
+
+$(`.refcardsetuptext`).each(function(index) {
+    $(this).html(referencetext[index+3]);
+
 })
 
 let cardtexts = textMaker(story, alliesandrivals, heronames, enemies);
@@ -468,6 +548,23 @@ function mysticalSynonym(){
     
     return mystical;
     
+}
+
+function getMotivation(alliesandrivals) {
+
+let supportmotivate = [] 
+    $(alliesandrivals).each(function () {
+        supportmotivate = supportmotivate.concat(this.keywords)
+        })
+
+let motivations = supportmotivate.reduce((r,k)=>{r[k]=1+r[k]||1;return r},{})
+
+motivations = _.pick(motivations, function(value, key, object) {
+  return value >= $("#players").val();
+})
+
+return(randFrom(Object.keys(motivations)))
+
 }
 
 function cleanStages(stages) {
@@ -738,12 +835,16 @@ function loungeMusic() {
     return music
 }
 
-function storyEnemies(storystages, enemies) {
+function storyEnemies(storystages, enemies, heroenemies) {
+let randomenemy
 
+do {
+    randomenemy = Math.floor(Math.random()*enemies.length)
+} while (heroenemies.includes(enemies[randomenemy].boss))
 
-let randomenemy = Math.floor(Math.random()*enemies.length);
 let storyenemies = []
 let finalboss = enemies[randomenemy];
+
 enemies.splice(randomenemy, 1);
 
 (Math.random() < 0.5 ? 
@@ -2169,6 +2270,244 @@ function laconicStatement() {
 
 function randomArtefact() {
     return randFrom(["urn", "artefact", "relic", "vestige", "sculpture", "statue", "orb"])
+}
+
+function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalmotivation, finalboss) {
+
+    let ourheroes = "This story is best experienced with "
+    for (i = 0; i < gladiators.length; i++) {
+        ourheroes = ourheroes + "<b>" + gladiators[i].name + "</b>" + (i == gladiators.length-2 ? " and " : ", ")
+    }
+
+    gladiators.length > 0 ? ourheroes = ourheroes.substring(0, ourheroes.length - 2) + 
+    ". You can pick any Global Gladiators for this story, but some might make more sense than others.<br>" : 
+    ourheroes = `You can pick any Global Gladiators for this story, but some might make more sense than others.<br>`
+
+    let allytext = motivationText(allymotivation, allygroup, "Ally", finalboss)
+
+    let rivaltext = motivationText(rivalmotivation, rivalgroup, "Rival", finalboss)
+
+    let allysetup = "Put"
+    
+    for (i = 0; i < allygroup.length; i++) {
+        allysetup = allysetup + " " + allygroup[i].name + " (Ally)" + (i == allygroup.length-2 ? " and " : ", ")
+    }
+
+    allygroup.length > 0 ? allysetup = allysetup.substring(0, allysetup.length - 2) + " in the Story Pool." : allysetup = `You can pick any Allies for this story, but some might make more sense than others.`
+
+    let rivalsetup = "Put"
+    
+    for (i = 0; i < rivalgroup.length; i++) {
+        rivalsetup = rivalsetup + " " + rivalgroup[i].name + " (Rival)" + (i == rivalgroup.length-2 ? " and " : ", ")
+    }
+
+    rivalgroup.length > 0 ? rivalsetup = rivalsetup.substring(0, rivalsetup.length - 2) + " in the Story Pool." : rivalsetup = `You can pick any Allies for this story, but some might make more sense than others.`
+
+    let text = []
+
+    text.push(ourheroes)
+    text.push(allytext)
+    text.push(rivaltext)
+    text.push(allysetup)
+    text.push(rivalsetup)
+
+    return text
+}
+
+function motivationText(motivation, group, stance, finalboss) {
+
+let text
+    switch(motivation) {
+            case "Boss": text = (stance == "Ally" ? 
+            `A secret cabal of powerful and influential individuals have decided that the threat ${finalboss} makes is far too hazardous for them to leave it the the 
+            rank and file of their organizations - or to you. ${group.length == 1 ? `${group[0].name} has` : "Several of them have"} joined you in your mission whether you wish it or not.` : 
+            `Whatever ${finalboss} is trying to do, it will serve the powerful men and women of different shadowy organizations well. You are considered such a threat that this cabal
+            has decided no mere mooks are enought to stop you.`);
+            break;
+            case "Golden Dragons": text = (stance == "Ally" ? 
+            `The Golden Dragons know their businesses need stability that ${finalboss} is risk for. A ${group.length == 1 ? "single enforcer" : "group of enforcers"} 
+            has been sent to crush the opposition. You're lucky to have them on your side!` : 
+            `You have been a thorn in the side of the Golden Dragons for a long time. While you are busy with your mission to get ${finalboss}, they have sent a 
+            ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
+            break;
+            case "Organized Crime": text = (stance == "Ally" ? 
+            `The ongoing plans of ${finalboss} risks the stability that organized crime requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"} 
+            has been sent to crush the opposition. You're lucky to have them on your side!` : 
+            `Organized crime sees the ongoing plans of ${finalboss} a perfect time to hit law enforcement everywhere, and Citadel is no exception to their plans. A 
+            ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to take you out.`);
+            break;
+            case "Martial Arts Master": text = (stance == "Ally" ?
+            `A wandering ${group.length == 1 ? "martial arts master" : "band of martial artists"} sees ${finalboss} as an opportunity to test their mettle, and has decided to walk with you.` : 
+            `A wandering ${group.length == 1 ? "martial arts master" : "band of martial artists"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
+            break;
+            case "Chi": text = (stance == "Ally" ?
+            `${group.length == 1 ? "This warriors is" : "These warriors are"} privy to the ${mysticalSynonym()} Chi powers. Their deep understanding of the flow of 
+            ${mysticalSynonym()} energies has revealed to them that ${finalboss} is a great disturbance in this force.` : 
+            `${group.length == 1 ? "This warrior is" : "These warriors are"} privy to the ${mysticalSynonym()} Chi powers. Their deep understanding of the flow of 
+            ${mysticalSynonym()} energies has revealed to them that you are a great disturbance in this force.`);
+            break;
+            case "Brook City": text = (stance == "Ally" ? 
+            `Before the Rise of the Kingdom, Brook City was a very different place. Now ${group.length == 1 ? "a single citizen" : "a group of citizens"} from that
+            city's past have arrived to the future, and they are not happy with what they see. Their only hope of getting back seems to lie in stopping ${finalboss}.` : 
+            `Before the Rise of the Kingdom, Brook City was a very different place. Now ${group.length == 1 ? "a single citizen" : "a group of citizens"} from that
+            city's past have arrived to the future, and they are not happy with what they see. Their only hope of getting back seems to lie in stopping you.`);
+            break;
+            case "Brotherhood": text = (stance == "Ally" ? 
+            `"The enemy of my enemy is my friend, and a friend with money is a friend indeed", ${group[0].name} tells you. You're wary of the Brotherhood, 
+            but there is no job they wouldn't handle for the right price, and you can't deny their effectiveness.` : 
+            `Your intel tells you that the mercenaries of the Brotherhood have been paid to make sure you will not interfere with ${possessiveSuffix(finalboss)} plans, 
+            and you can be certain you they will not stop until you do.`);
+            break;
+            case "Black Ops": text = (stance == "Ally" ? `Citadel has many spies and assassins in their contacts, and a ${group.length == 1 ? "single operative" : "team of specialists"} 
+            has been assigned with you to eliminate the threat ${finalboss} poses.` : 
+            `The world is full of shadowy organizations with spies and assassins everywhere. A mysterious malefactor has sent a 
+            ${group.length == 1 ? "single operative" : "team of specialists"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
+            break;
+            case "Gunslinger": text = (stance == "Ally" ? 
+            `A wandering ${group.length == 1 ? "gunslinger" : "band of gunslingers"} sees ${finalboss} as an opportunity to test their mettle, and has decided to walk with you.` : 
+            `A wandering ${group.length == 1 ? "gunslinger" : "band of gunslingers"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
+            break;
+            case "Soldier": text = (stance == "Ally" ? 
+            `Citadel has many soldiers and mercenaries in their contacts, and a ${group.length == 1 ? "single soldier" : "team of soldiers"} 
+            has been assigned with you to eliminate the threat ${finalboss} poses.` : 
+            `The world is full of rogue nations and terrorist organizations with private armies everywhere. A mysterious malefactor has sent a 
+            ${group.length == 1 ? "single soldier" : "team of soldiers"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
+            break;
+            case "Celebrity": text = (stance == "Ally" ? 
+            `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : "these are"} the worst. With  
+            ${group.length == 1 ? "this fool" : "these fools"} appearing everywhere for cheap publicity, you just hope nobody gets hurt.` : 
+            `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : "these are"} the worst. With  
+            ${group.length == 1 ? "this fool" : "these fools"} appearing everywhere for cheap publicity, you're afraid someone will get hurt.. not that it would deter them.`);
+            break;
+            case "Fraud": text = (stance == "Ally" ? 
+            `The lost reputation and ridicule of some unlucky or incapable fighters has driven them to desperation, and now they believe the only way to restore their name 
+            is to defeat ${finalboss}. You just hope nobody gets too badly hurt.` : 
+            `The lost reputation and ridicule of some unlucky or incapable fighters has driven them to desperation, and ${finalboss} has manipulated them
+            and the world to think that the only way to restore their name is to defeat you. Sadly the fools absolutely will not stop hounding you no matter what you do.`);
+            break;
+            case "Global Gladiator": text = (stance == "Ally" ? 
+            `Citadel has determined this mission to be of topmost priority. Agent Fletch has pulled all Global Gladiators available from less important tasks to aid you here.` : 
+            `Miscommunication, misunderstanding and misdirection has led Citadel to deploy a ${group.length == 1 ? "single Global Gladiator" : "group of Global Gladiators"} 
+            against you, and nothing you say can sway them from their mission.`);
+            break;
+            case "Wanderer": text = (stance == "Ally" ? 
+            `Some men and women wander the lands in search for something or someone, and now your goals seem to have aligned. They have gone far and wide, 
+            sometimes to unbelieveable places in their quest, and if defeating ${finalboss} is what is needed, they would die trying.` :
+            `Some men and women wander the lands in search for something or someone, and now you seem to be in the way of the mutual purpose of some individuals. They have 
+            gone far and wide, sometimes to unbelieveable places in their quest, and if your defeat is what is needed, then so be it.`);
+            break;
+            case "Beast": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, but the beast is on your side this time. The strength of the 
+            creature is a welcome, if unnerving addition to your mission to make a stop to ${possessiveSuffix(finalboss)} plans.` : 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, and the beast is in the tight leash of ${finalboss}. 
+            ${group.length == 1 ? "It" : "They"} won't stop hunting their quarry.`);
+            break;
+            case "Kingdom": text = (stance == "Ally" ? 
+            `The Kingdom knows you are their enemy, but all their plans are smoke and mirrors. ${group.length == 1 ? "This warrior has" : "These warriors have"} joined 
+            you to stop ${finalboss}. You are quite sure this alliance is tenuous and temporary at best, but you have to be thankful for any help.` : 
+            `The Kingdom knows you are the only credible threat to their long-term plans, and ${group.length == 1 ? "this warrior has" : "these warriors have"} been
+            sent to make sure the threat will be neutralized.`);
+            break;
+            case "Insane": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} not sound of mind, unpredicable and dangerous. For whatever irresponsible reason, 
+            they are following you around, dead set on taking on ${finalboss}. You just have to hope they will not change their mind.` : 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} quite deranged, unpredicable and dangerous. For whatever psychotic reason, 
+            they are following you around, dead set on taking you out.`);
+            break;
+            case "Indines": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King 
+            Greyheart being freed and save their world, they have to save yours!` :
+            `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King 
+            Greyheart being freed and save their world, they have to doom yours!`);
+            break;
+            case "Psychic": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} power of the mind, and has foreseen the future. 
+            They have determined ${possessiveSuffix(finalboss)} plans will have to change.` : 
+            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} power of the mind, and has foreseen the future. 
+            They have determined ${possessiveSuffix(finalboss)} must come to fruition.`);
+            break;
+            case "Toxic": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the powers of toxins, and has received a vision of the future 
+            in a chemical dream. They have determined ${possessiveSuffix(finalboss)} cannot be allowed to continue on this path.` : 
+            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the powers of toxins, and has received a vision of the future 
+            in a chemical dream. They have determined ${possessiveSuffix(finalboss)} must be allowed to continue on this path.`);
+            break;
+            case "Ancient": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the ancient past holds archaic knowledge that they will use to determine the future. 
+            Fortunately for you, you seem to be a part of that future.` : 
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the ancient past holds archaic knowledge that they will use to determine the future. 
+            Unfortunately for you, you need to be erased from that future.`);
+            break;
+            case "Pitfighter": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighter"} 
+            of competetive - and deadly - events. Now they pursue the victory of the ultimate challenge: ${finalboss}!` :
+            `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighter"} 
+            of competetive - and deadly - events. Now they pursue the victory of the ultimate challenge: you!`);
+            break;
+            case "Street": text = (stance == "Ally" ? 
+            `The streets have had enought of the constant threat the evil machinations of ${finalboss} and the ilk pose to the common people. 
+            A ${group.length == 1 ? "street tough" : "street gang"} has formed to aid you in taking ${genderPronoun(finalboss,"object")} out!` : 
+            `Your perpetual fights with ${finalboss} and the ilk pose a constant threat to the common people. 
+            A ${group.length == 1 ? "street tough" : "street gang"} has decided you are the worse of two evils!`);
+            break;
+            case "Cifarelli": text = (stance == "Ally" ?
+            `The ongoing plans of ${finalboss} risks the stability that the operation of the Cifarelli family requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"} 
+            has been sent to crush the opposition. You're lucky to have them on your side!` : 
+            `The Cifarelli family sees the ongoing plans of ${finalboss} a perfect time to hit law enforcement everywhere, and Citadel is no exception to their plans. A 
+            ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to take you out.`);
+            break;
+            case "Ransom City": text = (stance == "Ally" ? 
+            `Ransom City stands on its own, and will not stand idly when an outside force tries to interfere. A ${group.length == 1 ? "concerned citizen" : "group of concerned citizens"} 
+            see no alternative than to aid you in your mission.` : 
+            `Ransom City stands on its own, and can handle their own troubles. A ${group.length == 1 ? "concerned citizen" : "group of concerned citizens"} will not let you 
+            meddle in affairs Ransom can handle on its own.`);
+            break;
+            case "Extraplanar": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} privy to the secrets of planes of existence beyond yours. For whatever ${mysticalSynonym()} 
+            reason, the stars are right for them to stop ${finalboss}, no matter the cost.` : 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} privy to the secrets of planes of existence beyond yours. For whatever ${mysticalSynonym()} 
+            reason, the stars are right for them to stop you, no matter the cost.`);
+            break;
+            case "Sensei": text = (stance == "Ally" ? 
+            `A wandering ${group.length == 1 ? "sensei" : "sensei group"} has decided your training is not quite complete, and they oversee your journey to 
+            ensure your discipline will reach its potential.` : 
+            `A wandering ${group.length == 1 ? "sensei" : "sensei group"} has decided your training is not quite complete, and they follow you on your path to teach you a lesson in 
+            discipline and skill.`);
+            break;
+            case "Blade": text = (stance == "Ally" ? 
+            `A wandering ${group.length == 1 ? "swordmaster" : "host of swordmasters"} sees ${finalboss} as an opportunity to test their mettle, and has decided to walk with you.` : 
+            `A wandering ${group.length == 1 ? "swordmaster" : "host of swordmasters"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
+            break;
+            case "Science": text = (stance == "Ally" ? 
+            `What ${finalboss} is planning has a scientific angle that an inquiring mind cannot bypass. This ${group.length == 1 ? "researcher" : "group of researchers"} 
+            will follow you for analytical purposes.` : 
+            `What ${finalboss} is planning has a scientific angle that an inquiring mind cannot bypass. This ${group.length == 1 ? "researcher" : "group of researchers"} 
+            is trying to stop you so they can observe this interesting event first hand!`);
+            break;
+            case "Law Enforcement": text = (stance == "Ally" ? 
+            `The law enforcement agencies around the world do not really understand the threat the Kingdom poses and are not equipped to properly fight it, but 
+            sometimes their operations align with your efforts.` : 
+            `The law enforcement agencies around the world are not immune to the reach of the Kingdom, and ${group.length == 1 ? "this corrupt officer" : "these corrupt officers"}
+            are determined to take you in - or take you out!`);
+            break;
+            case "Cartel": text = (stance == "Ally" ?
+            `The streets have had enought of the constant threat the evil machinations of ${finalboss} and the ilk pose to the common people. 
+            The Cartel has decided to aid you in taking ${genderPronoun(finalboss,"object")} out!` : 
+            `You have been a thorn in the side of the Golden Dragons for a long time. While you are busy with your mission to get ${finalboss}, they have sent a 
+            ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
+            break;
+            case "Aztec": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the Aztec empire has received a vision of the future from Tezcatlipoca. 
+            Fortunately for you, you seem to be a part of that future.` : 
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the Aztec empire has received a vision of the future from Mictlantecuhtli.
+            Unfortunately for you, you need to be erased from that future.`);
+            break;
+            default: text = (stance == "Ally" ? "For whatever reason, these people stand with you againt the schemes of the Kingdom." : "For whatever reason, these people stand against you with the Kingdom.");
+}
+
+text = `<br>If you wouldn't like to have some extra ${stance == "Ally" ? "assistance" : "challenge"}, flip this card if you did not do that already. Otherwise, this card will add another layer to your story: <br><br>` + text + "<br><br><br>If you haven't yet flipped this card, flip it."
+return text
+
 }
 
 </script>
