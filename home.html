@@ -76,7 +76,7 @@
 </div>
 <script type="text/javascript">
 
-let enemiescopy = []
+let enemiescopy
 
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
@@ -145,41 +145,50 @@ function randFrom(array) {
     return array[Math.floor(Math.random()*array.length)]
 }
 
-function globalGladiators() {
+function filterArray(array, key, filter) {
+    return _.where(array, _.object([[key, filter]]));
+}
+
+function globalGladiators(enemies, stages) {
     // {name: "", enemy: "", ally: "", rival: ""; stage: ""}
-    
+
     let gladiators = [
-        {name: "Ah Long", enemy: "Ah Long"/*, "The Kingdom"*/, ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: ["Steel Memories"]},
-        {name: "Axel", enemy: "Mack", ally: ["Mary Ann"], rival: ["Mary Ann"], stage: ["Under Destruction"]},
+        {name: "Ah Long", enemy: ["Ah Long",randFrom(filterArray(enemies,"name","Kingdom")).boss], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
+        get instructions() {return `If you choose to use ${this.name}, choose ${this.enemy[1]} as the enemy in ${possessiveSuffix(this.name)} personal story 2B.`}},
+        {name: "Axel", enemy: "Mack", ally: ["Mary Ann"], rival: ["Mary Ann"], stage: "Under Destruction"},
         {name: "Brandon", enemy: "Ah Long", ally: ["Isabella"], rival: ["Isabella"], stage: ["Cashed Out", "Steel Memories"]},
-        {name: "Clint", enemy: "", ally: [""], rival: [""], stage: [""]},
-        {name: "Dmitri", enemy: "", ally: [""], rival: ["Anastasia"], stage: ["Right to Remain Silent"]},
-        {name: "Gabriel", enemy: "Jackal", ally: ["Drago"], rival: ["Drago"], stage: ["Original Copy"]},
-        {name: "Ikuchi", enemy: "Jackal", ally: ["Megan"], rival: [""], stage: ["Original Copy"]},
-        {name: "Jackal", enemy: "Shadow", ally: ["Project X"], rival: ["Kemono", "Project X"], stage: ["Steel Memories"]},
-        {name: "Juan", enemy: ""/*"The Kingdom"*/, ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: ["Compromised"]},
-        {name: "Kemono", enemy: "", ally: ["Darius"], rival: ["Shadow", "Darius"], stage: ["Sudden Death"]},
-        {name: "Kenshin", enemy: "Ah Long", ally: ["Brandon"], rival: ["Shadow","Jackal","Kemono"], stage: ["Cashed Out"]},
-        {name: "Kyoryu", enemy: ""/*"Any Enemy"*/, ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Sudden Death"]},
-        {name: "Mack", enemy: "Juan", ally: ["Leeta"], rival: ["Shadow"], stage: ["Sudden Death"]},
+        {name: "Clint", enemy: "", ally: [""], rival: [""], stage: ""},
+        {name: "Dmitri", enemy: randFrom(enemies).boss, ally: [""], rival: ["Anastasia"], stage: "Right to Remain Silent",
+        get instructions() {return `If you choose to use ${this.name}, choose ${this.enemy} as the enemy in ${possessiveSuffix(this.name)} personal story 1.`}},
+        {name: "Gabriel", enemy: "Jackal", ally: ["Drago"], rival: ["Drago"], stage: "Original Copy"},
+        {name: "Ikuchi", enemy: "Jackal", ally: ["Megan"], rival: [""], stage: "Original Copy"},
+        {name: "Jackal", enemy: "Shadow", ally: ["Project X"], rival: ["Kemono", "Project X"], stage: "Steel Memories"},
+        {name: "Juan", enemy: randFrom(enemies).boss, ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: "Compromised",
+        get instructions() {return `If you choose to use ${this.name}, choose ${this.enemy} as the enemy in ${possessiveSuffix(this.name)} personal story 1.`}},
+        {name: "Kemono", enemy: "", ally: ["Darius"], rival: ["Shadow", "Darius"], stage: "Sudden Death"},
+        {name: "Kenshin", enemy: "Ah Long", ally: ["Brandon"], rival: ["Shadow","Jackal","Kemono"], stage: "Cashed Out"},
+        {name: "Kyoryu", enemy: randFrom(enemies).boss, ally: ["Hanzo"], rival: ["Hanzo"], stage: "Sudden Death",
+        get instructions() {return `If you choose to use ${this.name}, choose ${this.enemy} as the enemy in ${possessiveSuffix(this.name)} personal story 2A.`}},
+        {name: "Mack", enemy: "Juan", ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death"},
         {name: "Max", enemy: "", ally: [""], rival: [""], stage: ""},
-        {name: "Megan", enemy: "Dmitri"/*, "Any Enemy"*/, ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"]},
-        {name: "Miss Matrix", enemy: "Ah Long", ally: ["Ying Hua"], rival: ["Ah Long","Kemono"], stage: ["Cashed Out"]},
+        {name: "Megan", enemy: "Dmitri", ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"]}, 
+        {name: "Miss Matrix", enemy: "Ah Long", ally: ["Ying Hua"], rival: ["Ah Long","Kemono"], stage: "Cashed Out"},
         {name: "Natalia", enemy: "Dmitri", ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"]},
-        {name: "Project X", enemy: ""/*The Kingdom"*/, ally: ["Natalia"], rival: ["Natalia","Jackal"], stage: ["Original Copy"]},
-        {name: "Rhys", enemy: "Mack", ally: ["Leeta"], rival: ["Leeta"], stage: ["Poison the Well"]},
-        {name: "Shadow", enemy: "Juan", ally: ["Shin Yokai"], rival: ["Ah Long", "Dmitri", "Shin Yokai", "Kemono"], stage: [""]/*"Any Stage"*/},
-        {name: "Selene", enemy: "Dmitri", ally: [""], rival: ["Genesis"], stage: ["Estate of Decay"]},
-        {name: "The Don", enemy: "Juan", ally: ["Gabriel"], rival: ["Juan", "Gabriel"], stage: ["Gone Ballistic"]},
-        {name: "The Proxy", enemy: "Juan", ally: ["Power Soldier"], rival: ["Power Soldier"], stage: ["Compromised"]},
+        {name: "Project X", enemy: randFrom(filterArray(enemies,"name","Kingdom")).boss, ally: ["Natalia"], rival: ["Natalia","Jackal"], stage: "Original Copy", 
+        get instructions() {return `If you choose to use ${this.name}, choose ${this.enemy} as the enemy in ${possessiveSuffix(this.name)} personal story 3.`}},
+        {name: "Rhys", enemy: "Mack", ally: ["Leeta"], rival: ["Leeta"], stage: "Poison the Well"},
+        {name: "Shadow", enemy: "Juan", ally: ["Shin Yokai"], rival: ["Ah Long", "Dmitri", "Shin Yokai", "Kemono"], stage: [randFrom(stages).name],
+        get instructions() {return `If you choose to use ${this.name}, choose ${this.stage} as the stage in ${possessiveSuffix(this.name)} personal story 2A.`}},
+        {name: "Selene", enemy: "Dmitri", ally: [""], rival: ["Genesis"], stage: "Estate of Decay"},
+        {name: "The Don", enemy: "Juan", ally: ["Gabriel"], rival: ["Juan", "Gabriel"], stage: "Gone Ballistic"},
+        {name: "The Proxy", enemy: "Juan", ally: ["Power Soldier"], rival: ["Power Soldier"], stage: "Compromised"},
         {name: "Tiger Azules", enemy: "", ally: [""], rival: [""], stage: ""},
-        {name: "Tlazolteotl", enemy: "Jackal", ally: ["Kemono"], rival: ["Kemono","Tlazolteotl"], stage: ["Original Copy"]},
+        {name: "Tlazolteotl", enemy: "Jackal", ally: ["Kemono"], rival: ["Kemono","Tlazolteotl"], stage: "Original Copy"},
         {name: "Ying Hua", enemy: "Ah Long", ally: ["Jin"], rival: ["Jin"], stage: ["Cashed Out"]},
-        {name: "Yokai", enemy: "Shadow", ally: ["Marionette Doll"], rival: ["Marionette Doll"], stage: ["Steel Memories"]}
+        {name: "Yokai", enemy: "Shadow", ally: ["Marionette Doll"], rival: ["Marionette Doll"], stage: "Steel Memories"}
         ]        
         
     let globalgladiators = []
-
 
     while (globalgladiators.length < $("#players").val()) {
         let random = Math.floor(Math.random()*gladiators.length)
@@ -191,8 +200,41 @@ function globalGladiators() {
 }
 
 function createStory() {
+
+let enemies = [
+        {name:"Brotherhood", boss: "Dmitri", bosstitle: "callous mercenary", sex: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar","and put it into play"],["N-40 Punisher","and put it into play"]]},
+        {name:"Cartel", boss: "Juan", bosstitle: "ruthless gangster", sex: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: "vicious gangers and hardened outcasts", threat: "levels his gun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert","and put it into play"]]},
+        {name:"Golden Dragons", boss: "Ah Long", bosstitle: "unrelenting martial arts master", sex: "male", desc: "the enterprise of martial artists, thugs, and businessmen", addressing: "weasels", minions: "ruthless triads and yakuza", threat: "lifts his hand, dark, malevolent energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"], preparedboss: [["Merciless Clutch", "and put it into play"]]},
+        {name:"Kingdom", boss: "Kemono", bosstitle: "imposing green mutant", sex: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fist, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge","and put it into play"]]},
+        {name:"Kingdom", boss: "Jackal", bosstitle: "mad scientist", sex: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "mysterious ninja and clone puppets", threat: "smiles, as her eyes start to glow malevolently, and your pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion","and play it"]]},
+        {name:"Kingdom", boss: "Shadow", bosstitle: "ominous mastermind", sex: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades","and put it into play"]]},
+        {name:"Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", sex: "female", desc: "the ancient force of restless warriors", addressing: "warriors", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller","Pale Caller"], preparedboss: [["Decaying Blast","and play it"]]},
+        {name:"Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", sex: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, eldritch power crackling", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike","and play it"]]},
+        {name:"Onyx League", boss: "Mack", bosstitle: "black-hearted overlord", sex: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim","and put it into play"]]}
+        ];
+
+let stages = [
+    {name:"Ashes of the Eternal", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.`,false,false,false], stagepenalty: [`The fighter places 1 fire token in the space nearest to them.`,false,false,false], masterplan: randFrom(["actsofterror","personalpower"])},
+    {name:"Cashed Out", instory: 0, location: "base", bystander: "gambler", stagebonus: [`Each fighter may put a random defense token on a Frightened Gambler in their threat area.`,false,false,false], stagepenalty: [`Search the stage deck for a Pit Boss card and choose one fighter to draw it. Shuffle the stage deck.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])},
+    {name:"Compromised", instory: 0, location: "remote", bystander: "hostage", stagebonus: [`Each fighter may search the stage deck for 1 copy of Calming Words and add it to their fighter play area. Shuffle the stage deck.`,false,false,false], stagepenalty: [`Each fighter places 1 power on a different "Scared Staff" card.`,false,false,false], masterplan: randFrom(["actsofterror","kidnapping"])},
+    {name:"Gone Ballistic", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`One fighter may move 3 spaces toward the nearest objective token.`,false,false,false], stagepenalty: [`Search the stage deck for an additional objective card and put it into play. Shuffle the stage deck.`,false,false,false], masterplan: randFrom(["illegalgains","strengtheningforces"])},
+    {name:"One Step Ahead", instory: 0, location: "remote", bystander: "civilian", stagebonus: [`Each fighter may search the enemy deck for a Minion card to discard. Shuffle the enemy deck.`,false,false,false], stagepenalty: [`Each fighter must put their Objective card into the stage play area, and put the token in the corresponding space on the map.`,false,false,false], masterplan: randFrom(["personalpower","kidnapping"])},
+    {name:"Original Copy", instory: 0, location: "base", bystander: "scientist", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose a copy of Vandal Serum attached to a card in the Cloning Area. Return the selected card to Serum Supply.`,false,false,false], stagepenalty: [`Each fighter suffers 1 direct damage.  Then, if any fighter is on or adjacent to an objective space, remove this card from the game.`,true,true,false], masterplan: randFrom(["strengtheningforces","personalpower"])},
+    {name:"Out of Time", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`The fighters may choose to flip one objective to its inactive side.`,false,false,false], stagepenalty: [`The boss gains 1 random defense token for each Remnant engaged with a fighter.`,false,false,false], masterplan: randFrom(["strengtheningforces","personalpower"])},
+    {name:"Poison the Well", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`Remove each copy of Vandal Addict from the stage deck and remove them from the game. Shuffle the stage deck.`,false,false,false], stagepenalty: [`Each fighter searches the stage deck for 1 copy of Infected Rats and adds it to their Threat area. Shuffle the stage deck.`,false,false,false], masterplan: randFrom(["actsofterror","strengtheningforces"])},
+    {name:"Right to Remain Silent", instory: 0, location: "base", bystander: "captive", stagebonus: [`Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.`,false,false,false], stagepenalty: [`Add one power to Recoverd Intel.`,false,false,false], masterplan: randFrom(["illegalgains","kidnapping"])},
+    {name:"Rude Awakening", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Flip all objectives to their inactive side.`,false,false,false], stagepenalty: [`Each fighter places 1 damage on the Stage Rules card.`,false,false,false], masterplan: randFrom(["actsofterror","strengtheningforces"])},
+    {name:"Running Wild", instory: 0, location: "remote", bystander: "civilian", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".`,false,false,false],stagepenalty: [`Each Hero places 3 random defense tokens on the copy of "Hunt for the Idols" in their fighter play area. Each time a Hero searches, these defense tokens block successes and are discarded as normal.`,false,false,false], masterplan: randFrom(["illegalgains","personalpower"])},
+    {name:"Steel Memories", instory: 0, location: "base", bystander: "nameless goon", stagebonus: [`One fighter may move 3 spaces toward the nearest objective.`,false,false,false], stagepenalty: [`Each fighter must <b>Recruit</b>.`,false,false,false], masterplan: randFrom(["actsofterror","kidnapping"])},
+    {name:"Sudden Death", instory: 0, location: "neutral", bystander: "fighter", stagebonus: [`Put one random defense token on each copy of "A New Challenger".`,false,false,false], stagepenalty: [`The active objective token nearest to the boss advances 4 spaces toward the boss and attacks.`,false,false,false], masterplan: randFrom(["kidnapping","strengtheningforces"])},
+    {name:"Supply & Demand", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objectve token it is carrying.`,false,false,false], stagepenalty: [`The boss gains 1 random defense token. Each fighter is dealt 1 direct damage.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])},
+    {name:"The Ceremony", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Flip 2 objective tokens to their inactive side.`,false,false,false], stagepenalty: [`Each fighter must either discard a card at random or place 1 power on "Oni's Vessel".`,false,false,false], masterplan: randFrom(["kidnapping","personalpower"])},
+    {name:"Under Destruction", instory: 0, location: "neutral", bystander: "construction worker", stagebonus: [`<b>Exhaust:</b> Move 1 power from a Time Bomb card to this card. Then, if there's 5 power on this card, remove it from the game.`,true,false,false], stagepenalty: [`Each fighter chooses a different objective and places 1 power on the chosen objective.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])}
+    ];
+
+    enemiescopy = enemies.slice(0,enemies.length)
     
-    let globalgladiators = globalGladiators()
+    let globalgladiators = globalGladiators(enemies,stages)
     
     let herostages = []
     let supportingcast = []
@@ -200,56 +242,61 @@ function createStory() {
     let heroenemies = []
 
     $(globalgladiators).each(function () {
-        herostages = _.union(herostages, this.stage)
+        herostages.push(this.stage)
         supportingcast = _.union(supportingcast, this.ally)
         supportingcast = _.union(supportingcast, this.rival)
         heronames.push(this.name)
         heroenemies.push(this.enemy)
         })
     
+    herostages = _.flatten(herostages)
+    heroenemies = _.flatten(heroenemies)
+
+    console.log(herostages)
+
     herostages = (_.uniq(herostages)).filter(function(el) { return el; });
     supportingcast = (_.uniq(supportingcast)).filter(function(el) { return el; });
     heroenemies = (_.uniq(heroenemies)).filter(function(el) { return el; });
 
 let alliesandrivals = [
         {name: "Ah Long", keywords: ["Boss", "Golden Dragons", "Organized Crime", "Martial Arts Master", "Chi"]},
-        {name: "Ah Long of Brook City", keywords: ["Boss", "Brook City", "Golden Dragons", "Organized Crime"]},
+        {name: "Ah Long of Brook City", keywords: ["Boss", "Brook City", "Golden Dragons", "Organized Crime","Past"]},
         {name: "Anastasia", keywords: ["Brotherhood", "Black Ops", "Gunslinger", "Soldier"]},
-        {name: "Brandon", keywords: ["Celebrity", "Fraud", "Global Gladiator", "Wanderer"]},
+        {name: "Brandon", keywords: ["Celebrity", "Fraud", "Martial Arts Master", "Global Gladiator", "Wanderer"]},
         {name: "Chan Chan", keywords: ["Beast", "Martial Arts Master", "Kingdom", "Insane"]},
         {name: "Clinhyde Eight", keywords: ["Black Ops", "Indines", "Psychic","Toxic"]},
-        {name: "Darius", keywords: ["Ancient", "Kingdom", "Martial Arts Master", "Toxic"]},
+        {name: "Darius", keywords: ["Past", "Kingdom", "Martial Arts Master", "Toxic"]},
         {name: "Dmitri", keywords: ["Boss", "Black Ops", "Brotherhood", "Soldier"]},
-        {name: "Drago", keywords: ["Black Ops","Brotherhood","Pitfighter","Street"]},
+        {name: "Drago", keywords: ["Black Ops","Brotherhood","Competitor","Street"]},
         {name: "Gabriel", keywords: ["Global Gladiator","Martial Arts Master","Street","Wanderer"]},
-        {name: "Genesis", keywords: ["Cifarelli","Organized Crime","Ransom City","Extraplanar"]},
-        {name: "Hanzo", keywords: ["Ancient","Sensei","Wanderer","Blade"]},
+        {name: "Genesis", keywords: ["Cifarelli","Organized Crime","Extraplanar"]},
+        {name: "Hanzo", keywords: ["Past","Sensei","Wanderer","Blade","Global Gladiator","Kingdom"]},
         {name: "Isabella", keywords: ["Martial Arts Master","Wanderer"]},
         {name: "Jackal", keywords: ["Insane","Kingdom","Psychic","Science"]},
-        {name: "James Wong", keywords: ["Black Ops","Brook City","Law Enforcement","Kingdom"]},
+        {name: "James Wong", keywords: ["Black Ops","Brook City","Law Enforcement","Kingdom","Past"]},
         {name: "Jin", keywords: ["Golden Dragons", "Organized Crime", "Blade"]},
-        {name: "Juan", keywords: ["Cartel","Fraud","Gunslinger","Street"]},
-        {name: "Kemono", keywords: ["Beast", "Kingdom","Pitfighter", "Chi"]},
+        {name: "Juan", keywords: ["Cartel","Organized Crime","Gunslinger","Street"]},
+        {name: "Kemono", keywords: ["Beast", "Kingdom","Competitor", "Chi"]},
         {name: "Khadath Ahemusei", keywords: ["Indines","Science","Extraplanar","Wanderer"]},
-        {name: "Leeta", keywords: ["Brook City","Ransom City","Street","Wanderer"]},
-        {name: "Lotus", keywords: ["Brook City","Golden Dragons","Organized Crime"]},
+        {name: "Leeta", keywords: ["Brook City","Street","Wanderer"]},
+        {name: "Lotus", keywords: ["Brook City","Golden Dragons","Organized Crime","Past"]},
         {name: "Marionette Doll", keywords: ["Kingdom","Martial Arts Master","Psychic"]},
-        {name: "Mary Ann", keywords: ["Ransom City","Sensei","Street"]},
-        {name: "Megan", keywords: ["Celebrity","Fraud","Global Gladiator","Wanderer"]},
+        {name: "Mary Ann", keywords: ["Sensei","Street"]},
+        {name: "Megan", keywords: ["Celebrity","Fraud","Global Gladiator","Martial Arts Master","Wanderer"]},
         {name: "Mr. Apple", keywords: ["Celebrity","Fraud","Sensei"]},
-        {name: "Natalia", keywords: ["Black Ops","Global Gladiator","Soldier","Wanderer"]},
+        {name: "Natalia", keywords: ["Black Ops","Global Gladiator","Martial Arts Master","Soldier","Wanderer"]},
         {name: "Power Soldier", keywords: ["Beast","Kingdom","Martial Arts Master"]},
         {name: "Project X", keywords: ["Beast","Insane","Martial Arts Master"]},
         {name: "Sera O'Quinn", keywords: ["Boss","Celebrity","Insane","Organized Crime"]},
         {name: "Shadow", keywords: ["Boss","Kingdom","Martial Arts Master","Chi"]},
         {name: "Shin Yokai", keywords: ["Boss","Insane","Extraplanar","Chi"]},
         {name: "Star Knight Iri", keywords: ["Indines","Extraplanar","Blade","Soldier"]},
-        {name: "Tiger Azules", keywords: ["Aztec","Street","Cartel","Celebrity"]},
-        {name: "Tlazolteotl", keywords: ["Ancient","Aztec","Boss","Extraplanar"]},
+        {name: "Tiger Azules", keywords: ["Aztec","Street","Cartel","Martial Arts Master"]},
+        {name: "Tlazolteotl", keywords: ["Past","Aztec","Boss","Extraplanar"]},
         {name: "Wan Bo", keywords: ["Golden Dragons","Martial Arts Master","Chi"]},
-        {name: "Ying Hua", keywords: ["Global Gladiator","Law Enforcement"]},
-        {name: "Ying Hua of Brook City", keywords: ["Brook City","Law Enforcement"]},
-        {name: "Zane", keywords: ["Pitfighter","Chi"]}
+        {name: "Ying Hua", keywords: ["Global Gladiator","Law Enforcement","Competitor","Martial Arts Master"]},
+        {name: "Ying Hua of Brook City", keywords: ["Brook City","Law Enforcement","Past"]},
+        {name: "Zane", keywords: ["Competitor","Chi"]}
         ];
 
 for (i = alliesandrivals.length-1; i > 0; i--) {
@@ -282,26 +329,6 @@ while (rivalgroup.length < $("#players").val()) {
         alliesandrivals.splice(random,1)
         }
     }
-
-
-    let stages = [
-    {name:"Ashes of the Eternal", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.`,false,false,false], stagepenalty: [`The fighter places 1 fire token in the space nearest to them.`,false,false,false], masterplan: randFrom(["actsofterror","personalpower"])},
-    {name:"Cashed Out", instory: 0, location: "base", bystander: "gambler", stagebonus: [`Each fighter may put a random defense token on a Frightened Gambler in their threat area.`,false,false,false], stagepenalty: [`Search the stage deck for a Pit Boss card and choose one fighter to draw it. Shuffle the stage deck.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])},
-    {name:"Compromised", instory: 0, location: "remote", bystander: "hostage", stagebonus: [`Each fighter may search the stage deck for 1 copy of Calming Words and add it to their fighter play area. Shuffle the stage deck.`,false,false,false], stagepenalty: [`Each fighter places 1 power on a different "Scared Staff" card.`,false,false,false], masterplan: randFrom(["actsofterror","kidnapping"])},
-    {name:"Gone Ballistic", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`One fighter may move 3 spaces toward the nearest objective token.`,false,false,false], stagepenalty: [`Search the stage deck for an additional objective card and put it into play. Shuffle the stage deck.`,false,false,false], masterplan: randFrom(["illegalgains","strengtheningforces"])},
-    {name:"One Step Ahead", instory: 0, location: "remote", bystander: "civilian", stagebonus: [`Each fighter may search the enemy deck for a Minion card to discard. Shuffle the enemy deck.`,false,false,false], stagepenalty: [`Each fighter must put their Objective card into the stage play area, and put the token in the corresponding space on the map.`,false,false,false], masterplan: randFrom(["personalpower","kidnapping"])},
-    {name:"Original Copy", instory: 0, location: "base", bystander: "scientist", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose a copy of Vandal Serum attached to a card in the Cloning Area. Return the selected card to Serum Supply.`,false,false,false], stagepenalty: [`Each fighter suffers 1 direct damage.  Then, if any fighter is on or adjacent to an objective space, remove this card from the game.`,true,true,false], masterplan: randFrom(["strengtheningforces","personalpower"])},
-    {name:"Out of Time", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`The fighters may choose to flip one objective to its inactive side.`,false,false,false], stagepenalty: [`The boss gains 1 random defense token for each Remnant engaged with a fighter.`,false,false,false], masterplan: randFrom(["strengtheningforces","personalpower"])},
-    {name:"Poison the Well", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`Remove each copy of Vandal Addict from the stage deck and remove them from the game. Shuffle the stage deck.`,false,false,false], stagepenalty: [`Each fighter searches the stage deck for 1 copy of Infected Rats and adds it to their Threat area. Shuffle the stage deck.`,false,false,false], masterplan: randFrom(["actsofterror","strengtheningforces"])},
-    {name:"Right to Remain Silent", instory: 0, location: "base", bystander: "captive", stagebonus: [`Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.`,false,false,false], stagepenalty: [`Add one power to Recoverd Intel.`,false,false,false], masterplan: randFrom(["illegalgains","kidnapping"])},
-    {name:"Rude Awakening", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Flip all objectives to their inactive side.`,false,false,false], stagepenalty: [`Each fighter places 1 damage on the Stage Rules card.`,false,false,false], masterplan: randFrom(["actsofterror","strengtheningforces"])},
-    {name:"Running Wild", instory: 0, location: "remote", bystander: "civilian", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".`,false,false,false],stagepenalty: [`Each Hero places 3 random defense tokens on the copy of "Hunt for the Idols" in their fighter play area. Each time a Hero searches, these defense tokens block successes and are discarded as normal.`,false,false,false], masterplan: randFrom(["illegalgains","personalpower"])},
-    {name:"Steel Memories", instory: 0, location: "base", bystander: "nameless goon", stagebonus: [`One fighter may move 3 spaces toward the nearest objective.`,false,false,false], stagepenalty: [`Each fighter must <b>Recruit</b>.`,false,false,false], masterplan: randFrom(["actsofterror","kidnapping"])},
-    {name:"Sudden Death", instory: 0, location: "neutral", bystander: "fighter", stagebonus: [`Put one random defense token on each copy of "A New Challenger".`,false,false,false], stagepenalty: [`The active objective token nearest to the boss advances 4 spaces toward the boss and attacks.`,false,false,false], masterplan: randFrom(["kidnapping","strengtheningforces"])},
-    {name:"Supply & Demand", instory: 0, location: "neutral", bystander: "hireling", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objectve token it is carrying.`,false,false,false], stagepenalty: [`The boss gains 1 random defense token. Each fighter is dealt 1 direct damage.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])},
-    {name:"The Ceremony", instory: 0, location: "cursed", bystander: "unwitting acolyte", stagebonus: [`Flip 2 objective tokens to their inactive side.`,false,false,false], stagepenalty: [`Each fighter must either discard a card at random or place 1 power on "Oni's Vessel".`,false,false,false], masterplan: randFrom(["kidnapping","personalpower"])},
-    {name:"Under Destruction", instory: 0, location: "neutral", bystander: "construction worker", stagebonus: [`<b>Exhaust:</b> Move 1 power from a Time Bomb card to this card. Then, if there's 5 power on this card, remove it from the game.`,true,false,false], stagepenalty: [`Each fighter chooses a different objective and places 1 power on the chosen objective.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"])}
-    ];
     
     
     for (i = 0; i < stages.length; i++) {
@@ -313,20 +340,6 @@ while (rivalgroup.length < $("#players").val()) {
     }
 
     stages = cleanStages(stages);
-
-let enemies = [
-    {name:"Brotherhood", boss: "Dmitri", bosstitle: "callous mercenary", sex: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar","and put it into play"],["N-40 Punisher","and put it into play"]]},
-    {name:"Cartel", boss: "Juan", bosstitle: "ruthless gangster", sex: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: "vicious gangers and hardened outcasts", threat: "levels his gun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert","and put it into play"]]},
-    {name:"Golden Dragons", boss: "Ah Long", bosstitle: "unrelenting martial arts master", sex: "male", desc: "the enterprise of martial artists, thugs, and businessmen", addressing: "weasels", minions: "ruthless triads and yakuza", threat: "lifts his hand, dark, malevolent energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"], preparedboss: [["Merciless Clutch", "and put it into play"]]},
-    {name:"Kingdom", boss: "Kemono", bosstitle: "imposing green mutant", sex: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fist, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge","and put it into play"]]},
-    {name:"Kingdom", boss: "Jackal", bosstitle: "mad scientist", sex: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "mysterious ninja and clone puppets", threat: "smiles, as her eyes start to glow malevolently, and your pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion","and play it"]]},
-    {name:"Kingdom", boss: "Shadow", bosstitle: "ominous mastermind", sex: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades","and put it into play"]]},
-    {name:"Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", sex: "female", desc: "the ancient force of restless warriors", addressing: "warriors", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller","Pale Caller"], preparedboss: [["Decaying Blast","and play it"]]},
-    {name:"Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", sex: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, eldritch power crackling", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike","and play it"]]},
-    {name:"Onyx League", boss: "Mack", bosstitle: "black-hearted overlord", sex: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim","and put it into play"]]}
-    ];
-
-enemiescopy = enemies.slice(0,enemies.length)
 
 let storystages = storyStages(stages);
 
@@ -393,6 +406,13 @@ let cardtexts = textMaker(story, alliesandrivals, heronames, enemies);
 $(`.storycardfront-prologuetext`).each(function(index) {
     $(this).html(cardtexts[index].prologue);
 })
+
+$(function() {
+    $(`.refcardfront-prologuetext`).each(function(i) {
+        $(this).css({"font-size": "8px"})
+        if ($(this).height() > 198) {$(this).css({"font-size": "7px"})}
+    });
+});
 
 $(function() {
     $(`.storycardfront-prologuetext`).each(function(i) {
@@ -1091,7 +1111,7 @@ function victoryResult(stageindex, story, nextstage) {
     let finalcahoots = finalboss.name == nextenemy.name ? randFrom([finalboss.boss, (finalboss.desc.replace("the", "a certain"), finalboss.desc)]) : randFrom([`the ${finalboss.name}`, `${finalboss.desc} ${wanting}`, `${finalboss.minions} ${wanting}`, `the ${finalboss.bosstitle} ${wanting}`, finalboss.boss])
     let thiscahoots = enemy.name == nextenemy.name ? randFrom([enemy.boss, (enemy.desc.replace("the", "this very")),`this ${enemy.bosstitle}`]) : randFrom([`the ${enemy.name}`, (enemy.desc.replace("the", "this")), `these ${enemy.minions}`, `the ${enemy.bosstitle}`, enemy.boss])
     let cahoots = randFrom([finalcahoots,thiscahoots])
-    let supposition = randFrom(["","supposedly ","rumored to be ","who to your understanding are ","who, according to Agent Fletch, are ","apparently ","probably ","believed to be ","most likely ","in all likelihood ",
+    let supposition = randFrom(["","supposedly ","rumored to be ","who to your understanding are ","who according to Agent Fletch are ","apparently ","probably ","believed to be ","most likely ","in all likelihood ",
     "presumably ","surely ","assumably ","which you believe are ", "the Citadel analysts are saying is ", "apparently ", "in fact ","indeed ","as a matter of fact ","in truth "])
     cahoots = randFrom([``,` - ${supposition}in cahoots with ${cahoots}`, `, ${supposition}in league with ${cahoots}`,`, ${supposition}allied to ${cahoots}`, 
         `, ${supposition}working for ${cahoots} this time`,`, ${supposition}in alliance with ${cahoots}`,`, ${supposition}hired by ${cahoots}`, `, ${supposition}linked to ${cahoots}`, `, ${supposition}tied to ${cahoots}`,
@@ -2280,8 +2300,17 @@ function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalm
     }
 
     gladiators.length > 0 ? ourheroes = ourheroes.substring(0, ourheroes.length - 2) + 
-    ". You can pick any Global Gladiators for this story, but some might make more sense than others.<br>" : 
+    ". You can pick any Global Gladiators for this story, but some might make more sense than others." : 
     ourheroes = `You can pick any Global Gladiators for this story, but some might make more sense than others.<br>`
+
+
+    let personalsetup = ""
+    for (i = 0; i < gladiators.length; i++) {
+        if (gladiators[i].hasOwnProperty('instructions'))
+        personalsetup = personalsetup + " " + gladiators[i].instructions + " "
+    }
+    
+    ourheroes = ourheroes + personalsetup + "<br>"
 
     let allytext = motivationText(allymotivation, allygroup, "Ally", finalboss)
 
@@ -2325,8 +2354,8 @@ let text
             has decided no mere mooks are enought to stop you.`);
             break;
             case "Golden Dragons": text = (stance == "Ally" ? 
-            `The Golden Dragons know their businesses need stability that ${finalboss} is risk for. A ${group.length == 1 ? "single enforcer" : "group of enforcers"} 
-            has been sent to crush the opposition. You're lucky to have them on your side!` : 
+            `"What ${finalboss} is attempting is a risk for our businesses. The enemy of our enemy is our friend, ${group[0].name} says. 
+            You are not sure the Golden Dragons are the sort of friends you'd want to have, but they might be the ones you need to have.` : 
             `You have been a thorn in the side of the Golden Dragons for a long time. While you are busy with your mission to get ${finalboss}, they have sent a 
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
             break;
@@ -2370,8 +2399,8 @@ let text
             case "Soldier": text = (stance == "Ally" ? 
             `Citadel has many soldiers and mercenaries in their contacts, and a ${group.length == 1 ? "single soldier" : "team of soldiers"} 
             has been assigned with you to eliminate the threat ${finalboss} poses.` : 
-            `The world is full of rogue nations and terrorist organizations with private armies everywhere. A mysterious malefactor has sent a 
-            ${group.length == 1 ? "single soldier" : "team of soldiers"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
+            `The world is full of rogue nations and terrorist organizations with private armies everywhere and soldiers for hire. A mysterious malefactor has sent a 
+            ${group.length == 1 ? "a formidable mercernary" : "team of mercenaries"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
             break;
             case "Celebrity": text = (stance == "Ally" ? 
             `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : "these are"} the worst. With  
@@ -2397,19 +2426,19 @@ let text
             gone far and wide, sometimes to unbelieveable places in their quest, and if your defeat is what is needed, then so be it.`);
             break;
             case "Beast": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, but the beast is on your side this time. The strength of the 
-            creature is a welcome, if unnerving addition to your mission to make a stop to ${possessiveSuffix(finalboss)} plans.` : 
-            `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, and the beast is in the tight leash of ${finalboss}. 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, but ${group.length == 1 ? "this one" : "these"} have been tamed for now.
+            The strength of the ${group.length == 1 ? "beast" : "beasts"} is welcome if unnerving addition to your mission to make a stop to ${possessiveSuffix(finalboss)} plans.` : 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, and ${group.length == 1 ? "this beast is" : "these are"} in the tight leash of ${finalboss}. 
             ${group.length == 1 ? "It" : "They"} won't stop hunting their quarry.`);
             break;
             case "Kingdom": text = (stance == "Ally" ? 
-            `The Kingdom knows you are their enemy, but all their plans are smoke and mirrors. ${group.length == 1 ? "This warrior has" : "These warriors have"} joined 
-            you to stop ${finalboss}. You are quite sure this alliance is tenuous and temporary at best, but you have to be thankful for any help.` : 
+            `The Kingdom knows you are their most dangerous enemy, but all their plans are smoke and mirrors. For some devious reason ${group.length == 1 ? "this warrior has" : "these warriors have"} 
+            joined you to stop ${finalboss}. You are quite sure this alliance is tenuous and temporary at best, but you know you will need the help.` : 
             `The Kingdom knows you are the only credible threat to their long-term plans, and ${group.length == 1 ? "this warrior has" : "these warriors have"} been
             sent to make sure the threat will be neutralized.`);
             break;
             case "Insane": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This individual is" : "These individuals are"} not sound of mind, unpredicable and dangerous. For whatever irresponsible reason, 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} not sound of mind, but unpredicable and dangerous. For whatever irresponsible reason, 
             they are following you around, dead set on taking on ${finalboss}. You just have to hope they will not change their mind.` : 
             `${group.length == 1 ? "This individual is" : "These individuals are"} quite deranged, unpredicable and dangerous. For whatever psychotic reason, 
             they are following you around, dead set on taking you out.`);
@@ -2421,46 +2450,40 @@ let text
             Greyheart being freed and save their world, they have to doom yours!`);
             break;
             case "Psychic": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} power of the mind, and has foreseen the future. 
+            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future. 
             They have determined ${possessiveSuffix(finalboss)} plans will have to change.` : 
-            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} power of the mind, and has foreseen the future. 
+            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future. 
             They have determined ${possessiveSuffix(finalboss)} must come to fruition.`);
             break;
             case "Toxic": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the powers of toxins, and has received a vision of the future 
-            in a chemical dream. They have determined ${possessiveSuffix(finalboss)} cannot be allowed to continue on this path.` : 
-            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the powers of toxins, and has received a vision of the future 
-            in a chemical dream. They have determined ${possessiveSuffix(finalboss)} must be allowed to continue on this path.`);
+            `${group.length == 1 ? "This warrior has" : "These warriors have"} mastered the powers of toxins, and has received a vision of the future 
+            in a psychedelic chemical dream. They have determined ${possessiveSuffix(finalboss)} cannot be allowed to continue on this path. They have joined you in your mission.` : 
+            `${group.length == 1 ? "This warrior has" : "These warriors have"} mastered the powers of toxins, and has received a vision of the future 
+            in a psychedelic chemical dream. They have determined ${possessiveSuffix(finalboss)} must be allowed to continue on this path. They attempt to stop you at every turn.`);
             break;
-            case "Ancient": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the ancient past holds archaic knowledge that they will use to determine the future. 
+            case "Past": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the past holds archaic knowledge that they will use to determine the future. 
             Fortunately for you, you seem to be a part of that future.` : 
-            `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the ancient past holds archaic knowledge that they will use to determine the future. 
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the past holds archaic knowledge that they will use to determine the future. 
             Unfortunately for you, you need to be erased from that future.`);
             break;
-            case "Pitfighter": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighter"} 
+            case "Competitor": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighters"} 
             of competetive - and deadly - events. Now they pursue the victory of the ultimate challenge: ${finalboss}!` :
-            `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighter"} 
+            `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighters"} 
             of competetive - and deadly - events. Now they pursue the victory of the ultimate challenge: you!`);
             break;
             case "Street": text = (stance == "Ally" ? 
             `The streets have had enought of the constant threat the evil machinations of ${finalboss} and the ilk pose to the common people. 
-            A ${group.length == 1 ? "street tough" : "street gang"} has formed to aid you in taking ${finalboss} out!` : 
+            ${group.length == 1 ? "A defender of the streets has" : "Defenders of the streets have"} decided to aid you in taking ${finalboss} out!` : 
             `Your perpetual fights with ${finalboss} and the ilk pose a constant threat to the common people. 
-            A ${group.length == 1 ? "street tough" : "street gang"} has decided you are the worse of two evils!`);
+            ${group.length == 1 ? "A defender of the streets has" : "Defenders of the streets have"} decided you are the worse of two evils!`);
             break;
             case "Cifarelli": text = (stance == "Ally" ?
             `The ongoing plans of ${finalboss} risks the stability that the operation of the Cifarelli family requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"} 
             has been sent to crush the opposition. You're lucky to have them on your side!` : 
             `The Cifarelli family sees the ongoing plans of ${finalboss} a perfect time to hit law enforcement everywhere, and Citadel is no exception to their plans. A 
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to take you out.`);
-            break;
-            case "Ransom City": text = (stance == "Ally" ? 
-            `Ransom City stands on its own, and will not stand idly when an outside force tries to interfere. A ${group.length == 1 ? "concerned citizen" : "group of concerned citizens"} 
-            see no alternative than to aid you in your mission.` : 
-            `Ransom City stands on its own, and can handle their own troubles. A ${group.length == 1 ? "concerned citizen" : "group of concerned citizens"} will not let you 
-            meddle in affairs Ransom can handle on its own.`);
             break;
             case "Extraplanar": text = (stance == "Ally" ? 
             `${group.length == 1 ? "This individual is" : "These individuals are"} privy to the secrets of planes of existence beyond yours. For whatever ${mysticalSynonym()} 
@@ -2491,21 +2514,22 @@ let text
             are determined to take you in - or take you out!`);
             break;
             case "Cartel": text = (stance == "Ally" ?
-            `The streets have had enought of the constant threat the evil machinations of ${finalboss} and the ilk pose to the common people. 
-            The Cartel has decided to aid you in taking ${genderPronoun(finalboss,"object")} out!` : 
+            `"${finalboss} puts the family at risk, and we will not allow that," ${group[0].name} says, and continues: "The enemy of our enemy is our friend." 
+            Juan and his Cartel might be criminals, but at least you know they are honorable and will die for the "family".` : 
             `You have been a thorn in the side of the Cartel for a long time. While you are busy with your mission to get ${finalboss}, they have sent a 
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
             break;
             case "Aztec": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the Aztec empire has received a vision of the future from Tezcatlipoca. 
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the bygone Aztec empire has received a vision of the future from Tezcatlipoca. 
             Fortunately for you, you seem to be a part of that future.` : 
-            `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the Aztec empire has received a vision of the future from Mictlantecuhtli.
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the bygone Aztec empire has received a vision of the future from Mictlantecuhtli.
             Unfortunately for you, you need to be erased from that future.`);
             break;
             default: text = (stance == "Ally" ? "For whatever reason, these people stand with you againt the schemes of the Kingdom." : "For whatever reason, these people stand against you with the Kingdom.");
 }
 
-text = `<br>If you wouldn't like to have some extra ${stance == "Ally" ? "assistance" : "challenge"}, flip this card if you did not do that already. Otherwise, this card will add another layer to your story: <br><br>` + text + "<br><br><br>If you haven't yet flipped this card, flip it."
+text = `<br>If you prefer not to use extra ${stance == "Ally" ? "Allies" : "Rivals"} for this story, flip this card if you did not do that already, otherwise put it in the Story Pool for reference. Otherwise, this card will add another layer to your story: <br><br>` 
+    + text + "<br><br><br>If you haven't yet flipped this card, flip it. Otherwise, keep it in in the Story Pool for reference."
 return text
 
 }

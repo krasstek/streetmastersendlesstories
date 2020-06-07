@@ -7,7 +7,8 @@
     .card {
         transform: scale(0.93);
         position: relative;
-        top: -6mm;
+        top: -10mm;
+        margin-bottom: 20mm;
     }
 
     .refcardback {
