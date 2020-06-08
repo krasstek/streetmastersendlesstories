@@ -2397,7 +2397,7 @@ let text
             case "Soldier": text = (stance == "Ally" ? 
             `Citadel has many soldiers and mercenaries in their contacts, and a ${group.length == 1 ? "single soldier" : "team of soldiers"} 
             has been assigned with you to eliminate the threat ${finalboss} poses.` : 
-            `The world is full of rogue nations and terrorist organizations with private armies everywhere and soldiers for hire. A mysterious malefactor has sent a 
+            `The world is full of rogue nations and terrorist organizations with soldiers for hire and private armies everywhere. A mysterious malefactor has sent a 
             ${group.length == 1 ? "a formidable mercernary" : "team of mercenaries"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
             break;
             case "Celebrity": text = (stance == "Ally" ? 
@@ -2454,9 +2454,9 @@ let text
             They have determined ${possessiveSuffix(finalboss)} plans must come to fruition.`);
             break;
             case "Toxic": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This warrior has" : "These warriors have"} mastered the powers of toxins, and has received a vision of the future 
+            `${group.length == 1 ? "This warrior has" : "These warriors have"} expertise on toxins, and has received a vision of the future 
             in a psychedelic chemical dream. They have determined ${possessiveSuffix(finalboss)} cannot be allowed to continue on this path. They have joined you in your mission.` : 
-            `${group.length == 1 ? "This warrior has" : "These warriors have"} mastered the powers of toxins, and has received a vision of the future 
+            `${group.length == 1 ? "This warrior has" : "These warriors have"} expertise of toxins, and has received a vision of the future 
             in a psychedelic chemical dream. They have determined ${finalboss} must be allowed to continue on this path. They attempt to stop you at every turn.`);
             break;
             case "Past": text = (stance == "Ally" ? 
@@ -2513,7 +2513,7 @@ let text
             break;
             case "Cartel": text = (stance == "Ally" ?
             `"${finalboss} puts the family at risk, and we will not allow that," ${group[0].name} says, and continues: "The enemy of our enemy is our friend." 
-            Juan and his Cartel might be criminals, but at least you know they are honorable and will die for the "family".` : 
+            Juan and his Cartel might be criminals, but at least you know they are honorable and willing to even die for their "family".` : 
             `You have been a thorn in the side of the Cartel for a long time. While you are busy with your mission to get ${finalboss}, they have sent a 
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
             break;
@@ -2533,7 +2533,7 @@ let text
 }
 
 text = `<br>If you prefer not to use extra ${stance == "Ally" ? "Allies" : "Rivals"} for this story, flip this card if you did not do that already, otherwise put it in the Story Pool for reference. If you do, this card will add another layer to your story: <br><br>` 
-    + text + "<br><br><br>If you haven't yet flipped this card, flip it. Otherwise, keep it in in the Story Pool for reference."
+    + text + "<br><br>If you haven't yet flipped this card, flip it. Otherwise, keep it in in the Story Pool for reference."
 return text
 
 }
