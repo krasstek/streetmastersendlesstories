@@ -272,7 +272,7 @@ let alliesandrivals = [
         {name: "Isabella", keywords: ["Martial Arts Master","Wanderer"]},
         {name: "Jackal", keywords: ["Insane","Kingdom","Psychic","Science"]},
         {name: "James Wong", keywords: ["Black Ops","Brook City","Law Enforcement","Kingdom","Past"]},
-        {name: "Jin", keywords: ["Golden Dragons", "Organized Crime", "Blade"]},
+        {name: "Jin", keywords: ["Golden Dragons", "Organized Crime", "Blade", "Law Enforcement"]},
         {name: "Juan", keywords: ["Cartel","Organized Crime","Gunslinger","Street"]},
         {name: "Kemono", keywords: ["Beast", "Kingdom","Competitor", "Chi"]},
         {name: "Khadath Ahemusei", keywords: ["Indines","Science","Extraplanar","Wanderer"]},
@@ -284,7 +284,7 @@ let alliesandrivals = [
         {name: "Mr. Apple", keywords: ["Celebrity","Fraud","Sensei"]},
         {name: "Natalia", keywords: ["Black Ops","Global Gladiator","Martial Arts Master","Soldier","Wanderer"]},
         {name: "Power Soldier", keywords: ["Beast","Kingdom","Martial Arts Master"]},
-        {name: "Project X", keywords: ["Beast","Insane","Martial Arts Master"]},
+        {name: "Project X", keywords: ["Beast","Insane","Martial Arts Master", "Youth"]},
         {name: "Sera O'Quinn", keywords: ["Boss","Celebrity","Insane","Organized Crime"]},
         {name: "Shadow", keywords: ["Boss","Kingdom","Martial Arts Master","Chi"]},
         {name: "Shin Yokai", keywords: ["Boss","Insane","Extraplanar","Chi"]},
@@ -294,7 +294,7 @@ let alliesandrivals = [
         {name: "Wan Bo", keywords: ["Golden Dragons","Martial Arts Master","Chi"]},
         {name: "Ying Hua", keywords: ["Global Gladiator","Law Enforcement","Competitor","Martial Arts Master"]},
         {name: "Ying Hua of Brook City", keywords: ["Brook City","Law Enforcement","Past"]},
-        {name: "Zane", keywords: ["Competitor","Chi"]}
+        {name: "Zane", keywords: ["Competitor","Chi", "Youth"]}
         ];
 
 for (i = alliesandrivals.length-1; i > 0; i--) {
@@ -981,7 +981,7 @@ function loseResult(stageindex, story, nextstage) {
     
     let goal
     
-    let captivity = ["Ashes of the Eternal", "Original Copy", "Out of Time", "Poison the Well","Right to Remain Silent", "Under Destruction", "Steel Memories", "Sudden Death"]
+    let captivity = ["Original Copy", "Out of Time", "Poison the Well","Right to Remain Silent", "Under Destruction", "Steel Memories", "Sudden Death"]
     
     
     //erottele tällä tarkemmin lopetukset
@@ -1886,7 +1886,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         Soon you find the ${enemy.minions} of ${enemy.name} in the forest."<br><br>
         ${enemy.boss} notices notices your approach. ""${gloat[0]}" the boss shouts in anger: "${gloat[1]}!" ${rivalpresence == true ? `, as ${rival} steps in your way.`:``}`}
         else {prologue = `${changeOfPlans(trail,finalboss,enemy,stage)}<br><br>
-        With help from the locals you have no trouble finding the area with a ruined shrine where the ${enemy.name}${possessiveSuffix(enemy.name)} searches are happening, but turns out they have been scouring the woods for 
+        With help from the locals you have no trouble finding the area with a ruined shrine where the ${possessiveSuffix(enemy.name)} searches are happening, but turns out they have been scouring the woods for 
         weeks already, and are quite prepared.<br><br>
         When you reach them, you find ${enemy.boss} ${rivalpresence == true ? ` and ${rival}`:``}. "${gloat[0]}"
         ${upperCaseInitial(genderPronoun(enemy.sex,"subject"))} says as you are noticed, and ${enemy.threat}.`}
@@ -2352,8 +2352,8 @@ let text
             has decided no mere mooks are enought to stop you.`);
             break;
             case "Golden Dragons": text = (stance == "Ally" ? 
-            `"What ${finalboss} is attempting is a risk for our businesses. The enemy of our enemy is our friend, ${group[0].name} says. 
-            You are not sure the Golden Dragons are the sort of friends you'd want to have, but they might be the ones you need to have.` : 
+            `"What ${finalboss} is attempting is a risk to our businesses. The enemy of our enemy is our friend," ${group[0].name} says. 
+            You are not sure the Golden Dragons are the sort of friends you'd want to have, but they might be the ones you need.` : 
             `You have been a thorn in the side of the Golden Dragons for a long time. While you are busy with your mission to get ${finalboss}, they have sent a 
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
             break;
@@ -2451,13 +2451,13 @@ let text
             `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future. 
             They have determined ${possessiveSuffix(finalboss)} plans will have to change.` : 
             `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future. 
-            They have determined ${possessiveSuffix(finalboss)} must come to fruition.`);
+            They have determined ${possessiveSuffix(finalboss)} plans must come to fruition.`);
             break;
             case "Toxic": text = (stance == "Ally" ? 
             `${group.length == 1 ? "This warrior has" : "These warriors have"} mastered the powers of toxins, and has received a vision of the future 
             in a psychedelic chemical dream. They have determined ${possessiveSuffix(finalboss)} cannot be allowed to continue on this path. They have joined you in your mission.` : 
             `${group.length == 1 ? "This warrior has" : "These warriors have"} mastered the powers of toxins, and has received a vision of the future 
-            in a psychedelic chemical dream. They have determined ${possessiveSuffix(finalboss)} must be allowed to continue on this path. They attempt to stop you at every turn.`);
+            in a psychedelic chemical dream. They have determined ${finalboss} must be allowed to continue on this path. They attempt to stop you at every turn.`);
             break;
             case "Past": text = (stance == "Ally" ? 
             `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the past holds archaic knowledge that they will use to determine the future. 
@@ -2523,10 +2523,16 @@ let text
             `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the bygone Aztec empire has received a vision of the future from Mictlantecuhtli.
             Unfortunately for you, you need to be erased from that future.`);
             break;
+            case "Youth": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This youth" : "These youths"} hold more power than anyone of their age should have. With recklessness of their age, they are trying to 
+            stop the evil of ${finalboss}. You don't think you can restrain them, so the only way you can look after them is to let the accompany you.` : 
+            `${group.length == 1 ? "This exceptionally powerful youth" : "These exceptionally powerful youths"}, are trying to find their place in the world. 
+            ${finalboss} has manipulated them to follow the path of darkness. You have no choice but to fight them.`);
+            break;
             default: text = (stance == "Ally" ? "For whatever reason, these people stand with you againt the schemes of the Kingdom." : "For whatever reason, these people stand against you with the Kingdom.");
 }
 
-text = `<br>If you prefer not to use extra ${stance == "Ally" ? "Allies" : "Rivals"} for this story, flip this card if you did not do that already, otherwise put it in the Story Pool for reference. Otherwise, this card will add another layer to your story: <br><br>` 
+text = `<br>If you prefer not to use extra ${stance == "Ally" ? "Allies" : "Rivals"} for this story, flip this card if you did not do that already, otherwise put it in the Story Pool for reference. If you do, this card will add another layer to your story: <br><br>` 
     + text + "<br><br><br>If you haven't yet flipped this card, flip it. Otherwise, keep it in in the Story Pool for reference."
 return text
 
