@@ -157,7 +157,8 @@ function globalGladiators(enemies, stages) {
         get instructions() {return `If you choose to use ${this.name}, choose ${this.enemy[1]} as the boss in part 2B of your personal story.`}},
         {name: "Axel", enemy: "Mack", ally: ["Mary Ann"], rival: ["Mary Ann"], stage: "Under Destruction"},
         {name: "Brandon", enemy: "Ah Long", ally: ["Isabella"], rival: ["Isabella"], stage: ["Cashed Out", "Steel Memories"]},
-        {name: "Clint", enemy: "", ally: [""], rival: [""], stage: ""},
+        {name: "Clint", enemy: randFrom(filterArray(enemies,"name","Kingdom")).boss, ally: [""], rival: [""]/*random rival*//*random rival*/, stage: [randFrom(stages).name],
+        get instructions() {return `If you choose to use ${this.name}, choose ${this.enemy} as the boss and ${this.stage} as the stage in part 3 of your personal story.`}},
         {name: "Dmitri", enemy: randFrom(enemies).boss, ally: [""], rival: ["Anastasia"], stage: "Right to Remain Silent",
         get instructions() {return `If you choose to use ${this.name}, choose ${this.enemy} as the boss in part 1 of your personal story.`}},
         {name: "Gabriel", enemy: "Jackal", ally: ["Drago"], rival: ["Drago"], stage: "Original Copy"},
@@ -169,8 +170,9 @@ function globalGladiators(enemies, stages) {
         {name: "Kenshin", enemy: "Ah Long", ally: ["Brandon"], rival: ["Shadow","Jackal","Kemono"], stage: "Cashed Out"},
         {name: "Kyoryu", enemy: randFrom(enemies).boss, ally: ["Hanzo"], rival: ["Hanzo"], stage: "Sudden Death",
         get instructions() {return `If you choose to use ${this.name}, choose ${this.enemy} as the boss in part 2A of your personal story.`}},
-        {name: "Mack", enemy: "Juan", ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death"},
-        {name: "Max", enemy: "", ally: [""], rival: [""], stage: ""},
+        {name: "Mack", enemy: "Juan", ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death",
+        get instructions() {return `If you choose to use ${this.name}, choose ${this.enemy} as the boss in part 2A of your personal story.`}},
+        {name: "Max", enemy: randFrom(enemies).boss, ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised"},
         {name: "Megan", enemy: "Dmitri", ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"]}, 
         {name: "Miss Matrix", enemy: "Ah Long", ally: ["Ying Hua"], rival: ["Ah Long","Kemono"], stage: "Cashed Out"},
         {name: "Natalia", enemy: "Dmitri", ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"]},
@@ -182,7 +184,8 @@ function globalGladiators(enemies, stages) {
         {name: "Selene", enemy: "Dmitri", ally: [""], rival: ["Genesis"], stage: "Estate of Decay"},
         {name: "The Don", enemy: "Juan", ally: ["Gabriel"], rival: ["Juan", "Gabriel"], stage: "Gone Ballistic"},
         {name: "The Proxy", enemy: "Juan", ally: ["Power Soldier"], rival: ["Power Soldier"], stage: "Compromised"},
-        {name: "Tiger Azules", enemy: "", ally: [""], rival: [""], stage: ""},
+        {name: "Tiger Azules", enemy: randFrom(enemies).boss, ally: [""]/*random ally*/, rival: [""], stage: "Supply and Demand",
+        get instructions() {return `If you choose to use ${this.name}, choose ${this.enemy} as the boss in part 2 of your personal story.`}},},
         {name: "Tlazolteotl", enemy: "Jackal", ally: ["Kemono"], rival: ["Kemono","Tlazolteotl"], stage: "Original Copy"},
         {name: "Ying Hua", enemy: "Ah Long", ally: ["Jin"], rival: ["Jin"], stage: ["Cashed Out"]},
         {name: "Yokai", enemy: "Shadow", ally: ["Marionette Doll"], rival: ["Marionette Doll"], stage: "Steel Memories"}
@@ -276,14 +279,14 @@ let alliesandrivals = [
         {name: "Juan", keywords: ["Cartel","Organized Crime","Gunslinger","Street"]},
         {name: "Kemono", keywords: ["Beast", "Kingdom","Competitor", "Chi"]},
         {name: "Khadath Ahemusei", keywords: ["Indines","Science","Extraplanar","Wanderer"]},
-        {name: "Leeta", keywords: ["Brook City","Street","Wanderer"]},
+        {name: "Leeta", keywords: ["Brook City","Street","Wanderer","Past"]},
         {name: "Lotus", keywords: ["Brook City","Golden Dragons","Organized Crime","Past"]},
         {name: "Marionette Doll", keywords: ["Kingdom","Martial Arts Master","Psychic"]},
         {name: "Mary Ann", keywords: ["Sensei","Street"]},
         {name: "Megan", keywords: ["Celebrity","Fraud","Global Gladiator","Martial Arts Master","Wanderer"]},
         {name: "Mr. Apple", keywords: ["Celebrity","Fraud","Sensei"]},
         {name: "Natalia", keywords: ["Black Ops","Global Gladiator","Martial Arts Master","Soldier","Wanderer"]},
-        {name: "Power Soldier", keywords: ["Beast","Kingdom","Martial Arts Master"]},
+        {name: "Power Soldier", keywords: ["Beast","Black Ops","Kingdom","Martial Arts Master"]},
         {name: "Project X", keywords: ["Beast","Insane","Martial Arts Master", "Youth"]},
         {name: "Sera O'Quinn", keywords: ["Boss","Celebrity","Insane","Organized Crime"]},
         {name: "Shadow", keywords: ["Boss","Kingdom","Martial Arts Master","Chi"]},
@@ -1820,7 +1823,7 @@ function createFinale(stageindex, story, alliesandrivals, heronames, enemies, vi
         prologue = `${trail}, you were able to find your way to ${possessiveSuffix(enemy.boss)} secret sewer lair. As you enter a large chamber, you find what used to be a water treatment facility that is now being
         used as some sort of insane science experiment. "${gloat[0]}" came a voice, echoing from somewhere else in the chamber.<br><br>
         The ${enemy.bosstitle} of the ${enemy.name} enters your view from the shadows and ${genderPronoun(enemy.sex,"subject")} continues: "${gloat[1]}
-        Once we get these pumps working, all the water in the city will be tainted with Vandal, the everyone will be an addict. But you won't be here to see it!"`}
+        Once we get these pumps working, all the water in the city will be tainted with our serum, and everyone will be addicted. But you won't be here to see it!"`}
         else if (knowledge != "clueless" && masterplan == "strengtheningforces") {
         prologue = `${trail}, you were able to find your way to ${possessiveSuffix(enemy.boss)} secret sewer lair. As you enter a large chamber, you find what used to be a water treatment facility that is now being
         used as some sort of insane science experiment. "${gloat[0]}" came a voice, echoing from somewhere else in the chamber.<br><br>
@@ -2345,34 +2348,33 @@ function motivationText(motivation, group, stance, finalboss) {
 
 let text
     switch(motivation) {
+            case "Aztec": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the bygone Aztec empire has received a vision of the future from Tezcatlipoca. 
+            Fortunately for you, you seem to be a part of that future.` : 
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the bygone Aztec empire has received a vision of the future from Mictlantecuhtli.
+            Unfortunately for you, you need to be erased from that future.`);
+            break;
+            case "Beast": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, but ${group.length == 1 ? "this one" : "these"} have been tamed for now.
+            The strength of the ${group.length == 1 ? "beast" : "beasts"} is welcome if unnerving addition to your mission to make a stop to ${possessiveSuffix(finalboss)} plans.` : 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, and ${group.length == 1 ? "this beast is" : "these are"} in the tight leash of ${finalboss}. 
+            ${group.length == 1 ? "It" : "They"} won't stop hunting their quarry.`);
+            break;
+            case "Blade": text = (stance == "Ally" ? 
+            `A wandering ${group.length == 1 ? "swordmaster" : "host of swordmasters"} sees ${finalboss} as an opportunity to test their mettle, and has decided to walk with you.` : 
+            `A wandering ${group.length == 1 ? "swordmaster" : "host of swordmasters"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
+            break;
+            case "Black Ops": text = (stance == "Ally" ? `Citadel has many spies and assassins in their contacts, and a ${group.length == 1 ? "single operative" : "team of specialists"} 
+            has been assigned with you to eliminate the threat ${finalboss} poses.` : 
+            `The world is full of shadowy organizations with spies and assassins everywhere. A mysterious malefactor has sent a 
+            ${group.length == 1 ? "single operative" : "team of specialists"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
+            break;
             case "Boss": text = (stance == "Ally" ? 
             `A secret cabal of powerful and influential individuals have decided that the threat ${finalboss} makes is far too hazardous for them to leave it the the 
             rank and file of their organizations - or to you. ${group.length == 1 ? `${group[0].name} has` : "Several of them have"} joined you in your mission whether you wish it or not.` : 
             `Whatever ${finalboss} is trying to do, it will serve the powerful men and women of different shadowy organizations well. You are considered such a threat that this cabal
             has decided no mere mooks are enought to stop you.`);
-            break;
-            case "Golden Dragons": text = (stance == "Ally" ? 
-            `"What ${finalboss} is attempting is a risk to our businesses. The enemy of our enemy is our friend," ${group[0].name} says. 
-            You are not sure the Golden Dragons are the sort of friends you'd want to have, but they might be the ones you need.` : 
-            `You have been a thorn in the side of the Golden Dragons for a long time. While you are busy with your mission to get ${finalboss}, they have sent a 
-            ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
-            break;
-            case "Organized Crime": text = (stance == "Ally" ? 
-            `The ongoing plans of ${finalboss} risks the stability that organized crime requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"} 
-            has been sent to crush the opposition. You're lucky to have them on your side!` : 
-            `Organized crime sees the ongoing plans of ${finalboss} a perfect time to hit law enforcement everywhere, and Citadel is no exception to their plans. A 
-            ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to take you out.`);
-            break;
-            case "Martial Arts Master": text = (stance == "Ally" ?
-            `A wandering ${group.length == 1 ? "martial arts master" : "band of martial artists"} sees ${finalboss} as an opportunity to test their mettle, and has decided to walk with you.` : 
-            `A wandering ${group.length == 1 ? "martial arts master" : "band of martial artists"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
-            break;
-            case "Chi": text = (stance == "Ally" ?
-            `${group.length == 1 ? "This warriors is" : "These warriors are"} privy to the ${mysticalSynonym()} Chi powers. Their deep understanding of the flow of 
-            ${mysticalSynonym()} energies has revealed to them that ${finalboss} is a great disturbance in this force.` : 
-            `${group.length == 1 ? "This warrior is" : "These warriors are"} privy to the ${mysticalSynonym()} Chi powers. Their deep understanding of the flow of 
-            ${mysticalSynonym()} energies has revealed to them that you are a great disturbance in this force.`);
-            break;
+            break;            
             case "Brook City": text = (stance == "Ally" ? 
             `Before the Rise of the Kingdom, Brook City was a very different place. Now ${group.length == 1 ? "a single citizen" : "a group of citizens"} from that
             city's past have arrived to the future, and they are not happy with what they see. Their only hope of getting back seems to lie in stopping ${finalboss}.` : 
@@ -2385,26 +2387,41 @@ let text
             `Your intel tells you that the mercenaries of the Brotherhood have been paid to make sure you will not interfere with ${possessiveSuffix(finalboss)} plans, 
             and you can be certain they will not stop until you do.`);
             break;
-            case "Black Ops": text = (stance == "Ally" ? `Citadel has many spies and assassins in their contacts, and a ${group.length == 1 ? "single operative" : "team of specialists"} 
-            has been assigned with you to eliminate the threat ${finalboss} poses.` : 
-            `The world is full of shadowy organizations with spies and assassins everywhere. A mysterious malefactor has sent a 
-            ${group.length == 1 ? "single operative" : "team of specialists"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
-            break;
-            case "Gunslinger": text = (stance == "Ally" ? 
-            `A wandering ${group.length == 1 ? "gunslinger" : "band of gunslingers"} sees ${finalboss} as an opportunity to test their mettle, and has decided to walk with you.` : 
-            `A wandering ${group.length == 1 ? "gunslinger" : "band of gunslingers"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
-            break;
-            case "Soldier": text = (stance == "Ally" ? 
-            `Citadel has many soldiers and mercenaries in their contacts, and a ${group.length == 1 ? "single soldier" : "team of soldiers"} 
-            has been assigned with you to eliminate the threat ${finalboss} poses.` : 
-            `The world is full of rogue nations and terrorist organizations with soldiers for hire and private armies everywhere. A mysterious malefactor has sent a 
-            ${group.length == 1 ? "a formidable mercernary" : "team of mercenaries"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
+            case "Cartel": text = (stance == "Ally" ?
+            `"${finalboss} puts the family at risk, and we will not allow that," ${group[0].name} says, and continues: "The enemy of our enemy is our friend." 
+            Juan and his Cartel might be criminals, but at least you know they are honorable and willing to even die for their "family".` : 
+            `You have been a thorn in the side of the Cartel for a long time. While you are busy with your mission to get ${finalboss}, they have sent a 
+            ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
             break;
             case "Celebrity": text = (stance == "Ally" ? 
             `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : "these are"} the worst. With  
             ${group.length == 1 ? "this fool" : "these fools"} appearing everywhere for cheap publicity, you just hope nobody gets hurt.` : 
             `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : "these are"} the worst. With  
             ${group.length == 1 ? "this fool" : "these fools"} appearing everywhere for cheap publicity, you're afraid someone will get hurt.. not that it would deter them.`);
+            break;
+            case "Chi": text = (stance == "Ally" ?
+            `${group.length == 1 ? "This warriors is" : "These warriors are"} privy to ${mysticalSynonym()} Chi powers. Their deep understanding of the flow of 
+            ${mysticalSynonym()} energies has revealed to them that ${finalboss} is a great disturbance in this force.` : 
+            `${group.length == 1 ? "This warrior is" : "These warriors are"} privy to ${mysticalSynonym()} Chi powers. Their deep understanding of the flow of 
+            ${mysticalSynonym()} energies has revealed to them that you are a great disturbance in this force.`);
+            break;
+            case "Cifarelli": text = (stance == "Ally" ?
+            `The ongoing plans of ${finalboss} risks the stability that the operation of the Cifarelli family requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"} 
+            has been sent to crush the opposition. You're lucky to have them on your side!` : 
+            `The Cifarelli family sees the ongoing plans of ${finalboss} a perfect time to hit law enforcement everywhere, and Citadel is no exception to their plans. A 
+            ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to take you out.`);
+            break;
+            case "Competitor": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighters"} 
+            of competetive - and deadly - events. Now they pursue the victory of the ultimate challenge: ${finalboss}!` :
+            `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighters"} 
+            of competetive - and deadly - events. Now they pursue the victory of the ultimate challenge: you!`);
+            break;
+            case "Extraplanar": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} privy to the secrets of planes of existence beyond yours. For whatever ${mysticalSynonym()} 
+            reason, the stars are right for them to stop ${finalboss}, no matter the cost.` : 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} privy to the secrets of planes of existence beyond yours. For whatever ${mysticalSynonym()} 
+            reason, the stars are right for them to stop you, no matter the cost.`);
             break;
             case "Fraud": text = (stance == "Ally" ? 
             `The lost reputation and ridicule of some unlucky or incapable fighters has driven them to desperation, and now they believe the only way to restore their name 
@@ -2417,23 +2434,21 @@ let text
             `Miscommunication, misunderstanding and misdirection has led Citadel to deploy a ${group.length == 1 ? "single Global Gladiator" : "group of Global Gladiators"} 
             against you, and nothing you say can sway them from their mission.`);
             break;
-            case "Wanderer": text = (stance == "Ally" ? 
-            `Some men and women wander the lands in search for something or someone, and now your goals seem to have aligned. They have gone far and wide, 
-            sometimes to unbelieveable places in their quest, and if defeating ${finalboss} is what is needed, they would die trying.` :
-            `Some men and women wander the lands in search for something or someone, and now you seem to be in the way of the mutual purpose of some individuals. They have 
-            gone far and wide, sometimes to unbelieveable places in their quest, and if your defeat is what is needed, then so be it.`);
+            case "Golden Dragons": text = (stance == "Ally" ? 
+            `"What ${finalboss} is attempting is a risk to our businesses. The enemy of our enemy is our friend," ${group[0].name} says. 
+            You are not sure the Golden Dragons are the sort of friends you'd want to have, but they might be the ones you need.` : 
+            `You have been a thorn in the side of the Golden Dragons for a long time. While you are busy with your mission to get ${finalboss}, they have sent a 
+            ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
             break;
-            case "Beast": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, but ${group.length == 1 ? "this one" : "these"} have been tamed for now.
-            The strength of the ${group.length == 1 ? "beast" : "beasts"} is welcome if unnerving addition to your mission to make a stop to ${possessiveSuffix(finalboss)} plans.` : 
-            `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, and ${group.length == 1 ? "this beast is" : "these are"} in the tight leash of ${finalboss}. 
-            ${group.length == 1 ? "It" : "They"} won't stop hunting their quarry.`);
+            case "Gunslinger": text = (stance == "Ally" ? 
+            `A wandering ${group.length == 1 ? "gunslinger" : "band of gunslingers"} sees ${finalboss} as an opportunity to test their mettle, and has decided to walk with you.` : 
+            `A wandering ${group.length == 1 ? "gunslinger" : "band of gunslingers"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
             break;
-            case "Kingdom": text = (stance == "Ally" ? 
-            `The Kingdom knows you are their most dangerous enemy, but all their plans are smoke and mirrors. For some devious reason ${group.length == 1 ? "this warrior has" : "these warriors have"} 
-            joined you to stop ${finalboss}. You are quite sure this alliance is tenuous and temporary at best, but you know you will need the help.` : 
-            `The Kingdom knows you are the only credible threat to their long-term plans, and ${group.length == 1 ? "this warrior has" : "these warriors have"} been
-            sent to make sure the threat will be neutralized.`);
+            case "Indines": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King 
+            Greyheart being freed and save their world they have to save yours!` :
+            `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King 
+            Greyheart being freed and save their world they have to doom yours!`);
             break;
             case "Insane": text = (stance == "Ally" ? 
             `${group.length == 1 ? "This individual is" : "These individuals are"} not sound of mind, but unpredicable and dangerous. For whatever irresponsible reason, 
@@ -2441,69 +2456,11 @@ let text
             `${group.length == 1 ? "This individual is" : "These individuals are"} quite deranged, unpredicable and dangerous. For whatever psychotic reason, 
             they are following you around, dead set on taking you out.`);
             break;
-            case "Indines": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King 
-            Greyheart being freed and save their world, they have to save yours!` :
-            `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King 
-            Greyheart being freed and save their world, they have to doom yours!`);
-            break;
-            case "Psychic": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future. 
-            They have determined ${possessiveSuffix(finalboss)} plans will have to change.` : 
-            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future. 
-            They have determined ${possessiveSuffix(finalboss)} plans must come to fruition.`);
-            break;
-            case "Toxic": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This warrior has" : "These warriors have"} expertise on toxins, and has received a vision of the future 
-            in a psychedelic chemical dream. They have determined ${possessiveSuffix(finalboss)} cannot be allowed to continue on this path. They have joined you in your mission.` : 
-            `${group.length == 1 ? "This warrior has" : "These warriors have"} expertise of toxins, and has received a vision of the future 
-            in a psychedelic chemical dream. They have determined ${finalboss} must be allowed to continue on this path. They attempt to stop you at every turn.`);
-            break;
-            case "Past": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the past holds archaic knowledge that they will use to determine the future. 
-            Fortunately for you, you seem to be a part of that future.` : 
-            `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the past holds archaic knowledge that they will use to determine the future. 
-            Unfortunately for you, you need to be erased from that future.`);
-            break;
-            case "Competitor": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighters"} 
-            of competetive - and deadly - events. Now they pursue the victory of the ultimate challenge: ${finalboss}!` :
-            `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighters"} 
-            of competetive - and deadly - events. Now they pursue the victory of the ultimate challenge: you!`);
-            break;
-            case "Street": text = (stance == "Ally" ? 
-            `The streets have had enought of the constant threat the evil machinations of ${finalboss} and the ilk pose to the common people. 
-            ${group.length == 1 ? "A defender of the streets has" : "Defenders of the streets have"} decided to aid you in taking ${finalboss} out!` : 
-            `Your perpetual fights with ${finalboss} and the ilk pose a constant threat to the common people. 
-            ${group.length == 1 ? "A defender of the streets has" : "Defenders of the streets have"} decided you are the worse of two evils!`);
-            break;
-            case "Cifarelli": text = (stance == "Ally" ?
-            `The ongoing plans of ${finalboss} risks the stability that the operation of the Cifarelli family requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"} 
-            has been sent to crush the opposition. You're lucky to have them on your side!` : 
-            `The Cifarelli family sees the ongoing plans of ${finalboss} a perfect time to hit law enforcement everywhere, and Citadel is no exception to their plans. A 
-            ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to take you out.`);
-            break;
-            case "Extraplanar": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This individual is" : "These individuals are"} privy to the secrets of planes of existence beyond yours. For whatever ${mysticalSynonym()} 
-            reason, the stars are right for them to stop ${finalboss}, no matter the cost.` : 
-            `${group.length == 1 ? "This individual is" : "These individuals are"} privy to the secrets of planes of existence beyond yours. For whatever ${mysticalSynonym()} 
-            reason, the stars are right for them to stop you, no matter the cost.`);
-            break;
-            case "Sensei": text = (stance == "Ally" ? 
-            `A wandering ${group.length == 1 ? "sensei" : "sensei group"} has decided your training is not quite complete, and they oversee your journey to 
-            ensure your discipline will reach its potential.` : 
-            `A wandering ${group.length == 1 ? "sensei" : "sensei group"} has decided your training is not quite complete, and they follow you on your path to teach you a lesson in 
-            discipline and skill.`);
-            break;
-            case "Blade": text = (stance == "Ally" ? 
-            `A wandering ${group.length == 1 ? "swordmaster" : "host of swordmasters"} sees ${finalboss} as an opportunity to test their mettle, and has decided to walk with you.` : 
-            `A wandering ${group.length == 1 ? "swordmaster" : "host of swordmasters"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
-            break;
-            case "Science": text = (stance == "Ally" ? 
-            `What ${finalboss} is planning has a scientific angle that an inquiring mind cannot bypass. This ${group.length == 1 ? "researcher" : "group of researchers"} 
-            will follow you for analytical purposes.` : 
-            `What ${finalboss} is planning has a scientific angle that an inquiring mind cannot bypass. This ${group.length == 1 ? "researcher" : "group of researchers"} 
-            is trying to stop you so they can observe this interesting event first hand!`);
+            case "Kingdom": text = (stance == "Ally" ? 
+            `The Kingdom knows you are their most dangerous enemy, but all their plans are smoke and mirrors. For some devious reason ${group.length == 1 ? "this warrior has" : "these warriors have"} 
+            joined you to stop ${finalboss}. You are quite sure this alliance is tenuous and temporary at best, but you know you will need the help.` : 
+            `The Kingdom knows you are the only credible threat to their long-term plans, and ${group.length == 1 ? "this warrior has" : "these warriors have"} been
+            sent to make sure the threat will be neutralized.`);
             break;
             case "Law Enforcement": text = (stance == "Ally" ? 
             `The law enforcement agencies around the world do not really understand the threat the Kingdom poses and are not equipped to properly fight it, but 
@@ -2511,28 +2468,74 @@ let text
             `The law enforcement agencies around the world are not immune to the reach of the Kingdom, and ${group.length == 1 ? "this corrupt officer" : "these corrupt officers"}
             are determined to take you in - or take you out!`);
             break;
-            case "Cartel": text = (stance == "Ally" ?
-            `"${finalboss} puts the family at risk, and we will not allow that," ${group[0].name} says, and continues: "The enemy of our enemy is our friend." 
-            Juan and his Cartel might be criminals, but at least you know they are honorable and willing to even die for their "family".` : 
-            `You have been a thorn in the side of the Cartel for a long time. While you are busy with your mission to get ${finalboss}, they have sent a 
-            ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
+            case "Organized Crime": text = (stance == "Ally" ? 
+            `The ongoing plans of ${finalboss} risks the stability that organized crime requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"} 
+            has been sent to crush the opposition. You're lucky to have them on your side!` : 
+            `Organized crime sees the ongoing plans of ${finalboss} a perfect time to hit law enforcement everywhere, and Citadel is no exception to their plans. A 
+            ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to take you out.`);
             break;
-            case "Aztec": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the bygone Aztec empire has received a vision of the future from Tezcatlipoca. 
+            case "Martial Arts Master": text = (stance == "Ally" ?
+            `A wandering ${group.length == 1 ? "martial arts master" : "band of martial artists"} sees ${finalboss} as an opportunity to test their mettle, and has decided to walk with you.` : 
+            `A wandering ${group.length == 1 ? "martial arts master" : "band of martial artists"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
+            break;
+            case "Past": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the past holds archaic knowledge that they will use to determine the future. 
             Fortunately for you, you seem to be a part of that future.` : 
-            `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the bygone Aztec empire has received a vision of the future from Mictlantecuhtli.
+            `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the past holds archaic knowledge that they will use to determine the future. 
             Unfortunately for you, you need to be erased from that future.`);
+            break;
+            case "Psychic": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future. 
+            They have determined ${possessiveSuffix(finalboss)} plans will have to change.` : 
+            `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future. 
+            They have determined ${possessiveSuffix(finalboss)} plans must come to fruition. They seem to know your every move, and appear wherever you go!`);
+            break;
+            case "Science": text = (stance == "Ally" ? 
+            `What ${finalboss} is planning has a scientific angle that an inquiring mind cannot bypass. This ${group.length == 1 ? "researcher" : "group of researchers"} 
+            will follow you for analytical purposes.` : 
+            `What ${finalboss} is planning has a scientific angle that an inquiring mind cannot bypass. This ${group.length == 1 ? "researcher" : "group of researchers"} 
+            is trying to stop you so they can observe this interesting event first hand!`);
+            break;
+            case "Sensei": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "A wandering sensei has" : "Wandering sensei have"} decided your training is not quite complete, and they oversee your journey to 
+            ensure your discipline will reach its potential.` : 
+            `A wandering ${group.length == 1 ? "sensei" : "sensei group"} has decided your training is not quite complete, and they follow you on your path to teach you a lesson in 
+            discipline and skill.`);
+            break;
+            case "Soldier": text = (stance == "Ally" ? 
+            `Citadel has many soldiers and mercenaries in their contacts, and a ${group.length == 1 ? "single soldier" : "team of soldiers"} 
+            has been assigned with you to eliminate the threat ${finalboss} poses.` : 
+            `The world is full of rogue nations and terrorist organizations with soldiers for hire and private armies everywhere. A mysterious malefactor has sent a 
+            ${group.length == 1 ? "a formidable mercernary" : "team of mercenaries"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
+            break;
+            case "Street": text = (stance == "Ally" ? 
+            `The streets have had enought of the constant threat the evil machinations of ${finalboss} and the ilk pose to the common people. 
+            ${group.length == 1 ? "A defender of the streets has" : "Defenders of the streets have"} decided to aid you in taking ${finalboss} out!` : 
+            `Your perpetual fights with ${finalboss} and the ilk pose a constant threat to the common people. 
+            ${group.length == 1 ? "A defender of the streets has" : "Defenders of the streets have"} decided you are the worse of two evils!`);
+            break;
+            case "Toxic": text = (stance == "Ally" ? 
+            `${group.length == 1 ? "This warrior has" : "These warriors have"} expertise on toxins, and have received a vision of the future 
+            in a psychedelic chemical dream. They have determined ${finalboss} cannot be allowed to continue on this path. They have joined you in your mission.` : 
+            `${group.length == 1 ? "This warrior has" : "These warriors have"} expertise of toxins, and have received a vision of the future 
+            in a psychedelic chemical dream. They have determined ${finalboss} must be allowed to continue on this path. They attempt to stop you at every turn.`);
+            break;
+            case "Wanderer": text = (stance == "Ally" ? 
+            `Some men and women wander the lands in search for something or someone, and now your goals seem to have aligned. They have gone far and wide, 
+            sometimes to unbelieveable places in their quest, and if defeating ${finalboss} is what is needed, they would die trying.` :
+            `Some men and women wander the lands in search for something or someone, and now you seem to be in the way of the mutual purpose of some individuals. They have 
+            gone far and wide, sometimes to unbelieveable places in their quest, and if your defeat is what is needed, then so be it.`);
             break;
             case "Youth": text = (stance == "Ally" ? 
             `${group.length == 1 ? "This youth" : "These youths"} hold more power than anyone of their age should have. With recklessness of their age, they are trying to 
-            stop the evil of ${finalboss}. You don't think you can restrain them, so the only way you can look after them is to let the accompany you.` : 
-            `${group.length == 1 ? "This exceptionally powerful youth" : "These exceptionally powerful youths"}, are trying to find their place in the world. 
-            ${finalboss} has manipulated them to follow the path of darkness. You have no choice but to fight them.`);
+            stop the evil of ${finalboss}. You don't think you can restrain them, so the only way you can look after them is to let them accompany you.` : 
+            `${group.length == 1 ? "This exceptionally powerful youth" : "These exceptionally powerful youths"} are trying to find their place in the world. 
+            ${finalboss} has manipulated them to follow the path of darkness. They seem to be wherever you go, and you have no choice but to fight them.`);
             break;
-            default: text = (stance == "Ally" ? "For whatever reason, these people stand with you againt the schemes of the Kingdom." : "For whatever reason, these people stand against you with the Kingdom.");
+            default: text = (stance == "Ally" ? "For whatever reason, these people stand with you againt the schemes of the Kingdom." : "For whatever reason, these people stand with the Kingdom against you.");
 }
 
-text = `<br>If you prefer not to use extra ${stance == "Ally" ? "Allies" : "Rivals"} for this story, flip this card if you did not do that already, otherwise put it in the Story Pool for reference. If you do, this card will add another layer to your story: <br><br>` 
+text = `<br>If you prefer not to use extra ${stance == "Ally" ? "Allies" : "Rivals"} for this story, flip this card if you did not do that already, otherwise put it in the Story Pool for reference. If do prefer to, this card will add another layer to your story: <br><br>` 
     + text + "<br><br>If you haven't yet flipped this card, flip it. Otherwise, keep it in in the Story Pool for reference."
 return text
 
