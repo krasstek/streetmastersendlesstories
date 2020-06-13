@@ -2446,7 +2446,7 @@ let text
             break;
             case "Clone": text = (stance == "Ally" ?
             `With the multitude of clones unleashed upon the world from Jackal's secret experiments, you are bound to run into some from time to time that 
-            ${finalboss = "Jackal" ? `seek their creator and want more life` : `would ally themselves to your cause`}.` : 
+            ${finalboss == "Jackal" ? `seek their creator and want more life` : `would ally themselves to your cause`}.` : 
             `With the multitude of clones unleashed upon the world from Jackal's secret experiments, sometimes you find surprising parties of people working together, 
             furthering the goals of the Kingdom.`);
             break;
