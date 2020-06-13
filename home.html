@@ -1030,7 +1030,7 @@ function loseResult(stageindex, story, nextstage) {
         `"Just as I thought," ${enemy.boss} says with calm confidence as he paces around you. "Absolutely pathetic." "What should we do with them?" ${minion} asks. "They are worthless."<br><br>"Not entirely," 
         ${enemy.boss} says. "Bind them. Perhaps ${nextenemy.boss} will have a use for their inadequate talents."`,
         `"Your pitiful husks won't serve me," ${enemy.boss} says. "Perhaps you'll be worth something on the black market. ${upperCaseInitial(genderPronoun(enemy,"possessive"))} ${enemy.minions} approach to apprehend you.`,
-        `${enemy.boss} ${enemy.threat} before ${nextenemy.boss} gestures for ${genderPronoun(enemy,"object")} to stop. "No," ${genderPronoun(nextenemy.sex,"subject")} says. We have a better use for the Gladiators. 
+        `${enemy.boss} ${enemy.threat} before ${nextenemy.boss} gestures for ${genderPronoun(enemy,"object")} to stop. "No," ${genderPronoun(nextenemy,"subject")} says. We have a better use for the Gladiators. 
         After all, who better to think ${finalboss.boss} would want than the Citadel's best?" ${minion} and ${nextenemy.boss} share an amused glance as ${enemy.boss} opens a secret passage. The three of them lead you to the unknown.`,
         `Cackling maniacally the whole time, ${enemy.boss} and ${genderPronoun(enemy,"possessive")} ${enemy.minions} surround you, overwhelming you. Their constant attacks became too much for you, and soon you blacked out,
         ${possessiveSuffix(enemy.boss)} haunting laughter echoing through your head all the while.`,
@@ -1060,7 +1060,7 @@ function loseResult(stageindex, story, nextstage) {
         deusexmachina = deusexmachina.concat([
         `The ${enemy.name} was able to escape with their plan fulfilled. You call Agent Fletch and request a cleanup team at the site, and then you begin searching through the debris. You find a ${gizmo} placed almost intentionally
         where you would find it.`,
-        `After an uphill battle against overwhelming odds, ${enemy.boss} apparently became bored with the uneven competition and suddenly assaulted with unprecedented fury, leaving you beaten. "Let's move out!" ${genderPronoun(nextenemy.sex,"subject")}
+        `After an uphill battle against overwhelming odds, ${enemy.boss} apparently became bored with the uneven competition and suddenly assaulted with unprecedented fury, leaving you beaten. "Let's move out!" ${genderPronoun(nextenemy,"subject")}
         commanded.  "This is not worth our time."<br><br>Left for dead, you had no chance of following, and had very little to proceed with.`,
         `The ${enemy.name} escaped with what they wanted, and a ${gizmo} you happened upon looks damaged. "Agent Fletch," you got into your communications device. "I've found a ${gizmo}, but it looks damaged." "At least we have it,"
         Agent Fletch replied in your ear. "Bring it back to Citadel HQ and we'll see what can we pull from it."`,
@@ -1143,7 +1143,7 @@ function victoryResult(stageindex, story, nextstage) {
     break;
     case "One Step Ahead": clue = `the ${nextenemy.name} are guarding an arduous mountain path with their ${nextenemy.minions}${cahoots}`
     break;
-    case "Original Copy": clue = `${nextenemy.boss} and ${genderPronoun(nextenemy.sex,"possessive")} ${nextenemy.minions}${cahoots}, have been spotted at a suspicious lab`
+    case "Original Copy": clue = `${nextenemy.boss} and ${genderPronoun(nextenemy,"possessive")} ${nextenemy.minions}${cahoots}, have been spotted at a suspicious lab`
     break;
     case "Out of Time": 
     case "Rude Awakening": clue = `strange sorcery and walking corpses have been again witnessed, along with ${nextenemy.boss} in ${whichPreposition(evilplace)} ${evilplace}${cahoots}`
@@ -1160,7 +1160,7 @@ function victoryResult(stageindex, story, nextstage) {
     break;
     case "Steel Memories": clue =`${nextenemy.boss} has a secret underground base${cahoots}`
     break;
-    case "Sudden Death": clue = `the ${nextenemy.name == "Kingdom" ? nextenemy.boss  + ` was back to ${genderPronoun(nextenemy.sex,"possessive")} previous practice` : " the customary recruitment methods of the Kingdom have been duplicated by " + nextenemy.name}${cahoots}`
+    case "Sudden Death": clue = `the ${nextenemy.name == "Kingdom" ? nextenemy.boss  + ` was back to ${genderPronoun(nextenemy,"possessive")} previous practice` : " the customary recruitment methods of the Kingdom have been duplicated by " + nextenemy.name}${cahoots}`
     break;
     }
     
