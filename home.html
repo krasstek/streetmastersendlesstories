@@ -217,15 +217,15 @@ function globalGladiators(enemies, stages) {
 function createStory() {
 
 let enemies = [
-        {name:"Brotherhood", boss: "Dmitri", bosstitle: "callous mercenary", gender: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar","and put it into play"],["N-40 Punisher","and put it into play"]]},
-        {name:"Cartel", boss: "Juan", bosstitle: "ruthless gangster", gender: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: "vicious gangers and hardened outcasts", threat: "levels his gun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert","and put it into play"]]},
-        {name:"Golden Dragons", boss: "Ah Long", bosstitle: "unrelenting martial arts master", gender: "male", desc: "the enterprise of martial artists, thugs, and businessmen", addressing: "weasels", minions: "ruthless triads and yakuza", threat: "lifts his hand, dark, malevolent energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"], preparedboss: [["Merciless Clutch", "and put it into play"]]},
-        {name:"Kingdom", boss: "Kemono", bosstitle: "imposing green mutant", gender: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fist, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge","and put it into play"]]},
-        {name:"Kingdom", boss: "Jackal", bosstitle: "mad scientist", gender: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "mysterious ninja and clone puppets", threat: "smiles, as her eyes start to glow malevolently, and you feel pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion","and play it"]]},
-        {name:"Kingdom", boss: "Shadow", bosstitle: "ominous mastermind", gender: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades","and put it into play"]]},
-        {name:"Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", gender: "female", desc: "the ancient force of restless warriors", addressing: "warriors", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller","Pale Caller"], preparedboss: [["Decaying Blast","and play it"]]},
-        {name:"Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", gender: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, suddenly engulfed in cursed flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike","and play it"]]},
-        {name:"Onyx League", boss: "Mack", bosstitle: "black-hearted overlord", gender: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim","and put it into play"]]}
+        {name:"Brotherhood", boss: "Dmitri", bosstitle: "callous mercenary", gender: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar","and put it into play"],["N-40 Punisher","and put it into play"]], expression: `menacing eyes and grim expression broadcasting danger`},
+        {name:"Cartel", boss: "Juan", bosstitle: "ruthless gangster", gender: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: "vicious gangers and hardened outcasts", threat: "levels his gun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert","and put it into play"]], expression: `keen eyes and sly smirk reeking of confidence and self-importance`},
+        {name:"Golden Dragons", boss: "Ah Long", bosstitle: "unrelenting martial arts master", gender: "male", desc: "the enterprise of martial artists, thugs, and businessmen", addressing: "weasels", minions: "ruthless triads and yakuza", threat: "lifts his hand, dark, malevolent energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"], preparedboss: [["Merciless Clutch", "and put it into play"]], expression: `keen eyes and sly smirk reeking of confidence and self-importance`},
+        {name:"Kingdom", boss: "Kemono", bosstitle: "imposing green mutant", gender: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fist, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge","and put it into play"]], expression: `demonic eyes and grim expression sending a promise of violence`},
+        {name:"Kingdom", boss: "Jackal", bosstitle: "mad scientist", gender: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "mysterious ninja and clone puppets", threat: "smiles, as her eyes start to glow malevolently, and you feel pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion","and play it"]], expression: `mad eyes and demonic grin showing no humanity`},
+        {name:"Kingdom", boss: "Shadow", bosstitle: "ominous mastermind", gender: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades","and put it into play"]], expression: `keen eyes and sly smirk reeking of confidence and self-importance`},
+        {name:"Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", gender: "female", desc: "the ancient force of restless warriors", addressing: "warriors", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller","Pale Caller"], preparedboss: [["Decaying Blast","and play it"]], expression: `ckeen eyes and sly smirk reeking of onfidence and self-importance`},
+        {name:"Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", gender: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, suddenly engulfed in cursed flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike","and play it"]], gloat: [`Are you prepared to face the wrath of Shin Yokai?`,`No,  you’re not prepared!`], expression: `fiery stare and gritted teeth sending a message of barely contained fury`},
+        {name:"Onyx League", boss: "Mack", bosstitle: "black-hearted overlord", gender: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim","and put it into play"]], expression: `keen eyes and predatory sneer reeking of confidence and ruthlessness`}
         ];
         // Yokai special setup?
 
@@ -254,18 +254,28 @@ stage.prologue: _.template('${trail}, you find ${enemy.boss}, the boss of the ${
  */
 
 let stages = [
-    {name:"Ashes of the Eternal", instory: 0, location: "cursed", bystander: "acolyte", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.`,false,false,false], stagepenalty: [`One fighter places 1 fire token in the space nearest to them.`,false,false,false], masterplan: randFrom(["actsofterror","personalpower"]),
+    {name:"Ashes of the Eternal", instory: 0, location: "cursed", bystander: "acolyte", 
+    stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.`,false,false,false],
+    stagepenalty: [`One fighter places 1 fire token in the space nearest to them.`,false,false,false], 
+    masterplan: randFrom(["actsofterror","personalpower"]),
     gloat: [`You won’t stop the inevitable!`,`I’ll end you here, with or without the Oni!`],
     rivaltext: _.template(', but ${rival}<%=rivalboost ? `, possessed by the infernal force` : `, looking to gain some of the infernal force`%> moves in to intervene'),
     hottrail: _.template('You were not too late! ${enemy.boss} falls on the floor, barely able to stand up, and stares at ${genderPronoun(enemy, "possessive")} hands with astonishment.  "This can\'t be," ${genderPronoun(enemy, "subject")} says hoarsely.  "I have come so far..." ${upperCaseInitial(genderPronoun(enemy, "subject"))} looks up to you with a look of shock.'),
     coldtrail:  _.template('${enemy.boss} falls on the floor, then pulls ${genderPronoun(enemy,"reflexive")} off, standing up and staring at ${genderPronoun(enemy, "possessive")} hands with astonishment.  "This can\'t be," ${genderPronoun(enemy, "subject")} says calmly.  "I have come so far..." ${upperCaseInitial(genderPronoun(enemy, "subject"))} looks up to you,  ${genderPronoun(enemy, "possessive")} look of shock changing to one of pure rage.'),
     clueless: _.template('${enemy.boss} falls down to the floor of the temple, landing solidly on ${genderPronoun(enemy, "possessive")} feet.  ${upperCaseInitial(genderPronoun(enemy, "subject"))} flexes ${genderPronoun(enemy, "possessive")} muscles slowly, staring at ${genderPronoun(enemy, "possessive")} clenched fists, an evil grin on ${genderPronoun(enemy, "possessive")} face. ${upperCaseInitial(genderPronoun(enemy, "subject"))} then looks up to you, and laughs.'),
-    prologue: _.template('${trail}, you find ${enemy.boss}, the boss of the ${enemy.name} at another ${evilPlace()}. The ${mysticalSynonym()} powers float ${genderPronoun(enemy, "object")} as ${genderPronoun(enemy, "subject")} draws in a portion of the hellfire of the cursed Oni. You rush in to disrupt the ritual, scattering the unholy urns.<br><br>${knowledge} "${gloat[0]}" ${genderPronoun(enemy, "subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}<br><br>You once again stand ready to face ${genderPronoun(enemy, "object")}, and suddenly you wince as your hands begin burning with a searing hot pain. You look down to see bright red lines snaking their way along your hands. You must have disrupted some ancient power by scattering the urns - ${randFrom([`when will you`,`will you ever`,`would it hurt to someday`])} learn? Gritting your teeth, you pick up the urns and prepare to return them to their rightful place<%=rivalpresence ? `${rivaltext}` : ``%>.')},
+    prologue: _.template('${trail}, you find ${enemy.boss}, the boss of the ${enemy.name} at another ${evilPlace()}. The ${mysticalSynonym()} powers float ${genderPronoun(enemy, "object")} as ${genderPronoun(enemy, "subject")} draws in a portion of the hellfire of the cursed Oni. You rush in to disrupt the ritual, scattering the unholy urns.<br><br>${stagevar} "${gloat[0]}" ${genderPronoun(enemy, "subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}<br><br>You once again stand ready to face ${genderPronoun(enemy, "object")}, and suddenly you wince as your hands begin burning with a searing hot pain. You look down to see bright red lines snaking their way along your hands. You must have disrupted some ancient power by scattering the urns - ${randFrom([`when will you`,`will you ever`,`would it hurt to someday`])} learn? Gritting your teeth, you pick up the urns and prepare to return them to their rightful place<%=rivalpresence ? `${rivaltext}` : ``%>.')},
     
-    {name:"Cashed Out", instory: 0, location: "base", bystander: "gambler", stagebonus: [`Each fighter may put a random defense token on a Frightened Gambler in their threat area.`,false,false,false], stagepenalty: [`Search the stage deck for a Pit Boss card and choose one fighter to draw it. Shuffle the stage deck.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"]),
-    hottrail: _.template('${trail} you locate the gambling den of the ${enemy.name}.<br><br> At the den, you poke around and eventually find your way to a set of double doors. Listening, you hear voices and burst in. ${enemy.boss} stands up from a private table to take you on. "A crime boss just can\t take a break, huh?" ${genderPronoun(enemy,"subject")} exclaims.'),
-    coldtrail: _.template('${trail}, you were able to locate the gambling den that is owned and operated by members of the ${enemy.name}. With so many of their members in one place, you knew it was the best bet to get more information. You decided to pay them a visit, break up their operation and get some intel on the ${possessiveSuffix(enemy.name)} plans.<br><br>When you arrived at the casino, you heard a commotion inside and - fearing you could lose the element of surprise - you busted in. Your hunch was right; ${enemy.boss} knew you were coming and was trying to clear the place out. "<%=rivalpresence ? `${rivalboost ? `Hold them off, ${rival}`: `Get the money, ${rival}`}` : `Get the money`%>," ${genderPronoun(enemy, "subject")} commanded, "<%=rivalboost ? `I\'ll get the money` : `I\'ll hold them off`%>!"'),
-    clueless: _.template('${trail}, you didn\'t have much to work with. You manage to locate a gambling den that is owned and operated by members of the ${enemy.name}.  With so many of their members in one place, you knew it was the best bet to get information. You decided to pay them a visit. When you arrived at the casino, something seemed off.<br><br>Your hunch was right; ${enemy.boss} had been tipped. "Everybody, keep on playing!" ${genderPronoun(enemy, "subject")} commanded, "<%=rivalpresence ? `Me and ${rival} will`: `I\'ll`%> escort them out!" <%=rivalboost ? `${rival} looks to be hopped up on Vandal!`: ``%>')},
+    {name:"Cashed Out", instory: 0, location: "base", bystander: "gambler", 
+    stagebonus: [`Each fighter may put a random defense token on a Frightened Gambler in their threat area.`,false,false,false], 
+    stagepenalty: [`Search the stage deck for a Pit Boss card and choose one fighter to draw it. Shuffle the stage deck.`,false,false,false], 
+    masterplan: randFrom(["actsofterror","illegalgains"]),
+    gloat: [`If you have a gun, you can rob a casino,`,`But if you have a casino, you can rob everyone!`],
+    rivaltext: _.template(', ready to face you, but ${genderPronoun(enemy,"subject")} is not alone. Alongside ${genderPronoun(enemy,"object")} is ${rival}, <%=rivalboost ? `eyes glowing green, a telltale sign of Vandal use!` : `here to make a deal of some kind with ${enemy.boss}.`%>'),
+    hottrail: _.template('You eventually find your way to a set of double doors. You step into the VIP room of the opulent casino. Seated before you is ${enemy.boss}, the leader of the ${enemy.name}'),
+    coldtrail: _.template('You eventually find your way to a set of double doors. You hear a commotion inside and - fearing you have lost the element of surprise - you bust in.  Your hunch was right; ${enemy.boss} knew you were coming'), 
+    clueless: _.template('You are thrown to the floor of the VIP room in the casino, beaten from your attempts to storm the room and caught by the many ${enemy.minions} within. Seated before you is ${enemy.boss}, the leader of the ${enemy.name}'),
+    prologue: _.template('${trail}, you arrive at the ${casino}, where you <%=knowledge == "hottrail" ? `sneak in` : `fight your way in`%> to find your way to where the ${enemy.name} officers are. You make your way through the halls of the casino. Your surroundings speak volumes about the vast wealth channeled into the ${possessiveSuffix(enemy.name)} operations.<br><br>${stagevar}<%=!rivalpresence ? `, ${genderPronoun(enemy,"possessive")} ${enemy.expression}.`:`${rivaltext}`%><br><br>${enemy.boss} looks at you and grins. "${gloat[0]}" ${genderPronoun(enemy,"subject")} says. "${gloat[1]}" At that, ${enemy.boss} snaps ${genderPronoun(enemy,"possessive")} fingers, and it becomes clear that the chat is over.')
+    },
     
     {name:"Compromised", instory: 0, location: "remote", bystander: "hostage", stagebonus: [`Each fighter may search the stage deck for 1 copy of Calming Words and add it to their fighter play area. Shuffle the stage deck.`,false,false,false], stagepenalty: [`Each fighter places 1 power on a different "Scared Staff" card.`,false,false,false], masterplan: randFrom(["actsofterror","kidnapping"]),
     hottrail: _.template('${trail}, you have arrived at the offices just in the nick of time. The ${enemy.name} is ushering their ${enemy.minions} into the building, ready to take hostages. You managed to slip ahead of them. "There\'s no escape!" ${enemy.boss} shouts out. "Achieving our goals requires your cooperation, and you will abide by our demands!" As panic ensues around the offices, you make your move.<br><br>"There you are", ${enemy.boss} said with a mixture of amusement and annoyance. "Heard you were poking around. Let me show you the door before you get in over your heads."'),
@@ -1441,21 +1451,22 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, 
     loseepilogue = loseepilogue + "<br><br>" + `${(stageindex == 7 || stageindex == 8) ? `The fighters lose this story` : `Advance to part ${story[lose].chapter}`}.`
     let gloat = gloatingList(enemy, stage)
     let prologue
+    let casino = getCasino()
 
     if (stage.hasOwnProperty(`prologue`)) {
 
         let stagevar
         switch(knowledge) {
-            case "hottrail": stagevar = stage.hottrail({"finalboss":finalboss,"enemy":enemy,"rival":rival,"competitor":competitor,"minion":minion,"trail":trail,"rivalpresence":rivalpresence,"gloat":gloat,"stageindex":stageindex,"rivaltext":stage.rivaltext,"knowledge":stagevar});
+            case "hottrail": stagevar = stage.hottrail({"finalboss":finalboss,"enemy":enemy,"rival":rival,"competitor":competitor,"minion":minion,"trail":trail,"rivalpresence":rivalpresence,"gloat":gloat,"stageindex":stageindex,"rivaltext":stage.rivaltext});
             break;
-            case "coldtrail": stagevar = stage.coldtrail({"finalboss":finalboss,"enemy":enemy,"rival":rival,"competitor":competitor,"minion":minion,"trail":trail,"rivalpresence":rivalpresence,"gloat":gloat,"stageindex":stageindex,"rivaltext":stage.rivaltext,"knowledge":stagevar});
+            case "coldtrail": stagevar = stage.coldtrail({"finalboss":finalboss,"enemy":enemy,"rival":rival,"competitor":competitor,"minion":minion,"trail":trail,"rivalpresence":rivalpresence,"gloat":gloat,"stageindex":stageindex,"rivaltext":stage.rivaltext});
             break;
-            case "clueless": stagevar = stage.clueless({"finalboss":finalboss,"enemy":enemy,"rival":rival,"competitor":competitor,"minion":minion,"trail":trail,"rivalpresence":rivalpresence,"gloat":gloat,"stageindex":stageindex,"rivaltext":stage.rivaltext,"knowledge":stagevar});
+            case "clueless": stagevar = stage.clueless({"finalboss":finalboss,"enemy":enemy,"rival":rival,"competitor":competitor,"minion":minion,"trail":trail,"rivalpresence":rivalpresence,"gloat":gloat,"stageindex":stageindex,"rivaltext":stage.rivaltext});
         }
 
         let stageriv = stage.rivaltext({"finalboss":finalboss,"enemy":enemy,"rival":rival,"minion":minion,"rivalboost":rivalboost,"stageindex":stageindex})
 
-        prologue = stage.prologue({"finalboss":finalboss,"enemy":enemy,"rival":rival,"competitor":competitor,"minion":minion,"trail":trail,"rivalpresence":rivalpresence,"gloat":gloat,"stageindex":stageindex,"rivaltext":stageriv,"knowledge":stagevar})
+        prologue = stage.prologue({"finalboss":finalboss,"enemy":enemy,"rival":rival,"competitor":competitor,"minion":minion,"trail":trail,"rivalpresence":rivalpresence,"gloat":gloat,"stageindex":stageindex,"rivaltext":stageriv,"stagevar":stagevar,"casino":casino,"knowledge":knowledge})
 
     } else {
         switch(knowledge) {
@@ -2121,7 +2132,7 @@ function gloatingList(enemy, stage) {
         
         let gloat = randFrom(gloating) 
         
-        return randFrom([gloat,gloat,gloat,(stage.hasOwnProperty("gloat") ? enemy.gloat : gloat),(enemy.hasOwnProperty("gloat") ? enemy.gloat : gloat)])
+        return randFrom([gloat,gloat,(stage.hasOwnProperty("gloat") ? stage.gloat : gloat),(stage.hasOwnProperty("gloat") ? stage.gloat : gloat),(enemy.hasOwnProperty("gloat") ? enemy.gloat : gloat)])
 
 }
 
@@ -2139,7 +2150,8 @@ function laconicStatement(enemy = null) {
         "That's not a completely bad point, you think to yourself.",
         "You will never give up!",
         "You don't plan to let these criminals get away.",
-        "You know the dark can embrace the light, but never eclipse it."
+        "You know the dark can embrace the light, but never eclipse it.",
+        "You begin to wonder if you're in over your head.."
         // `${possessiveSuffix(genderpronoun(finalboss,"possessive"))} plan ends here`
     ]
 
@@ -2589,6 +2601,16 @@ text = `<br>If you prefer not to use extra ${stance == "Ally" ? "Allies" : "Riva
     + text + "<br>——————————————————————————————————<br>If you haven't yet flipped this card, flip it. Otherwise, keep it in in the Story Pool for reference."
 return text
 
+}
+
+function getCasino() {
+    let animal = randFrom(["Dragon","Tiger","Serpent","Phoenix","Tortoise","Lion","Crane","Oyster"])
+    let prefix = randFrom(["Cloud","Black","Azure","Vermilion","White","Yellow","Wood","Fire","Metal","Water","Earth","Void","Sky","Blue"])
+    let suffix = randFrom(["Den","Nest","Sanctuary","Cloister","Retreat"])
+
+    let casino = randFrom([`${possessiveSuffix(animal)} ${suffix}`,`${prefix} ${animal}`])
+
+    return casino
 }
 
 </script>
