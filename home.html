@@ -216,6 +216,7 @@ function globalGladiators(enemies, stages) {
 
 function bossDescription(enemy) {
     let bossynonym = randFrom(["boss","boss","boss","leader","leader","head","chief","kingpin"])
+    let fame = randFrom(["notorious","infamous","ill-famed"])
 
     let description = [
         `${enemy.expression}`,
@@ -225,8 +226,11 @@ function bossDescription(enemy) {
         `the ${enemy.bosstitle} of the ${enemy.name}`,
         `the ${enemy.bosstitle}, ${enemy.expression}`,
         `the ${enemy.bosstitle} ${bossynonym} of the ${enemy.name}`,
-        `the ${enemy.bosstitle} ${bossynonym} of the ${enemy.name}, ${enemy.expression}`,
-        `the ${bossynonym} of the ${enemy.name}`,
+        `the ${enemy.bosstitle} of the ${enemy.name}, ${enemy.expression}`,
+        `the ${fame} ${bossynonym} of the ${enemy.name}`,
+        `the ${fame} ${enemy.bosstitle}`,
+        `the ${fame} ${enemy.bosstitle} of the ${enemy.name}`,
+        `the ${fame} ${enemy.bosstitle}, ${enemy.expression}`
     ]
 
     return `${enemy.boss}, ${randFrom(description)}`
@@ -244,13 +248,13 @@ let enemies = [
         
         {name:"Kingdom", boss: "Kemono", bosstitle: "imposing green mutant", gender: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fist, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge","and put it into play"]], expression: `his demonic eyes and grim expression delivering a promise of violence`},
         
-        {name:"Kingdom", boss: "Jackal", bosstitle: "mad scientist", gender: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "soldiers and marionettes", threat: "smiles, as her eyes start to glow malevolently, and you feel pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion","and play it"]], expression: `her mad eyes and demonic grin showing no humanity`},
+        {name:"Kingdom", boss: "Jackal", bosstitle: "mad scientist", gender: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "soldiers and marionettes", threat: "smiles, as her eyes start to glow malevolently, and you feel pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion","and play it"]], gloat: [[`You won't get out of here,`,`I never turn down new specimens!`]], expression: `her mad eyes and demonic grin showing no humanity`},
         
         {name:"Kingdom", boss: "Shadow", bosstitle: "ominous mastermind", gender: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades","and put it into play"]], expression: `his calculating eyes reflecting a cold, merciless intellect`},
         
         {name:"Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", gender: "female", desc: "the ancient force of restless warriors", addressing: "mortals", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller","Pale Caller"], preparedboss: [["Decaying Blast","and play it"]], gloat: [[`You must be taught what has been forgotten,`,`You must be taught the wrath of the old gods.`],[`I will have your soul!`,`I will taste its sins!`],[`You have strayed from the cycle of life and death,`,`I will make you my next sacrifice.`],[`I have conquered this world before,`,`I will not be stopped by the likes of you children!`],[`Enough of these games!`,`I will take what I am due!`],[`You will pay your goddess her due respect!`,`I will make you my next sacrifice!`]], expression: `beautiful and terrible all at once`},
         
-        {name:"Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", gender: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, suddenly engulfed in cursed flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike","and play it"]], gloat: [[`Are you prepared to face the wrath of Shin Yokai?`,`No, you’re not prepared!`]], expression: `his fiery stare and gritted teeth sending a message of barely contained fury`},
+        {name:"Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", gender: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, suddenly engulfed in cursed flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike","and play it"]], gloat: [[`Are you prepared to face the wrath of Shin Yokai?`,`No, you’re not prepared!`],[`My hunger is insatiable!`,`And you are my food!`]], expression: `his fiery stare and gritted teeth sending a message of barely contained fury`},
         
         {name:"Onyx League", boss: "Mack", bosstitle: "black-hearted overlord", gender: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim","and put it into play"]], gloat: [[`Fists versus bullets?`,`I will use your butts as target practice!`],[`It's better to have a gun and not need it,`,`Than to need a gun and not have it.`],[`This is my boomstick,`,`Good or bad, I'm the one with the gun.`],[`Okay, I'm reloaded! You think you're big time? You're gonna die big time!`,`You ready? Here comes the pain!`],[`You wanna play rough? Ok,`,`Say hello to my little friend!`]], expression: `his keen eyes and predatory sneer reeking of confidence and ruthlessness`}
         ];
@@ -332,9 +336,13 @@ let stages = [
     {name:"Original Copy", instory: 0, location: "base", bystander: "scientist", 
     stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose a copy of Vandal Serum attached to a card in the Cloning Area. Return the selected card to Serum Supply.`,false,false,false], 
     stagepenalty: [`Each fighter suffers 1 direct damage.  Then, if any fighter is on or adjacent to an objective space, remove this card from the game.`,true,true,false], masterplan: randFrom(["strengtheningforces","personalpower"]),
-    hottrail: _.template('${trail}, you located the facility. You are surprised to find the lab not heavily guarded, so slipping in is not necessarily challenging, and you take the elevator down to the large lab. You patiently wait while a lounge version of ${loungeMusic()} plays over the cheap speakers.<br><br>Inside, however, you are glad to find just who you came for. "Just get what we came for," ${enemy.boss} commands. "We need as much as possible!" Whatever it is they\'re after, you must stop them!'),
-    coldtrail: _.template('${trail}, you made your way to the hidden facility. You defeated a few guards in your way and proceeded to take the elevator down to the large lab. You patiently wait while a lounge version of ${loungeMusic()} plays over the cheap speakers.<br><br>You finally reach a cavernous room filled with row upon row of glass containment tubes. Each tube has a motionless body in it; some of you recognized as opponents you\'d faced before. <%=rivalpresence ? `Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It looks exactly like ${rival}!` : ``%><%=rivalboost ? ` It stands, slowly, powerfully built, moving with graceful precision. It is the ultimate clone, ${rival.toUpperCase()}-EX!` : ``%> Standing at the far end of the room, you see ${enemy.boss} ${gPron(enemy,"reflexive")}. ${ucInit(gPron(enemy,"subject"))} looks at you and grins. ${ucInit(enemy.minions)} descend on you, emerging from the shadows.'),
-    clueless: _. template('As you slowly regain consciousness, you notice an IV hooked up to your arm. Your strength has been completely drained and you are unable to even stand up. "Calm down there," a voice called. "${finalboss.boss} wants to run some tests to see if you\'re worth keeping alive."<br><br>You have no idea how long you have been the hostage to your captors. As your vision clears, you see the voice belongs to ${enemy.boss}, the notorious boss of ${enemy.name}, ${enemy.desc}. You also see that you are surrounded by sterile lab equipment and ominous test tubes occupied by shadowy figures<%=(rivalpresence && rivalboost == false) ? `, with ${rival} observing your vitals from a screen` : `` %>. You suddenly feel a surge of strength return and yank out the IV. "Fine, let\'s do it the hard way!" <%=rivalboost ? `Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It stands, slowly, powerfully built, moving with graceful precision. It is the ultimate clone, ${rival.toUpperCase()}-EX!` : ``%>')},
+    gloat: [[`New subjects have arrived,`,`Contain them and proceed with the experiments.`]],
+    rivaltext: _.template('<%=rivalboost ? ` Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It stands, slowly, powerfully built, dripping with greel gel. It is the ultimate clone, ${rival.toUpperCase()}-EX!` : ` Apparently ${enemy.boss} is taking blood samples from ${rival}.`%>'),
+    hottrail: _.template('${trail}, you locate the facility. You were surprised to find the laboratory not heavily guarded, so slipping in was not challenging.  You '),
+    coldtrail: _.template('${trail}, you locate the facility. You defeat a few guards in your way and '),
+    clueless: _.template('${trail}, you investigate a facility in the outskirts of the city that develops cutteng edge genetic enhancements and conducts non-sanctioned medical experiments. You fight your way in and '),
+    prologue: _.template('${stagevar}<%=randFrom([`proceed down to `,`take an elevator down. You wait patiently while a lounge version of ${loungeMusic()} plays over the cheap speakers. You arrive `])%> to the large lab, a cavernous room filled with row upon row of glass containment tubes. Each tube has a motionless body in it; some of you recognize as opponents you\'ve faced before.<br><br>Standing at the far end of the room, you see ${bossDescription(enemy)}.<%=rivalpresence ? rivaltext : ``%> "Just get the serum," ${enemy.boss} commands ${gPron(enemy,"possessive")} ${enemy.minions}. "${finalboss.boss} has made it clear; ${gPron(finalboss,"subject")} needs as much of it as possible to make it work. And we all need it to work!" ${enemy.boss} lifts ${gPron(enemy,"possessive")} eyes to you. "${gloat[0]}" ${gPron(enemy,"subject")} calls out. "${gloat[1]}" ${laconicStatement(enemy)}'),
+    captured: _.template('As you slowly regain consciousness, you notice an IV hooked up to your arm.  Your strength had been completely drained and you are unable to even stand up.  "Calm down there," an arrogant voice called. "${finalboss.boss} wants to run some tests to see if you\'re worth keeping alive”. As your vision clears, you see the voice belongs to ${bossDescription(enemy)}. You also see that you are surrounded by sterile lab equipment and ominous test tubes occupied by shadowy figures. You suddenly feel a surge of strength return and yank out the IV "Fine, Let\'s do it the hard way.”')},
 
     {name:"Out of Time", instory: 0, location: "cursed", bystander: "acolyte", stagebonus: [`The fighters may choose to flip one objective to its inactive side.`,false,false,false], stagepenalty: [`The boss gains 1 random defense token for each Remnant engaged with a fighter.`,false,false,false], masterplan: randFrom(["strengtheningforces","personalpower"]),
     hottrail: _.template('${trail}, you find yourself nearing one more ${evilPlace()}, hoping to find ${enemy.boss}. Animated corpses are digging their way out the ground all around you, a large altar dominating the scene where ${enemy.bosstitle} of the ${enemy.name} stands. "Stop this while you can, ${enemy.boss}!" you shout over the rising winds. The ${enemy.minions} and their boss all turn to you, surprised to see you there. "And you are the ones who are going to make me?" ${gPron(enemy,"subject")} asks, between amusement and annoyance.<br><br>${laconicStatement(enemy)}'),
@@ -1135,7 +1143,7 @@ function loseResult(stageindex, story, nextstage, gizmo) {
     
     let goal
     
-    let captivity = ["Original Copy", "Out of Time", "Poison the Well","Right to Remain Silent", "Under Destruction", "Steel Memories", "Sudden Death"]
+    let captivity = ["Out of Time", "Poison the Well","Right to Remain Silent", "Under Destruction", "Steel Memories", "Sudden Death"]
     
     
     //erottele tällä tarkemmin lopetukset
@@ -1279,7 +1287,7 @@ function victoryResult(stageindex, story, nextstage, gizmo) {
     break;
     case "Gone Ballistic": clue = `${nextenemy.name} - ${nextenemy.desc}${cahoots} - are conducting an arms deal at a nearby warehouse`
     break;
-    case "One Step Ahead": clue = `the ${nextenemy.name} are guarding an arduous mountain path with their ${nextenemy.minions}${cahoots}`
+    case "One Step Ahead": clue = `the ${nextenemy.name} have been seen along a distant mountain path with their ${nextenemy.minions}${cahoots}`
     break;
     case "Original Copy": clue = `${nextenemy.boss} and ${gPron(nextenemy,"possessive")} ${nextenemy.minions}${cahoots}, have been spotted at a suspicious lab`
     break;
