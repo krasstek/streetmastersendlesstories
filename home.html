@@ -368,7 +368,8 @@ let stages = [
 
     {name:"Right to Remain Silent", instory: 0, location: "base", bystander: "captive", 
     stagebonus: [`Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.`,false,false,false], 
-    stagepenalty: [`Add two power to Recoverd Intel.`,false,false,false], masterplan: randFrom(["illegalgains","kidnapping"]),
+    stagepenalty: [`Add two power to Recoverd Intel.`,false,false,false], 
+    masterplan: randFrom(["illegalgains","kidnapping"]),
     rivaltext: _.template(' ${rival} stands guard<%= rivalboost ? `, vigilant and keen-eyed.`: `.`%>'),
     hottrail: _.template('<br><br>You are yet unseen, and dart through the room like shadows to rescue the captured Citadel scouts before they break and ${enemy.boss} finds out what you know about the plans of the ${finalboss.name}.'),
     coldtrail: _.template('<br><br>You don\'t think you have time for subtlety, and make your move to rescue the captured Citadel scouts before they break, and ${enemy.boss} finds out what you know about the plans of the ${finalboss.name}.'),
@@ -376,10 +377,16 @@ let stages = [
     prologue: _.template('${trail}, you locate <%=knowledge == "clueless" ? `a`: `the`%> hidden site of the ${enemy.name}. You observe the bleak location from hiding. There are armed guards here and there, and you are certain there are hidden alarms everywhere.<br><br>The captives have their hands bound above their heads, bodies hanging inches from the floor of the dark and musty room. ${enemy.boss} says: "I\'ll give you this one chance to come clean before we start our procedures again."<%=rivalpresence ? ` Meanwhile,${rivaltext}` : ``%>${stagevar}'),
     captured: _.template('"Finally awake?" That\'s the first thing you hear after the splash of stale water jolts you awake. You have no idea how long you\'ve been a hostage of the ${enemy.name}, ${enemy.desc} — but you\'d guess it\'s been at least a few days.<br><br><%=stageindex == 0 ? `Your simple recon mission went south, and now y` : `Y`%>ou\'ve been enduring  their tortures as they\'ve tried to get everything they could out of you. You\'ve held out for now but don\'t know how long you\'ll be able to keep it up. ${bossDescription(enemy)} ${enemy.threat} as ${gPron(enemy, "subject")} stares at you down. "I\'ll give you this one chance to come clean before we start our procedures again." Your silence is deafening as you stare at the floor. "Very well," ${enemy.boss} sneers. "I won\'t be gone for too long, ${defineAddressing(enemy)}. Don\'t get comfortable."<br><br>${ucInit(gPron(enemy, "subject"))} exits,<%=rivalpresence ? `while ${rivaltext}` : ` and as soon as the door closes behind ${gPron(enemy, "object")}, you begin working at your bonds.`%>')},
 
-    {name:"Rude Awakening", instory: 0, location: "cursed", bystander: "necromancer", stagebonus: [`Flip all objectives to their inactive side.`,false,false,false], stagepenalty: [`Each fighter places 1 damage on the Stage Rules card.`,false,false,false], masterplan: randFrom(["actsofterror","strengtheningforces"]),
-    hottrail: _.template('${trail}, you finally find yourself at your destination, another ${evilPlace()}. You see a bunch of people all of them shambling about, all of them appearing broken and decayed.<br><br>You immediately notice ${enemy.boss}, directing a cabal of necromancers! "No! You shouldn\'t be here!" ${gPron(enemy,"subject")} exclaims. "Not yet, in any case.. no matter, soon you will join the horde!"'),
-    coldtrail: _.template('${trail}, you finally find yourself at your destination, another ${evilPlace()}. You see a veritable sea of people, all of them shambling about, all of them appearing broken and decayed.<br><br>You immediately notice ${enemy.boss}, directing a cabal of necromancers<%=rivalpresence ? `, with ${rival} standing guard, ` : ``%><%=rivalpresence ? ` "Stop those Gladiators! Just a little more time, and we will both get what we came for," the leader of the ${enemy.name}` : ` "Even you will fall to the power of death, ${defineAddressing(enemy)}!" ${gPron(enemy,"subject")}`%> shouts, and the coven is surrounded by ${mysticalSynonym()} energy. You see even more zombies climb out of the ground at their feet.'),
-    clueless: _.template('${trail}, you finally find yourself at your destination, another ${evilPlace()}. You see a veritable sea of people, all of them shambling about, all of them appearing broken and decayed.<br><br>You immediately notice ${enemy.boss}, directing a cabal of necromancers<%=rivalpresence ? `, with ${rival} standing guard. ` : `.`%><%=rivalpresence ? ` "Stop those Gladiators! Just a little more time, and we will both get what we came for," the leader of the ${enemy.name}` : `"You will never ${(finalboss.boss == enemy.boss) ? "discover my true intentions" : `have time to stop me and ${finalboss.boss} both`}, ${gPron(enemy, "subject")}`%> shouts, and the coven is surrounded by ${mysticalSynonym()} energy. You see even more zombies climb out of the ground at their feet.')},
+    {name:"Rude Awakening", instory: 0, location: "cursed", bystander: "necromancer", 
+    stagebonus: [`Flip all objectives to their inactive side.`,false,false,false], 
+    stagepenalty: [`Each fighter places 1 damage on the Stage Rules card.`,false,false,false], 
+    masterplan: randFrom(["actsofterror","strengtheningforces"]),
+    gloat: [[`Klaatu verata..`,`Nikto!`],[`Even the strongest warriors will fall,`,`To the power of death!`],[`Now I call upon my army of the dead,`,`Arise, my messengers of death! Our time has arrived!`],[`Magic, the darkest magic,`,`My soul swims in it..`]],
+    rivaltext: _.template(' To your horror, you see <%=rivalboost ? `the rotting corpse of ${rival} among the zombies that climb out of the ground at ${gPron(enemy, "possessive")} feet.`: `${rival} joining ${enemy.boss} in the atrocious rite! Even more zombies climb out of the ground at their feet.`%>'),
+    hottrail: _.template('You notice in the distance ${bossDescription(enemy)}. A coven of dark ${randFrom(["sorcerers","wizards","acolytes","priests","necromancers"])} is gathering around ${gPron(enemy,"object")}, and broken and decayed bodies are rising from the ground. Maybe you can stop this before it has really begun.'),
+    coldtrail: _.template('You see a veritable sea of ​​people, all of them shambling about, all of them appearing broken and decayed. As you look over the zombies around you, you notice in the distance ${bossDescription(enemy)}.'),
+    clueless: _.template('You see a veritable sea of ​​people, all of them appearing broken and decayed. They are shambling in the general direction of Ransom City, like driven by a sinister purpose. As you look over the zombies around you, you notice in the distance ${bossDescription(enemy)}.'),
+    prologue: _.template('${trail}, you find yourself at <%=knowledge == "clueless" ? `${whichPreposition(evilPlace())}`: `the ${evilPlace()}`%>. ${stagevar}<br><br>${ucInit(gPron(enemy,"subject"))} looks at you and raises ${gPron(enemy, "possessive")} hands. "${gloat[0]}" ${gPron(enemy, "subject")} shouts, and is surrounded by ${mysticalSynonym()} energy. "${gloat[1]}" <%=rivalpresence ? rivaltext : `You see even more zombies climb out of the ground at ${gPron(enemy, "possessive")} feet.`%><br><br>${laconicStatement(enemy)}')},
 
     {name:"Running Wild", instory: 0, location: "remote", bystander: "civilian", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".`,false,false,false],stagepenalty: [`Each Hero places 3 random defense tokens on the copy of "Hunt for the Idols" in their fighter play area. Each time a Hero searches, these defense tokens block successes and are discarded as normal.`,false,false,false], masterplan: randFrom(["illegalgains","personalpower"]),
     hottrail: _.template('${trail}, you find the ${enemy.minions} of ${enemy.name} in the forest, near a ruined shrine. ${enemy.boss} shouts to ${gPron(enemy,"possessive")} goons: "Search, you fools, search! It cannot take this long!"<br><br>${ucInit(gPron(enemy,"subject"))} then notices your approach and further instructs ${gPron(enemy,"possessive")} goons: "Just find them! I can hold these troublemakers!"<br><br>You inform ${enemy.boss} that whatever they are after probably belongs in a museum.'),
@@ -687,9 +694,9 @@ function lowerCaseInitial (word) {
 
 function whichPreposition (word) {
     if (/[aeiou]/.test(word.charAt(0))) {
-        return "an"
+        return "an " + word
     } else {
-    return "a"}
+    return "a " + word}
 }
 
 function latestScheme() {
@@ -1309,7 +1316,7 @@ function victoryResult(stageindex, story, nextstage, gizmo) {
     case "Original Copy": clue = `${nextenemy.boss} and ${gPron(nextenemy,"possessive")} ${nextenemy.minions}${cahoots}, have been spotted at a suspicious lab`
     break;
     case "Out of Time": 
-    case "Rude Awakening": clue = `strange sorcery and walking corpses have been again witnessed, along with ${nextenemy.boss} in ${whichPreposition(evilplace)} ${evilplace}${cahoots}`
+    case "Rude Awakening": clue = `strange sorcery and walking corpses have been witnessed, along with ${nextenemy.boss} in ${whichPreposition(evilplace)}${cahoots}`
     break;
     case "Poison the Well": clue = `the ${nextenemy.name} has hauled some equipment to the sewers${cahoots}`
     break;
@@ -1987,7 +1994,7 @@ function finalResult(stage, enemy, rival, vip = null, result) {
         `You are lying in the corner, exhausted, all enemies defeated - but their master is nowhere to be found. "You've done a hero's job, Gladiators. I guess you're through, huh?" Agent Fletch asks as he approaches you. "Finished," you answer wearily. "It's too bad we couldn't catch ${enemy.boss}. But then again, do we really ever?"`,
         `Your intense fight takes you to the edge of an unfathomably deep pit. Just as you're about to strike ${enemy.boss} down, ${gPron(enemy,"subject")} dives in, and that's the last you see of ${gPron(enemy,"object")}. For now!`,
         `You are sure you have cornered ${enemy.boss} with no route of escape, when all of a sudden a sleek ${enemy.name} helicopter descends and ${gPron(enemy,"subject")} leaves, dangling from a ladder. "The ${neutralize}, but ${enemy.boss} slipped away," you report to Agent Fletch with your communicator.`,
-        `Your body spasms, fighting against the green gel. Unable to breathe, you claw wildly at the hard, translucent surface encasing you. Shadowy figures move about on the other side of the barrier, and suddenly the lid slides open, and you fall to the ground. The lights are blindingly bright to your aching eyes, and you draw air in your lungs. "Welcome, child!" you hear a woman calling. What is happening? Was that a dream?`
+        `Your body spasms, fighting against the green gel. Unable to breathe, you claw wildly at the hard, translucent surface encasing you. Shadowy figures move about on the other side of the barrier, and suddenly the lid slides open, and you fall to the ground. The lights are blindingly bright to your aching eyes, and you draw air in your lungs. "Welcome, child!" you hear a voice calling. What is happening? Was that a dream?`
         ]
     
     let finisher = randFrom(["Finish them","Show no mercy","End them","Put an end to this","Kill them, and send what remains to Agent Fletch","Wipe them out, all of them","Put a stop to this"])
