@@ -285,10 +285,10 @@ let stages = [
     masterplan: randFrom(["actsofterror","illegalgains"]),
     gloat: [[`If you have a gun, you can rob a casino,`,`But if you have a casino, you can rob everyone!`],[`You think fighting me in some nightclub's going to stop the downfall of Ransom?`,`I'm not your problem. I'm just doing business.`]],
     rivaltext: _.template(' But ${gPron(enemy,"subject")} is not alone. Alongside ${gPron(enemy,"object")} is ${rival}, <%=rivalboost ? `eyes glowing green of Vandal!` : `here to sell an encrypted ${gizmo} to ${enemy.boss}.`%>'),
-    hottrail: _.template('You quickly find your way to a set of double doors. You step into the VIP room of the opulent casino. Seated before you is a surprised ${bossDescription(enemy)}'),
+    hottrail: _.template('You quickly find your way to a set of double doors. You step into the VIP room of the opulent casino. Seated before you, surprised is ${bossDescription(enemy)}'),
     coldtrail: _.template('You eventually find your way to a set of double doors. You hear a commotion inside and - fearing you have lost the element of surprise - you bust in.  Your hunch was right; ${bossDescription(enemy)}, knew you were coming. "Get the money," ${gPron(enemy,"subject")} commands ${gPron(enemy,"possessive")} goons. "I\'ll hold them off."'), 
-    clueless: _.template('After going through many ${enemy.minions} of the ${enemy.name}, you reach the VIP room of the casino. Inside, ready to face you is ${bossDescription(enemy)}'),
-    prologue: _.template('${trail}, you <%=knowledge == "clueless" ? `investigate the gambling den ${casino}` : `arrive at the ${casino}` %>, where you sneak in, and make your way through the halls of the casino. The surroundings speak volumes about the vast wealth channeled into the ${possessiveSuffix(enemy.name)} operations.<br><br>${stagevar}<%=!rivalpresence ? `.`:`${rivaltext}`%><br><br>${enemy.boss} looks at you and grins. "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" At that, ${enemy.boss} snaps ${gPron(enemy,"possessive")} fingers, and it becomes clear that the chat is over.'),
+    clueless: _.template('After going through many ${enemy.minions} of the ${enemy.name}, you reach the VIP room of the casino. Inside, ready to face you is ${bossDescription(enemy)}.'),
+    prologue: _.template('${trail}, you <%=knowledge != "hottrail" ? `investigate the gambling den ${casino}` : `arrive at the ${casino}` %>, where you sneak in, and make your way through the halls of the casino. The surroundings speak volumes about the vast wealth channeled into the ${possessiveSuffix(enemy.name)} operations.<%=randFrom([``,` You take an elevator, and wait patiently while a lounge version of ${loungeMusic()} plays over the speakers.`])%><br><br>${stagevar}<%=!rivalpresence ? ``:`${rivaltext}`%><br><br>${enemy.boss} looks at you and grins. "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" At that, ${enemy.boss} snaps ${gPron(enemy,"possessive")} fingers, and it becomes clear that the chat is over.'),
     captured: _.template('You are thrown to the floor of the VIP room in the ${casino} casino, beaten by the many ${enemy.minions}. Seated before you is ${bossDescription(enemy)}.<%=!rivalpresence ? `.`:`${rivaltext}`%><br><br>${enemy.boss} looks at you, grins and ${enemy.threat}. "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" At that, ${enemy.boss} snaps ${gPron(enemy,"possessive")} fingers, and it becomes clear that the chat is over.')
     },
 
@@ -301,7 +301,7 @@ let stages = [
     hottrail: _.template(' in the hopes of preventing ${enemy.boss} from realizing ${gPron(enemy,"possessive")} plans. "${gloat[0]}" calls ${bossDescription(enemy)}. "${gloat[1]}" ${ucInit(gPron(enemy,"subject"))} and ${gPron(enemy,"possessive")} forces have reached the entrance, and now stand ready to engage you!'),
     coldtrail: _.template('. ${enemy.boss} and ${gPron(enemy,"possessive")} forces are already starting the ritual. "${gloat[0]}" calls the confident ${bossDescription(enemy)}, ${gPron(enemy,"possessive")} voice echoing off the stone walls. "${gloat[1]}" ${ucInit(gPron(enemy,"subject"))} forces charge you while ${gPron(enemy,"subject")} continues the ritual.'),
     clueless: _.template('. ${enemy.boss} and ${gPron(enemy,"possessive")} forces have already started the ritual, and you feel the the air intensifying. "${gloat[0]}" calls the confident ${bossDescription(enemy)}, ${gPron(enemy,"possessive")} voice echoing off the stone walls. "${gloat[1]}" ${ucInit(gPron(enemy,"possessive"))} forces charge you while ${gPron(enemy,"subject")} finalizes the ritual.'),
-    prologue: _.template('${trail}, you reach the hidden ${evilPlace()}. You see the main chamber of the ancient stone structure is encircled with multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of images depicting powerful warriors defeating mighty foes.<br><br>Thinking that these may be part of the ritual, you decide you must quickly remove them from their pedestals${stagevar}${rivalpresence ? rivaltext : ``}<br><br>${laconicStatement(enemy)}'),
+    prologue: _.template('${trail}, <%=knowledge != "hottrail" ? `you find out about a sighting of the ${enemy.name} near a hidden ${evilPlace()}, and move to investigate` : `you reach the hidden ${evilPlace()}`%>. You see the main chamber of the ancient stone structure is encircled with multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of images depicting powerful warriors defeating mighty foes.<br><br>Thinking that these may be part of <%=knowledge == "hottrail" ? `the` : `a`%> ritual, you decide you must quickly remove them from their pedestals${stagevar}${rivalpresence ? rivaltext : ``}<br><br>${laconicStatement(enemy)}'),
     captured: _.template('You are brought into some hidden, ${evilPlace()}, where the air is thick with intensifying heat, and thrown in front of ${bossDescription(enemy)}.${rivalpresence ? rivaltext : ``} "${gloat[0]}" ${enemy.boss} calls out. "${gloat[1]}"<br><br>You see the main chamber of the ancient stone structure is encircled with multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of images depicting powerful warriors defeating mighty foes. Thinking that you must be the final part of some dark ritual with the urns, you suddenly fight your captors off, and move in to remove the urns from their pedestals.')},
     
     {name:"Compromised", instory: 0, location: "remote", bystander: "hostage", pit: 'a broken window with a 13-story drop',
@@ -311,7 +311,7 @@ let stages = [
     gloat: [["I have some bad news for you!","Nobody will leave this building alive!"],["You think you could be of use as a hostage?", "I have no use for you."]],
     rivaltext: _.template('<%=(knowledge == "clueless") ? ` Suddenly, a janitor takes off a cap and rips off a fake moustache${rivalboost ? `and snaps the neck of a nearby agent` : ``}! It is ${rival} in disguise, an agent for the ${enemy.name}!` : ` ${ucInit(gPron(enemy,"subject"))} is not working alone. Alongside ${gPron(enemy,"object")} is ${rival}, ${rivalboost ? `eyes glowing green, a telltale sign of Vandal use!` : `furthering some personal agenda.`}`%>'),
     hottrail: _.template('${trail}, you arrive at the offices just in the nick of time. <%=randFrom([`The ${enemy.name}`,ucInit(enemy.desc)])%> is ushering their people in, ready to take hostages. You manage to slip ahead of them.  "There\'s no escape," a ${gPron(enemy,"sex")} shouts out. "The ${finalboss.name} needs your operation, and you will abide by our demands. We speak for ${finalboss.boss}<%=finalboss.name != "Kingdom" ? `, and ${gPron(finalboss, "subject")} speaks for the Kingdom` : ``%>." As panic ensues around the offices, you manage to calm several employees, making sure they keep their heads. Then you made your move on the ${enemy.name}.'),
-    coldtrail: _.template('${trail} you arrive at the offices, and know it is too late. Gunshots can be heard inside the building, followed by screams inside and out.  "Call the police!"  several fleeing employees shout, but you know it is futile.  The chances of any Ransom P.D. response is beyond unlikely. The police are as corrupt as the very criminals they are charged to protect the city against. You rush into the building, heedless of all the warnings shouted at you.'),
+    coldtrail: _.template('${trail} you conclude the next target of the ${enemy.name}. You arrive at the offices, and know it is too late. Gunshots can be heard inside the building, followed by screams inside and out.  "Call the police!"  several fleeing employees shout, but you know it is futile.  The chances of any Ransom P.D. response is beyond unlikely. The police are as corrupt as the very criminals they are charged to protect the city against. You rush into the building, heedless of all the warnings shouted at you.'),
     clueless: randFrom([_.template('${trail}, you investigate a building you believe ${finalboss.name} have been operating out of. As you make your way into the darkened interior, you see a number of people through the windows, held at gunpoint. Hostages! While ${finalboss.boss} is your primary objective, you can\'t let ${enemy.boss} get away with this!'),
     _.template('<%=stageindex == 0 ? `You are preparing for a hard-earned vacation, but just as you are about to take your leave from Citadel HQ` : `${trail}, you are at the Citadel HQ, reviewing what you\'ve got.  "We\'ve had the intel for a week," Fletch says. "I need to show something to the top brass." "There\'s a lot of dead ends," the analyst says.  "It\'s like they expected us to get the data."  Fletch considers those words.  What if the ${finalboss.name} wanted the Citadel to get a hold of the intel? Just as he was about to call his superiors`%>, a klaxon starts blaring in the facility."Sir!" a technician says. "I\'m picking up multiple hostiles on the scanners!" "Scramble our defenses!" Fletch commands.  "And alert the Global Gladiators!"')]),
     prologue: _.template('${stagevar}<br><br>"${gloat[0]}" greets a familiar face that you thought you might have seen last of: ${bossDescription(enemy)}. "${gloat[1]}"<%=!rivalpresence ? ``:` ${rivaltext}`%>'),
@@ -326,7 +326,7 @@ let stages = [
     hottrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : finalboss.name%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You creep low, listening carefully as the they spill all the plans. Once you\'ve heard enough, you jump the startled pair.'),
     coldtrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : finalboss.name%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You move quickly to keep up and continue your eavesdropping. "Boss!" a guard calls out. You hadn\'t seen him behind the crates nearby, but when you moved to take cover behind them, you were spotted instantly.'),
     clueless: _.template('have to dive for cover behind nearby crates as you run into the ${enemy.minions} guarding the trade. "Get the guns!" you hear a voice call out. "And get those spies!"'),
-    prologue: _.template('${trail}, you locate a suspicious warehouse. You enter, and almost immediately ${stagevar}<br><br>${bossDescription(enemy)}<%=rivalpresence ? rivaltext : `, standing next to the contact for the trade, shoots the ${randFrom(["man","woman"])} dead, taking ${knowledge == "clueless" ? "a" : "the"} ${gizmo} from the body.`%> "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}'),
+    prologue: _.template('${trail}, you locate <%=knowledge == "hottrail" ? `the` : `a suspicious` %> warehouse. You enter, and almost immediately ${stagevar}<br><br>${bossDescription(enemy)}<%=rivalpresence ? rivaltext : `, standing next to the contact for the trade, shoots the ${randFrom(["man","woman"])} dead, taking ${knowledge == "clueless" ? "a" : "the"} ${gizmo} from the body.`%> "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}'),
     captured: _.template('You wake up on cold concrete floor, and hear a voice explaining: "Your revenge is at hand. Voilà!" There\'s a slight pause. "It\'s light, handle\'s adjustable for easy carrying, good for righties and lefties, breaks down into four parts, ideal for quick discreet interventions. A word on firepower.. oh, our practice targets seem to have come to their senses!"<br><br>The ${enemy.minions} of the ${enemy.name} remove your hoods, and you see ${bossDescription(enemy)}, nodding to ${gPron(enemy,"possessive")} companion. "You can pay afterward." ${ucInit(gPron(enemy, "subject"))} <%=rivalpresence ? rivaltext : `turns from the client who stashes a ${gizmo}.`%> "Let the presentation commence!"')},
 
     {name:"One Step Ahead", instory: 0, location: "remote", bystander: "mountain climber", pit: "edge of the cliff",
@@ -337,17 +337,17 @@ let stages = [
     hottrail: _.template('Climbing the mountain is arduous, but you make good time and come to a point where your path crosses that of ${possessiveSuffix(enemy.boss)} band of goons: the ${enemy.name}! Knowing they are only a short distance behind, you hunker down to spring an ambush. As they rush around the bend, you leap out of your hiding spot taking out a number of ${gPron(enemy,"possessive")} forces before they can regroup and face you.'),
     coldtrail: _.template('The path is winding and overgrown and difficult to traverse, but you refuse to slow down. You finally come to face ${possessiveSuffix(enemy.boss)} forces.'),
     clueless: _.template('The path is winding and overgrown and difficult to traverse, and when you finally come to face ${possessiveSuffix(enemy.boss)} forces, you are completely exhausted.'),
-    prologue: _.template('${trail}, you have affirmed that the ${randFrom(["minions",enemy.minions])} of ${enemy.boss} have been using <%=knowledge == "clueless" ? `a remote mountain path`: `the mountain path you suspected` %> to conceal their movements, so that\'s where you head to catch up with them.<br><br>${stagevar}<%=rivalpresence ? rivaltext : ``%><br><br>${bossDescription(enemy)} doesn\'t seem surprised by your efforts. "${gloat[0]}" ${gPron(enemy,"subject")} laughs. "${gloat[1]}" ${ucInit(gPron(enemy,"subject"))} readies to strike back! <br><br>${laconicStatement(enemy)}')},
+    prologue: _.template('${trail}, you have affirmed that the ${randFrom(["minions",enemy.minions])} of ${enemy.boss} have been using <%=knowledge != "hottrail" ? `a remote mountain path`: `the mountain path you suspected` %>, so that\'s where you head to catch up with them.<br><br>${stagevar}<%=rivalpresence ? rivaltext : ``%><br><br>${bossDescription(enemy)} doesn\'t seem surprised by your efforts. "${gloat[0]}" ${gPron(enemy,"subject")} laughs. "${gloat[1]}" ${ucInit(gPron(enemy,"subject"))} readies to strike back! <br><br>${laconicStatement(enemy)}')},
 
     {name:"Original Copy", instory: 0, location: "base", bystander: "scientist", pit: "a pitch-black elevator shaft",
     stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose a copy of Vandal Serum attached to a card in the Cloning Area. Return the selected card to Serum Supply.`,false,false,false], 
     stagepenalty: [`Each fighter suffers 1 direct damage.  Then, if any fighter is on or adjacent to an objective space, remove this card from the game.`,true,true,false], masterplan: randFrom(["strengtheningforces","personalpower"]),
-    gloat: [[`New subjects have arrived,`,`Contain them and proceed with the experiments.`],[`Being in a medical facility will not help you,`,`Not after I'm done with you.`], [`You have played your part well,`,`But do you think you were born?`],[`You always are so predictable,`,`Where do you think you were made in?`], [`We couldn't have asked for better specimens,`,`It's time you provide your skills and abilities to the Kingdom.`],],
+    gloat: [[`New subjects have arrived,`,`Contain them and proceed with the experiments.`],[`Being in a medical facility will not help you,`,`Not after I'm done with you.`], [`You have played your part well,`,`But do you think you were born and not made?`],[`You always are so predictable,`,`Where do you think you were made in?`], [`We couldn't have asked for better specimens,`,`It's time you provide your skills and abilities to the Kingdom.`],],
     rivaltext: _.template('<%=rivalboost ? ` Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It stands, slowly, powerfully built, dripping with greel gel. It is the ultimate clone, ${rival.toUpperCase()}-EX!<br><br>` : ` Apparently ${enemy.boss} is taking blood samples from ${rival}.`%>'),
     hottrail: _.template('${trail}, you locate the facility. You were surprised to find the laboratory not heavily guarded, so slipping in was not challenging.  You '),
-    coldtrail: _.template('${trail}, you locate the facility. You defeat a few guards in your way and '),
-    clueless: _.template('${trail}, you investigate a facility in the outskirts of the city that develops cutteng edge genetic enhancements and conducts non-sanctioned medical experiments. You fight your way in and '),
-    prologue: _.template('${stagevar}<%=randFrom([`proceed down to `,`take an elevator down. You wait patiently while a lounge version of ${loungeMusic()} plays over the cheap speakers. You arrive `])%> to the large lab, a cavernous room filled with row upon row of glass containment tubes. Each tube has a motionless body in it; some of you recognize as opponents you\'ve faced before.<br><br>Standing at the far end of the room, you see ${bossDescription(enemy)}.<%=rivalpresence ? rivaltext : ``%> "Just get the serum," ${enemy.boss} commands ${gPron(enemy,"possessive")} ${enemy.minions}. "${finalboss.boss} has made it clear; ${gPron(finalboss,"subject")} needs as much of it as possible to make it work. And we all need it to work!"<br><br>${enemy.boss} lifts ${gPron(enemy,"possessive")} eyes to you. "${gloat[0]}" ${gPron(enemy,"subject")} calls out. "${gloat[1]}" ${laconicStatement(enemy)}'),
+    coldtrail: _.template('${trail}, you investigate a facility where ${enemy.name} has reportedly been seen. You defeat a few guards in your way and '),
+    clueless: _.template('${trail}, you investigate a facility in the outskirts of the city that develops cutting edge genetic enhancements and conducts non-sanctioned medical experiments. You fight your way in and '),
+    prologue: _.template('${stagevar}<%=randFrom([`proceed down to `,`take an elevator down. You wait patiently while a lounge version of ${loungeMusic()} plays over the cheap speakers. You arrive `])%> at the large lab, a cavernous room filled with row upon row of glass containment tubes. Each tube has a motionless body in it; some of you recognize as opponents you\'ve faced before.<br><br>Standing at the far end of the room, you see ${bossDescription(enemy)}.<%=rivalpresence ? rivaltext : ``%> "Just get the serum," ${enemy.boss} commands ${gPron(enemy,"possessive")} ${enemy.minions}. "${finalboss.boss} has made it clear; ${gPron(finalboss,"subject")} needs as much of it as possible to make it work. And we all need it to work!"<br><br>${enemy.boss} lifts ${gPron(enemy,"possessive")} eyes to you. "${gloat[0]}" ${gPron(enemy,"subject")} calls out. "${gloat[1]}" ${laconicStatement(enemy)}'),
     captured: _.template('As you slowly regain consciousness, you notice an IV hooked up to your arm.  Your strength had been completely drained and you are unable to even stand up.  "Calm down there," an arrogant voice called. "${finalboss.boss} wants to run some tests to see if you\'re worth keeping alive”.<br><br>As your vision clears, you see the voice belongs to ${bossDescription(enemy)}. You also see that you are surrounded by sterile lab equipment and ominous test tubes occupied by shadowy figures. You suddenly feel a surge of strength return and yank out the IV. "Fine, let\'s do it the hard way.”')},
 
     {name:"Out of Time", instory: 0, location: "cursed", bystander: "acolyte", pit: "a deathly portal",
@@ -359,7 +359,7 @@ let stages = [
     hottrail: _.template('${ucInit(gPron(enemy, "subject"))} is just starting a ghastly ritual, and ominous clouds are gathering above you.<br><br>The wind is rising and the air feels heavy'),
     coldtrail: _.template('Animated corpses are digging their way out the ground all around you. A heavy mass of dark clouds has gathered above you.<br><br>An ominous wind is rising and the very air around you feels hot and heavy'),
     clueless: _.template('Animated corpses are digging their way out the ground all around you. The sky is a boiling, writhing mass of clouds, each black as coal but glowing with an intense, blood-red heat.<br><br>Dark winds sting your skin and the very air around you smolders your throat and lungs'),
-    prologue: _.template('${trail}, you find ${bossDescription(enemy)} at a remote ${evilPlace()}. A large structure where ${gPron(enemy,"subject")} is standing in dominates the scene. ${stagevar} as ${enemy.boss}<%=knowledge == "clueless" ? `, bristling with power,`: ``%> looks down at you. "${gloat[0]}" ${gPron(enemy,"subject")} continues ${gPron(enemy,"possessive")} magic. "${gloat[1]}"<%=rivalpresence ? rivaltext : ``%> All around ${gPron(enemy,"object")} the ground breaks apart as<%=knowledge == "hottrail" ? ``: ` more and more`%> undead climb to the surface. Death permeates everything here.<br><br>${laconicStatement(enemy)}'),
+    prologue: _.template('${trail}, you find ${bossDescription(enemy)} at a remote ${evilPlace()}. A large structure where ${gPron(enemy,"subject")} is standing on dominates the scene. ${stagevar} as ${enemy.boss}<%=knowledge == "clueless" ? `, bristling with power,`: ``%> looks down at you. "${gloat[0]}" ${gPron(enemy,"subject")} continues ${gPron(enemy,"possessive")} magic. "${gloat[1]}"<%=rivalpresence ? rivaltext : ``%> All around ${gPron(enemy,"object")} the ground breaks apart as<%=knowledge == "hottrail" ? ``: ` more and more`%> undead climb to the surface. Death permeates everything here.<br><br>${laconicStatement(enemy)}'),
     captured: _.template('You come to your senses as undead hands are gripping you, guiding you upwards to an ominous altar on a large pedestal in front of you. What ${mysticalSynonym()} sorcery had kept you enthralled is weakening, and you put your captor down. Dark winds sting your skin and the very air around you smolders your throat and lungs as ${bossDescription(enemy)} looks down at you "${gloat[0]}" ${gPron(enemy,"subject")} works ${gPron(enemy,"possessive")} magic. "${gloat[1]}"<%=rivalpresence ? rivaltext : ``%><br><br>All around ${gPron(enemy,"object")} the ground breaks apart as more and more undead climb to the surface. Death permeates everything here. ${laconicStatement(enemy)}')},
 
     {name:"Poison the Well", instory: 0, location: "neutral", bystander: "hireling", pit: "an outflow shaft",
@@ -395,7 +395,7 @@ let stages = [
     hottrail: _.template('You notice in the distance ${bossDescription(enemy)}. A coven of dark ${randFrom(["sorcerers","wizards","acolytes","priests","necromancers"])} is gathering around ${gPron(enemy,"object")}, and broken and decayed bodies are rising from the ground. Maybe you can stop this before it has really begun.'),
     coldtrail: _.template('You see a veritable sea of ​​people, all of them shambling about, all of them appearing broken and decayed. As you look over the zombies around you, you notice in the distance ${bossDescription(enemy)}.'),
     clueless: _.template('You see a veritable sea of ​​people, all of them appearing broken and decayed. They are shambling in the general direction of Ransom City, like driven by a sinister purpose. As you look over the zombies around you, you notice in the distance ${bossDescription(enemy)}.'),
-    prologue: _.template('${trail}, you find yourself at <%=knowledge == "clueless" ? `${whichPreposition(evilPlace())}`: `the ${evilPlace()}`%>. ${stagevar}<br><br>${ucInit(gPron(enemy,"subject"))} looks at you and raises ${gPron(enemy, "possessive")} hands. "${gloat[0]}" ${gPron(enemy, "subject")} shouts, and is surrounded by ${mysticalSynonym()} energy. "${gloat[1]}" <%=rivalpresence ? rivaltext : `You see even more zombies climb out of the ground at ${gPron(enemy, "possessive")} feet.`%><br><br>${laconicStatement(enemy)}')},
+    prologue: _.template('${trail}, you find yourself at <%=knowledge != "hottrail" ? `${whichPreposition(evilPlace())}`: `the ${evilPlace()}`%>. ${stagevar}<br><br>${ucInit(gPron(enemy,"subject"))} looks at you and raises ${gPron(enemy, "possessive")} hands. "${gloat[0]}" ${gPron(enemy, "subject")} shouts, and is surrounded by ${mysticalSynonym()} energy. "${gloat[1]}" <%=rivalpresence ? rivaltext : `You see even more zombies climb out of the ground at ${gPron(enemy, "possessive")} feet.`%><br><br>${laconicStatement(enemy)}')},
 
     {name:"Running Wild", instory: 0, location: "remote", bystander: "civilian", pit: "an incredibly deep dig",
     stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".`,false,false,false],
@@ -406,7 +406,7 @@ let stages = [
     hottrail: _.template('Fortunately, it seems the goons of the ${enemy.name} don\'t have too much of a headway.'),
     coldtrail: _.template('If you hope to be the first to find them, there\'s no time to waste.'),
     clueless: _.template('You are late to the party..'),
-    prologue: _.template('${trail}, it seems there are a number of enchanted idols in the forest, according to legend used in a ritual to channel the Oni\'s power. The ${enemy.name} has sent their forces to recover the idols.<br><br>You make your way to this forest and soon find yourself lost in its natural labyrinth. Finding these idols won\'t be easy. To make matters worse, ${bossDescription(enemy)} is there<%=rivalpresence ? `${rivaltext} They are` : ``%> overseeing the dig by the ${enemy.minions} to recover the idols near an ancient, crumbling ${evilPlace()}. ${stagevar}<br><br>"${gloat[0]}" ${enemy.boss} shouts at you as ${gPron(enemy, "subject")} watches your approach. "${gloat[1]}"')},
+    prologue: _.template('${trail}, it seems there are a number of enchanted idols in the forest, according to legend used in a ritual to channel the Oni\'s power. The <%=finalboss.name == enemy.name ? `${enemy.name} is here to`: `${finalboss.name} has sent their mercenaries`%> to recover the idols.<br><br>You make your way to this forest and soon find yourself lost in its natural labyrinth. Finding these idols won\'t be easy. To make matters worse, ${bossDescription(enemy)} is there<%=rivalpresence ? `${rivaltext} They are` : ``%> overseeing the dig by the ${enemy.minions} to recover the idols near an ancient, crumbling ${evilPlace()}. ${stagevar}<br><br>"${gloat[0]}" ${enemy.boss} shouts at you as ${gPron(enemy, "subject")} watches your approach. "${gloat[1]}"')},
 
     {name:"Steel Memories", instory: 0, location: "base", bystander: "nameless goon", pit: "a pitch-black elevator shaft",
     stagebonus: [`One fighter may move 3 spaces toward the nearest objective.`,false,false,false], 
@@ -428,18 +428,29 @@ let stages = [
     hottrail: _.template('You walk calmly into the tournament. "I\'m here to compete in this fine affair!" you announce. "I assume you still have room, no?" Taken aback by your sudden, bold appearance, ${bossDescription(enemy)} ${enemy.threat}.<%=rivalpresence ? rivaltext : ``%> "${gloat[0]}" ${gPron(enemy,"subject")} growls. "${gloat[1]}"'),
     coldtrail: _.template('You infiltrate the tournament, and arrive just in time - you see that none of the competitors are a match for a killer like ${gPron(enemy,"object")}.<%=rivalpresence ? rivaltext : ``%> ${bossDescription(enemy)} ${enemy.threat}. "${gloat[0]}" ${gPron(enemy,"subject")} laughs. "${gloat[1]}"'),
     clueless: _.template('You have to fight your way through the ${enemy.minions} securing the tournament. When you arrive, you are exhausted, and the see that none of the competitors are a match for a killer like ${gPron(enemy,"object")}.<%=rivalpresence ? rivaltext : ``%> ${bossDescription(enemy)} ${enemy.threat}. "${gloat[0]}" ${gPron(enemy,"subject")} laughs. "${gloat[1]}"'),
-    prologue: _.template('${trail}, you enter a competition that is modelled after <%=enemy.name == "Kingdom" ? `their`: `the Kingdom\'s`%> now infamous trials: the winners will be offered prestigious positions as officers in the ${possessiveSuffix(enemy.name)} armed forces, and those who will refuse will captured and killed. You couldn\'t let this happen.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}'),
+    prologue: _.template('${trail}, you enter a competition that is modelled after <%=enemy.name == "Kingdom" && knowledge == "hottrail" ? `their`: `the Kingdom\'s`%> now infamous trials: the winners will be offered prestigious positions as officers in the ${possessiveSuffix(enemy.name)} armed forces, and those who refuse will be captured and killed. You couldn\'t let this happen.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}'),
     captured: _.template('Hands tied behind your back, you are led by <%=rivalpresence ? rival : minion%> and ${bossDescription(enemy)} into an an oddly-placed urban clearing. The out-of-place streets are hosting several fighters, each of them sparring in deadly martial arts. "You\'re not worthy to walk on this ground," <%=rivalpresence ? rival : minion%> growls, glaring at you with a deep-seated hatred. "And so," ${enemy.boss} interjects. "We will allow you the chance to prove your worth. <%=finalboss.boss == enemy.boss? `I have developed a great interest in you. I would be pleased if you\'d demonstrate it to ${rivalpresence ? rival : minion}.` : `${finalboss.boss} has taken great interest in you. Show us why that is.`%>"<br><br>"This is unnecessary," <%=rivalpresence ? rival : minion%> says quietly to ${enemy.boss}. "You play games with the trust of the <%=finalboss.name == enemy.name ? "Master" : finalboss.name%>." ${enemy.boss} loosens your bonds, ignoring <%=rivalpresence ? possessiveSuffix(rival) : possessiveSuffix(minion)%> words. You grab your wrists as they are free, rubbing the pain away, and watch as the other fighters turn toward ${enemy.boss}, preparing for what you\'re assuming will be a fight to the death.  The other fighters show no fear; their eyes looking only for glory.<%=rivalpresence ? `${rivalboost ? ` ${rival} moves to end you. "This is ridiculous!"` : ``}` : ``%> ')},
 
-    {name:"Supply & Demand", instory: 0, location: "neutral", bystander: "customer", stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objective token it is carrying.`,false,false,false], stagepenalty: [`The boss gains 1 random defense token. Each fighter is dealt 1 direct damage.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"]),
-    hottrail: _.template('${trail}, you are on to a black market trade conducted by the ${enemy.name}.<br><br>You have approached the site stealthily, and observe the ongoing trade. Standing nearby, the ${enemy.bosstitle} ${enemy.boss} watches over the activity. During their work, one of the soldiers drops his crate, a large amount of illegal drugs spilling out onto the concrete loading dock. You hear ${enemy.boss} roar in rage at the soldier\'s clumsiness, and use the commotion as a cover for your attack!'),
-    coldtrail: _.template('${trail}, you are on to a black market trade is conducted by the ${enemy.name}.<br><br>You have approached the site stealthily, and are preparing your attack. Standing nearby, the ${enemy.bosstitle} ${enemy.boss} watches over the activity. During their work, one of the soldiers drops his crate, a large amount of illegal drugs spilling out onto the concrete loading dock. You duck behind cover, and hear ${enemy.boss} roar in rage at the soldier\'s clumsiness. <%=rivalpresence ? `${rival} calms ${gPron(enemy,"object")}, saving the unlucky soldier: "Somebody\'s back there!"`: `Yet it only takes a few exchanged words before you are given up. "Show yourselves, ${defineAddressing(enemy)}!" ${enemy.boss} calls. "And face your opponent head-on!" The ensuing burst of gunfire convinces you otherwise.`%>'),
-    clueless: _.template('${trail}, you happen upon a black market trade conducted by ${enemy.name}.<br><br>You have approached the site stealthily, and are just about to attack. Standing nearby, the ${enemy.bosstitle} ${enemy.boss} watches over the activity. <%=rivalpresence ? `During their work, one of the soldiers spots you and drops his crate, a large amount of illegal drugs spilling out onto the concrete loading dock. You duck behind cover, but ${rivalboost ? `out of nowhere ${rival} leaps from the shadows and delivers a powerful strike square to your face.` : `${rival} calms ${gPron(enemy,"object")}, saving the unlucky soldier: "Somebody\'s back there!"`}` : `Suddenly, the soldiers carrying the goods drop their crates where they stand, illegal drugs spilling out! "Show yourselves, ${defineAddressing(enemy)}!" ${enemy.boss} calls. You position is rained on by torrents of gunfire. "${gloat[0]}" ${gPron(enemy,"subject")} shouts. "${gloat[1]}"`%>')},
+    {name:"Supply & Demand", instory: 0, location: "neutral", bystander: "customer", 
+    stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objective token it is carrying.`,false,false,false], stagepenalty: [`The boss gains 1 random defense token. Each fighter is dealt 1 direct damage.`,false,false,false], 
+    masterplan: randFrom(["actsofterror","illegalgains"]),
+    gloat: [[`You think fighting me in some landfill is going to stop the downfall of Ransom?`,`I'm not your problem. I'm just doing business.`]],
+    rivaltext: _.template(', ${rival} at ${gPron(enemy,"possessive")} side<%=rivalboost ? `. ${rival} looks to have taken more than just a sample of the product`: ``%>'),
+    hottrail: _.template('you work your way to the property'),
+    coldtrail: _.template('you find out about an abandoned property where a drug deal is taking place. You work your way to the property'),
+    clueless: _.template('stumble upon an abandoned lot'),
+    prologue: _.template('${trail}, ${stagevar} to find a group of ${enemy.name} ${enemy.minions} carrying large crates to their clients from the rear entrance. Standing nearby, ${enemy.boss} watches over the activity<%=rivalpresence ? rivaltext : ``%>.<br><br>During their work, one of the goons spots you and drops <%=randFrom(["his","her"])%> crate, a large amount of illegal drugs spilling out onto the concrete. You duck behind cover, and hear ${enemy.boss} roar in rage at the goon\'s clumsiness, yet it only takes a few exchanged words before you are given up. "${gloat[0]}" calls ${bossDescription(enemy)}. "${gloat[1]} Now face your opponent head-on!"  The ensuing gunfire convinces you otherwise.')},
 
-    {name:"Under Destruction", instory: 0, location: "neutral", bystander: "construction worker", pit: "an out-of-commission elevator shaft", stagebonus: [`<b>Exhaust:</b> Move 1 power from a Time Bomb card to this card. Then, if there's 5 power on this card, remove it from the game.`,true,false,false], stagepenalty: [`Each fighter chooses a different objective and places 1 power on the chosen objective.`,false,false,false], masterplan: randFrom(["actsofterror","illegalgains"]),
-    hottrail: _.template('${trail}, you find out the site that ${enemy.name} has targeted. According to the intel, the building being constructed is owned by the ${competitor.name} through shell corporations. You don\'t really mind ${competitor.desc} taking such a loss, but why is the ${enemy.name} so interested in this place?<br><br>You arrive at the scene, where ${enemy.boss} and ${gPron(enemy,"possessive")} ${enemy.minions} are busy setting the explosives. "Faster, ${randFrom(enemy.minionnames)}," ${enemy.boss} shouts. "We need to be ready before those pesky Gladiators arrive." Then ${gPron(enemy,"subject")} sees you, and ${gPron(enemy,"possessive")} face darkens.'),
-    coldtrail: _.template('${trail}, you find out that the ${enemy.name} has been very busy setting up explosives to bring a construction site down. Unfortunately, you may have arrived too late..<br><br>"Arm the bombs and let\'s get out of here," a voice commands from behind a plastic sheet. When the sheet is thrown aside, ${enemy.boss} <%=rivalpresence ? `and ${rival} step` : `steps`%> into view. ${possessiveSuffix(enemy.boss)} eyes immediately dart from the placed explosives. Without hesitation, ${gPron(enemy,"subject")} attacks!<%=rivalboost ? ` "Leave something for me!" ${rival} shouts.` : ``%>'),
-    clueless: _.template('You open your eyes and find yourself in.. an unfinished construction site? Suddenly, ${enemy.boss} steps out from the shadows. "Welcome, ${enemy.addressing}! Nice of you to join us!" You note that ${enemy.minions} are suddenly blocking every exit, except for the one ${enemy.boss} is guarding. "The whole place is rigged with explosives, <%=rivalpresence ? `and some would even pay to watch you die!" At that, ${rival} steps into view. ${rivalboost ? `"But I\'m a hands-on kind of person," ${rival} adds, and moves at you.` : ``}` : `and I will gladly expend some foot soldiers to get to watch you being.. demolished!"`%><br><br>No matter if this sounds contrived, you have no choice but to fight your way out - and fast!')}
+    {name:"Under Destruction", instory: 0, location: "neutral", bystander: "construction worker", pit: "an out-of-commission elevator shaft", 
+    stagebonus: [`<b>Exhaust:</b> Move 1 power from a Time Bomb card to this card. Then, if there's 5 power on this card, remove it from the game.`,true,false,false], stagepenalty: [`Each fighter chooses a different objective and places 1 power on the chosen objective.`,false,false,false], 
+    masterplan: randFrom(["actsofterror","illegalgains"]),
+    gloat: [[`Cool guys don't look at explosions,`,`So gape all you want!`],[`Most problems can be solved`,`By an appropriate charge of high explosives.`],[`Most problems can be solved with an appropriate charge of high explosives,`,`The trick is not to be around when they go off.`],[`It happens sometimes,`,`People just explode. Natural causes.`],[`Why do you have to nuke the whole building?" you ask. "Well, when you do something minor, you can just disappear,`,`When you do something like we will, they will find you unless they think you're dead.`],[`Enough bombs have been planted in this building to bring down the city block,`,`"You'll die with us," you answer. "Could be.`],[`Explosives, buzzsaws, a good old-fashioned beating.. There are so many alternatives,`,`How do you wish to die?`]],
+    rivaltext: _.template(', and ${rival} emerges from the shadows<%=rivalboost ? `, eyes glowing green` : ``%>.'),
+    hottrail: _.template('You arrive at the site, and inside you find surprised ${bossDescription(enemy)}. "Arm the bombs and let\'s get out of here," ${gPron(enemy,"subject")} commands ${gPron(enemy,"possessive")} goons<%=rivalpresence? rivaltext : `.`%> "${gloat[0]}" ${enemy.boss} says, eyeing you. "${gloat[1]}"'),
+    coldtrail: _.template('You arrive at the site, and beat the few ${enemy.minions} guarding the area. Inside, you find ${bossDescription(enemy)}. "Arm the bombs and let\'s get out of here," ${gPron(enemy,"subject")} commands ${gPron(enemy,"possessive")} goons<%=rivalpresence? rivaltext : `.`%> "${gloat[0]}" ${enemy.boss} says, eyeing you. "${gloat[1]}"'),
+    clueless: _.template('Unfortunately, you may have arrived too late.. "Arm the bombs and let\'s get out of here," a voice commands from behind a plastic sheet. When the sheet is thrown aside, ${bossDescription(enemy)} steps into view<%=rivalpresence? rivaltext : `.`%> ${possessiveSuffix(enemy.boss)} eyes immediately dart from the placed explosives. Without hesitation, ${gPron(enemy, "subject")} attacks.'),
+    prologue: _.template('${trail}, it didn\'t take long to find out ${enemy.name} had been busy setting up an intricate series of explosives at a construction site for a planned ${randFrom([`research facility`,`headquarters`,`manufacturing facility`])} of a ${randFrom([`cutting edge medical company`,`weapons manufacturer`,`chemical manufacturer`,`cybernetics research company`])}. How is the ${finalboss.name} connected? There is only one way to find out.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}'),
+    captured: _.template('You wake up on cold concrete floor and try to get your bearings. Suddenly, ${enemy.boss} steps out from the shadows. "Welcome, ${enemy.addressing}! Nice of you to join us!" You note that ${enemy.minions} are suddenly blocking every exit, except for the one ${enemy.boss} is guarding, and explosives are rigged everywhere. You will be buried under tons of rubble.<%=rivalpresence ? rivaltext : ``%> "${gloat[0]}" ${enemy.boss} says as you pick yourselves up to face them. "${gloat[1]}"<br><br>${laconicStatement(enemy)')}
 ];
     
     enemiescopy = enemies.slice(0,enemies.length)
@@ -919,7 +930,7 @@ function storyNamer(finalboss,finalstage, number = 16){
         break;
         case "Supply & Demand":
             stageadjectives = ["Distribution","Pinned","Rising","Hooked","Addicted","Dealing","Pushing"]
-            stagenouns = [["Supply","Supplies"],["Demand","Demand"],["Crossfire","Crossfire"],[`Island`,`Islands`],["Drug","Drugs"],["Smuggler","Smugglers"],["Network","Networks"],["Kingpin","Kingpin"],["Drive-By","Drive-By"],["Contraband","Contraband"],["Island","Islands"],["Beach","Beaches"],["Camp","Camps"]]
+            stagenouns = [["Supply","Supplies"],["Demand","Demand"],["Crossfire","Crossfire"],[`Island`,`Islands`],["Drug","Drugs"],["Smuggler","Smugglers"],["Network","Networks"],["Kingpin","Kingpin"],["Drive-By","Drive-By"],["Contraband","Contraband"],["Island","Islands"],["Camp","Camps"],["Junkyard","Junkyard"]]
         break;
         case "The Ceremony":
             stageadjectives = ["Eldritch","Whispered","Unholy","Unclean","Ceremonial","Cursed","Lured","Promised"]
@@ -975,11 +986,6 @@ function storyNamer(finalboss,finalstage, number = 16){
         break;
         default: storyname = "New Rise of the Kingdom"
 }
-
-//käy läpi substantiivit
-/*for (i = 0; i < nouns.length; i++) {
-    console.log(nouns[i][0] + " - " + nouns[i][1])
-}*/
 
 storyname.length > 42 ? storyNamer(finalboss,finalstage, 15) : ``
 
@@ -1196,8 +1202,6 @@ function loseResult(stageindex, story, nextstage, gizmo) {
     
     let goal
     
-    let captivity = ["Under Destruction"]
-    
     
     //erottele tällä tarkemmin lopetukset
     switch (story[stageindex].stage.name) {
@@ -1285,14 +1289,14 @@ function loseResult(stageindex, story, nextstage, gizmo) {
         
     let loseresult
     
-    if ((story[altstage].stage.name != nextmission.name) && (captivity.includes(nextmission.name) || (nextmission.hasOwnProperty("captured") && nextmission.knowledge == "captured"))) {
+    if ((nextmission.hasOwnProperty("captured") && nextmission.knowledge == "captured")) {
         loseresult = randFrom(goingdown)
         } else {loseresult = randFrom(deusexmachina)}
     
     if (goal == "ritual") {loseresult = `You were not able to stop ${enemy.boss} completing the ritual!
     Standing in the middle of the temple, ${gPron(enemy,"subject")} rises up off the stone floor, the ${mysticalSynonym()} powers swirling around ${gPron(enemy,"object")}.
     You watch as ${gPron(enemy,"possessive")} eyes burn, and ${gPron(enemy,"possessive")} body pulses with the ${mysticalSynonym()} energies! 
-    ${((story[altstage].stage.name != nextmission.name) && captivity.includes(nextmission.name) || (nextmission.hasOwnProperty("captured") && nextmission.knowledge == "captured")) ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!`}`}
+    ${(nextmission.hasOwnProperty("captured") && nextmission.knowledge == "captured") ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!`}`}
     
     return loseresult
 }
@@ -1351,13 +1355,13 @@ function victoryResult(stageindex, story, nextstage, gizmo) {
     break;
     case "Poison the Well": clue = `the ${nextenemy.name} has hauled some equipment to the sewers${cahoots}`
     break;
-    case "Right to Remain Silent": clue = `the ${nextenemy.name} has imprisoned Citadel scouts${cahoots}`
+    case "Right to Remain Silent": clue = `the undercover Citadel scouts have been captured by ${nextenemy.name}${cahoots}`
     break;
-    case "Supply & Demand": clue = `${nextenemy.name} - ${nextenemy.desc}${cahoots} - are conducting a drug deal at a nearby warehouse`
+    case "Supply & Demand": clue = `${nextenemy.name} - ${nextenemy.desc}${cahoots} - are conducting a drug deal at a nearby abandoned property`
     break;
-    case "Under Destruction": clue = `the ${nextenemy.name}${cahoots} - had been busy setting up an intricate series of explosives to bring a certain building down`
+    case "Under Destruction": clue = `the ${nextenemy.name}${cahoots} - had something going down at an unfinished construction site`
     break;
-    case "Running Wild": clue = `${nextenemy.minions} of the ${nextenemy.name}${cahoots} have set up a dig in a nearby labyrinthine forest`
+    case "Running Wild": clue = `${nextenemy.minions} of the ${nextenemy.name}${cahoots} have set up a dig in a labyrinthine forest`
     break;
     case "Steel Memories": clue =`the location of the secret base of ${nextenemy.boss}${cahoots}`
     break;
@@ -1367,7 +1371,7 @@ function victoryResult(stageindex, story, nextstage, gizmo) {
     
     let gatherclues = [
         `${enemy.boss} forces you to dodge ${gPron(enemy,"possessive")} attack, and when you return to your stance, ${gPron(enemy,"subject")} is gone! Rather than give chase, you interrogate ${minion} who reveals`,
-        `After the skirmish, the ${enemy.name} scared away, you rush to one of the ${bystanders}s' side - an undercover Citadel scout, who holds ${whichPreposition(gizmo)} ${gizmo} in hand. ${contact}'s alive, bleeding out from an attack. "The ${gizmo}!" you ask. "What's in it?" ${contact} doesn't make it, but the intel you recovered tells`,
+        `After the skirmish, the ${enemy.name} scared away, you rush to one of the ${bystanders}s' side - an undercover Citadel scout, who holds ${whichPreposition(gizmo)} in hand. ${contact}'s alive, bleeding out from an attack. "The ${gizmo}!" you ask. "What's in it?" ${contact} doesn't make it, but the intel you recovered tells`,
         `Before you can finish the job, ${enemy.boss} leaps through ${stage.hasOwnProperty("pit") ? stage.pit : "a bottomless pit"}. You race after ${gPron(enemy,"object")}, but ${gPron(enemy,"subject")} is nowhere to be seen. You doubt this is the last you see of the ${enemy.bosstitle} of the ${enemy.name}. You turn to the ${bystanders}s and one of them approaches you.  "Thank you!" ${lowerCaseInitial(contact)} says, and tells of overhearing that`,
         `As you tie up the unconscious members of the ${enemy.name}, left on their own devices by ${enemy.boss}, you're shocked when ${minion} approaches you calmly. ${minion} - a double agent - informs you that `,
         `"Sir, we've captured one of the ${enemy.minions} and are holding them for questioning."  The technician got to Agent Fletch, and then paused for a moment.  "Find out what they are up to!" Fletch told the technician.  "By any means necessary!" ${minion} revealed that`,
@@ -1542,7 +1546,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, 
     let minion = randFrom(enemy.minionnames)
     let pregame = stageindex == 0 ? pregameprologue : "";
     ((enemy.boss != finalboss.boss) && stageindex == 0) ? pregame = pregame + `Without ${randFrom(["intel","knowledge","information","a clue","a word","lowdown"])} on the current ${randFrom(["locale","location","whereabouts","position","scene","station","bearings"])} of ${finalboss.boss}, ${randFrom(["Citadel analysts","you","Agent Flecth and you"])} ${randFrom(["believe","consider","conclude","suppose","think","regard","assume","postulate","deem","surmise"])} ${enemy.boss} is the best source for more information.<br><br>` : ``
-    let trail = pregame + randFrom(["Based on current intel","Chasing the clues","Following your leads", "In pursuit of clues", "After a little more intel-gathering", "Following this lead", "As you investigated further", "After searching for more intel","Following the intel you had","After searching for more information","Reviewing what you got"]);
+    let trail = pregame + randFrom(["Based on current intel","Chasing the clues","Following your leads", "In pursuit of clues", "After a little more intel-gathering", "Following this lead", "As you investigated further", "After searching for more intel","Following the intel you had","After searching for more information","Reviewing what you got", "With the information you gathered", `You tracked down some of the ${enemy.name} associates and tailed their movements. Hence`,`Following the trail of money leading from the previous encounter`]);
     let instructions = setUpInstructions(stageindex,enemy,rival,knowledge,stage.stagebonus,stage.stagepenalty)
     let rivalpresence = instructions[1]
     let rivalboost = instructions[2]
@@ -1558,7 +1562,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, 
     let prologue
     let casino = getCasino(enemy)
     
-    stage.name == "Sudden Death"? console.log(stage.name) : ``
+    stage.name == "Under Destruction" ? console.log(stage.name + Math.random()) : ``
 
     if (stage.hasOwnProperty(`prologue`)) {
 
@@ -2072,7 +2076,7 @@ function finalResult(stage, enemy, rival, vip = null, result) {
         `"Finish them off, ${enemy.boss}! Do it now!" shouts ${randFrom(enemy.minionnames)}. "${gloat[0]}" ${enemy.boss} says, and ${enemy.threat}. "${gloat[1]}"`,
         `"${randFrom([`No more, ${enemy.boss}! Grant me mercy!" you shout.`,`${lastwords[0]}" ${heroSpeech()}, "${lastwords[1]}"`])} ${enemy.boss} ${enemy.threat}${randFrom([`. "I thought you were made of sterner stuff," ${gPron(enemy,"subject")} responds.`,`, and orders ${gPron(enemy,"possessive")} minions: "${finisher}!"`])}`,
         `${enemy.boss} has you pinned. Without a word, ${gPron(enemy,"subject")} ${enemy.threat}. With grim determination in ${gPron(enemy,"possessive")} eyes ${gPron(enemy,"subject")} ends your life.`,
-        `"${defiance[0]} ${enemy.boss}," you spit defiantly in the face of the victorious ${enemy.bosstitle}. "${defiance[1]}"<br><br>"${gloat[0]}" ${gPron(enemy,"subject")} answers. "${gloat[1]}"`,
+        `"${defiance[0]}," you spit defiantly in the face of the victorious ${enemy.bosstitle}. "${defiance[1]}"<br><br>"${gloat[0]}" ${gPron(enemy,"subject")} answers. "${gloat[1]}"`,
         `"${lastwords[0]}" ${heroSpeech()}, but ${enemy.boss} cuts you off by grabbing your throat. "${gloat[0]}" ${gPron(enemy,"subject")} says and starts to squeeze the life out of you. "${gloat[1]}"`,
         `Suddenly, there's a blinding flash and ${possessiveSuffix(enemy.boss)} gone! It's all gone. Shockingly, you're back at Citadel HQ, surrounded by agents all going about their business. Did all that even happen?`,
         `Your body spasms, fighting against the green gel. Unable to breathe, you claw wildly at the hard, translucent surface encasing you. Shadowy figures move about on the other side of the barrier, and suddenly the lid slides open, and you fall to the ground. The lights are blindingly bright to your aching eyes, and you draw air in your lungs like it's the first time in your life. "Welcome, my children!" you hear a woman calling. What is happening? Was that a dream?`,
@@ -2115,13 +2119,12 @@ function lastWords(enemy) {
     let lastwords = [
         [`Tomorrow, at sunrise..`,`I shall no longer be here.`],
         [`I was not supposed to die, not here..`,`Not like this.`],
-        [`Do not grieve,`,`One day another Gladiator will rise and uses the power of ${randFrom(["Street Masters","the Tiger"])} to light the darkest hour.`],
+        [`I do not grieve,`,`One day another Gladiator will rise and uses the power of ${randFrom(["Street Masters","the Tiger"])} to light the darkest hour.`],
         [`It's over,`,`Goodbye.`],
         [`One never knows the ending,`,`One has to die to know exactly what happens after.`],
         [`If I'll close my eyes now,`,`I'm not going to wake up.`],
         [`I must go in..`,`The fog is rising.`],
         [`Tired..`,`So.. tired.`],
-        [`I was supposed to die in France..`,`I never even saw France.`],
         [`Goodbye..`,`Farewell.`],
         [`You always were a pain in the rear,`,`It was nice knowing you.`],
         [`I'm afraid,`,`And I'm glad to be afraid.`],
@@ -2137,7 +2140,8 @@ function lastWords(enemy) {
         [`I can only think of all the innocent lives that will perish,`,`Because of this insane scheme I failed to thwart.`],
         [`I gave everything,`,`I have no regrets.`],
         [`When death comes,`,`It will come as an old friend.`],
-        [`To dream, perchance to sleep,`,`Aye, there's the rub.`]
+        [`To dream, perchance to sleep,`,`Aye, there's the rub.`],
+        [`'tis but a scratch,`,`Had worse.`]
     ]
 
     return randFrom(lastwords)
@@ -2151,7 +2155,6 @@ function lastThoughts(enemy) {
         `You can only think that if you'll close your eyes now, you're not going to wake up.`,
         `You think to yourself it's been a funny sort of day in a way.`,
         `Your only hope is that the next team Agent Fletch will send will do what you could not.`,
-        `If only, you think, you had a few more coins to insert.`,
         `You think that even with a lifetime of preparation, you could never have been ready.`,
         `You have a fleeting moment where you think this is not really happening - these are someone else's memories.`
     ]
@@ -2218,7 +2221,6 @@ function gloatingList(enemy, stage) {
         [`I feel no pity, or remorse, or fear,`,`And I absolutely will not stop - ever - until ${enemy.name} rules over everything!`],
         [`Did you believe I would let you on my trail by mistake?`,`Now face your death!`],
         [`Death smiles at us all,`,`All you can do is to smile back.`],
-        [`${ucInit(defineAddressing(enemy))},`,`I thought you were made of sterner stuff.`],
         [`Why, ${defineAddressing(enemy)}? Why do you do it? Why keep fighting?`,`Do you believe you're fighting for something? Can you tell me what it is? Do you even know?`],
         [`You must be able to see it. You must know it by now,`,`You can't win. It's pointless to keep fighting. Why do you persist?`],
         [`You won't get away with this," you tell ${enemy.boss}. "I won't get away with this?`,`I already have!`],
@@ -2241,7 +2243,8 @@ function gloatingList(enemy, stage) {
         [`They say violence is never the answer,`,`They are wrong.`],
         [`You want to kill me, don't you, ${defineAddressing(enemy)}?`,`Get a number and get in line.`],
         [`If you want something done,`,`Do it yourself. Yep!`],
-        [`You think you're big time?`,`You're gonna die big time!`]
+        [`You think you're big time?`,`You're gonna die big time!`],
+        [`When we last met, you were but a learner,`,`You still are.`]
         ]
         
         let gloat = randFrom(gloating) 
@@ -2735,6 +2738,10 @@ function getCasino(enemy) {
         case "Cartel": 
         animal = randFrom(["Lamb","Phoenix","Dove","Peacock","Phoenix","Lion","Ox","Eagle","Pelican","Siren","Ram","Fish"]);
         prefix = randFrom(["White","Golden","Brazen","Red","Brown","Green","Fire","Light"]);
+        break;
+        case "Onyx League": 
+        animal = randFrom(["Cat","Cougar","Eagle","Grizzly","Moose","Wolverine","Bobcat","Wolf"]);
+        prefix = randFrom(["Black","Red","Chaos","Unbound","Green","Orange"]);
         break;
         default:
         animal = randFrom(["Dragon","Tiger","Serpent","Phoenix","Tortoise","Lion","Crane","Oyster", "Fox", "Snake","Panda","Mantis","Snake"])
