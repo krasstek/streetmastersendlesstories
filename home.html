@@ -222,18 +222,18 @@ function bossDescription(enemy) {
         `${enemy.expression}`,
         `the ${bossynonym} of the ${enemy.name}`,
         `the ${bossynonym} of the ${enemy.desc},`,
-        `the ${bossynonym} of the ${enemy.desc}, the ${enemy.name},`,
+        `the ${bossynonym} of the ${enemy.desc}, the ${enemy.name}`,
         `the ${bossynonym} of the ${enemy.name}, ${enemy.expression}`,
         `the ${bossynonym} of ${enemy.desc}, ${enemy.expression}`,
         `the ${enemy.bosstitle}`,
         `the ${enemy.bosstitle} of the ${enemy.name},`,
-        `the ${enemy.bosstitle} of the ${enemy.desc}, the ${enemy.name},`,
+        `the ${enemy.bosstitle} of the ${enemy.desc}, the ${enemy.name}`,
         `the ${enemy.bosstitle}, ${enemy.expression}`,
-        `the ${enemy.bosstitle} ${bossynonym} of the ${enemy.name},`,
-        `the ${enemy.bosstitle} ${bossynonym} of ${enemy.desc},`,
+        `the ${enemy.bosstitle} ${bossynonym} of the ${enemy.name}`,
+        `the ${enemy.bosstitle} ${bossynonym} of ${enemy.desc}`,
         `the ${enemy.bosstitle} of the ${enemy.name}, ${enemy.expression}`,
-        `the ${fame} ${bossynonym} of the ${enemy.name},`,
-        `the ${fame} ${bossynonym} of ${enemy.desc},`,
+        `the ${fame} ${bossynonym} of the ${enemy.name}`,
+        `the ${fame} ${bossynonym} of ${enemy.desc}`,
         `the ${fame} ${enemy.bosstitle}`,
         `the ${fame} ${enemy.bosstitle} of the ${enemy.name},`,
         `the ${fame} ${enemy.bosstitle}, ${enemy.expression}`
@@ -285,7 +285,7 @@ let stages = [
     masterplan: randFrom(["actsofterror","illegalgains"]),
     gloat: [[`If you have a gun, you can rob a casino,`,`But if you have a casino, you can rob everyone!`],[`You think fighting me in some nightclub's going to stop the downfall of Ransom?`,`I'm not your problem. I'm just doing business.`]],
     rivaltext: _.template(' But ${gPron(enemy,"subject")} is not alone. Alongside ${gPron(enemy,"object")} is ${rival}, <%=rivalboost ? `eyes glowing green of Vandal!` : `here to sell an encrypted ${gizmo} to ${enemy.boss}.`%>'),
-    hottrail: _.template('You quickly find your way to a set of double doors. You step into the VIP room of the opulent casino. ${bossDescription(enemy)} is seated before you, surprised.'),
+    hottrail: _.template('You quickly find your way to a set of double doors. You step into the VIP room of the opulent casino. Seated before you, surprised, is ${bossDescription(enemy)}'),
     coldtrail: _.template('You eventually find your way to a set of double doors. You hear a commotion inside and - fearing you have lost the element of surprise - you bust in.  Your hunch was right; ${bossDescription(enemy)}, knew you were coming. "Get the money," ${gPron(enemy,"subject")} commands ${gPron(enemy,"possessive")} goons. "I\'ll hold them off."'), 
     clueless: _.template('After going through many ${enemy.minions} of the ${enemy.name}, you reach the VIP room of the casino. Inside, ready to face you is ${bossDescription(enemy)}.'),
     prologue: _.template('${trail}, you <%=knowledge != "hottrail" ? `investigate the gambling den ${casino}` : `arrive at the ${casino}` %>, where you sneak in, and make your way through the halls of the casino. The surroundings speak volumes about the vast wealth channeled into the ${possessiveSuffix(enemy.name)} operations.<%=randFrom([``,` You take an elevator, and wait patiently while a lounge version of ${loungeMusic()} plays over the speakers.`])%><br><br>${stagevar}<%=!rivalpresence ? ``:`${rivaltext}`%><br><br>${enemy.boss} looks at you and grins. "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" At that, ${enemy.boss} snaps ${gPron(enemy,"possessive")} fingers, and it becomes clear that the chat is over.'),
@@ -326,7 +326,7 @@ let stages = [
     hottrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that the ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : finalboss.name%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You creep low, listening carefully as the they spill all the plans. Once you\'ve heard enough, you jump the startled pair.'),
     coldtrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that the ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : finalboss.name%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You move quickly to keep up and continue your eavesdropping. "Boss!" a guard calls out. You hadn\'t seen him behind the crates nearby, but when you moved to take cover behind them, you were spotted instantly.'),
     clueless: _.template('have to dive for cover behind nearby crates as you run into the ${enemy.minions} guarding the trade. "Get the guns!" you hear a voice call out. "And get those spies!"'),
-    prologue: _.template('${trail}, you locate <%=knowledge == "hottrail" ? `the` : `a suspicious` %> warehouse. You enter, and almost immediately ${stagevar}<br><br>${bossDescription(enemy)}<%=rivalpresence ? rivaltext : ` standing next to the contact for the trade, shoots the ${randFrom(["man","woman"])} dead, taking ${knowledge == "clueless" ? "a" : "the"} ${gizmo} from the body.`%> "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}'),
+    prologue: _.template('${trail}, you locate <%=knowledge == "hottrail" ? `the` : `a suspicious` %> warehouse. You enter, and almost immediately ${stagevar}<br><br>${bossDescription(enemy)}<%=rivalpresence ? rivaltext : `, standing next to the contact for the trade, shoots the ${randFrom(["man","woman"])} dead, taking ${knowledge == "clueless" ? "a" : "the"} ${gizmo} from the body.`%> "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}'),
     captured: _.template('You wake up on cold concrete floor, and hear a voice explaining: "Your revenge is at hand. Voilà!" There\'s a slight pause. "It\'s light, handle\'s adjustable for easy carrying, good for righties and lefties, breaks down into four parts, ideal for quick discreet interventions. A word on firepower.. oh, our practice targets seem to have come to their senses!"<br><br>The ${enemy.minions} of the ${enemy.name} remove your hoods, and you see ${bossDescription(enemy)}, nodding to ${gPron(enemy,"possessive")} companion. "You can pay afterward." ${ucInit(gPron(enemy, "subject"))} <%=rivalpresence ? rivaltext : `turns from the client who stashes a ${gizmo}.`%> "Let the presentation commence!"')},
 
     {name:"One Step Ahead", instory: 0, location: "remote", bystander: "mountain climber", pit: "the edge of the cliff",
@@ -450,7 +450,7 @@ let stages = [
     coldtrail: _.template('You arrive at the site, and beat the few ${enemy.minions} guarding the area. Inside, you find ${bossDescription(enemy)}. "Arm the bombs and let\'s get out of here," ${gPron(enemy,"subject")} commands ${gPron(enemy,"possessive")} goons<%=rivalpresence? rivaltext : `.`%> "${gloat[0]}" ${enemy.boss} says, eyeing you. "${gloat[1]}"'),
     clueless: _.template('Unfortunately, you may have arrived too late.. "Arm the bombs and let\'s get out of here," a voice commands from behind a plastic sheet. When the sheet is thrown aside, ${bossDescription(enemy)} steps into view<%=rivalpresence? rivaltext : `.`%> ${possessiveSuffix(enemy.boss)} eyes immediately dart from the placed explosives. Without hesitation, ${gPron(enemy, "subject")} attacks.'),
     prologue: _.template('${trail}, it didn\'t take long to find out ${enemy.name} had been busy setting up an intricate series of explosives at a construction site for a planned ${randFrom([`research facility`,`headquarters`,`manufacturing facility`])} of a ${randFrom([`cutting edge medical company`,`weapons manufacturer`,`chemical manufacturer`,`cybernetics research company`])}. How is the ${finalboss.name} connected? There is only one way to find out.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}'),
-    captured: _.template('You wake up on cold concrete floor and try to get your bearings. Suddenly, ${enemy.boss} steps out from the shadows. "Welcome, ${enemy.addressing}! Nice of you to join us!" You note that ${enemy.minions} are suddenly blocking every exit, except for the one ${enemy.boss} is guarding, and explosives are rigged everywhere<%=rivalpresence ? rivaltext : ``%>. ${ucInit(gPron(enemy,"subject"))} plans to bury you under tons of rubble!<br><br> "${gloat[0]}" ${enemy.boss} says as you pick yourselves up to face them. "${gloat[1]}"<br><br>${laconicStatement(enemy)}')}
+    captured: _.template('You wake up on cold concrete floor and try to get your bearings. Suddenly, ${enemy.boss} steps out from the shadows. "Welcome, ${enemy.addressing}! Nice of you to join us!" You note that ${enemy.minions} are suddenly blocking every exit, except for the one ${enemy.boss} is guarding, and explosives are rigged everywhere<%=rivalpresence ? rivaltext : ``%>. ${ucInit(gPron(enemy,"subject"))} plans to bury you under tons of rubble!<%=rivalpresence ? rivaltext : ``%> "${gloat[0]}" ${enemy.boss} says as you pick yourselves up to face them. "${gloat[1]}"<br><br>${laconicStatement(enemy)}')}
 ];
     
     enemiescopy = enemies.slice(0,enemies.length)
@@ -588,14 +588,24 @@ $(".titletext").each(function() {
 
 $(function() {
     $(".titletext").each(function(i) {
-        $(this).css({"bottom": "0px", "font-size": "21px"})
+        $(this).css({"bottom": "0px", "font-size": "26px", "font-weight": "200"})
         var element = $(this)
                         .clone()
                         .css({display: 'inline', visibility: 'hidden'})
                         .appendTo('body');
-        if (element.width() > ($(this).width()+1)) {$(this).css({"bottom": "+=13px", "font-size": "+-2px"})}
-        //((element.width() > ($(this).width()+1)) ? $(this).css({fontSize: "19px", "bottom": "35%"}) : $(this).css({fontSize: "21px", "bottom": "0px"}))
-    
+        if (element.width() > ($(this).width()+1)) {$(this).css({"font-size": "-=5px"})}
+        element.remove();
+        var element = $(this)
+                        .clone()
+                        .css({display: 'inline', visibility: 'hidden'})
+                        .appendTo('body');
+        if (element.width() > ($(this).width()+1)) {$(this).css({"bottom": "+=13px"})}
+        element.remove();
+        var element = $(this)
+                        .clone()
+                        .css({display: 'inline', visibility: 'hidden'})
+                        .appendTo('body');
+        if (($(this).height()) > 40) {$(this).css({"bottom": "-=5px", "font-size": "-=4px"})}
         element.remove();
     });
 });
