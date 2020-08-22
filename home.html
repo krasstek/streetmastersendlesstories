@@ -500,8 +500,8 @@ let alliesandrivals = [
         {name: "Lotus", keywords: ["Brook City","Golden Dragons","Organized Crime","Past", "Clone", "Ah Long of Brook City"]},
         {name: "Marionette Doll", keywords: ["Dark Matter","Kingdom","Martial Arts Master","Psychic", "Clone", "Shin Yokai"]},
         {name: "Mary Ann", keywords: ["Street", "Clone", "Twin Tiger", "Onyx League","Youth"]},
-        {name: "Megan", keywords: ["Celebrity","Chi","Fraud","Global Gladiator","Martial Arts Master","Wanderer", "Clone", "Megan", "Law Enforcement"]},
-        {name: "Mr. Apple", keywords: ["Celebrity","Fraud","Sensei","Music", "Clone"]},
+        {name: "Megan", keywords: ["Celebrity","Chi","Fraud","Global Gladiator","Martial Arts Master","Wanderer", "Clone", "Megan", "Law Enforcement", "Mr. Apple"]},
+        {name: "Mr. Apple", keywords: ["Celebrity","Fraud","Sensei","Music", "Clone", "Mr. Apple"]},
         {name: "Natalia", keywords: ["Black Ops","Global Gladiator","Martial Arts Master","Soldier","Wanderer", "Clone", "Natalia", "Project X", "Street"]},
         {name: "Power Soldier", keywords: ["Dark Matter","Beast","Black Ops","Kingdom","Martial Arts Master", "Clone"]},
         {name: "Project X", keywords: ["Dark Matter","Beast","Insane","Martial Arts Master", "Youth", "Clone", "Jackal", "Project X"]},
@@ -2588,6 +2588,11 @@ let text
             } else if (stance == "Ally") {text = personalstory_ally} else if (stance == "Rival" && (redemption.some(v=> gladiators.indexOf(v) !== -1) == true) && !gladiators.includes("Megan")) {
                 text = `Under the influence of the Kingdom, you has been involved in many things that you regret. ${_.map(group, 'name').includes(motivation) ? `${group.length == 2 ? ` Megan and Sera both accuse you of ruining their family businesses, and now they do everything they can to bring you down.` : `Megan accuses you of an extensive theft from her company, which was techincally the doings of the O'Quinn family.` }` : `Sera O'Quinn accuses you of corrupting her father, and tries to bring you down.`} You admit you are responsible, but your hands would be full as they are!`
             } else {text = personalstory_enemy};
+            break;
+            case "Mr. Apple":
+            if (stance == "Ally") {
+                text = `After and exhibition Sensei Apple was surrounded by ${finalboss.minions} and their leader challenged him to a fight. Unfortunately, due to lack of music Sensei Apple lost his rhythm and it didn't take long for him to be overwhelmed. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? `Now he has joined forces with his protege to find his assailant and show ${genderPronoun(finalboss,"object")} what true skill is.` : `Now he has joined forces with you to find his assailant and show ${genderPronoun(finalboss,"object")} what true skill is.`) : `His protege is determined to find the assailants and return the honor of her master.`}`
+            } else {text = `After and exhibition Sensei Apple was surrounded by an unknown group of martial artists. Unfortunately, due to lack of music Sensei Apple lost his rhythm and it didn't take long for him to be overwhelmed. ${_.map(group, 'name').includes(motivation) ? `Confused and angry, he is determined you are the assailants, and tries to face you at every turn${group.length == 2 ? `, and drags his apprentice along`: ``}.` : `Confused and angry, he is determined you are the assailants, and his protege is determined to return the honor of her master.`}`};
             break;
             case "Monk": text = (stance == "Ally" ? 
             `${group.length == 1 ? `A lone warrior monk has`: `A group of warrior monks have`} left their distant monastery to deliver ${finalboss.boss} the wisdom to leave the corrupt way. 
