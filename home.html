@@ -226,7 +226,7 @@ function bossDescription(enemy) {
         `the ${bossynonym} of the ${enemy.name}, ${enemy.expression}`,
         `the ${bossynonym} of ${enemy.desc}, ${enemy.expression}`,
         `the ${enemy.bosstitle}`,
-        `the ${enemy.bosstitle} of the ${enemy.name},`,
+        `the ${enemy.bosstitle} of the ${enemy.name}`,
         `the ${enemy.bosstitle} of the ${enemy.desc}, the ${enemy.name}`,
         `the ${enemy.bosstitle}, ${enemy.expression}`,
         `the ${enemy.bosstitle} ${bossynonym} of the ${enemy.name}`,
@@ -271,7 +271,7 @@ let stages = [
     stagebonus: [`Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.`,false,false,false],
     stagepenalty: [`One fighter places 1 fire token in the space nearest to them.`,false,false,false], 
     masterplan: randFrom(["actsofterror","personalpower"]), // rework acts of terror into decimating the countryside
-    gloat: [[`You won’t stop the inevitable!`,`I’ll end you here, with or without the Oni!`],[`Power!`,`Unlimited power!`],[`Fire is a living thing, Gladiators,`,`It breaths, it eats. And it hates.`],[`It is better to burn out`,`Than to fade away!`],[`You should be glad to go like this,`,`You will have warrior's funeral pyre!`], [`I am the Alpha and the Omega. Death and rebirth,`,`And, as you die, so will I be reborn!`],],
+    gloat: [[`You won’t stop the inevitable!`,`I’ll end you here, with or without the Oni!`],[`Power!`,`Unlimited power!`],[`Fire is a living thing, Gladiators,`,`It breaths, it eats. And it hates.`],[`It is better to burn out,`,`Than to fade away!`],[`You should be glad to go like this,`,`You will have warrior's funeral pyre!`], [`I am the Alpha and the Omega. Death and rebirth,`,`And, as you die, so will I be reborn!`],],
     rivaltext: _.template(', but ${rival}<%=rivalboost ? `, possessed by the infernal force` : `, looking to gain some of the infernal force`%> moves in to intervene'),
     hottrail: _.template('You were not too late! ${enemy.boss} falls on the floor, barely able to stand up, and stares at ${gPron(enemy, "possessive")} hands with astonishment.  "This can\'t be," ${gPron(enemy, "subject")} says hoarsely.  "I have come so far..." ${ucInit(gPron(enemy, "subject"))} looks up to you with a look of shock.'),
     coldtrail:  _.template('${enemy.boss} falls on the floor, then pulls ${gPron(enemy,"reflexive")} off, standing up and staring at ${gPron(enemy, "possessive")} hands with astonishment.  "This can\'t be," ${gPron(enemy, "subject")} says calmly.  "I have come so far..." ${ucInit(gPron(enemy, "subject"))} looks up to you,  ${gPron(enemy, "possessive")} look of shock changing to one of pure rage.'),
@@ -283,9 +283,9 @@ let stages = [
     stagebonus: [`Each fighter may put a random defense token on a Frightened Gambler in their threat area.`,false,false,false], 
     stagepenalty: [`Search the stage deck for a Pit Boss card and choose one fighter to draw it. Shuffle the stage deck.`,false,false,false], 
     masterplan: randFrom(["actsofterror","illegalgains"]),
-    gloat: [[`If you have a gun, you can rob a casino,`,`But if you have a casino, you can rob everyone!`],[`You think fighting me in some nightclub's going to stop the downfall of Ransom?`,`I'm not your problem. I'm just doing business.`]],
+    gloat: [[`If you have a gun, you can rob a casino,`,`But if you have a casino, you can rob everyone!`],[`You think fighting me in some nightclub is going to stop the downfall of Ransom?`,`I'm not your problem. I'm just doing business.`]],
     rivaltext: _.template(' But ${gPron(enemy,"subject")} is not alone. Alongside ${gPron(enemy,"object")} is ${rival}, <%=rivalboost ? `eyes glowing green of Vandal!` : `here to sell an encrypted ${gizmo} to ${enemy.boss}.`%>'),
-    hottrail: _.template('You quickly find your way to a set of double doors. You step into the VIP room of the opulent casino. Seated before you, surprised, is ${bossDescription(enemy)}'),
+    hottrail: _.template('You quickly find your way to a set of double doors. You step into the VIP room of the opulent casino. Seated before you, surprised, is ${bossDescription(enemy)}.'),
     coldtrail: _.template('You eventually find your way to a set of double doors. You hear a commotion inside and - fearing you have lost the element of surprise - you bust in.  Your hunch was right; ${bossDescription(enemy)}, knew you were coming. "Get the money," ${gPron(enemy,"subject")} commands ${gPron(enemy,"possessive")} goons. "I\'ll hold them off."'), 
     clueless: _.template('After going through many ${enemy.minions} of the ${enemy.name}, you reach the VIP room of the casino. Inside, ready to face you is ${bossDescription(enemy)}.'),
     prologue: _.template('${trail}, you <%=knowledge != "hottrail" ? `investigate the gambling den ${casino}` : `arrive at the ${casino}` %>, where you sneak in, and make your way through the halls of the casino. The surroundings speak volumes about the vast wealth channeled into the ${possessiveSuffix(enemy.name)} operations.<%=randFrom([``,` You take an elevator, and wait patiently while a lounge version of ${loungeMusic()} plays over the speakers.`])%><br><br>${stagevar}<%=!rivalpresence ? ``:`${rivaltext}`%><br><br>${enemy.boss} looks at you and grins. "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" At that, ${enemy.boss} snaps ${gPron(enemy,"possessive")} fingers, and it becomes clear that the chat is over.'),
@@ -308,10 +308,10 @@ let stages = [
     stagebonus: [`Each fighter may search the stage deck for 1 copy of Calming Words and add it to their fighter play area. Shuffle the stage deck.`,false,false,false], 
     stagepenalty: [`Each fighter places 1 power on a different "Scared Staff" card.`,false,false,false],
     masterplan: randFrom(["actsofterror","kidnapping"]), // personalpower?? power from the scientists
-    gloat: [["I have some bad news for you!","Nobody will leave this building alive!"],["You think you could be of use as a hostage?", "I have no use for you."]],
+    gloat: [["I have some bad news for you!","Nobody will leave this building alive!"],["You think you could be of use as a hostage?", "I have no use for you."],[`Let the hostages go," you demand. "And we can work something out?`,`I don't negotiate with Global Gladiators.`]],
     rivaltext: _.template('<%=(knowledge == "clueless") ? ` Suddenly, a janitor takes off a cap and rips off a fake moustache${rivalboost ? `and snaps the neck of a nearby agent` : ``}! It is ${rival} in disguise, an agent for the ${enemy.name}!` : ` ${ucInit(gPron(enemy,"subject"))} is not working alone. Alongside ${gPron(enemy,"object")} is ${rival}, ${rivalboost ? `eyes glowing green, a telltale sign of Vandal use!` : `furthering some personal agenda.`}`%>'),
-    hottrail: _.template('${trail}, you arrive at the offices just in the nick of time. <%=randFrom([`The ${enemy.name}`,ucInit(enemy.desc)])%> is ushering their people in, ready to take hostages. You manage to slip ahead of them.  "There\'s no escape," a ${gPron(enemy,"sex")} shouts out. "The ${finalboss.name} needs your operation, and you will abide by our demands. We speak for ${finalboss.boss}<%=finalboss.name != "Kingdom" ? `, and ${gPron(finalboss, "subject")} speaks for the Kingdom` : ``%>." As panic ensues around the offices, you manage to calm several employees, making sure they keep their heads. Then you made your move on the ${enemy.name}.'),
-    coldtrail: _.template('${trail} you conclude the next target of the ${enemy.name}. You arrive at the offices, and know it is too late. Gunshots can be heard inside the building, followed by screams inside and out.  "Call the police!"  several fleeing employees shout, but you know it is futile.  The chances of any Ransom P.D. response is beyond unlikely. The police are as corrupt as the very criminals they are charged to protect the city against. You rush into the building, heedless of all the warnings shouted at you.'),
+    hottrail: _.template('${trail}, you arrive at the offices just in the nick of time. <%=randFrom([`The ${enemy.name}`,ucInit(enemy.desc)])%> is ushering their people in, ready to take hostages. You manage to slip ahead of them.  "There\'s no escape," a ${gPron(enemy,"sex")} shouts out. "The ${finalboss.name} needs your operation, and you will abide by our demands. We speak for ${finalboss.boss}<%=finalboss.name != "Kingdom" ? `, and ${gPron(finalboss, "subject")} speaks for the Kingdom` : ``%>." As panic ensues around the offices, you manage to calm several employees, making sure they keep their heads. Then you make your move on the ${enemy.name}.'),
+    coldtrail: _.template('${trail} you conclude the next target of the ${enemy.name}. You arrive at an office building, and know it is too late. Gunshots can be heard inside the building, followed by screams inside and out.  "Call the police!"  several fleeing employees shout, but you know it is futile.  The chances of any Ransom P.D. response is beyond unlikely. The police are as corrupt as the very criminals they are charged to protect the city against. You rush into the building, heedless of all the warnings shouted at you.'),
     clueless: randFrom([_.template('${trail}, you investigate a building you believe ${finalboss.name} have been operating out of. As you make your way into the darkened interior, you see a number of people through the windows, held at gunpoint. Hostages! While ${finalboss.boss} is your primary objective, you can\'t let ${enemy.boss} get away with this!'),
     _.template('<%=stageindex == 0 ? `You are preparing for a hard-earned vacation, but just as you are about to take your leave from Citadel HQ` : `${trail}, you are at the Citadel HQ, reviewing what you\'ve got.  "We\'ve had the intel for a week," Fletch says. "I need to show something to the top brass." "There\'s a lot of dead ends," the analyst says.  "It\'s like they expected us to get the data."  Fletch considers those words.  What if the ${finalboss.name} wanted the Citadel to get a hold of the intel? Just as he was about to call his superiors`%>, a klaxon starts blaring in the facility."Sir!" a technician says. "I\'m picking up multiple hostiles on the scanners!" "Scramble our defenses!" Fletch commands.  "And alert the Global Gladiators!"')]),
     prologue: _.template('${stagevar}<br><br>"${gloat[0]}" greets a familiar face that you thought you might have seen last of: ${bossDescription(enemy)}. "${gloat[1]}"<%=!rivalpresence ? ``:` ${rivaltext}`%>'),
@@ -344,11 +344,11 @@ let stages = [
     stagepenalty: [`Each fighter suffers 1 direct damage.  Then, if any fighter is on or adjacent to an objective space, remove this card from the game.`,true,true,false], masterplan: randFrom(["strengtheningforces","personalpower"]), //kidnap masterplan? clone
     gloat: [[`New subjects have arrived,`,`Contain them and proceed with the experiments.`],[`Being in a medical facility will not help you,`,`Not after I'm done with you.`], [`You have played your part well,`,`But do you think you were born and not made?`],[`You always are so predictable,`,`Where do you think you were made in?`], [`We couldn't have asked for better specimens,`,`It's time you provide your skills and abilities to the Kingdom.`],],
     rivaltext: _.template('<%=rivalboost ? ` Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It stands, slowly, powerfully built, dripping with greel gel. It is the ultimate clone, ${rival.toUpperCase()}-EX!<br><br>` : ` Apparently ${enemy.boss} is taking blood samples from ${rival}.`%>'),
-    hottrail: _.template('${trail}, you locate the facility. You were surprised to find the laboratory not heavily guarded, so slipping in is not challenging.  You '),
+    hottrail: _.template('${trail}, you locate the facility. You are surprised to find the laboratory not heavily guarded, and slipping in is not challenging.  You '),
     coldtrail: _.template('${trail}, you investigate a facility where ${enemy.name} has reportedly been seen. You defeat a few guards in your way and '),
     clueless: _.template('${trail}, you investigate a facility in the outskirts of the city that develops cutting edge genetic enhancements and conducts non-sanctioned medical experiments. You fight your way in and '),
     prologue: _.template('${stagevar}<%=randFrom([`proceed down to `,`take an elevator down. You wait patiently while a lounge version of ${loungeMusic()} plays over the cheap speakers. You arrive `])%> at the large lab, a cavernous room filled with row upon row of glass containment tubes. Each tube has a motionless body in it; some of you recognize as opponents you\'ve faced before.<br><br>Standing at the far end of the room, you see ${bossDescription(enemy)} overseeing the activity.<%=rivalpresence ? rivaltext : ``%> "Just get the serum," ${enemy.boss} commands ${gPron(enemy,"possessive")} ${enemy.minions}. "<%=finalboss.boss == enemy.boss ? `Let me be clear; we need as much of it as possible to make it work. And I need it to work!`: `${finalboss.boss} has made it clear; ${gPron(finalboss,"subject")} needs as much of it as possible to make it work. And we all need it to work!`%>"<br><br>${enemy.boss} lifts ${gPron(enemy,"possessive")} eyes to you. "${gloat[0]}" ${gPron(enemy,"subject")} calls out. "${gloat[1]}" ${laconicStatement(enemy)}'),
-    captured: _.template('As you slowly regain consciousness, you notice an IV hooked up to your arm.  Your strength had been completely drained and you are unable to even stand up.  "Calm down there," an arrogant voice called. "${finalboss.boss} wants to run some tests to see if you\'re worth keeping alive.”<br><br>As your vision clears, you see the voice belongs to ${bossDescription(enemy)}. You also see that you are surrounded by sterile lab equipment and ominous test tubes occupied by shadowy figures. You suddenly feel a surge of strength return and yank out the IV. "Fine, let\'s do it the hard way.”')},
+    captured: _.template('As you slowly regain consciousness, you notice an IV hooked up to your arm.  Your strength had been completely drained and you are unable to even stand up.  "Calm down there," an arrogant voice called. "<%=enemy.boss == finalboss.boss ? `I want`: `${finalboss.boss} wants`%> to run some tests to see if you\'re worth keeping alive.”<br><br>As your vision clears, you see the voice belongs to ${bossDescription(enemy)}. You also see that you are surrounded by sterile lab equipment and ominous test tubes occupied by shadowy figures. You suddenly feel a surge of strength return and yank out the IV. "Fine, let\'s do it the hard way.”')},
 
     {name:"Out of Time", instory: 0, location: "cursed", bystander: "acolyte", pit: "a glowing portal",
     stagebonus: [`The fighters may choose to flip one objective to its inactive side.`,false,false,false], 
@@ -381,7 +381,7 @@ let stages = [
     masterplan: randFrom(["illegalgains","kidnapping"]),
     rivaltext: _.template(' ${rival} stands guard<%= rivalboost ? `, vigilant and keen-eyed.`: `.`%>'),
     hottrail: _.template('<br><br>You are yet unseen, and dart through the room like shadows to rescue the captured Citadel scouts before they break and ${enemy.boss} finds out what you know about the plans of the ${finalboss.name}.'),
-    coldtrail: _.template('<br><br>You don\'t think you have time for subtlety, and make your move to rescue the captured Citadel scouts before they break, and ${enemy.boss} finds out what you know about the plans of the ${finalboss.name}.'),
+    coldtrail: _.template('<br><br>You don\'t think you have time for subtlety, and make your move to rescue the captured Citadel scouts before they break and ${enemy.boss} finds out what you know about the plans of the ${finalboss.name}.'),
     clueless: _.template('<br><br>The captured Citadel scout breaks, and tells what little ${randFrom([`he`,`she`])} knows of what you have on ${possessiveSuffix(finalboss.name)} plans. ${enemy.boss} swings the pipe one more time and starts to move toward the next captive.<br><br>You have to move fast before anything important is revealed.'),
     prologue: _.template('${trail}, you locate <%=knowledge == "clueless" ? `a`: `the`%> black site of the ${enemy.name}. You observe the bleak location from hiding. There are armed guards here and there, and you are certain there are hidden alarms everywhere.<br><br>The captives have their hands bound above their heads, bodies hanging inches from the floor of the dark and musty room. ${enemy.boss} says: "I\'ll give you this one chance to come clean before we start our procedures again."<%=rivalpresence ? ` Meanwhile,${rivaltext}` : ``%>${stagevar}'),
     captured: _.template('"Finally awake?" That\'s the first thing you hear after the splash of stale water jolts you awake. You have no idea how long you\'ve been a hostage of the ${enemy.name}, ${enemy.desc} — but you\'d guess it\'s been at least a few days.<br><br><%=stageindex == 0 ? `Your simple recon mission went south, and now y` : `Y`%>ou\'ve been enduring  their tortures as they\'ve tried to get everything they could out of you. You\'ve held out for now but don\'t know how long you\'ll be able to keep it up. ${bossDescription(enemy)} ${enemy.threat} as ${gPron(enemy, "subject")} stares at you down. "I\'ll give you this one chance to come clean before we start our procedures again." Your silence is deafening as you stare at the floor. "Very well," ${enemy.boss} sneers. "I won\'t be gone for too long, ${defineAddressing(enemy)}. Don\'t get comfortable."<br><br>${ucInit(gPron(enemy, "subject"))} exits,<%=rivalpresence ? `while ${rivaltext}` : ` and as soon as the door closes behind ${gPron(enemy, "object")}, you begin working at your bonds.`%>')},
@@ -668,12 +668,15 @@ $(function() {
 
 $(`.storycardback-winepiloguetext`).each(function(index) {
     $(this).html(cardtexts[index].winepilogue);
-
+    $(this).css({"font-size": "8px"})
+    if (($(this).height() > 109)) {$(this).css({"font-size": "7px"})}
 })
 
 
 $(`.storycardback-loseepiloguetext`).each(function(index) {
     $(this).html(cardtexts[index].loseepilogue);
+    $(this).css({"font-size": "8px"})
+    if (($(this).height() > 109)) {$(this).css({"font-size": "7px"})}
 })
 
 stageindex = 0
@@ -1261,7 +1264,7 @@ function loseResult(stageindex, story, nextstage, gizmo) {
         sent off to your next target, where ${nextenemy.boss} has been seen.`,
         `You retreat and regroup nearby, having lost to ${enemy.boss} and ${gPron(enemy,"possessive")} forces. You overheard a lead, but it will be a struggle for you to catch up with the
         ${possessiveSuffix(finalboss.name)} plans now.`,
-        `You slowly awoke in a helicopter, confused how you wound up here. Agent Fletch leans towards you, shouting over the roar of the vehicle. "No idea what you thought you were doing down there. Now we must hurry to ${nextenemy.name}
+        `You slowly awoke in a helicopter, confused how you wound up here. Agent Fletch leans toward you, shouting over the roar of the vehicle. "No idea what you thought you were doing down there. Now we must hurry to ${nextenemy.name}
         if we're to fix this!"`,
         `As you were regrouping some distance away, you saw your first welcome sight; Agent Fletch approached with a tablet under his arm. "Don't get comfy," Fletch said, booting up the tablet. "After this fiasco, we might recover if we rapidly strike at key
         targets, and hopefully throw the ${finalboss.name} off-balance."`,
@@ -1563,7 +1566,7 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, 
     let prologue
     let casino = getCasino(enemy)
     
-    stage.name == "Cashed Out" ? console.log(stage.name + Math.random()) : ``
+    stage.name == "Original Copy" && knowledge == "captured" ? console.log(stage.name + Math.random()) : ``
 
     if (stage.hasOwnProperty(`prologue`)) {
 
@@ -2109,7 +2112,7 @@ function defiantEnd (enemy) {
         [`Come on, I love it. Bring on some more!`,`Come on, ${enemy.boss}!`],
         [`Just finish this,`,`What are you waiting for?`],
         [`Was that all you got?`,`I excpected more of you.`],
-        [`One day another Gladiator will rise`,`And you shall fall.`],
+        [`One day another Gladiator will rise,`,`And you shall fall.`],
         [`It is better to burn out,`,`Than to fade away.`]
     ]
 
