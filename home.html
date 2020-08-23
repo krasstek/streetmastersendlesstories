@@ -2314,7 +2314,7 @@ function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalm
 
     let rivaltext = motivationText(rivalmotivation, rivalgroup, "Rival", finalboss, gladiators)
 
-    let allysetup = "Each fighter puts one of "
+    let allysetup = "<b>Setup:</b> Each fighter puts one of "
     
     for (i = 0; i < allygroup.length; i++) {
         allysetup = allysetup + " " + allygroup[i].name + " (Ally)" + (i == allygroup.length-2 ? " and " : ", ")
@@ -2322,7 +2322,7 @@ function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalm
 
     allygroup.length > 0 ? allysetup = allysetup.substring(0, allysetup.length - 2) + " into play." : allysetup = `You can pick any Allies for this story, but some might make more sense than others.`
 
-    let rivalsetup = "Each fighter puts one of "
+    let rivalsetup = "<b>Setup:</b> Each fighter puts one of "
     
     for (i = 0; i < rivalgroup.length; i++) {
         rivalsetup = rivalsetup + " " + rivalgroup[i].name + " (Rival)" + (i == rivalgroup.length-2 ? " and " : ", ")
