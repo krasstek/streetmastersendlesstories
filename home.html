@@ -302,7 +302,7 @@ let stages = [
     coldtrail: _.template('. ${enemy.boss} and ${gPron(enemy,"possessive")} forces are already starting the ritual. "${gloat[0]}" calls the confident ${bossDescription(enemy)}, ${gPron(enemy,"possessive")} voice echoing off the stone walls. "${gloat[1]}" ${ucInit(gPron(enemy,"subject"))} forces charge you while ${gPron(enemy,"subject")} continues the ritual.'),
     clueless: _.template('. ${enemy.boss} and ${gPron(enemy,"possessive")} forces have already started the ritual, and you feel the the air intensifying. "${gloat[0]}" calls the confident ${bossDescription(enemy)}, ${gPron(enemy,"possessive")} voice echoing off the stone walls. "${gloat[1]}" ${ucInit(gPron(enemy,"possessive"))} forces charge you while ${gPron(enemy,"subject")} finalizes the ritual.'),
     prologue: _.template('${trail}, <%=knowledge != "hottrail" ? `you find out about a sighting of the ${enemy.name} near a hidden ${evilPlace()}, and move to investigate` : `you reach the hidden ${evilPlace()}`%>. You see the main chamber of the ancient stone structure is encircled with multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of images depicting powerful warriors defeating mighty foes.<br><br>Thinking that these may be part of <%=knowledge == "hottrail" ? `the` : `a`%> ritual, you decide you must quickly remove them from their pedestals${stagevar}<%=rivalpresence ? rivaltext : ``%><br><br>${laconicStatement(enemy)}'),
-    captured: _.template('You are brought into some hidden, ${evilPlace()}, where the air is thick with intensifying heat, and thrown in front of ${bossDescription(enemy)}.<%=rivalpresence ? rivaltext : ``%> "${gloat[0]}" ${enemy.boss} calls out. "${gloat[1]}"<br><br>You see the main chamber of the ancient stone structure is encircled with multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of images depicting powerful warriors defeating mighty foes. Thinking that you must be the final part of some dark ritual with the urns, you suddenly fight your captors off, and move in to remove the urns from their pedestals.')},
+    captured: _.template('Your captors have brought you into a hidden, ${evilPlace()}, where the air is thick with intensifying heat, and thrown in front of ${bossDescription(enemy)}.<%=rivalpresence ? rivaltext : ``%> "${gloat[0]}" ${enemy.boss} calls out. "${gloat[1]}"<br><br>You see the main chamber of the ancient stone structure is encircled with multiple pedestals, each with a mysterious urn placed on top. The urns are etched with a series of images depicting powerful warriors defeating mighty foes. Thinking that you must be the final part of some dark ritual with the urns, you suddenly fight your captors off, and move in to remove the urns from their pedestals.')},
     
     {name:"Compromised", instory: 0, location: "remote", bystander: "hostage", pit: 'a broken window with a 13-story drop',
     stagebonus: [`Each fighter may search the stage deck for 1 copy of Calming Words and add it to their fighter play area. Shuffle the stage deck.`,false,false,false], 
@@ -321,13 +321,13 @@ let stages = [
     stagebonus: [`One fighter may move 3 spaces toward the nearest objective token.`,false,false,false], 
     stagepenalty: [`Search the stage deck for an additional objective card and put it into play. Shuffle the stage deck.`,false,false,false], 
     masterplan: randFrom(["illegalgains","strengtheningforces"]), // actsofterror? chaos, armed strike.. megan's story
-    rivaltext: _.template(' turns to you as ${rival}<%=rivalboost ? `, heavily armed and armored,`: ``%> stashes <%=(knowledge == "clueless" || knowledge == "captured") ? "a" : "the"%> ${gizmo}.'),
+    rivaltext: _.template(' turns to you as ${gPron(enemy.boss, "possessive")} partner in trade, ${rival}<%=rivalboost ? `, heavily armed and armored,`: ``%> stashes <%=(knowledge == "clueless" || knowledge == "captured") ? "a" : "the"%> ${gizmo}.'),
     gloat: [[`It's better to have a gun and not need it,`,`Than to need a gun and not have it.`],[`This is my boomstick,`,`Good or bad, I'm the one with the gun.`],[`Okay, I'm reloaded!`,`You ready? Here comes the pain!`],[`You wanna play rough? Ok,`,`Say hello to my little friend!`]],
     hottrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that the ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : finalboss.name%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You creep low, listening carefully as the they spill all the plans. Once you\'ve heard enough, you jump the startled pair.'),
     coldtrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that the ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : finalboss.name%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You move quickly to keep up and continue your eavesdropping. "Boss!" a guard calls out. You hadn\'t seen him behind the crates nearby, but when you moved to take cover behind them, you were spotted instantly.'),
     clueless: _.template('have to dive for cover behind nearby crates as you run into the ${enemy.minions} guarding the trade. "Get the guns!" you hear a voice call out. "And get those spies!"'),
     prologue: _.template('${trail}, you locate <%=knowledge == "hottrail" ? `the` : `a suspicious` %> warehouse. You enter, and almost immediately ${stagevar}<br><br>${bossDescription(enemy)}<%=rivalpresence ? rivaltext : `, standing next to the contact for the trade, shoots the ${randFrom(["man","woman"])} dead, taking ${knowledge == "clueless" ? "a" : "the"} ${gizmo} from the body.`%> "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}'),
-    captured: _.template('You wake up on cold concrete floor, and hear a voice explaining: "Your revenge is at hand. Voilà!" There\'s a slight pause. "It\'s light, handle\'s adjustable for easy carrying, good for righties and lefties, breaks down into four parts, ideal for quick discreet interventions. A word on firepower.. oh, our practice targets seem to have come to their senses!"<br><br>The ${enemy.minions} of the ${enemy.name} remove your hoods, and you see ${bossDescription(enemy)}, nodding to ${gPron(enemy,"possessive")} companion. "You can pay afterward." ${ucInit(gPron(enemy, "subject"))} <%=rivalpresence ? rivaltext : `turns from the client who stashes a ${gizmo}.`%> "Let the presentation commence!"')},
+    captured: _.template('You wake up on cold concrete floor, and hear a voice explaining: "Your revenge is at hand. Voilà!" There\'s a slight pause. "It\'s light, handle\'s adjustable for easy carrying, good for righties and lefties, breaks down into four parts, ideal for quick discreet interventions. A word on firepower.. oh, our practice targets seem to have come to their senses!"<br><br>The ${enemy.minions} of the ${enemy.name} remove your hoods, and you see ${bossDescription(enemy)}, nodding to ${gPron(enemy,"possessive")} companion. "I can take that later." ${ucInit(gPron(enemy, "subject"))} <%=rivalpresence ? rivaltext : `turns from the client who stashes a ${gizmo}.`%> "Let the presentation commence!"')},
 
     {name:"One Step Ahead", instory: 0, location: "remote", bystander: "mountain climber", pit: "the edge of the cliff",
     stagebonus: [`Each fighter may search the enemy deck for a Minion card to discard. Shuffle the enemy deck.`,false,false,false], 
@@ -450,7 +450,7 @@ let stages = [
     coldtrail: _.template('You arrive at the site, and beat the few ${enemy.minions} guarding the area. Inside, you find ${bossDescription(enemy)}. "Arm the bombs and let\'s get out of here," ${gPron(enemy,"subject")} commands ${gPron(enemy,"possessive")} goons<%=rivalpresence? rivaltext : `.`%> "${gloat[0]}" ${enemy.boss} says, eyeing you. "${gloat[1]}"'),
     clueless: _.template('Unfortunately, you may have arrived too late.. "Arm the bombs and let\'s get out of here," a voice commands from behind a plastic sheet. When the sheet is thrown aside, ${bossDescription(enemy)} steps into view<%=rivalpresence? rivaltext : `.`%> ${possessiveSuffix(enemy.boss)} eyes immediately dart from the placed explosives. Without hesitation, ${gPron(enemy, "subject")} attacks.'),
     prologue: _.template('${trail}, it didn\'t take long to find out ${enemy.name} had been busy setting up an intricate series of explosives at a construction site for a planned ${randFrom([`research facility`,`headquarters`,`manufacturing facility`])} of a ${randFrom([`cutting edge medical company`,`weapons manufacturer`,`chemical manufacturer`,`cybernetics research company`])}. How is the ${finalboss.name} connected? There is only one way to find out.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}'),
-    captured: _.template('You wake up on cold concrete floor and try to get your bearings. Suddenly, ${enemy.boss} steps out from the shadows. "Welcome, ${enemy.addressing}! Nice of you to join us!" You note that ${enemy.minions} are suddenly blocking every exit, except for the one ${enemy.boss} is guarding, and explosives are rigged everywhere<%=rivalpresence ? rivaltext : ``%>. ${ucInit(gPron(enemy,"subject"))} plans to bury you under tons of rubble!<%=rivalpresence ? rivaltext : ``%> "${gloat[0]}" ${enemy.boss} says as you pick yourselves up to face them. "${gloat[1]}"<br><br>${laconicStatement(enemy)}')}
+    captured: _.template('You wake up on cold concrete floor and try to get your bearings. Suddenly, ${enemy.boss} steps out from the shadows. "Welcome, ${enemy.addressing}! Nice of you to join us!"<>br><br>You note that ${enemy.minions} are suddenly blocking every exit, except for the one ${enemy.boss} is guarding, and explosives are rigged everywhere<%=rivalpresence ? rivaltext : ``%>. ${ucInit(gPron(enemy,"subject"))} plans to bury you under tons of rubble!<%=rivalpresence ? rivaltext : ``%> "${gloat[0]}" ${enemy.boss} says as you pick yourselves up to face them. "${gloat[1]}"<br><br>${laconicStatement(enemy)}')}
 ];
     
     enemiescopy = enemies.slice(0,enemies.length)
@@ -506,7 +506,7 @@ let alliesandrivals = [
         {name: "Power Soldier", keywords: ["Dark Matter","Beast","Black Ops","Kingdom","Martial Arts Master", "Clone"]},
         {name: "Project X", keywords: ["Dark Matter","Beast","Insane","Martial Arts Master", "Youth", "Clone", "Jackal", "Project X"]},
         {name: "Sera O'Quinn", keywords: ["Boss","Celebrity","Insane","Organized Crime", "Clone", "Megan"]},
-        {name: "Shadow", keywords: ["Boss","Kingdom","Martial Arts Master","Chi", "Clone", "Shadow", "Horseman"]},
+        {name: "Shadow", keywords: ["Boss","Kingdom","Martial Arts Master","Chi", "Clone", "Shadow", "Horseman", "Sensei"]},
         {name: "Shin Yokai", keywords: ["Boss","Insane","Extraplanar","Chi", "Clone", "Shadow", "Shin Yokai", "Horseman"]},
         {name: "Star Knight Iri", keywords: ["Indines","Extraplanar","Blade","Soldier", "Clone"]},
         {name: "Tiger Azules", keywords: ["Aztec","Street","Cartel","Martial Arts Master", "Clone", "Juan", "Wanderer"]},
@@ -752,7 +752,7 @@ function whichPreposition (word) {
     return "a " + word}
 }
 
-function latestScheme() {
+function latestScheme(enemy) {
     let latestscheme = [
         `In Citadel's ongoing investigations, rumors have been uncovered that`,
         `In the wake of the Kingdom's latest scheme, the Citadel has learned a new threat on the rise: `,
@@ -761,14 +761,18 @@ function latestScheme() {
         `In a situation familiar to the Citadel and Global Gladiators, `,
         `In a street-level recon operation, Citadel has uncovered a job fit for Global Gladiators: `,
         `Thanks to Citadel's resourcefulness and your familiarity with the Kingdom's street-level activity, there's new intel that`, 
+        `You have received a note signed by the ${enemy.name} boss that instructs you not to interfere or you'll be in for the fight of your lives, as `,
+        `Responding to a crisis, the Global Gladiators are called into action. You come into play as `
         ];
     latestscheme = randFrom(latestscheme);
     return latestscheme
 }
 
 function preGamePrologue(stage, enemy) {
+
+    //more masterplans: complete desctruction; activate superweapon?
     
-    let latestscheme = latestScheme()
+    let latestscheme = latestScheme(enemy)
     
     let masterplan
 
@@ -776,14 +780,15 @@ function preGamePrologue(stage, enemy) {
 
     switch(stage.masterplan) {
     case "actsofterror": masterplan = `the vicious criminal syndicate ${enemy.name} believes they do not have to bow to the government or even the
-    police force of Ransom City. ${enemy.boss} is going to let everyone know that the city has become a center of violence and crime where no-one is safe. `
+    police force of Ransom City. ${enemy.boss} is going to let everyone know that Ransom has become a center of violence and crime where no-one is safe. `
     break;
     case "illegalgains": masterplan = `the ${possessiveSuffix(enemy.name)} vast network of crime and 
         ${(enemy.desc).replace("the","")} require substantial financial pipelines, and ${enemy.boss} is organizing a big score to fund
         ${gPron(enemy, "possessive")} operations. `
     break;
-    case "kidnapping": masterplan = `the ${vip[1]} is not the exception to the rampant crimes related to the Kingdom these days. The ${vip[0]} has been kidnapped by the
-    ${enemy.minions} of ${enemy.boss}. Are you a bad enough dude to rescue the ${vip[0]}? `
+    case "kidnapping": masterplan = randFrom(
+        [`the ${vip[1]} is not the exception to the rampant crimes related to the Kingdom these days. The ${vip[0]} has been kidnapped by the ${enemy.minions} of ${enemy.boss}. Are you a bad enough dude to rescue the ${vip[0]}? `,
+        `${enemy.boss} is holding Ransom City captive and the ${vip[0]} hostage. With ${gPron(enemy,"possessive")} gang of ${enemy.minions}, nobody but you can stop ${gPron(enemy,"object")} now. `])
     break;
     case "strengtheningforces": masterplan = `the ${enemy.bosstitle} ${enemy.boss} has been covertly making efforts to
             strengthen the forces of the ${enemy.name}. Their plans must be thwarted before their forces become unstoppable. `
@@ -2309,21 +2314,21 @@ function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalm
 
     let rivaltext = motivationText(rivalmotivation, rivalgroup, "Rival", finalboss, gladiators)
 
-    let allysetup = "Put"
+    let allysetup = "Each fighter puts one of "
     
     for (i = 0; i < allygroup.length; i++) {
         allysetup = allysetup + " " + allygroup[i].name + " (Ally)" + (i == allygroup.length-2 ? " and " : ", ")
     }
 
-    allygroup.length > 0 ? allysetup = allysetup.substring(0, allysetup.length - 2) + " in the Story Pool." : allysetup = `You can pick any Allies for this story, but some might make more sense than others.`
+    allygroup.length > 0 ? allysetup = allysetup.substring(0, allysetup.length - 2) + " into play." : allysetup = `You can pick any Allies for this story, but some might make more sense than others.`
 
-    let rivalsetup = "Put"
+    let rivalsetup = "Each fighter puts one of "
     
     for (i = 0; i < rivalgroup.length; i++) {
         rivalsetup = rivalsetup + " " + rivalgroup[i].name + " (Rival)" + (i == rivalgroup.length-2 ? " and " : ", ")
     }
 
-    rivalgroup.length > 0 ? rivalsetup = rivalsetup.substring(0, rivalsetup.length - 2) + " in the Story Pool." : rivalsetup = `You can pick any Allies for this story, but some might make more sense than others.`
+    rivalgroup.length > 0 ? rivalsetup = rivalsetup.substring(0, rivalsetup.length - 2) + " into play." : rivalsetup = `You can pick any Rivals for this story, but some might make more sense than others.`
 
     let text = []
 
@@ -2443,9 +2448,9 @@ let text
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
             break;
             case "Celebrity": text = (stance == "Ally" ? 
-            `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : `these ${numberAsString(group.lenth)} are`} the worst. With  
+            `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : `these ${numberAsString(group.length)} are`} the worst. With  
             ${group.length == 1 ? "this fool" : "these fools"} appearing everywhere for cheap publicity, you just hope nobody gets hurt.` : 
-            `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : `these ${numberAsString(group.lenth)} are`} the worst. With  
+            `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : `these ${numberAsString(group.length)} are`} the worst. With  
             ${group.length == 1 ? "this fool" : "these fools"} appearing everywhere for cheap publicity, you're afraid someone will get hurt.. not that it would deter them.`);
             break;
             case "Chi": text = (stance == "Ally" ?
@@ -2529,7 +2534,7 @@ let text
             break;
             case "Horseman": text = (stance == "Ally" ? 
             `The mysterious Master must believe ${finalboss.boss} is truly a lost cause to his secretive goals, as ${group.length == 1 ? "a horseman has" : `not one, but ${numberAsString(group.length)} horsemen have`} been sent after ${gPron(finalboss, "object")}.` : 
-            `The mysterious Master must believe you is truly are an immense threat to his secretive goals, as ${group.length == 1 ? "a horseman has" : `not one, but ${numberAsString(group.length)} horsemen have`} been sent to take you down.`);
+            `The mysterious Master must believe you truly are an immense threat to his secretive goals, as ${group.length == 1 ? "a horseman has" : `not one, but ${numberAsString(group.length)} horsemen have`} been sent to take you down.`);
             break;
             case "Indines": text = (stance == "Ally" ? 
             `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King 
@@ -2538,10 +2543,10 @@ let text
             Greyheart being freed and save their world they have to doom yours!`);
             break;
             case "Insane": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This individual is" : "These individuals are"} not sound of mind, but unpredicable and dangerous. For whatever irresponsible reason, 
-            they are following you around, dead set on taking on ${finalboss.boss}. You just have to hope they will not change their mind.` : 
-            `${group.length == 1 ? "This individual is" : "These individuals are"} quite deranged, unpredicable and dangerous. For whatever psychotic reason, 
-            they are following you around, dead set on taking you out.`);
+            `${group.length == 1 ? "This individual is" : "These individuals are"} unpredictable and dangerously unhinged. For their own reasons, 
+            they are following you around, dead set on taking on ${finalboss.boss}. You just have to hope they will not turn on you.` : 
+            `${group.length == 1 ? "This individual is" : "These individuals are"} unpredictable and dangerously unhinged. For whatever deranged reason, 
+            they are dead set on taking you out.`);
             break;
             case "Jackal":
             if (stance == "Ally" && finalboss.boss == "Shadow" && !gladiators.includes("Shadow") && !gladiators.includes("Jackal")) {
@@ -2591,7 +2596,7 @@ let text
             break;
             case "Mr. Apple":
             if (stance == "Ally") {
-                text = `After and exhibition Sensei Apple was surrounded by ${finalboss.minions} and their leader challenged him to a fight. Unfortunately, due to lack of music Sensei Apple lost his rhythm and it didn't take long for him to be overwhelmed. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? `Now he has joined forces with his protege to find his assailant and show ${genderPronoun(finalboss,"object")} what true skill is.` : `Now he has joined forces with you to find his assailant and show ${genderPronoun(finalboss,"object")} what true skill is.`) : `His protege is determined to find the assailants and return the honor of her master.`}`
+                text = `After and exhibition Sensei Apple was surrounded by ${finalboss.minions} and their leader challenged him to a fight. Unfortunately, due to lack of music Sensei Apple lost his rhythm and it didn't take long for him to be overwhelmed. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? `Now he has joined forces with his protege to find his assailant and show ${gPron(finalboss,"object")} what true skill is.` : `Now he has joined forces with you to find his assailant and show ${gPron(finalboss,"object")} what true skill is.`) : `His protege is determined to find the assailants and return the honor of her master.`}`
             } else {text = `After and exhibition Sensei Apple was surrounded by an unknown group of martial artists. Unfortunately, due to lack of music Sensei Apple lost his rhythm and it didn't take long for him to be overwhelmed. ${_.map(group, 'name').includes(motivation) ? `Confused and angry, he is determined you are the assailants, and tries to face you at every turn${group.length == 2 ? `, and drags his apprentice along`: ``}.` : `Confused and angry, he is determined you are the assailants, and his protege is determined to return the honor of her master.`}`};
             break;
             case "Monk": text = (stance == "Ally" ? 
@@ -2693,10 +2698,8 @@ let text
             } else {text = personalstory_enemy};
             break;
             case "Toxic": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "This warrior has" : "These warriors have"} expertise on toxins, and have received a vision of the future 
-            in a psychedelic chemical dream. They have determined ${finalboss.boss} cannot be allowed to continue on this path. They have joined you in your mission.` : 
-            `${group.length == 1 ? "This warrior has" : "These warriors have"} expertise of toxins, and have received a vision of the future 
-            in a psychedelic chemical dream. They have determined ${finalboss.boss} must be allowed to continue on this path. They attempt to stop you at every turn.`);
+            `${group.length == 1 ? "This warrior has" : "These warriors have"} received a vision of the future from toxin experimentation. They have determined ${finalboss.boss} cannot be allowed to continue on this path. They have joined you in your mission.` : 
+            `${group.length == 1 ? "This warrior has" : "These warriors have"} received a vision of the future from toxin experimentation. They have determined ${finalboss.boss} must be allowed to continue on this path. They attempt to stop you at every turn.`);
             break;
             case "Twin Tiger": text = (stance == "Ally" ? 
             `Twin Tiger dojo has decided your skills are lacking, and ${group.length == 1 ? `${group[0].name}` : "these fighters"} oversee your journey to 
@@ -2725,8 +2728,8 @@ let text
             default: text = (stance == "Ally" ? "For whatever reason, these people stand with you againt the schemes of the Kingdom." : "For whatever reason, these people stand with the Kingdom against you.");
 }
 
-text = `<br>If you prefer not to use extra ${stance == "Ally" ? "Allies" : "Rivals"} for this story, flip this card if you did not do that already, otherwise put it in the Story Pool for reference. If do prefer to, this card will add another layer to your story: <br>——————————————————————————————————<br>` 
-    + text + "<br>——————————————————————————————————<br>If you haven't yet flipped this card, flip it. Otherwise, keep it in in the Story Pool for reference."
+text = `<br>If you want to use additional Allies or Rivals during this story, put this card in the Story Pool for reference.<br><br><i>` 
+    + text + `</i><br><br>If you only want to use ${stance == "Ally" ? "Allies" : "Rivals"}, use the setup instructions on this side of the card. Otherwise, use both sides.`
 return text
 
 }

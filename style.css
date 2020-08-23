@@ -157,7 +157,13 @@ h1,h2 {
     
 }
 
-.refcardfront-prologuetext,
+.refcardfront-prologuetext{
+    padding: 3mm;
+    color: black;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 8px;
+}
+
 .storycardfront-prologuetext{
     padding: 3mm;
     color: black;
