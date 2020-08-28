@@ -382,8 +382,8 @@ let stages = [
     rivaltext: _.template(' ${rival} stands guard<%= rivalboost ? `, vigilant and keen-eyed.`: `.`%>'),
     hottrail: _.template('<br><br>You are yet unseen, and dart through the room like shadows to rescue the captured Citadel scouts before they break and ${enemy.boss} finds out what you know about the plans of the ${finalboss.name}.'),
     coldtrail: _.template('<br><br>You don\'t think you have time for subtlety, and make your move to rescue the captured Citadel scouts before they break and ${enemy.boss} finds out what you know about the plans of the ${finalboss.name}.'),
-    clueless: _.template('<br><br>The captured Citadel scout breaks, and tells what little ${randFrom([`he`,`she`])} knows of what you have on ${possessiveSuffix(finalboss.name)} plans. ${enemy.boss} swings the pipe one more time and starts to move toward the next captive.<br><br>You have to move fast before anything important is revealed.'),
-    prologue: _.template('${trail}, you locate <%=knowledge == "clueless" ? `a`: `the`%> black site of the ${enemy.name}. You observe the bleak location from hiding. There are armed guards here and there, and you are certain there are hidden alarms everywhere.<br><br>The captives have their hands bound above their heads, bodies hanging inches from the floor of the dark and musty room. ${enemy.boss} says: "I\'ll give you this one chance to come clean before we start our procedures again."<%=rivalpresence ? ` Meanwhile,${rivaltext}` : ``%>${stagevar}'),
+    clueless: _.template('<br><br>A captured Citadel scout breaks, and tells what little ${randFrom([`he`,`she`])} knows of what you have on ${possessiveSuffix(finalboss.name)} plans. ${enemy.boss} swings the pipe one more time and starts to move toward the next captive.<br><br>You have to move fast before anything important is revealed.'),
+    prologue: _.template('${trail}, you locate <%=knowledge != "hottrail" ? `a`: `the`%> black site of the ${enemy.name}. You observe the bleak location from hiding. There are armed guards here and there, and you are certain there are hidden alarms everywhere.<br><br>The captives have their hands bound above their heads, bodies hanging inches from the floor of the dark and musty room. ${enemy.boss} says: "I\'ll give you this one chance to come clean before we start our procedures again."<%=rivalpresence ? ` Meanwhile,${rivaltext}` : ``%>${stagevar}'),
     captured: _.template('"Finally awake?" That\'s the first thing you hear after the splash of stale water jolts you awake. You have no idea how long you\'ve been a hostage of the ${enemy.name}, ${enemy.desc} — but you\'d guess it\'s been at least a few days.<br><br><%=stageindex == 0 ? `Your simple recon mission went south, and now y` : `Y`%>ou\'ve been enduring  their tortures as they\'ve tried to get everything they could out of you. You\'ve held out for now but don\'t know how long you\'ll be able to keep it up. ${bossDescription(enemy)} ${enemy.threat} as ${gPron(enemy, "subject")} stares at you down. "I\'ll give you this one chance to come clean before we start our procedures again." Your silence is deafening as you stare at the floor. "Very well," ${enemy.boss} sneers. "I won\'t be gone for too long, ${defineAddressing(enemy)}. Don\'t get comfortable."<br><br>${ucInit(gPron(enemy, "subject"))} exits,<%=rivalpresence ? `while ${rivaltext}` : ` and as soon as the door closes behind ${gPron(enemy, "object")}, you begin working at your bonds.`%>')},
 
     {name:"Rude Awakening", instory: 0, location: "cursed", bystander: "necromancer", pit: "a bottomless fissure",
@@ -990,7 +990,7 @@ function storyNamer(finalboss,finalstage, number = 16){
         break;
         case 10: storyname = randFrom(nouns)[0] + " " + randFrom(nouns)[0] + " " + randFrom(nouns)[plural]
         break;
-        case 11: storyname = randFrom(nouns)[plural] + " and " + randFrom(nouns)[plural]
+        case 11: storyname = (plural == 0 ? " The " : " ") + randFrom(nouns)[plural] + " and " + (plural == 0 ? " the " : " ") + randFrom(nouns)[plural]
         break;
         case 12: storyname = randFrom(nouns)[0] + ": " + storyNamer(finalboss,finalstage,15)
         break;
@@ -2317,7 +2317,7 @@ function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalm
     let allysetup = "<b>Setup:</b> Each fighter puts one of "
     
     for (i = 0; i < allygroup.length; i++) {
-        allysetup = allysetup + " " + allygroup[i].name + " (Ally)" + (i == allygroup.length-2 ? " and " : ", ")
+        allysetup = allysetup + " " + allygroup[i].name + " (Ally)" + (i == allygroup.length-2 ? " or " : ", ")
     }
 
     allygroup.length > 0 ? allysetup = allysetup.substring(0, allysetup.length - 2) + " into play." : allysetup = `You can pick any Allies for this story, but some might make more sense than others.`
@@ -2325,7 +2325,7 @@ function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalm
     let rivalsetup = "<b>Setup:</b> Each fighter puts one of "
     
     for (i = 0; i < rivalgroup.length; i++) {
-        rivalsetup = rivalsetup + " " + rivalgroup[i].name + " (Rival)" + (i == rivalgroup.length-2 ? " and " : ", ")
+        rivalsetup = rivalsetup + " " + rivalgroup[i].name + " (Rival)" + (i == rivalgroup.length-2 ? " or " : ", ")
     }
 
     rivalgroup.length > 0 ? rivalsetup = rivalsetup.substring(0, rivalsetup.length - 2) + " into play." : rivalsetup = `You can pick any Rivals for this story, but some might make more sense than others.`
@@ -2430,8 +2430,8 @@ let text
             } else {text = personalstory_enemy};
             break;            
             case "Brook City": text = (stance == "Ally" ? 
-            `${group.length == 1 ? "A citizen" : "A group of citizens"} from Brook City's past have arrived to the future, and they are not happy with what they see. Their only hope of getting back seems to lie in stopping ${finalboss.boss}.` : 
-            `${group.length == 1 ? "A citizen" : "A group of citizens"} from Brook City's past have arrived to the future, and they are not happy with what they see. Their only hope of getting back seems to lie in stopping you.`);
+            `${group.length == 1 ? "This resident" : "A group of residents"} of Brook City believes that if ${finalboss.boss} is not stopped, their home will be next. They will do what they can to help you.` : 
+            `If ${finalboss.boss} can just do what ${gPron(finalboss, "subject")} wants in Ransom, maybe Brook City will be left in peace? ${group.length == 1 ? "A citizen" : "A group of citizens"} has traveled here to see that he ${gPron(finalboss, "subject")} will.`);
             break;
             case "Brotherhood": text = (stance == "Ally" ? 
             `${bossclone ? `"An impostor has taken over my organization, and he must go down," Dmitri tells you. You're wary of the Brotherhood, 
@@ -2619,8 +2619,8 @@ let text
             } else {text = personalstory_enemy};
             break;
             case "Onyx League": text = (stance == "Ally" ?
-            `The ongoing plans of ${finalboss.boss} will lead only to mindless destruction, not anarcy and freedom the Onyx League is after. 
-            A ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to crush the opposition. You're lucky to have them on your side!` : 
+            `The ongoing plans of ${finalboss.boss} will lead only to mindless destruction, not anarcy through strength the Onyx League is after. 
+            A ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to correct this course. You're lucky to have them on your side!` : 
             `You have been a thorn in the side of the Onyx League for a long time. While you are busy with your mission to get ${finalboss.boss}, they have sent a 
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
             break;
@@ -2672,8 +2672,8 @@ let text
             } else {text = personalstory_enemy};
             break;
             case "Shin Yokai":
-            if (stance == "Ally" && finalboss.boss == "Shadow" && !gladiators.includes("Yokai")) {
-                text = `The furious master of the Oni, Shin Yokai believes he has been betrayed by his Master, and wants to find Shadow just as much as you do, to find out what he knows. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? `He has taken pity on one Marionette Doll called June, and protects her on their travels.` : `He looks like he is unable to control the demonic force, and is no longer in touch with his human side.`) : `A Marionette Doll called June he once helped tries to repay this by helping you find Shadow for him.`}`
+            if (stance == "Ally" && finalboss.boss != "Yokai" && !gladiators.includes("Yokai")) {
+                text = `The furious master of the Oni, Shin Yokai believes he has been betrayed by his Master, and wants to find ${finalboss.boss} to find out what ${gPron(finalboss, "subject")} knows. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? `He has taken pity on one Marionette Doll called June, and protects her on their travels.` : `He looks like he is unable to control the demonic force, and is no longer in touch with his human side.`) : `June, a Marionette Doll he once helped tries to repay the debt helping you find ${finalboss.boss} for him.`}`
             } else if (stance == "Ally") {text = personalstory_ally} else if (stance == "Rival" && gladiators.includes("Shadow") && !gladiators.includes("Yokai")) {
                 text = `The furious master of the Oni, Shin Yokai believes he has been betrayed by his Master, and wants to find out what you know about him. ${_.map(group, 'name').includes(motivation) ? `${group.length == 2 ? `A Marionette Doll called June he once helped tries to repay this by helping him interrogate you.` : `He looks like he is unable to control the demonic force, and is no longer in touch with his human side.`}` : `A Marionette Doll called June he once helped tries to repay this by fishing the information out of you.`} You know nothing but this matters not. You have to deal with this yourself.`
             } else {text = personalstory_enemy};
@@ -2728,7 +2728,7 @@ let text
             default: text = (stance == "Ally" ? "For whatever reason, these people stand with you againt the schemes of the Kingdom." : "For whatever reason, these people stand with the Kingdom against you.");
 }
 
-text = `<br>If you want to use additional Allies or Rivals during this story, put this card in the Story Pool for reference.<br><br><i>` 
+text = `<br>If you want to use additional Allies or Rivals during this story, put this card in the Story Pool.<br><br><i>` 
     + text + `</i><br><br>If you only want to use ${stance == "Ally" ? "Allies" : "Rivals"}, use the setup instructions on this side of the card. Otherwise, use both sides.`
 return text
 
