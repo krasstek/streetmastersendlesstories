@@ -99,7 +99,8 @@ h1,h2 {
     padding-top: 3mm;
     padding-bottom: 1mm;
     display: table-cell;
-    font-size: 24px;
+    font-size: 26px;
+    font-weight: 200;
     border: 2pt solid transparent;
 }
 
@@ -228,7 +229,8 @@ h1,h2 {
     z-index: 2;
 }
 
-.storycardback-epiloguetitle {
+.storycardback-epiloguetitle-win,
+.storycardback-epiloguetitle-lose {
     width: 63mm;
     height: 5mm;
     position: relative;
@@ -238,12 +240,12 @@ h1,h2 {
     top: 0.4mm;
     font-style: italic;
     padding-top: 1mm;
-    padding-left: 23mm;
     color: #d6d2ce;
     box-sizing: border-box;
     -webkit-clip-path: polygon(0 0, 100% 0%, 100% 20%, 80% 20%, 75% 100%, 25% 100%, 20% 20%, 0% 20%);
     clip-path: polygon(0 0, 100% 0%, 100% 20%, 80% 20%, 75% 100%, 25% 100%, 20% 20%, 0% 20%);
     z-index: 2;
+    text-align: center;
 }
 
 .storycardback-winepiloguetext,
