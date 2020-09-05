@@ -1587,6 +1587,8 @@
 
             let addrival
 
+            let ally = rival
+
             let penalty = Math.max(0, Math.round(stageindex / 3))
 
             if (knowledge == "clueless") {
@@ -1607,14 +1609,14 @@
             let preparedboss = randFrom(enemy.preparedboss)
 
             let genericbonus = [
-                { allysetup: `Put ${rival.name} (ally) into play.` },
+                { allysetup: `Put ${ally.name} (ally) into play.`, prologue: "guide" },
                 { setup: `Each fighter may take a second mulligan.` },
                 { setup: `Each fighter gains 2 random defense tokens.` },
                 { setup: `Search the enemy deck for ${preparedboss[0]} and discard it. Shuffle the enemy deck.`},
                 { setup: `Each fighter may draw one loot card.` },
                 { setup: `Each fighter may draw one card and gain 1 defense token of their choice.` }, // exhaust to attack with guard
-                // { persisent: `<b>Exhaust:</b> Choose one unengaged fighter to draw one card.` }, // feint to draw loot?ß
-                { rivalsetup: `Put ${rival.name} (rival) into play.`, wincondition: [`If ${rival.name} is defeated:`,`If ${rival.name} is not defeated:`] }
+                { persisent: `<b>Exhaust:</b> Choose one unengaged fighter to draw one card.` }, // feint to draw loot?ß
+                { rivalsetup: `Put ${rival.name} (rival) into play.`, wincondition: [`If ${rival.name} is defeated:`,`If ${rival.name} is not defeated:`], prologue: "rival" }
             ]
             let angryrival = [
                 { setup: `${rival.name} (rival) gains 1 of each type of defense token, and is placed within 3 spaces of a fighter. Activate ${rival.name} (rival).`, rivalboost: true },
@@ -1622,9 +1624,14 @@
                 { activate: `${rival.name} (rival) gains 2 random defese tokens.`, rivalboost: true },
                 { activate: `${rival.name} (rival) gains gains 1 defense token from each engaged fighter.`, rivalboost: true },
                 { activate: `The fighter furtherst from ${rival.name} (rival) discards 1 power.`, rivalboost: true },
-                { wincondition: [`If you win and ${rival.name} is defeated:`,`If ${rival.name} is not defeated:`] },
-                { activate: `If ${rival.name} (rival) is in play, each fighter discards 2 defense tokens of different types. Each fighter and each adjacent figure to them is 3 general damage.` }
+                { wincondition: [`If you win and ${rival.name} is defeated:`,`If ${rival.name} is not defeated:`], prologue: "rival" },
+                { activate: `If ${rival.name} (rival) is in play, each fighter discards 2 defense tokens of different types. For each fighter that did not, deal that fighter and each figure adjacent to them 3 general damage.` }
             ]
+
+            let intel_words = [`intel`, `evidence`, `knowledge`, `information`]
+            let acquire_words = [`acquired`, `obtained`, `collected`, `found`, `discovered`]
+            let interrogate_words = randFrom([`interrogated`, `questioned`, `examined`, `probed`])
+            let intel_goal = randFrom([`${randFrom(acquire_words)} the ${randFrom(intel_words)}`,`learned what you need`])
 
             let penalties = [
                 { activate: `If ${enemy.boss} is unengaged, ${gPron(enemy, "subject")} gains 1 defense token.` },
@@ -1636,12 +1643,12 @@
                 { persistent: `${enemy.boss} gains +1 attack value.` },
                 { persistent: `${enemy.boss} gains ${enemy.boss == "Ah Long" ? "2P" : "4P"} health value.` },
                 { activate: `The fighter furtherst from ${enemy.boss} within 4 spaces discards 1 power.`},
-                { allysetup: `Put ${rival.name} (ally) into play.`, wincondition: [`If you win and ${rival.name} is not defeated:`,`If ${rival.name} is defeated:`]},
-                { persistent: `Put 2P power on this card. <b>Interact:</b> If engaged with ${enemy.boss}, discard 1 defense token of a type of which ${gPron(enemy,"subject")} has 0 of to discard 1 power from this card and if no power remains, ${enemy.boss} is successfully interrogated.`, wincondition: [`If you win and ${enemy.boss} is interrogated:`,`If ${enemy.boss} is not interrogated:`], prologue: "intel" },
-                { persistent: `<b>Interact:</b> If you are in a crate space, you may discard 1 of each type of defense token on this card. Once there is 1P of each defense token on this card, you have acquired the evidence.`, activate: `Each fighter discards 1 defense token for each space the nearest crate space is from them.`, wincondition: [`If you win and have acquired the evidence:`,`If you have not acquired the evidence:`], prologue: "intel" },
+                { allysetup: `Put ${ally.name} (ally) into play.`, wincondition: [`If you win and ${ally.name} is not defeated:`,`If ${ally.name} is defeated:`], prologue: "escort"},
+                { persistent: `Put 2P power on this card. <b>Interact:</b> If engaged with ${enemy.boss}, discard 1 defense token of a type of which ${gPron(enemy,"subject")} has 0 of to discard 1 power from this card and if no power remains, ${enemy.boss} is successfully ${interrogate_words}.`, wincondition: [`If you win and ${enemy.boss} is ${interrogate_words}:`,`If ${enemy.boss} is not ${interrogate_words}:`], prologue: "intel" },
+                { persistent: `<b>Interact:</b> If you are in a crate space, you may discard 1 of each type of defense token on this card. Once there is 1P of each defense token on this card, you have ${intel_goal}.`, activate: `Each fighter discards 1 defense token for each space the nearest crate space is from them.`, wincondition: [`If you win and have ${intel_goal}:`,`If you have not ${intel_goal}:`], prologue: "intel" },
                 { activate: `Every fighter not engaged with an enemy must discard 1 power and 1 defense token of their choice.` },
-                { persistent: `Place 5P power tokens on this card. After a fighter defeats an enemy in their threat area, they may discard 1 defense token to gain 1 power from this card. If there is no power on this card, you have learned what you need.`, activate: `Place 1 power on this card for any enemy except for the boss is unengaged.`, wincondition: [`If you win and have learned what you need:`,`If you have not learned what you need:`], prologue: "intel" },
-                { allysetup: `Put ${rival.name} (ally) into play.`, persistent: `If ${rival.name} (ally) would be dealt any damage, deal it to one fighter instead.` },
+                { persistent: `Place 5P power tokens on this card. After a fighter defeats an enemy in their threat area, they may discard 1 defense token to gain 1 power from this card. If there is no power on this card, you have ${intel_goal}.`, activate: `Place 1 power on this card for any enemy except for the boss is unengaged.`, wincondition: [`If you win and have ${intel_goal}:`,`If you have not ${intel_goal}:`], prologue: "intel" },
+                { allysetup: `Put ${ally.name} (ally) into play.`, persistent: `If ${ally.name} (ally) would be dealt any damage, deal it to one fighter instead.`, prologue: "escort" },
             ]
 
             addrival ? penalties = _.union(penalties, angryrival) : penalties = penalties
@@ -1690,35 +1697,48 @@
 
         }
 
-        function createLeadIn(pregameprologue, stageindex, wincondition, enemy, finalboss) {
+        function createLeadIn(pregameprologue, stageindex, wincondition, enemy, finalboss, rival, ally) {
 
-            let lead_in
+            // stageindex makes finalboss the "true mastermind" or some such when index 8/9
+
+            pregameprologue = stageindex == 0 ? pregameprologue : ``
+            let find_out_words = [`you discover`,`you find out`,`you learn`,`you get wind`,`you determine`, `it seems`, `turns out`]
+            let this_boss = finalboss.name == enemy.name ? enemy.boss : randFrom([enemy.boss,`the ${enemy.name}`])
+            let this_finalboss = finalboss.name == enemy.name ? finalboss.boss : randFrom([finalboss.boss,`the ${finalboss.name}`])
+            
             let intel_words = ["intel", "knowledge", "information", "a clue", "a word", "lowdown"]
             let location_words = ["locale", "location", "whereabouts", "position", "scene", "station", "bearings"]
             let investigator_words = ["Citadel analysts", "you", "Agent Fletch and you"]
             let assumption_words = ["believe", "consider", "conclude", "suppose", "think", "regard", "assume", "postulate", "deem", "surmise"]
+            let decision_words = [`resolve`, `determine`,`come to a decision`, `decide`, `come to a conclusion`]
+            let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence` ]
+
+            let first_is_final = enemy.boss != finalboss.boss && stageindex == 0 ? 
+            `Without ${randFrom(intel_words)} on the current ${randFrom(location_words)} of ${finalboss.boss}, ${randFrom(investigator_words)} ${randFrom(assumption_words)} ${enemy.boss} is the best source for more information.<br><br>` : ``
+
             let hence_words = [`Accordingly`,`Hence`, `So`, `Consequently`, `Therefore`, `Thus`]
             let default_clues = ["Based on current intel", "Chasing the clues", "Following your leads", "In pursuit of clues", "After a little more intel-gathering", "Following this lead", "As you investigated further", "After searching for more intel", "Following the intel you had", "After searching for more information", "Reviewing what you got", "With the information you gathered", `You tracked down some of the ${enemy.name} associates and tailed their movements. ${randFrom(hence_words)}`, `Following the trail of money leading from the previous encounter`]
             let wincondition_txt = ""
 
-            if (wincondition != ``){
-            let find_out_words = [`you discover`,`you find out`,`you learn`,`you get wind`,`you determine`, `it seems`, `turns out`]
-            let decision_words = [`resolve`, `determine`,`come to a decision`, `decide`, `come to a conclusion`]
-            let this_boss = finalboss.name == enemy.name ? enemy.boss : randFrom([enemy.boss,`the ${enemy.name}`])
-            let this_finalboss = finalboss.name == enemy.name ? finalboss.boss : randFrom([finalboss.boss,`the ${finalboss.name}`])
+            if (wincondition == "intel"){
+
             let intel_words_2 = [`intel`, `evidence`, `knowledge`, `information`]
-            let evidence_clues = [` ${randFrom(find_out_words)} that ${this_boss} knows more about ${possessiveSuffix(this_finalboss)} plan than you excpected.`, ` ${randFrom(find_out_words)} ${this_boss} has detailed ${randFrom(intel_words_2)} on the plans of ${this_finalboss}.`, ` ${randFrom(find_out_words)} ${this_boss} has ${randFrom(intel_words_2)} that will lead you to ${this_finalboss}.`]
+            let evidence_clues = [` that ${this_boss} knows more about ${possessiveSuffix(this_finalboss)} plan than you excpected.`, ` ${this_boss} has detailed ${randFrom(intel_words_2)} on the plans of ${this_finalboss}.`, ` ${this_boss} has ${randFrom(intel_words_2)} that will lead you to ${this_finalboss}.`]
             let acquire_words = [`obtaining`, `acquiring`, `securing`, `procuring`, `getting`, `finding`]
             let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence` ]
             let decision_txt = `${ucInit(randFrom(investigator_words))} ${randFrom(decision_words)} ${randFrom(acquire_words)} the ${randFrom(intel_words_2)} is ${randFrom(priority_words)}.`
-            wincondition_txt = `${randFrom(evidence_clues)} ${decision_txt} ${randFrom(hence_words)}` 
-           } 
+            wincondition_txt = `${randFrom(default_clues)} ${randFrom(find_out_words)} ${randFrom(evidence_clues)} ${decision_txt} ${randFrom(hence_words)}` 
+           
+            } else if (wincondition == "rival"){
 
-            pregameprologue = stageindex == 0 ? pregameprologue : ``
-            let first_is_final = enemy.boss != finalboss.boss && stageindex == 0 ? 
-            `Without ${randFrom(intel_words)} on the current ${randFrom(location_words)} of ${finalboss.boss}, ${randFrom(investigator_words)} ${randFrom(assumption_words)} ${enemy.boss} is the best source for more information.<br><br>` : ``
+            let rivals_fate_words = [`capturing`, `seizing`, `arresting`, `catching`, `interrogating`, `grilling`, `questioning`]
+            let rival_capture = `${ucInit(investigator_words)} ${randFrom(decision_words)} ${randFrom(rivals_fate_words)} ${gPron(rival, "object")} ${randFrom(decision_words)}.`
 
-            lead_in = pregameprologue + first_is_final + randFrom(default_clues) + wincondition_txt
+            wincondition_txt = `${randFrom(default_clues)} ${randFrom(find_out_words)} ${this_boss} has an associate who knows more about the plans of ${this_finalboss}. ${rival_capture}`
+
+           } else wincondition_txt = randFrom(default_clues)
+
+            let lead_in = pregameprologue + first_is_final + wincondition_txt
 
             console.log(lead_in)
 
@@ -1731,6 +1751,7 @@
             let enemy = story[stageindex].enemy
             let stage = story[stageindex].stage
             let rival = allyNamer(alliesandrivals, enemy, heronames)
+            let ally = rival
             let competitor = []; do { competitor = randFrom(enemiescopy) } while (finalboss.name == competitor.name || enemy.name == competitor.name)
             let knowledge = stage.knowledge
             let minion = randFrom(enemy.minionnames)
@@ -1738,7 +1759,7 @@
             let allypresence = instructions.allysetup
             let rivalpresence = instructions.rivalsetup
             let rivalboost = instructions.rivalboost
-            let trail = createLeadIn(pregameprologue, stageindex, instructions.prologue, enemy, finalboss)
+            let trail = createLeadIn(pregameprologue, stageindex, instructions.prologue, enemy, finalboss, rival, ally)
             let setup = `<b>${stage.name}: ${enemy.name} ${enemy.name == "Kingdom" ? `(${enemy.boss})` : ""}</b><br>` + ((stage.name == "Original Copy") ? ucInit(getRandomMinions(enemy.name)) + ".<br>" : ``) + instructions.setup
             let win = determineNextStage(stageindex, story, 1)
             let lose = determineNextStage(stageindex, story, 0)
