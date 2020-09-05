@@ -1283,6 +1283,8 @@
                 ally = randFrom(alliesandrivals)
             }
 
+            alliesandrivals =   _.filter(alliesandrivals, !{name: ally.name})
+
             if (ally.name === enemy.boss) { ally.name = "Mirror " + ally.name }
             else if (heronames.includes(ally.name)) { ally.name = "Shadow " + ally.name }
 
@@ -1583,11 +1585,11 @@
         }
 
 
-        function setUpInstructions2(stageindex, enemy, rival, knowledge,stagebonus,stagemalus) {
+        function setUpInstructions2(stageindex, enemy, rival, ally, knowledge,stagebonus,stagemalus) {
 
             let addrival
-
-            let ally = rival
+            
+            ally == null ? ally = rival : ()=>{}
 
             let penalty = Math.max(0, Math.round(stageindex / 3))
 
@@ -1709,9 +1711,12 @@
             let intel_words = ["intel", "knowledge", "information", "a clue", "a word", "lowdown"]
             let location_words = ["locale", "location", "whereabouts", "position", "scene", "station", "bearings"]
             let investigator_words = ["Citadel analysts", "you", "Agent Fletch and you"]
+            let citadel_words = [`the Gladiators`, `you`, `Citadel`, `Global Gladiators`, `Agent Fletch`]
             let assumption_words = ["believe", "consider", "conclude", "suppose", "think", "regard", "assume", "postulate", "deem", "surmise"]
             let decision_words = [`resolve`, `determine`,`come to a decision`, `decide`, `come to a conclusion`]
             let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence` ]
+            let turns_out_words = [`turns out`, `emerges`, `comes to light`, `transpires`]
+            let intel_words_2 = [`intel`, `evidence`, `knowledge`, `information`]
 
             let first_is_final = enemy.boss != finalboss.boss && stageindex == 0 ? 
             `Without ${randFrom(intel_words)} on the current ${randFrom(location_words)} of ${finalboss.boss}, ${randFrom(investigator_words)} ${randFrom(assumption_words)} ${enemy.boss} is the best source for more information.<br><br>` : ``
@@ -1722,7 +1727,6 @@
 
             if (wincondition == "intel"){
 
-            let intel_words_2 = [`intel`, `evidence`, `knowledge`, `information`]
             let evidence_clues = [` that ${this_boss} knows more about ${possessiveSuffix(this_finalboss)} plan than you excpected.`, ` ${this_boss} has detailed ${randFrom(intel_words_2)} on the plans of ${this_finalboss}.`, ` ${this_boss} has ${randFrom(intel_words_2)} that will lead you to ${this_finalboss}.`]
             let acquire_words = [`obtaining`, `acquiring`, `securing`, `procuring`, `getting`, `finding`]
             let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence` ]
@@ -1732,15 +1736,24 @@
             } else if (wincondition == "rival"){
 
             let rivals_fate_words = [`capturing`, `seizing`, `arresting`, `catching`, `interrogating`, `grilling`, `questioning`]
-            let rival_capture = `${ucInit(investigator_words)} ${randFrom(decision_words)} ${randFrom(rivals_fate_words)} ${gPron(rival, "object")} ${randFrom(decision_words)}.`
+            let rival_capture = `${ucInit(randFrom(investigator_words))} ${randFrom(decision_words)} ${randFrom(rivals_fate_words)} ${gPron(rival, "object")} is ${randFrom(priority_words)}`
 
-            wincondition_txt = `${randFrom(default_clues)} ${randFrom(find_out_words)} ${this_boss} has an associate who knows more about the plans of ${this_finalboss}. ${rival_capture}`
+            wincondition_txt = `${randFrom(default_clues)} ${randFrom(find_out_words)} ${this_boss} has an associate who knows more about the plans of ${this_finalboss}. ${rival_capture}. ${randFrom(default_clues)}`
 
-           } else wincondition_txt = randFrom(default_clues)
+           } else if (wincondition == "escort") {
+
+               console.log("ESCORT")
+
+            let escort_prologue = [
+                `${ally.name} has agreed to share ${gPron(ally,"possessive")} ${randFrom(intel_words_2)} on ${this_finalboss} if you help ${gPron(ally,"object")} with ${this_boss}`, 
+                `${randFrom(default_clues)}, ${randFrom(turns_out_words)} that ${ally.name} has ${randFrom(intel_words_2)} on ${this_finalboss}. You need to make sure ${gPron(ally,"subject")} survives for ${randFrom(investigator_words)} to get that ${randFrom(intel_words_2)}`,
+                `${ally.name} has approached ${randFrom(citadel_words)} for assistance in exchange for ${randFrom(intel_words_2)} on ${this_finalboss}. ${ucInit(gPron(ally,"subject"))} needs your protection from ${this_boss}`,
+                `${ally.name} is on a parallel Citadel mission to yours, and you need to protect ${gPron(ally,"object")} so ${gPron(ally,"subject")} can obtain whatever ${randFrom(intel_words_2)} ${gPron(ally,"subject")} is after`]
+            wincondition_txt = `${randFrom(escort_prologue)}. ${randFrom(default_clues)}`
+
+           } else {wincondition_txt = randFrom(default_clues)}
 
             let lead_in = pregameprologue + first_is_final + wincondition_txt
-
-            console.log(lead_in)
 
             return lead_in
         }
@@ -1751,11 +1764,11 @@
             let enemy = story[stageindex].enemy
             let stage = story[stageindex].stage
             let rival = allyNamer(alliesandrivals, enemy, heronames)
-            let ally = rival
+            let ally = allyNamer(alliesandrivals, enemy, heronames)
             let competitor = []; do { competitor = randFrom(enemiescopy) } while (finalboss.name == competitor.name || enemy.name == competitor.name)
             let knowledge = stage.knowledge
             let minion = randFrom(enemy.minionnames)
-            let instructions = setUpInstructions2(stageindex, enemy, rival, knowledge, stage.stagebonus, stage.stagepenalty)
+            let instructions = setUpInstructions2(stageindex, enemy, rival, ally, knowledge, stage.stagebonus, stage.stagepenalty)
             let allypresence = instructions.allysetup
             let rivalpresence = instructions.rivalsetup
             let rivalboost = instructions.rivalboost
@@ -1826,7 +1839,7 @@
             let masterplan = stage.masterplan
             let minion = randFrom(enemy.minionnames)
             let trail = randFrom(["Based on current intel", "Chasing the clues", "Following your leads", "In pursuit of clues", "After a little more intel-gathering", "Following this lead", "As you investigated further", "After searching for more intel", "Following the intel you had", "After searching for more information"]);
-            let instructions = setUpInstructions2(stageindex, enemy, rival, knowledge, stage.stagebonus, stage.stagepenalty)
+            let instructions = setUpInstructions2(stageindex, enemy, rival, null, knowledge, stage.stagebonus, stage.stagepenalty)
             let rivalpresence = instructions.rivalsetup
             let rivalboost = instructions.rivalboost
             let setup = `<b>${stage.name}: ${enemy.name} ${enemy.name == "Kingdom" ? `(${enemy.boss})` : ""}</b><br>` + ((stage.name == "Original Copy") ? ucInit(getRandomMinions(enemy.name)) + ".<br>" : ``) + instructions.setup
