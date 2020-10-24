@@ -20,14 +20,14 @@
     <div data-role = "page" id = "intro">
         
         <div data-role = "header" data-id="head" data-theme="b" data-position="fixed" >
-            <div class = "ui-grid-solo" style = "display: flex;align-items: center;justify-content: center"><img border="0" src="Street Masters logo.png" alt="Street Masters Logo"/></div>
+            <div class = "ui-grid-solo" style = "display: flex;align-items: center;justify-content: center"><img src="Street Masters logo.png" alt="Street Masters Logo"/></div>
            <h2>Endless Stories</h2>
         </div>
         
 
         <div data-role = "main" class = "ui-content">
             <div class="ui-grid-solo">
-                <label for="players">Number of players:</label>
+                <label class = "ui-btn ui-btn-b ui-disabled" style = "opacity: 100%" for="players">Number of players:</label>
                 <select name="players" id="players" data-native-menu="false" data-iconpos="left">
                     <option value="4">4</option>
                     <option value="3">3</option>
@@ -39,51 +39,43 @@
             <div class="ui-grid-solo">
                 <div data-role="navbar">
                 <ul>
-                    <li><a href="#page_1" data-transition = "pop" onclick="createStory()">Get my story</a></li>
+                    <li><a href="#page_0" data-transition = "pop" data-theme="b" onclick="createStory()"><h2>GENERATE STORY</h2></a></li>
                 </ul>
             </div>
             </div>
 
         </div>
         
-        <div data-role = "footer">
+        <div data-role = "footer" data-theme="b" data-position="fixed">
+            Created by Antti Jäppinen. Street Masters and all associated artwork is created and owned by Blacklist Games.
         </div>
     
     </div>
-    <div data-role="page" data-dialog="true" id="refpanel">
+    
+    <div data-role="page" data-dialog="true" id="refpanel" data-theme="b">
         
         <div data-role = "header" data-theme="b">
             <h2>Character<br>Reference</h2>
          </div>
- 
-         <div data-role = "main" class = "ui-content">
-            <div data-role = "main" class = "ui-content">
-                <ul data-role="listview" data-inset="true">
-                    <li data-role = "list-divider" data-theme="b">Recommended Global Gladiators</li>
-                    <li style = "white-space:normal" id="charactersetup"></li>
-                </ul>
-                <ul data-role="listview" data-inset="true">
-                    <li data-role = "list-divider" data-theme="b">Recommended Allies</li>
-                    <li style = "white-space:normal" id = "allyintro"></li>
-                    <li data-role = "list-divider" data-theme="b" id ="allysetup" style = "white-space:normal"></li>
-                </ul>
-                <ul data-role="listview" data-inset="true">
-                    <li data-role = "list-divider" data-theme="b">Recommended Rivals</li>
-                    <li style = "white-space:normal" id = "rivalintro"></li>
-                    <li data-role = "list-divider" data-theme="b" id ="rivalsetup" style = "white-space:normal"></li>
-                </ul>
-                <a href="#page_${index*2+2}" class="ui-btn ui-corner-all ui-btn-b" data-transition = "flip">Results</a>
-        </div>
 
-            <div class="ui-grid-solo">
-                <div class="ui-body ui-body-a" id="charactersetup"></div>
-                <div class="ui-body ui-body-a" id="allyintro"></div>
-                <div class="ui-body ui-body-b" id="allysetup"></div>
-                <div class="ui-body ui-body-a" id="rivalintro"></div>
-                <div class="ui-body ui-body-b" id="rivalsetup"></div>
-                <div class="ui-body ui-body-b"></div>
-            </div>
-         </div>
+        <div data-role = "main" class = "ui-content">
+            <ul data-role="listview" data-inset="true">
+                <li data-role = "list-divider" data-theme="b">Recommended Global Gladiators</li>
+                <li class = "cardbg" style = "white-space:normal; border-color: #bbb; color: #333; text-shadow: 0 1px 0 #f3f3f3;" id="charactersetup"></li>
+            </ul>
+            
+            <ul data-role="listview" data-inset="true">
+                <li data-role = "list-divider" data-theme="b">Recommended Allies</li>
+                <li style = "white-space:normal; border-color: #bbb; color: #333; text-shadow: 0 1px 0 #f3f3f3;" id = "allyintro" data-theme="b" class = "cardbg"></li>
+                <li data-role = "list-divider" data-theme="b" id ="allysetup" style = "white-space:normal"></li>
+            </ul>
+            
+            <ul data-role="listview" data-inset="true">
+                <li data-role = "list-divider" data-theme="b">Recommended Rivals</li>
+                <li style = "white-space:normal; border-color: #bbb; color: #333; text-shadow: 0 1px 0 #f3f3f3;" id = "rivalintro" data-theme="b" class = "cardbg"></li>
+                <li data-role = "list-divider" data-theme="b" id ="rivalsetup" style = "white-space:normal"></li>
+            </ul>
+        </div>
          
     </div>
 
@@ -96,6 +88,10 @@
                 createStory();
             }
         });
+
+        $(document).one("pagebeforecreate", function () { //Ennen minkä tahansa sivun luomista, tehdään kerran (.one)	
+			$("#popupMenu").enhanceWithin().popup();
+		});
 
         function randFrom(array) {
             return array[Math.floor(Math.random() * array.length)]
@@ -212,7 +208,8 @@
 
         function createStory() {
 
-            $(document).bind('pageinit')
+
+            $(document).on('pageinit')
 
             let enemies = [
                 { name: "Brotherhood", boss: "Dmitri", bosstitle: "callous mercenary", gender: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar", "and put it into play"], ["N-40 Punisher", "and put it into play"]], gloat: [[`You will lose,`, `I must break you.`], [`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`You want to play rough?`, `Say hello to my little friend!`]], expression: `baring his teeth as he recognizes you` },
@@ -602,64 +599,53 @@
             $(cardtexts).each(function(index) {
 
                 cardFront = $(`
-                <div data-role = "page" id = "page_${index*2+1}">
+                <div data-role = "page" id = "page_${index}">
         <div data-role = "header" data-id="head" data-position = "fixed" data-theme="b">
-            <div "ui-grid-solo" style = "display: flex;align-items: center;justify-content: center"><h2>${storyname}</h2></div>
+            <div "ui-grid-solo" style = "display: flex;align-items: center;justify-content: center; font-family: 'Yanone Kaffeesatz', sans-serif"><h2>${storyname}</h2></div>
         </div>
 
         
         <div data-role = "main" class = "ui-content">
                 <ul data-role="listview" data-inset="true">
-                    <li data-role = "list-divider" data-theme="b">${finalboss.name.toUpperCase()} STORY - PART ${this.chapter}</li>
-                    <li style = "white-space:normal">${this.prologue}</li>
+                    <li data-role = "list-divider" data-theme="b"><i>${finalboss.name.toUpperCase()} STORY - PART ${this.chapter}</i></li>
+                    <li class = "cardbg" style = "white-space:normal">${this.prologue}</li>
                     <li data-role = "list-divider" data-theme="b">SETUP</li>
                     <li style = "white-space:normal" data-theme="b">${this.setup}</li>
                 </ul>
-                <a href="#page_${index*2+2}" class="ui-btn ui-corner-all ui-btn-b" data-transition = "flip">Results</a>
+                <a href="#winpop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "pop" style = "white-space:normal; background: #0a612b">${this.wincondition[0]}</a>
+                <a href="#losepop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "pop" style = "white-space:normal; background: #c4331a">${this.wincondition[1]}</a>  
+        </div>
+
+        <div data-role="popup" id="winpop_${index}">
+            <ul data-role="listview" data-inset="true">
+                <li data-role = "list-divider" data-theme="b"><h2>VICTORY!</h2></li>
+                <li style = "white-space:normal" class = "cardbg">${this.winepilogue}</li>
+                <li><a href="#page_${Math.ceil(index/2)*2+1}" data-transition = "slide" class = "cardadvance">Advance to part ${cardtexts[Math.ceil(index/2)*2+1].chapter}</a></li>
+                ${index == cardtexts.length -1 || index == cardtexts.length -2 ? `<li><a href="#intro" data-transition = "pop">End</a></li>`: ``}
+            </ul>
+        </div>
+
+        <div data-role="popup" id="losepop_${index}">
+            <ul data-role="listview" data-inset="true">
+                <li data-role = "list-divider" data-theme="b"><h2>DEFEAT!</h2></li>
+                <li class = "cardbg" style = "white-space:normal">${this.loseepilogue}</li>
+                <li data-theme="b"><a href="#page_${Math.ceil(index/2)*2+2}" data-transition = "slide">Advance to part ${cardtexts[Math.ceil(index/2)*2+2].chapter}</a></li>
+                ${index == cardtexts.length -1 || index == cardtexts.length -2 ? `<li><a href="#intro" data-transition = "pop">End</a></li>`: ``}
+            </ul>
         </div>
 
         <div data-role="footer" data-id="foo1" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#" data-rel="back" data-direction="reverse">Back</a></li>
-                    <li><a href="#refpanel">Characters</a></li>
+                    <li><a href="#" data-rel="back" data-direction="reverse" data-theme="b">Back</a></li>
+                    <li><a href="#refpanel" data-theme="b" data-transition = "slidedown">Characters</a></li>
                 </ul>
             </div>
         </div>
      </div>
                 `)
 
-                cardBack = $(`
-
-     <div data-role = "page" id = "page_${index*2+2}">
-        <div data-role = "header" data-id="head" data-position = "fixed" data-theme="b" style = "white-space:normal">
-            <div "ui-grid-solo" style = "display: flex;align-items: center;justify-content: center"><h2>${storyname}</h2></div>
-        </div>
-
-        <div data-role = "main" class = "ui-content">
-                <ul data-role="listview" data-inset="true">
-                    <li data-theme="b"><a href="#page_${Math.ceil(index/2)*2*2+3}" data-transition = "slide">${this.wincondition[0]}</a></li>
-                    <li style = "white-space:normal">${this.winepilogue}</li>
-                    <li data-theme="b"><a href="#page_${Math.ceil(index/2)*2*2+5}" data-transition = "slide">${this.wincondition[1]}</a></li>
-                    <li style = "white-space:normal">${this.loseepilogue}</li>
-                </ul>
-        </div>
-        
-        <div data-role="footer" data-id="foo1" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#" data-rel="back" data-direction="reverse">Back</a></li>
-                    <li><a href="#refpanel">Characters</a></li>
-                    ${index == cardtexts.length -1 || index == cardtexts.length -2 ? `<li><a href="#intro" data-transition = "pop">End</a></li>`: ``}
-                </ul>
-            </div>
-        </div>
-     </div>
-                `)
-                
                 cardFront.appendTo($.mobile.pageContainer);
-                cardBack.appendTo($.mobile.pageContainer);
-
 
             })
 
@@ -1658,9 +1644,9 @@
             let lose = determineNextStage(stageindex, story, 0)
             let gizmo = randFrom(["data disc", "keycard", "tape recorder", "floppy disc", "microchip", "communicator", "cell phone", "diskette", "data cartridge", "tablet", "magnetic tape", "computer"])
             let winepilogue = (stageindex == 7 || stageindex == 8) ? `You have defeated the masterplan` : victoryResult(stageindex, story, win, gizmo)
-            winepilogue = winepilogue + "<br><br>" + `${(stageindex == 7 || stageindex == 8) ? `The fighters win this story` : `Advance to part ${story[win].chapter}`}.`
+            winepilogue = winepilogue + `${(stageindex == 7 || stageindex == 8) ? `<br><br>The fighters win this story.` : ``}`
             let loseepilogue = (stageindex == 7 || stageindex == 8) ? `You have failed to defeat the masterplan` : loseResult(stageindex, story, lose, gizmo)
-            loseepilogue = loseepilogue + "<br><br>" + `${(stageindex == 7 || stageindex == 8) ? `The fighters lose this story` : `Advance to part ${story[lose].chapter}`}.`
+            loseepilogue = loseepilogue + `${(stageindex == 7 || stageindex == 8) ? `<br><br>The fighters lose this story.` : ``}`
             let gloat = gloatingList(enemy, stage)
             let prologue
             let casino = getCasino(enemy)

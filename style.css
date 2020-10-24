@@ -9,6 +9,32 @@ background-image:url("Street Masters background.png");
 background-size:cover;
 }
 
+.cardbg {
+    background:url("Street Masters card background.png");
+    background-size:cover;
+    }
+
+    .cardadvance {
+        background:url("Advance.png");
+        background-size:cover;
+        color: black !important;
+        text-shadow: none !important;
+        }
+
+    .ui-dialog-contain{
+        background: #000;
+background-image:url("Street Masters background.png");
+background-size:cover;
+    }
+
+    #players-button {
+        background: #e7aa3c;
+        text-shadow: none;
+        border: 2pt solid rgba(255,255,255,1);
+    }
+
+
+
 @media only print {
     .refcard,
     .card {
