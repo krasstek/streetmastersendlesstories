@@ -2,94 +2,91 @@
 <html lang=fi>
 
 <head>
-    <meta charset="UTF-8">
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1" charset="UTF-8">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel = "stylesheet" href = "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"></script>
-
+    <script src = "https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src = "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 
 <body>
-    <div class=upperbar style="display: none;">
-        <h1>Street Masters - Endless Story Mode</h1>
+    
+    <div data-role = "page" id = "intro">
+        
+        <div data-role = "header" data-id="head" data-theme="b" data-position="fixed" >
+            <div class = "ui-grid-solo" style = "display: flex;align-items: center;justify-content: center"><img border="0" src="Street Masters logo.png" alt="Street Masters Logo"/></div>
+           <h2>Endless Stories</h2>
+        </div>
+        
+
+        <div data-role = "main" class = "ui-content">
+            <div class="ui-grid-solo">
+                <label for="players">Number of players:</label>
+                <select name="players" id="players" data-native-menu="false" data-iconpos="left">
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2" selected>2</option>
+                    <option value="1">1</option>
+                </select>
+            </div>
+
+            <div class="ui-grid-solo">
+                <div data-role="navbar">
+                <ul>
+                    <li><a href="#page_1" data-transition = "pop" onclick="createStory()">Get my story</a></li>
+                </ul>
+            </div>
+            </div>
+
+        </div>
+        
+        <div data-role = "footer">
+        </div>
+    
+    </div>
+    <div data-role="page" data-dialog="true" id="refpanel">
+        
+        <div data-role = "header" data-theme="b">
+            <h2>Character<br>Reference</h2>
+         </div>
+ 
+         <div data-role = "main" class = "ui-content">
+            <div data-role = "main" class = "ui-content">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role = "list-divider" data-theme="b">Recommended Global Gladiators</li>
+                    <li style = "white-space:normal" id="charactersetup"></li>
+                </ul>
+                <ul data-role="listview" data-inset="true">
+                    <li data-role = "list-divider" data-theme="b">Recommended Allies</li>
+                    <li style = "white-space:normal" id = "allyintro"></li>
+                    <li data-role = "list-divider" data-theme="b" id ="allysetup" style = "white-space:normal"></li>
+                </ul>
+                <ul data-role="listview" data-inset="true">
+                    <li data-role = "list-divider" data-theme="b">Recommended Rivals</li>
+                    <li style = "white-space:normal" id = "rivalintro"></li>
+                    <li data-role = "list-divider" data-theme="b" id ="rivalsetup" style = "white-space:normal"></li>
+                </ul>
+                <a href="#page_${index*2+2}" class="ui-btn ui-corner-all ui-btn-b" data-transition = "flip">Results</a>
+        </div>
+
+            <div class="ui-grid-solo">
+                <div class="ui-body ui-body-a" id="charactersetup"></div>
+                <div class="ui-body ui-body-a" id="allyintro"></div>
+                <div class="ui-body ui-body-b" id="allysetup"></div>
+                <div class="ui-body ui-body-a" id="rivalintro"></div>
+                <div class="ui-body ui-body-b" id="rivalsetup"></div>
+                <div class="ui-body ui-body-b"></div>
+            </div>
+         </div>
+         
     </div>
 
-    <div class="boxtitle"><span>
-            <h2>Number of Global Gladiators?</b></h2>
-        </span>
-        <input type="button" class="button" value="The Kingdom must fall!" onclick="createStory()">
-        <select type="select" class="input" id="players" name="players">
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2" selected>2</option>
-            <option value="1">1</option>
-        </select><br><br>
-    </div><br>
-
-    <div class=backbar>
-        <div class="refcard">
-            <div class="storycardfront">
-                <div class="storycardfront-title" id="storycardfront-title${cardnumber}">
-                    <div class="circleicon" style="float: left">
-                        <span class="circle-outer"><span class="circle-middle"><span
-                                    class="circle-inner"></span></span></span>
-                    </div>
-                    <div class="titletext"></div>
-                </div>
-                <div class="storycard-divider"></div>
-                <div class="refcard-subtitle"></div>
-                <div class="storycard-divider"></div>
-                <div class="storycardfront-prologue">
-                    <div class="refcardfront-prologuetext"></div>
-                </div>
-                <div class="storycard-divider"></div>
-                <div class="storycardfront-setup">
-                    <div class="refcardsetuptext"></div>
-                    <div class="expansionicon">
-                        <span class="infinity-before"></span><span class="infinity-after"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="refcard">
-            <div class="refcardback">
-                <div class="storycardfront-title" id="storycardfront-title${cardnumber}">
-                    <div class="circleicon" style="float: left">
-                        <span class="circle-outer"><span class="circle-middle"><span
-                                    class="circle-inner"></span></span></span>
-                    </div>
-                    <div class="titletext"></div>
-                </div>
-                <div class="storycard-divider"></div>
-                <div class="refcard-subtitle"></div>
-                <div class="storycard-divider"></div>
-                <div class="storycardfront-prologue">
-                    <div class="refcardfront-prologuetext"></div>
-                </div>
-                <div class="storycard-divider"></div>
-                <div class="storycardfront-setup">
-                    <div class="refcardsetuptext"></div>
-                    <div class="expansionicon">
-                        <span class="infinity-before"></span><span class="infinity-after"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-    </div>
-    </div>
     <script type="text/javascript">
 
         let enemiescopy
@@ -98,61 +95,6 @@
             if (e.which == 13) {
                 createStory();
             }
-        });
-
-        $(document).ready(function () {
-
-            let cardnumber = 0;
-            $(".card").each(function () {
-                cardnumber++;
-                $(this).attr("id", "card" + cardnumber);
-                $(this).html(`
-<div class = "storycardfront">
-<div class = "storycardfront-title" id="storycardfront-title${cardnumber}">
-    <div class = "circleicon" style="float: left">
-        <span class="circle-outer"><span class="circle-middle"><span class="circle-inner"></span></span></span>
-    </div>
-    <div class="titletext"></div>
-</div>
-<div class = "storycard-divider"></div>
-<div class = "storycardfront-subtitle" id="storycardfront-subtitle${cardnumber}"></div>
-<div class = "storycard-divider"></div>
-<div class = "storycardfront-prologue"><div class = "storycardfront-prologuetext"></div></div>
-<div class = "storycard-divider"></div>
-<div class = "storycardfront-setup">
-    <div class = "setuptext" id = "setuptext${cardnumber}"></div>
-    <div class = "expansionicon">
-        <span class="infinity-before"></span><span class="infinity-after"></span>
-    </div>
-</div>
-</div>
-
-<div class = "storycardback">
-<div class = "storycardback-bar-top"></div>
-<div class = "storycard-divider" style = "height: 0.4px"></div>
-<div class = "storycardback-epilogue-top" id = "storycardback-epilogue-top${cardnumber}">
-    <div class = "storycardback-titlebar">
-    <div class = "storycardback-epiloguetitle-win"></div>
-    </div>
-        <div class = "storycardback-colorbar-back"><div class = "storycardback-colorbar-green"></div></div>
-        <div class = "storycardback-winepiloguetext"></div>
-
-</div>
-<div class = "storycardback-epilogue-bottom" id = "storycardback-epilogue-bottom${cardnumber}">
-<div class = "storycardback-titlebar">
-    <div class = "storycardback-epiloguetitle-lose"></div>
-    </div>
-        <div class = "storycardback-colorbar-back"><div class = "storycardback-colorbar-red"></div></div>
-        <div class = "storycardback-loseepiloguetext"></div>
-</div>
-<div class = "storycard-divider"></div>
-<div class = "storycardback-bar-bottom">
-        <div class = "storycardback-bottomtitle" id = "storycardback-bottomtitle${cardnumber}"></div>
-</div>
-</div>
-`);
-            });
-
         });
 
         function randFrom(array) {
@@ -169,51 +111,41 @@
         function globalGladiators(enemies, stages) {
 
             let gladiators = [
-                {
-                    name: "Ah Long", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
+                {  name: "Ah Long", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy[1].boss} as the boss in part 2B of your personal story.` }
                 },
                 { name: "Axel", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Mary Ann"], rival: ["Mary Ann"], stage: "Under Destruction" },
                 { name: "Brandon", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Isabella"], rival: ["Isabella"], stage: ["Cashed Out", "Steel Memories"] },
-                {
-                    name: "Clint", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: [""], rival: [""]/*random rival*//*random rival*/, stage: [randFrom(stages).name],
+                { name: "Clint", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: [""], rival: [""]/*random rival*//*random rival*/, stage: [randFrom(stages).name],
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${this.stage} as the stage in part 3 of your personal story.` }
                 },
-                {
-                    name: "Dmitri", enemy: randFrom(enemies), ally: [""], rival: ["Anastasia"], stage: "Right to Remain Silent",
+                { name: "Dmitri", enemy: randFrom(enemies), ally: [""], rival: ["Anastasia"], stage: "Right to Remain Silent",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
                 },
-                {
-                    name: "Gabriel", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Drago"], rival: ["Drago"], stage: "Original Copy",
+                { name: "Gabriel", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Drago"], rival: ["Drago"], stage: "Original Copy",
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
                 },
-                {
-                    name: "Ikuchi", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Megan"], rival: [""], stage: "Original Copy",
+                { name: "Ikuchi", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Megan"], rival: [""], stage: "Original Copy",
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2 of your personal story.` }
                 },
                 { name: "Jackal", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Project X"], rival: ["Kemono", "Project X"], stage: "Steel Memories" },
-                {
-                    name: "Juan", enemy: randFrom(enemies), ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: "Compromised",
+                { name: "Juan", enemy: randFrom(enemies), ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: "Compromised",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
                 },
-                {
-                    name: "Kemono", enemy: randFrom(filterArray(enemies, "boss", "Shadow", true)), ally: ["Darius"], rival: ["Shadow", "Darius"], stage: "Sudden Death",
+                { name: "Kemono", enemy: randFrom(filterArray(enemies, "boss", "Shadow", true)), ally: ["Darius"], rival: ["Shadow", "Darius"], stage: "Sudden Death",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2 of your personal story.` }
                 },
                 { name: "Kenshin", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Brandon"], rival: ["Shadow", "Jackal", "Kemono"], stage: "Cashed Out" },
-                {
-                    name: "Kyoryu", enemy: randFrom(enemies), ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Steel Memories", "Sudden Death"],
+                { name: "Kyoryu", enemy: randFrom(enemies), ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Steel Memories", "Sudden Death"],
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2A of your personal story.` }
                 },
                 { name: "Mack", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death" },
-                {
-                    name: "Max", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised",
+                { name: "Max", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2A of your personal story.` }
                 },
                 { name: "Megan", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"] },
                 { name: "Miss Matrix", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Ying Hua"], rival: ["Ah Long", "Kemono"], stage: "Cashed Out" },
-                {
-                    name: "Natalia", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"],
+                { name: "Natalia", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"],
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2B of your personal story.` }
                 },
                 {
@@ -228,12 +160,10 @@
                 { name: "Selene", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: [""], rival: ["Genesis"], stage: "Estate of Decay" },
                 { name: "The Don", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Gabriel"], rival: ["Juan", "Gabriel"], stage: "Gone Ballistic" },
                 { name: "The Proxy", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Power Soldier"], rival: ["Power Soldier"], stage: "Compromised" },
-                {
-                    name: "Tiger Azules", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""], stage: "Supply and Demand",
+                { name: "Tiger Azules", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""], stage: "Supply and Demand",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2 of your personal story.` }
                 },
-                {
-                    name: "Tlazolteotl", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Kemono"], rival: ["Kemono", "Tlazolteotl"], stage: "Original Copy",
+                { name: "Tlazolteotl", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Kemono"], rival: ["Kemono", "Tlazolteotl"], stage: "Original Copy",
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
                 },
                 { name: "Ying Hua", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Jin"], rival: ["Jin"], stage: ["Cashed Out"] },
@@ -281,6 +211,8 @@
 
 
         function createStory() {
+
+            $(document).bind('pageinit')
 
             let enemies = [
                 { name: "Brotherhood", boss: "Dmitri", bosstitle: "callous mercenary", gender: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar", "and put it into play"], ["N-40 Punisher", "and put it into play"]], gloat: [[`You will lose,`, `I must break you.`], [`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`You want to play rough?`, `Say hello to my little friend!`]], expression: `baring his teeth as he recognizes you` },
@@ -374,7 +306,7 @@
                     coldtrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that the ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : finalboss.name%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You move quickly to keep up and continue your eavesdropping. "Boss!" a guard calls out. You hadn\'t seen him behind the crates nearby, but when you moved to take cover behind them, you were spotted instantly.'),
                     clueless: _.template('have to dive for cover behind nearby crates as you run into the ${enemy.minions} guarding the trade. "Get the guns!" you hear a voice call out. "And get those spies!"'),
                     prologue: _.template('${trail}, you locate <%=knowledge == "hottrail" ? `the` : `a suspicious` %> warehouse. You enter, and almost immediately ${stagevar}<br><br>${bossDescription(enemy)}<%=rivalpresence ? rivaltext : `, standing next to the contact for the trade, shoots the ${randFrom(["man","woman"])} dead, taking ${knowledge == "clueless" ? "a" : "the"} ${gizmo} from the body.`%> "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}'),
-                    captured: _.template('You wake up on cold concrete floor, and hear a voice explaining: "Your revenge is at hand. Voilà!" There\'s a slight pause. "It\'s light, handle\'s adjustable for easy carrying, good for righties and lefties, breaks down into four parts, ideal for quick discreet interventions. A word on firepower.. oh, our practice targets seem to have come to their senses!"<br><br>The ${enemy.minions} of the ${enemy.name} remove your hoods, and you see ${bossDescription(enemy)}, nodding to ${gPron(enemy,"possessive")} companion. "I can take that later." ${ucInit(gPron(enemy, "subject"))} <%=rivalpresence ? rivaltext : `turns from the client who stashes a ${gizmo}.`%> "Let the presentation commence!"')
+                    captured: _.template('You wake up on cold concrete floor, and hear a voice explaining: "Your revenge is at hand. Voilà!" There\'s a slight pause. "It\'s light, handle\'s adjustable for easy carrying, good for righties and lefties, breaks down into four parts, ideal for quick discreet interventions. A word on firepower.. oh, our practice targets seem to have come to their senses!"<br><br>The ${enemy.minions} of the ${enemy.name} remove your hoods, and you see ${bossDescription(enemy)} nodding to ${gPron(enemy,"possessive")} companion. "I can take that later." ${ucInit(gPron(enemy, "subject"))} <%=rivalpresence ? rivaltext : `turns from the client who stashes a ${gizmo}.`%> "Let the presentation commence!"')
                 },
 
                 {
@@ -657,144 +589,94 @@
 
             let storyname = String(storyNamer(finalboss, story[7].stage))
 
-            $(".titletext").each(function () {
-                $(this).text(storyname);
-            })
-
-            $(function () {
-                $(".titletext").each(function (i) {
-                    $(this).css({ "bottom": "", "font-size": "", "font-weight": "" })
-                    var element = $(this)
-                        .clone()
-                        .css({ display: 'inline', visibility: 'hidden' })
-                        .appendTo('body');
-                    if (element.width() > ($(this).width() + 1)) { $(this).css({ "font-size": "-=5px" }) }
-                    element.remove();
-                    var element = $(this)
-                        .clone()
-                        .css({ display: 'inline', visibility: 'hidden' })
-                        .appendTo('body');
-                    if (element.width() > ($(this).width() + 1)) { $(this).css({ "bottom": "+=13px" }) }
-                    element.remove();
-                    var element = $(this)
-                        .clone()
-                        .css({ display: 'inline', visibility: 'hidden' })
-                        .appendTo('body');
-                    if (($(this).height()) > 40) { $(this).css({ "bottom": "-=5px", "font-size": "-=4px" }) }
-                    element.remove();
-                });
-            });
-
-
-            stageindex = 0
-            $(".storycardfront-subtitle").each(function () {
-                $(this).html((finalboss.name).toUpperCase() + ` STORY <span style="float:right">PART ${story[stageindex].chapter} PROLOGUE</span>`);
-                stageindex++
-            })
-
-            $(".refcard-subtitle").each(function () {
-                $(this).html((finalboss.name).toUpperCase() + ` STORY <span style="float:right">CHARACTER REFERENCE</span>`);
-            })
-
             let referencetext = referenceText(globalgladiators, allygroup, allymotivation, rivalgroup, rivalmotivation, finalboss)
 
-            $(`.refcardfront-prologuetext`).each(function (index) {
-                $(this).html(referencetext[0] + referencetext[index + 1]);
-            })
-
-            $(`.refcardsetuptext`).each(function (index) {
-                $(this).html(referencetext[index + 3]);
-
-            })
+            $(`#charactersetup`).html(referencetext[0])
+            $(`#allyintro`).html(referencetext[1])
+            $(`#allysetup`).html(referencetext[3])
+            $(`#rivalintro`).html(referencetext[2])
+            $(`#rivalsetup`).html(referencetext[4])
 
             let cardtexts = textMaker(story, alliesandrivals, heronames, enemies);
 
-            $(function () {
-                $(".setuptext").each(function (i) {
-                    $(this).css({ "bottom": "", "font-size": "" })
-                    $(`.storycardfront-setup:eq(${i+2})`).css({ "height": ""})
-                    $(`.storycardfront-prologue:eq(${i+2})`).css({ "height": ""})
-                    if (($(this).height() > 51)) { $(this).css({ "font-size": "+-2px", "bottom": "+=7px" }) }
-                    if (($(this).height() > 61)) { 
-                        $(`.storycardfront-setup:eq(${i+2})`).css({ "height": "+=5mm"})
-                        $(`.storycardfront-prologue:eq(${i+2})`).css({ "height": "-=5mm"}) 
-                        }
-                    if (($(this).height() > 81)) { 
-                        $(`.storycardfront-setup:eq(${i+2})`).css({ "height": "+=3mm"})
-                        $(`.storycardfront-prologue:eq(${i+2})`).css({ "height": "-=3mm"}) 
-                        }        
-                });
-            });
+            $(cardtexts).each(function(index) {
 
-            $(`.storycardfront-prologuetext`).each(function (index) {
-                $(this).html(cardtexts[index].prologue);
+                cardFront = $(`
+                <div data-role = "page" id = "page_${index*2+1}">
+        <div data-role = "header" data-id="head" data-position = "fixed" data-theme="b">
+            <div "ui-grid-solo" style = "display: flex;align-items: center;justify-content: center"><h2>${storyname}</h2></div>
+        </div>
+
+        
+        <div data-role = "main" class = "ui-content">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role = "list-divider" data-theme="b">${finalboss.name.toUpperCase()} STORY - PART ${this.chapter}</li>
+                    <li style = "white-space:normal">${this.prologue}</li>
+                    <li data-role = "list-divider" data-theme="b">SETUP</li>
+                    <li style = "white-space:normal" data-theme="b">${this.setup}</li>
+                </ul>
+                <a href="#page_${index*2+2}" class="ui-btn ui-corner-all ui-btn-b" data-transition = "flip">Results</a>
+        </div>
+
+        <div data-role="footer" data-id="foo1" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" data-rel="back" data-direction="reverse">Back</a></li>
+                    <li><a href="#refpanel">Characters</a></li>
+                </ul>
+            </div>
+        </div>
+     </div>
+                `)
+
+                cardBack = $(`
+
+     <div data-role = "page" id = "page_${index*2+2}">
+        <div data-role = "header" data-id="head" data-position = "fixed" data-theme="b" style = "white-space:normal">
+            <div "ui-grid-solo" style = "display: flex;align-items: center;justify-content: center"><h2>${storyname}</h2></div>
+        </div>
+
+        <div data-role = "main" class = "ui-content">
+                <ul data-role="listview" data-inset="true">
+                    <li data-theme="b"><a href="#page_${Math.ceil(index/2)*2*2+3}" data-transition = "slide">${this.wincondition[0]}</a></li>
+                    <li style = "white-space:normal">${this.winepilogue}</li>
+                    <li data-theme="b"><a href="#page_${Math.ceil(index/2)*2*2+5}" data-transition = "slide">${this.wincondition[1]}</a></li>
+                    <li style = "white-space:normal">${this.loseepilogue}</li>
+                </ul>
+        </div>
+        
+        <div data-role="footer" data-id="foo1" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" data-rel="back" data-direction="reverse">Back</a></li>
+                    <li><a href="#refpanel">Characters</a></li>
+                    ${index == cardtexts.length -1 || index == cardtexts.length -2 ? `<li><a href="#intro" data-transition = "pop">End</a></li>`: ``}
+                </ul>
+            </div>
+        </div>
+     </div>
+                `)
+                
+                cardFront.appendTo($.mobile.pageContainer);
+                cardBack.appendTo($.mobile.pageContainer);
+
+
             })
 
-            $(function () {
-                $(`.refcardfront-prologuetext`).each(function (i) {
-                    $(this).css({ "font-size": "8px" })
-                    if ($(this).height() > 198) { $(this).css({ "font-size": "7px" }) }
-                });
-            });
 
-            $(function () {
-                $(`.storycardfront-prologuetext`).each(function (i) {
-                    $(this).css({ "font-size": "8px" })
-                    if ($(this).height() > ($(`.storycardfront-prologue:eq(${i+2})`).height())-20) { $(this).css({ "font-size": "7px" }) }
-                    if ($(this).height() > ($(`.storycardfront-prologue:eq(${i+2})`).height())-15) { $(this).css({ "font-size": "6px" }) }
-                });
-            });
-
-            $(`.setuptext`).each(function (index) {
-                $(this).html(cardtexts[index].setup);
-
+            $(`#prologue`).each(function(index) {
+                $(this).html(cardtexts[index].prologue)
+            })
+            $(`#setup-stage`).each(function(index) {
+                $(this).html(cardtexts[index].setup)
+            })
+            $(`#epilogue-win`).each(function(index) {
+                $(this).html(cardtexts[index].winepilogue)
+            })
+            $(`#epilogue-lose`).each(function(index) {
+                $(this).html(cardtexts[index].loseepilogue)
             })
 
-
-            $(`.storycardback-winepiloguetext`).each(function (index) {
-                $(this).html(cardtexts[index].winepilogue);
-                $(this).css({ "font-size": "8px" })
-                if (($(this).height() > 109)) { $(this).css({ "font-size": "7px" }) }
-            })
-
-
-            $(`.storycardback-loseepiloguetext`).each(function (index) {
-                $(this).html(cardtexts[index].loseepilogue);
-                $(this).css({ "font-size": "8px" })
-                if (($(this).height() > 109)) { $(this).css({ "font-size": "7px" }) }
-            })
-
-            // text width checker
-            $.fn.textWidth = function(){
-                let html_org = $(this).html();
-                let html_calc = '<span>' + html_org + '</span>';
-                $(this).html(html_calc);
-                let width = $(this).find('span:first').width();
-                $(this).html(html_org);
-                return width;
-            };
-            
-            $(`.storycardback-epiloguetitle-win`).each(function (index) {
-                $(this).css({ "font-size": "9px", "padding-top": "1mm" })
-                txt = cardtexts[index].wincondition[0]
-                $(this).html(txt);
-                if (($(this).textWidth() > 120)) { $(this).css({ "font-size": "7px", "padding-top": "1.2mm" }) }
-                if (($(this).textWidth() > 120)) { $(this).css({ "font-size": "6px" , "padding-top": "1.5mm"}) }
-            })
-
-            $(`.storycardback-epiloguetitle-lose`).each(function (index) {
-                $(this).css({ "font-size": "9px", "padding-top": "1mm" })
-                txt = cardtexts[index].wincondition[1]
-                $(this).html(txt);
-                if (($(this).textWidth() > 120)) { $(this).css({ "font-size": "7px", "padding-top": "1.2mm" }) }
-                if (($(this).textWidth() > 120)) { $(this).css({ "font-size": "6px" , "padding-top": "1.5mm"}) }
-            })
-
-            stageindex = 0
-            $(".storycardback-bottomtitle").each(function () {
-                $(this).text("PART " + story[stageindex].chapter + " EPILOGUE");
-                stageindex++
-            })
 
         }
 
@@ -891,7 +773,7 @@
 
             let masterplan
 
-            let vip = randFrom([["President", "White House"], ["Colonel", "Pentagon"], ["Mayor", "city hall"], ["Police Chief", "Ransom P.D. headquoarters"], ["Citadel commander", "Citadel HQ"]])
+            let vip = randFrom([["President", "White House"], ["Colonel", "Pentagon"], ["Mayor", "city hall"], ["Police Chief", "Ransom P.D. headquarters"], ["Citadel commander", "Citadel HQ"]])
 
             switch (stage.masterplan) {
                 case "actsofterror": masterplan = `the vicious criminal syndicate ${enemy.name} believes they do not have to bow to the government or even the
@@ -1626,7 +1508,7 @@
                 { activate: `${rival.name} (rival) gains 2 random defese tokens.`, rivalboost: true },
                 { activate: `${rival.name} (rival) gains gains 1 defense token from each engaged fighter.`, rivalboost: true },
                 { activate: `The fighter furtherst from ${rival.name} (rival) discards 1 power.`, rivalboost: true },
-                { wincondition: [`If you win and ${rival.name} is defeated:`,`If ${rival.name} is not defeated:`], prologue: "rival" },
+                { wincondition: [`If the fighters win and ${rival.name} is defeated:`,`If ${rival.name} is not defeated:`], prologue: "rival" },
                 { activate: `If ${rival.name} (rival) is in play, each fighter discards 2 defense tokens of different types. For each fighter that did not, deal that fighter and each figure adjacent to them 3 general damage.` }
             ]
 
@@ -1645,11 +1527,11 @@
                 { persistent: `${enemy.boss} gains +1 attack value.` },
                 { persistent: `${enemy.boss} gains ${enemy.boss == "Ah Long" ? "2P" : "4P"} health value.` },
                 { activate: `The fighter furtherst from ${enemy.boss} within 4 spaces discards 1 power.`},
-                { allysetup: `Put ${ally.name} (ally) into play.`, wincondition: [`If you win and ${ally.name} is not defeated:`,`If ${ally.name} is defeated:`], prologue: "escort"},
-                { persistent: `Put 2P power on this card. <b>Interact:</b> If engaged with ${enemy.boss}, discard 1 defense token of a type of which ${gPron(enemy,"subject")} has 0 of to discard 1 power from this card and if no power remains, ${enemy.boss} is successfully ${interrogate_words}.`, wincondition: [`If you win and ${enemy.boss} is ${interrogate_words}:`,`If ${enemy.boss} is not ${interrogate_words}:`], prologue: "intel" },
-                { persistent: `<b>Interact:</b> If you are in a crate space, you may discard 1 of each type of defense token on this card. Once there is 1P of each defense token on this card, you have ${intel_goal}.`, activate: `Each fighter discards 1 defense token for each space the nearest crate space is from them.`, wincondition: [`If you win and have ${intel_goal}:`,`If you have not ${intel_goal}:`], prologue: "intel" },
+                { allysetup: `Put ${ally.name} (ally) into play.`, wincondition: [`If the fighters win and ${ally.name} is not defeated:`,`If ${ally.name} is defeated:`], prologue: "escort"},
+                { persistent: `Put 2P power on this card. <b>Interact:</b> If engaged with ${enemy.boss}, discard 1 defense token of a type of which ${gPron(enemy,"subject")} has 0 of to discard 1 power from this card and if no power remains, ${enemy.boss} is successfully ${interrogate_words}.`, wincondition: [`If the fighters win and ${enemy.boss} is ${interrogate_words}:`,`If ${enemy.boss} is not ${interrogate_words}:`], prologue: "intel" },
+                { persistent: `<b>Interact:</b> If you are in a crate space, you may discard 1 of each type of defense token on this card. Once there is 1P of each defense token on this card, you have ${intel_goal}.`, activate: `Each fighter discards 1 defense token for each space the nearest crate space is from them.`, wincondition: [`If the fighters win and have ${intel_goal}:`,`If you have not ${intel_goal}:`], prologue: "intel" },
                 { activate: `Every fighter not engaged with an enemy must discard 1 power and 1 defense token of their choice.` },
-                { persistent: `Place 5P power tokens on this card. After a fighter defeats an enemy in their threat area, they may discard 1 defense token to gain 1 power from this card. If there is no power on this card, you have ${intel_goal}.`, activate: `Place 1 power on this card for any enemy except for the boss is unengaged.`, wincondition: [`If you win and have ${intel_goal}:`,`If you have not ${intel_goal}:`], prologue: "intel" },
+                { persistent: `Place 5P power tokens on this card. After a fighter defeats an enemy in their threat area, they may discard 1 defense token to gain 1 power from this card. If there is no power on this card, you have ${intel_goal}.`, activate: `Place 1 power on this card for any enemy except for the boss is unengaged.`, wincondition: [`If the fighters win and have ${intel_goal}:`,`If you have not ${intel_goal}:`], prologue: "intel" },
                 { allysetup: `Put ${ally.name} (ally) into play.`, persistent: `If ${ally.name} (ally) would be dealt any damage, deal it to one fighter instead.`, prologue: "escort" },
             ]
 
@@ -1742,8 +1624,6 @@
 
            } else if (wincondition == "escort") {
 
-               console.log("ESCORT")
-
             let escort_prologue = [
                 `${ally.name} has agreed to share ${gPron(ally,"possessive")} ${randFrom(intel_words_2)} on ${this_finalboss} if you help ${gPron(ally,"object")} with ${this_boss}`, 
                 `${randFrom(default_clues)}, ${randFrom(turns_out_words)} that ${ally.name} has ${randFrom(intel_words_2)} on ${this_finalboss}. You need to make sure ${gPron(ally,"subject")} survives for ${randFrom(investigator_words)} to get that ${randFrom(intel_words_2)}`,
@@ -1802,7 +1682,7 @@
                     prologue = stage.captured({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "rivalboost": rivalboost, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "stagevar": stagevar, "casino": casino, "knowledge": knowledge, "gizmo": gizmo })
                 } else { prologue = stage.prologue({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "rivalboost": rivalboost, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "stagevar": stagevar, "casino": casino, "knowledge": knowledge, "gizmo": gizmo }) }
 
-            return { prologue: prologue, setup: setup, wincondition: instructions.wincondition, winepilogue: winepilogue, loseepilogue: loseepilogue }
+            return { chapter: story[stageindex].chapter, prologue: prologue, setup: setup, wincondition: instructions.wincondition, winepilogue: winepilogue, loseepilogue: loseepilogue }
         }
 
         function textMaker(story, alliesandrivals, heronames, enemies) {
@@ -2223,7 +2103,7 @@
                     prologue = "The stage has no stage intro defined.<br>"
             }
 
-            return { prologue: prologue, setup: setup, wincondition: instructions.wincondition, winepilogue: winepilogue, loseepilogue: loseepilogue }
+            return { chapter: story[stageindex].chapter, prologue: prologue, setup: setup, wincondition: instructions.wincondition, winepilogue: winepilogue, loseepilogue: loseepilogue }
         }
 
         function changeOfPlans(trail, finalboss, enemy, stage) {
@@ -2555,21 +2435,23 @@
 
             let rivaltext = motivationText(rivalmotivation, rivalgroup, "Rival", finalboss, gladiators)
 
-            let allysetup = "<b>Setup:</b> Each fighter puts one of "
+            let setup = `<b>Story Setup:</b> Put `
+
+            let allysetup = setup
 
             for (i = 0; i < allygroup.length; i++) {
-                allysetup = allysetup + " " + allygroup[i].name + " (Ally)" + (i == allygroup.length - 2 ? " or " : ", ")
+                allysetup = allysetup + " " + allygroup[i].name + " (Ally)" + (i == allygroup.length - 2 ? " and " : ", ")
             }
 
-            allygroup.length > 0 ? allysetup = allysetup.substring(0, allysetup.length - 2) + " into play." : allysetup = `You can pick any Allies for this story, but some might make more sense than others.`
+            allygroup.length > 0 ? allysetup = allysetup.substring(0, allysetup.length - 2) + " into the Story Pool." : allysetup = `You can pick any Allies for this story, but some might make more sense than others.`
 
-            let rivalsetup = "<b>Setup:</b> Each fighter puts one of "
+            let rivalsetup = setup
 
             for (i = 0; i < rivalgroup.length; i++) {
-                rivalsetup = rivalsetup + " " + rivalgroup[i].name + " (Rival)" + (i == rivalgroup.length - 2 ? " or " : ", ")
+                rivalsetup = rivalsetup + " " + rivalgroup[i].name + " (Rival)" + (i == rivalgroup.length - 2 ? " and " : ", ")
             }
 
-            rivalgroup.length > 0 ? rivalsetup = rivalsetup.substring(0, rivalsetup.length - 2) + " into play." : rivalsetup = `You can pick any Rivals for this story, but some might make more sense than others.`
+            rivalgroup.length > 0 ? rivalsetup = rivalsetup.substring(0, rivalsetup.length - 2) + " into the Story Pool." : rivalsetup = `You can pick any Rivals for this story, but some might make more sense than others.`
 
             let text = []
 
@@ -2834,7 +2716,7 @@
                     if (stance == "Ally" && !gladiators.includes(finalboss.boss) && !gladiators.includes("Megan")) {
                         text = `The ${megansenemy} is behind the theft of tens of thousands of dollars from Megan's family's company. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? `She has joined forces with the unhinged criminal Sera O'Quinn, who believes they are responsible for her father's corruption, and they will help you take the ${megansenemy} down.` : `She has joined forces with you to help you take the ${megansenemy} down.`) : `The unhinged criminal Sera O'Quinn believes this is somehow related to her family, and has joined you to take the ${megansenemy} down.`}`
                     } else if (stance == "Ally") { text = personalstory_ally } else if (stance == "Rival" && (redemption.some(v => gladiators.indexOf(v) !== -1) == true) && !gladiators.includes("Megan")) {
-                        text = `Under the influence of the Kingdom, you has been involved in many things that you regret. ${_.map(group, 'name').includes(motivation) ? `${group.length == 2 ? ` Megan and Sera both accuse you of ruining their family businesses, and now they do everything they can to bring you down.` : `Megan accuses you of an extensive theft from her company, which was techincally the doings of the O'Quinn family.`}` : `Sera O'Quinn accuses you of corrupting her father, and tries to bring you down.`} You admit you are responsible, but your hands would be full as they are!`
+                        text = `Under the influence of the Kingdom, you has been involved in many things that you regret. ${_.map(group, 'name').includes(motivation) ? `${group.length == 2 ? ` Megan and Sera both accuse you of ruining their family businesses, and now they do everything they can to bring you down.` : `Megan accuses you of an extensive theft from her company, which was techincally the doings of the O'Quinn family.`}` : `Sera O'Quinn accuses you of corrupting her father, and tries to bring you down.`} You admit you might be responsible, but your hands would be full as they are!`
                     } else { text = personalstory_enemy };
                     break;
                 case "Mr. Apple":
@@ -2971,8 +2853,8 @@
                 default: text = (stance == "Ally" ? "For whatever reason, these people stand with you againt the schemes of the Kingdom." : "For whatever reason, these people stand with the Kingdom against you.");
             }
 
-            text = `<br>If you want to use additional Allies or Rivals during this story, put this card in the Story Pool.<br><br><i>`
-                + text + `</i><br><br>If you only want to use ${stance == "Ally" ? "Allies" : "Rivals"}, use the setup instructions on this side of the card. Otherwise, use both sides.`
+            text = `If you wish to use additional ${stance == "Ally" ? "Allies" : "Rivals"} during this story, read the following text and use the setup instructions below.<br><br><i>`
+                + text + `</i>`
             return text
 
         }
