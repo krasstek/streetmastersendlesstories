@@ -2,32 +2,34 @@
 <html lang=fi>
 
 <head>
-    <meta name = "viewport" content = "width = device-width, initial-scale = 1" charset="UTF-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1" charset="UTF-8">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel = "stylesheet" href = "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"></script>
-    <script src = "https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src = "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 
-<body>
-    
-    <div data-role = "page" id = "intro">
-        
-        <div data-role = "header" data-id="head" data-theme="b" data-position="fixed" >
-            <div class = "ui-grid-solo" style = "display: flex;align-items: center;justify-content: center"><img src="Street Masters logo.png" alt="Street Masters Logo"/></div>
-           <h2>Endless Stories</h2>
-        </div>
-        
+<body style="display: hidden">
 
-        <div data-role = "main" class = "ui-content">
+    <div data-role="page" id="intro">
+
+        <div data-role="header" data-id="head" data-theme="b" data-position="fixed">
+            <div class="ui-grid-solo" style="display: flex;align-items: center;justify-content: center"><img
+                    src="Street Masters logo.png" alt="Street Masters Logo" /></div>
+            <h2>Endless Stories</h2>
+        </div>
+
+
+        <div data-role="main" class="ui-content">
             <div class="ui-grid-solo">
-                <label class = "ui-btn ui-btn-b ui-disabled" style = "opacity: 100%" for="players">Number of players:</label>
+                <label class="ui-btn ui-btn-b ui-disabled" style="opacity: 100%" for="players">Number of
+                    players:</label>
                 <select name="players" id="players" data-native-menu="false" data-iconpos="left">
                     <option value="4">4</option>
                     <option value="3">3</option>
@@ -38,48 +40,172 @@
 
             <div class="ui-grid-solo">
                 <div data-role="navbar">
-                <ul>
-                    <li><a href="#page_0" data-transition = "pop" data-theme="b" onclick="createStory()"><h2>GENERATE STORY</h2></a></li>
-                </ul>
+                    <ul>
+                        <li><a href="#page_0" data-transition="pop" data-theme="b" onclick="createStory()">
+                                <h2>GENERATE A STORY</h2>
+                            </a></li>
+                    </ul>
+                </div>
             </div>
+
+            <div class="ui-grid-solo">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#loadpopup" data-rel="popup" data-transition = "pop" data-theme = "b"><h2>LOAD A STORY</h2></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div data-role="popup" id="loadpopup">
+                <ol data-role="listview" data-inset="true">
+                    <li data-role = "list-divider" data-theme="b"><h2>SAVE AND EXIT?</h2></li>
+                    <li><a href="#page_0" id = "loadgame_1" onclick = "createPageContent(JSON.parse(localStorage.getItem('save_game_content_1')))" class = "cardadvance" style = "white-space:normal"></a></li>
+                    <li><a href="#page_0" id = "loadgame_2" onclick = "createPageContent(JSON.parse(localStorage.getItem('save_game_content_2')))" class = "cardadvance" style = "white-space:normal"></a></li>
+                    <li><a href="#page_0" id = "loadgame_3" onclick = "createPageContent(JSON.parse(localStorage.getItem('save_game_content_3')))" class = "cardadvance" style = "white-space:normal"></a></li>
+            </ol>
+            <button class = "ui-btn-b cardadvance"><a href="#" onclick = "clearSaves()" style = "color: black; white-space:normal"><i>CLEAR ALL SAVE DATA</i> </a></button>
             </div>
 
         </div>
-        
-        <div data-role = "footer" data-theme="b" data-position="fixed">
-            Created by Antti Jäppinen. Street Masters and all associated artwork is created and owned by Blacklist Games.
+
+        <div data-role="footer" data-theme="b" data-position="fixed">
+            Created by Antti Jäppinen. Street Masters and all associated artwork is created and owned by Blacklist
+            Games.
         </div>
-    
+
     </div>
-    
-    <div data-role="page" data-dialog="true" id="refpanel" data-theme="b">
-        
-        <div data-role = "header" data-theme="b">
-            <h2>Character<br>Reference</h2>
-         </div>
 
-        <div data-role = "main" class = "ui-content">
+    <div data-role="page" data-dialog="true" id="refpanel" data-theme="b">
+
+        <div data-role="header" data-theme="b">
+            <h2>Character<br>Reference</h2>
+        </div>
+
+        <div data-role="main" class="ui-content">
             <ul data-role="listview" data-inset="true">
-                <li data-role = "list-divider" data-theme="b">Recommended Global Gladiators</li>
-                <li class = "cardbg" style = "white-space:normal; border-color: #bbb; color: #333; text-shadow: 0 1px 0 #f3f3f3;" id="charactersetup"></li>
+                <li data-role="list-divider" data-theme="b">Recommended Global Gladiators</li>
+                <li class="refcard" id="charactersetup"></li>
             </ul>
-            
+
             <ul data-role="listview" data-inset="true">
-                <li data-role = "list-divider" data-theme="b">Recommended Allies</li>
-                <li style = "white-space:normal; border-color: #bbb; color: #333; text-shadow: 0 1px 0 #f3f3f3;" id = "allyintro" data-theme="b" class = "cardbg"></li>
-                <li data-role = "list-divider" data-theme="b" id ="allysetup" style = "white-space:normal"></li>
+                <li data-role="list-divider" data-theme="b">Recommended Allies</li>
+                <li class="refcard" id="allyintro" data-theme="b"></li>
+                <li data-role="list-divider" data-theme="b" id="allysetup" style="white-space:normal"></li>
             </ul>
-            
+
             <ul data-role="listview" data-inset="true">
-                <li data-role = "list-divider" data-theme="b">Recommended Rivals</li>
-                <li style = "white-space:normal; border-color: #bbb; color: #333; text-shadow: 0 1px 0 #f3f3f3;" id = "rivalintro" data-theme="b" class = "cardbg"></li>
-                <li data-role = "list-divider" data-theme="b" id ="rivalsetup" style = "white-space:normal"></li>
+                <li data-role="list-divider" data-theme="b">Recommended Rivals</li>
+                <li class="refcard" id="rivalintro" data-theme="b"></li>
+                <li data-role="list-divider" data-theme="b" id="rivalsetup" style="white-space:normal"></li>
             </ul>
         </div>
-         
+
     </div>
 
     <script type="text/javascript">
+
+
+        function createPageContent(pagecontent) {
+
+            let referencetext = pagecontent.reference
+            let cardtexts = pagecontent.text
+            let storyname = pagecontent.storyname
+            let finalboss = pagecontent.finalboss
+
+            $(`#charactersetup`).html(referencetext[0])
+            $(`#allyintro`).html(referencetext[1])
+            $(`#allysetup`).html(referencetext[3])
+            $(`#rivalintro`).html(referencetext[2])
+            $(`#rivalsetup`).html(referencetext[4])
+
+            savegamecontent = pagecontent
+
+            $(cardtexts).each(function (index) {
+
+                cardFront = $(`
+                <div data-role = "page" id = "page_${index}">
+        <div data-role = "header" data-id="head" data-position = "fixed" data-theme="b">
+            <div "ui-grid-solo" style = "display: flex;align-items: center;justify-content: center; font-family: 'Yanone Kaffeesatz', sans-serif"><h2>${storyname}</h2></div>
+        </div>
+
+        
+        <div data-role = "main" class = "ui-content">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role = "list-divider" data-theme="b"><i>${finalboss.toUpperCase()} STORY - PART ${this.chapter}</i></li>
+                    <li class = "cardbg" style = "white-space:normal">${this.prologue}</li>
+                    <li data-role = "list-divider" data-theme="b">SETUP</li>
+                    <li style = "white-space:normal" data-theme="b">${this.setup}</li>
+                </ul>
+                <a href="#winpop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "pop" style = "white-space:normal; background: #0a612b">${this.wincondition[0]}</a>
+                <a href="#losepop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "pop" style = "white-space:normal; background: #c4331a">${this.wincondition[1]}</a>  
+        </div>
+
+        <div data-role="popup" id="winpop_${index}">
+            <ul data-role="listview" data-inset="true">
+                <li data-role = "list-divider" data-theme="b"><h2>VICTORY!</h2></li>
+                <li style = "white-space:normal" class = "cardbg">${this.winepilogue}</li>
+                ${index == cardtexts.length - 1 || index == cardtexts.length - 2 ? `<li><a href="#intro" data-transition = "pop" class = "cardadvance">End Story</a></li>` : `<li><a href="#page_${Math.ceil(index / 2) * 2 + 1}" data-transition = "slide" class = "cardadvance">Advance to part ${cardtexts[Math.ceil(index / 2) * 2 + 1].chapter}</a></li>`}
+            </ul>
+        </div>
+
+        <div data-role="popup" id="losepop_${index}">
+            <ul data-role="listview" data-inset="true">
+                <li data-role = "list-divider" data-theme="b"><h2>DEFEAT!</h2></li>
+                <li class = "cardbg" style = "white-space:normal">${this.loseepilogue}</li>
+                ${index == cardtexts.length - 1 || index == cardtexts.length - 2 ? `<li><a href="#intro" data-transition = "pop" class = "cardadvance">End Story</a></li>` : `<li data-theme="b"><a href="#page_${Math.ceil(index / 2) * 2 + 2}" data-transition = "slide" class = "cardadvance">Advance to part ${cardtexts[Math.ceil(index / 2) * 2 + 2].chapter}</a></li>`}
+            </ul>
+        </div>
+
+        <div data-role="popup" id="savepop_${index}">
+            <ol data-role="listview" data-inset="true">
+                <li data-role = "list-divider" data-theme="b"><h2>SAVE AND EXIT?</h2></li>
+                <li><a href="#" id = "savegame" onclick = "saveGame_1()" class = "cardadvance" style = "white-space:normal"><i>${localStorage.getItem("save_game_content_1") != null ? `${JSON.parse(localStorage.getItem("save_game_content_1")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_1")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i></a></li>
+                <li><a href="#" id = "savegame" onclick = "saveGame_2()" class = "cardadvance" style = "white-space:normal"><i>${localStorage.getItem("save_game_content_2") != null ? `${JSON.parse(localStorage.getItem("save_game_content_2")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_2")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i></a></li>
+                <li><a href="#" id = "savegame" onclick = "saveGame_3()" class = "cardadvance" style = "white-space:normal"><i>${localStorage.getItem("save_game_content_3") != null ? `${JSON.parse(localStorage.getItem("save_game_content_3")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_3")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i></a></li>
+            </ol>
+        </div>
+
+        <div data-role="footer" data-id="foo1" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" data-rel="back" data-direction="reverse" data-theme = "b">Back</a></li>
+                    <li><a href="#savepop_${index}" data-rel="popup" data-transition = "pop" data-theme = "b">Save</a></li>
+                    <li><a href="#refpanel" data-transition = "slidedown" data-theme = "b">Characters</a></li>
+                </ul>
+            </div>
+        </div>
+     </div>
+                `)
+
+                cardFront.appendTo($.mobile.pageContainer);
+
+            })
+
+        }
+
+        let savegamecontent
+
+        function saveGame_1(save_position = 1, save_game_content = savegamecontent) {
+            localStorage.setItem(`save_game_content_${save_position}`, JSON.stringify(save_game_content));
+            location.reload();
+        }
+
+        function saveGame_2(save_position = 2, save_game_content = savegamecontent) {
+            localStorage.setItem(`save_game_content_${save_position}`, JSON.stringify(save_game_content));
+            location.reload();
+        }
+
+        function saveGame_3(save_position = 3, save_game_content = savegamecontent) {
+            localStorage.setItem(`save_game_content_${save_position}`, JSON.stringify(save_game_content));
+            location.reload();
+        }
+
+        function clearSaves() {
+            localStorage.removeItem("save_game_content_1")
+            localStorage.removeItem("save_game_content_2")
+            localStorage.removeItem("save_game_content_3")
+            location.reload();
+        }
 
         let enemiescopy
 
@@ -89,9 +215,18 @@
             }
         });
 
-        $(document).one("pagebeforecreate", function () { //Ennen minkä tahansa sivun luomista, tehdään kerran (.one)	
-			$("#popupMenu").enhanceWithin().popup();
-		});
+        $(window).on('load', function () {
+            $(this).trigger('resize');
+            $("#loadgame_1").html(`<i>${localStorage.getItem("save_game_content_1") != null ? `${JSON.parse(localStorage.getItem("save_game_content_1")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_1")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i>`)
+            $("#loadgame_2").html(`<i>${localStorage.getItem("save_game_content_2") != null ? `${JSON.parse(localStorage.getItem("save_game_content_2")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_2")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i>`)
+            $("#loadgame_3").html(`<i>${localStorage.getItem("save_game_content_3") != null ? `${JSON.parse(localStorage.getItem("save_game_content_3")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_3")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i>`)
+
+        });
+
+
+        $(document).one("pageinit", function () { //Ennen minkä tahansa sivun luomista, tehdään kerran (.one)	
+            $("body").show();
+        });
 
         function randFrom(array) {
             return array[Math.floor(Math.random() * array.length)]
@@ -107,41 +242,51 @@
         function globalGladiators(enemies, stages) {
 
             let gladiators = [
-                {  name: "Ah Long", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
+                {
+                    name: "Ah Long", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy[1].boss} as the boss in part 2B of your personal story.` }
                 },
                 { name: "Axel", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Mary Ann"], rival: ["Mary Ann"], stage: "Under Destruction" },
                 { name: "Brandon", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Isabella"], rival: ["Isabella"], stage: ["Cashed Out", "Steel Memories"] },
-                { name: "Clint", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: [""], rival: [""]/*random rival*//*random rival*/, stage: [randFrom(stages).name],
+                {
+                    name: "Clint", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: [""], rival: [""]/*random rival*//*random rival*/, stage: [randFrom(stages).name],
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${this.stage} as the stage in part 3 of your personal story.` }
                 },
-                { name: "Dmitri", enemy: randFrom(enemies), ally: [""], rival: ["Anastasia"], stage: "Right to Remain Silent",
+                {
+                    name: "Dmitri", enemy: randFrom(enemies), ally: [""], rival: ["Anastasia"], stage: "Right to Remain Silent",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
                 },
-                { name: "Gabriel", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Drago"], rival: ["Drago"], stage: "Original Copy",
+                {
+                    name: "Gabriel", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Drago"], rival: ["Drago"], stage: "Original Copy",
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
                 },
-                { name: "Ikuchi", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Megan"], rival: [""], stage: "Original Copy",
+                {
+                    name: "Ikuchi", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Megan"], rival: [""], stage: "Original Copy",
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2 of your personal story.` }
                 },
                 { name: "Jackal", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Project X"], rival: ["Kemono", "Project X"], stage: "Steel Memories" },
-                { name: "Juan", enemy: randFrom(enemies), ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: "Compromised",
+                {
+                    name: "Juan", enemy: randFrom(enemies), ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: "Compromised",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
                 },
-                { name: "Kemono", enemy: randFrom(filterArray(enemies, "boss", "Shadow", true)), ally: ["Darius"], rival: ["Shadow", "Darius"], stage: "Sudden Death",
+                {
+                    name: "Kemono", enemy: randFrom(filterArray(enemies, "boss", "Shadow", true)), ally: ["Darius"], rival: ["Shadow", "Darius"], stage: "Sudden Death",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2 of your personal story.` }
                 },
                 { name: "Kenshin", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Brandon"], rival: ["Shadow", "Jackal", "Kemono"], stage: "Cashed Out" },
-                { name: "Kyoryu", enemy: randFrom(enemies), ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Steel Memories", "Sudden Death"],
+                {
+                    name: "Kyoryu", enemy: randFrom(enemies), ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Steel Memories", "Sudden Death"],
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2A of your personal story.` }
                 },
                 { name: "Mack", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death" },
-                { name: "Max", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised",
+                {
+                    name: "Max", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2A of your personal story.` }
                 },
                 { name: "Megan", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"] },
                 { name: "Miss Matrix", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Ying Hua"], rival: ["Ah Long", "Kemono"], stage: "Cashed Out" },
-                { name: "Natalia", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"],
+                {
+                    name: "Natalia", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"],
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2B of your personal story.` }
                 },
                 {
@@ -156,10 +301,12 @@
                 { name: "Selene", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: [""], rival: ["Genesis"], stage: "Estate of Decay" },
                 { name: "The Don", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Gabriel"], rival: ["Juan", "Gabriel"], stage: "Gone Ballistic" },
                 { name: "The Proxy", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Power Soldier"], rival: ["Power Soldier"], stage: "Compromised" },
-                { name: "Tiger Azules", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""], stage: "Supply and Demand",
+                {
+                    name: "Tiger Azules", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""], stage: "Supply and Demand",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2 of your personal story.` }
                 },
-                { name: "Tlazolteotl", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Kemono"], rival: ["Kemono", "Tlazolteotl"], stage: "Original Copy",
+                {
+                    name: "Tlazolteotl", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Kemono"], rival: ["Kemono", "Tlazolteotl"], stage: "Original Copy",
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
                 },
                 { name: "Ying Hua", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Jin"], rival: ["Jin"], stage: ["Cashed Out"] },
@@ -235,8 +382,8 @@
             let stages = [
                 {
                     name: "Ashes of the Eternal", instory: 0, location: "cursed", bystander: "acolyte", pit: "a bottomless well",
-                    stagebonus: {setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.`},
-                    stagepenalty:{setup: `One fighter places 1 fire token in the space nearest to them.`},
+                    stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.` },
+                    stagepenalty: { setup: `One fighter places 1 fire token in the space nearest to them.` },
                     masterplan: randFrom(["actsofterror", "personalpower"]), // rework acts of terror into decimating the countryside
                     gloat: [[`You won’t stop the inevitable!`, `I’ll end you here, with or without the Oni!`], [`Power!`, `Unlimited power!`], [`Fire is a living thing, Gladiators,`, `It breaths, it eats. And it hates.`], [`It is better to burn out,`, `Than to fade away!`], [`You should be glad to go like this,`, `You will have warrior's funeral pyre!`], [`I am the Alpha and the Omega. Death and rebirth,`, `And, as you die, so will I be reborn!`],],
                     rivaltext: _.template(', but ${rival.name}<%=rivalboost ? `, possessed by the infernal force` : `, looking to gain some of the infernal force`%> moves in to intervene'),
@@ -249,10 +396,10 @@
 
                 {
                     name: "Cashed Out", instory: 0, location: "base", bystander: "gambler", pit: 'a broken window with a 13-story drop',
-                    stagebonus: [{setup: `Each fighter may put a random defense token on a Frightened Gambler in their threat area.`},
-                    {persistent: `<b>Interact</b>: If a fighter is in a space with an active objective token, place 1 damage on this card. If 1P damage is on this card, you have acquired the evidence.`, wincondition: [`If you acquired the evidence:`,`If you did not acquire the evidence:`], prologue: "intel"}],
-                    stagepenalty: [{setup: `Search the stage deck for a Pit Boss and put it into play. Shuffle the stage deck.`},
-                    {persistent: `<b>Interact</b>: If a fighter is in a space with an active objective token, place 1 damage on this card. If 1P damage is on this card, you have acquired the evidence.`, wincondition: [`If you won and acquired the evidence:`,`If you did not acquire the evidence:`]}],
+                    stagebonus: [{ setup: `Each fighter may put a random defense token on a Frightened Gambler in their threat area.` },
+                    { persistent: `<b>Interact</b>: If a fighter is in a space with an active objective token, place 1 damage on this card. If 1P damage is on this card, you have acquired the evidence.`, wincondition: [`If you acquired the evidence:`, `If you did not acquire the evidence:`], prologue: "intel" }],
+                    stagepenalty: [{ setup: `Search the stage deck for a Pit Boss and put it into play. Shuffle the stage deck.` },
+                    { persistent: `<b>Interact</b>: If a fighter is in a space with an active objective token, place 1 damage on this card. If 1P damage is on this card, you have acquired the evidence.`, wincondition: [`If you won and acquired the evidence:`, `If you did not acquire the evidence:`] }],
                     masterplan: randFrom(["actsofterror", "illegalgains"]),
                     gloat: [[`If you have a gun, you can rob a casino,`, `But if you have a casino, you can rob everyone!`], [`You think fighting me in some nightclub is going to stop the downfall of Ransom?`, `I'm not your problem. I'm just doing business.`]],
                     rivaltext: _.template(' But ${gPron(enemy,"subject")} is not alone. Alongside ${gPron(enemy,"object")} is ${rival.name}, <%=rivalboost ? `eyes glowing green of Vandal!` : `here to sell an encrypted ${gizmo} to ${enemy.boss}.`%>'),
@@ -265,8 +412,8 @@
 
                 {
                     name: "The Ceremony", instory: 0, location: "cursed", bystander: "acolyte",
-                    stagebonus: {setup: `Flip 2 objective tokens furthest from a fighter to their active side. Each fighter gains 1 random dedense token.`},
-                    stagepenalty: {setup: `Each fighter must either discard a card at random or place 1 power on "Oni's Vessel".`},
+                    stagebonus: { setup: `Flip 2 objective tokens furthest from a fighter to their active side. Each fighter gains 1 random dedense token.` },
+                    stagepenalty: { setup: `Each fighter must either discard a card at random or place 1 power on "Oni's Vessel".` },
                     masterplan: randFrom(["kidnapping", "personalpower"]),
                     gloat: [[`You're too late!`, `You're efforts are futile!`], [`You won’t stop the inevitable!`, `I’ll end you here, with or without the Oni!`], [`I am the Alpha and the Omega. Death and rebirth,`, `And, as you die, so will I be reborn!`],],
                     rivaltext: _.template(' To your dismay ${rival.name}<%=rivalboost ? `, arms engulfed with burning lines of power`: ``%> has joined the ${enemy.minions} of the ${enemy.name} in the ritual.'),
@@ -279,8 +426,8 @@
 
                 {
                     name: "Compromised", instory: 0, location: "remote", bystander: "hostage", pit: 'a broken window with a 13-story drop',
-                    stagebonus: {setup: `Each fighter may search the stage deck for 1 copy of Calming Words and add it to their fighter play area. Shuffle the stage deck.`},
-                    stagepenalty: {setup: `Each fighter places 1 power on a different "Scared Staff" card.`},
+                    stagebonus: { setup: `Each fighter may search the stage deck for 1 copy of Calming Words and add it to their fighter play area. Shuffle the stage deck.` },
+                    stagepenalty: { setup: `Each fighter places 1 power on a different "Scared Staff" card.` },
                     masterplan: randFrom(["actsofterror", "kidnapping"]), // personalpower?? power from the scientists
                     gloat: [["I have some bad news for you!", "Nobody will leave this building alive!"], ["You think you could be of use as a hostage?", "I have no use for you."], [`Let the hostages go," you demand. "And we can work something out?`, `I don't negotiate with Global Gladiators.`]],
                     rivaltext: _.template('<%=(knowledge == "clueless") ? ` Suddenly, a janitor takes off a cap and rips off a fake moustache${rivalboost ? `and snaps the neck of a nearby agent` : ``}! It is ${rival.name} in disguise, an agent for the ${enemy.name}!` : ` ${ucInit(gPron(enemy,"subject"))} is not working alone. Alongside ${gPron(enemy,"object")} is ${rival.name}, ${rivalboost ? `eyes glowing green, a telltale sign of Vandal use!` : `furthering some personal agenda.`}`%>'),
@@ -294,8 +441,8 @@
 
                 {
                     name: "Gone Ballistic", instory: 0, location: "neutral", bystander: "warehouse worker",
-                    stagebonus: {setup: `One fighter may move 3 spaces toward the nearest objective token.`},
-                    stagepenalty: {setup: `Search the stage deck for an additional objective card and put it into play. Shuffle the stage deck.`},
+                    stagebonus: { setup: `One fighter may move 3 spaces toward the nearest objective token.` },
+                    stagepenalty: { setup: `Search the stage deck for an additional objective card and put it into play. Shuffle the stage deck.` },
                     masterplan: randFrom(["illegalgains", "strengtheningforces"]), // actsofterror? chaos, armed strike.. megan's story
                     rivaltext: _.template(' turns to you as ${gPron(enemy, "possessive")} partner in trade, ${rival.name}<%=rivalboost ? `, heavily armed and armored,`: ``%> stashes <%=(knowledge == "clueless" || knowledge == "captured") ? "a" : "the"%> ${gizmo}.'),
                     gloat: [[`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`Okay, I'm reloaded!`, `You ready? Here comes the pain!`], [`You wanna play rough? Ok,`, `Say hello to my little friend!`]],
@@ -308,8 +455,8 @@
 
                 {
                     name: "One Step Ahead", instory: 0, location: "remote", bystander: "mountain climber", pit: "the edge of the cliff",
-                    stagebonus: {setup: `Each fighter may search the enemy deck for a Minion card to discard. Shuffle the enemy deck.`},
-                    stagepenalty: {setup: `Each fighter must put search the stage deck for a copy of Vertigo, and put in into play. Shuffle the stage deck.`},
+                    stagebonus: { setup: `Each fighter may search the enemy deck for a Minion card to discard. Shuffle the enemy deck.` },
+                    stagepenalty: { setup: `Each fighter must put search the stage deck for a copy of Vertigo, and put in into play. Shuffle the stage deck.` },
                     masterplan: randFrom(["personalpower", "kidnapping"]),
                     rivaltext: _.template('<%=rivalboost ? ` Leaping from the shadows in the trees, ${rival.name} ambushes you!` : ` and to your dismay you find that ${rival.name} has joined forces with ${enemy.boss}.` %>'),
                     gloat: [[`Even the strongest warriors cannot take this fall,`, `And you are not the strongest.`], [`It'll not be the fall that kills you,`, `It's the sudden stop at the end!`], [`It's a long way down, Gladiators,`, `You'll have a lot of time to reflect on your mistakes.`], [`Only one way down for you,`, `The quickest possible.`]],
@@ -321,11 +468,11 @@
 
                 {
                     name: "Original Copy", instory: 0, location: "base", bystander: "scientist", pit: "a pitch-black elevator shaft",
-                    stagebonus: {setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose a copy of Vandal Serum attached to a card in the Cloning Area. Return the selected card to Serum Supply.`},
-                    stagepenalty: {setup: `Put 1 damage on this card.`, activate: `Each fighter suffers 1 direct damage for each damage on this card. Then, if any fighter is on or adjacent to an objective space, remove 1 damage from this card.`}, 
+                    stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose a copy of Vandal Serum attached to a card in the Cloning Area. Return the selected card to Serum Supply.` },
+                    stagepenalty: { setup: `Put 1 damage on this card.`, activate: `Each fighter suffers 1 direct damage for each damage on this card. Then, if any fighter is on or adjacent to an objective space, remove 1 damage from this card.` },
                     masterplan: randFrom(["strengtheningforces", "personalpower"]), //kidnap masterplan? clone
                     gloat: [[`New subjects have arrived,`, `Contain them and proceed with the experiments.`], [`Being in a medical facility will not help you,`, `Not after I'm done with you.`], [`You have played your part well,`, `But do you think you were born and not made?`], [`You always are so predictable,`, `Where do you think you were made in?`], [`We couldn't have asked for better specimens,`, `It's time you provide your skills and abilities to the Kingdom.`],],
-                    rivaltext: _.template('<%=rivalboost ? ` Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It stands, slowly, powerfully built, dripping with greel gel. It is the ultimate clone, ${rival.toUpperCase()}-EX!<br><br>` : ` Apparently ${enemy.boss} is taking blood samples from ${rival.name}.`%>'),
+                    rivaltext: _.template('<%=rivalboost ? ` Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It stands, slowly, powerfully built, dripping with greel gel. It is the ultimate clone, ${rival.name.toUpperCase()}-EX!<br><br>` : ` Apparently ${enemy.boss} is taking blood samples from ${rival.name}.`%>'),
                     hottrail: _.template('${trail}, you locate the facility. You are surprised to find the laboratory not heavily guarded, and slipping in is not challenging.  You '),
                     coldtrail: _.template('${trail}, you investigate a facility where ${enemy.name} has reportedly been seen. You defeat a few guards in your way and '),
                     clueless: _.template('${trail}, you investigate a facility in the outskirts of the city that develops cutting edge genetic enhancements and conducts non-sanctioned medical experiments. You fight your way in and '),
@@ -335,8 +482,8 @@
 
                 {
                     name: "Out of Time", instory: 0, location: "cursed", bystander: "acolyte", pit: "a glowing portal",
-                    stagebonus: {setup: `The fighters may choose to flip one objective to its inactive side.`},
-                    stagepenalty: {activate: `The boss gains 1 random defense token for each Remnant engaged with a fighter.`},
+                    stagebonus: { setup: `The fighters may choose to flip one objective to its inactive side.` },
+                    stagepenalty: { activate: `The boss gains 1 random defense token for each Remnant engaged with a fighter.` },
                     masterplan: randFrom(["strengtheningforces", "personalpower"]),
                     gloat: [[`Klaatu verata..`, `Nikto!`], [`Even the strongest warriors will fall,`, `In the face of the power of death!`], [`Now I call upon my army of the dead,`, `Arise, my messengers of death! Our time has arrived!`], [`Magic, the darkest magic,`, `My soul swims in it..`], [`I am the Alpha and the Omega. Death and rebirth,`, `And, as you die, so will I be reborn!`],],
                     rivaltext: _.template(' To your horror, you see <%=rivalboost ? `the rotting corpse of ${rival.name} dig itself out of the ground!`: `${rival.name} joining ${enemy.boss} in the atrocious rite!`%>'),
@@ -349,8 +496,8 @@
 
                 {
                     name: "Poison the Well", instory: 0, location: "neutral", bystander: "hireling", pit: "an outflow shaft",
-                    stagebonus: {setup: `Remove each copy of Vandal Addict from the stage deck and remove them from the game. Shuffle the stage deck.`},
-                    stagepenalty: {setup: `Each fighter searches the stage deck for 1 copy of Infected Rats and adds it to their Threat area. Shuffle the stage deck.`},
+                    stagebonus: { setup: `Remove each copy of Vandal Addict from the stage deck and remove them from the game. Shuffle the stage deck.` },
+                    stagepenalty: { setup: `Each fighter searches the stage deck for 1 copy of Infected Rats and adds it to their Threat area. Shuffle the stage deck.` },
                     masterplan: randFrom(["actsofterror", "strengtheningforces"]),
                     // After setting up the stage, flip 1 objective token to its active side.
                     gloat: [[`With this formula,`, `The weak will die and the strong will join us as thralls!`], [`You will get a bath,`, `A bath that will melt the skin off of you!`], [`How nice that you decided to show up,`, `Better to test the cocktail before deployment!`], [`You will have a proper burial for a Gladiator,`, `Within the sewage!`]],
@@ -364,8 +511,8 @@
 
                 {
                     name: "Right to Remain Silent", instory: 0, location: "base", bystander: "captive",
-                    stagebonus: {setup: `Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.`},
-                    stagepenalty: {setup: `Add two power to Recoverd Intel.`},
+                    stagebonus: { setup: `Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.` },
+                    stagepenalty: { setup: `Add two power to Recoverd Intel.` },
                     masterplan: randFrom(["illegalgains", "kidnapping"]),
                     rivaltext: _.template(' ${rival.name} stands guard<%= rivalboost ? `, vigilant and keen-eyed.`: `.`%>'),
                     hottrail: _.template('<br><br>You are yet unseen, and dart through the room like shadows to rescue the captured Citadel scouts before they break and ${enemy.boss} finds out what you know about the plans of the ${finalboss.name}.'),
@@ -377,8 +524,8 @@
 
                 {
                     name: "Rude Awakening", instory: 0, location: "cursed", bystander: "necromancer", pit: "a bottomless fissure",
-                    stagebonus: {setup: `Flip all objectives to their inactive side.`},
-                    stagepenalty: {setup: `Each fighter places 1 damage on the Stage Rules card.`},
+                    stagebonus: { setup: `Flip all objectives to their inactive side.` },
+                    stagepenalty: { setup: `Each fighter places 1 damage on the Stage Rules card.` },
                     masterplan: randFrom(["actsofterror", "strengtheningforces"]),
                     gloat: [[`Klaatu verata..`, `Nikto!`], [`Even the strongest warriors will fall,`, `In the face of the power of death!`], [`Now I call upon my army of the dead,`, `Arise, my messengers of death! Our time has arrived!`], [`Magic, the darkest magic,`, `My soul swims in it..`]],
                     rivaltext: _.template(' To your horror, you see <%=rivalboost ? `the rotting corpse of ${rival.name} among the zombies that climb out of the ground at ${gPron(enemy, "possessive")} feet.`: `${rival.name} joining ${enemy.boss} in the atrocious rite! Even more zombies climb out of the ground at their feet.`%>'),
@@ -390,8 +537,8 @@
 
                 {
                     name: "Running Wild", instory: 0, location: "remote", bystander: "civilian", pit: "an incredibly deep dig",
-                    stagebonus: {setup: `Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".`},
-                    stagepenalty: {setup: `Each fighter places 3 random defense tokens on their copy of "Hunt for the Idols".`, persistent: `The defense tokens on "Hunt for the Idol" block search successes and are discarded as normal.`},
+                    stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".` },
+                    stagepenalty: { setup: `Each fighter places 3 random defense tokens on their copy of "Hunt for the Idols".`, persistent: `The defense tokens on "Hunt for the Idol" block search successes and are discarded as normal.` },
                     masterplan: randFrom(["illegalgains", "personalpower"]),
                     gloat: [[`You won’t stop the inevitable!`, `I’ll end you here, with or without the Oni!`], [`With the idols in my hands,`, `You and the Citadel will burn.`]],
                     rivaltext: _.template(', guided to the location by <%=rivalboost ? `the spirit of Oni possessing`: ``%> ${rival.name}.'),
@@ -403,8 +550,8 @@
 
                 {
                     name: "Steel Memories", instory: 0, location: "base", bystander: "nameless goon", pit: "a pitch-black elevator shaft",
-                    stagebonus: {setup: `One fighter may move 3 spaces toward the nearest objective.`},
-                    stagepenalty: {setup: `Each fighter must <b>Recruit</b>.`}, masterplan: randFrom(["actsofterror", "kidnapping"]),
+                    stagebonus: { setup: `One fighter may move 3 spaces toward the nearest objective.` },
+                    stagepenalty: { setup: `Each fighter must <b>Recruit</b>.` }, masterplan: randFrom(["actsofterror", "kidnapping"]),
                     gloat: [["Believe me when I say this, Global Gladiators,", "Nobody will leave this room alive!"], ["I'm not even going to kill you myself!", "I'll let my minions take care of that."]],
                     rivaltext: _.template(' accompanied by ${rival.name}<%=rivalboost ? `, eyes green from Vandal dosage, both`: `, both`%>'),
                     hottrail: _.template('surprised by the rapid assault on ${gPron(enemy, "possessive")} fortress. "${gloat[0]}" ${enemy.boss} says as ${gPron(enemy, "subject")} ${enemy.threat}. "${gloat[1]}"'),
@@ -416,8 +563,8 @@
 
                 {
                     name: "Sudden Death", instory: 0, location: "neutral", bystander: "challenger", pit: "a pitch-black elevator shaft",
-                    stagebonus: {setup: `Put one random defense token on each copy of "A New Challenger".`},
-                    stagepenalty: {setup: `All the objective tokens advance 2 spaces toward the boss.`},
+                    stagebonus: { setup: `Put one random defense token on each copy of "A New Challenger".` },
+                    stagepenalty: { setup: `All the objective tokens advance 2 spaces toward the boss.` },
                     masterplan: randFrom(["kidnapping", "strengtheningforces"]),
                     gloat: [[`This is a private affair, Gladiators,`, `You should not have intervened.`], [`In the end,`, `There can be only one!`]],
                     rivaltext: _.template(' To your surprise you see ${rival.name} is among the fighters,<%=rivalboost ? ` quite jacked up,`: ``%> eyes on you.'),
@@ -430,8 +577,8 @@
 
                 {
                     name: "Supply & Demand", instory: 0, location: "neutral", bystander: "customer", pit: `a manhole`,
-                    stagebonus: {setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objective token it is carrying.`}, 
-                    stagepenalty: {setup: `The boss gains 1 defense token of each type. Each fighter is dealt 1 direct damage.`},
+                    stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objective token it is carrying.` },
+                    stagepenalty: { setup: `The boss gains 1 defense token of each type. Each fighter is dealt 1 direct damage.` },
                     masterplan: randFrom(["actsofterror", "illegalgains"]),
                     gloat: [[`You think fighting me in some landfill is going to stop the downfall of Ransom?`, `I'm not your problem. I'm just doing business.`]],
                     rivaltext: _.template(', ${rival.name} at ${gPron(enemy,"possessive")} side<%=rivalboost ? `. ${rival.name} looks to have taken more than just a sample of the product`: ``%>'),
@@ -443,8 +590,8 @@
 
                 {
                     name: "Under Destruction", instory: 0, location: "neutral", bystander: "construction worker", pit: "an out-of-commission elevator shaft",
-                    stagebonus: {persistent: `<b>Exhaust:</b> Move 1 power from a Time Bomb card to this card. Then, if there's 5 power on this card, remove it from the game.`}, 
-                    stagepenalty: {setup: `Each fighter chooses an objective card and places 1 power on that objective.`},
+                    stagebonus: { persistent: `<b>Exhaust:</b> Move 1 power from a Time Bomb card to this card. Then, if there's 5 power on this card, remove it from the game.` },
+                    stagepenalty: { setup: `Each fighter chooses an objective card and places 1 power on that objective.` },
                     masterplan: randFrom(["actsofterror", "illegalgains"]),
                     gloat: [[`Cool guys don't look at explosions,`, `So gape all you want!`], [`Most problems with Gladiators can be solved,`, `By an appropriate charge of high explosives.`], [`Most problems can be solved with an appropriate charge of high explosives,`, `The trick is not to be around when they go off.`], [`It happens sometimes,`, `People just explode. Natural causes.`], [`Why do you have to nuke the whole building?" you ask. "Well, when you do something minor, you can just disappear,`, `When you do something like we will, they will find you unless they think you're dead.`], [`Enough bombs have been planted in this building to bring down the city block,`, `"You'll die with us," you answer. "Could be.`], [`Explosives, buzzsaws, a good old-fashioned beating.. There are so many alternatives,`, `How do you wish to die?`]],
                     rivaltext: _.template(', and ${rival.name} emerges from the shadows<%=rivalboost ? `, eyes glowing green` : ``%>'),
@@ -588,80 +735,11 @@
 
             let referencetext = referenceText(globalgladiators, allygroup, allymotivation, rivalgroup, rivalmotivation, finalboss)
 
-            $(`#charactersetup`).html(referencetext[0])
-            $(`#allyintro`).html(referencetext[1])
-            $(`#allysetup`).html(referencetext[3])
-            $(`#rivalintro`).html(referencetext[2])
-            $(`#rivalsetup`).html(referencetext[4])
-
             let cardtexts = textMaker(story, alliesandrivals, heronames, enemies);
 
-            $(cardtexts).each(function(index) {
+            let pagecontent = { reference: referencetext, text: cardtexts, storyname: storyname, finalboss: finalboss.name }
 
-                cardFront = $(`
-                <div data-role = "page" id = "page_${index}">
-        <div data-role = "header" data-id="head" data-position = "fixed" data-theme="b">
-            <div "ui-grid-solo" style = "display: flex;align-items: center;justify-content: center; font-family: 'Yanone Kaffeesatz', sans-serif"><h2>${storyname}</h2></div>
-        </div>
-
-        
-        <div data-role = "main" class = "ui-content">
-                <ul data-role="listview" data-inset="true">
-                    <li data-role = "list-divider" data-theme="b"><i>${finalboss.name.toUpperCase()} STORY - PART ${this.chapter}</i></li>
-                    <li class = "cardbg" style = "white-space:normal">${this.prologue}</li>
-                    <li data-role = "list-divider" data-theme="b">SETUP</li>
-                    <li style = "white-space:normal" data-theme="b">${this.setup}</li>
-                </ul>
-                <a href="#winpop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "pop" style = "white-space:normal; background: #0a612b">${this.wincondition[0]}</a>
-                <a href="#losepop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "pop" style = "white-space:normal; background: #c4331a">${this.wincondition[1]}</a>  
-        </div>
-
-        <div data-role="popup" id="winpop_${index}">
-            <ul data-role="listview" data-inset="true">
-                <li data-role = "list-divider" data-theme="b"><h2>VICTORY!</h2></li>
-                <li style = "white-space:normal" class = "cardbg">${this.winepilogue}</li>
-                <li><a href="#page_${Math.ceil(index/2)*2+1}" data-transition = "slide" class = "cardadvance">Advance to part ${cardtexts[Math.ceil(index/2)*2+1].chapter}</a></li>
-                ${index == cardtexts.length -1 || index == cardtexts.length -2 ? `<li><a href="#intro" data-transition = "pop">End</a></li>`: ``}
-            </ul>
-        </div>
-
-        <div data-role="popup" id="losepop_${index}">
-            <ul data-role="listview" data-inset="true">
-                <li data-role = "list-divider" data-theme="b"><h2>DEFEAT!</h2></li>
-                <li class = "cardbg" style = "white-space:normal">${this.loseepilogue}</li>
-                <li data-theme="b"><a href="#page_${Math.ceil(index/2)*2+2}" data-transition = "slide">Advance to part ${cardtexts[Math.ceil(index/2)*2+2].chapter}</a></li>
-                ${index == cardtexts.length -1 || index == cardtexts.length -2 ? `<li><a href="#intro" data-transition = "pop">End</a></li>`: ``}
-            </ul>
-        </div>
-
-        <div data-role="footer" data-id="foo1" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#" data-rel="back" data-direction="reverse" data-theme="b">Back</a></li>
-                    <li><a href="#refpanel" data-theme="b" data-transition = "slidedown">Characters</a></li>
-                </ul>
-            </div>
-        </div>
-     </div>
-                `)
-
-                cardFront.appendTo($.mobile.pageContainer);
-
-            })
-
-
-            $(`#prologue`).each(function(index) {
-                $(this).html(cardtexts[index].prologue)
-            })
-            $(`#setup-stage`).each(function(index) {
-                $(this).html(cardtexts[index].setup)
-            })
-            $(`#epilogue-win`).each(function(index) {
-                $(this).html(cardtexts[index].winepilogue)
-            })
-            $(`#epilogue-lose`).each(function(index) {
-                $(this).html(cardtexts[index].loseepilogue)
-            })
+            createPageContent(pagecontent)
 
 
         }
@@ -725,7 +803,7 @@
         }
 
         function whichPreposition(word) {
-            if (/[aeiou]/.test(word.charAt(0))) {
+            if (/[aeiou]/.test(word.toLowerCase().charAt(0))) {
                 return "an " + word
             } else {
                 return "a " + word
@@ -1151,7 +1229,7 @@
                 ally = randFrom(alliesandrivals)
             }
 
-            alliesandrivals =   _.filter(alliesandrivals, !{name: ally.name})
+            alliesandrivals = _.filter(alliesandrivals, !{ name: ally.name })
 
             if (ally.name === enemy.boss) { ally.name = "Mirror " + ally.name }
             else if (heronames.includes(ally.name)) { ally.name = "Shadow " + ally.name }
@@ -1453,11 +1531,11 @@
         }
 
 
-        function setUpInstructions2(stageindex, enemy, rival, ally, knowledge,stagebonus,stagemalus) {
+        function setUpInstructions2(stageindex, enemy, rival, ally, knowledge, stagebonus, stagemalus) {
 
             let addrival
-            
-            ally == null ? ally = rival : ()=>{}
+
+            ally == null ? ally = rival : () => { }
 
             let penalty = Math.max(0, Math.round(stageindex / 3))
 
@@ -1482,11 +1560,11 @@
                 { allysetup: `Put ${ally.name} (ally) into play.`, prologue: "guide" },
                 { setup: `Each fighter may take a second mulligan.` },
                 { setup: `Each fighter gains 2 random defense tokens.` },
-                { setup: `Search the enemy deck for ${preparedboss[0]} and discard it. Shuffle the enemy deck.`},
+                { setup: `Search the enemy deck for ${preparedboss[0]} and discard it. Shuffle the enemy deck.` },
                 { setup: `Each fighter may draw one loot card.` },
                 { setup: `Each fighter may draw one card and gain 1 defense token of their choice.` }, // exhaust to attack with guard
                 { persisent: `<b>Exhaust:</b> Choose one unengaged fighter to draw one card.` }, // feint to draw loot?ß
-                { rivalsetup: `Put ${rival.name} (rival) into play.`, wincondition: [`If ${rival.name} is defeated:`,`If ${rival.name} is not defeated:`], prologue: "rival" }
+                { rivalsetup: `Put ${rival.name} (rival) into play.`, wincondition: [`If ${rival.name} is defeated:`, `If ${rival.name} is not defeated:`], prologue: "rival" }
             ]
             let angryrival = [
                 { setup: `${rival.name} (rival) gains 1 of each type of defense token, and is placed within 3 spaces of a fighter. Activate ${rival.name} (rival).`, rivalboost: true },
@@ -1494,30 +1572,30 @@
                 { activate: `${rival.name} (rival) gains 2 random defese tokens.`, rivalboost: true },
                 { activate: `${rival.name} (rival) gains gains 1 defense token from each engaged fighter.`, rivalboost: true },
                 { activate: `The fighter furtherst from ${rival.name} (rival) discards 1 power.`, rivalboost: true },
-                { wincondition: [`If the fighters win and ${rival.name} is defeated:`,`If ${rival.name} is not defeated:`], prologue: "rival" },
+                { wincondition: [`If the fighters win and ${rival.name} is defeated:`, `If ${rival.name} is not defeated:`], prologue: "rival" },
                 { activate: `If ${rival.name} (rival) is in play, each fighter discards 2 defense tokens of different types. For each fighter that did not, deal that fighter and each figure adjacent to them 3 general damage.` }
             ]
 
             let intel_words = [`intel`, `evidence`, `knowledge`, `information`]
             let acquire_words = [`acquired`, `obtained`, `collected`, `found`, `discovered`]
             let interrogate_words = randFrom([`interrogated`, `questioned`, `examined`, `probed`])
-            let intel_goal = randFrom([`${randFrom(acquire_words)} the ${randFrom(intel_words)}`,`learned what you need`])
+            let intel_goal = randFrom([`${randFrom(acquire_words)} the ${randFrom(intel_words)}`, `learned what you need`])
 
             let penalties = [
                 { activate: `If ${enemy.boss} is unengaged, ${gPron(enemy, "subject")} gains 1 defense token.` },
                 { setup: `Each fighter randomly discards 1 card.` },
                 { activate: `Each fighter discards 1 defense token.` },
                 { setup: `Each fighter suffers 2 direct damage.` },
-                { setup: `Search the enemy deck for ${preparedboss[0]}, ${preparedboss[1]}. Shuffle the enemy deck.`},
+                { setup: `Search the enemy deck for ${preparedboss[0]}, ${preparedboss[1]}. Shuffle the enemy deck.` },
                 { setup: `${enemy.boss} gains 2 defense tokens of each type.` },
                 { persistent: `${enemy.boss} gains +1 attack value.` },
                 { persistent: `${enemy.boss} gains ${enemy.boss == "Ah Long" ? "2P" : "4P"} health value.` },
-                { activate: `The fighter furtherst from ${enemy.boss} within 4 spaces discards 1 power.`},
-                { allysetup: `Put ${ally.name} (ally) into play.`, wincondition: [`If the fighters win and ${ally.name} is not defeated:`,`If ${ally.name} is defeated:`], prologue: "escort"},
-                { persistent: `Put 2P power on this card. <b>Interact:</b> If engaged with ${enemy.boss}, discard 1 defense token of a type of which ${gPron(enemy,"subject")} has 0 of to discard 1 power from this card and if no power remains, ${enemy.boss} is successfully ${interrogate_words}.`, wincondition: [`If the fighters win and ${enemy.boss} is ${interrogate_words}:`,`If ${enemy.boss} is not ${interrogate_words}:`], prologue: "intel" },
-                { persistent: `<b>Interact:</b> If you are in a crate space, you may discard 1 of each type of defense token on this card. Once there is 1P of each defense token on this card, you have ${intel_goal}.`, activate: `Each fighter discards 1 defense token for each space the nearest crate space is from them.`, wincondition: [`If the fighters win and have ${intel_goal}:`,`If you have not ${intel_goal}:`], prologue: "intel" },
+                { activate: `The fighter furtherst from ${enemy.boss} within 4 spaces discards 1 power.` },
+                { allysetup: `Put ${ally.name} (ally) into play.`, wincondition: [`If the fighters win and ${ally.name} is not defeated:`, `If ${ally.name} is defeated:`], prologue: "escort" },
+                { persistent: `Put 2P power on this card. <b>Interact:</b> If engaged with ${enemy.boss}, discard 1 defense token of a type of which ${gPron(enemy, "subject")} has 0 of to discard 1 power from this card and if no power remains, ${enemy.boss} is successfully ${interrogate_words}.`, wincondition: [`If the fighters win and ${enemy.boss} is ${interrogate_words}:`, `If ${enemy.boss} is not ${interrogate_words}:`], prologue: "intel" },
+                { persistent: `<b>Interact:</b> If you are in a crate space, you may discard 1 of each type of defense token on this card. Once there is 1P of each defense token on this card, you have ${intel_goal}.`, activate: `Each fighter discards 1 defense token for each space the nearest crate space is from them.`, wincondition: [`If the fighters win and have ${intel_goal}:`, `If you have not ${intel_goal}:`], prologue: "intel" },
                 { activate: `Every fighter not engaged with an enemy must discard 1 power and 1 defense token of their choice.` },
-                { persistent: `Place 5P power tokens on this card. After a fighter defeats an enemy in their threat area, they may discard 1 defense token to gain 1 power from this card. If there is no power on this card, you have ${intel_goal}.`, activate: `Place 1 power on this card for any enemy except for the boss is unengaged.`, wincondition: [`If the fighters win and have ${intel_goal}:`,`If you have not ${intel_goal}:`], prologue: "intel" },
+                { persistent: `Place 5P power tokens on this card. After a fighter defeats an enemy in their threat area, they may discard 1 defense token to gain 1 power from this card. If there is no power on this card, you have ${intel_goal}.`, activate: `Place 1 power on this card for any enemy except for the boss is unengaged.`, wincondition: [`If the fighters win and have ${intel_goal}:`, `If you have not ${intel_goal}:`], prologue: "intel" },
                 { allysetup: `Put ${ally.name} (ally) into play.`, persistent: `If ${ally.name} (ally) would be dealt any damage, deal it to one fighter instead.`, prologue: "escort" },
             ]
 
@@ -1525,17 +1603,21 @@
 
             let directions = []
 
-            Array.isArray(stagebonus) ? stagebonus = randFrom(stagebonus) : ()=>{}
-            Array.isArray(stagemalus) ? stagemalus = randFrom(stagemalus) : ()=>{}
+            Array.isArray(stagebonus) ? stagebonus = randFrom(stagebonus) : () => { }
+            Array.isArray(stagemalus) ? stagemalus = randFrom(stagemalus) : () => { }
 
-            if (penalty < 0) {directions.push(randFrom([stagebonus,randFrom(genericbonus)]))}
-            else if (penalty == 0) {directions = directions}
-            else if (penalty == 1) {addrival ? 
-                directions.push({ rivalsetup: `Put ${rival.name} (rival) into play.` }) :  
-                directions.push(randFrom([stagemalus,randFrom(penalties)])) }
-            else {addrival ? 
-                (directions.push({ rivalsetup: `Put ${rival.name} (rival) into play.` }), directions.push(randFrom([stagemalus,randFrom(penalties)]))) :  
-                (directions.push(randFrom(penalties)), directions.push(stagemalus)) }
+            if (penalty < 0) { directions.push(randFrom([stagebonus, randFrom(genericbonus)])) }
+            else if (penalty == 0) { directions = directions }
+            else if (penalty == 1) {
+                addrival ?
+                    directions.push({ rivalsetup: `Put ${rival.name} (rival) into play.` }) :
+                    directions.push(randFrom([stagemalus, randFrom(penalties)]))
+            }
+            else {
+                addrival ?
+                    (directions.push({ rivalsetup: `Put ${rival.name} (rival) into play.` }), directions.push(randFrom([stagemalus, randFrom(penalties)]))) :
+                    (directions.push(randFrom(penalties)), directions.push(stagemalus))
+            }
 
             let persistence = false
             let activate = false
@@ -1545,25 +1627,25 @@
             let setuptext = ""
             let activatetext = ""
             let persistenttext = ""
-            let wincondition = [`If the fighters win:`,`If the fighters lose:`]
+            let wincondition = [`If the fighters win:`, `If the fighters lose:`]
             let prologue = ""
 
             $(directions).each(function () {
-                this.hasOwnProperty("setup") ? (setuptext = `${setuptext} ${this.setup}`) : ()=>{}
-                this.hasOwnProperty("activate") ? (persistence = true, activate = true, activatetext = `${activatetext} ${this.activate}`) : ()=>{}
-                this.hasOwnProperty("persistent") ? (persistence = true, persistenttext = `${persistenttext} ${this.persistent}`) : ()=>{}
-                this.hasOwnProperty("allysetup") ? (allysetup = true, setuptext = `${setuptext} ${this.allysetup}`) : ()=>{}
-                this.hasOwnProperty("rivalsetup") ? (rivalsetup = true, setuptext = `${setuptext} ${this.rivalsetup}`) : ()=>{}
-                this.hasOwnProperty("rivalboost") ? rivalboost = true : ()=>{}
-                this.hasOwnProperty("wincondition") ? wincondition = this.wincondition : ()=>{}
-                this.hasOwnProperty("prologue") ? prologue = this.prologue : ()=>{}
+                this.hasOwnProperty("setup") ? (setuptext = `${setuptext} ${this.setup}`) : () => { }
+                this.hasOwnProperty("activate") ? (persistence = true, activate = true, activatetext = `${activatetext} ${this.activate}`) : () => { }
+                this.hasOwnProperty("persistent") ? (persistence = true, persistenttext = `${persistenttext} ${this.persistent}`) : () => { }
+                this.hasOwnProperty("allysetup") ? (allysetup = true, setuptext = `${setuptext} ${this.allysetup}`) : () => { }
+                this.hasOwnProperty("rivalsetup") ? (rivalsetup = true, setuptext = `${setuptext} ${this.rivalsetup}`) : () => { }
+                this.hasOwnProperty("rivalboost") ? rivalboost = true : () => { }
+                this.hasOwnProperty("wincondition") ? wincondition = this.wincondition : () => { }
+                this.hasOwnProperty("prologue") ? prologue = this.prologue : () => { }
             })
 
-            let instructions = `<b>Stage Setup:</b> ${setuptext}${persistence ? ` Put this card into play in the enemy play area.` : "" } ${persistence ? persistenttext : "" }${activate ? ` <b>Activate:</b> ` : "" }${activate ? activatetext : "" }`
+            let instructions = `<b>Stage Setup:</b> ${setuptext}${persistence ? ` Put this card into play in the enemy play area.` : ""} ${persistence ? persistenttext : ""}${activate ? ` <b>Activate:</b> ` : ""}${activate ? activatetext : ""}`
 
-            instructions.trim() == "<b>Stage Setup:</b>" ? instructions = `<b>Stage Setup:</b> No special setup` : ()=>{}
+            instructions.trim() == "<b>Stage Setup:</b>" ? instructions = `<b>Stage Setup:</b> No special setup` : () => { }
 
-            return({setup: instructions, allysetup: allysetup, rivalsetup: rivalsetup, rivalboost: rivalboost, wincondition: wincondition, prologue: prologue})
+            return ({ setup: instructions, allysetup: allysetup, rivalsetup: rivalsetup, rivalboost: rivalboost, wincondition: wincondition, prologue: prologue })
 
         }
 
@@ -1572,52 +1654,52 @@
             // stageindex makes finalboss the "true mastermind" or some such when index 8/9
 
             pregameprologue = stageindex == 0 ? pregameprologue : ``
-            let find_out_words = [`you discover`,`you find out`,`you learn`,`you get wind`,`you determine`, `it seems`, `turns out`]
-            let this_boss = finalboss.name == enemy.name ? enemy.boss : randFrom([enemy.boss,`the ${enemy.name}`])
-            let this_finalboss = finalboss.name == enemy.name ? finalboss.boss : randFrom([finalboss.boss,`the ${finalboss.name}`])
-            
+            let find_out_words = [`you discover`, `you find out`, `you learn`, `you get wind`, `you determine`, `it seems`, `turns out`]
+            let this_boss = finalboss.name == enemy.name ? enemy.boss : randFrom([enemy.boss, `the ${enemy.name}`])
+            let this_finalboss = finalboss.name == enemy.name ? finalboss.boss : randFrom([finalboss.boss, `the ${finalboss.name}`])
+
             let intel_words = ["intel", "knowledge", "information", "a clue", "a word", "lowdown"]
             let location_words = ["locale", "location", "whereabouts", "position", "scene", "station", "bearings"]
             let investigator_words = ["Citadel analysts", "you", "Agent Fletch and you"]
             let citadel_words = [`the Gladiators`, `you`, `Citadel`, `Global Gladiators`, `Agent Fletch`]
             let assumption_words = ["believe", "consider", "conclude", "suppose", "think", "regard", "assume", "postulate", "deem", "surmise"]
-            let decision_words = [`resolve`, `determine`,`come to a decision`, `decide`, `come to a conclusion`]
-            let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence` ]
+            let decision_words = [`resolve`, `determine`, `come to a decision`, `decide`, `come to a conclusion`]
+            let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence`]
             let turns_out_words = [`turns out`, `emerges`, `comes to light`, `transpires`]
             let intel_words_2 = [`intel`, `evidence`, `knowledge`, `information`]
 
-            let first_is_final = enemy.boss != finalboss.boss && stageindex == 0 ? 
-            `Without ${randFrom(intel_words)} on the current ${randFrom(location_words)} of ${finalboss.boss}, ${randFrom(investigator_words)} ${randFrom(assumption_words)} ${enemy.boss} is the best source for more information.<br><br>` : ``
+            let first_is_final = enemy.boss != finalboss.boss && stageindex == 0 ?
+                `Without ${randFrom(intel_words)} on the current ${randFrom(location_words)} of ${finalboss.boss}, ${randFrom(investigator_words)} ${randFrom(assumption_words)} ${enemy.boss} is the best source for more information.<br><br>` : ``
 
-            let hence_words = [`Accordingly`,`Hence`, `So`, `Consequently`, `Therefore`, `Thus`]
+            let hence_words = [`Accordingly`, `Hence`, `So`, `Consequently`, `Therefore`, `Thus`]
             let default_clues = ["Based on current intel", "Chasing the clues", "Following your leads", "In pursuit of clues", "After a little more intel-gathering", "Following this lead", "As you investigated further", "After searching for more intel", "Following the intel you had", "After searching for more information", "Reviewing what you got", "With the information you gathered", `You tracked down some of the ${enemy.name} associates and tailed their movements. ${randFrom(hence_words)}`, `Following the trail of money leading from the previous encounter`]
             let wincondition_txt = ""
 
-            if (wincondition == "intel"){
+            if (wincondition == "intel") {
 
-            let evidence_clues = [` that ${this_boss} knows more about ${possessiveSuffix(this_finalboss)} plan than you excpected.`, ` ${this_boss} has detailed ${randFrom(intel_words_2)} on the plans of ${this_finalboss}.`, ` ${this_boss} has ${randFrom(intel_words_2)} that will lead you to ${this_finalboss}.`]
-            let acquire_words = [`obtaining`, `acquiring`, `securing`, `procuring`, `getting`, `finding`]
-            let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence` ]
-            let decision_txt = `${ucInit(randFrom(investigator_words))} ${randFrom(decision_words)} ${randFrom(acquire_words)} the ${randFrom(intel_words_2)} is ${randFrom(priority_words)}.`
-            wincondition_txt = `${randFrom(default_clues)} ${randFrom(find_out_words)} ${randFrom(evidence_clues)} ${decision_txt} ${randFrom(hence_words)}` 
-           
-            } else if (wincondition == "rival"){
+                let evidence_clues = [` that ${this_boss} knows more about ${possessiveSuffix(this_finalboss)} plan than you excpected.`, ` ${this_boss} has detailed ${randFrom(intel_words_2)} on the plans of ${this_finalboss}.`, ` ${this_boss} has ${randFrom(intel_words_2)} that will lead you to ${this_finalboss}.`]
+                let acquire_words = [`obtaining`, `acquiring`, `securing`, `procuring`, `getting`, `finding`]
+                let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence`]
+                let decision_txt = `${ucInit(randFrom(investigator_words))} ${randFrom(decision_words)} ${randFrom(acquire_words)} the ${randFrom(intel_words_2)} is ${randFrom(priority_words)}.`
+                wincondition_txt = `${randFrom(default_clues)} ${randFrom(find_out_words)} ${randFrom(evidence_clues)} ${decision_txt} ${randFrom(hence_words)}`
 
-            let rivals_fate_words = [`capturing`, `seizing`, `arresting`, `catching`, `interrogating`, `grilling`, `questioning`]
-            let rival_capture = `${ucInit(randFrom(investigator_words))} ${randFrom(decision_words)} ${randFrom(rivals_fate_words)} ${gPron(rival, "object")} is ${randFrom(priority_words)}`
+            } else if (wincondition == "rival") {
 
-            wincondition_txt = `${randFrom(default_clues)} ${randFrom(find_out_words)} ${this_boss} has an associate who knows more about the plans of ${this_finalboss}. ${rival_capture}. ${randFrom(default_clues)}`
+                let rivals_fate_words = [`capturing`, `seizing`, `arresting`, `catching`, `interrogating`, `grilling`, `questioning`]
+                let rival_capture = `${ucInit(randFrom(investigator_words))} ${randFrom(decision_words)} ${randFrom(rivals_fate_words)} ${gPron(rival, "object")} is ${randFrom(priority_words)}`
 
-           } else if (wincondition == "escort") {
+                wincondition_txt = `${randFrom(default_clues)} ${randFrom(find_out_words)} ${this_boss} has an associate who knows more about the plans of ${this_finalboss}. ${rival_capture}. ${randFrom(default_clues)}`
 
-            let escort_prologue = [
-                `${ally.name} has agreed to share ${gPron(ally,"possessive")} ${randFrom(intel_words_2)} on ${this_finalboss} if you help ${gPron(ally,"object")} with ${this_boss}`, 
-                `${randFrom(default_clues)}, ${randFrom(turns_out_words)} that ${ally.name} has ${randFrom(intel_words_2)} on ${this_finalboss}. You need to make sure ${gPron(ally,"subject")} survives for ${randFrom(investigator_words)} to get that ${randFrom(intel_words_2)}`,
-                `${ally.name} has approached ${randFrom(citadel_words)} for assistance in exchange for ${randFrom(intel_words_2)} on ${this_finalboss}. ${ucInit(gPron(ally,"subject"))} needs your protection from ${this_boss}`,
-                `${ally.name} is on a parallel Citadel mission to yours, and you need to protect ${gPron(ally,"object")} so ${gPron(ally,"subject")} can obtain whatever ${randFrom(intel_words_2)} ${gPron(ally,"subject")} is after`]
-            wincondition_txt = `${randFrom(escort_prologue)}. ${randFrom(default_clues)}`
+            } else if (wincondition == "escort") {
 
-           } else {wincondition_txt = randFrom(default_clues)}
+                let escort_prologue = [
+                    `${ally.name} has agreed to share ${gPron(ally, "possessive")} ${randFrom(intel_words_2)} on ${this_finalboss} if you help ${gPron(ally, "object")} with ${this_boss}`,
+                    `${randFrom(default_clues)}, ${randFrom(turns_out_words)} that ${ally.name} has ${randFrom(intel_words_2)} on ${this_finalboss}. You need to make sure ${gPron(ally, "subject")} survives for ${randFrom(investigator_words)} to get that ${randFrom(intel_words_2)}`,
+                    `${ally.name} has approached ${randFrom(citadel_words)} for assistance in exchange for ${randFrom(intel_words_2)} on ${this_finalboss}. ${ucInit(gPron(ally, "subject"))} needs your protection from ${this_boss}`,
+                    `${ally.name} is on a parallel Citadel mission to yours, and you need to protect ${gPron(ally, "object")} so ${gPron(ally, "subject")} can obtain whatever ${randFrom(intel_words_2)} ${gPron(ally, "subject")} is after`]
+                wincondition_txt = `${randFrom(escort_prologue)}. ${randFrom(default_clues)}`
+
+            } else { wincondition_txt = randFrom(default_clues) }
 
             let lead_in = pregameprologue + first_is_final + wincondition_txt
 
@@ -1653,20 +1735,20 @@
 
             stage.name == "Casdft" && knowledge != "" ? console.log(stage.name + Math.random()) : ``
 
-           let stageriv = stage.rivaltext({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "minion": minion, "rivalboost": rivalboost, "stageindex": stageindex, "knowledge": knowledge, "gizmo": gizmo })
+            let stageriv = stage.rivaltext({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "minion": minion, "rivalboost": rivalboost, "stageindex": stageindex, "knowledge": knowledge, "gizmo": gizmo })
 
-                let stagevar
-                switch (knowledge) {
-                    case "hottrail": stagevar = stage.hottrail({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "knowledge": knowledge, "gizmo": gizmo });
-                        break;
-                    case "coldtrail": stagevar = stage.coldtrail({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "knowledge": knowledge, "gizmo": gizmo });
-                        break;
-                    case "clueless": stagevar = stage.clueless({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "knowledge": knowledge, "gizmo": gizmo });
-                }
+            let stagevar
+            switch (knowledge) {
+                case "hottrail": stagevar = stage.hottrail({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "knowledge": knowledge, "gizmo": gizmo });
+                    break;
+                case "coldtrail": stagevar = stage.coldtrail({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "knowledge": knowledge, "gizmo": gizmo });
+                    break;
+                case "clueless": stagevar = stage.clueless({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "knowledge": knowledge, "gizmo": gizmo });
+            }
 
-                if (knowledge == "captured") {
-                    prologue = stage.captured({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "rivalboost": rivalboost, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "stagevar": stagevar, "casino": casino, "knowledge": knowledge, "gizmo": gizmo })
-                } else { prologue = stage.prologue({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "rivalboost": rivalboost, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "stagevar": stagevar, "casino": casino, "knowledge": knowledge, "gizmo": gizmo }) }
+            if (knowledge == "captured") {
+                prologue = stage.captured({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "rivalboost": rivalboost, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "stagevar": stagevar, "casino": casino, "knowledge": knowledge, "gizmo": gizmo })
+            } else { prologue = stage.prologue({ "finalboss": finalboss, "enemy": enemy, "rival": rival, "competitor": competitor, "minion": minion, "trail": trail, "rivalpresence": rivalpresence, "rivalboost": rivalboost, "gloat": gloat, "stageindex": stageindex, "rivaltext": stageriv, "stagevar": stagevar, "casino": casino, "knowledge": knowledge, "gizmo": gizmo }) }
 
             return { chapter: story[stageindex].chapter, prologue: prologue, setup: setup, wincondition: instructions.wincondition, winepilogue: winepilogue, loseepilogue: loseepilogue }
         }
@@ -2624,7 +2706,7 @@
                         text = `You have apparently captured Gabriel's sister Regina at one point, but you cannot remember this - you have not been yourself. ${_.map(group, 'name').includes(motivation) ? `Now Gabriel is determined to confront you to locate his sister.${group.length == 2 ? ` His mute friend Drago follows him like a dog.` : ``}` : `His mute friend Drago hounds you to find the location of Gabriel's missing sister.`} They won't be hearing that you just don't know about Regina.`
                     } else {
                         text =
-                        `Gabriel has received a letter from his sister Regina that informed him she is been held, but by whom? ${_.map(group, 'name').includes(motivation) ? `${motivation}${group.length == 2 ? `, along with Drago` : ""} believes you have information on her whereabouts and will not take no for an answer.` : `${possessiveSuffix(motivation)} believes you have information on her whereabouts and will not take no for an answer.`} `
+                            `Gabriel has received a letter from his sister Regina that informed him she is been held, but by whom? ${_.map(group, 'name').includes(motivation) ? `${motivation}${group.length == 2 ? `, along with Drago` : ""} believes you have information on her whereabouts and will not take no for an answer.` : `${possessiveSuffix(motivation)} believes you have information on her whereabouts and will not take no for an answer.`} `
                     };
                     break;
                 case "Global Gladiator": text = (stance == "Ally" ?
