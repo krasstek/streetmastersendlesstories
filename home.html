@@ -136,8 +136,8 @@
                     <li data-role = "list-divider" data-theme="b">SETUP</li>
                     <li style = "white-space:normal" data-theme="b">${this.setup}</li>
                 </ul>
-                <a href="#winpop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "pop" style = "white-space:normal; background: #0a612b">${this.wincondition[0]}</a>
-                <a href="#losepop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "pop" style = "white-space:normal; background: #c4331a">${this.wincondition[1]}</a>  
+                <a href="#winpop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "flip" style = "white-space:normal; background: #0a612b">${this.wincondition[0]}</a>
+                <a href="#losepop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "flip" style = "white-space:normal; background: #c4331a">${this.wincondition[1]}</a>  
         </div>
 
         <div data-role="popup" id="winpop_${index}">
@@ -168,9 +168,9 @@
         <div data-role="footer" data-id="foo1" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#" data-rel="back" data-direction="reverse" data-theme = "b">Back</a></li>
-                    <li><a href="#savepop_${index}" data-rel="popup" data-transition = "pop" data-theme = "b">Save</a></li>
-                    <li><a href="#refpanel" data-transition = "slidedown" data-theme = "b">Characters</a></li>
+                    <li><a class = "ui-icon-back ui-btn-icon-top" href="#" data-rel="back" data-direction="reverse" data-theme = "b"></a></li>
+                    <li><a class = "ui-icon-user ui-btn-icon-top" href="#refpanel" data-transition = "slidedown" data-theme = "b"></a></li>
+                    <li><a class = "ui-icon-arrow-d ui-btn-icon-top" href="#savepop_${index}" data-rel="popup" data-transition = "pop" data-theme = "b"></a></li>
                 </ul>
             </div>
         </div>
@@ -209,11 +209,6 @@
 
         let enemiescopy
 
-        $(document).on('keypress', function (e) {
-            if (e.which == 13) {
-                createStory();
-            }
-        });
 
         $(window).on('load', function () {
             $(this).trigger('resize');
@@ -354,7 +349,6 @@
 
 
         function createStory() {
-
 
             $(document).on('pageinit')
 
