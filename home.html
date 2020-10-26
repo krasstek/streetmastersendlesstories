@@ -79,9 +79,10 @@
             </div>
 
             <div data-role="popup" id="loadpopup">
+                <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                 <ol data-role="listview" data-inset="true">
                     <li data-role="list-divider" data-theme="b">
-                        <h2>SAVE AND EXIT?</h2>
+                        <h2>SELECT SAVED STORY</h2>
                     </li>
                     <li><a href="#page_0" id="loadgame_1"
                             onclick="createPageContent(JSON.parse(localStorage.getItem('save_game_content_1')))"
@@ -98,6 +99,7 @@
             </div>
 
             <div data-role="popup" id="expansion_popup" data-theme="b">
+                <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
                 <ul data-role="listview" data-inset="true">
                     <li data-role="list-divider" data-theme="b">
                         <h2>EXPANSION SELECTION</h2>
@@ -223,6 +225,7 @@
         </div>
 
         <div data-role="popup" id="winpop_${index}">
+            <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
             <ul data-role="listview" data-inset="true">
                 <li data-role = "list-divider" data-theme="b"><h2>VICTORY!</h2></li>
                 <li style = "white-space:normal" class = "cardbg">${this.winepilogue}</li>
@@ -231,6 +234,7 @@
         </div>
 
         <div data-role="popup" id="losepop_${index}">
+            <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
             <ul data-role="listview" data-inset="true">
                 <li data-role = "list-divider" data-theme="b"><h2>DEFEAT!</h2></li>
                 <li class = "cardbg" style = "white-space:normal">${this.loseepilogue}</li>
@@ -239,6 +243,7 @@
         </div>
 
         <div data-role="popup" id="savepop_${index}">
+            <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
             <ol data-role="listview" data-inset="true">
                 <li data-role = "list-divider" data-theme="b"><h2>SAVE AND EXIT?</h2></li>
                 <li><a href="#" id = "savegame" onclick = "saveGame_1()" class = "cardadvance" style = "white-space:normal"><i>${localStorage.getItem("save_game_content_1") != null ? `${JSON.parse(localStorage.getItem("save_game_content_1")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_1")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i></a></li>
