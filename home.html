@@ -51,12 +51,24 @@
             <div class="ui-grid-solo">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#loadpopup" data-rel="popup" data-transition = "pop" data-theme = "b"><h2>LOAD A STORY</h2></a></li>
+                        <li><a href="#loadpopup" data-rel="popup" data-transition="pop" data-theme="b">
+                                <h2>LOAD A STORY</h2>
+                            </a></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="ui-grid-solo" id = "to_first_page">
+            <div class="ui-grid-solo" id="expansion_picker">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#expansion_popup" data-rel="popup" data-transition="pop" data-theme="b">
+                                <h2>SELECT EXPANSIONS</h2>
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ui-grid-solo" id="to_first_page" style="display: hidden">
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#page_0" data-transition="pop" data-theme="b">
@@ -68,15 +80,60 @@
 
             <div data-role="popup" id="loadpopup">
                 <ol data-role="listview" data-inset="true">
-                    <li data-role = "list-divider" data-theme="b"><h2>SAVE AND EXIT?</h2></li>
-                    <li><a href="#page_0" id = "loadgame_1" onclick = "createPageContent(JSON.parse(localStorage.getItem('save_game_content_1')))" class = "cardadvance" style = "white-space:normal"></a></li>
-                    <li><a href="#page_0" id = "loadgame_2" onclick = "createPageContent(JSON.parse(localStorage.getItem('save_game_content_2')))" class = "cardadvance" style = "white-space:normal"></a></li>
-                    <li><a href="#page_0" id = "loadgame_3" onclick = "createPageContent(JSON.parse(localStorage.getItem('save_game_content_3')))" class = "cardadvance" style = "white-space:normal"></a></li>
-            </ol>
-            <button class = "ui-btn-b cardadvance"><a href="#" onclick = "clearSaves()" style = "color: black; white-space:normal"><i>CLEAR ALL SAVE DATA</i> </a></button>
+                    <li data-role="list-divider" data-theme="b">
+                        <h2>SAVE AND EXIT?</h2>
+                    </li>
+                    <li><a href="#page_0" id="loadgame_1"
+                            onclick="createPageContent(JSON.parse(localStorage.getItem('save_game_content_1')))"
+                            class="cardadvance" style="white-space:normal"></a></li>
+                    <li><a href="#page_0" id="loadgame_2"
+                            onclick="createPageContent(JSON.parse(localStorage.getItem('save_game_content_2')))"
+                            class="cardadvance" style="white-space:normal"></a></li>
+                    <li><a href="#page_0" id="loadgame_3"
+                            onclick="createPageContent(JSON.parse(localStorage.getItem('save_game_content_3')))"
+                            class="cardadvance" style="white-space:normal"></a></li>
+                </ol>
+                <button class="ui-btn-b cardadvance"><a href="#" onclick="clearSaves()"
+                        style="color: black; white-space:normal"><i>CLEAR ALL SAVE DATA</i> </a></button>
             </div>
 
+            <div data-role="popup" id="expansion_popup" data-theme="b">
+                <ul data-role="listview" data-inset="true">
+<!--                     rise of the kingdom unselectable so the generator has enought material-->
+                    <li><a href="#" class="exp_selector ui-icon-check ui-icon-right ui-disabled" name="riseofthekingdom"
+                            selected="select">Rise of the Kingdom</a></li>
+                    <li><a href="#" class="exp_selector ui-icon-check ui-icon-right" name="stretchgoals17">Rise of the
+                            Kingdom Stretch Goals</a></li>
+                    <li><a href="#" class="exp_selector ui-icon-check ui-icon-right" name="legendofoni">Legend of
+                            Oni</a></li>
+                    <li><a href="#" class="exp_selector ui-icon-check ui-icon-right" name="twintiger">Twin Tiger</a>
+                    </li>
+                    <li><a href="#" class="exp_selector ui-icon-check ui-icon-right" name="redemption">Redemption</a>
+                    </li>
+                    <li><a href="#" class="exp_selector ui-icon-check ui-icon-right" name="battlecon">Street Masters X
+                            BattleCON</a></li>
+                    <li><a href="#" class="exp_selector ui-icon-check ui-icon-right" name="keystothekingdom">Brook City:
+                            Keys to the Kingdom</a></li>
+                    <li><a href="#" class="exp_selector ui-icon-minus ui-icon-right ui-disabled"
+                            name="aftershock">Aftershock</a></li>
+                    <li><a href="#" class="exp_selector ui-icon-minus ui-icon-right ui-disabled"
+                            name="essenceofevil">Essence of Evil</a></li>
+                    <li><a href="#" class="exp_selector ui-icon-minus ui-icon-right ui-disabled"
+                            name="stretchgoals18">Aftershock Stretch Goals</a></li>
+                    <li><a href="#" class="exp_selector ui-icon-check ui-icon-right" name="redemption2">Redemption 2</a>
+                    </li>
+                    <li><a href="#" class="exp_selector ui-icon-minus ui-icon-right ui-disabled"
+                            name="tideofthedragon">Tide of the Dragon</a></li>
+                    <li><a href="#" class="exp_selector ui-icon-minus ui-icon-right ui-disabled"
+                            name="newchallengers">New Challengers</a></li>
+                    <li><a href="#" class="exp_selector ui-icon-minus ui-icon-right ui-disabled"
+                            name="rumblepack">Rumble Pack</a></li>
+                </ul>
+            </div>
+
+
         </div>
+
 
         <div data-role="footer" data-theme="b" data-position="fixed">
             Created by Antti Jäppinen. Street Masters and all associated artwork is created and owned by Blacklist
@@ -114,6 +171,18 @@
 
     <script type="text/javascript">
 
+        $('.exp_selector').on('tap', function (e) {
+
+            if ($(this).hasClass("ui-icon-minus")) {
+                $(this).removeClass("ui-icon-minus")
+                $(this).addClass("ui-icon-check")
+            } else {
+                $(this).removeClass("ui-icon-check")
+                $(this).addClass("ui-icon-minus")
+            }
+
+
+        });
 
         function createPageContent(pagecontent) {
 
@@ -178,7 +247,8 @@
         <div data-role="footer" data-id="foo1" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a class = "ui-icon-back ui-btn-icon-top" href="#" data-rel="back" data-direction="reverse" data-theme = "b"></a></li>
+                    <li><a class = "ui-icon-arrow-l ui-btn-icon-top" href="#" data-rel="back" data-direction="reverse" data-theme = "b"></a></li>
+                    <li><a class = "ui-icon-back ui-btn-icon-top" href="#intro" data-transition="fade" data-theme = "b"></a></li>
                     <li><a class = "ui-icon-user ui-btn-icon-top" href="#refpanel" data-transition = "slidedown" data-theme = "b"></a></li>
                     <li><a class = "ui-icon-arrow-d ui-btn-icon-top" href="#savepop_${index}" data-rel="popup" data-transition = "pop" data-theme = "b"></a></li>
                 </ul>
@@ -233,10 +303,10 @@
             $("body").show();
         });
 
-        $(document).on("pagecontainerbeforeshow", function( event, ui ) {
-			let toPage = ui.toPage[0].id; 	
-            toPage == "intro" ? showForwardButton() : ()=>{}
-            })
+        $(document).on("pagecontainerbeforeshow", function (event, ui) {
+            let toPage = ui.toPage[0].id;
+            toPage == "intro" ? showForwardButton() : () => { }
+        })
 
         function randFrom(array) {
             return array[Math.floor(Math.random() * array.length)]
@@ -253,76 +323,80 @@
 
             let gladiators = [
                 {
-                    name: "Ah Long", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
+                    name: "Ah Long", expansion: "redemption", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy[1].boss} as the boss in part 2B of your personal story.` }
                 },
-                { name: "Axel", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Mary Ann"], rival: ["Mary Ann"], stage: "Under Destruction" },
+                { name: "Axel", expansion: "twintiger", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Mary Ann"], rival: ["Mary Ann"], stage: "Under Destruction" },
                 { name: "Brandon", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Isabella"], rival: ["Isabella"], stage: ["Cashed Out", "Steel Memories"] },
                 {
-                    name: "Clint", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: [""], rival: [""]/*random rival*//*random rival*/, stage: [randFrom(stages).name],
+                    name: "Clint", expansion: "stretchgoals17", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: [""], rival: [""]/*random rival*//*random rival*/, stage: [randFrom(stages).name],
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${this.stage} as the stage in part 3 of your personal story.` }
                 },
                 {
-                    name: "Dmitri", enemy: randFrom(enemies), ally: [""], rival: ["Anastasia"], stage: "Right to Remain Silent",
+                    name: "Dmitri", expansion: "redemption", enemy: randFrom(enemies), ally: [""], rival: ["Anastasia"], stage: "Right to Remain Silent",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
                 },
                 {
-                    name: "Gabriel", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Drago"], rival: ["Drago"], stage: "Original Copy",
+                    name: "Gabriel", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Drago"], rival: ["Drago"], stage: "Original Copy",
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
                 },
                 {
-                    name: "Ikuchi", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Megan"], rival: [""], stage: "Original Copy",
+                    name: "Ikuchi", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Megan"], rival: [""], stage: "Original Copy",
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2 of your personal story.` }
                 },
-                { name: "Jackal", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Project X"], rival: ["Kemono", "Project X"], stage: "Steel Memories" },
+                { name: "Jackal", expansion: "redemption", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Project X"], rival: ["Kemono", "Project X"], stage: "Steel Memories" },
                 {
-                    name: "Juan", enemy: randFrom(enemies), ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: "Compromised",
+                    name: "Juan", expansion: "redemption", enemy: randFrom(enemies), ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: "Compromised",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
                 },
                 {
-                    name: "Kemono", enemy: randFrom(filterArray(enemies, "boss", "Shadow", true)), ally: ["Darius"], rival: ["Shadow", "Darius"], stage: "Sudden Death",
+                    name: "Kemono", expansion: "redemption", enemy: randFrom(filterArray(enemies, "boss", "Shadow", true)), ally: ["Darius"], rival: ["Shadow", "Darius"], stage: "Sudden Death",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2 of your personal story.` }
                 },
-                { name: "Kenshin", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Brandon"], rival: ["Shadow", "Jackal", "Kemono"], stage: "Cashed Out" },
+                { name: "Kenshin", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Brandon"], rival: ["Shadow", "Jackal", "Kemono"], stage: "Cashed Out" },
                 {
-                    name: "Kyoryu", enemy: randFrom(enemies), ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Steel Memories", "Sudden Death"],
+                    name: "Kyoryu", expansion: "riseofthekingdom", enemy: randFrom(enemies), ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Steel Memories", "Sudden Death"],
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2A of your personal story.` }
                 },
-                { name: "Mack", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death" },
+                { name: "Mack", expansion: "twintiger", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death" },
                 {
-                    name: "Max", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised",
+                    name: "Max", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2A of your personal story.` }
                 },
-                { name: "Megan", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"] },
+                { name: "Megan", expansion: "riseofthekingdom",enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"] },
                 { name: "Miss Matrix", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Ying Hua"], rival: ["Ah Long", "Kemono"], stage: "Cashed Out" },
                 {
-                    name: "Natalia", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"],
+                    name: "Natalia", expansion: "riseofthekingdom",enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"],
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2B of your personal story.` }
                 },
                 {
-                    name: "Project X", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: ["Natalia"], rival: ["Natalia", "Jackal"], stage: "Original Copy",
+                    name: "Project X", expansion: "redemption2", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: ["Natalia"], rival: ["Natalia", "Jackal"], stage: "Original Copy",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
                 },
-                { name: "Rhys", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Leeta"], rival: ["Leeta"], stage: "Poison the Well" },
+                { name: "Rhys", expansion: "twintiger", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Leeta"], rival: ["Leeta"], stage: "Poison the Well" },
                 {
-                    name: "Shadow", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Shin Yokai"], rival: ["Ah Long", "Dmitri", "Shin Yokai", "Kemono"], stage: [randFrom(stages).name],
+                    name: "Shadow", expansion: "redemption", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Shin Yokai"], rival: ["Ah Long", "Dmitri", "Shin Yokai", "Kemono"], stage: [randFrom(stages).name],
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.stage} as the stage in part 2A of your personal story.` }
                 },
-                { name: "Selene", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: [""], rival: ["Genesis"], stage: "Estate of Decay" },
-                { name: "The Don", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Gabriel"], rival: ["Juan", "Gabriel"], stage: "Gone Ballistic" },
-                { name: "The Proxy", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Power Soldier"], rival: ["Power Soldier"], stage: "Compromised" },
+                { name: "Selene", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: [""], rival: ["Genesis"], stage: "Estate of Decay" },
+                { name: "The Don", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Gabriel"], rival: ["Juan", "Gabriel"], stage: "Gone Ballistic" },
+                { name: "The Proxy", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Power Soldier"], rival: ["Power Soldier"], stage: "Compromised" },
                 {
-                    name: "Tiger Azules", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""], stage: "Supply and Demand",
+                    name: "Tiger Azules", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""], stage: "Supply and Demand",
                     get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2 of your personal story.` }
                 },
                 {
-                    name: "Tlazolteotl", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Kemono"], rival: ["Kemono", "Tlazolteotl"], stage: "Original Copy",
+                    name: "Tlazolteotl", expansion: "stretchgoals17", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Kemono"], rival: ["Kemono", "Tlazolteotl"], stage: "Original Copy",
                     get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
                 },
-                { name: "Ying Hua", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Jin"], rival: ["Jin"], stage: ["Cashed Out"] },
-                { name: "Yokai", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Marionette Doll"], rival: ["Marionette Doll"], stage: "Steel Memories" }
+                { name: "Ying Hua", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Jin"], rival: ["Jin"], stage: ["Cashed Out"] },
+                { name: "Yokai", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Marionette Doll"], rival: ["Marionette Doll"], stage: "Steel Memories" }
             ]
+            
+            let expansionfilter = $('.exp_selector').map((_,el) => $(el).hasClass("ui-icon-check") ? el.name : ``).get().filter(el => el != "")
 
+            gladiators = gladiators.filter(gladiator => expansionfilter.includes(gladiator.expansion))
+            
             let globalgladiators = []
 
             while (globalgladiators.length < $("#players").val()) {
@@ -374,7 +448,8 @@
 
         function showForwardButton() {
 
-            document.querySelectorAll('[id^="page"]').length > 0 ? $("#to_first_page").css("display","block") : $("#to_first_page").css("display","none")
+            document.querySelectorAll('[id^="page"]').length > 0 ? $("#to_first_page").css("display", "block") : $("#to_first_page").css("display", "none")
+
 
         }
 
@@ -385,30 +460,34 @@
 
             $(document).on('pageinit')
 
+            let expansionfilter = $('.exp_selector').map((_,el) => $(el).hasClass("ui-icon-check") ? el.name : ``).get().filter(el => el != "")
+
             let enemies = [
-                { name: "Brotherhood", boss: "Dmitri", bosstitle: "callous mercenary", gender: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar", "and put it into play"], ["N-40 Punisher", "and put it into play"]], gloat: [[`You will lose,`, `I must break you.`], [`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`You want to play rough?`, `Say hello to my little friend!`]], expression: `baring his teeth as he recognizes you` },
+                { name: "Brotherhood", expansion: "riseofthekingdom", boss: "Dmitri", bosstitle: "callous mercenary", gender: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: "mercenaries, soldiers and spies", threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar", "and put it into play"], ["N-40 Punisher", "and put it into play"]], gloat: [[`You will lose,`, `I must break you.`], [`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`You want to play rough?`, `Say hello to my little friend!`]], expression: `baring his teeth as he recognizes you` },
 
-                { name: "Cartel", boss: "Juan", bosstitle: "ruthless gangster", gender: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: "vicious gangers and hardened outcasts", threat: "levels his gun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert", "and put it into play"]], gloat: [[`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`Okay, I'm reloaded!`, `You ready? Here comes the pain!`], [`You wanna play rough?`, `Say hello to my little friend!`]], expression: `flicking a cigar in your direction` },
+                { name: "Cartel", expansion: "riseofthekingdom", boss: "Juan", bosstitle: "ruthless gangster", gender: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: "vicious gangers and hardened outcasts", threat: "levels his gun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert", "and put it into play"]], gloat: [[`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`Okay, I'm reloaded!`, `You ready? Here comes the pain!`], [`You wanna play rough?`, `Say hello to my little friend!`]], expression: `flicking a cigar in your direction` },
 
-                { name: "Golden Dragons", boss: "Ah Long", bosstitle: "unrelenting martial arts master", gender: "male", desc: "the enterprise of martial artists, thugs and businessmen", addressing: "weasels", minions: "ruthless triads and yakuza", threat: "lifts his hand, dark, malevolent energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"], preparedboss: [["Merciless Clutch", "and put it into play"]], expression: `his keen eyes and sly smirk reeking of confidence and self-importance` },
+                { name: "Golden Dragons", expansion: "riseofthekingdom", boss: "Ah Long", bosstitle: "unrelenting martial arts master", gender: "male", desc: "the enterprise of martial artists, thugs and businessmen", addressing: "weasels", minions: "ruthless triads and yakuza", threat: "lifts his hand, dark, malevolent energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"], preparedboss: [["Merciless Clutch", "and put it into play"]], expression: `his keen eyes and sly smirk reeking of confidence and self-importance` },
 
-                { name: "Kingdom", boss: "Kemono", bosstitle: "imposing green mutant", gender: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fists, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge", "and put it into play"]], gloat: [[`You should not have come,`, `But you have forced my hand.`], [`You should not have come,`, `You have brought this upon yourselves.`]], expression: `his demonic eyes and grim expression delivering a promise of violence`, detonation: `Suddenly, you feel your hair stand up, and in an instant Kemono explodes with electricity` },
+                { name: "Kingdom", expansion: "riseofthekingdom", boss: "Kemono", bosstitle: "imposing green mutant", gender: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: "mysterious ninja and martial arts masters", threat: "lifts his mighty fists, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge", "and put it into play"]], gloat: [[`You should not have come,`, `But you have forced my hand.`], [`You should not have come,`, `You have brought this upon yourselves.`]], expression: `his demonic eyes and grim expression delivering a promise of violence`, detonation: `Suddenly, you feel your hair stand up, and in an instant Kemono explodes with electricity` },
 
-                { name: "Kingdom", boss: "Jackal", bosstitle: "mad scientist", gender: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "soldiers and marionettes", threat: "smiles, her eyes start to glow malevolently, and you feel pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion", "and play it"]], gloat: [[`How noble of you,`, `To donate your bodies for science.`], [`You won't get out of here,`, `I never turn down new specimens!`], [`You have played your part well,`, `But who do you think you really are?`], [`You always are so predictable,`, `Who do think you are working for?`], [`Children,`, `You should not have risen against your mother.`], [`Seems there is no shortage of new specimens these days,`, `But that is a positive problem.`], [`I couldn't have asked for better specimens,`, `It's time you provide your skills and abilities to the Kingdom.`],], expression: `her constricted pupils and demonic grin showing no humanity` },
+                { name: "Kingdom", expansion: "riseofthekingdom", boss: "Jackal", bosstitle: "mad scientist", gender: "female", desc: "the mysterious criminal syndicate", addressing: "my subjects", minions: "soldiers and marionettes", threat: "smiles, her eyes start to glow malevolently, and you feel pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion", "and play it"]], gloat: [[`How noble of you,`, `To donate your bodies for science.`], [`You won't get out of here,`, `I never turn down new specimens!`], [`You have played your part well,`, `But who do you think you really are?`], [`You always are so predictable,`, `Who do think you are working for?`], [`Children,`, `You should not have risen against your mother.`], [`Seems there is no shortage of new specimens these days,`, `But that is a positive problem.`], [`I couldn't have asked for better specimens,`, `It's time you provide your skills and abilities to the Kingdom.`],], expression: `her constricted pupils and demonic grin showing no humanity` },
 
-                { name: "Kingdom", boss: "Shadow", bosstitle: "ominous mastermind", gender: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades", "and put it into play"]], gloat: [[`My, what a brave, handsome group,`, `Perhaps it would interest you to see what fate has in store for you.`], [`You have interfered for the last time,`, `Now, you shall die.`], [`My children, you have come to me. For who now is your father if it is not me?`, `When I am gone, you will have never been. What would your world be without me?`], [`On its own, humanity is a destructive force,`, `It needs a master.`], [`Your meddling grows weary,`, `The time has come for us to end this, and it is my pleasure to grant you release from this foolish errand.`]], expression: `his calculating eyes reflecting a cold, merciless intellect` },
+                { name: "Kingdom", expansion: "riseofthekingdom", boss: "Shadow", bosstitle: "ominous mastermind", gender: "male", desc: "the mysterious criminal syndicate", addressing: "you fools", minions: "mysterious ninja and martial arts masters", threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades", "and put it into play"]], gloat: [[`My, what a brave, handsome group,`, `Perhaps it would interest you to see what fate has in store for you.`], [`You have interfered for the last time,`, `Now, you shall die.`], [`My children, you have come to me. For who now is your father if it is not me?`, `When I am gone, you will have never been. What would your world be without me?`], [`On its own, humanity is a destructive force,`, `It needs a master.`], [`Your meddling grows weary,`, `The time has come for us to end this, and it is my pleasure to grant you release from this foolish errand.`]], expression: `his calculating eyes reflecting a cold, merciless intellect` },
 
-                { name: "Nahualli", boss: "Tlazolteotl", bosstitle: "Aztec empress", gender: "female", desc: "the ancient force of restless warriors", addressing: "mortals", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller", "Pale Caller"], preparedboss: [["Decaying Blast", "and play it"]], gloat: [[`You must be taught what has been forgotten,`, `You must be taught the wrath of the old gods.`], [`I will have your soul!`, `I will taste its sins!`], [`You have strayed from the cycle of life and death,`, `I will make you my next sacrifice.`], [`I have conquered this world before,`, `I will not be stopped by the likes of you children!`], [`Enough of these games!`, `I will take what I am due!`], [`You will pay your goddess her due respect!`, `I will make you my next sacrifice!`], [`Even the strongest warriors will fall!`, `Fall to the power of death!`]], expression: `beautiful and terrible all at once`, detonation: `She touches the amulet around her neck. The world around you seems to blow away in a deafening explosion of arcane energy` },
+                { name: "Nahualli", expansion: "stretchgoals17", boss: "Tlazolteotl", bosstitle: "Aztec empress", gender: "female", desc: "the ancient force of restless warriors", addressing: "mortals", minions: "necromancers and walking dead", threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller", "Pale Caller"], preparedboss: [["Decaying Blast", "and play it"]], gloat: [[`You must be taught what has been forgotten,`, `You must be taught the wrath of the old gods.`], [`I will have your soul!`, `I will taste its sins!`], [`You have strayed from the cycle of life and death,`, `I will make you my next sacrifice.`], [`I have conquered this world before,`, `I will not be stopped by the likes of you children!`], [`Enough of these games!`, `I will take what I am due!`], [`You will pay your goddess her due respect!`, `I will make you my next sacrifice!`], [`Even the strongest warriors will fall!`, `Fall to the power of death!`]], expression: `beautiful and terrible all at once`, detonation: `She touches the amulet around her neck. The world around you seems to blow away in a deafening explosion of arcane energy` },
 
-                { name: "Oni", boss: "Yokai", bosstitle: "cursed, powerful warrior", gender: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, suddenly engulfed in eldritch flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike", "and play it"]], gloat: [[`Are you prepared to face the wrath of Shin Yokai?`, `No, you’re not prepared!`], [`The hunger of the Oni is insatiable!`, `And you will be the food!`]], expression: `his fiery stare and gritted teeth sending a message of barely contained fury`, detonation: `With one enraged scream, he explodes with a tremendous flash of energy from within, causing a blazing ring of fire to spread outwards` },
+                { name: "Oni", expansion: "legendofoni", boss: "Yokai", bosstitle: "cursed, powerful warrior", gender: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: "ancient guardians and powerful spirits", threat: "lifts his mighty fist, suddenly engulfed in eldritch flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike", "and play it"]], gloat: [[`Are you prepared to face the wrath of Shin Yokai?`, `No, you’re not prepared!`], [`The hunger of the Oni is insatiable!`, `And you will be the food!`]], expression: `his fiery stare and gritted teeth sending a message of barely contained fury`, detonation: `With one enraged scream, he explodes with a tremendous flash of energy from within, causing a blazing ring of fire to spread outwards` },
 
-                { name: "Onyx League", boss: "Mack", bosstitle: "black-hearted overlord", gender: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim", "and put it into play"]], gloat: [[`Fists versus bullets?`, `I will use your butts as target practice!`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`You wanna play rough?`, `Say hello to my little friend!`], [`Greed is for amateurs,`, `I believe there should be no rules, only chaos.`], [`I have come here to create a new country,`, `A country called chaos!`], [`When the world turns upside down,`, `The best thing to do is turn right along with it.`], [`You think you're free,`, `But you don't understand what freedom is.`], [`Only after disaster,`, `Can we be resurrected.`], [`It's only after you've lost everything,`, `That you're free to do anything.`], [`Nothing is static, everything is evolving,`, `Everything is falling apart.`]], expression: `his keen eyes and predatory sneer reeking of confidence and ruthlessness` }
+                { name: "Onyx League", expansion: "twintiger", boss: "Mack", bosstitle: "black-hearted overlord", gender: "male", desc: "the league of street gangs", addressing: "pigs", minions: "vicious gangers and street criminals", threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim", "and put it into play"]], gloat: [[`Fists versus bullets?`, `I will use your butts as target practice!`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`You wanna play rough?`, `Say hello to my little friend!`], [`Greed is for amateurs,`, `I believe there should be no rules, only chaos.`], [`I have come here to create a new country,`, `A country called chaos!`], [`When the world turns upside down,`, `The best thing to do is turn right along with it.`], [`You think you're free,`, `But you don't understand what freedom is.`], [`Only after disaster,`, `Can we be resurrected.`], [`It's only after you've lost everything,`, `That you're free to do anything.`], [`Nothing is static, everything is evolving,`, `Everything is falling apart.`]], expression: `his keen eyes and predatory sneer reeking of confidence and ruthlessness` }
             ];
+
+            enemies = enemies.filter(enemy => expansionfilter.includes(enemy.expansion))
             // Yokai special setup?
 
             let stages = [
                 {
-                    name: "Ashes of the Eternal", instory: 0, location: "cursed", bystander: "acolyte", pit: "a bottomless well",
+                    name: "Ashes of the Eternal", expansion: "legendofoni", instory: 0, location: "cursed", bystander: "acolyte", pit: "a bottomless well",
                     stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to discard 1 fire token from the map.` },
                     stagepenalty: { setup: `One fighter places 1 fire token in the space nearest to them.` },
                     masterplan: randFrom(["actsofterror", "personalpower"]), // rework acts of terror into decimating the countryside
@@ -422,7 +501,7 @@
                 },
 
                 {
-                    name: "Cashed Out", instory: 0, location: "base", bystander: "gambler", pit: 'a broken window with a 13-story drop',
+                    name: "Cashed Out", expansion: "riseofthekingdom", instory: 0, location: "base", bystander: "gambler", pit: 'a broken window with a 13-story drop',
                     stagebonus: [{ setup: `Each fighter may put a random defense token on a Frightened Gambler in their threat area.` },
                     { persistent: `<b>Interact</b>: If a fighter is in a space with an active objective token, place 1 damage on this card. If 1P damage is on this card, you have acquired the evidence.`, wincondition: [`If you acquired the evidence:`, `If you did not acquire the evidence:`], prologue: "intel" }],
                     stagepenalty: [{ setup: `Search the stage deck for a Pit Boss and put it into play. Shuffle the stage deck.` },
@@ -438,7 +517,7 @@
                 },
 
                 {
-                    name: "The Ceremony", instory: 0, location: "cursed", bystander: "acolyte",
+                    name: "The Ceremony", expansion: "legendofoni", instory: 0, location: "cursed", bystander: "acolyte",
                     stagebonus: { setup: `Flip 2 objective tokens furthest from a fighter to their active side. Each fighter gains 1 random dedense token.` },
                     stagepenalty: { setup: `Each fighter must either discard a card at random or place 1 power on "Oni's Vessel".` },
                     masterplan: randFrom(["kidnapping", "personalpower"]),
@@ -452,7 +531,7 @@
                 },
 
                 {
-                    name: "Compromised", instory: 0, location: "remote", bystander: "hostage", pit: 'a broken window with a 13-story drop',
+                    name: "Compromised", expansion: "riseofthekingdom", instory: 0, location: "remote", bystander: "hostage", pit: 'a broken window with a 13-story drop',
                     stagebonus: { setup: `Each fighter may search the stage deck for 1 copy of Calming Words and add it to their fighter play area. Shuffle the stage deck.` },
                     stagepenalty: { setup: `Each fighter places 1 power on a different "Scared Staff" card.` },
                     masterplan: randFrom(["actsofterror", "kidnapping"]), // personalpower?? power from the scientists
@@ -467,11 +546,11 @@
                 },
 
                 {
-                    name: "Gone Ballistic", instory: 0, location: "neutral", bystander: "warehouse worker",
+                    name: "Gone Ballistic", expansion: "riseofthekingdom", instory: 0, location: "neutral", bystander: "warehouse worker",
                     stagebonus: { setup: `One fighter may move 3 spaces toward the nearest objective token.` },
                     stagepenalty: { setup: `Search the stage deck for an additional objective card and put it into play. Shuffle the stage deck.` },
                     masterplan: randFrom(["illegalgains", "strengtheningforces"]), // actsofterror? chaos, armed strike.. megan's story
-                    rivaltext: _.template(' turns to you as ${gPron(enemy, "possessive")} partner in trade, ${rival.name}<%=rivalboost ? `, heavily armed and armored,`: ``%> stashes <%=(knowledge == "clueless" || knowledge == "captured") ? "a" : "the"%> ${gizmo}.'),
+                    rivaltext: _.template(' turns to you as ${gPron(enemy, "possessive")} partner in trade, ${rival.name},<%=rivalboost ? ` heavily armed and armored,`: ``%> stashes <%=(knowledge == "clueless" || knowledge == "captured") ? "a" : "the"%> ${gizmo}.'),
                     gloat: [[`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`Okay, I'm reloaded!`, `You ready? Here comes the pain!`], [`You wanna play rough? Ok,`, `Say hello to my little friend!`]],
                     hottrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that the ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : finalboss.name%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You creep low, listening carefully as the they spill all the plans. Once you\'ve heard enough, you jump the startled pair.'),
                     coldtrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that the ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : finalboss.name%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You move quickly to keep up and continue your eavesdropping. "Boss!" a guard calls out. You hadn\'t seen him behind the crates nearby, but when you moved to take cover behind them, you were spotted instantly.'),
@@ -481,7 +560,7 @@
                 },
 
                 {
-                    name: "One Step Ahead", instory: 0, location: "remote", bystander: "mountain climber", pit: "the edge of the cliff",
+                    name: "One Step Ahead", expansion: "legendofoni", instory: 0, location: "remote", bystander: "mountain climber", pit: "the edge of the cliff",
                     stagebonus: { setup: `Each fighter may search the enemy deck for a Minion card to discard. Shuffle the enemy deck.` },
                     stagepenalty: { setup: `Each fighter must put search the stage deck for a copy of Vertigo, and put in into play. Shuffle the stage deck.` },
                     masterplan: randFrom(["personalpower", "kidnapping"]),
@@ -494,7 +573,7 @@
                 },
 
                 {
-                    name: "Original Copy", instory: 0, location: "base", bystander: "scientist", pit: "a pitch-black elevator shaft",
+                    name: "Original Copy", expansion: "riseofthekingdom", instory: 0, location: "base", bystander: "scientist", pit: "a pitch-black elevator shaft",
                     stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose a copy of Vandal Serum attached to a card in the Cloning Area. Return the selected card to Serum Supply.` },
                     stagepenalty: { setup: `Put 1 damage on this card.`, activate: `Each fighter suffers 1 direct damage for each damage on this card. Then, if any fighter is on or adjacent to an objective space, remove 1 damage from this card.` },
                     masterplan: randFrom(["strengtheningforces", "personalpower"]), //kidnap masterplan? clone
@@ -508,7 +587,7 @@
                 },
 
                 {
-                    name: "Out of Time", instory: 0, location: "cursed", bystander: "acolyte", pit: "a glowing portal",
+                    name: "Out of Time", expansion: "stretchgoals17", instory: 0, location: "cursed", bystander: "acolyte", pit: "a glowing portal",
                     stagebonus: { setup: `The fighters may choose to flip one objective to its inactive side.` },
                     stagepenalty: { activate: `The boss gains 1 random defense token for each Remnant engaged with a fighter.` },
                     masterplan: randFrom(["strengtheningforces", "personalpower"]),
@@ -522,7 +601,7 @@
                 },
 
                 {
-                    name: "Poison the Well", instory: 0, location: "neutral", bystander: "hireling", pit: "an outflow shaft",
+                    name: "Poison the Well", expansion: "twintiger", instory: 0, location: "neutral", bystander: "hireling", pit: "an outflow shaft",
                     stagebonus: { setup: `Remove each copy of Vandal Addict from the stage deck and remove them from the game. Shuffle the stage deck.` },
                     stagepenalty: { setup: `Each fighter searches the stage deck for 1 copy of Infected Rats and adds it to their Threat area. Shuffle the stage deck.` },
                     masterplan: randFrom(["actsofterror", "strengtheningforces"]),
@@ -537,7 +616,7 @@
                 },
 
                 {
-                    name: "Right to Remain Silent", instory: 0, location: "base", bystander: "captive",
+                    name: "Right to Remain Silent", expansion: "riseofthekingdom", instory: 0, location: "base", bystander: "captive",
                     stagebonus: { setup: `Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.` },
                     stagepenalty: { setup: `Add two power to Recoverd Intel.` },
                     masterplan: randFrom(["illegalgains", "kidnapping"]),
@@ -550,7 +629,7 @@
                 },
 
                 {
-                    name: "Rude Awakening", instory: 0, location: "cursed", bystander: "necromancer", pit: "a bottomless fissure",
+                    name: "Rude Awakening", expansion: "stretchgoals17", instory: 0, location: "cursed", bystander: "necromancer", pit: "a bottomless fissure",
                     stagebonus: { setup: `Flip all objectives to their inactive side.` },
                     stagepenalty: { setup: `Each fighter places 1 damage on the Stage Rules card.` },
                     masterplan: randFrom(["actsofterror", "strengtheningforces"]),
@@ -563,7 +642,7 @@
                 },
 
                 {
-                    name: "Running Wild", instory: 0, location: "remote", bystander: "civilian", pit: "an incredibly deep dig",
+                    name: "Running Wild", expansion: "legendofoni", instory: 0, location: "remote", bystander: "civilian", pit: "an incredibly deep dig",
                     stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".` },
                     stagepenalty: { setup: `Each fighter places 3 random defense tokens on their copy of "Hunt for the Idols".`, persistent: `The defense tokens on "Hunt for the Idol" block search successes and are discarded as normal.` },
                     masterplan: randFrom(["illegalgains", "personalpower"]),
@@ -576,7 +655,7 @@
                 },
 
                 {
-                    name: "Steel Memories", instory: 0, location: "base", bystander: "nameless goon", pit: "a pitch-black elevator shaft",
+                    name: "Steel Memories", expansion: "riseofthekingdom", instory: 0, location: "base", bystander: "nameless goon", pit: "a pitch-black elevator shaft",
                     stagebonus: { setup: `One fighter may move 3 spaces toward the nearest objective.` },
                     stagepenalty: { setup: `Each fighter must <b>Recruit</b>.` }, masterplan: randFrom(["actsofterror", "kidnapping"]),
                     gloat: [["Believe me when I say this, Global Gladiators,", "Nobody will leave this room alive!"], ["I'm not even going to kill you myself!", "I'll let my minions take care of that."]],
@@ -585,11 +664,11 @@
                     coldtrail: _.template('standing ready. "I\'m not surprised to see you here," ${enemy.boss} says. "${gloat[0]}" ${gPron(enemy, "subject")} says as ${gPron(enemy, "subject")} ${enemy.threat}. "${gloat[1]}"'),
                     clueless: randFrom([_.template('${trail}, you find out rumors that the ${enemy.bosstitle} ${enemy.boss} has been openly recruiting soldiers into the ${enemy.name}. As you investigate the matter further, you find out that the ${enemy.name} <%=enemy.name == "Kingdom" ? `is back to its previous practices`: `has adopted the same practices as the Kingdom` %>: testing out new recruits in a savage melee where only the strong survive.<br><br>You try to go undercover, posing as recruits for yourselves. But ${enemy.name} - familiar with your ploy from the past - sees through your plot and throws you into ${gPron(enemy, "possessive")} "pit." You suddenly become the final exam for ${gPron(enemy, "possessive")} would-be recruits... "${gloat[0]}" says ${bossDescription(enemy)}<rivalpresence ? rivaltext : ``> standing there as ${gPron(enemy,"possessive")} minions pour in from the shadows. "${gloat[1]}"'), _.template('${trail}, you investigate a site reported to have acitivy of the ${enemy.name}. You find an elevator an descend down.<%=randFrom([` You wait patiently while a lounge version of ${loungeMusic()} plays over the cheap speakers.`,``])%><br><br>Standing in a pitch black room, you turn around, hoping to find some sort of reference to where exactly you are, but there is none. All you see is the ever-encroaching blackness and the deafening silence surrounding you. And then, cutting through the shadows is a laugh, rolling through the large room to meet you. It is a diabolical sound, smug and evil. It rings through your ears for a moment or two before the lights in the room snap on, almost blinding you with their intensity.<br><br>You blink, and see standing before you ${bossDescription(enemy)}<%=rivalpresence ? rivaltext : ``%> ready to finish it. "${gloat[0]}" ${enemy.boss} says as ${gPron(enemy,"subject")} stalks the darkness. "${gloat[1]}"')]),
                     prologue: _.template('<%=knowledge == "clueless" ? ``: `${trail}, you accompany a large squad of Citadel agents as they storm the ${possessiveSuffix(enemy.name)} base. ${ucInit(enemy.minions)} of the ${enemy.name} fall before you as you make your way through the maze-like halls until you finally reach an elevator, indicated as your goal on your map. As you call it, you hear the sounds of more approaching soldiers. The Citadel agents engage these reinforcements as you head up to face ${enemy.boss}.${randFrom([` You wait patiently while a lounge version of ${loungeMusic()} plays over the cheap speakers.`,``])}<br><br>The elevator doors open to reveal ${bossDescription(enemy)} ${rivalpresence ? rivaltext : ``} ` %>${stagevar} ${laconicStatement(enemy)}'),
-                    captured: randFrom([_.template('Hands tied behind your back, you are led by <%=rivalpresence ? rival.name : minion%> and ${bossDescription(enemy)} into an an underground training facility. The room is hosting several fighters, each of them sparring in deadly martial arts. "You\'re not worthy to walk on this ground," <%=rivalpresence ? rival : minion%> growls, glaring at you with a deep-seated hatred. "And so," ${enemy.boss} interjects. "We will allow you the chance to prove your worth. <%=finalboss.boss == enemy.boss? `I have developed a great interest in you. I would be pleased if you\'d demonstrate it to ${rivalpresence ? rival : minion}.` : `${finalboss.boss} has taken great interest in you. Show us why that is.`%>"<br><br>"This is unnecessary," <%=rivalpresence ? rival : minion%> says quietly to ${enemy.boss}. "You play games with the trust of the <%=finalboss.name == enemy.name ? "Master" : finalboss.name%>." ${enemy.boss} loosens your bonds, ignoring <%=rivalpresence ? possessiveSuffix(rival.name) : possessiveSuffix(minion)%> words. You grab your wrists as they are free, rubbing the pain away, and watch as the other fighters turn toward you.<%=rivalpresence ? `${rivalboost ? ` ${rival.name} moves to end you. "This is ridiculous!"` : ``}` : ``%>'), _.template('Waking up in a pitch black room, you turn around, hoping to find some sort of reference to where exactly you are but you\'re not fully recovered. All you see is the ever-encroaching blackness and the deafening silence surrounding you. And then, cutting through the shadows is a laugh, rolling through the large room to meet you. It is a diabolical sound, smug and evil. It rings through your ears for a moment or two before the lights in the room snap on, almost blinding you with their intensity. <br><br>You blink, and see standing before you ${bossDescription(enemy)}<%=rivalpresence ? rivaltext : ``%> ready to finish it. "${gloat[0]}" ${enemy.boss} says as ${gPron(enemy,"subject")} stalks the darkness. "${gloat[1]}" ${laconicStatement(enemy)}')])
+                    captured: randFrom([_.template('Hands tied behind your back, you are led by <%=rivalpresence ? rival.name : minion%> and ${bossDescription(enemy)} into an an underground training facility. The room is hosting several fighters, each of them sparring in deadly martial arts. "You\'re not worthy to walk on this ground," <%=rivalpresence ? rival : minion%> growls, glaring at you with a deep-seated hatred. "And so," ${enemy.boss} interjects. "We will allow you the chance to prove your worth. <%=finalboss.boss == enemy.boss? `I have developed a great interest in you. I would be pleased if you\'d demonstrate it to ${rivalpresence ? rival.name : minion}.` : `${finalboss.boss} has taken great interest in you. Show us why that is.`%>"<br><br>"This is unnecessary," <%=rivalpresence ? rival.name : minion%> says quietly to ${enemy.boss}. "You play games with the trust of the <%=finalboss.name == enemy.name ? "Master" : finalboss.name%>." ${enemy.boss} loosens your bonds, ignoring <%=rivalpresence ? possessiveSuffix(rival.name) : possessiveSuffix(minion)%> words. You grab your wrists as they are free, rubbing the pain away, and watch as the other fighters turn toward you.<%=rivalpresence ? `${rivalboost ? ` ${rival.name} moves to end you. "This is ridiculous!"` : ``}` : ``%>'), _.template('Waking up in a pitch black room, you turn around, hoping to find some sort of reference to where exactly you are but you\'re not fully recovered. All you see is the ever-encroaching blackness and the deafening silence surrounding you. And then, cutting through the shadows is a laugh, rolling through the large room to meet you. It is a diabolical sound, smug and evil. It rings through your ears for a moment or two before the lights in the room snap on, almost blinding you with their intensity. <br><br>You blink, and see standing before you ${bossDescription(enemy)}<%=rivalpresence ? rivaltext : ``%> ready to finish it. "${gloat[0]}" ${enemy.boss} says as ${gPron(enemy,"subject")} stalks the darkness. "${gloat[1]}" ${laconicStatement(enemy)}')])
                 },
 
                 {
-                    name: "Sudden Death", instory: 0, location: "neutral", bystander: "challenger", pit: "a pitch-black elevator shaft",
+                    name: "Sudden Death", expansion: "riseofthekingdom", instory: 0, location: "neutral", bystander: "challenger", pit: "a pitch-black elevator shaft",
                     stagebonus: { setup: `Put one random defense token on each copy of "A New Challenger".` },
                     stagepenalty: { setup: `All the objective tokens advance 2 spaces toward the boss.` },
                     masterplan: randFrom(["kidnapping", "strengtheningforces"]),
@@ -599,11 +678,11 @@
                     coldtrail: _.template('You infiltrate the underground tournament, and arrive just in time.<%=rivalpresence ? rivaltext : ``%> ${bossDescription(enemy)}, ${enemy.threat}. You see that none of the competitors are a match for a killer like ${gPron(enemy,"object")}. "${gloat[0]}" ${gPron(enemy,"subject")} laughs. "${gloat[1]}"'),
                     clueless: _.template('You have to fight your way through the ${enemy.minions} securing the underground tournament. When you arrive, you are exhausted, and the see that none of the competitors are a match for a killer like ${gPron(enemy,"object")}.<%=rivalpresence ? rivaltext : ``%> ${bossDescription(enemy)} ${enemy.threat}. "${gloat[0]}" ${gPron(enemy,"subject")} laughs. "${gloat[1]}"'),
                     prologue: _.template('${trail}, you enter a competition that is modelled after <%=enemy.name == "Kingdom" && knowledge == "hottrail" ? `their`: `the Kingdom\'s`%> now infamous trials: the winners will be offered prestigious positions as officers in the ${possessiveSuffix(enemy.name)} armed forces, and those who refuse will be captured and killed. You couldn\'t let this happen.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}'),
-                    captured: _.template('Hands tied behind your back, you are led by <%=rivalpresence ? rival : minion%> and ${bossDescription(enemy)} into an an oddly-placed urban clearing. The out-of-place streets are hosting several fighters, each of them sparring in deadly martial arts. "You\'re not worthy to walk on this ground," <%=rivalpresence ? rival : minion%> growls, glaring at you with a deep-seated hatred. "And so," ${enemy.boss} interjects. "We will allow you the chance to prove your worth. <%=finalboss.boss == enemy.boss? `I have developed a great interest in you. I would be pleased if you\'d demonstrate it to ${rivalpresence ? rival : minion}.` : `${finalboss.boss} has taken great interest in you. Show us why that is.`%>"<br><br>"This is unnecessary," <%=rivalpresence ? rival : minion%> says quietly to ${enemy.boss}. "You play games with the trust of the <%=finalboss.name == enemy.name ? "Master" : finalboss.name%>." ${enemy.boss} loosens your bonds, ignoring <%=rivalpresence ? possessiveSuffix(rival.name) : possessiveSuffix(minion)%> words. You grab your wrists as they are free, rubbing the pain away, and watch as the other fighters turn toward ${enemy.boss}, preparing for what you\'re assuming will be a fight to the death.  The other fighters show no fear; their eyes looking only for glory.<%=rivalpresence ? `${rivalboost ? ` ${rival.name} moves to end you. "This is ridiculous!"` : ``}` : ``%> ')
+                    captured: _.template('Hands tied behind your back, you are led by <%=rivalpresence ? rival.name : minion%> and ${bossDescription(enemy)} into an an oddly-placed urban clearing. The out-of-place streets are hosting several fighters, each of them sparring in deadly martial arts. "You\'re not worthy to walk on this ground," <%=rivalpresence ? rival.name : minion%> growls, glaring at you with a deep-seated hatred. "And so," ${enemy.boss} interjects. "We will allow you the chance to prove your worth. <%=finalboss.boss == enemy.boss? `I have developed a great interest in you. I would be pleased if you\'d demonstrate it to ${rivalpresence ? rival.name : minion}.` : `${finalboss.boss} has taken great interest in you. Show us why that is.`%>"<br><br>"This is unnecessary," <%=rivalpresence ? rival.name : minion%> says quietly to ${enemy.boss}. "You play games with the trust of the <%=finalboss.name == enemy.name ? "Master" : finalboss.name%>." ${enemy.boss} loosens your bonds, ignoring <%=rivalpresence ? possessiveSuffix(rival.name) : possessiveSuffix(minion)%> words. You grab your wrists as they are free, rubbing the pain away, and watch as the other fighters turn toward ${enemy.boss}, preparing for what you\'re assuming will be a fight to the death.  The other fighters show no fear; their eyes looking only for glory.<%=rivalpresence ? `${rivalboost ? ` ${rival.name} moves to end you. "This is ridiculous!"` : ``}` : ``%> ')
                 },
 
                 {
-                    name: "Supply & Demand", instory: 0, location: "neutral", bystander: "customer", pit: `a manhole`,
+                    name: "Supply & Demand", expansion: "riseofthekingdom", instory: 0, location: "neutral", bystander: "customer", pit: `a manhole`,
                     stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objective token it is carrying.` },
                     stagepenalty: { setup: `The boss gains 1 defense token of each type. Each fighter is dealt 1 direct damage.` },
                     masterplan: randFrom(["actsofterror", "illegalgains"]),
@@ -616,12 +695,12 @@
                 },
 
                 {
-                    name: "Under Destruction", instory: 0, location: "neutral", bystander: "construction worker", pit: "an out-of-commission elevator shaft",
+                    name: "Under Destruction", expansion: "twintiger", instory: 0, location: "neutral", bystander: "construction worker", pit: "an out-of-commission elevator shaft",
                     stagebonus: { persistent: `<b>Exhaust:</b> Move 1 power from a Time Bomb card to this card. Then, if there's 5 power on this card, remove it from the game.` },
                     stagepenalty: { setup: `Each fighter chooses an objective card and places 1 power on that objective.` },
                     masterplan: randFrom(["actsofterror", "illegalgains"]),
                     gloat: [[`Cool guys don't look at explosions,`, `So gape all you want!`], [`Most problems with Gladiators can be solved,`, `By an appropriate charge of high explosives.`], [`Most problems can be solved with an appropriate charge of high explosives,`, `The trick is not to be around when they go off.`], [`It happens sometimes,`, `People just explode. Natural causes.`], [`Why do you have to nuke the whole building?" you ask. "Well, when you do something minor, you can just disappear,`, `When you do something like we will, they will find you unless they think you're dead.`], [`Enough bombs have been planted in this building to bring down the city block,`, `"You'll die with us," you answer. "Could be.`], [`Explosives, buzzsaws, a good old-fashioned beating.. There are so many alternatives,`, `How do you wish to die?`]],
-                    rivaltext: _.template(', and ${rival.name} emerges from the shadows<%=rivalboost ? `, eyes glowing green` : ``%>'),
+                    rivaltext: _.template(', and ${rival.name} emerges from the shadows<%=rivalboost ? `, eyes glowing green` : ``%>.'),
                     hottrail: _.template('You arrive at the site, and inside you find surprised ${bossDescription(enemy)}. "Arm the bombs and let\'s get out of here," ${gPron(enemy,"subject")} commands ${gPron(enemy,"possessive")} goons<%=rivalpresence? rivaltext : `.`%> "${gloat[0]}" ${enemy.boss} says, eyeing you. "${gloat[1]}"'),
                     coldtrail: _.template('You arrive at the site, and beat the few ${enemy.minions} guarding the area. Inside, you find ${bossDescription(enemy)}. "Arm the bombs and let\'s get out of here," ${gPron(enemy,"subject")} commands ${gPron(enemy,"possessive")} goons<%=rivalpresence? rivaltext : ``%>. "${gloat[0]}" ${enemy.boss} says, eyeing you. "${gloat[1]}"'),
                     clueless: _.template('Unfortunately, you may have arrived too late.. "Arm the bombs and let\'s get out of here," a voice commands from behind a plastic sheet. When the sheet is thrown aside, ${bossDescription(enemy)} steps into view<%=rivalpresence? rivaltext : `.`%> ${possessiveSuffix(enemy.boss)} eyes immediately dart from the placed explosives. Without hesitation, ${gPron(enemy, "subject")} attacks.'),
@@ -629,6 +708,8 @@
                     captured: _.template('You wake up on cold concrete floor and try to get your bearings. Suddenly, ${enemy.boss} steps out from the shadows. "Welcome, ${enemy.addressing}! Nice of you to join us!"<br><br>You note that ${enemy.minions} are suddenly blocking every exit, except for the one ${enemy.boss} is guarding, and explosives are rigged everywhere<%=rivalpresence ? rivaltext : ``%>. ${ucInit(gPron(enemy,"subject"))} plans to bury you under tons of rubble!<%=rivalpresence ? rivaltext : ``%> "${gloat[0]}" ${enemy.boss} says as you pick yourselves up to face them. "${gloat[1]}"<br><br>${laconicStatement(enemy)}')
                 }
             ];
+
+            stages = stages.filter(stage => expansionfilter.includes(stage.expansion))
 
             enemiescopy = enemies.slice(0, enemies.length)
 
@@ -654,45 +735,48 @@
             heroenemies: (_.uniq(heroenemies)).filter(function (el) { return el; });
 
             let alliesandrivals = [
-                { name: "Ah Long", gender: "male", keywords: ["Boss", "Golden Dragons", "Organized Crime", "Martial Arts Master", "Chi", "Clone", "Ah Long"] },
-                { name: "Ah Long of Brook City", gender: "male", keywords: ["Boss", "Brook City", "Golden Dragons", "Organized Crime", "Past", "Clone", "Ah Long of Brook City"] },
-                { name: "Anastasia", gender: "female", keywords: ["Brotherhood", "Black Ops", "Gunslinger", "Soldier", "Clone"] },
-                { name: "Brandon", gender: "male", keywords: ["Celebrity", "Fraud", "Martial Arts Master", "Global Gladiator", "Wanderer", "Clone", "Brandon"] },
-                { name: "Chan Chan", gender: "female", keywords: ["Beast", "Dark Matter", "Martial Arts Master", "Kingdom", "Insane", "Clone"] },
-                { name: "Clinhyde Eight", gender: "male", keywords: ["Black Ops", "Indines", "Psychic", "Toxic", "Clone"] },
-                { name: "Darius", gender: "male", keywords: ["Past", "Kingdom", "Martial Arts Master", "Toxic", "Clone", "Kemono"] },
-                { name: "Dmitri", gender: "male", keywords: ["Boss", "Black Ops", "Brotherhood", "Soldier", "Clone"] },
-                { name: "Drago", gender: "male", keywords: ["Black Ops", "Brotherhood", "Competitor", "Street", "Clone", "Gabriel"] },
-                { name: "Gabriel", gender: "male", keywords: ["Global Gladiator", "Martial Arts Master", "Street", "Wanderer", "Clone", "Gabriel"] },
-                { name: "Genesis", gender: "female", keywords: ["Cifarelli", "Organized Crime", "Extraplanar", "Street", "Clone", "Music"] },
-                { name: "Hanzo", gender: "male", keywords: ["Past", "Sensei", "Wanderer", "Blade", "Global Gladiator", "Kingdom", "Clone"] },
-                { name: "Isabella", gender: "female", keywords: ["Celebrity", "Martial Arts Master", "Wanderer", "Clone", "Brandon", "Golden Dragons"] },
-                { name: "Jackal", gender: "female", keywords: ["Dark Matter", "Insane", "Kingdom", "Psychic", "Science", "Clone", "Jackal"] },
-                { name: "James Wong", gender: "male", keywords: ["Black Ops", "Brook City", "Law Enforcement", "Kingdom", "Past", "Clone"] },
-                { name: "Jin", gender: "male", keywords: ["Golden Dragons", "Organized Crime", "Blade", "Law Enforcement", "Clone", "Ying Hua"] },
-                { name: "Juan", gender: "male", keywords: ["Cartel", "Organized Crime", "Gunslinger", "Street", "Clone", "Juan"] },
-                { name: "Kemono", gender: "male", keywords: ["Beast", "Kingdom", "Competitor", "Chi", "Clone", "Kemono", "Tlazolteotl", "Horseman", "Aztec"] },
-                { name: "Khadath Ahemusei", gender: "male", keywords: ["Indines", "Science", "Extraplanar", "Wanderer", "Clone"] },
-                { name: "Leeta", gender: "female", keywords: ["Brook City", "Street", "Wanderer", "Past", "Clone"] },
-                { name: "Lotus", gender: "female", keywords: ["Brook City", "Golden Dragons", "Organized Crime", "Past", "Clone", "Ah Long of Brook City"] },
-                { name: "Marionette Doll", gender: "female", keywords: ["Dark Matter", "Kingdom", "Martial Arts Master", "Psychic", "Clone", "Shin Yokai"] },
-                { name: "Mary Ann", gender: "female", keywords: ["Street", "Clone", "Twin Tiger", "Onyx League", "Youth"] },
-                { name: "Megan", gender: "female", keywords: ["Celebrity", "Chi", "Fraud", "Global Gladiator", "Martial Arts Master", "Wanderer", "Clone", "Megan", "Law Enforcement", "Mr. Apple"] },
-                { name: "Mr. Apple", gender: "male", keywords: ["Celebrity", "Fraud", "Sensei", "Music", "Clone", "Mr. Apple"] },
-                { name: "Natalia", gender: "female", keywords: ["Black Ops", "Global Gladiator", "Martial Arts Master", "Soldier", "Wanderer", "Clone", "Natalia", "Project X", "Street"] },
-                { name: "Power Soldier", gender: "male", keywords: ["Dark Matter", "Beast", "Black Ops", "Kingdom", "Martial Arts Master", "Clone"] },
-                { name: "Project X", gender: "female", keywords: ["Dark Matter", "Beast", "Insane", "Martial Arts Master", "Youth", "Clone", "Jackal", "Project X"] },
-                { name: "Sera O'Quinn", gender: "female", keywords: ["Boss", "Celebrity", "Insane", "Organized Crime", "Clone", "Megan"] },
-                { name: "Shadow", gender: "male", keywords: ["Boss", "Kingdom", "Martial Arts Master", "Chi", "Clone", "Shadow", "Horseman", "Sensei"] },
-                { name: "Shin Yokai", gender: "male", keywords: ["Boss", "Insane", "Extraplanar", "Chi", "Clone", "Shadow", "Shin Yokai", "Horseman"] },
-                { name: "Star Knight Iri", gender: "female", keywords: ["Indines", "Extraplanar", "Blade", "Soldier", "Clone"] },
-                { name: "Tiger Azules", gender: "male", keywords: ["Aztec", "Street", "Cartel", "Martial Arts Master", "Clone", "Juan", "Wanderer"] },
-                { name: "Tlazolteotl", gender: "female", keywords: ["Past", "Aztec", "Boss", "Extraplanar", "Clone", "Tlazolteotl"] },
-                { name: "Wan Bo", gender: "male", keywords: ["Golden Dragons", "Martial Arts Master", "Chi", "Monk", "Clone", "Ah Long"] },
-                { name: "Ying Hua", gender: "female", keywords: ["Global Gladiator", "Law Enforcement", "Martial Arts Master", "Science", "Clone", "Ying Hua"] },
-                { name: "Ying Hua of Brook City", gender: "female", keywords: ["Brook City", "Law Enforcement", "Past", "Science", "Clone"] },
-                { name: "Zane", gender: "male", keywords: ["Competitor", "Chi", "Youth", "Clone", "Natalia"] }
+                { name: "Ah Long", expansion: "riseofthekingdom", gender: "male", keywords: ["Boss", "Golden Dragons", "Organized Crime", "Martial Arts Master", "Chi", "Clone", "Ah Long"] },
+                { name: "Ah Long of Brook City", expansion: "keystothekingdom", gender: "male", keywords: ["Boss", "Brook City", "Golden Dragons", "Organized Crime", "Past", "Clone", "Ah Long of Brook City"] },
+                { name: "Anastasia", expansion: "redemption", gender: "female", keywords: ["Brotherhood", "Black Ops", "Gunslinger", "Soldier", "Clone"] },
+                { name: "Brandon", expansion: "redemption2", gender: "male", keywords: ["Celebrity", "Fraud", "Martial Arts Master", "Global Gladiator", "Wanderer", "Clone", "Brandon"] },
+                { name: "Chan Chan", expansion: "stretchgoals17", gender: "female", keywords: ["Beast", "Dark Matter", "Martial Arts Master", "Kingdom", "Insane", "Clone"] },
+                { name: "Clinhyde Eight", expansion: "battlecon", gender: "male", keywords: ["Black Ops", "Indines", "Psychic", "Toxic", "Clone"] },
+                { name: "Darius", expansion: "redemption", gender: "male", keywords: ["Past", "Kingdom", "Martial Arts Master", "Toxic", "Clone", "Kemono"] },
+                { name: "Dmitri", expansion: "riseofthekingdom", gender: "male", keywords: ["Boss", "Black Ops", "Brotherhood", "Soldier", "Clone"] },
+                { name: "Drago", expansion: "riseofthekingdom", gender: "male", keywords: ["Black Ops", "Brotherhood", "Competitor", "Street", "Clone", "Gabriel"] },
+                { name: "Gabriel", expansion: "redemption2", gender: "male", keywords: ["Global Gladiator", "Martial Arts Master", "Street", "Wanderer", "Clone", "Gabriel"] },
+                { name: "Genesis", expansion: "redemption2", gender: "female", keywords: ["Cifarelli", "Organized Crime", "Extraplanar", "Street", "Clone", "Music"] },
+                { name: "Hanzo", expansion: "riseofthekingdom", gender: "male", keywords: ["Past", "Sensei", "Wanderer", "Blade", "Global Gladiator", "Kingdom", "Clone"] },
+                { name: "Isabella", expansion: "riseofthekingdom", gender: "female", keywords: ["Celebrity", "Martial Arts Master", "Wanderer", "Clone", "Brandon", "Golden Dragons"] },
+                { name: "Jackal", expansion: "riseofthekingdom", gender: "female", keywords: ["Dark Matter", "Insane", "Kingdom", "Psychic", "Science", "Clone", "Jackal"] },
+                { name: "James Wong", expansion: "keystothekingdom",gender: "male", keywords: ["Black Ops", "Brook City", "Law Enforcement", "Kingdom", "Past", "Clone"] },
+                { name: "Jin", expansion: "riseofthekingdom", gender: "male", keywords: ["Golden Dragons", "Organized Crime", "Blade", "Law Enforcement", "Clone", "Ying Hua"] },
+                { name: "Juan", expansion: "riseofthekingdom", gender: "male", keywords: ["Cartel", "Organized Crime", "Gunslinger", "Street", "Clone", "Juan"] },
+                { name: "Kemono", expansion: "riseofthekingdom", gender: "male", keywords: ["Beast", "Kingdom", "Competitor", "Chi", "Clone", "Kemono", "Tlazolteotl", "Horseman", "Aztec"] },
+                { name: "Khadath Ahemusei", expansion: "battlecon", gender: "male", keywords: ["Indines", "Science", "Extraplanar", "Wanderer", "Clone"] },
+/*                 leeta is in redemption too, fix */
+                { name: "Leeta", expansion: "twintiger", gender: "female", keywords: ["Brook City", "Street", "Wanderer", "Past", "Clone"] },
+                { name: "Lotus", expansion: "keystothekingdom", gender: "female", keywords: ["Brook City", "Golden Dragons", "Organized Crime", "Past", "Clone", "Ah Long of Brook City"] },
+                { name: "Marionette Doll", expansion: "redemption2", gender: "female", keywords: ["Dark Matter", "Kingdom", "Martial Arts Master", "Psychic", "Clone", "Shin Yokai"] },
+                { name: "Mary Ann", expansion: "twintiger", gender: "female", keywords: ["Street", "Clone", "Twin Tiger", "Onyx League", "Youth"] },
+                { name: "Megan", expansion: "redemption2", gender: "female", keywords: ["Celebrity", "Chi", "Fraud", "Global Gladiator", "Martial Arts Master", "Wanderer", "Clone", "Megan", "Law Enforcement", "Mr. Apple"] },
+                { name: "Mr. Apple", expansion: "stretchgoals17", gender: "male", keywords: ["Celebrity", "Fraud", "Sensei", "Music", "Clone", "Mr. Apple"] },
+                { name: "Natalia", expansion: "redemption2", gender: "female", keywords: ["Black Ops", "Global Gladiator", "Martial Arts Master", "Soldier", "Wanderer", "Clone", "Natalia", "Project X", "Street"] },
+                { name: "Power Soldier", expansion: "redemption2", gender: "male", keywords: ["Dark Matter", "Beast", "Black Ops", "Kingdom", "Martial Arts Master", "Clone"] },
+                { name: "Project X", expansion: "redemption", gender: "female", keywords: ["Dark Matter", "Beast", "Insane", "Martial Arts Master", "Youth", "Clone", "Jackal", "Project X"] },
+                { name: "Sera O'Quinn", expansion: "riseofthekingdom", gender: "female", keywords: ["Boss", "Celebrity", "Insane", "Organized Crime", "Clone", "Megan"] },
+                { name: "Shadow", expansion: "riseofthekingdom", gender: "male", keywords: ["Boss", "Kingdom", "Martial Arts Master", "Chi", "Clone", "Shadow", "Horseman", "Sensei"] },
+                { name: "Shin Yokai", expansion: "redemption", gender: "male", keywords: ["Boss", "Insane", "Extraplanar", "Chi", "Clone", "Shadow", "Shin Yokai", "Horseman"] },
+                { name: "Star Knight Iri", expansion: "battlecon", gender: "female", keywords: ["Indines", "Extraplanar", "Blade", "Soldier", "Clone"] },
+                { name: "Tiger Azules", expansion: "redemption", gender: "male", keywords: ["Aztec", "Street", "Cartel", "Martial Arts Master", "Clone", "Juan", "Wanderer"] },
+                { name: "Tlazolteotl", expansion: "redemption2", gender: "female", keywords: ["Past", "Aztec", "Boss", "Extraplanar", "Clone", "Tlazolteotl"] },
+                { name: "Wan Bo", expansion: "redemption", gender: "male", keywords: ["Golden Dragons", "Martial Arts Master", "Chi", "Monk", "Clone", "Ah Long"] },
+                { name: "Ying Hua", expansion: "redemption2", gender: "female", keywords: ["Global Gladiator", "Law Enforcement", "Martial Arts Master", "Science", "Clone", "Ying Hua"] },
+                { name: "Ying Hua of Brook City", expansion: "keystothekingdom",gender: "female", keywords: ["Brook City", "Law Enforcement", "Past", "Science", "Clone"] },
+                { name: "Zane", expansion: "riseofthekingdom", gender: "male", keywords: ["Competitor", "Chi", "Youth", "Clone", "Natalia"] }
             ];
+
+            alliesandrivals = alliesandrivals.filter(character => expansionfilter.includes(character.expansion))
 
             for (i = alliesandrivals.length - 1; i > 0; i--) {
                 if (supportingcast.includes(alliesandrivals[i].name)) {
@@ -1622,7 +1706,7 @@
                 { persistent: `Put 2P power on this card. <b>Interact:</b> If engaged with ${enemy.boss}, discard 1 defense token of a type of which ${gPron(enemy, "subject")} has 0 of to discard 1 power from this card and if no power remains, ${enemy.boss} is successfully ${interrogate_words}.`, wincondition: [`If the fighters win and ${enemy.boss} is ${interrogate_words}:`, `If ${enemy.boss} is not ${interrogate_words}:`], prologue: "intel" },
                 { persistent: `<b>Interact:</b> If you are in a crate space, you may discard 1 of each type of defense token on this card. Once there is 1P of each defense token on this card, you have ${intel_goal}.`, activate: `Each fighter discards 1 defense token for each space the nearest crate space is from them.`, wincondition: [`If the fighters win and have ${intel_goal}:`, `If you have not ${intel_goal}:`], prologue: "intel" },
                 { activate: `Every fighter not engaged with an enemy must discard 1 power and 1 defense token of their choice.` },
-                { persistent: `Place 5P power tokens on this card. After a fighter defeats an enemy in their threat area, they may discard 1 defense token to gain 1 power from this card. If there is no power on this card, you have ${intel_goal}.`, activate: `Place 1 power on this card for any enemy except for the boss is unengaged.`, wincondition: [`If the fighters win and have ${intel_goal}:`, `If you have not ${intel_goal}:`], prologue: "intel" },
+                { persistent: `Place 5P power tokens on this card. After a fighter defeats an enemy in their threat area, they may discard 1 defense token to gain 1 power from this card. If there is no power on this card, you have ${intel_goal}.`, activate: `Place 1 power on this card for any unengaged enemy except for the boss.`, wincondition: [`If the fighters win and have ${intel_goal}:`, `If you have not ${intel_goal}:`], prologue: "intel" },
                 { allysetup: `Put ${ally.name} (ally) into play.`, persistent: `If ${ally.name} (ally) would be dealt any damage, deal it to one fighter instead.`, prologue: "escort" },
             ]
 
@@ -2079,7 +2163,7 @@
                         prologue = `${trail}, you have found out that ${enemy.boss} has managed to organize a 12 hour marathon of crimes of every imaginable sort, including murder,
         for this very night. Agent Fletch explains to you: "The ${enemy.name} has provided the people release for all the hatred, and violence, and aggression that they keep up inside them. You need to contain their mob,
         before the mentality spreads any further and Ransom City falls to anarchy!"<br><br>This has been ${possessiveSuffix(enemy.boss)} plan all along! You have no choice but to move in and subdue both the ${enemy.minions}, and treat any 
-        victims to ${possessiveSuffix(enemy.boss)} manipulations collateral damage, or the city will never be the same again.`
+        victims to ${possessiveSuffix(enemy.boss)} manipulations collateral damage, or Ransom City will never be the same again.`
                     }
                     else if (knowledge != "clueless" && masterplan == "kidnapping") {
                         prologue = `${trail}, you have found out where the secret base of the ${enemy.name} is located and the ${vip[0]} is being held. You accompany a squad of Citadel soldiers as they storm the base.
@@ -2132,7 +2216,7 @@
         You have to stop the ${enemy.boss} here and now, or their reach and power will grow exponentially with the leverage and cash the deal will deliver them.`
                     }
                     else if (knowledge != "clueless" && masterplan == "actsofterror") {
-                        prologue = `${trail}, you find out that the ${enemy.desc} of the ${enemy.name} are planning to openly flood the streets of the city with free samples of a Vandal-derivative drug. Citadel analysts have determined the location and time of
+                        prologue = `${trail}, you find out that the ${enemy.desc} of the ${enemy.name} are planning to openly flood the streets of Ransom with free samples of a Vandal-derivative drug. Citadel analysts have determined the location and time of
         their plan, and you move in to intervene.<br><br>
         A Citadel chopper drops you at the remote beach where the ${possessiveSuffix(enemy.name)} distribution of product is taking place. "${gloat[0]}" ${enemy.boss} says. "${gloat[1]}" You have to stop the distribution here and now, or Ransom will fall into unimaginable social troubles - and the people will know no-one can stop the ${enemy.name}!`
                     }
@@ -2361,7 +2445,7 @@
                 [`I got what everyone gets,`, `I got a lifetime`],
                 [`Time..`, `To die.`],
                 [`My only hope,`, `Is that the next team will do what I could not.`],
-                [`My only regret is that I failed to stop the ${possessiveSuffix(enemy.name)} scheme,`, `And my failure has doomed the city.`],
+                [`My only regret is that I failed to stop the ${possessiveSuffix(enemy.name)} scheme,`, `And my failure has doomed Ransom.`],
                 [`I can only think of all the innocent lives that will perish,`, `Because of this insane scheme I failed to thwart.`],
                 [`I gave everything,`, `I have no regrets.`],
                 [`When death comes,`, `It will come as an old friend.`],
@@ -2375,7 +2459,7 @@
         function lastThoughts(enemy) {
             let lastthoughts = [
                 `You can only think of all the innocent lives that will perish because of this insane scheme you failed to thwart.`,
-                `Your only regret is that you failed to stop the ${possessiveSuffix(enemy.name)} scheme, and your failure has doomed the city.`,
+                `Your only regret is that you failed to stop the ${possessiveSuffix(enemy.name)} scheme, and your failure has doomed Ransom.`,
                 `From out of nowhere a thought crosses your mind: one day another Gladiator will rise and uses the power of ${randFrom(["Street Masters", "the Tiger"])} to light the darkest hour.`,
                 `You can only think that if you'll close your eyes now, you're not going to wake up.`,
                 `You think to yourself it's been a funny sort of day in a way.`,
@@ -2396,7 +2480,7 @@
                 [`This is finally turning into my kind of day,`, `The monument to my humble genius is now complete!`],
                 [`Mwahahaha!`, `I'm so powerful I even impress myself!`],
                 [`Please meet your end with dignity,`, `I hate whiners.`],
-                [`Only you were brave - or stupid enough to oppose the ${enemy.name}.`, `The city is now under martial law.. and I am the marshal.`],
+                [`Only you were brave - or stupid enough to oppose the ${enemy.name}.`, `Ransom City is now under martial law.. and I am the marshal.`],
                 [`This is almost too easy,`, `Such heroic nonsense.`],
                 [`${ucInit(defineAddressing(enemy))}!`, `Why throw away your lives so recklessly?`],
                 [`I would've waited an eternity for this,`, `It's over, ${defineAddressing(enemy)}.`],
@@ -2753,8 +2837,8 @@
                     `A wandering ${group.length == 1 ? "gunslinger" : "band of gunslingers"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
                     break;
                 case "Horseman": text = (stance == "Ally" ?
-                    `The mysterious Master must believe ${finalboss.boss} is truly a lost cause to his secretive goals, as ${group.length == 1 ? "a horseman has" : `not one, but ${numberAsString(group.length)} horsemen have`} been sent after ${gPron(finalboss, "object")}.` :
-                    `The mysterious Master must believe you truly are an immense threat to his secretive goals, as ${group.length == 1 ? "a horseman has" : `not one, but ${numberAsString(group.length)} horsemen have`} been sent to take you down.`);
+                    `The mysterious Master must believe ${finalboss.boss} is truly a lost cause to his secretive goals, as ${group.length == 1 ? "a Horseman has" : `not one, but ${numberAsString(group.length)} horsemen have`} been sent after ${gPron(finalboss, "object")}.` :
+                    `The mysterious Master must believe you truly are an immense threat to his secretive goals, as ${group.length == 1 ? "a Horseman has" : `not one, but ${numberAsString(group.length)} horsemen have`} been sent to take you down.`);
                     break;
                 case "Indines": text = (stance == "Ally" ?
                     `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King 
