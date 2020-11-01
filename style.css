@@ -37,7 +37,7 @@ background-image:url("Street Masters background.png");
 background-size:cover;
     }
 
-    #players-button {
+    #players-button, #storylength-button {
         background: #e7aa3c;
         text-shadow: none;
         border: 2pt solid rgba(255,255,255,1);
