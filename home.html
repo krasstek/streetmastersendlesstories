@@ -906,7 +906,7 @@
                 story[i].stage.knowledge = defineKnowledge(i, story)
             })
 
-            let finalboss = story[Math.max($("#storylength").val()*2-3),0].enemy
+            let finalboss = story[Math.max($("#storylength").val()*2-3,0)].enemy
 
             let stageindex = 0;
 
@@ -1604,7 +1604,7 @@
 
         function victoryResult(stageindex, story, nextstage, gizmo) {
 
-            let finalboss = story[$("#storylength").val()*2-2].enemy
+            let finalboss = story[Math.max($("#storylength").val()*2-3,0)].enemy
             let enemy = story[stageindex].enemy
             let stage = story[stageindex].stage
             let nextenemy = story[nextstage].enemy
@@ -1701,7 +1701,7 @@
             let finalclue = randFrom([`where ${finalboss.boss} is waiting for you.`, `where your final showdown will go down!`, `the critical piece of information that leads you to the location of ${finalboss.boss}!`, `where ${finalboss.boss} is!`, `where the fight to end this will be.`, `the location where your ultimate destiny lies.`, `${nextenemy.boss} in fact is where all the clues were pointing at.`])
             let finality = randFrom([``, `You're going to stop this once and for all.`, `You prepare for a fight this one last time.`, `This is it!`, `This is the end, at last.`, `No escape for ${finalboss.boss} now!`, `You can almost taste the victory!`, `Everything has led to this moment.`, `It is in your hands now.`, `The time has come for your final confrontation!`, `You know this, the final confrontation, won't be easy!`])
 
-            let victoryresult = (nextstage == $("#storylength").val()*2-2) ? randFrom(gatherclues).replace(" that", "").replace("continues", "reveals") + " " + finalclue + "<br><br>" + finality : randFrom(gatherclues) + " " + clue + randFrom(planning)
+            let victoryresult = (nextstage >= $("#storylength").val()*2-3) ? randFrom(gatherclues).replace(" that", "").replace("continues", "reveals") + " " + finalclue + "<br><br>" + finality : randFrom(gatherclues) + " " + clue + randFrom(planning)
 
             return victoryresult
         }
