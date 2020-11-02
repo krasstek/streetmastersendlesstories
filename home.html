@@ -910,7 +910,7 @@
 
             let stageindex = 0;
 
-            let storyname = String(storyNamer(finalboss, story[$("#storylength").val()*2-2].stage))
+            let storyname = String(storyNamer(finalboss, story[Math.max($("#storylength").val()*2-3,0)].stage))
 
             let referencetext = referenceText(globalgladiators, allygroup, allymotivation, rivalgroup, rivalmotivation, finalboss)
 
@@ -1469,7 +1469,7 @@
 
         function loseResult(stageindex, story, nextstage, gizmo) {
 
-            let finalboss = story[$("#storylength").val()*2-2].enemy
+            let finalboss = story[Math.max($("#storylength").val()*2-3,0)].enemy
 
             let enemy = story[stageindex].enemy
 
@@ -1626,7 +1626,7 @@
             cahoots = randFrom([``, ` - ${supposition}in cahoots with ${cahoots}`, `, ${supposition}in league with ${cahoots}`, `, ${supposition}allied to ${cahoots}`,
                 `, ${supposition}working for ${cahoots} this time`, `, ${supposition}in alliance with ${cahoots}`, `, ${supposition}hired by ${cahoots}`, `, ${supposition}linked to ${cahoots}`, `, ${supposition}tied to ${cahoots}`,
                 `, ${supposition}connected to ${cahoots}`], `, somehow connected to all of this`, ``, ` that ${supposition}is connected to this`, `, that the Citadel confirms warrants further investigation`, `, who doesn't serve the Kingdom, but instead someone known only as The Master`, `, and seems more important than you originally thought`)
-            cahoots = (nextstage == $("#storylength").val()*2-2 || nextstage == $("#storylength").val()*2-1) ? `` : cahoots
+            cahoots = (nextstage >= Math.max($("#storylength").val()*2-3,0)) ? `` : cahoots
 
             switch (nextmission.name) {
                 case "Ashes of the Eternal":
@@ -1974,7 +1974,7 @@
             let cardtexts = []
             let winepilogue = "Victory text"
             let loseepilogue = "Defeat text"
-            let pregameprologue = preGamePrologue(story[$("#storylength").val()*2-2].stage, story[$("#storylength").val()*2-2].enemy)
+            let pregameprologue = preGamePrologue(story[Math.max($("#storylength").val()*2-3,0)].stage, story[Math.max($("#storylength").val()*2-3,0)].enemy)
 
             for (i = 0; i < story.length; i++) {
                 cardtext = createPrologue(i, story, alliesandrivals, heronames, enemies, pregameprologue.storytext, pregameprologue.vip);
