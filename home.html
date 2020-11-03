@@ -750,7 +750,7 @@
                     stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose one enemy to drop an objective token it is carrying.` },
                     stagepenalty: { setup: `The boss gains 1 defense token of each type. Each fighter is dealt 1 direct damage.` },
                     masterplan: randFrom(["strengtheningforces", "illegalgains"]),
-                    gloat: [[`You think fighting me in some landfill is going to stop the downfall of Ransom?`, `I'm not your problem. I'm just doing business.`],[`Just say no, ${enemy.boss}!" you tell it like it is. "Okay. 'No.'`, `Now what?`]],
+                    gloat: [[`You think fighting me in some landfill is going to stop the downfall of Ransom?`, `I'm not your problem. I'm just doing business.`],[`Just say no!" you tell it like it is. "Okay. 'No.'`, `Now what?`]],
                     rivaltext: _.template(', ${rival.name} at ${gPron(enemy,"possessive")} side<%=rivalboost ? `. ${rival.name} looks to have taken more than just a sample of the product`: ``%>'),
                     hottrail: _.template('you work your way to the property'),
                     coldtrail: _.template('you find out about an abandoned property where a drug deal is taking place. You work your way to the property'),
