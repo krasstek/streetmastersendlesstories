@@ -1529,14 +1529,14 @@
 
             let generic = captured ? randFrom(capture) : `${randFrom([...retreat,...rescue])} ${randFrom(intel)}`
 
-            let escort = [`You failed to protect ${ally.name}! ${captured ? `${randFrom(captured)}` : `${generic}` }`]
+            let intel_words = [`intel`, `evidence`, `knowledge`, `information`]
+            let escort = [`You failed to protect ${ally.name} and gather the ${randFrom(intel_words)}! ${captured ? `${randFrom(capture)}` : `${generic}` }`]
 
             let explosion_cause = []
             stage.hasOwnProperty("explosions") ? explosion_cause = [stage.explosions,...explosion_cause] : ()=>{}
             enemy.hasOwnProperty("explosions") ? explosion_cause = [enemy.explosions,...explosion_cause] : ()=>{}
             let explosion = [`You barely clear the area when the ${randFrom(explosion_cause)} finally bring everything crumbling down. ${captured ? randFrom(capture): generic} `]
 
-            let intel_words = [`intel`, `evidence`, `knowledge`, `information`]
             let find_intel = [`${captured ? `"Looking for this?" ${enemy.boss} holds ${whichPreposition(gizmo)} in front of you. ${randFrom(capture)}` : `You could not obtain whatever ${randFrom(intel_words)} ${enemy.boss} had. ${generic}` }`]
 
             let revolting_words = [`disgusting`,`revolting`,`repulsive`,`nauseating`,`stomach-churning`]
