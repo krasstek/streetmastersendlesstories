@@ -1481,7 +1481,7 @@
             let nextminion = randFrom(nextenemy.minionnames)
 
             let evilplace = evilPlace()
-            let contact = Math.random() < 0.5 ? "He" : "She"
+            let contact = randFrom(["he","she"])
 
             let captured = nextmission.hasOwnProperty("captured") && nextmission.knowledge == "captured" ? true : false
 
@@ -1492,7 +1492,9 @@
             `After failing to contain the situation, you are forced to flee from ${possessiveSuffix(enemy.name)} forces.`,
             `You regain your consciousness after a while and pick yourself up. ${enemy.boss} is nowhere to be found.`,
             `"You are not worth my time, ${defineAddressing(enemy)}!" ${enemy.boss} growls, and leaves you lying on the ground, defeated.`,
-            `You can't let this defeat stop you! You pick yourself up, and dust yourself off.`]
+            `You can't let this defeat stop you! You pick yourself up, and dust yourself off.`,
+            `You hurry away from the conflict, beaten and defeated.  You hear the sound of ${possessiveSuffix(enemy.boss)} laughter echoing behind you.`,
+            `After an uphill battle against overwhelming odds, ${enemy.boss} apparently becomes bored with the uneven competition and unleashes ${getEnemyAttack(enemy, "antiair", "an unrelenting assault")} into the melee. "Let's move out!" ${gPron(enemy,"subject")} commands. "This is not worth our time." Left for dead, you have no chance of following. `]
 
             let rescue = [`Suddenly, Citadel agents rappel down out of nowhere. ${enemy.boss} and ${gPron(enemy, "possessive")} ${enemy.minions} flee as the agents free you.`,
             `You slowly awaken in a helicopter, confused on how you wound up there.`,
@@ -1506,7 +1508,7 @@
             `Ashamed and frustrated, you have no choice but to return to Ransom and hope someone at the police department would hear you out. You can't think of any other option at this point.`,
             `"Gladiators," a Citadel agent greets you. "I have a location of heavy ${nextenemy.name} activity that could use your particular brand of investigating."`,
             `Agent Fletch leans toward you. "No idea what you thought you were doing down there. Now we must hurry to ${nextenemy.name} if we're to fix this!"`,
-            `You see your first welcome sight; Agent Fletch approaches with ${whichPreposition(fletch_gadget)} under his arm. "Don't get comfy," Fletch said, booting up the ${fletch_gadget}. "After this fiasco, we might recover if we rapidly strike at key targets, and hopefully throw the ${finalboss.name} off-balance."`,
+            `You see your first welcome sight; Agent Fletch approaches with ${whichPreposition(fletch_gadget)} in hand. "Don't get comfy," Fletch said, booting up the ${fletch_gadget}. "After this fiasco, we might recover if we rapidly strike at key targets, and hopefully throw the ${finalboss.name} off-balance."`,
             `Citadel soldiers take a moment to patch up your wounds, getting you prepared to return to the Citadel.`,
             `With no clue what to do next, you have no choice but to reconnect with Agent Fletch and hope the Citadel has more intel.`,
             `You call Agent Fletch and request a cleanup team, and then you begin searching through the area, and find ${whichPreposition(getGizmo())} placed almost intentionally where you would find it. Inside you find maps and coordinates.`,
@@ -1527,9 +1529,17 @@
                 `You find yourself immediately surrounded by ${possessiveSuffix(enemy.boss)} ${enemy.minions}. "You're due at the next stop," ${enemy.boss} says menacingly. "The ${nextenemy.name} still has some uses for you.`
             ]
 
+            let intel_words = [`intel`, `evidence`, `knowledge`, `information`]
+            let revolting_words = [`disgusting`,`revolting`,`repulsive`,`nauseating`,`stomach-churning`]
+
+            let stage_loot = stage.loot != undefined ? stage.loot : "haste" 
+            let stage_swarm = []
+            stage.hasOwnProperty("swarm") ? stage_swarm = [stage.swarm,...stage_swarm] : ()=>{}
+            enemy.hasOwnProperty("swarm") ? stage_swarm = [enemy.swarm,...stage_swarm] : ()=>{}
+
+
             let generic = captured ? randFrom(capture) : `${randFrom([...retreat,...rescue])} ${randFrom(intel)}`
 
-            let intel_words = [`intel`, `evidence`, `knowledge`, `information`]
             let escort = [`You failed to protect ${ally.name} and gather the ${randFrom(intel_words)}! ${captured ? `${randFrom(capture)}` : `${generic}` }`]
 
             let explosion_cause = []
@@ -1537,15 +1547,15 @@
             enemy.hasOwnProperty("explosions") ? explosion_cause = [enemy.explosions,...explosion_cause] : ()=>{}
             let explosion = [`You barely clear the area when the ${randFrom(explosion_cause)} finally bring everything crumbling down. ${captured ? randFrom(capture): generic} `]
 
-            let find_intel = [`${captured ? `"Looking for this?" ${enemy.boss} holds ${whichPreposition(gizmo)} in front of you. ${randFrom(capture)}` : `You could not obtain whatever ${randFrom(intel_words)} ${enemy.boss} had. ${generic}` }`]
+            let find_intel = [`${captured ? `"Looking for this?" ${enemy.boss} holds ${whichPreposition(gizmo)} in front of you. ${randFrom(capture)}` : `You could not obtain whatever ${randFrom(intel_words)} ${enemy.boss} had. ${generic}` }`,
+            `${captured ? randFrom(capture) : `The ${enemy.name} escaped with ${stage.loot}, and the ${gizmo} in your hands looks damaged. "Agent Fletch," you got into your communications device. "I've got the ${gizmo}, but it looks damaged." "At least we have it," Agent Fletch replied in your ear. "Bring it back to Citadel HQ and we'll see what data we can pull from it.`}`]
 
-            let revolting_words = [`disgusting`,`revolting`,`repulsive`,`nauseating`,`stomach-churning`]
             let gunk = [`You are forced to duck from ${getEnemyAttack(enemy,"antiair", "a relentless assault")}. You lose your balance and fall straight into ${stage.gunk}. You try to desperately not to swallow any of the ${randFrom(revolting_words)} liquid${captured ? ` but fail, and start to lose your consciousness. When almost passed out, you feel you're dragged back to the surface. "Clean them up," you think you hear ${enemy.boss} say. "${nextenemy.boss} won't want them like that."`: `, and when you finally manage to get to the surface, ${enemy.boss} has disappeared with ${gPron(enemy,"possessive")} ${enemy.minions}.`}`]
 
-            gun_loot = stage.loot != undefined ? stage.loot : "what they were after" 
-            let guns = [`You duck behind cover as your enemies fire on you. To move would be a a suicide, and you are forced to watch as the ${enemy.name} leaves with ${gun_loot}. ${captured ? `You are pinned by the fire, and after a while you are surrounded by gun-toting enemies from all sides. ${randFrom(capture)}`: `You hunker down to avoid being hit by stray fire.<br><br>${randFrom(rescue)} ${randFrom(intel)}`}`]
+            let guns = [`You duck behind cover as your enemies fire on you. To move would be a a suicide, and you are forced to watch as the ${enemy.name} leaves with ${stage_loot}. ${captured ? `You are pinned by the fire, and after a while you are surrounded by gun-toting enemies from all sides. ${randFrom(capture)}`: `You hunker down to avoid being hit by stray fire.<br><br>${randFrom(rescue)} ${randFrom(intel)}`}`]
 
-            let hostages = [`${captured ? `You are lying on the ground, defeated and helpless, as` : `Despite all of your efforts,` } ${enemy.boss} executes another one of the ${stage.hostages}.<br><br>${captured ? randFrom(capture) : generic }`]
+            let hostages = [`${captured ? `You are lying on the ground, defeated and helpless, as` : `Despite all of your efforts,` } ${enemy.boss} executes another one of the ${stage.hostages}.<br><br>${captured ? randFrom(capture) : generic }`,
+            `You weren't able to save the ${stage.hostages}, and now their lives are on your hands. ${captured ? randFrom(capture) : generic}`]
 
             let labyrinth = [`The relentless ${enemy.bosstitle()} forces you to full rout, and you soon find yourselves lost in the ${stage.labyrinth}. You rush through the area to escape, ${captured ? `but suddenly you find yourself surrounded by ${enemy.minions}. You feel exhausted, and cannot push on. "How could you face the ${finalboss.name} if you can't even find your own way?" ${enemy.boss} says, eyeing you with contempt.`: `and suddenly you are in the clear. ${randFrom(intel)}`}`]
 
@@ -1555,16 +1565,16 @@
             `Even with the prepared positioning and the upper hand in the fight, ${enemy.boss} and ${gPron(enemy,"possessive")} ${randFrom(["forces",enemy.minions])} beat you ${captured ? `down. ${randFrom(capture)}` : `back and slow your down, giving them time to get ${stage.loot} and retreat. ${randFrom(intel)}`}`]
 
             let ritual = [`You were not able to stop ${enemy.boss} from completing the ritual! Standing in the middle of the temple, ${gPron(enemy,"subject")} rises up off the stone floor, the ${mysticalSynonym()} powers swirling around ${gPron(enemy,"object")}. You watch as ${gPron(enemy,"possessive")} muscles grow, ${gPron(enemy,"possessive")} eyes burn, and ${gPron(enemy,"possessive")} body pulses with the ${mysticalSynonym()} energies! ${captured ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!` }`,
-            `You're thrown to the ground by a blast of ${mysticalSynonym()} force, ${captured ? `and you are sucked through a shimmering, twisting portal.` : `and the ${enemy.bosstitle()} disappears in a flash of brilliant purple light. ${randFrom(intel)}.` }`]
+            `You're thrown to the ground by a blast of ${mysticalSynonym()} force, ${captured ? `and you are sucked through a shimmering, twisting portal.` : `and the ${enemy.bosstitle()} disappears in a flash of brilliant purple light. ${randFrom(intel)}.` }`,
+            `${enemy.boss} looks down at you, a smug smirk spreading across ${gPron(enemy,"possessive")} face. ${ucInit(gPron(enemy,"subject"))} reaches up and recites a few strange words in a language you've never heard before. In an instant, the world blows away around you in a deafening explosion of ${mysticalSynonym()} energy${captured ? ` and then`: `, and for a moment,`} all you can see is the blackness.${captured ? `` : `<br><br>${randFrom(intel)}.`}`]
 
-            let rival_interrogate = [`${captured ? `${rival.name} smirks at you as you are beaten. ${randFrom(captured)}` : `Despite your best efforts, ${rival.name} has slipped away. ${generic}` }`]
+            let rival_interrogate = [`${captured ? `${rival.name} smirks at you as you are beaten. ${randFrom(captured)}` : `Despite your best efforts, ${rival.name} has slipped away. ${generic}` }`,
+            `${captured ? randFrom(capture): `The ${enemy.name} was able to escape with ${rival.name}. ${randFrom(intel)}`}`]
 
-            let swarm = []
-            stage.hasOwnProperty("swarm") ? swarm = [stage.swarm,...swarm] : ()=>{}
-            enemy.hasOwnProperty("swarm") ? swarm = [enemy.swarm,...swarm] : ()=>{}
-            let swarmed = [`Despite all of your skills, the endless waves of ${randFrom(swarm)} eventually tire you out${captured ? `.<br><br>${randFrom(capture)}` : `, and everything seems lost.<br><br>${randFrom([randFrom(retreat),randFrom(rescue)])} ${randFrom(intel)}` }`]
+            let swarmed = [`Despite all of your skills, the endless waves of ${randFrom(stage_swarm)} eventually tire you out${captured ? `.<br><br>${randFrom(capture)}` : `, and everything seems lost.<br><br>${randFrom([randFrom(retreat),randFrom(rescue)])} ${randFrom(intel)}` }`]
 
-            let undead = [`Looking out over the battlefield, you see the zombies are too many for you to keep at bay. ${captured ? `You fight as long as you can, but eventually you are overrun by the horde.`: `"Agent Fletch," you say into your radio. "The target's fled, and the horde is loose. Requesting extraction.`}`]
+            let undead = [`Looking out over the battlefield, you see the zombies are too many for you to keep at bay. ${captured ? `You fight as long as you can, but eventually you are overrun by the horde.`: `"Agent Fletch," you say into your radio. "The target's fled, and the horde is loose. Requesting extraction.`}`,
+            `"Go!" a ${stage.bystander} yells at you from where ${contact} lies, wounded and pinned. "Get out of here!" You turn and flee as the unstoppable horde of zombies approaches${captured ? `, but you are not fast enough in your current state.` : `. Sounds of fightning can be heard as ${contact} fights them off as long as ${contact} can, but all too soon those sounds give way to screams of pain.<br><br>${randFrom(intel)}`}`]
 
             let loseresult
 
@@ -2074,7 +2084,8 @@
                 `Your intense fight takes you to the edge of ${stage.hasOwnProperty(`pit`) ? stage.pit : `a bottomless pit`}. Just as you're about to strike ${enemy.boss} down, ${gPron(enemy, "subject")} dives in, and that's the last you see of ${gPron(enemy, "object")}. For now!`,
                 `You are sure you have cornered ${enemy.boss} with no route of escape, when all of a sudden a sleek ${enemy.name} helicopter descends and ${gPron(enemy, "subject")} leaves, dangling from a ladder. "The ${neutralize}, but ${enemy.boss} slipped away," you report to Agent Fletch with your communicator.`,
                 `Your body spasms, fighting against the green gel. Unable to breathe, you claw wildly at the hard, translucent surface encasing you. Shadowy figures move about on the other side of the barrier, and suddenly the lid slides open, and you fall to the ground. The lights are blindingly bright to your aching eyes, and you draw air in your lungs like it's the first time in your life. "Welcome, child!" you hear a voice calling. What is happening? Was that a dream?`,
-                `"If you strike me down, I shall become more powerful than you possibly can imagine," ${enemy.boss} says. ${ucInit(gPron(enemy, "subject"))} drops ${gPron(enemy, "possessive")} guard, and you strike ${gPron(enemy, "object")} one last time, and there's a blinding flash! ${ucInit(possessiveSuffix(gPron(enemy, "subject")))} gone! Disappeared!`
+                `"If you strike me down, I shall become more powerful than you possibly can imagine," ${enemy.boss} says. ${ucInit(gPron(enemy, "subject"))} drops ${gPron(enemy, "possessive")} guard, and you strike ${gPron(enemy, "object")} one last time, and there's a blinding flash! ${ucInit(possessiveSuffix(gPron(enemy, "subject")))} gone! Disappeared!`,
+                `The screen of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "You beat the high score! Good job, Gladiators!" Agent Fletch calls from beyond the observation screen. "When you have to face ${enemy.boss} for real, you just might be ready."`,
             ]
 
             let finisher = randFrom(["Finish them", "Show no mercy", "End them", "Put an end to this", "Kill them, and send what remains to Agent Fletch", "Wipe them out, all of them", "Put a stop to this"])
@@ -2117,10 +2128,11 @@
                 `"Finish them off, ${enemy.boss}! Do it now!" shouts ${randFrom(enemy.minionnames)}. "${gloat[0]}" ${enemy.boss} says, and ${enemy.threat}. "${gloat[1]}"`,
                 `"${randFrom([`No more, ${enemy.boss}! Grant me mercy!" you shout.`, `${lastwords[0]}" ${heroSpeech()}, "${lastwords[1]}"`])} ${enemy.boss} ${enemy.threat}${randFrom([`. "I thought you were made of sterner stuff," ${gPron(enemy, "subject")} responds.`, `, and orders ${gPron(enemy, "possessive")} minions: "${finisher}!"`])}`,
                 `${enemy.boss} has you pinned. Without a word, ${gPron(enemy, "subject")} ${enemy.threat}. With grim determination in ${gPron(enemy, "possessive")} eyes ${gPron(enemy, "subject")} ends your life.`,
-                `"${defiance[0]}," you spit defiantly in the face of the victorious ${enemy.bosstitle()}. "${defiance[1]}"<br><br>"${gloat[0]}" ${gPron(enemy, "subject")} answers. "${gloat[1]}"`,
+                `"${defiance[0]}" you spit defiantly in the face of the victorious ${enemy.bosstitle()}. "${defiance[1]}"<br><br>"${gloat[0]}" ${gPron(enemy, "subject")} answers. "${gloat[1]}"`,
                 `"${lastwords[0]}" ${heroSpeech()}, but ${enemy.boss} cuts you off by grabbing your throat. "${gloat[0]}" ${gPron(enemy, "subject")} says and starts to squeeze the life out of you. "${gloat[1]}"`,
                 `Suddenly, there's a blinding flash and ${possessiveSuffix(enemy.boss)} gone! It's all gone. Shockingly, you're back at Citadel HQ, surrounded by agents all going about their business. Did all that even happen?`,
                 `Your body spasms, fighting against the green gel. Unable to breathe, you claw wildly at the hard, translucent surface encasing you. Shadowy figures move about on the other side of the barrier, and suddenly the lid slides open, and you fall to the ground. The lights are blindingly bright to your aching eyes, and you draw air in your lungs like it's the first time in your life. "Welcome, my children!" you hear a woman calling. What is happening? Was that a dream?`,
+                `The screen of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "Gladiators!" Agent Fletch calls from beyond the observation screen, his face dark with disappointment. "Only ${Math.ceil(Math.random()*10000)} points! How do you think you can face the real ${enemy.name}?!"`
             ]
 
             let finalresult
@@ -2143,7 +2155,7 @@
             let defiance = [
                 [`You're sick,`, `Where do people like you come from?`],
                 [`You won't get away with this!`, `Citadel will make sure of it!`],
-                [`No matter where you or what you do,`, `You're going down.`],
+                [`No matter where you go or what you do,`, `You're going down.`],
                 [`When beasts like you have devoured each other,`, `The world will belong again to the little people.`],
                 [`Come on down. You haven't got a chance,`, `Come on!`],
                 [`Come on, I love it. Bring on some more!`, `Come on, ${enemy.boss}!`],
