@@ -601,7 +601,7 @@
                     name: "One Step Ahead", expansion: "legendofoni", instory: 0, location: "remote", bystander: "mountain climber", pit: "the edge of the cliff",
                     stagebonus: { setup: `Each fighter may search the enemy deck for a Minion card to discard. Shuffle the enemy deck.` },
                     stagepenalty: { setup: `Each fighter must put search the stage deck for a copy of Vertigo, and put in into play. Shuffle the stage deck.` },
-                    masterplan: randFrom(["personalpower", "kidnapping"]),keywords: ["heights","wilds","labyrinth"], labyrinth: "twisting mountain paths",
+                    masterplan: randFrom(["personalpower", "kidnapping"]),keywords: ["heights","labyrinth"], labyrinth: "twisting mountain paths",
                     rivaltext: _.template('<%=rivalboost ? `. Leaping from the shadows in the trees, ${rival.name} ambushes you!` : ` and to your dismay you find that ${rival.name} has joined forces with ${enemy.boss}.` %>'),
                     gloat: [[`Even the strongest warriors cannot take this fall,`, `And you are not the strongest.`], [`It'll not be the fall that kills you,`, `It's the sudden stop at the end!`], [`It's a long way down, Gladiators,`, `You'll have a lot of time to reflect on your mistakes.`], [`Only one way down for you,`, `The quickest possible.`]],
                     hottrail: _.template('Climbing the mountain is arduous, but you make good time and come to a point where your path crosses that of ${possessiveSuffix(enemy.boss)} band of goons: the ${enemy.name}! Knowing they are only a short distance behind, you hunker down to spring an ambush. As they rush around the bend, you leap out of your hiding spot taking out a number of ${gPron(enemy,"possessive")} forces before they can regroup and face you.'),
@@ -610,7 +610,7 @@
                     prologue: _.template('${trail}, you have affirmed that the ${randFrom(["minions",enemy.minions])} of ${enemy.boss} have been using <%=knowledge != "hottrail" ? `a remote mountain path`: `the mountain path you suspected` %>, so that\'s where you head to catch up with them.<br><br>${stagevar}<%=rivalpresence ? rivaltext : ``%><br><br>${bossDescription(enemy)} doesn\'t seem surprised by your efforts. "${gloat[0]}" ${gPron(enemy,"subject")} laughs. "${gloat[1]}" ${ucInit(gPron(enemy,"subject"))} readies to strike back! <br><br>${laconicStatement(enemy)}'),
                     finalvar: _.template('<br><br>A Citadel aircraft speeds you to the mountain, but ${getEnemyAttack(enemy,"antiair","an ominous aura")} drives the plane away. You parachute to the mountainside, and have to finish this with your fists.'),
                     personalpower: _.template('${trail}, you have affirmed that the ${possessiveSuffix(enemy.bosstitle())} ${getMasterPlan()} has led ${gPron(enemy,"object")} to the ${mysticalSynonym()} energy that rests at the top of the Cursed Mountain of Oni. Having trekked through the Forest of Sorrow, ${enemy.boss} and ${gPron(enemy,"possessive")} minions have begun their ascent.${finalvar} "${gloat[0]}" ${bossDescription(enemy)} laughs<%=rivalpresence ? `, with ${rival.name} at ${gPron(enemy,"possessive")} side, looking for ${gPron(rival,"possessive")} part of the ${mysticalSynonym()} power` : ``%>. "${gloat[1]}"'),
-                    kidnapping: _.template('${trail}, you have affirmed that the ${possessiveSuffix(enemy.bosstitle())} has ${vip[0]} holed up in a remote mountain cave. ${finalvar} "Get to the cave and finish ${randFrom(["him","her"])}, <%=rivalpresence ? rival.name : randFrom(enemy.minionnames) %>! I can handle the ${defineAddressing(enemy)}." ${bossDescription(enemy)} shouts. "${gloat[0]}" ${gPron(enemy, "subject")} laughs. "${gloat[1]}"')
+                    kidnapping: _.template('${trail}, you have affirmed that the ${enemy.bosstitle()} has ${vip[0]} holed up in a remote mountain cave. ${finalvar} "Get to the cave and finish ${randFrom(["him","her"])}, <%=rivalpresence ? rival.name : randFrom(enemy.minionnames) %>! I can handle the ${defineAddressing(enemy)}." ${bossDescription(enemy)} shouts. "${gloat[0]}" ${gPron(enemy, "subject")} laughs. "${gloat[1]}"')
                 },
 
                 {
@@ -700,10 +700,10 @@
                 },
 
                 {
-                    name: "Running Wild", expansion: "legendofoni", instory: 0, location: "remote", bystander: "civilian", pit: "an incredibly deep dig",
+                    name: "Running Wild", expansion: "legendofoni", instory: 0, location: "remote", bystander: "civilian", pit: "a particularly deep dig",
                     stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Roll 3 enemy dice; for each different result, remove 1 power from "The Final Key".` },
-                    stagepenalty: { setup: `Each fighter places 3 random defense tokens on their copy of "Hunt for the Idols".`, persistent: `The defense tokens on "Hunt for the Idol" block search successes and are discarded as normal.` },
-                    masterplan: randFrom(["illegalgains", "personalpower","actsofterror"]), keywords: ["wilds","labyrinth"], labyrinth: "the dense woods",
+                    stagepenalty: { setup: `Each fighter places 3 random defense tokens on their copy of "Hunt for the Idols".`, persistent: `The defense tokens on "Hunt for the Idols" block search successes and are discarded as normal.` },
+                    masterplan: randFrom(["illegalgains", "personalpower","actsofterror"]), keywords: ["labyrinth","retrieval"], labyrinth: "the dense woods", loot: "the idols",
                     gloat: [[`You won’t stop the inevitable!`, `I’ll end you here, with or without the Oni!`], [`With the idols in my hands,`, `You and the Citadel will burn.`]],
                     rivaltext: _.template(', guided to the location by <%=rivalboost ? `the spirit of Oni possessing`: ``%> ${rival.name}.'),
                     hottrail: _.template('Fortunately, it seems the goons of the ${enemy.name} don\'t have too much of a headway.'),
@@ -1466,7 +1466,7 @@
             return knowledge
         }
 
-        function loseResult(stageindex, story, nextstage, gizmo, wincondition, rival, ally) {
+        function loseResult(stageindex, story, nextstage, gizmo, wincondition, rival, rivalpresence, ally) {
 
             let finalboss = story[Math.max($("#storylength").val()*2-3,0)].enemy
 
@@ -1494,7 +1494,9 @@
             `"You are not worth my time, ${defineAddressing(enemy)}!" ${enemy.boss} growls, and leaves you lying on the ground, defeated.`,
             `You can't let this defeat stop you! You pick yourself up, and dust yourself off.`,
             `You hurry away from the conflict, beaten and defeated.  You hear the sound of ${possessiveSuffix(enemy.boss)} laughter echoing behind you.`,
-            `After an uphill battle against overwhelming odds, ${enemy.boss} apparently becomes bored with the uneven competition and unleashes ${getEnemyAttack(enemy, "antiair", "an unrelenting assault")} into the melee. "Let's move out!" ${gPron(enemy,"subject")} commands. "This is not worth our time." Left for dead, you have no chance of following. `]
+            `After an uphill battle against overwhelming odds, ${enemy.boss} apparently becomes bored with the uneven competition and unleashes ${getEnemyAttack(enemy, "antiair", "an unrelenting assault")} into the melee. "Let's move out!" ${gPron(enemy,"subject")} commands. "This is not worth our time." Left for dead, you have no chance of following. `,
+            `"You were close, ${defineAddressing(enemy)}", ${enemy.boss} calls to you. "But not close enough." ${ucInit(gPron(enemy,"subject"))} clutches at ${gPron(enemy,"possessive")} wounds, and though they were serious, at least ${gPron(enemy,"subject")} is still standing. ${ucInit(gPron(enemy,"subject"))} watches you writhe on the ground for a moment longer, and spits in your direction. "Go ahead," ${gPron(enemy,"subject")} says. "Follow me. I don't care. You'll walk right into ${possessiveSuffix(finalboss.name)} lap."<br><br>`,
+            `"Do not follow us, ${defineAddressing(enemy)}," ${enemy.boss} threatens. "We will go now warn ${finalboss.boss} of you, and if you still continue on this ill-conceived mission, you will meet your end by ${gPron(finalboss, "possessive")} hand."<br><br>"Go then," you say, spitting blood. "Scurry back to ${finalboss.bosstitle()}, and see what good that will do you in the end."`]
 
             let rescue = [`Suddenly, Citadel agents rappel down out of nowhere. ${enemy.boss} and ${gPron(enemy, "possessive")} ${enemy.minions} flee as the agents free you.`,
             `You slowly awaken in a helicopter, confused on how you wound up there.`,
@@ -1511,8 +1513,9 @@
             `You see your first welcome sight; Agent Fletch approaches with ${whichPreposition(fletch_gadget)} in hand. "Don't get comfy," Fletch said, booting up the ${fletch_gadget}. "After this fiasco, we might recover if we rapidly strike at key targets, and hopefully throw the ${finalboss.name} off-balance."`,
             `Citadel soldiers take a moment to patch up your wounds, getting you prepared to return to the Citadel.`,
             `With no clue what to do next, you have no choice but to reconnect with Agent Fletch and hope the Citadel has more intel.`,
-            `You call Agent Fletch and request a cleanup team, and then you begin searching through the area, and find ${whichPreposition(getGizmo())} placed almost intentionally where you would find it. Inside you find maps and coordinates.`,
-            `You vow to catch the ${finalboss.name} before their ${getMasterPlan()} is complete!`
+            `You call Agent Fletch and request a cleanup team, and then you begin searching through the area, and find ${whichPreposition(getGizmo())} placed almost intentionally where you would find it. From the device you find maps and coordinates.`,
+            `You vow to catch the ${finalboss.name} before their ${getMasterPlan()} is complete!`,
+            `This was only a delay in the inevitable. You know ${enemy.boss} is only a beatstick, not the mastermind. ${ucInit(gPron(enemy,"subject"))} will lead you to ${finalboss.boss}, and you will be making examples of them both.`
             ]
 
             let capture = [
@@ -1525,8 +1528,9 @@
                 `${enemy.boss} ${enemy.threat} before ${nextenemy.boss} gestures for ${gPron(enemy, "object")} to stop. "No," ${gPron(nextenemy, "subject")} says. We have a better use for the Gladiators. 
         After all, who better to think ${enemy.boss == finalboss.boss ? `the Master` : finalboss.boss} would want than the Citadel's best?" ${minion} and ${nextenemy.boss == finalboss.boss ? nextenemy.minion : nextenemy.boss } share an amused glance as ${enemy.boss} opens a secret passage. The three of them lead you to the unknown.`,
                 `Cackling maniacally the whole time, ${enemy.boss} and ${gPron(enemy, "possessive")} ${enemy.minions} surround you, overwhelming you. Their constant attacks become too much for you, and soon you black out, ${possessiveSuffix(enemy.boss)} haunting laughter echoing through your head all the while.`,
-                `${enemy.boss} laughed quietly and sinisterly as he slowly licked a bleeding wound on ${gPron(enemy, "possessive")} hand. "${finalboss.boss == enemy.boss ? `I'm proud of you` : `${finalboss.boss} would be proud`}," ${gPron(enemy, "subject")} told as you were tied and your vision faded. You barely heard ${possessiveSuffix(enemy.boss)} final command: "Take them to the ${nextenemy.name}!"`,
-                `You find yourself immediately surrounded by ${possessiveSuffix(enemy.boss)} ${enemy.minions}. "You're due at the next stop," ${enemy.boss} says menacingly. "The ${nextenemy.name} still has some uses for you.`
+                `${enemy.boss} laughs quietly and sinisterly as ${gPron(enemy,"subject")} slowly licks a bleeding wound on ${gPron(enemy, "possessive")} hand. "${finalboss.boss == enemy.boss ? `I'm proud of you` : `${finalboss.boss} would be proud`}," ${gPron(enemy, "subject")} tells as you are tied and your vision fades. You barely hear ${possessiveSuffix(enemy.boss)} final command: "Take them to the ${nextenemy.name}!"`,
+                `You find yourself immediately surrounded by ${possessiveSuffix(enemy.boss)} ${enemy.minions}. "You're due at the next stop," ${enemy.boss} says menacingly. "The ${nextenemy.name} still has some uses for you.`,
+                `"You were close, ${defineAddressing(enemy)}", ${enemy.boss} calls to you. "But not close enough." ${ucInit(gPron(enemy,"subject"))} clutches at ${gPron(enemy,"possessive")} wounds, and though they are serious, at least ${gPron(enemy,"subject")} is still standing. ${ucInit(gPron(enemy,"subject"))} watches you writhe on the ground for a moment longer, and spits in your direction. "Subdue them," ${gPron(enemy,"subject")} orders the ${enemy.minions}.`
             ]
 
             let intel_words = [`intel`, `evidence`, `knowledge`, `information`]
@@ -1552,9 +1556,9 @@
 
             let gunk = [`You are forced to duck from ${getEnemyAttack(enemy,"antiair", "a relentless assault")}. You lose your balance and fall straight into ${stage.gunk}. You try to desperately not to swallow any of the ${randFrom(revolting_words)} liquid${captured ? ` but fail, and start to lose your consciousness. When almost passed out, you feel you're dragged back to the surface. "Clean them up," you think you hear ${enemy.boss} say. "${nextenemy.boss} won't want them like that."`: `, and when you finally manage to get to the surface, ${enemy.boss} has disappeared with ${gPron(enemy,"possessive")} ${enemy.minions}.`}`]
 
-            let guns = [`You duck behind cover as your enemies fire on you. To move would be a a suicide, and you are forced to watch as the ${enemy.name} leaves with ${stage_loot}. ${captured ? `You are pinned by the fire, and after a while you are surrounded by gun-toting enemies from all sides. ${randFrom(capture)}`: `You hunker down to avoid being hit by stray fire.<br><br>${randFrom(rescue)} ${randFrom(intel)}`}`]
+            let guns = [`You duck behind cover as your enemies fire on you. To move would be a a suicide, and you are forced to watch as the ${enemy.name} leaves with ${stage_loot}. ${captured ? `You are pinned by the fire, and after a while you are surrounded by gun-toting enemies from all sides. ${randFrom(capture)}`: `You hunker down to avoid being hit by stray bullets.<br><br>${randFrom(rescue)} ${randFrom(intel)}`}`]
 
-            let hostages = [`${captured ? `You are lying on the ground, defeated and helpless, as` : `Despite all of your efforts,` } ${enemy.boss} executes another one of the ${stage.hostages}.<br><br>${captured ? randFrom(capture) : generic }`,
+            let hostages = [`${captured ? `You are lying on the ground, defeated and helpless, as` : `Despite all of your efforts,` } ${enemy.boss} executes another one of the ${stage.hostages}. ${captured ? randFrom(capture) : generic }`,
             `You weren't able to save the ${stage.hostages}, and now their lives are on your hands. ${captured ? randFrom(capture) : generic}`]
 
             let labyrinth = [`The relentless ${enemy.bosstitle()} forces you to full rout, and you soon find yourselves lost in the ${stage.labyrinth}. You rush through the area to escape, ${captured ? `but suddenly you find yourself surrounded by ${enemy.minions}. You feel exhausted, and cannot push on. "How could you face the ${finalboss.name} if you can't even find your own way?" ${enemy.boss} says, eyeing you with contempt.`: `and suddenly you are in the clear. ${randFrom(intel)}`}`]
@@ -1566,15 +1570,16 @@
 
             let ritual = [`You were not able to stop ${enemy.boss} from completing the ritual! Standing in the middle of the temple, ${gPron(enemy,"subject")} rises up off the stone floor, the ${mysticalSynonym()} powers swirling around ${gPron(enemy,"object")}. You watch as ${gPron(enemy,"possessive")} muscles grow, ${gPron(enemy,"possessive")} eyes burn, and ${gPron(enemy,"possessive")} body pulses with the ${mysticalSynonym()} energies! ${captured ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!` }`,
             `You're thrown to the ground by a blast of ${mysticalSynonym()} force, ${captured ? `and you are sucked through a shimmering, twisting portal.` : `and the ${enemy.bosstitle()} disappears in a flash of brilliant purple light. ${randFrom(intel)}.` }`,
-            `${enemy.boss} looks down at you, a smug smirk spreading across ${gPron(enemy,"possessive")} face. ${ucInit(gPron(enemy,"subject"))} reaches up and recites a few strange words in a language you've never heard before. In an instant, the world blows away around you in a deafening explosion of ${mysticalSynonym()} energy${captured ? ` and then`: `, and for a moment,`} all you can see is the blackness.${captured ? `` : `<br><br>${randFrom(intel)}.`}`]
+            `${enemy.boss} looks down at you, a smug smirk spreading across ${gPron(enemy,"possessive")} face. ${ucInit(gPron(enemy,"subject"))} reaches up and recites a few strange words in a language you've never heard before. In an instant, the world blows away around you in a deafening explosion of ${mysticalSynonym()} energy${captured ? ` and then`: `, and for a moment,`} all you can see is the blackness.${captured ? `` : `<br><br>${randFrom(intel)}`}`]
 
-            let rival_interrogate = [`${captured ? `${rival.name} smirks at you as you are beaten. ${randFrom(captured)}` : `Despite your best efforts, ${rival.name} has slipped away. ${generic}` }`,
-            `${captured ? randFrom(capture): `The ${enemy.name} was able to escape with ${rival.name}. ${randFrom(intel)}`}`]
+            let rival_interrogate = [`${captured ? `${rival.name} smirks at you as you are beaten. ${randFrom(captured)}` : `Despite your best efforts, ${rival.name} has slipped away. ${generic}`}`,
+            `${captured ? randFrom(capture): `The ${enemy.name} was able to escape with ${rival.name}. ${randFrom(intel)}`}`,
+            `${captured ? randFrom(capture) : `${rival.name} showed ${gPron(rival, "reflexive")} to be a true coward and fled before you could make ${gPron(rival,"object")} reveal what ${randFrom(intel_words)} ${gPron(rival,"subject")} has. ${generic}` }`]
 
             let swarmed = [`Despite all of your skills, the endless waves of ${randFrom(stage_swarm)} eventually tire you out${captured ? `.<br><br>${randFrom(capture)}` : `, and everything seems lost.<br><br>${randFrom([randFrom(retreat),randFrom(rescue)])} ${randFrom(intel)}` }`]
 
             let undead = [`Looking out over the battlefield, you see the zombies are too many for you to keep at bay. ${captured ? `You fight as long as you can, but eventually you are overrun by the horde.`: `"Agent Fletch," you say into your radio. "The target's fled, and the horde is loose. Requesting extraction.`}`,
-            `"Go!" a ${stage.bystander} yells at you from where ${contact} lies, wounded and pinned. "Get out of here!" You turn and flee as the unstoppable horde of zombies approaches${captured ? `, but you are not fast enough in your current state.` : `. Sounds of fightning can be heard as ${contact} fights them off as long as ${contact} can, but all too soon those sounds give way to screams of pain.<br><br>${randFrom(intel)}`}`]
+            `"Go!" ${whichPreposition(stage.bystander)} yells at you from where ${contact} lies, wounded and pinned. "Get out of here!" You turn and flee as the unstoppable horde of zombies approaches${captured ? `, but you are not fast enough in your current state.` : `. Sounds of fightning can be heard as ${contact} fights them off as long as ${contact} can, but all too soon those sounds give way to screams of pain.<br><br>${randFrom(intel)}`}`]
 
             let loseresult
 
@@ -1965,7 +1970,7 @@
             let gizmo = getGizmo()
             
             let winepilogue = stageindex >= Math.max(($("#storylength").val()*2-3),0) ? finalResult(stage, enemy, rival, vip, 1) + "<br><br>" + `${finalboss.boss != enemy.boss ? `You could not stop the ${finalboss.boss}, but your efforts were not in vain, as a threat as serious was neutralized. ` : ``}The fighters win this story.` : victoryResult(stageindex, story, win, gizmo)
-            let loseepilogue = stageindex >= Math.max(($("#storylength").val()*2-3),0) ? finalResult(stage, enemy, rival, vip, 0) + "<br><br>" + `The fighters lose this story.` : loseResult(stageindex, story, lose, gizmo, instructions.prologue, rival, ally)
+            let loseepilogue = stageindex >= Math.max(($("#storylength").val()*2-3),0) ? finalResult(stage, enemy, rival, vip, 0) + "<br><br>" + `The fighters lose this story.` : loseResult(stageindex, story, lose, gizmo, instructions.prologue, rival, rivalpresence, ally)
             let gloat = gloatingList(enemy, stage)
             let prologue
             let casino = getCasino(enemy)
@@ -2132,7 +2137,9 @@
                 `"${lastwords[0]}" ${heroSpeech()}, but ${enemy.boss} cuts you off by grabbing your throat. "${gloat[0]}" ${gPron(enemy, "subject")} says and starts to squeeze the life out of you. "${gloat[1]}"`,
                 `Suddenly, there's a blinding flash and ${possessiveSuffix(enemy.boss)} gone! It's all gone. Shockingly, you're back at Citadel HQ, surrounded by agents all going about their business. Did all that even happen?`,
                 `Your body spasms, fighting against the green gel. Unable to breathe, you claw wildly at the hard, translucent surface encasing you. Shadowy figures move about on the other side of the barrier, and suddenly the lid slides open, and you fall to the ground. The lights are blindingly bright to your aching eyes, and you draw air in your lungs like it's the first time in your life. "Welcome, my children!" you hear a woman calling. What is happening? Was that a dream?`,
-                `The screen of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "Gladiators!" Agent Fletch calls from beyond the observation screen, his face dark with disappointment. "Only ${Math.ceil(Math.random()*10000)} points! How do you think you can face the real ${enemy.name}?!"`
+                `The screen of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "Gladiators!" Agent Fletch calls from beyond the observation screen, his face dark with disappointment. "Only ${Math.ceil(Math.random()*10000)} points! How do you think you can face the real ${enemy.name}?!"`,
+                `${enemy.name} cackles as you fall back, defeated. "${gloat[0]}" "You will fall. If not now, then one day," you retort. "${gloat[1]}"`,
+                `"${gloat[0]}" ${enemy.name} taunts you. "${gloat[1]}"`
             ]
 
             let finalresult
@@ -2300,7 +2307,9 @@
                 [`You have this one chance to give up," you browbeat ${enemy.boss}. "How very generous of you,`, `I can't wait to see what happens when I don't!`],
                 [`There is still time to stop this," you plead to ${enemy.boss}. "No,`,`It is far too late for that.`],
                 [`You can still end this," you plead to ${enemy.boss}. "Yes,`,`It is you who I shall end!`],
-                [`Do you expect me to yield?" you ask defiantly. "No, ${defineAddressing(enemy)},`,`I expect you to die.`]
+                [`Do you expect me to yield?" you ask defiantly. "No, ${defineAddressing(enemy)},`,`I expect you to die.`],
+                [`Poor ${defineAddressing(enemy)}!`,`I would offer you a place in the ${enemy.name}, but you fail to see the bigger picture." "I still believe in Global Gladiators, not the ${randFrom([enemy.name, "Kingdom"])}!" you retort through gritted teeth. "That will always be your downfall.`],
+                [`When you are out of my way, there's nothing holding the ${enemy.name} back,`,`From prosperity in my hands!`]
             ]
 
             let gloat = randFrom(gloating)
