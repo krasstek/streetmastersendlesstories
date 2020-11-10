@@ -653,7 +653,7 @@
                 {
                     name: "Original Copy", expansion: "riseofthekingdom", instory: 0, location: "base", bystander: "scientist", pit: "a pitch-black elevator shaft",
                     stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to choose a copy of Vandal Serum attached to a card in the Cloning Area. Return the selected card to Serum Supply.` },
-                    stagepenalty: { setup: `Put 1 damage on this card.`, activate: `Each fighter suffers 1 direct damage for each damage on this card. Then, if any fighter is on or adjacent to an objective space, remove 1 damage from this card.` },
+                    stagepenalty: { setup: `Put 1 damage on this card.`, activate: `Each fighter suffers 1 direct damage if there is damage on this card. Then, if any fighter is on or adjacent to an objective space, remove 1 damage from this card.` },
                     masterplan: randFrom(["strengtheningforces", "personalpower", "kidnapping"]), keywords: ["swarmed", "gunk", "experiments", "retrieval"], gunk: "a vat of green gel", loot: `the ${randFrom(["Dark Matter", "Vandal", "Dynasty Cell"])} samples`, swarm: "clones",
                     gloat: [[`New subjects have arrived,`, `Contain them and proceed with the experiments.`], [`You have played your part well,`, `But do you think you were born and not made?`], [`You always are so predictable,`, `Where do you think you were made in?`], [`We couldn't have asked for better specimens,`, `It's time you provide your skills and abilities to the Kingdom.`]],
                     rivaltext: _.template('<%=rivalboost ? ` Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It stands, slowly, powerfully built, dripping with greel gel. It is the ultimate clone, ${rival.name.toUpperCase()}-EX!<br><br>` : ` Apparently ${enemy.boss} is taking blood samples from ${rival.name}.`%>'),
@@ -702,7 +702,7 @@
                     clueless: _.template(' Unfortunately, it is a labyrinth and you lose a lot of time going in circles. By the time you find the ${possessiveSuffix(enemy.name)} operation, you are already swarmed by mutated rats.'),
                     prologue: _.template('${trail}, you descend down to the sewers which are a labyrinth of filth and decay. The city\'s utilities are barely maintained, and since the criminal elements have all but taken over, only the bravest city workers brave these depths. ${stagevar} It appears to be abandoned water treatment facility, and the ${enemy.name} have fitted it with their own crude devices that pump some weird chemical into the water ducts.<br><br>"${gloat[0]}" a familiar voice calls. "${gloat[1]}" ${bossDescription(enemy)} steps out of the shadows<%=rivalpresence ? rivaltext : ``%>. ${laconicStatement(enemy)}'),
                     captured: _.template('You wake up, and the first thing you notice is the intense stench attacking your nostrils. You open your eyes, and as you focus, you can see ${bossDescription(enemy)}<%=rivalpresence ? rivaltext : ``%> standing at a distance. You seem to be underground, in some kind of a crazy scientist setup, and ${enemy.minions} are moving canisters about big machinery.<br><br>"${gloat[0]}" ${enemy.boss} says. "${gloat[1]}"'),
-                    finalvar: _.template('${trail}, you find out that ${possessiveSuffix(enemy.boss)} ${getMasterPlan()} is to pump something dangerous in the city waters. By the information you\'ve gathered, you are eventually able to find your way through the Ransom City sewers to ${possessiveSuffix(enemy.name)} secret lair.<br><br>As you enter a large chamber, you find what used to be a water treatment facility that is now being used as some sort of insane science experiment "${gloat[0]}"  comes a voice, echoing from somewhere else in the chamber. "${gloat[1]}" ${bossDescription(enemy)} steps ouf of the shadows<%=rivalpresence ? rivaltext : ``%>. "Once we get these pumps working, all the water in Ransom City will be'),
+                    finalvar: _.template('${trail}, you find out that ${possessiveSuffix(enemy.boss)} ${getMasterPlan()} is to pump something dangerous in the city waters. By the information you\'ve gathered, you are eventually able to find your way through the Ransom City sewers to ${possessiveSuffix(enemy.name)} secret lair.<br><br>As you enter a large chamber, you find what used to be a water treatment facility that is now being used as some sort of insane science experiment. "${gloat[0]}"  comes a voice, echoing from somewhere else in the chamber. "${gloat[1]}" ${bossDescription(enemy)} steps ouf of the shadows<%=rivalpresence ? rivaltext : ``%>. "Once we get these pumps working, all the water in Ransom City will be'),
                     actsofterror: _.template('${finalvar} poisoned by our new toxic cocktail. Many will die, but the surviving will be all the stronger for it. So now you have a choice: join us, or die!" ${ucInit(getEnemyAttack(enemy,"antiair","The approaching enemy minions"))} eliminated one option.'),
                     strengtheningforces: _.template('${finalvar} blessed by our new ${randFrom(["Dynasty", "Vandal", "Dark Matter"])} serum. The weak will die, and the surviving strong will join our ranks as thralls! So now you have a choice: join us, or die!" ${ucInit(getEnemyAttack(enemy,"antiair","The approaching enemy minions"))} eliminated one option.')
                 },
@@ -726,7 +726,7 @@
                 {
                     name: "Rude Awakening", expansion: "stretchgoals17", instory: 0, location: "cursed", bystander: "misguided necromancer", pit: "a bottomless fissure",
                     stagebonus: { setup: `Flip all objectives to their inactive side.` },
-                    stagepenalty: { setup: `Each fighter places 1 damage on the Stage Rules card.` },
+                    stagepenalty: { setup: `Place 1P damage on the Stage Rules card.` },
                     masterplan: randFrom(["actsofterror", "strengtheningforces"]), keywords: ["ritual", "undead", "swarmed"], swarm: "undead",
                     gloat: [[`Klaatu verata..`, `Nikto!`], [`Even the strongest warriors will fall,`, `In the face of the power of death!`], [`Now I call upon my army of the dead,`, `Arise, my messengers of death! Our time has arrived!`], [`Magic, the darkest magic,`, `My soul swims in it..`]],
                     rivaltext: _.template(' To your horror, you see <%=rivalboost ? `the rotting corpse of ${rival.name} among the zombies that climb out of the ground at ${gPron(enemy, "possessive")} feet.`: `${rival.name} joining ${enemy.boss} in the atrocious rite! Even more zombies climb out of the ground at their feet.`%>'),
@@ -1828,7 +1828,7 @@
 
             while (clones.name === enemy) { clones = randFrom(enemiescopy) }
 
-            if (getdeck = false) {
+            if (getdeck == false) {
                 return `choose ${randFrom([clones.minionnames[0], clones.minionnames[1]])} from the ${clones.name} deck as the minion`
                 } else {return clones.name}
         }
@@ -1896,7 +1896,7 @@
                 { setup: `Each fighter suffers 2 direct damage.` },
                 { setup: `Search the enemy deck for ${preparedboss[0]}, ${preparedboss[1]}. Shuffle the enemy deck.` },
                 { setup: `${enemy.boss} gains 2 defense tokens of each type.` },
-                { setup: `Place 3P power on this card.`, activate: `Each fighter discards 1 defense token. For each fighter that did not, remove 1 power from this card. If no power remains on this card, you have rescued the innocent.`, wincondition: [`If you win and have rescued the innocent:`, `If if you have not rescued the innocent:`], prologue: "protect"  },
+                { setup: `Place 3P power on this card.`, activate: `Each fighter discards 1 defense token. For each fighter that did not, remove 1 power from this card. If no power remains on this card, you have rescued the innocent.`, wincondition: [`If you win and have rescued the innocent:`, `If you have not rescued the innocent:`], prologue: "protect"  },
                 { persistent: `${enemy.boss} gains +1 attack value.` },
                 { persistent: `${enemy.boss} gains ${enemy.boss == "Ah Long" ? "2P" : "4P"} health value.` },
                 { activate: `The fighter furthest from ${enemy.boss} within 4 spaces of ${gPron(enemy, "object")} discards 1 power.` },
@@ -2025,7 +2025,7 @@
                 let guide_prologue = [
                     `After the previous encounter, you see a familiar silhouette materialize from the smoke and dust before you: ${ally.name}. Your occasional ally approaches, smirking slyly. "Fancy meeting you here", you say to ${gPron(ally, "object")}. "Thanks for the heads-up."`,
                     `You meet ${ally.name} on the corner of a warehouse. "Glad you found the place alright," ${ally.name} says. "This is a big catch," you answer. "Good work finding it." "It's easy to find ${enemy.name} activity if you merely keep your eyes open," ${ally.name} responds.<br><br>"Let's do this," you say.`,
-                    `${ally.name} follows you. "${enemy.boss} will make you regret your challenge, Gladiators," ${gPron(ally,"subject")} calls. "Prepare to meet your fate by ${gPron(enemy,"possessive")} hands" "Hah" you laugh.`]
+                    `${ally.name} follows you. "${enemy.boss} will make you regret your challenge, Gladiators," ${gPron(ally,"subject")} calls. "Prepare to meet your fate by ${gPron(enemy,"possessive")} hands." "Hah" you laugh.`]
                 wincondition_txt = `${randFrom(guide_prologue)} ${randFrom(hence_words)}`
 
             } else if (wincondition == "protection") {
@@ -2187,7 +2187,7 @@
                 `You are sure you have cornered ${enemy.boss} with no route of escape, when all of a sudden a sleek ${enemy.name} helicopter descends and ${gPron(enemy, "subject")} leaves, dangling from a ladder. "The ${neutralize}, but ${enemy.boss} slipped away," you report to Agent Fletch with your communicator.`,
                 `Your body spasms, fighting against the green gel. Unable to breathe, you claw wildly at the hard, translucent surface encasing you. Shadowy figures move about on the other side of the barrier, and suddenly the lid slides open, and you fall to the ground. The lights are blindingly bright to your aching eyes, and you draw air in your lungs like it's the first time in your life. "Welcome, child!" you hear a voice calling. What is happening? Was that a dream?`,
                 `"If you strike me down, I shall become more powerful than you possibly can imagine," ${enemy.boss} says. ${ucInit(gPron(enemy, "subject"))} drops ${gPron(enemy, "possessive")} guard, and you strike ${gPron(enemy, "object")} one last time, and there's a blinding flash! ${ucInit(possessiveSuffix(gPron(enemy, "subject")))} gone! Disappeared!`,
-                `The screen of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "You beat the high score! Good job, Gladiators!" Agent Fletch calls from beyond the observation screen. "When you have to face ${enemy.boss} for real, you just might be ready."`,
+                `The screens of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "${Math.ceil(Math.random() * 100000)} point! You beat the high score! Good job, Gladiators!" Agent Fletch calls from beyond the observation screen. "When you have to face ${enemy.boss} for real, you just might be ready."`,
             ]
 
             let finisher = randFrom(["Finish them", "Show no mercy", "End them", "Put an end to this", "Kill them, and send what remains to Agent Fletch", "Wipe them out, all of them", "Put a stop to this"])
@@ -2235,7 +2235,7 @@
                 `"${lastwords[0]}" ${heroSpeech()}, but ${enemy.boss} cuts you off by grabbing your throat. "${gloat[0]}" ${gPron(enemy, "subject")} says and starts to squeeze the life out of you. "${gloat[1]}"`,
                 `Suddenly, there's a blinding flash and ${possessiveSuffix(enemy.boss)} gone! It's all gone. Shockingly, you're back at Citadel HQ, surrounded by agents all going about their business. Did all that even happen?`,
                 `Your body spasms, fighting against the green gel. Unable to breathe, you claw wildly at the hard, translucent surface encasing you. Shadowy figures move about on the other side of the barrier, and suddenly the lid slides open, and you fall to the ground. The lights are blindingly bright to your aching eyes, and you draw air in your lungs like it's the first time in your life. "Welcome, my children!" you hear a woman calling. What is happening? Was that a dream?`,
-                `The screen of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "Gladiators!" Agent Fletch calls from beyond the observation screen, his face dark with disappointment. "Only ${Math.ceil(Math.random() * 10000)} points! How do you think you can face the real ${enemy.name}?!"`,
+                `The screens of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "Gladiators!" Agent Fletch calls from beyond the observation screen, his face dark with disappointment. "Only ${Math.ceil(Math.random() * 10000)} points! How do you think you can face the real ${enemy.name}?!"`,
                 `${enemy.name} cackles as you fall back, defeated. "${gloat[0]}" "You will fall. If not now, then one day," you retort. "${gloat[1]}"`,
                 `"${gloat[0]}" ${enemy.name} taunts you. "${gloat[1]}"`
             ]
