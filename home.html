@@ -96,15 +96,15 @@
                     <li data-role="list-divider" data-theme="b">
                         <h2>SELECT SAVED STORY</h2>
                     </li>
-                    <li><a href="#page_0" id="loadgame_1"
+                    <li><a href="#" id="loadgame_1"
                             onclick="createPageContent(JSON.parse(localStorage.getItem('save_game_content_1')))"
-                            class="cardadvance" style="white-space:normal"></a></li>
-                    <li><a href="#page_0" id="loadgame_2"
+                            class="cardadvance" style="white-space:normal; font-style: italic;"></a></li>
+                    <li><a href="#" id="loadgame_2"
                             onclick="createPageContent(JSON.parse(localStorage.getItem('save_game_content_2')))"
-                            class="cardadvance" style="white-space:normal"></a></li>
-                    <li><a href="#page_0" id="loadgame_3"
+                            class="cardadvance" style="white-space:normal; font-style: italic;"></a></li>
+                    <li><a href="#" id="loadgame_3"
                             onclick="createPageContent(JSON.parse(localStorage.getItem('save_game_content_3')))"
-                            class="cardadvance" style="white-space:normal"></a></li>
+                            class="cardadvance" style="white-space:normal; font-style: italic;"></a></li>
                 </ol>
                 <button class="ui-btn-b cardadvance"><a href="#" onclick="clearSaves()"
                         style="color: black; white-space:normal"><i>CLEAR ALL SAVE DATA</i> </a></button>
@@ -124,22 +124,45 @@
                 <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext"
                     class="ui-btn-right"></a>
                 <ul data-role="listview" data-inset="true">
-                    <li data-role = "list-divider" data-theme="b"><i>ABOUT</i></li>
-                    <li class = "cardbg" style = "white-space:normal; padding: 1em">
-                    This page is a fan-made story generator for the boardgame Street Masters from Blacklist Games, and is not affiliated with Blacklist Games.
-                    <br><br>
-                    A story in Street Masters is a series of several narratively linked stages that a fixed group of fighters play through. Each story is guided by a story deck that contains story stage cards and other auxiliary cards. The fighter decks of the game have their own hero stories that can be played within any regular story. Together these bring about a small narrative campaign with some character development. I believe the strength of the game system, however, is in the modular nature of the game, in the way the enemy and stage decks and other game components can be combined for endless combinations of play experiences. The stories that come with the game and its expansions by necessity can not support this modularity, but I enjoy the character development and narrative gaming.
-                    <br><br>
-                    This generator attempts to combine the modularity of the game with the narrative character development experience by making a list of random stage and enemy combinations, and adding other game parameters, like allies, rivals and alternative victory conditions on top of those, and then tying them up with a somewhat logical narrative. You also get random fighters for the chosen player count, and the allies and rivals should you choose to use either of those. It avoids too much stage repetition, taking into account the stages in the fighters' hero stories. It can also alter the length of the story to player preferences. I would suggest choosing no less than 3 stages for most stories if playing with hero stories. Picking just 1 stage makes the generator work as a randomizer for an arcade mode game, though!
-                    <br><br>
-                    Of the released game content, the generator is missing most of Aftershock-related content, as I do not have access to those at this time.
-                    <br><br>
-                    The texts of the generator are mostly cut up and reordered texts from the various story cards from the game and its expansions, remixed with other texts to make them appropriate for the given enemy. Additional texts are borrowed from games, films and cartoons, mostly for villain dialogue. By necessity, there are also texts written by myself. The generator cannot produce exact copies of the official stories, but can of course occasionally get quite close.
-                    <br><br>
-                    I hope you'll have fun playing Street Masters with the added narratives from this generator!
-                    <br><br>
-                    -Antti
-                    <a href="https://www.blacklistgamesllc.com/street-masters"  target="_blank">Get your copy of Street Masters from Blacklist Games!</a>
+                    <li data-role="list-divider" data-theme="b"><i>ABOUT</i></li>
+                    <li class="cardbg" style="white-space:normal; padding: 1em">
+                        This page is a fan-made story generator for the boardgame Street Masters from Blacklist Games,
+                        and is not affiliated with Blacklist Games.
+                        <br><br>
+                        A story in Street Masters is a series of several narratively linked stages that a fixed group of
+                        fighters play through. Each story is guided by a story deck that contains story stage cards and
+                        other auxiliary cards. The fighter decks of the game have their own hero stories that can be
+                        played within any regular story. Together these bring about a small narrative campaign with some
+                        character development. I believe the strength of the game system, however, is in the modular
+                        nature of the game, in the way the enemy and stage decks and other game components can be
+                        combined for endless combinations of play experiences. The stories that come with the game and
+                        its expansions by necessity can not support this modularity, but I enjoy the character
+                        development and narrative gaming.
+                        <br><br>
+                        This generator attempts to combine the modularity of the game with the narrative character
+                        development experience by making a list of random stage and enemy combinations, and adding other
+                        game parameters, like allies, rivals and alternative victory conditions on top of those, and
+                        then tying them up with a somewhat logical narrative. You also get random fighters for the
+                        chosen player count, and the allies and rivals should you choose to use either of those. It
+                        avoids too much stage repetition, taking into account the stages in the fighters' hero stories.
+                        It can also alter the length of the story to player preferences. I would suggest choosing no
+                        less than 3 stages for most stories if playing with hero stories. Picking just 1 stage makes the
+                        generator work as a randomizer for an arcade mode game, though!
+                        <br><br>
+                        Of the released game content, the generator is missing most of Aftershock-related content, as I
+                        do not have access to those at this time.
+                        <br><br>
+                        The texts of the generator are mostly cut up and reordered texts from the various story cards
+                        from the game and its expansions, remixed with other texts to make them appropriate for the
+                        given enemy. Additional texts are borrowed from games, films and cartoons, mostly for villain
+                        dialogue. By necessity, there are also texts written by myself. The generator cannot produce
+                        exact copies of the official stories, but can of course occasionally get quite close.
+                        <br><br>
+                        I hope you'll have fun playing Street Masters with the added narratives from this generator!
+                        <br><br>
+                        -Antti
+                        <a href="https://www.blacklistgamesllc.com/street-masters" target="_blank">Get your copy of
+                            Street Masters from Blacklist Games!</a>
                     </li>
                 </ul>
             </div>
@@ -221,6 +244,22 @@
 
     </div>
 
+    <div data-role="popup" id="savepop">
+        <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext"
+            class="ui-btn-right"></a>
+        <ol id="savelist" data-role="listview" data-inset="true">
+            <li data-role="list-divider" data-theme="b">
+                <h2>SAVE GAME</h2>
+            </li>
+            <li><a href="#" id="savegame_1" onclick="saveGame(1)" class="cardadvance"
+                    style="white-space:normal; font-style: italic;"></a></li>
+            <li><a href="#" id="savegame_2" onclick="saveGame(2)" class="cardadvance"
+                    style="white-space:normal; font-style: italic;"></a></li>
+            <li><a href="#" id="savegame_3" onclick="saveGame(3)" class="cardadvance"
+                    style="white-space:normal; font-style: italic;"></a></li>
+        </ol>
+    </div>
+
     <script type="text/javascript">
 
 
@@ -235,6 +274,10 @@
             }
 
 
+        });
+
+        $(function () {
+            $("#savepop").enhanceWithin().popup();
         });
 
         function createPageContent(pagecontent) {
@@ -290,15 +333,6 @@
             </ul>
         </div>
 
-        <div data-role="popup" id="savepop_${index}">
-            <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
-            <ol data-role="listview" data-inset="true">
-                <li data-role = "list-divider" data-theme="b"><h2>SAVE AND EXIT?</h2></li>
-                <li><a href="#" id = "savegame" onclick = "saveGame_1()" class = "cardadvance" style = "white-space:normal"><i>${localStorage.getItem("save_game_content_1") != null ? `${JSON.parse(localStorage.getItem("save_game_content_1")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_1")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i></a></li>
-                <li><a href="#" id = "savegame" onclick = "saveGame_2()" class = "cardadvance" style = "white-space:normal"><i>${localStorage.getItem("save_game_content_2") != null ? `${JSON.parse(localStorage.getItem("save_game_content_2")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_2")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i></a></li>
-                <li><a href="#" id = "savegame" onclick = "saveGame_3()" class = "cardadvance" style = "white-space:normal"><i>${localStorage.getItem("save_game_content_3") != null ? `${JSON.parse(localStorage.getItem("save_game_content_3")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_3")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i></a></li>
-            </ol>
-        </div>
 
         <div data-role="footer" data-id="foo1" data-position="fixed">
             <div data-role="navbar">
@@ -306,7 +340,7 @@
                     <li><a class = "ui-icon-arrow-l ui-btn-icon-top" href="#" data-rel="back" data-direction="reverse" data-theme = "b"></a></li>
                     <li><a class = "ui-icon-back ui-btn-icon-top" href="#intro" data-transition="fade" data-theme = "b"></a></li>
                     <li><a class = "ui-icon-user ui-btn-icon-top" href="#refpanel" data-transition = "slidedown" data-theme = "b"></a></li>
-                    <li><a class = "ui-icon-arrow-d ui-btn-icon-top" href="#savepop_${index}" data-rel="popup" data-transition = "pop" data-theme = "b"></a></li>
+                    <li><a class = "ui-icon-arrow-d ui-btn-icon-top" href="#savepop" data-rel="popup" data-transition = "pop" data-theme = "b"></a></li>
                 </ul>
             </div>
         </div>
@@ -317,41 +351,53 @@
 
             })
 
+            return pagecontent.hasOwnProperty("page") ? $.mobile.changePage( `#${pagecontent.page}`, false ) : $.mobile.changePage( `#page_0` )
+
         }
 
         let savegamecontent
 
-        function saveGame_1(save_position = 1, save_game_content = savegamecontent) {
+        function saveGame(save_position, save_game_content = savegamecontent) {
+            save_game_content.page = $.mobile.activePage.attr('id')
+            localStorage.getItem(`save_game_content_${save_position}`) != null ? localStorage.removeItem(`save_game_content_${save_position}`) : ()=>{}
             localStorage.setItem(`save_game_content_${save_position}`, JSON.stringify(save_game_content));
-            location.reload();
-        }
-
-        function saveGame_2(save_position = 2, save_game_content = savegamecontent) {
-            localStorage.setItem(`save_game_content_${save_position}`, JSON.stringify(save_game_content));
-            location.reload();
-        }
-
-        function saveGame_3(save_position = 3, save_game_content = savegamecontent) {
-            localStorage.setItem(`save_game_content_${save_position}`, JSON.stringify(save_game_content));
-            location.reload();
+            getSaveNames()
+            setTimeout(function(){ $( "#savepop" ).popup( "close" ) }, 300);
+            return false
         }
 
         function clearSaves() {
             localStorage.removeItem("save_game_content_1")
             localStorage.removeItem("save_game_content_2")
             localStorage.removeItem("save_game_content_3")
-            location.reload();
+            getSaveNames()
         }
 
         let enemiescopy
 
+        function getSaveNames() {
+            $(`a[id^="loadgame_"]`).each(function(i) {
+
+                if (localStorage.getItem(`save_game_content_${i+1}`) != null) {
+                    lstore = JSON.parse(localStorage.getItem(`save_game_content_${i+1}`))
+                    $(this).text(`${lstore.storyname} - ${whichPreposition(lstore.finalboss).toUpperCase()} STORY`)
+                    lstore.hasOwnProperty("page") ? $(this).attr("href",`#${lstore.page}`) : $(this).attr("href",`#page_0`)
+                } else { 
+                    $(this).text("EMPTY SLOT") 
+                    $(this).attr("href",`#intro`)
+                }
+
+            })
+            $(`a[id^="savegame_"]`).each(function(i) {
+                $(this).text(`${localStorage.getItem(`save_game_content_${i+1}`) != null ? `${JSON.parse(localStorage.getItem(`save_game_content_${i+1}`)).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem(`save_game_content_${i+1}`)).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}`)
+            })
+            $.mobile.activePage.trigger("refresh");
+        }
+
 
         $(window).on('load', function () {
             $(this).trigger('resize');
-            $("#loadgame_1").html(`<i>${localStorage.getItem("save_game_content_1") != null ? `${JSON.parse(localStorage.getItem("save_game_content_1")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_1")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i>`)
-            $("#loadgame_2").html(`<i>${localStorage.getItem("save_game_content_2") != null ? `${JSON.parse(localStorage.getItem("save_game_content_2")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_2")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i>`)
-            $("#loadgame_3").html(`<i>${localStorage.getItem("save_game_content_3") != null ? `${JSON.parse(localStorage.getItem("save_game_content_3")).storyname} - ${whichPreposition(JSON.parse(localStorage.getItem("save_game_content_3")).finalboss).toUpperCase()} STORY` : `EMPTY SLOT`}</i>`)
-
+           getSaveNames()
         });
 
         /* 		$(document).on("keypress", 13, function() {
@@ -517,7 +563,7 @@
             let expansionfilter = $('.exp_selector').map((_, el) => $(el).hasClass("ui-icon-check") ? el.name : ``).get().filter(el => el != "")
 
             let enemies = [
-                { name: "Brotherhood", expansion: "riseofthekingdom", boss: "Dmitri", bosstitle: _.template('callous mercenary'), gender: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: _.template("mercenaries, soldiers and spies"), threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar", "and put it into play"], ["N-40 Punisher", "and put it into play"]], gloat: [[`You will lose,`, `I must break you.`], [`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`You want to play rough?`, `Say hello to my little friend!`]], expression: _.template(`baring his teeth as he recognizes you`), attacks: { antiair: "a rocket-propelled grenade" }, keywords: ["blade","explosion", "guns"], blade: "N-40 Punisher", explosions: `rocket-propelled grenades`, gunmen: "Brotherhood assassins" },
+                { name: "Brotherhood", expansion: "riseofthekingdom", boss: "Dmitri", bosstitle: _.template('callous mercenary'), gender: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: _.template("mercenaries, soldiers and spies"), threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar", "and put it into play"], ["N-40 Punisher", "and put it into play"]], gloat: [[`You will lose,`, `I must break you.`], [`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`You want to play rough?`, `Say hello to my little friend!`]], expression: _.template(`baring his teeth as he recognizes you`), attacks: { antiair: "a rocket-propelled grenade" }, keywords: ["blade", "explosion", "guns"], blade: "N-40 Punisher", explosions: `rocket-propelled grenades`, gunmen: "Brotherhood assassins" },
 
                 { name: "Cartel", expansion: "riseofthekingdom", boss: "Juan", bosstitle: _.template("ruthless gangster"), gender: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: _.template("vicious gangers and hardened outcasts"), threat: "levels his shotgun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert", "and put it into play"]], gloat: [[`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`Okay, I'm reloaded!`, `You ready? Here comes the pain!`], [`You wanna play rough?`, `Say hello to my little friend!`]], expression: _.template(`flicking a cigar in your direction`), keywords: ["guns"], gunmen: "gangsters" },
 
@@ -533,7 +579,7 @@
 
                 { name: "Oni", expansion: "legendofoni", boss: "Yokai", bosstitle: _.template('${randFrom(["cursed, powerful warrior","warrior born of mystery and fire"])}'), gender: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: _.template('${randFrom([`ancient`,`immortal`,`lost`,`undead`,`cursed`])} ${randFrom([`warriors`,`ninja`,`doppelgangers`])} and ${randFrom([`powerful`,`seductive`,`nine-tailed`])} ${randFrom([`spirits`,`foxes`,`shapeshifters`])}'), threat: "lifts his mighty fist, suddenly engulfed in eldritch flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike", "and play it"]], gloat: [[`Are you prepared to face the wrath of Shin Yokai?`, `No, you’re not prepared!`], [`The hunger of the Oni is insatiable!`, `And you will be the food!`]], expression: _.template(`his fiery stare and gritted teeth sending a message of barely contained fury`), attacks: { antiair: `hurled bolts of eldritch energy`, detonation: `With one enraged scream, he explodes with a tremendous flash of energy from within, causing a blazing ring of fire to spread outwards` }, keywords: ["oni"], ritual: "Oni" },
 
-                { name: "Onyx League", expansion: "twintiger", boss: "Mack", bosstitle: _.template('${randFrom(["black-hearted","mysterious"])} overlord'), gender: "male", desc: "the league of street gangs", addressing: "pigs", minions: _.template("vicious gangers and street criminals"), threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim", "and put it into play"]], gloat: [[`Fists versus bullets?`, `I will use your butts as target practice!`], [`Greed is for amateurs,`, `I believe there should be no rules, only chaos.`], [`I have come here to create a new country,`, `A country called chaos!`], [`When the world turns upside down,`, `The best thing to do is turn right along with it.`], [`You think you're free,`, `But you don't understand what freedom is.`], [`Only after disaster,`, `Can we be resurrected.`], [`It's only after you've lost everything,`, `That you're free to do anything.`], [`Nothing is static, everything is evolving,`, `Everything is falling apart.`], [`Before you die, I give you a glimpse of a brave new world of freedom,`,`Am I not merciful?`]], expression: _.template(`his keen eyes and predatory sneer reeking of confidence and ruthlessness`), attacks: { antiair: `hail of machine-gun fire` }, keywords: ["guns"], get gunmen() { return this.bosstitle() } }
+                { name: "Onyx League", expansion: "twintiger", boss: "Mack", bosstitle: _.template('${randFrom(["black-hearted","mysterious"])} overlord'), gender: "male", desc: "the league of street gangs", addressing: "pigs", minions: _.template("vicious gangers and street criminals"), threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim", "and put it into play"]], gloat: [[`Fists versus bullets?`, `I will use your butts as target practice!`], [`Greed is for amateurs,`, `I believe there should be no rules, only chaos.`], [`I have come here to create a new country,`, `A country called chaos!`], [`When the world turns upside down,`, `The best thing to do is turn right along with it.`], [`You think you're free,`, `But you don't understand what freedom is.`], [`Only after disaster,`, `Can we be resurrected.`], [`It's only after you've lost everything,`, `That you're free to do anything.`], [`Nothing is static, everything is evolving,`, `Everything is falling apart.`], [`Before you die, I give you a glimpse of a brave new world of freedom,`, `Am I not merciful?`]], expression: _.template(`his keen eyes and predatory sneer reeking of confidence and ruthlessness`), attacks: { antiair: `hail of machine-gun fire` }, keywords: ["guns"], get gunmen() { return this.bosstitle() } }
             ];
 
             enemies = enemies.filter(enemy => expansionfilter.includes(enemy.expansion))
@@ -711,7 +757,7 @@
                     name: "Right to Remain Silent", expansion: "riseofthekingdom", instory: 0, location: "base", bystander: "captive",
                     stagebonus: { setup: `Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.` },
                     stagepenalty: { setup: `Add two power to Recoverd Intel.` },
-                    masterplan: randFrom(["illegalgains", "kidnapping"]), keywords: ["hostages","guns"], gunmen: "armed guards", hostages: "hostages", loot: "the sensitive intel",
+                    masterplan: randFrom(["illegalgains", "kidnapping"]), keywords: ["hostages", "guns"], gunmen: "armed guards", hostages: "hostages", loot: "the sensitive intel",
                     rivaltext: _.template(' ${rival.name} stands guard<%= rivalboost ? `, vigilant and keen-eyed.`: `.`%>'),
                     hottrail: _.template('<br><br>You are yet unseen, and dart through the room like shadows to rescue the captured Citadel scouts before they break and ${enemy.boss} finds out what you know about the plans of the ${finalboss.name}.'),
                     coldtrail: _.template('<br><br>You don\'t think you have time for subtlety, and make your move to rescue the captured Citadel scouts before they break and ${enemy.boss} finds out what you know about the plans of the ${finalboss.name}.'),
@@ -760,23 +806,23 @@
                     name: "Steel Memories", expansion: "riseofthekingdom", instory: 0, location: "base", bystander: "nameless goon", pit: "a pitch-black elevator shaft",
                     stagebonus: { setup: `One fighter may move 3 spaces toward the nearest objective.` },
                     stagepenalty: { setup: `Each fighter must <b>Recruit</b>.` },
-                    masterplan: randFrom(["actsofterror", "kidnapping"]), keywords: ["swarmed","labyrinth"], swarm: "new fighters", labyrinth: "winding passages",
+                    masterplan: randFrom(["actsofterror", "kidnapping"]), keywords: ["swarmed", "labyrinth"], swarm: "new fighters", labyrinth: "winding passages",
                     gloat: [["Believe me when I say this, Global Gladiators,", "Nobody will leave this room alive!"], ["I'm not even going to kill you myself!", "I'll let my minions take care of that."]],
                     rivaltext: _.template(' accompanied by ${rival.name}<%=rivalboost ? `, eyes green from Vandal dosage, both`: `, both`%>'),
                     hottrail: _.template('surprised by the rapid assault on ${gPron(enemy, "possessive")} fortress. "${gloat[0]}" ${enemy.boss} says as ${gPron(enemy, "subject")} ${enemy.threat}. "${gloat[1]}"'),
                     coldtrail: _.template('standing ready. "I\'m not surprised to see you here," ${enemy.boss} says. "${gloat[0]}" ${gPron(enemy, "subject")} says as ${gPron(enemy, "subject")} ${enemy.threat}. "${gloat[1]}"'),
                     clueless: _.template(randFrom([
-                        '${trail}, you find out rumors that the ${enemy.bosstitle()} ${enemy.boss} has been openly recruiting soldiers into the ${enemy.name}. As you investigate the matter further, you find out that the ${enemy.name} <%=enemy.name == "Kingdom" ? `is back to its previous practices`: `has adopted the same practices as the Kingdom` %>: testing out new recruits in a savage melee where only the strong survive.<br><br>You try to go undercover, posing as recruits for yourselves. But ${enemy.name} - familiar with your ploy from the past - sees through your plot and throws you into ${gPron(enemy, "possessive")} "pit." You suddenly become the final exam for ${gPron(enemy, "possessive")} would-be recruits... "${gloat[0]}" says ${bossDescription(enemy)}<rivalpresence ? rivaltext : ``> standing there as ${gPron(enemy,"possessive")} minions pour in from the shadows. "${gloat[1]}"', 
+                        '${trail}, you find out rumors that the ${enemy.bosstitle()} ${enemy.boss} has been openly recruiting soldiers into the ${enemy.name}. As you investigate the matter further, you find out that the ${enemy.name} <%=enemy.name == "Kingdom" ? `is back to its previous practices`: `has adopted the same practices as the Kingdom` %>: testing out new recruits in a savage melee where only the strong survive.<br><br>You try to go undercover, posing as recruits for yourselves. But ${enemy.name} - familiar with your ploy from the past - sees through your plot and throws you into ${gPron(enemy, "possessive")} "pit." You suddenly become the final exam for ${gPron(enemy, "possessive")} would-be recruits... "${gloat[0]}" says ${bossDescription(enemy)}<rivalpresence ? rivaltext : ``> standing there as ${gPron(enemy,"possessive")} minions pour in from the shadows. "${gloat[1]}"',
                         '${trail}, you investigate a site reported to have activity of the ${enemy.name}. You find an elevator an descend down.<%=randFrom([` You wait patiently while a lounge version of ${loungeMusic()} plays over the cheap speakers.`,``])%><br><br>Standing in a pitch black room, you turn around, hoping to find some sort of reference to where exactly you are, but there is none. All you see is the ever-encroaching blackness and the deafening silence surrounding you. And then, cutting through the shadows is a laugh, rolling through the large room to meet you. It is a diabolical sound, smug and evil. It rings through your ears for a moment or two before the lights in the room snap on, almost blinding you with their intensity.<br><br>You blink, and see standing before you ${bossDescription(enemy)}<%=rivalpresence ? rivaltext : ``%> ready to finish it. "${gloat[0]}" ${enemy.boss} says as ${gPron(enemy,"subject")} stalks the darkness. "${gloat[1]}"'
-                        ])),
+                    ])),
                     prologue: _.template(randFrom([
                         '<%=knowledge == "clueless" ? ``: `${trail}, you accompany a large squad of Citadel agents as they storm the ${possessiveSuffix(enemy.name)} base. ${ucInit(enemy.minions())} of the ${enemy.name} fall before you as you make your way through the maze-like halls until you finally reach an elevator, indicated as your goal on your map. As you call it, you hear the sounds of more approaching soldiers. The Citadel agents engage these reinforcements as you head up to face ${enemy.boss}.${randFrom([` You wait patiently while a lounge version of ${loungeMusic()} plays over the cheap speakers.`,``])}<br><br>The elevator doors open to reveal ${bossDescription(enemy)} ${rivalpresence ? rivaltext : ``} ` %>${stagevar} ${laconicStatement(enemy)}',
                         '${trail}, you infiltrate <%=knowledge == "hottrail" ? `the` : `a suspected`%> ${enemy.name} base.<br><br>"You have skill," ${enemy.boss} says to the group of recruits before ${gPron(enemy,"object")}. "And with the ${enemy.name}, you will become the greatest fighting force across the entire globe!"<br><br>"Still spreading your lies, ${enemy.boss}?" you call out across the training grounds.<br><br>${enemy.boss} turns,<%=rivalpresence ? `${rivaltext} ` : `` %>ready to face you. "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" ${enemy.boss} then turns to look at the recruits gathered there. "Alright, rookies, now is your chance to prove yourselves."'
-                        ])),
+                    ])),
                     captured: _.template(randFrom([
-                        'Hands tied behind your back, you are led by <%=rivalpresence ? rival.name : minion%> and ${bossDescription(enemy)} into an an underground training facility. The room is hosting several fighters, each of them sparring in deadly martial arts. "You\'re not worthy to walk on this ground," <%=rivalpresence ? rival : minion%> growls, glaring at you with a deep-seated hatred. "And so," ${enemy.boss} interjects. "We will allow you the chance to prove your worth. <%=finalboss.boss == enemy.boss? `I have developed a great interest in you. I would be pleased if you\'d demonstrate it to ${rivalpresence ? rival.name : minion}.` : `${finalboss.boss} has taken great interest in you. Show us why that is.`%>"<br><br>"This is unnecessary," <%=rivalpresence ? rival.name : minion%> says quietly to ${enemy.boss}. "You play games with the trust of the <%=finalboss.name == enemy.name ? "Master" : finalboss.name%>." ${enemy.boss} loosens your bonds, ignoring <%=rivalpresence ? possessiveSuffix(rival.name) : possessiveSuffix(minion)%> words. You grab your wrists as they are free, rubbing the pain away, and watch as the other fighters turn toward you.<%=rivalpresence ? `${rivalboost ? ` ${rival.name} moves to end you. "This is ridiculous!"` : ``}` : ``%>', 
+                        'Hands tied behind your back, you are led by <%=rivalpresence ? rival.name : minion%> and ${bossDescription(enemy)} into an an underground training facility. The room is hosting several fighters, each of them sparring in deadly martial arts. "You\'re not worthy to walk on this ground," <%=rivalpresence ? rival : minion%> growls, glaring at you with a deep-seated hatred. "And so," ${enemy.boss} interjects. "We will allow you the chance to prove your worth. <%=finalboss.boss == enemy.boss? `I have developed a great interest in you. I would be pleased if you\'d demonstrate it to ${rivalpresence ? rival.name : minion}.` : `${finalboss.boss} has taken great interest in you. Show us why that is.`%>"<br><br>"This is unnecessary," <%=rivalpresence ? rival.name : minion%> says quietly to ${enemy.boss}. "You play games with the trust of the <%=finalboss.name == enemy.name ? "Master" : finalboss.name%>." ${enemy.boss} loosens your bonds, ignoring <%=rivalpresence ? possessiveSuffix(rival.name) : possessiveSuffix(minion)%> words. You grab your wrists as they are free, rubbing the pain away, and watch as the other fighters turn toward you.<%=rivalpresence ? `${rivalboost ? ` ${rival.name} moves to end you. "This is ridiculous!"` : ``}` : ``%>',
                         'Waking up in a pitch black room, you turn around, hoping to find some sort of reference to where exactly you are but you\'re not fully recovered. All you see is the ever-encroaching blackness and the deafening silence surrounding you. And then, cutting through the shadows is a laugh, rolling through the large room to meet you. It is a diabolical sound, smug and evil. It rings through your ears for a moment or two before the lights in the room snap on, almost blinding you with their intensity. <br><br>You blink, and see standing before you ${bossDescription(enemy)}<%=rivalpresence ? rivaltext : ``%> ready to finish it. "${gloat[0]}" ${enemy.boss} says as ${gPron(enemy,"subject")} stalks the darkness. "${gloat[1]}" ${laconicStatement(enemy)}'
-                        ])),
+                    ])),
                     actsofterror: _.template('${trail}, Agent Fletch explains to you the ${getMasterPlan()} of the ${enemy.name}: "${enemy.boss} has provided the citizens of Ransom City a release for all the hatred, violence, and aggression that they keep up inside them." He leans over the satellite image of the city and continues. "With the people whipped up to a frenzy, a 12 hour marathon of crimes of every imaginable sort - including murder - will start right here," he points at the map. "Unless you can stop the spread of the mob mentality, I don\'t think Ransom will survive the night."<br><br>You move in to confront the mob and the perturbing ${enemy.minions()} of the ${enemy.name}.'),
                     kidnapping: _.template('${trail}, you accompany a large squad of Citadel agents as they storm the ${possessiveSuffix(enemy.name)} base where the ${vip[0]} is being held. ${ucInit(enemy.minions())} of the ${enemy.name} fall before you as you make your way through the maze-like halls until you finally reach an elevator, indicated as your goal on your map. As you call it, you hear the sounds of more approaching soldiers. The Citadel agents engage these reinforcements as you head up to face ${enemy.boss}.<%=randFrom([` You wait patiently while a lounge version of ${loungeMusic()} plays over the cheap speakers.`,``])%><br><br>The elevator doors open to reveal ${bossDescription(enemy)}<%=rivalpresence ? rivaltext : ``%> standing ready. "${gloat[0]}" ${enemy.boss} says. "${gloat[1]}"<br><br>${laconicStatement(enemy)}')
                 },
@@ -950,7 +996,7 @@
 
             storystages = storystages[0].splice(0)
 
-/*             console.log(JSON.stringify(storystages, ["name"])) */
+            /*             console.log(JSON.stringify(storystages, ["name"])) */
 
             let storyenemies = storyEnemies(storystages, enemies, heroenemies);
 
@@ -1149,7 +1195,7 @@
             let stageadjectives
             let stagenouns
             let adjectives = ["Avenging", "Deadly", "Final", "Mortal", "Double", "Twin", "Fighting", "Bad", "Mysterious", "Lost", "Unleashed", "New", "Eternal", "Forever", "Ultimate", "Evil", "Rumble"];
-            let nouns = [["Revenge", "Revenge"], ["Fate", "Fates"], ["Destiny", "Destiny"], ["Redemption", "Redemption"], ["Aftershock", "Aftershock"], ["Warrior", "Warriors"], ["Combat", "Kombat"], ["Challenger","Challengers"], ["Fighter", "Fighters"], ["Force", "Forces"], ["Thug", "Thugs"], ["Rage", "Rage"], ["City", "City"], ["Ransom", "Ransom"], ["Legend", "Legends"], ["Fight", "Fights"], ["Kingdom", "Kingdoms"], ["Street", "Streets"], ["Master", "Masters"], ["Rise", "Rise"], ["Strike","Strikes"], ["Kick","Kicks"], ["Legend", "Legends"], ["Tide","Tides"]];
+            let nouns = [["Revenge", "Revenge"], ["Fate", "Fates"], ["Destiny", "Destiny"], ["Redemption", "Redemption"], ["Aftershock", "Aftershock"], ["Warrior", "Warriors"], ["Combat", "Kombat"], ["Challenger", "Challengers"], ["Fighter", "Fighters"], ["Force", "Forces"], ["Thug", "Thugs"], ["Rage", "Rage"], ["City", "City"], ["Ransom", "Ransom"], ["Legend", "Legends"], ["Fight", "Fights"], ["Kingdom", "Kingdoms"], ["Street", "Streets"], ["Master", "Masters"], ["Rise", "Rise"], ["Strike", "Strikes"], ["Kick", "Kicks"], ["Legend", "Legends"], ["Tide", "Tides"]];
 
             switch (finalboss.boss) {
                 case "Ah Long":
@@ -1162,11 +1208,11 @@
                     break;
                 case "Jackal":
                     bossadjectives = ["Broken", "Neural", "Dark", "Darker", "Wild", "Mad", "Insane", "Genius", "Grapsing", "Growing", "Forced", "Leaching", "Possession", "Torturous", "Unbelievable", "Scientific", "Experimental", "Psychic", "Biological", "Tightened"]
-                    bossnouns = [["Kingdom", "Kingdom"], ["Scientist", "Scientists"], ["Jackal", "Jackals"], ["Directive", "Directives"], ["Dread","Dread"], ["Experiment", "Experiments"], ["Influence","Influences"], ["Matter", "Matters"], ["Sister", "Sisters"], ["Flesh", "Flesh"], ["Lances", "Lances"], ["Invasion", "Invasion"], ["Mind","Minds"], ["Mold", "Molds"], ["Ninja", "Ninja"], ["Clone", "Clones"], ["General", "Generals"], ["Mountain", "Mountains"], ["Marionette", "Marionettes"], ["Soldier", "Soldiers"], ["Spike","Spikes"], ["Doll", "Dolls"], ["Presence","Presences"], ["Rein","Reins"]]
+                    bossnouns = [["Kingdom", "Kingdom"], ["Scientist", "Scientists"], ["Jackal", "Jackals"], ["Directive", "Directives"], ["Dread", "Dread"], ["Experiment", "Experiments"], ["Influence", "Influences"], ["Matter", "Matters"], ["Sister", "Sisters"], ["Flesh", "Flesh"], ["Lances", "Lances"], ["Invasion", "Invasion"], ["Mind", "Minds"], ["Mold", "Molds"], ["Ninja", "Ninja"], ["Clone", "Clones"], ["General", "Generals"], ["Mountain", "Mountains"], ["Marionette", "Marionettes"], ["Soldier", "Soldiers"], ["Spike", "Spikes"], ["Doll", "Dolls"], ["Presence", "Presences"], ["Rein", "Reins"]]
                     break;
                 case "Juan":
-                    bossadjectives = ["Unloading", "Getaway", "Covering", "Alert", "Hard", "Honorable", "Hot", "Ruthless", "Avenging", "One", "Loyal", "Devoted", "Reloading","Tough"]
-                    bossnouns = [["Business","Businesses"], ["Con Artist","Con Artists"],["Getaway", "Getaway"], ["Revenge", "Revenge"], ["Cartel", "Cartel"], ["Flintlock", "Flintlocks"], ["Code", "Code"], ["Orphan", "Orphans"], ["Outcast", "Outcasts"], ["Gun", "Guns"], ["Gangster", "Gangsters"], ["Extortion", "Extortion"], ["Honor", "Honor"], ["Lead","Lead"], ["Protection", "Protection"], ["Carbine", "Carbines"], ["Human Shield", "Human Shields"], ["Double Barrels", "Double Barrels"], ["Family", "Families"], ["Drug", "Drugs"], ["Gang", "Gangs"], ["Bat", "Bats"], ["Dealer", "Dealers"], ["Ganger", "Gangers"], ["Shell","Shells"], ["Kickback","Kickback"], ["Shot","Shots"], ["Scattershot","Scattershot"]]
+                    bossadjectives = ["Unloading", "Getaway", "Covering", "Alert", "Hard", "Honorable", "Hot", "Ruthless", "Avenging", "One", "Loyal", "Devoted", "Reloading", "Tough"]
+                    bossnouns = [["Business", "Businesses"], ["Con Artist", "Con Artists"], ["Getaway", "Getaway"], ["Revenge", "Revenge"], ["Cartel", "Cartel"], ["Flintlock", "Flintlocks"], ["Code", "Code"], ["Orphan", "Orphans"], ["Outcast", "Outcasts"], ["Gun", "Guns"], ["Gangster", "Gangsters"], ["Extortion", "Extortion"], ["Honor", "Honor"], ["Lead", "Lead"], ["Protection", "Protection"], ["Carbine", "Carbines"], ["Human Shield", "Human Shields"], ["Double Barrels", "Double Barrels"], ["Family", "Families"], ["Drug", "Drugs"], ["Gang", "Gangs"], ["Bat", "Bats"], ["Dealer", "Dealers"], ["Ganger", "Gangers"], ["Shell", "Shells"], ["Kickback", "Kickback"], ["Shot", "Shots"], ["Scattershot", "Scattershot"]]
                     break;
                 case "Kemono":
                     bossadjectives = ["Apocalypse", "Imposing", "Green", "Enraged", "Hulking", "Loyal", "Uncontrollable", "Crackling", "Static", "Quadruple", "Electrical", "Savage", "Mountain"]
@@ -1402,8 +1448,8 @@
 
         function loungeMusic() {
 
-            let music = randFrom(["Don't Stop Believing", "Faithfully", "Don't Stop Me Now", "Open Arms", "Wheel in the Sky", "Separate Ways", "Livin' on a Prayer", "Any Way You Want It",
-                "Eye of the Tiger", "The Final Countdown", "Burning Heart", "Every Breath You Take", "Another One Bites the Dust", "Never Gonna Give You Up"])
+            let music = randFrom(["Don't Stop Believing", "Faithfully", "Don't Stop Me Now", "Open Arms", "Wheel in the Sky", "Separate Ways", "Livin' on a Prayer", "Any Way You Want It", "We Are the Champions", "Chariots of Fire", "We Will Rock You", "Hero", "Walking on Sunshine", "Always Look on the Bright Side of Life",
+                "Eye of the Tiger", "The Final Countdown", "Burning Heart", "Every Breath You Take", "Another One Bites the Dust", "Never Gonna Give You Up", "Gonna Fly Now", "One Moment In Time"])
 
             return music
         }
@@ -1493,8 +1539,8 @@
             alliesandrivals = _.filter(alliesandrivals, !{ name: ally.name })
 
             if (ally.name === enemy.boss || heronames.includes(ally.name) || finalboss.name == ally.name) { ally.name = "Mirror " + ally.name }
-/*             if (ally.name === enemy.boss) { ally.name = "Mirror " + ally.name } */
-/*             else if (heronames.includes(ally.name)) { ally.name = "Shadow " + ally.name } */
+            /*             if (ally.name === enemy.boss) { ally.name = "Mirror " + ally.name } */
+            /*             else if (heronames.includes(ally.name)) { ally.name = "Shadow " + ally.name } */
 
             return ally
         }
@@ -1550,7 +1596,7 @@
                 `You hurry away from the conflict, beaten and defeated.  You hear the sound of ${possessiveSuffix(enemy.boss)} laughter echoing behind you.`,
                 `After an uphill battle against overwhelming odds, ${enemy.boss} apparently becomes bored with the uneven competition and unleashes ${getEnemyAttack(enemy, "antiair", "an unrelenting assault")} into the melee. "Let's move out!" ${gPron(enemy, "subject")} commands. "This is not worth our time." Left for dead, you have no chance of following. `,
                 `"You were close, ${defineAddressing(enemy)}", ${enemy.boss} calls to you. "But not close enough." ${ucInit(gPron(enemy, "subject"))} clutches at ${gPron(enemy, "possessive")} wounds, and though they are serious, at least ${gPron(enemy, "subject")} is still standing. ${ucInit(gPron(enemy, "subject"))} watches you writhe on the ground for a moment longer, and spits in your direction. "Go ahead," ${gPron(enemy, "subject")} says. "Follow me. I don't care. You'll walk right into the ${possessiveSuffix(finalboss.name)} lap."`,
-                `"Do not follow us, ${defineAddressing(enemy)}," ${enemy.boss} threatens. "${enemy.boss == finalboss.boss ? `I now know`: `We will go now warn ${finalboss.boss}` } of you, and if you still continue on this ill-conceived mission, you will meet your end by ${enemy.boss == finalboss.boss ? `my`: `${gPron(finalboss, "possessive")}` } hand."<br><br>"Go then," you say, spitting blood. "Scurry back to ${enemy.boss == finalboss.boss ? `wherever you crawled out of`: `the ${finalboss.bosstitle()}` }, and see what good that will do you in the end."`,
+                `"Do not follow us, ${defineAddressing(enemy)}," ${enemy.boss} threatens. "${enemy.boss == finalboss.boss ? `I now know` : `We will go now warn ${finalboss.boss}`} of you, and if you still continue on this ill-conceived mission, you will meet your end by ${enemy.boss == finalboss.boss ? `my` : `${gPron(finalboss, "possessive")}`} hand."<br><br>"Go then," you say, spitting blood. "Scurry back to ${enemy.boss == finalboss.boss ? `wherever you crawled out of` : `the ${finalboss.bosstitle()}`}, and see what good that will do you in the end."`,
                 `Bleeding from multiple cuts, you distract the ${enemy.bosstitle()} and make your retreat in the moment of confusion. You escape ${enemy.boss}, but just barely.`,
                 `You gasp for breath, refusing this defeat to stop you from confronting ${finalboss.boss}.`,
                 `"I am done with you," the ${enemy.bosstitle()} says, and tosses you aside like a rag. You are left in a heap, beaten and humiliated.`]
@@ -1558,7 +1604,7 @@
             let rescue = [`Suddenly, Citadel agents rappel down out of nowhere. ${enemy.boss} and ${gPron(enemy, "possessive")} ${enemy.minions()} flee as the agents free you.`,
                 `You slowly awaken in a helicopter, confused on how you wound up there.`,
                 `A squad of Citadel soldiers rushes in and sends the enemies focused on you fleeing.`,
-                `When all seems lost, a Citadel operative pilots an armored transport through the ${enemy.minions()} and knocks ${enemy.boss} aside. "Come with me if you want to live!"`]
+            `When all seems lost, a Citadel operative pilots an armored transport through the ${enemy.minions()} and knocks ${enemy.boss} aside. "Come with me if you want to live!"`]
 
             let fletch_gadget = getGizmo()
 
@@ -1574,7 +1620,7 @@
             `You call Agent Fletch and request a cleanup team, and then you begin searching through the area, and find ${whichPreposition(getGizmo())} placed almost intentionally where you would find it. From the device you find maps and coordinates.`,
             `You vow to catch the ${finalboss.name} before their ${getMasterPlan()} is complete!`,
             `This was only a delay in the inevitable. You know ${enemy.boss} is only a beatstick, not the mastermind. ${ucInit(gPron(enemy, "subject"))} will lead you to ${finalboss.boss}, and you will be making examples of them both.`,
-            `Just then, you got a call on your communicator from Agent Fletch. "Heads up, Gladiators." Agent Fletch said. "We've got a a problem."`
+                `Just then, you got a call on your communicator from Agent Fletch. "Heads up, Gladiators." Agent Fletch said. "We've got a a problem."`
             ]
 
             let capture = [
@@ -1590,8 +1636,8 @@
                 `${enemy.boss} laughs quietly and sinisterly as ${gPron(enemy, "subject")} slowly licks a bleeding wound on ${gPron(enemy, "possessive")} hand. "${finalboss.boss == enemy.boss ? `I'm proud of your efforts` : `${finalboss.boss} would be proud`}," ${gPron(enemy, "subject")} tells as you are tied and your vision fades. You barely hear ${possessiveSuffix(enemy.boss)} final command: "Take them to the ${nextenemy.name}!"`,
                 `You find yourself immediately surrounded by ${possessiveSuffix(enemy.boss)} ${enemy.minions()}. "You're due at the next stop," ${enemy.boss} says menacingly. "The ${nextenemy.name} still has some uses for you.`,
                 `"You were close, ${defineAddressing(enemy)}", ${enemy.boss} calls to you. "But not close enough." ${ucInit(gPron(enemy, "subject"))} clutches at ${gPron(enemy, "possessive")} wounds, and though they are serious, at least ${gPron(enemy, "subject")} is still standing. ${ucInit(gPron(enemy, "subject"))} watches you writhe on the ground for a moment longer, and spits in your direction. "Subdue them," ${gPron(enemy, "subject")} orders the ${enemy.minions()}.`,
-                `You fall on your back, and ${enemy.boss} rushes in, planting ${gPron(enemy,"possessive")} foot on your chest, keeping you down. "No more," ${enemy.boss} says and ${enemy.threat}, ready, should you try to retaliate. "We are done."`,
-                `"You want to bring me down? You have to do it yourself, ${enemy.boss}! Take your shot!" you challenge the ${enemy.bosstitle()}, ignoring the ${enemy.minions()}, even though you can barely stand. "I need not fight you. I have done as I was bid," ${gPron(enemy,"subject")} answers. "None shall harm you here, angry little ${defineAddressing(enemy)}. You are awaited.. by ${nextenemy.boss}!"`
+                `You fall on your back, and ${enemy.boss} rushes in, planting ${gPron(enemy, "possessive")} foot on your chest, keeping you down. "No more," ${enemy.boss} says and ${enemy.threat}, ready, should you try to retaliate. "We are done."`,
+                `"You want to bring me down? You have to do it yourself, ${enemy.boss}! Take your shot!" you challenge the ${enemy.bosstitle()}, ignoring the ${enemy.minions()}, even though you can barely stand. "I need not fight you. I have done as I was bid," ${gPron(enemy, "subject")} answers. "None shall harm you here, angry little ${defineAddressing(enemy)}. You are awaited.. by ${nextenemy.boss}!"`
             ]
 
             let intel_words = [`intel`, `evidence`, `knowledge`, `information`]
@@ -1605,14 +1651,14 @@
 
             let generic = captured ? randFrom(capture) : `${randFrom([...retreat, ...rescue])}<br><br>${randFrom(intel)}`
 
-            let blade = [captured ? `${enemy.boss} draws your head back, with ${gPron(enemy,"possessive")} ${enemy.blade} on your throat. "Wait!" ${randFrom(enemy.minionnames)} shouts. "I hear ${nextenemy.boss} is looking for them." ` : `With multiple superficial and some severe cuts from ${possessiveSuffix(enemy.boss)} mastery with ${gPron(enemy,"possessive")} ${enemy.blade}, you have to choose: retreat or die. As you are yet to stop ${finalboss.boss}, the choice is obvious.<br><br>${randFrom(intel)}`]
+            let blade = [captured ? `${enemy.boss} draws your head back, with ${gPron(enemy, "possessive")} ${enemy.blade} on your throat. "Wait!" ${randFrom(enemy.minionnames)} shouts. "I hear ${nextenemy.boss} is looking for them." ` : `With multiple superficial and some severe cuts from ${possessiveSuffix(enemy.boss)} mastery with ${gPron(enemy, "possessive")} ${enemy.blade}, you have to choose: retreat or die. As you are yet to stop ${finalboss.boss}, the choice is obvious.<br><br>${randFrom(intel)}`]
 
             let escort = [
                 `Spitting up blood, you look up just in time to see ${ally.name} getting dragged away. ${captured ? randFrom(capture) : `${randFrom([`As ${ally.name} is carted off, you see the ${possessiveSuffix(gPron(ally, "sex"))} ${getGizmo()} fall, apparently unseen, onto the ground as the enemy retreats.`, `<br><br>${generic}`])}`}`,
                 `You became so obsessed with your fight, that you barely caught the sight of ${ally.name} taken away by the ${enemy.minions()}. ${captured ? randFrom(capture) : `Not only were you unable to retrieve any ${randFrom(intel_words)} on ${finalboss.boss}, but also got a valuable ally captured in the process.<br><br>${randFrom(intel)}`}`,
                 `With defeat inevitable, you back up with ${ally.name}. Your only hope of escape is ${stage.hasOwnProperty("pit") ? stage.pit : "a bottomless pit"}. ${ally.name} offers to help you climb down. As you descend, ${ally.name} is overwhelmed${captured ? `, and the ${enemy.minions()} pull you back. ${randFrom(capture)}` : `. Clenching your jaw, you turn away and make your escape.<br><br>${randFrom(intel)}`}`,
                 `${ally.name} had limped away, bleeding, and the others had gone after ${gPron(ally, "object")}, probably to finish ${gPron(ally, "object")} off.${captured ? `<br><br> ${randFrom(capture)}` : ` You could do nothing. They'd already finished with you.<br><br>${randFrom(intel)}`}`,
-                captured ? randFrom(capture) : `"We've failed ${gPron(ally,"object")}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`,
+                captured ? randFrom(capture) : `"We've failed ${gPron(ally, "object")}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`,
             ]
 
             let explosion_cause = []
@@ -1623,33 +1669,35 @@
             let find_intel = [
                 `${captured ? `"Looking for this?" ${enemy.boss} holds ${whichPreposition(gizmo)} in front of you. ${randFrom(capture)}` : `You could not obtain whatever ${randFrom(intel_words)} ${enemy.boss} had. ${generic}`}`,
                 `${captured ? randFrom(capture) : `The ${enemy.name} escaped with ${stage.loot}, and the ${gizmo} in your hands looks damaged. "Agent Fletch," you got into your communications device. "I've got the ${gizmo}, but it looks damaged." "At least we have it," Agent Fletch replied in your ear. "Bring it back to Citadel HQ and we'll see what data we can pull from it.`}`,
-                `"${captured ? nextenemy.boss : finalboss.boss} will hear of your interference," ${enemy.boss} says. "And you will beg for ${gPron(captured ? nextenemy : finalboss,"possessive")} mercy." ${ucInit(gPron(enemy,"subject"))} then reaches out to a ${getGizmo()}. "This is what you were after?"`,
+                `"${captured ? nextenemy.boss : finalboss.boss} will hear of your interference," ${enemy.boss} says. "And you will beg for ${gPron(captured ? nextenemy : finalboss, "possessive")} mercy." ${ucInit(gPron(enemy, "subject"))} then reaches out to a ${getGizmo()}. "This is what you were after?"`,
                 captured ? randFrom(capture) : `"We've failed to secure the ${randFrom(intel_words)}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`
-                ]
+            ]
 
-            let gunk = [`You are forced to duck from ${getEnemyAttack(enemy, "antiair", "a relentless assault")}. You lose your balance and fall straight into ${stage.gunk}. You try to desperately not to swallow any of the ${randFrom(revolting_words)} liquid${captured ? ` but fail, and start to lose your consciousness. When almost passed out, you feel you're dragged back to the surface. "Clean them up," you think you hear ${enemy.boss} say. "${nextenemy.boss} won't want them like that."` : `, and when you finally manage to get to the surface, ${enemy.boss} has disappeared with ${gPron(enemy, "possessive")} ${enemy.minions()}.<br><br>${generic}`}`]
+            let gunk = [`You are forced to duck from ${getEnemyAttack(enemy, "antiair", "a relentless assault")}. You lose your balance and fall straight into ${stage.gunk}. You try to desperately not to swallow any of the ${randFrom(revolting_words)} liquid${captured ? ` but fail, and start to lose your consciousness. When almost passed out, you feel you're dragged back to the surface. "Clean them up," you think you hear ${enemy.boss} say. "${nextenemy.boss} won't want them like that."` : `, and when you finally manage to get to the surface, ${enemy.boss} has disappeared with ${gPron(enemy, "possessive")} ${enemy.minions()}.<br><br>${randFrom(intel)}`}`]
 
             let guide = [
-                `"Unfortunate that ${gPron(enemy,"subject")} came out on top this time," ${ally.name}" says afterward. "${ucInit(gPron(enemy,"subject"))} won't be challenged again for some time. By you or by anyone else". You look at ${ally.name} in question, but the ${gPron(ally, "sex")} had vanished! ${captured ? randFrom(capture) : `You are left to contemplate your place in the world, alone. ${randFrom(intel)}`}`,
-                `"You led me into a deathtrap," you respond. "A rush like this is against everything we've learned." You and ${ally.name} stare hard at each other for a moment. "Very well. Strike your own path," ${ally.name} says, and turns, ${capture ? `leaving you in a heap. ${randFrom(capture)}`: `striding into the distance. ${randFrom(intel)}`}`,
-                `"You cannot expect to win every conflict," ${ally.name} says. "You almost got me killed!" you shout back, looking down at your bruised body. You are about to apologize, but when you look up, ${captured ? `you are faced with ${enemy.minions()}. ${randFrom(capture)}`: ` ${gPron(ally,"subject")} is gone. ${randFrom(intel)}`}`,
-                `${captured ? randFrom(capture) : `"Dammit!" you say to ${ally.name}. "They got away."<br><br>"It was a long shot. I'm sorry." ${gPron(ally,"subject")} answers. "Don't be," you answer. "We caused a stir. That's something." ${randFrom(intel)}`}`
-                ]
+                `"Unfortunate that ${gPron(enemy, "subject")} came out on top this time," ${ally.name}" says afterward. "${ucInit(gPron(enemy, "subject"))} won't be challenged again for some time. By you or by anyone else". You look at ${ally.name} in question, but the ${gPron(ally, "sex")} had vanished! ${captured ? randFrom(capture) : `You are left to contemplate your place in the world, alone. ${randFrom(intel)}`}`,
+                `"You led me into a deathtrap," you respond. "A rush like this is against everything we've learned." You and ${ally.name} stare hard at each other for a moment. "Very well. Strike your own path," ${ally.name} says, and turns, ${capture ? `leaving you in a heap. ${randFrom(capture)}` : `striding into the distance. ${randFrom(intel)}`}`,
+                `"You cannot expect to win every conflict," ${ally.name} says. "You almost got me killed!" you shout back, looking down at your bruised body. You are about to apologize, but when you look up, ${captured ? `you are faced with ${enemy.minions()}. ${randFrom(capture)}` : ` ${gPron(ally, "subject")} is gone. ${randFrom(intel)}`}`,
+                `${captured ? randFrom(capture) : `"Dammit!" you say to ${ally.name}. "They got away."<br><br>"It was a long shot. I'm sorry." ${gPron(ally, "subject")} answers. "Don't be," you answer. "We caused a stir. That's something." ${randFrom(intel)}`}`
+            ]
 
             let gunmen = ["armed enemies"]
             stage.hasOwnProperty("gunmen") ? gunmen = [stage.gunmen, ...gunmen] : () => { }
             enemy.hasOwnProperty("gunmen") ? gunmen = [enemy.gunmen, ...gunmen] : () => { }
             let guns = [`You duck behind cover as the ${randFrom(gunmen)} fire on you. To move would be a a suicide, and you are forced to watch as the ${enemy.name} leaves with ${stage_loot}. ${captured ? `You are pinned by the fire, and after a while you are surrounded by gun-toting enemies from all sides. ${randFrom(capture)}` : `You hunker down to avoid being hit by stray bullets.<br><br>${randFrom(rescue)} ${randFrom(intel)}`}`]
 
+            let heights = [captured ? `${enemy.boss} holds you on the edge of a drop to oblivion. "Wait!" ${randFrom(enemy.minionnames)} shouts. "I hear ${nextenemy.boss} is looking for them." ` : `"Get rid of them. They are useless," ${enemy.boss} orders the ${enemy.minions()}. You have no strength to resist as you are dragged to the edge and thrown to your deaths.<br><br>You are falling toward a certain death, when suddenly a daring Citadel pilot comes to rescue with incredible vehicular acrobacy, and you are caught by the chopper!<br><br>${randFrom(intel)}`]
+
             let hostages = [
-                `${captured ? `You are lying on the ground, defeated and helpless, as` : `Despite all of your efforts,`} ${enemy.boss} executes another one of the ${stage.hostages}. ${captured ? randFrom(capture) : generic}`,
+                `${captured ? `You are lying on the ground, defeated and helpless, as` : `Despite all of your efforts,`} ${enemy.boss} executes another one of the ${stage.hostages}.<br><br>${captured ? randFrom(capture) : generic}`,
                 `You weren't able to save the ${stage.hostages}, and now their lives are on your hands. ${captured ? randFrom(capture) : generic}`,
                 captured ? randFrom(capture) : `"We've failed to save them," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch was right.`]
 
             let labyrinth = [
                 `The relentless ${enemy.bosstitle()} forces you to full rout, and you soon find yourselves lost in the ${stage.labyrinth}. You rush through the area to escape, ${captured ? `but suddenly you find yourself surrounded by ${enemy.minions()}. You feel exhausted, and cannot push on. "How could you face the ${finalboss.name} if you can't even find your own way?" ${enemy.boss} says, eyeing you with contempt.` : `and suddenly you are in the clear.<br><br>${randFrom(intel)}`}`,
                 captured ? randFrom(capture) : `Beaten, you are left where you were. You awaken hours later in the dark, disoriented, and spend a good while trying to find your way out of the lightless ${stage.labyrinth}. A rescue team of Citadel soldiers eventually finds you and speeds you back to HQ.`
-                ]
+            ]
 
             let oni = [`Standing before you, the ${mysticalSynonym()} power of Oni fills ${enemy.boss}. ${ucInit(gPron(enemy, "subject"))} rises up off the ground, the ${mysticalSynonym()} powers swirling around ${gPron(enemy, "object")}. You watch as ${gPron(enemy, "possessive")} muscles grow, ${gPron(enemy, "possessive")} eyes burn, and ${gPron(enemy, "possessive")} body pulses with the ${mysticalSynonym()} energies! ${captured ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!`}`]
 
@@ -1668,14 +1716,14 @@
                 `You were not able to stop ${enemy.boss} from completing the ritual! ${getTransformationSequence(enemy, this_blade, ritual_focus)} ${captured ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!`}`,
                 `You're thrown to the ground by a blast of ${mysticalSynonym()} force, ${captured ? `and you are sucked through a shimmering, twisting portal.` : `and the ${enemy.bosstitle()} disappears in a flash of brilliant purple light. ${randFrom(intel)}`}`,
                 `${enemy.boss} looks down at you, a smug smirk spreading across ${gPron(enemy, "possessive")} face. ${ucInit(gPron(enemy, "subject"))} reaches up and recites a few strange words in a language you've never heard before. In an instant, the world blows away around you in a deafening explosion of ${mysticalSynonym()} energy${captured ? ` and then` : `, and for a moment,`} all you can see is the blackness.${captured ? `` : `<br><br>${randFrom(intel)}`}`
-                ]
+            ]
 
             let rival_interrogate = [
                 `${captured ? `${rival.name} smirks at you as you are beaten. ${randFrom(captured)}` : `Despite your best efforts, ${rival.name} has slipped away. ${generic}`}`,
                 `${captured ? randFrom(capture) : `The ${enemy.name} was able to escape with ${rival.name}. ${randFrom(intel)}`}`,
                 `${captured ? randFrom(capture) : `${rival.name} showed ${gPron(rival, "reflexive")} to be a true coward and fled before you could make ${gPron(rival, "object")} reveal what ${randFrom(intel_words)} ${gPron(rival, "subject")} has. ${generic}`}`,
-                `"${captured ? nextenemy.boss : finalboss.boss} will hear of your interference," ${rival.name} says. "And you will beg for ${gPron(captured ? nextenemy : finalboss,"possessive")} mercy." ${ucInit(gPron(rival,"subject"))} then reaches out to a ${getGizmo()}. "This is what you were after?"`,
-                `You could not reach ${randFrom(intel_words)}, ${rival.name} evading you at every opportunity. With a screech, ${gPron(rival.name, "subject")} leaps down on you from the shadows, ${captured ? `and you lose your balance.<br><br>${randFrom(capture)}`: `and you react the only way you can. You knock ${gPron(rival, "object")} away, and use the opportunity to escape. ${randFrom(intel)}`}`,
+                `"${captured ? nextenemy.boss : finalboss.boss} will hear of your interference," ${rival.name} says. "And you will beg for ${gPron(captured ? nextenemy : finalboss, "possessive")} mercy." ${ucInit(gPron(rival, "subject"))} then reaches out to a ${getGizmo()}. "This is what you were after?"`,
+                `You could not reach ${randFrom(intel_words)}, ${rival.name} evading you at every opportunity. With a screech, ${gPron(rival.name, "subject")} leaps down on you from the shadows, ${captured ? `and you lose your balance.<br><br>${randFrom(capture)}` : `and you react the only way you can. You knock ${gPron(rival, "object")} away, and use the opportunity to escape. ${randFrom(intel)}`}`,
                 `${captured ? randFrom(capture) : `"Dammit!" you contact Agent Fletch with your communicator. "${rival.name} got away."<br><br>"It was a long shot." he answers. "We caused a stir. That's something." You hang up and pick yourselves up. ${randFrom(intel)}`}`,
                 captured ? randFrom(capture) : `"We've failed to catch ${rival.name}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`]
 
@@ -1683,12 +1731,12 @@
                 `Despite all of your skills, the endless waves of ${randFrom(stage_swarm)} eventually tire you out${captured ? `.<br><br>${randFrom(capture)}` : `, and you almost give up.<br><br>${generic}`}`,
                 `With a never-ending stream of ${randFrom(stage_swarm)}, you never should have hoped to win. ${captured ? randFrom(capture) : generic}`,
                 `There is no end to the ${randFrom(stage_swarm)}, and inch by inch you are forced to retreat${captured ? `, until there is nowhere to retreat to, and you are buried under the avalanche of assailants.` : `. ${generic}`}`
-                ]
+            ]
 
             let undead = [
                 `Looking out over the battlefield, you see the zombies are too many for you to keep at bay. ${captured ? `You fight as long as you can, but eventually you are overrun by the horde.` : `"Agent Fletch," you say into your radio. "The target's fled, and the horde is loose. Requesting extraction.`}`,
                 `"Go!" ${whichPreposition(stage.bystander)} yells at you from where ${contact} lies, wounded and pinned. "Get out of here!" You turn and flee as the unstoppable horde of zombies approaches${captured ? `, but you are not fast enough in your current state.` : `. Sounds of fighting can be heard as ${contact} fights them off as long as ${contact} can, but all too soon those sounds give way to screams of pain.<br><br>${randFrom(intel)}`}`
-                ]
+            ]
 
             let loseresult
 
@@ -1872,7 +1920,7 @@
 
             if (getdeck == false) {
                 return `choose ${randFrom([clones.minionnames[0], clones.minionnames[1]])} from the ${clones.name} deck as the minion`
-                } else {return clones.name}
+            } else { return clones.name }
         }
 
 
@@ -1938,7 +1986,7 @@
                 { setup: `Each fighter suffers 2 direct damage.` },
                 { setup: `Search the enemy deck for ${preparedboss[0]}, ${preparedboss[1]}. Shuffle the enemy deck.` },
                 { setup: `${enemy.boss} gains 2 defense tokens of each type.` },
-                { setup: `Place 3P power on this card.`, activate: `Each fighter discards 1 defense token. For each fighter that did, remove 1 power from this card. If no power remains on this card, you have rescued the innocent.`, wincondition: [`If you win and have rescued the innocent:`, `If you have not rescued the innocent:`], prologue: "hostages"  },
+                { setup: `Place 3P power on this card.`, activate: `Each fighter discards 1 defense token. For each fighter that did, remove 1 power from this card. If no power remains on this card, you have rescued the innocent.`, wincondition: [`If you win and have rescued the innocent:`, `If you have not rescued the innocent:`], prologue: "hostages" },
                 { persistent: `${enemy.boss} gains +1 attack value.` },
                 { persistent: `${enemy.boss} gains ${enemy.boss == "Ah Long" ? "2P" : "4P"} health value.` },
                 { activate: `The fighter furthest from ${enemy.boss} within 4 spaces of ${gPron(enemy, "object")} discards 1 power.` },
@@ -2034,7 +2082,7 @@
                 `Without ${randFrom(intel_words)} on the current ${randFrom(location_words)} of ${finalboss.boss}, ${randFrom(investigator_words)} ${randFrom(assumption_words)} ${enemy.boss} is the best source for more information.<br><br>` : ``
 
             let hence_words = [`Accordingly`, `Hence`, `So`, `Consequently`, `Therefore`, `Thus`]
-            let default_clues = ["Based on current intel", "Chasing the clues", "Following your leads", "In pursuit of clues", "After a little more intel-gathering", "Following this lead", "As you investigated further", "After searching for more intel", "Following the intel you had", "After searching for more information", "Reviewing what you got", "With the information you gathered", `You tracked down some of the ${enemy.name} associates and tailed their movements. ${randFrom(hence_words)}`, `Following the trail of money leading from the previous encounter`, `"We've traced them," Agent Fletch says, seated across the table. He takes out a satellite image and lays it on the table, pointing to a small red dot near the image's center. ${randFrom(hence_words)}`,`"Here," Agent Fletch stabs his finger onto the table, pointing on a map unfolded there. "Is where there your next stop is." ${randFrom(hence_words)}`]
+            let default_clues = ["Based on current intel", "Chasing the clues", "Following your leads", "In pursuit of clues", "After a little more intel-gathering", "Following this lead", "As you investigated further", "After searching for more intel", "Following the intel you had", "After searching for more information", "Reviewing what you got", "With the information you gathered", `You tracked down some of the ${enemy.name} associates and tailed their movements. ${randFrom(hence_words)}`, `Following the trail of money leading from the previous encounter`, `"We've traced them," Agent Fletch says, seated across the table. He takes out a satellite image and lays it on the table, pointing to a small red dot near the image's center. ${randFrom(hence_words)}`, `"Here," Agent Fletch stabs his finger onto the table, pointing on a map unfolded there. "Is where there your next stop is." ${randFrom(hence_words)}`]
             let wincondition_txt = ""
 
             if (wincondition == "intel") {
@@ -2060,8 +2108,8 @@
                     `${ally.name} has approached ${randFrom(citadel_words)} for assistance in exchange for ${randFrom(intel_words_2)} on ${this_finalboss}. ${ucInit(gPron(ally, "subject"))} needs your protection from ${this_boss}.`,
                     `${ally.name} is on a parallel Citadel mission to yours, and you need to protect ${gPron(ally, "object")} so ${gPron(ally, "subject")} can obtain whatever ${randFrom(intel_words_2)} ${gPron(ally, "subject")} is after.`,
                     `After the previous encounter, you see a familiar silhouette materialize from the smoke and dust before you: ${ally.name}. Your occasional ally approaches, smirking slyly. "Fancy meeting you here", you say to ${gPron(ally, "object")}. "Thanks for the heads-up." ${ucInit(gPron(ally, "subject"))} claps ${gPron(ally, "possessive")} hand on your shoulder. "Help me defeat ${enemy.desc}, and I will tell you all about ${this_finalboss}."`,
-                    `"${ally.name}!" you shout at ${gPron(ally,"object")}. "Is this on you? What do you know about ${this_finalboss}?" "I can tell you something," ${gPron(ally, "subject")} answers. "But not for nothing. Are you willing to help me with something?"`
-                    ]
+                    `"${ally.name}!" you shout at ${gPron(ally, "object")}. "Is this on you? What do you know about ${this_finalboss}?" "I can tell you something," ${gPron(ally, "subject")} answers. "But not for nothing. Are you willing to help me with something?"`
+                ]
                 wincondition_txt = `${randFrom(escort_prologue)} ${randFrom(default_clues)}`
 
             } else if (wincondition == "guide") {
@@ -2069,15 +2117,15 @@
                 let guide_prologue = [
                     `After the previous encounter, you see a familiar silhouette materialize from the smoke and dust before you: ${ally.name}. Your occasional ally approaches, smirking slyly. "Fancy meeting you here", you say to ${gPron(ally, "object")}. "Thanks for the heads-up."`,
                     `You meet ${ally.name} on the corner of a warehouse. "Glad you found the place alright," ${ally.name} says. "This is a big catch," you answer. "Good work finding it." "It's easy to find ${enemy.name} activity if you merely keep your eyes open," ${ally.name} responds.<br><br>"Let's do this," you say.`,
-                    `${ally.name} follows you and gives you a warning. "${enemy.boss} will make you regret your challenge, Gladiators," ${gPron(ally,"subject")} calls. "Prepare to meet your fate by ${gPron(enemy,"possessive")} hands." "Hah" you laugh.`,
+                    `${ally.name} follows you and gives you a warning. "${enemy.boss} will make you regret your challenge, Gladiators," ${gPron(ally, "subject")} calls. "Prepare to meet your fate by ${gPron(enemy, "possessive")} hands." "Hah" you laugh.`,
                     `The Citadel has assigned you a handler for this mission. "I don't understand," you say, looking at ${ally.name} with skepticism. "Why such a reckless attack plan? Agent Fletch would not risk everything like this." "I'm not Agent Fletch," ${ally.name} says. Now prepare yourself, and we are almost out of time.`,
                     `The Citadel has assigned you a handler for this mission. "And what of now?" you ask, frustrated with the unexpected addition. "Today, I will personally oversee your actions and I will give detailed report to my superiors," ${ally.name} answers.`,
-                    `"It is dangerous out there. You shouldn't go alone," ${ally.name} tells you. "Take me with you."`                    ]
+                    `"It is dangerous out there. You shouldn't go alone," ${ally.name} tells you. "Take me with you."`]
                 wincondition_txt = `${randFrom(guide_prologue)} ${randFrom(hence_words)}`
 
             } else if (wincondition == "hostages") {
 
-                let bystander_words = [`bystanders`,`people`]
+                let bystander_words = [`bystanders`, `people`]
 
                 let protection_prologue = [`there are numerous innocent ${randFrom(bystander_words)} in the area, and protecting them is ${randFrom(priority_words)}`]
 
@@ -2246,7 +2294,7 @@
             let lastthoughts = lastThoughts(enemy)
 
             let loseresult = [
-                `"${gloat[0]}" ${enemy.boss} says as ${gPron(enemy,"subject")} stalks around you, beaten. "${gloat[1]}"`,
+                `"${gloat[0]}" ${enemy.boss} says as ${gPron(enemy, "subject")} stalks around you, beaten. "${gloat[1]}"`,
                 `"${gloat[0]}" ${enemy.boss} says, arms crossed confidently in front of ${gPron(enemy, "object")}. "${gloat[1]}" ${ucInit(gPron(enemy, "subject"))} turns to face ${rival.name + " and " + randFrom(enemy.minionnames)}, ${gPron(enemy, "possessive")} final command echoing powerfully off the walls with a sudden finality. "${finisher}!"`,
                 `"${gloat[0]}" ${enemy.boss} says as your body is strapped into a large metal apparatus in ${enemy.boss == "Jackal" ? "her" : "Jackal's"} laboratory. "${gloat[1]}"`,
                 `"Gladiator?" Agent Fletch's voice sounds in your ear, small and tinny from your damaged communicator." What's the status?" You watch from your place on the floor, unable to respond as ${enemy.boss} returns to ${gPron(enemy, "possessive")} plan.`,
@@ -2945,8 +2993,8 @@
 
         function getTransformationSequence(enemy, blade = null, source = null) {
 
-            source == null ? source = enemy.name : ()=>{}
-            blade == null ? blade = `blade` : ()=>{}
+            source == null ? source = enemy.name : () => { }
+            blade == null ? blade = `blade` : () => { }
 
             tranformations = [`Standing in the middle of the temple, ${gPron(enemy, "subject")} rises up off the stone floor, the ${mysticalSynonym()} powers swirling around ${gPron(enemy, "object")}. You watch as ${gPron(enemy, "possessive")} muscles grow, ${gPron(enemy, "possessive")} eyes burn, and ${gPron(enemy, "possessive")} body pulses with the ${mysticalSynonym()} energies!`,
             `Surrounded by an aura as dark and ominous as ${gPron(enemy, "possessive")} very reputation, ${gPron(enemy, "subject")} steps forth. ${ucInit(gPron(enemy, "possessive"))} eyes glow with a deep red energy, and ${gPron(enemy, "subject")} turns those burning orbs on you.`,
