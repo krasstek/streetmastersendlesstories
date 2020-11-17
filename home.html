@@ -93,7 +93,7 @@
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#printcards" data-transition="pop" data-theme="b">
-                                <h2>PRINTABLE CARDS (WIP)</h2>
+                                <h2>PRINTABLE CARDS</h2>
                             </a></li>
                     </ul>
                 </div>
@@ -257,20 +257,23 @@
     <div data-role="page" id="printcards" data-theme="b">
 
         <div data-role="header" id="printcards-header" data-theme="b">
-            <h2>PRINTABLE CARDS (WIP)</h2>
+            <h2>PRINTABLE CARDS</h2>
         </div>
 
-        <div data-role="main" id="printable_cards" class="ui-content" style= "display: block; flex-direction: row; flex-wrap: wrap">
-                <ul data-role="listview" data-inset="true">
-                    <li><a href="#intro">NO STORY YET GENERATED</a></li>
-                </ul>
+        <div data-role="main" id="printable_cards" class="ui-content"
+            style="display: block; flex-direction: row; flex-wrap: wrap">
+            <ul data-role="listview" data-inset="true">
+                <li><a href="#intro">NO STORY YET GENERATED</a></li>
+            </ul>
         </div>
 
         <div data-role="footer" id="printcards-footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a class = "ui-icon-arrow-l ui-btn-icon-top" href="#" data-rel="back" data-direction="reverse" data-theme = "b"></a></li>
-                    <li><a class = "ui-icon-back ui-btn-icon-top" href="#intro" data-transition="fade" data-theme = "b"></a></li>
+                    <li><a class="ui-icon-arrow-l ui-btn-icon-top" href="#" data-rel="back" data-direction="reverse"
+                            data-theme="b"></a></li>
+                    <li><a class="ui-icon-back ui-btn-icon-top" href="#intro" data-transition="fade" data-theme="b"></a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -309,13 +312,67 @@
 
         });
 
-        $(function () {
-            $("#savepop").enhanceWithin().popup();
+        $("#savepop").enhanceWithin().popup();
+
+        $(document).on("pagebeforeshow", "#printcards", function () {
+            $("div[class=print-card-container]").each(function () {
+                $(this).css("opacity", "0")
+            })
+        });
+
+        /*     (".storycardfront-prologue, .storycardfront-title, .storycardback-epiloguetitle, .storycardback-epilogue-top, storycardback-epilogue-bottom").each(function() */
+
+        $(document).on("pageshow", "#printcards", function () {
+
+            $(".storycardfront-title").each(function () {
+                if ($(this).prop('scrollHeight') > ($(this).height() + 9)) {
+                    do {
+                        $(this).css({ 'font-size': '-=1' })
+                    } while (
+                        $(this).prop('scrollHeight') > ($(this).height() + 9)
+                    )
+                }
+            })
+
+            $(".storycardfront-prologue").each(function () {
+                if ($(this).prop('scrollHeight') > ($(this).height() + 25)) {
+                    do {
+                        $(this).css({ 'font-size': '-=1', "padding": "-=1mm -=0mm" })
+                    } while (
+                        $(this).prop('scrollHeight') > ($(this).height() + 25)
+                    )
+                }
+            })
+
+            $(".storycardback-epilogue-top, .storycardback-epilogue-bottom").each(function () {
+                if ($(this).prop('scrollHeight') > ($(this).height() + 50)) {
+                    do {
+                        $(this).css({ 'font-size': '-=1' })
+                    } while (
+                        $(this).prop('scrollHeight') > ($(this).height() + 50)
+                    )
+                }
+            })
+
+            $(".storycardback-epiloguetitle").each(function () {
+                if ($(this).prop('scrollHeight') > ($(this).height() + 4)) {
+                    do {
+                        $(this).css({ 'font-size': '-=1' })
+                    } while (
+                        $(this).prop('scrollHeight') > ($(this).height() + 4)
+                    )
+                }
+            })
+
+            $("div[class=print-card-container]").each(function () {
+                $(this).css("opacity", "1")
+            })
+
         });
 
         function createPageContent(pagecontent) {
 
-            $("#printable_cards").html("").css("display","flex")
+            $("#printable_cards").html("").css("display", "flex")
 
             deletePages()
 
@@ -385,23 +442,25 @@
                 `)
 
                 printCard = (
-                    `<div class="print-card-container" id="card_front_${index}">
+                    `<div class = "card-both-sides">
+                    <div class="print-card-container">
                         <div class = "storycardfront-title">
-                            <div class = "circleicon">
-                                <span class="circle-outer">
-                                    <span class="circle-middle">
-                                        <span class="circle-inner"></span>
-                                    </span>
+                            ${storyname}   
+                        </div>
+                        <div class = "circleicon">
+                            <span class="circle-outer">
+                                <span class="circle-middle">
+                                    <span class="circle-inner"></span>
                                 </span>
-                            </div>${storyname}   
+                            </span>
                         </div>
                         <div class = "storycard-divider"></div>
                         <div class = "storycardfront-subtitle">${finalboss.toUpperCase()} STORY <span style="float:right;">PART ${this.chapter}</span></div>
                         <div class = "storycard-divider"></div>
-                        <div class = "storycardfront-prologue" id = "cardprologue_${index}">${this.prologue.trim()}</div>
+                        <div class = "storycardfront-prologue">${this.prologue.trim()}</div>
                         <div class = "storycard-divider"></div>
                         <div class = "storycardfront-setup">
-                            <div class = "setuptext"><b>Setup:</b><br>${this.setup.trim()}</div>
+                            <b>Setup:</b><br>${this.setup.trim()}
                             <div class = "expansionicon">
                                 <span class="infinity-before"></span><span class="infinity-after"></span>
                             </div>
@@ -434,18 +493,19 @@
                             <div class = "storycardback-bottomtitle">PART ${this.chapter} EPILOGUE</div>
                         </div>
                     </div>
+                    </div>
                         `)
 
                 cardFront.appendTo($.mobile.pageContainer);
                 $("#printable_cards").append(printCard);
-                                                        
+
 
             })
 
             return pagecontent.hasOwnProperty("page") ? $.mobile.changePage(`#${pagecontent.page}`, false) : $.mobile.changePage(`#page_0`)
 
         }
-        
+
 
         let savegamecontent
 
@@ -664,7 +724,7 @@
 
                 { name: "Nahualli", expansion: "stretchgoals17", boss: "Tlazolteotl", bosstitle: _.template('Aztec ${randFrom(["goddess of death", "empress", "sorcerer"])}'), gender: "female", desc: "the ancient force of restless warriors", addressing: "mortals", minions: _.template('${randFrom(["necromancers", "ancient callers", "pale wizards"])} and ${randFrom(["shambling cadavers", "walking dead", "rotten corpses"])}'), threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller", "Pale Caller"], preparedboss: [["Decaying Blast", "and play it"]], gloat: [[`You must be taught what has been forgotten,`, `You must be taught the wrath of the old gods.`], [`I will have your soul!`, `I will taste its sins!`], [`You have strayed from the cycle of life and death,`, `I will make you my next sacrifice.`], [`I have conquered this world before,`, `I will not be stopped by the likes of you children!`], [`Enough of these games!`, `I will take what I am due!`], [`You will pay your goddess her due respect!`, `I will make you my next sacrifice!`], [`Even the strongest warriors will fall!`, `Fall to the power of death!`]], expression: _.template(`beautiful and terrible all at once`), attacks: { antiair: `hurled magical spells`, detonation: `She touches the amulet around her neck. The world around you seems to blow away in a deafening explosion of arcane energy` }, keywords: ["undead", "swarmed"], ritual: "Mictecacihuatl", swarm: "zombies" },
 
-                { name: "Oni", expansion: "legendofoni", boss: "Yokai", bosstitle: _.template('${randFrom(["cursed, powerful warrior","warrior born of mystery and fire"])}'), gender: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: _.template('${randFrom([`ancient`,`immortal`,`lost`,`undead`,`cursed`,`shadow`])} ${randFrom([`warriors`,`ninja`,`doppelgangers`])} and ${randFrom([`powerful`,`seductive`,`nine-tailed`])} ${randFrom([`spirits`,`foxes`,`shapeshifters`])}'), threat: "lifts his mighty fist, suddenly engulfed in eldritch flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike", "and play it"]], gloat: [[`Are you prepared to face the wrath of Shin Yokai?`, `No, you’re not prepared!`], [`The hunger of the Oni is insatiable!`, `And you will be the food!`]], expression: _.template(`his fiery stare and gritted teeth sending a message of barely contained fury`), attacks: { antiair: `hurled bolts of eldritch energy`, detonation: `With one enraged scream, he explodes with a tremendous flash of energy from within, causing a blazing ring of fire to spread outwards` }, keywords: ["oni","swarm"], ritual: "Oni", swarm: "shadow ninja" },
+                { name: "Oni", expansion: "legendofoni", boss: "Yokai", bosstitle: _.template('${randFrom(["cursed, powerful warrior","warrior born of mystery and fire"])}'), gender: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: _.template('${randFrom([`ancient`,`immortal`,`lost`,`undead`,`cursed`,`shadow`])} ${randFrom([`warriors`,`ninja`,`doppelgangers`])} and ${randFrom([`powerful`,`seductive`,`nine-tailed`])} ${randFrom([`spirits`,`foxes`,`shapeshifters`])}'), threat: "lifts his mighty fist, suddenly engulfed in eldritch flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike", "and play it"]], gloat: [[`Are you prepared to face the wrath of Shin Yokai?`, `No, you’re not prepared!`], [`The hunger of the Oni is insatiable!`, `And you will be the food!`]], expression: _.template(`his fiery stare and gritted teeth sending a message of barely contained fury`), attacks: { antiair: `hurled bolts of eldritch energy`, detonation: `With one enraged scream, he explodes with a tremendous flash of energy from within, causing a blazing ring of fire to spread outwards` }, keywords: ["oni", "swarm"], ritual: "Oni", swarm: "shadow ninja" },
 
                 { name: "Onyx League", expansion: "twintiger", boss: "Mack", bosstitle: _.template('${randFrom(["black-hearted","mysterious"])} overlord'), gender: "male", desc: "the league of street gangs", addressing: "pigs", minions: _.template("vicious gangers and street criminals"), threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim", "and put it into play"]], gloat: [[`Fists versus bullets?`, `I will use your butts as target practice!`], [`Greed is for amateurs,`, `I believe there should be no rules, only chaos.`], [`I have come here to create a new country,`, `A country called chaos!`], [`When the world turns upside down,`, `The best thing to do is turn right along with it.`], [`You think you're free,`, `But you don't understand what freedom is.`], [`Only after disaster,`, `Can we be resurrected.`], [`It's only after you've lost everything,`, `That you're free to do anything.`], [`Nothing is static, everything is evolving,`, `Everything is falling apart.`], [`Before you die, I give you a glimpse of a brave new world of freedom,`, `Am I not merciful?`]], expression: _.template(`his keen eyes and predatory sneer reeking of confidence and ruthlessness`), attacks: { antiair: `hail of machine-gun fire` }, keywords: ["guns"], get gunmen() { return this.bosstitle() } }
             ];
@@ -1110,7 +1170,7 @@
             let pagecontent = { reference: referencetext, text: cardtexts, storyname: storyname, finalboss: finalboss.name }
 
             createPageContent(pagecontent)
-            
+
 
         }
 
@@ -2050,7 +2110,7 @@
 
             let intel_words = [`the intel`, `the evidence`, `the knowledge`, `the information`, `what was needed`]
             let acquire_words = [`acquired`, `obtained`, `collected`, `found`, `discovered`, `learned`, `tracked down`]
-            let interrogate_words = randFrom([`interrogated`, `questioned`, `examined`, `probed`])
+            let interrogate_words = randFrom([`interrogated`, `questioned`, `examined`])
             let intel_goal = `${randFrom(acquire_words)} ${randFrom(intel_words)}`
 
             let angryrival = [
