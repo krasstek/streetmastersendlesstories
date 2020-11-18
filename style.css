@@ -21,13 +21,14 @@ background-size:cover;
         }
 
    .print-card-container {
+        transform: scale(0.93);
         position:relative;
         page-break-inside: auto;
     }
   }
 
 .card-both-sides {
-    margin: 1mm;
+    margin: 0.2mm 1mm;
     display: flex;
     flex-direction: row;
 }
@@ -99,11 +100,18 @@ background-size:cover;
           font-family: 'Yanone Kaffeesatz', sans-serif;
           font-size: 28px;
           box-sizing: border-box;
-          padding-top: 2mm;
-          padding-left: 15mm;
+          padding: 1mm 1mm 1mm 16mm;
           text-align: center;
+          display: flex;
+          flex-direction: column;
       }
-      
+
+      .storycardfront-title span{
+        align-self: flex-end;
+        margin-top: auto;
+        margin-right: auto;
+    }
+ 
       .refcard-subtitle,
       .storycardfront-subtitle{
           min-height: 3mm;
@@ -119,7 +127,7 @@ background-size:cover;
       
       
       .storycardfront-prologue{
-          flex: 4;
+          flex: 5;
           background:url("Street Masters card background.png");
           background-size:cover;
           overflow: hidden;

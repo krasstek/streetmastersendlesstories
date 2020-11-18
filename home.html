@@ -89,15 +89,6 @@
                 </div>
             </div>
 
-            <div class="ui-grid-solo" id="to_print_cards">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#printcards" data-transition="pop" data-theme="b">
-                                <h2>PRINTABLE CARDS</h2>
-                            </a></li>
-                    </ul>
-                </div>
-            </div>
 
             <div data-role="popup" id="loadpopup">
                 <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext"
@@ -256,7 +247,7 @@
 
     <div data-role="page" id="printcards" data-theme="b">
 
-        <div data-role="header" id="printcards-header" data-theme="b">
+        <div data-role="header" id="printcards-header" data-theme="b" style= "white-space: normal">
             <h2>PRINTABLE CARDS</h2>
         </div>
 
@@ -335,11 +326,11 @@
             })
 
             $(".storycardfront-prologue").each(function () {
-                if ($(this).prop('scrollHeight') > ($(this).height() + 25)) {
+                if ($(this).prop('scrollHeight') > ($(this).height() + 30)) {
                     do {
                         $(this).css({ 'font-size': '-=1', "padding": "-=1mm -=0mm" })
                     } while (
-                        $(this).prop('scrollHeight') > ($(this).height() + 25)
+                        $(this).prop('scrollHeight') > ($(this).height() + 30)
                     )
                 }
             })
@@ -434,6 +425,7 @@
                     <li><a class = "ui-icon-arrow-l ui-btn-icon-top" href="#" data-rel="back" data-direction="reverse" data-theme = "b"></a></li>
                     <li><a class = "ui-icon-back ui-btn-icon-top" href="#intro" data-transition="fade" data-theme = "b"></a></li>
                     <li><a class = "ui-icon-user ui-btn-icon-top" href="#refpanel" data-transition = "slidedown" data-theme = "b"></a></li>
+                    <li><a class = "ui-icon-grid ui-btn-icon-top" href="#printcards" data-transition="pop" data-theme = "b"></a></li>
                     <li><a class = "ui-icon-arrow-d ui-btn-icon-top" href="#savepop" data-rel="popup" data-transition = "pop" data-theme = "b"></a></li>
                 </ul>
             </div>
@@ -445,7 +437,7 @@
                     `<div class = "card-both-sides">
                     <div class="print-card-container">
                         <div class = "storycardfront-title">
-                            ${storyname}   
+                            <span>${storyname}</span>   
                         </div>
                         <div class = "circleicon">
                             <span class="circle-outer">
@@ -460,7 +452,7 @@
                         <div class = "storycardfront-prologue">${this.prologue.trim()}</div>
                         <div class = "storycard-divider"></div>
                         <div class = "storycardfront-setup">
-                            <b>Setup:</b><br>${this.setup.trim()}
+                            ${this.setup.trim()}
                             <div class = "expansionicon">
                                 <span class="infinity-before"></span><span class="infinity-after"></span>
                             </div>
@@ -817,8 +809,8 @@
                     loot: "the weapons",
                     rivaltext: _.template(' turns to you as ${gPron(enemy, "possessive")} partner in trade, ${rival.name},<%=rivalboost ? ` heavily armed and armored,`: ``%> stashes <%=(knowledge == "clueless" || knowledge == "captured") ? "a" : "the"%> ${gizmo}.'),
                     gloat: [[`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], [`Okay, I'm reloaded!`, `You ready? Here comes the pain!`], [`You wanna play rough? Ok,`, `Say hello to my little friend!`]],
-                    hottrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that the ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : finalboss.name%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You creep low, listening carefully as the they spill all the plans. Once you\'ve heard enough, you jump the startled pair.'),
-                    coldtrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that the ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : finalboss.name%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You move quickly to keep up and continue your eavesdropping. "Boss!" a guard calls out. You hadn\'t seen him behind the crates nearby, but when you moved to take cover behind them, you were spotted instantly.'),
+                    hottrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that the ${enemy.name} is acting on behalf of <%=finalboss.name == enemy.name ? finalboss.boss : `the ${finalboss.name}`%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You creep low, listening carefully as the they spill all the plans. Once you\'ve heard enough, you jump the startled pair.'),
+                    coldtrail: _.template('hear voices nearby. Ducking behind cover, you listen intently to hear that the ${enemy.name} is acting on behalf of the <%=finalboss.name == enemy.name ? finalboss.boss : `the ${finalboss.name}`%>.<br><br>They\'re in the middle of a trade giving away heavy artillery in order to get their hands on an encrypted ${gizmo}. The pair in the discussion start to move away, and their voices begin to fade. You move quickly to keep up and continue your eavesdropping. "Boss!" a guard calls out. You hadn\'t seen him behind the crates nearby, but when you moved to take cover behind them, you were spotted instantly.'),
                     clueless: _.template('have to dive for cover behind nearby crates as you run into the ${enemy.minions()} guarding the trade. "Get the guns!" you hear a voice call out. "And get those spies!"'),
                     prologue: _.template('${trail}, you locate <%=knowledge == "hottrail" ? `the` : `a suspicious` %> warehouse. You enter, and almost immediately ${stagevar}<br><br>${bossDescription(enemy)}<%=rivalpresence ? rivaltext : `, standing next to the contact for the trade, shoots the ${randFrom(["man","woman"])} dead, taking ${knowledge == "clueless" ? "a" : "the"} ${gizmo} from the body.`%> "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}'),
                     captured: _.template('You wake up on cold concrete floor, and hear a voice explaining: "Your revenge is at hand. Voilà!" There\'s a slight pause. "It\'s light, handle\'s adjustable for easy carrying, good for righties and lefties, breaks down into four parts, ideal for quick discreet interventions. A word on firepower.. oh, our practice targets seem to have come to their senses!"<br><br>The ${enemy.minions()} of the ${enemy.name} remove your hoods, and you see ${bossDescription(enemy)} nodding to ${gPron(enemy,"possessive")} companion. "I can take that later." ${ucInit(gPron(enemy, "subject"))} <%=rivalpresence ? rivaltext : `turns from the client who stashes a ${gizmo}.`%> "Let the presentation commence!"'),
@@ -1766,7 +1758,7 @@
                 `With no clue what to do next, you have no choice but to reconnect with Agent Fletch and hope the Citadel has more intel.`,
             `You call Agent Fletch and request a cleanup team, and then you begin searching through the area, and find ${whichPreposition(getGizmo())} placed almost intentionally where you would find it. From the device you find maps and coordinates.`,
             `You vow to catch the ${finalboss.name} before their ${getMasterPlan()} is complete!`,
-            `This was only a delay in the inevitable. You know ${enemy.boss} is only a beatstick, not the mastermind. ${ucInit(gPron(enemy, "subject"))} will lead you to ${finalboss.boss}, and you will be making examples of them both.`,
+            `This was only a delay in the inevitable. You know ${enemy.boss} is only a beatstick, not the mastermind. ${ucInit(gPron(enemy, "subject"))} will lead you to ${finalboss.boss == enemy.boss ? `The Master` : finalboss.boss}, and you will be making examples of them both.`,
                 `Just then, you got a call on your communicator from Agent Fletch. "Heads up, Gladiators." Agent Fletch said. "We've got a a problem."`
             ]
 
@@ -2479,7 +2471,7 @@
                 `Your body spasms, fighting against the green gel. Unable to breathe, you claw wildly at the hard, translucent surface encasing you. Shadowy figures move about on the other side of the barrier, and suddenly the lid slides open, and you fall to the ground. The lights are blindingly bright to your aching eyes, and you draw air in your lungs like it's the first time in your life. "Welcome, my children!" you hear a woman calling. What is happening? Was that a dream?`,
                 `The screens of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "Gladiators!" Agent Fletch calls from beyond the observation screen, his face dark with disappointment. "Only ${Math.ceil(Math.random() * 10000)} points! How do you think you can face the real ${enemy.name}?!"`,
                 `${enemy.boss} cackles as you fall back, defeated. "${gloat[0]}" "You will fall. If not now, then one day," you retort. "${gloat[1]}"`,
-                `"${gloat[0]}" ${enemy.name} taunts you. "${gloat[1]}"`
+                `"${gloat[0]}" ${enemy.boss} taunts you. "${gloat[1]}"`
             ]
 
             let finalresult
