@@ -382,6 +382,61 @@
             $(`#rivalintro`).html(referencetext[2])
             $(`#rivalsetup`).html(referencetext[4])
 
+            $("#printable_cards").append(
+                    `<div class = "card-both-sides">
+                    <div class="print-card-container">
+                        <div class = "storycardfront-title">
+                            <span>${storyname}</span>   
+                        </div>
+                        <div class = "circleicon">
+                            <span class="circle-outer">
+                                <span class="circle-middle">
+                                    <span class="circle-inner"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class = "storycard-divider"></div>
+                        <div class = "storycardfront-subtitle">CHARACTER OVERVIEW</span></div>
+                        <div class = "storycard-divider"></div>
+                        <div class = "storycardfront-prologue" style = "font-size: 10px; font-style: normal;">
+                            ${referencetext[0].trim()}<br>The reverse side of this card gives suggestions for additional Allies and Rivals to be used during this story.
+                        </div>
+                        <div class = "storycard-divider"></div>
+                        <div class = "storycardfront-setup" style = "flex: 0.2">
+                            <div class = "expansionicon">
+                                <span class="infinity-before"></span><span class="infinity-after"></span>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class = "print-card-container">
+                        <div class = "storycardback-bar-top" style = "height: 6mm;"></div>
+                        <div class = "storycardback-epilogue-top" style = "font-style: normal; overflow: none; padding-top: 8mm;">
+                            ${referencetext[1]}
+                        </div>
+                        <div class = "storycard-divider"></div>
+                        <div class = "storycardfront-setup" style = "flex: 0.2; border-radius: 0px;"><span>${referencetext[3]}</span></div>
+                        <div class = "storycardback-titlebar" style = "top: 3.8mm">
+                                <div class = "storycardback-epiloguetitle">If you choose to use Allies</div>
+                        </div>
+                        <div class = "storycardback-colorbar-back" style = "top: 5.7mm"></div>
+                        <div class = "storycardback-colorbar-green" style = "top: 5.7mm"></div>
+                        <div class = "storycardback-epilogue-bottom" style = "font-style: normal; overflow:none; padding-top: 8mm;">
+                            ${referencetext[2]}
+                        </div>
+                        <div class = "storycard-divider"></div>
+                        <div class = "storycardfront-setup" style = "flex: 0.2; border-radius: 0px; padding-bottom: 3mm;"><span>${referencetext[4]}</span></div>
+                        <div class = "storycardback-titlebar" style = "top: 4.35cm">
+                                <div class = "storycardback-epiloguetitle">If you choose to use Rivals</div>
+                        </div>
+                        <div class = "storycardback-colorbar-back" style = "top: 4.54cm"></div>
+                        <div class = "storycardback-colorbar-red" style = "top: 4.54cm"></div>
+                        <div class = "storycardback-bar-bottom">
+                        </div>
+                    </div>
+                    </div>
+                        `)
+
             savegamecontent = pagecontent
 
             $(cardtexts).each(function (index) {
@@ -2708,7 +2763,7 @@
             }
 
             gladiators.length > 0 ? ourheroes = ourheroes.substring(0, ourheroes.length - 2) +
-                ". You can pick any Global Gladiators for this story, but some might make more sense than others." :
+                ". You can pick any Global Gladiators for this story, but some might make more sense than others. The story is not intentionally balanced for any specific fighters." :
                 ourheroes = `You can pick any Global Gladiators for this story, but some might make more sense than others.<br>`
 
 
@@ -2717,6 +2772,7 @@
                 if (gladiators[i].hasOwnProperty('instructions'))
                     personalsetup = personalsetup + " " + gladiators[i].instructions + " "
             }
+            personalsetup != "" ? personalsetup = `<br><br><b>Hero story instructions:</b> ${personalsetup}` : ()=>{}
 
             ourheroes = ourheroes + personalsetup + "<br>"
 
@@ -2732,7 +2788,7 @@
                 allysetup = allysetup + " " + allygroup[i].name + " (Ally)" + (i == allygroup.length - 2 ? " and " : ", ")
             }
 
-            allygroup.length > 0 ? allysetup = allysetup.substring(0, allysetup.length - 2) + " into the Story Pool." : allysetup = `You can pick any Allies for this story, but some might make more sense than others.`
+            allygroup.length > 0 ? allysetup = allysetup.substring(0, allysetup.length - 2) + " in the Story Pool." : allysetup = `You can pick any Allies for this story, but some might make more sense than others.`
 
             let rivalsetup = setup
 
@@ -2740,7 +2796,7 @@
                 rivalsetup = rivalsetup + " " + rivalgroup[i].name + " (Rival)" + (i == rivalgroup.length - 2 ? " and " : ", ")
             }
 
-            rivalgroup.length > 0 ? rivalsetup = rivalsetup.substring(0, rivalsetup.length - 2) + " into the Story Pool." : rivalsetup = `You can pick any Rivals for this story, but some might make more sense than others.`
+            rivalgroup.length > 0 ? rivalsetup = rivalsetup.substring(0, rivalsetup.length - 2) + " in the Story Pool." : rivalsetup = `You can pick any Rivals for this story, but some might make more sense than others.`
 
             let text = []
 
@@ -3150,7 +3206,7 @@
                 default: text = (stance == "Ally" ? "For whatever reason, these people stand with you againt the schemes of the Kingdom." : "For whatever reason, these people stand with the Kingdom against you.");
             }
 
-            text = `If you wish to use additional ${stance == "Ally" ? "Allies" : "Rivals"} during this story, read the following text and use the setup instructions below.<br><br><i>`
+            text = `If you choose to use additional ${stance == "Ally" ? "Allies" : "Rivals"} during this story, read the following text and use the setup instructions below.<br><br><i>`
                 + text + `</i>`
             return text
 
