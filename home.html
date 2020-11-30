@@ -794,7 +794,7 @@
 
             let enemies = [
 
-                { name: "Abandoned", expansion: "aftershock", boss: "Project X", bosstitle: _.template('${randFrom(["mutating","vengeful","horrendous"])} ${randFrom(["experiment","creature","monster"])}'), gender: "female", desc: "the covert triad", addressing: "playthings", minions: _.template("${randFrom(['insane','unhinged'])} nurses and ${randFrom(['mutated','monstrous'])} ${randFrom(['experiments','patients'])}"), threat: "whips her tendrous tentacles menacingly at you", minionnames: ["Stacey", "Amalgam", "The Baron"], preparedboss: [["Biological Mind Link", "and put it into play"]], gloat: [[`I will not let you hurt me,`, `You will not hurt anyone anymore.`]], expression: _.template(`turning the pits she has for eyes toward you`), attacks: {detonation: `She curls up, and in an instant arches out in a painful, twisted contortion, a blast of acid bursting from her every pore` }, keywords: ["swarm"], swarm: "fleshy growths", },
+                { name: "Abandoned", expansion: "aftershock", boss: "Project X", bosstitle: _.template('${randFrom(["mutating","vengeful","horrendous","tortured"])} ${randFrom(["experiment","creature","monster","bioweapon"])}'), gender: "female", desc: "irradiated mutants", addressing: "playthings", minions: _.template("${randFrom(['insane','unhinged'])} nurses and ${randFrom(['mutated','monstrous'])} ${randFrom(['experiments','patients'])}"), threat: "whips her creeping tendrils menacingly at you", minionnames: ["Stacey", "Amalgam", "The Baron"], preparedboss: [["Biological Mind Link", "and put it into play"]], gloat: [[`I will not let you hurt me,`, `You will not hurt anyone anymore.`]], expression: _.template(`turning the pits she has for eyes toward you`), attacks: {detonation: `She curls up, and in an instant arches out, emitting a blast of acid from her every pore` }, keywords: ["swarm"], swarm: "horrifying growths", },
 
                 { name: "All-Heaven Gang", expansion: "tideofthedragon", boss: "Train", bosstitle: _.template('${randFrom(["multibillionaire","hard-hearted","ruthless","determined"])} ${randFrom(["CEO","businessman","monk","dragon head","triad leader"])}'), gender: "male", desc: "the covert triad", addressing: "vermin", minions: _.template("cultists, triads and convicts"), threat: "drawing his finger under his chin", minionnames: ["Reina", "Big Dragon", "Goliath"], preparedboss: [["Heightened Reflexes", "and put it into play"]], gloat: [[`You will get a lesson,`, `That you will never forget.`]], expression: _.template(`eyeing you with disdain`) },
 
@@ -806,7 +806,7 @@
 
                 { name: "Kingdom", expansion: "riseofthekingdom", boss: "Jackal", bosstitle: _.template("mad scientist"), gender: "female", desc: "the mysterious criminal syndicate", addressing: "test subjects", minions: _.template("${randFrom([`enhanced`,`monstrous`,`zombie`])} ${randFrom([`soldiers`,`ninja`,`creations`])} and ${randFrom([`clone`,`molded`,`genetic`])} ${randFrom([`dolls`,`marionettes`,`puppets`,`sisters`])}"), threat: "smiles, her eyes start to glow malevolently, and you feel pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion", "and play it"]], gloat: [[`How noble of you,`, `To donate your bodies for science.`], [`You won't get out of here,`, `I never turn down new specimens!`], [`You have played your part well,`, `But who do you think you really are?`], [`You always are so predictable,`, `Who do think you are working for?`], [`Children,`, `You should not have risen against your mother.`], [`Seems there is no shortage of new specimens these days,`, `But that is a positive problem.`], [`I couldn't have asked for better specimens,`, `It's time you provide your skills and abilities to the Kingdom.`],], expression: _.template(`her constricted pupils and demonic grin showing no humanity`), attacks: { antiair: "an iridescent lance of psychic energy" }, keywords: ["swarmed"], swarm: "marionettes" },
 
-                { name: "Kingdom", expansion: "riseofthekingdom", boss: "Kemono", bosstitle: _.template('${randFrom(["imposing ","four-armed ",""])}green ${randFrom(["mutant","monster"])}'), gender: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: _.template("mysterious ninja and martial arts masters"), threat: "lifts his mighty fists, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge", "and put it into play"]], gloat: [[`You should not have come,`, `Now you have forced my hand.`], [`You should not have come,`, `What soon will happen, you have brought upon yourselves.`]], expression: _.template(`his demonic eyes and grim expression delivering a promise of violence`), attacks: { antiair: "a brilliant shock of burning white lightning", detonation: `Suddenly, you feel your hair stand up, and in an instant Kemono explodes with electricity` } },
+                { name: "Kingdom", expansion: "riseofthekingdom", boss: "Kemono", bosstitle: _.template('${randFrom(["imposing ","four-armed ",""])}green ${randFrom(["mutant","monster"])}'), gender: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: _.template("mysterious ninja and martial arts masters"), threat: "lifts his mighty fists, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge", "and put it into play"]], gloat: [[`You should not have come,`, `Now you have forced my hand.`], [`You should not have come,`, `What soon will happen, you have brought upon yourselves.`]], expression: _.template(`his demonic eyes and grim expression delivering a promise of violence`), attacks: { antiair: "a brilliant shock of burning white lightning", detonation: `Suddenly, you feel your hair stand up, and in an instant Kemono explodes with electricity` }, keywords: ["explosion"], explosions: "uncontrolled electrical surges" },
 
                 { name: "Kingdom", expansion: "riseofthekingdom", boss: "Shadow", bosstitle: _.template("ominous mastermind"), gender: "male", desc: "the mysterious criminal syndicate", addressing: "fools", minions: _.template("${randFrom([`mysterious`,`tireless`,`silent`])} ${randFrom([`soldiers`,`ninja`,`generals`])} and ${randFrom([`clone`,`identical`,`psychic`])} ${randFrom([`marionettes`,`puppets`,`martial artists`])}"), threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades", "and put it into play"]], gloat: [[`My, what a brave, handsome group,`, `Perhaps it would interest you to see what fate has in store for you.`], [`You have interfered for the last time,`, `Now, you shall die.`], [`My children, you have come to me. For who now is your father if it is not me?`, `When I am gone, you will have never been. What would your world be without me?`], [`On its own, humanity is a destructive force,`, `It needs a master.`], [`Your meddling grows weary,`, `The time has come for us to end this, and it is my pleasure to grant you release from this foolish errand.`]], expression: _.template(`his calculating eyes reflecting a cold, merciless intellect`), keywords: ["blade"], blade: "ephemeral blade" },
 
@@ -1163,8 +1163,7 @@
                 { name: "Juan", expansion: "riseofthekingdom", gender: "male", keywords: ["Cartel", "Organized Crime", "Gunslinger", "Street", "Clone", "Juan"] },
                 { name: "Kemono", expansion: "riseofthekingdom", gender: "male", keywords: ["Beast", "Kingdom", "Competitor", "Chi", "Clone", "Kemono", "Tlazolteotl", "Horseman", "Aztec"] },
                 { name: "Khadath Ahemusei", expansion: "battlecon", gender: "male", keywords: ["Indines", "Science", "Extraplanar", "Wanderer", "Clone"] },
-                /*                 leeta is in redemption too, fix */
-                { name: "Leeta", expansion: "twintiger", gender: "female", keywords: ["Brook City", "Street", "Wanderer", "Past", "Clone"] },
+                { name: "Leeta", expansion: ["twintiger","redemption"], gender: "female", keywords: ["Brook City", "Street", "Wanderer", "Past", "Clone"] },
                 { name: "Lotus", expansion: "keystothekingdom", gender: "female", keywords: ["Brook City", "Golden Dragons", "Organized Crime", "Past", "Clone", "Ah Long of Brook City"] },
                 { name: "Marionette Doll", expansion: "redemption2", gender: "female", keywords: ["Dark Matter", "Kingdom", "Martial Arts Master", "Psychic", "Clone", "Shin Yokai"] },
                 { name: "Mary Ann", expansion: "twintiger", gender: "female", keywords: ["Street", "Clone", "Twin Tiger", "Onyx League", "Youth"] },
@@ -1172,13 +1171,12 @@
                 { name: "Mr. Apple", expansion: "stretchgoals17", gender: "male", keywords: ["Celebrity", "Fraud", "Sensei", "Music", "Clone", "Mr. Apple"] },
                 { name: "Natalia", expansion: "redemption2", gender: "female", keywords: ["Black Ops", "Global Gladiator", "Martial Arts Master", "Soldier", "Wanderer", "Clone", "Natalia", "Project X", "Street"] },
                 { name: "Power Soldier", expansion: "redemption2", gender: "male", keywords: ["Dark Matter", "Beast", "Black Ops", "Kingdom", "Martial Arts Master", "Clone"] },
-                /* project x is in aftershock too, fix*/
-                { name: "Project X", expansion: "redemption", gender: "female", keywords: ["Dark Matter", "Beast", "Insane", "Martial Arts Master", "Youth", "Clone", "Jackal", "Project X"] },
+                { name: "Project X", expansion: ["redemption","aftershock"], gender: "female", keywords: ["Dark Matter", "Beast", "Insane", "Martial Arts Master", "Youth", "Clone", "Jackal", "Project X"] },
                 { name: "Sera O'Quinn", expansion: "riseofthekingdom", gender: "female", keywords: ["Boss", "Celebrity", "Insane", "Organized Crime", "Clone", "Megan", "Sera O'Quinn"] },
                 { name: "Shadow", expansion: "riseofthekingdom", gender: "male", keywords: ["Boss", "Kingdom", "Martial Arts Master", "Chi", "Clone", "Shadow", "Horseman", "Sensei"] },
                 { name: "Shin Yokai", expansion: "redemption", gender: "male", keywords: ["Boss", "Insane", "Extraplanar", "Chi", "Clone", "Shadow", "Shin Yokai", "Horseman"] },
                 /*add keywords*/
-                { name: "Stacey", expansion: "aftershock", gender: "female", keywords: ["Clone","Parasol","Science"] },
+                { name: "Stacey", expansion: "aftershock", gender: "female", keywords: ["Clone","Parasol","Science","Organized Crime"] },
                 { name: "Star Knight Iri", expansion: "battlecon", gender: "female", keywords: ["Indines", "Extraplanar", "Blade", "Soldier", "Clone"] },
                 /*add keywords*/
                 { name: "The Proxy", expansion: "aftershock", gender: "male", keywords: ["Organized Crime","The Proxy","Parasol","Clone"] },
@@ -1190,8 +1188,8 @@
                 { name: "Zane", expansion: "riseofthekingdom", gender: "male", keywords: ["Competitor", "Chi", "Youth", "Clone", "Natalia"] }
             ];
 
-            alliesandrivals = alliesandrivals.filter(character => expansionfilter.includes(character.expansion))
-
+            alliesandrivals = alliesandrivals.filter(character => expansionfilter.some(xp => character.expansion.includes(xp)))
+    
             for (i = alliesandrivals.length - 1; i > 0; i--) {
                 if (supportingcast.includes(alliesandrivals[i].name)) {
                     alliesandrivals.splice([i], 1)
@@ -2902,13 +2900,15 @@
 
             let personalstory_enemy = `${possessiveSuffix(motivation)} personal goals and your mission have opposing paths. ${_.map(group, 'name').includes(motivation) ? `${motivation}${group.length == 2 ? `, along with ${(_.map(group, 'name')).filter(character => character != motivation)}` : ""} will be facing you wherever you mission will take you.` : `${possessiveSuffix(motivation)} closest ally will be facing you wherever your mission will take you.`} `
 
+            let oneP = group.length == 1 ? true : false
+
             let text
             switch (motivation) {
                 case "Ah Long":
                     if (stance == "Ally" && finalboss.boss == "Ah Long" && !gladiators.includes("Ah Long")) {
                         text = `The Kingdom has put a clone in Ah Long's place to rule over the Golden Dragons. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? "Wan Bo has already shared so much with Ah Long, and together they will fight alongside you for the lost honor of the Dragons." : "He knows there is only one way to convince who is the real Head of the Dragon and regain their lost strength and independence.") : "Wan Bo, who has already shared so much with Ah Long, stands with you to regain the lost honor of the Dragons."}`
-                    } else if (stance == "Ally" && finalboss.name == "Kingdom" && !gladiators.includes("Ah Long")) {
-                        text = `The Kingdom is disappointed in Ah Long's performance, and have told they will take over the Golden Dragons from him. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? "Ah Long and his closest friend Wan Bo stand together with you to regain the lost strength and independence of the Dragons." : "He knows he will need your help against the Kingdom to regain the lost strength and independence of the Dragons.") : "Wan Bo, who has shared so much with Ah Long, stands with you to regain the lost strength and independence of the Dragons."}`
+                    } else if (stance == "Ally" && !gladiators.includes("Ah Long")) {
+                        text = `The Kingdom is disappointed in Ah Long's performance, and have told ${finalboss.name == `Kingdom` ? `they` : `the ${finalboss.name}`} will take over the Golden Dragons from him. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? "Ah Long and his closest friend Wan Bo stand together with you to regain the lost strength and independence of the Dragons." : "He knows he will need your help against the Kingdom to regain the lost strength and independence of the Dragons.") : "Wan Bo, who has shared so much with Ah Long, stands with you to regain the lost strength and independence of the Dragons."}`
                     } else if (stance == "Ally") {
                         text = personalstory_ally
                     } else if (stance == "Rival" && gladiators.includes("Ah Long")) {
@@ -2927,23 +2927,23 @@
                     } else { text = personalstory_enemy };
                     break;
                 case "Aztec": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the bygone Aztec empire has received a prophecy of the future from ${randFrom(["Mictecacihuatl", "Xolotl",])}. The soul of ${finalboss.boss} belongs in Mictlan and ${group.length == 1 ? "this warrior" : "these warriors"} will deliver ${gPron(finalboss, "object")} there!` :
-                    `${group.length == 1 ? "A single warrior" : "A group of warriors"} with the might of the bygone Aztec empire has received a prophecy of the future from ${randFrom(["Mictecacihuatl", "Xolotl",])}. Your souls belong in Mictlan and ${group.length == 1 ? "this warrior" : "these warriors"} will deliver you there!`);
+                    `${oneP == 1 ? "A single warrior" : "A group of warriors"} with the might of the bygone Aztec empire has received a prophecy of the future from ${randFrom(["Mictecacihuatl", "Xolotl",])}. The soul of ${finalboss.boss} belongs in Mictlan and ${oneP ? `this warrior` : "these warriors"} will deliver ${gPron(finalboss, "object")} there!` :
+                    `${oneP ? "A single warrior" : "A group of warriors"} with the might of the bygone Aztec empire has received a prophecy of the future from ${randFrom(["Mictecacihuatl", "Xolotl",])}. Your souls belong in Mictlan and ${oneP ? `this warrior` : "these warriors"} will deliver you there!`);
                     break;
                 case "Beast": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, but ${group.length == 1 ? "this one" : "these"} seem to have been tamed - for now.
-            The strength of the ${group.length == 1 ? "beast" : "beasts"} is welcome if unnerving addition to your mission to end ${possessiveSuffix(finalboss.boss)} plans.` :
-                    `${group.length == 1 ? "This individual is" : "These individuals are"} little more than savage beasts, and ${group.length == 1 ? "this beast is" : "these are"} in the tight leash of ${finalboss.boss}, who has sent them to hunt you. 
-            ${group.length == 1 ? "It" : "They"} won't stop hunting their quarry.`);
+                    `${oneP ? "This individual is" : "These individuals are"} little more than savage beasts, but ${oneP ? "this one seems" : "these seem"} to have been tamed - for now.
+            The strength of the ${oneP ? "beast" : "beasts"} is welcome if unnerving addition to your mission to end ${possessiveSuffix(finalboss.boss)} plans.` :
+                    `${oneP ? "This individual is" : "These individuals are"} little more than savage beasts, and ${oneP ? "this one is" : "they are"} in the tight leash of ${finalboss.boss}, who has sent them to hunt you. 
+            ${oneP ? "It" : "They"} won't stop hunting their quarry.`);
                     break;
                 case "Blade": text = (stance == "Ally" ?
-                    `A wandering ${group.length == 1 ? "blademaster" : "host of blademasters"} sees ${finalboss.boss} as an opportunity to test their mettle, and has decided to walk with you.` :
-                    `A wandering ${group.length == 1 ? "blademaster" : "host of blademasters"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
+                    `A wandering ${oneP ? "blademaster" : "host of blademasters"} sees ${finalboss.boss} as an opportunity to test their mettle, and has decided to walk with you.` :
+                    `A wandering ${oneP ? "blademaster" : "host of blademasters"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
                     break;
-                case "Black Ops": text = (stance == "Ally" ? `Citadel has many spies and assassins in their contacts, and a ${group.length == 1 ? "single operative" : "team of specialists"} 
+                case "Black Ops": text = (stance == "Ally" ? `Citadel has many spies and assassins in their contacts, and a ${oneP ? "single operative" : "team of specialists"} 
             has been assigned with you to eliminate the threat ${finalboss.boss} poses.` :
                     `The world is full of shadowy organizations with spies and assassins everywhere. A mysterious malefactor has sent a 
-            ${group.length == 1 ? "single operative" : "team of specialists"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
+            ${oneP ? "single operative" : "team of specialists"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
                     break;
                 case "Boss": text = (stance == "Ally" ?
                     `A secret cabal of powerful and influential individuals have decided that ${possessiveSuffix(finalboss.boss)} plans are a threat to the long game, and fixing it is far too hazardous for them to leave it to the 
@@ -3039,9 +3039,7 @@
             think that the only way to restore their name is to defeat you. Sadly the fools absolutely will not stop hounding you no matter what you do.`);
                     break;
                 case "Gabriel":
-                    if (stance == "Ally" && finalboss.boss == "Jackal" && !gladiators.includes("Jackal") && !gladiators.includes("Gabriel")) {
-                        text = `Gabriel has received a letter from his sister Regina that informed him she is been held by the Jackal. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? "He has joined you with his friend Drago to find his sister." : "He hopes you can help him locate his sister.") : "His mute friend Drago has joined you to help Gabriel's sister."}`
-                    } else if (stance == "Ally" && !gladiators.includes(finalboss.boss)) {
+                    if (stance == "Ally" && !gladiators.includes(finalboss.boss) && !gladiators.includes("Gabriel")) {
                         text = `Gabriel has received a letter from his sister Regina that informed him she is been held by ${finalboss.boss}. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? "He has joined you with his friend Drago to find his sister." : "He hopes you can help him locate his sister.") : "His mute friend Drago has joined you to help Gabriel's sister."}`
                     } else if (stance == "Ally") {
                         text = `Gabriel has received a letter from his sister Regina that informed him she is been held, but by whom? ${_.map(group, 'name').includes(motivation) ? `${motivation}${group.length == 2 ? `, along with Drago` : ""} will accompany you on your mission in order to find any clues.` : `${possessiveSuffix(motivation)} closest ally Drago accompanies you on your mission to find any clues on her whereabouts.`} `
@@ -3085,14 +3083,14 @@
             they are dead set on taking you out.`);
                     break;
                 case "Jackal":
-                    if (stance == "Ally" && finalboss.boss == "Shadow" && !gladiators.includes("Shadow") && !gladiators.includes("Jackal")) {
-                        text = `The Jackal has been doubting herself. Has Dark Matter changed her? Is she really herself anymore? Shadow is to blame. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? "She has joined you in hopes of confronting the Kingdom's mastermind, and taken her greatest creation with her." : "She has joined you in hopes of confronting the Kingdom's mastermind.") : "Her greatest creation, a snarling beast, stalks after you to get Shadow."}`
+                    if (stance == "Ally" && !gladiators.includes(finalboss.boss) && !gladiators.includes("Jackal")) {
+                        text = `The Jackal has been doubting herself. Has Dark Matter changed her? Is she really herself anymore? The Kingdom is to blame. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? `She has joined you in hopes of ${finalboss.name == "Kingdom" ? `confronting their leadership` : `injuring their allies`}, and taken her greatest creation with her.` : `She has joined you in hopes of ${finalboss.name == "Kingdom" ? `confronting their leadership` : `injuring their allies`}.`) : `Her greatest creation, a snarling beast, stalks after you to get ${finalboss.name == "Kingdom" ? `their leadership` : `their allies`}.`}`
                     } else if (stance == "Ally") { text = personalstory_ally } else if (stance == "Rival" && gladiators.includes("Shadow") && !gladiators.includes("Jackal")) {
                         text = `The Jackal thinks you have changed her with Dark Matter, but you have only unleashed her true self. ${_.map(group, 'name').includes(motivation) ? `Now she is determined to confront you with this ridiculousness.${group.length == 2 ? ` She even has one of her genetic mutants following her around!` : ``}` : `She has sent one of her genetic mutants to find you!`} You really wouldn't have time for this nonsense.`
                     } else { text = personalstory_enemy };
                     break;
                 case "Juan":
-                    if (stance == "Ally" && !gladiators.includes("Shadow") && !gladiators.includes("Juan")) {
+                    if (stance == "Ally" && gladiators.map(x => !x.name.includes([finalboss.boss,"Juan"]))) {
                         text = `Juan thinks the Kingdom has made the Cartel something it is not, and he needs to take the gang back. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? `He has joined forces with Tiger Azules to help the communities by confronting people like ${finalboss.boss} with you.` : `He will start by helping the communities by confronting people like ${finalboss.boss} with you.`) : "Tiger Azules has protected the people while the Cartel was a lost cause, and now tries to help Juan get them back on the right path by setting an example."}`
                     } else if (stance == "Ally") { text = personalstory_ally } else if (stance == "Rival" && (redemption.some(v => gladiators.indexOf(v) !== -1) == true) && !gladiators.includes("Juan")) {
                         text = `Juan thinks the Kingdom has made the Cartel something it is not. ${_.map(group, 'name').includes(motivation) ? `Now he is determined to show the communities that people like you can be stopped.${group.length == 2 ? ` Tiger Azules, defender of the streets has joined forces with him.` : ``}` : "Tiger Azules has protected the people while the Cartel was a lost cause, and now tries to help Juan get them back on the right path by setting an example."}`
@@ -3123,7 +3121,7 @@
                     `A wandering ${group.length == 1 ? "martial arts master" : "band of martial artists"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
                     break;
                 case "Megan":
-                    let megansenemy = finalboss.name == "Kingdom" ? finalboss.boss : finalboss.name
+                    let megansenemy = finalboss.name
                     if (stance == "Ally" && !gladiators.includes(finalboss.boss) && !gladiators.includes("Megan")) {
                         text = `The ${megansenemy} is behind the theft of tens of thousands of dollars from Megan's family's company. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? `She has joined forces with the unhinged criminal Sera O'Quinn, who believes they are responsible for her father's corruption, and they will help you take the ${megansenemy} down.` : `She has joined forces with you to help you take the ${megansenemy} down.`) : `The unhinged criminal Sera O'Quinn believes this is somehow related to her family, and has joined you to take the ${megansenemy} down.`}`
                     } else if (stance == "Ally") { text = personalstory_ally } else if (stance == "Rival" && (redemption.some(v => gladiators.indexOf(v) !== -1) == true) && !gladiators.includes("Megan")) {
@@ -3147,10 +3145,9 @@
                     `Wherever you go, ${group.length == 1 ? "this talent" : "these talents are"} there, ready for a dance-off. For what purpose, you cannot fathom, but you're afraid they will get hurt.`);
                     break;
                 case "Natalia":
-                    let badguys = ["Jackal", "Shadow", "Kemono", "Dmitri"]
-                    if (stance == "Ally" && (finalboss.name == "Brotherhood" || finalboss.name == "Kingdom") && !gladiators.includes(finalboss.name) && !gladiators.includes("Dmitri") && !gladiators.includes("Natalia")) {
+                    if (stance == "Ally" && !gladiators.includes(finalboss.name) && !gladiators.includes("Natalia")) {
                         text = `${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? `Natalia and her young protege Zane join your mission, as they are going to avenge the ${finalboss.name} strike that killed the boy's parents.` : `Natalia joins your mission, as she is going to avenge the ${finalboss.name} strike that killed Zane's parents.`) : `The orphaned boy Zane is trying to track down the murderous ${finalboss.name} who are responsible for the death of his parents, and has asked for your help.`}`
-                    } else if (stance == "Ally") { text = personalstory_ally } else if (stance == "Rival" && (badguys.some(v => gladiators.indexOf(v) !== -1) == true) && !gladiators.includes("Natalia")) {
+                    } else if (stance == "Ally") { text = personalstory_ally } else if (stance == "Rival" && gladiators.map(x => redemption.includes(x.name)) && !gladiators.includes("Natalia")) {
                         text = `The Kingdom orchestrated the strike that left Zane's parents dead${_.map(group, 'name').includes(motivation) ? `${group.length == 2 ? `, and Natalia is helping the boy confront those responsible.` : `, and Natalia will confront those responsible for the boy.`}` : ", and the orphaned boy is determined to confront those responsible."}`
                     } else { text = personalstory_enemy };
                     break;
@@ -3257,8 +3254,8 @@
             They will go wherever it takes, and if your defeat is what is needed to accomplish their goals, then so be it.`);
                     break;
                 case "Ying Hua":
-                    if (stance == "Ally" && finalboss.boss == "Ah Long" && !gladiators.includes("Ying Hua")) {
-                        text = `Officer Ying Hua has reveived a mysterious invitation lodged in the skull of an infamous Triad leader and is looking to find the highest ranks of the Golden Dragons and confront whoever is pulling the strings. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? "She has enlisted an ambitious enforcer of the Dragons to help her and you." : "She has decided she cannot play this one by the book, and has joined forces with you.") : "She has sent an ambitious enforcer of the Dragons she recruited as an informant to assist in locating the mysterious leader."}`
+                    if (stance == "Ally" && !gladiators.includes("Ying Hua")) {
+                        text = `Officer Ying Hua has reveived a mysterious invitation lodged in the skull of an infamous ${finalboss.name == "Golden Dragons" || finalboss.name == `All-Heaven Gang` ? `Triad leader` : `crime boss`} and is looking to find the highest ranks of the ${finalboss.name} and confront whoever is pulling the strings. ${_.map(group, 'name').includes(motivation) ? (group.length == 2 ? "She has enlisted an ambitious enforcer of the Dragons as an informant to help her and you." : "She has decided she cannot play this one by the book, and has joined forces with you.") : "She has sent an ambitious enforcer of the Dragons she recruited as an informant to assist in locating the mysterious leader."}`
                     } else if (stance == "Ally") { text = personalstory_ally } else if (stance == "Rival" && gladiators.includes("Ah Long") && !gladiators.includes("Ying Hua")) {
                         text = `The mysterious invitation you had sent to officer Ying Hua was supposed to keep her occupied and give the Golden Dragons room to operate, but she has learned who is behind he invite, and wants an explanation. Now the original plan is unnecessary, and you have to deal with her himself. ${(!(_.map(group, 'name').includes(motivation)) || group.length == 2) ? `Jin has even been assisting the officer. You are ashamed he recovered his honor before you did.` : ``}`
                     } else { text = personalstory_enemy };
