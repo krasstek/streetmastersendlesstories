@@ -141,7 +141,7 @@
                                             its expansions by necessity can not support this modularity, but I enjoy the character
                                             development and narrative gaming.</p>
                                     </li>
-        
+
                                 </ul>
                         </div>
 
@@ -159,7 +159,7 @@
                                             less than 3 stages for most stories if playing with hero stories. Picking just 1 stage makes the
                                             generator work as a randomizer for an arcade mode game, though!</p>
                                     </li>
-        
+
                                 </ul>
                         </div>
 
@@ -174,7 +174,7 @@
                                             exact copies of the official stories, but can of course occasionally get quite close. Of the released game content, the generator is missing most of Aftershock-related content, as I
                                             do not have access to those at this time.</p>
                                     </li>
-        
+
                                 </ul>
                         </div>
 
@@ -188,8 +188,8 @@
 
                     </div>
 
-                   
-                    
+
+
             </div>
 
             <div data-role="popup" id="expansion_popup" data-theme="b">
@@ -410,7 +410,7 @@
                 `<div class = "card-both-sides">
                     <div class="print-card-container">
                         <div class = "storycardfront-title">
-                            <span>${storyname}</span>   
+                            <span>${storyname}</span>
                         </div>
                         <div class = "circleicon">
                             <span class="circle-outer">
@@ -433,7 +433,7 @@
                             </div>
                         </div>
                     </div>
-                        
+
                     <div class = "print-card-container">
                         <div class = "storycardback-bar-top" style = "height: 6mm;"></div>
                         <div class = "storycardback-epilogue-top" style = "font-style: normal; overflow: none; padding-top: 8mm;">
@@ -472,7 +472,7 @@
             <div "ui-grid-solo" class = "mobile-card-title"><h2>${storyname}</h2></div>
         </div>
 
-        
+
         <div data-role = "main" class = "ui-content">
                 <ul data-role="listview" data-inset="true">
                     <li data-role = "list-divider" data-theme="b"><i>${finalboss.toUpperCase()} STORY - PART ${this.chapter}</i></li>
@@ -481,7 +481,7 @@
                     <li style = "white-space:normal" data-theme="b">${this.setup}</li>
                 </ul>
                 <a href="#winpop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "flip" style = "white-space:normal; background: #0a612b">${this.wincondition[0]}</a>
-                <a href="#losepop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "flip" style = "white-space:normal; background: #c4331a">${this.wincondition[1]}</a>  
+                <a href="#losepop_${index}" data-rel="popup" class="ui-btn ui-corner-all ui-btn-b" data-transition = "flip" style = "white-space:normal; background: #c4331a">${this.wincondition[1]}</a>
         </div>
 
         <div data-role="popup" id="winpop_${index}">
@@ -521,7 +521,7 @@
                     `<div class = "card-both-sides">
                     <div class="print-card-container">
                         <div class = "storycardfront-title">
-                            <span>${storyname}</span>   
+                            <span>${storyname}</span>
                         </div>
                         <div class = "circleicon">
                             <span class="circle-outer">
@@ -542,7 +542,7 @@
                             </div>
                         </div>
                     </div>
-                        
+
                     <div class = "print-card-container">
                         <div class = "storycardback-bar-top"></div>
                         <div class = "storycard-divider" style = "height: 0.4px"></div>
@@ -634,7 +634,7 @@
             }
         })
 
-        $(document).one("pageinit", function () { //Ennen minkä tahansa sivun luomista, tehdään kerran (.one)	
+        $(document).one("pageinit", function () { //Ennen minkä tahansa sivun luomista, tehdään kerran (.one)
             $("body").show();
         });
 
@@ -764,7 +764,7 @@
                 description.push(`, the ${enemy.name}`)
             } else if (of_whom.includes(enemy.minions())) {
                 description.push(` of the ${enemy.name}`)
-            } 
+            }
             description = randFrom(description)
 
             return `${enemy.boss}, ${boss_part}${of_whom}${description}`
@@ -794,7 +794,7 @@
 
             let enemies = [
 
-                { name: "Abandoned", expansion: "aftershock", boss: "Project X", bosstitle: _.template('${randFrom(["mutating","vengeful","horrendous","tortured"])} ${randFrom(["experiment","creature","monster","bioweapon"])}'), gender: "female", desc: "irradiated mutants", addressing: "playthings", minions: _.template("${randFrom(['insane','unhinged'])} nurses and ${randFrom(['mutated','monstrous'])} ${randFrom(['experiments','patients'])}"), threat: "whips her creeping tendrils menacingly at you", minionnames: ["Stacey", "Amalgam", "The Baron"], preparedboss: [["Biological Mind Link", "and put it into play"]], 
+                { name: "Abandoned", expansion: "aftershock", boss: "Project X", bosstitle: _.template('${randFrom(["mutating","vengeful","horrendous","tortured"])} ${randFrom(["experiment","creature","monster","bioweapon"])}'), gender: "female", desc: "irradiated mutants", addressing: "playthings", minions: _.template("${randFrom(['insane','unhinged'])} nurses and ${randFrom(['mutated','monstrous'])} ${randFrom(['experiments','patients'])}"), threat: "whips her creeping tendrils menacingly at you", minionnames: ["Stacey", "Amalgam", "The Baron"], preparedboss: [["Biological Mind Link", "and put it into play"]],
                 gloat: [
                     [`I will not let you hurt me,`, `You will not hurt anyone anymore.`],
                     [`You don't have to be what they designed you to be," you assert, inching closer, your hand outstretched in a gesture of peace, hoping to bridge the gap with empathy. "Intentions matter little in the face of survival,`, `I've been hunted, hurt... No more. I cannot trust. I cannot return.`],
@@ -807,7 +807,7 @@
                 { name: "All-Heaven Gang", expansion: "tideofthedragon", boss: "Train", bosstitle: _.template('${randFrom(["multibillionaire","hard-hearted","ruthless","determined"])} ${randFrom(["CEO","businessman","monk","dragon head","triad leader"])}'), gender: "male", desc: "the covert triad", addressing: "vermin", minions: _.template("cultists, triads and convicts"), threat: "drawing his finger under his chin", minionnames: ["Reina", "Big Dragon", "Goliath"], preparedboss: [["Heightened Reflexes", "and put it into play"]], gloat: [[`You will get a lesson,`, `That you will never forget.`]], expression: _.template(`eyeing you with disdain`) },
 
                 { name: "Brotherhood", expansion: "riseofthekingdom", boss: "Dmitri", bosstitle: _.template('callous mercenary'), gender: "male", desc: "the ruthless band of mercenaries", addressing: "comrades", minions: _.template("mercenaries, soldiers and spies"), threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar", "and put it into play"], ["N-40 Punisher", "and put it into play"]], gloat: [
-                    [`Brute force isn't the end-all of conflict, you know," you say, meeting the gaze of your enemy. The tension in the air matches his demeanor, but your voice remains steady, challenging. "Strength is inevitability,`, `Like the inevitability of change, unavoidable. I will break you.`], 
+                    [`Brute force isn't the end-all of conflict, you know," you say, meeting the gaze of your enemy. The tension in the air matches his demeanor, but your voice remains steady, challenging. "Strength is inevitability,`, `Like the inevitability of change, unavoidable. I will break you.`],
                     [`All this firepower, for what? A shadow of a bygone era?" you ask, stepping closer, your determination illuminating the standoff. "The era never ended; the battlefield merely shifted,`, `And here, now, you face its relentless truth.`],
                     [`They made us to be unbeatable. In my land, to show weakness is to already be dead,`,`Here, against you, I am the final test. I am the end of your journey.`],
                     [`War is not sought; it is inherited,`,`And with it, the responsibility to wield its power judiciously. Against you, I wield not just weapons, but the weight of history.`],
@@ -815,12 +815,12 @@
                     [`Your methods, Drago, your war... it's from another time. It's over," you say. "Over? The fight never ends.`,` It merely waits for a worthy opponent. I've been waiting for you.`]
                     ], expression: _.template(`baring his teeth as he recognizes you`), attacks: { antiair: "a rocket-propelled grenade" }, keywords: ["blade", "explosion", "guns"], blade: "N-40 Punisher", explosions: `rocket-propelled grenades`, gunmen: "Brotherhood assassins" },
 
-                { name: "Cartel", expansion: "riseofthekingdom", boss: "Juan", bosstitle: _.template("ruthless gangster"), gender: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: _.template("vicious gangers and hardened outcasts"), threat: "levels his shotgun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert", "and put it into play"]], 
+                { name: "Cartel", expansion: "riseofthekingdom", boss: "Juan", bosstitle: _.template("ruthless gangster"), gender: "male", desc: "the gang of vicious drug smugglers", addressing: "my boys", minions: _.template("vicious gangers and hardened outcasts"), threat: "levels his shotgun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert", "and put it into play"]],
                 gloat: [
-                    [`You cloak your actions in the guise of community service, but at what cost? How many lives have been ruined in your so-called protection?" you challenge, your voice firm, refusing to be swayed by his veneer of benevolence. "Ruined? No, you misunderstand. I've provided safety, opportunities where there were none,`,`Without me, the community faces chaos. I am not their oppressor; I am their savior.`],                    
-                    [`Your empire is built on suffering, no matter how you justify it. You're no hero to your community," you assert, stepping closer, the resolve in your eyes mirroring the strength of your words. "Suffering? You see only the surface. I've turned blood into the lifeblood of progress,`,`In this harsh world, I am the lesser evil, the shield against greater dangers.`],                    
-                    [`I've taken the reins where governments have failed. Who else but me has stood in the gap, faced the storm to protect our people?`,`Yes, I wield power, but for a cause greater than myself. I am the guardian this community neither chose nor knew it needed, but I am the guardian it has.`],                    
-                    [`You wield your shotgun like a scepter, ruling through fear under the guise of protection. How can you claim to serve the community with such violence in your hands?" you question, your stance unwavering as you confront the reality of his reign. "The shotgun is not just a tool of fear, but of order,`,`In the chaos that surrounds us, it's a beacon of swift justice. My rule has brought peace, stability. Can you say the same for your methods?`],                    
+                    [`You cloak your actions in the guise of community service, but at what cost? How many lives have been ruined in your so-called protection?" you challenge, your voice firm, refusing to be swayed by his veneer of benevolence. "Ruined? No, you misunderstand. I've provided safety, opportunities where there were none,`,`Without me, the community faces chaos. I am not their oppressor; I am their savior.`],
+                    [`Your empire is built on suffering, no matter how you justify it. You're no hero to your community," you assert, stepping closer, the resolve in your eyes mirroring the strength of your words. "Suffering? You see only the surface. I've turned blood into the lifeblood of progress,`,`In this harsh world, I am the lesser evil, the shield against greater dangers.`],
+                    [`I've taken the reins where governments have failed. Who else but me has stood in the gap, faced the storm to protect our people?`,`Yes, I wield power, but for a cause greater than myself. I am the guardian this community neither chose nor knew it needed, but I am the guardian it has.`],
+                    [`You wield your shotgun like a scepter, ruling through fear under the guise of protection. How can you claim to serve the community with such violence in your hands?" you question, your stance unwavering as you confront the reality of his reign. "The shotgun is not just a tool of fear, but of order,`,`In the chaos that surrounds us, it's a beacon of swift justice. My rule has brought peace, stability. Can you say the same for your methods?`],
                     [`Your so-called benevolence is a thin veil over the tyranny of your shotgun diplomacy. The community needs leaders, not tyrants," you assert, daring to challenge his narrative directly. "Ah, but leadership requires strength,`,`This weapon, it's a symbol—of the immediate consequences for those who threaten our way of life. I've used it to carve out a sanctuary in a world that offers none.`],
                     [`In this hand, the shotgun represents more than power; it's a commitment to the people under my protection,`,`With every pull of the trigger, I've defended my community from chaos. Critics call it violence; I call it sacrifice.`],
                     [`As you parade around, shotgun in hand, what's the endgame? To become a martyr for your so-called community?" you probe, challenging the narrative he's crafted around himself. "Martyr? No. Guardian. Protector. And when threats loom at our doorstep,`,`I say, 'Say hello to my little friend'.`],
@@ -836,56 +836,99 @@
                     [`Your mastery of chi, does it justify the path you've chosen? The imposition of your will upon the city?" you press on. "Justify? It is not about justification,`,`It is destiny.`]
                 ], expression: _.template(`his keen eyes and sly smirk reeking of confidence and self-importance`) },
 
-                { name: "Kingdom", expansion: "riseofthekingdom", boss: "Jackal", bosstitle: _.template("mad scientist"), gender: "female", desc: "the mysterious criminal syndicate", addressing: "test subjects", minions: _.template("${randFrom([`enhanced`,`monstrous`,`zombie`])} ${randFrom([`soldiers`,`ninja`,`creations`])} and ${randFrom([`clone`,`molded`,`genetic`])} ${randFrom([`dolls`,`marionettes`,`puppets`,`sisters`])}"), threat: "smiles, her eyes start to glow malevolently, and you feel pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion", "and play it"]], gloat: [[`How noble of you,`, `To donate your bodies for science.`], [`You won't get out of here,`, `I never turn down new specimens!`], [`You have played your part well,`, `But who do you think you really are?`], [`You always are so predictable,`, `Who do think you are working for?`], [`Children,`, `You should not have risen against your mother.`], [`Seems there is no shortage of new specimens these days,`, `But that is a positive problem.`], [`I couldn't have asked for better specimens,`, `It's time you provide your skills and abilities to the Kingdom.`],], expression: _.template(`her constricted pupils and demonic grin showing no humanity`), attacks: { antiair: "an iridescent lance of psychic energy" }, keywords: ["swarmed"], swarm: "marionettes" },
+                { name: "Kingdom", expansion: "riseofthekingdom", boss: "Jackal", bosstitle: _.template("mad scientist"), gender: "female", desc: "the mysterious criminal syndicate", addressing: "test subjects", minions: _.template("${randFrom([`enhanced`,`monstrous`,`zombie`])} ${randFrom([`soldiers`,`ninja`,`creations`])} and ${randFrom([`clone`,`molded`,`genetic`])} ${randFrom([`dolls`,`marionettes`,`puppets`,`sisters`])}"), threat: "smiles, her eyes start to glow malevolently, and you feel pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion", "and play it"]], 
+                gloat: [
+                    [`How noble of you,`, `To donate your bodies for science.`], 
+                    [`You won't get out of here,`, `I never turn down new specimens!`], 
+                    [`You have played your part well,`, `But who do you think you really are?`], 
+                    [`You always are so predictable,`, `Who do think you are working for?`], 
+                    [`Children,`, `You should not have risen against your mother.`], 
+                    [`Seems there is no shortage of new specimens these days,`, `But that is a positive problem.`], 
+                    [`Your anger, Jackal, it's consuming you. Who are you trying to punish with this madness?" you ask, your voice cutting through the palpable tension, a direct challenge to the fury smoldering within her.  "Punish? This is not about punishment; it's about correction,`,` My revenge is a gift, obsolescence of outdated morals that hold humanity back.`],
+                    [`This isn't evolution; it's manipulation on a global scale," you argue, taking a step forward, your determination casting a stark contrast to Jackal's madness. "Manipulation is just another tool for evolution,`,`You fail to see the beauty in the control I wield.`],
+                    [`As I stand at the precipice of a new era`,`I can't help but marvel at the simplicity of my solution. A world free from the chaos of free will.`],
+                    [`Why stop at clones, Jackal? Why not reshape the entire cosmos with your madness?" you ask, sarcasm lacing your words. "Ah, you jest, but there's wisdom in your mockery. Why indeed?`,`Perhaps that will be my next masterpiece, once I've tired of this world.`],
+                    [`Your army, your powers, Jackal — it's all just a facade to hide how truly lost you are," you say, challenging not just her plans but his very purpose. "Lost? On the contrary, I've never been more found,`,`This chaos, this 'madness' you see, it's the clarity of purpose.`],
+                    [`The mind holds such delicate power, a plaything for those with the will to manipulate it. My abilities are a paintbrush, reality my canvas`,`Let's see what masterpieces I can create.`],
+                    [`Your clones, they're abominations, not advancements," you assert. "Abominations? My children, you lack vision. They are the next step in your evolution. And you? `,`You're just relics.`],
+                    [`How can you justify this? Playing god with lives avenging what?" you question, the weight of your moral conviction clashing against hers. "Justify? I have no need for justification. You see toys; I see the future,`,` You perceive my actions as revenge, but I am merely setting the stage for a grand rebirth`],
+                    [`The beauty of cloning is not just the act itself, but the possibilities it unlocks. Each clone, a perfect soldier, ready to bend at my will. Gladiators?`,`Merely obstacles on my path to greatness.`],
+                    [`In your defiance, you prove your obsolescence,`,`In my creations, I see the future.`]
+                    ], expression: _.template(`her constricted pupils and demonic grin showing no humanity`), attacks: { antiair: "an iridescent lance of psychic energy" }, keywords: ["swarmed"], swarm: "marionettes" },
 
                 { name: "Kingdom", expansion: "riseofthekingdom", boss: "Kemono", bosstitle: _.template('${randFrom(["imposing ","four-armed ",""])}green ${randFrom(["mutant","monster"])}'), gender: "male", desc: "the mysterious criminal syndicate", addressing: "whelps", minions: _.template("mysterious ninja and martial arts masters"), threat: "lifts his mighty fists, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge", "and put it into play"]], gloat: [[`You should not have come,`, `Now you have forced my hand.`], [`You should not have come,`, `What soon will happen, you have brought upon yourselves.`]], expression: _.template(`his demonic eyes and grim expression delivering a promise of violence`), attacks: { antiair: "a brilliant shock of burning white lightning", detonation: `Suddenly, you feel your hair stand up, and in an instant Kemono explodes with electricity` }, keywords: ["explosion"], explosions: "uncontrolled electrical surges" },
 
-                { name: "Kingdom", expansion: "riseofthekingdom", boss: "Shadow", bosstitle: _.template("ominous mastermind"), gender: "male", desc: "the mysterious criminal syndicate", addressing: "fools", minions: _.template("${randFrom([`mysterious`,`tireless`,`silent`])} ${randFrom([`soldiers`,`ninja`,`generals`])} and ${randFrom([`clone`,`identical`,`psychic`])} ${randFrom([`marionettes`,`puppets`,`martial artists`])}"), threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades", "and put it into play"]], 
+                { name: "Kingdom", expansion: "riseofthekingdom", boss: "Shadow", bosstitle: _.template("ominous mastermind"), gender: "male", desc: "the mysterious criminal syndicate", addressing: "fools", minions: _.template("${randFrom([`mysterious`,`tireless`,`silent`])} ${randFrom([`soldiers`,`ninja`,`generals`])} and ${randFrom([`clone`,`identical`,`psychic`])} ${randFrom([`marionettes`,`puppets`,`martial artists`])}"), threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades", "and put it into play"]],
                 gloat: [
-                    [`My, what a brave, handsome group,`, `Perhaps it would interest you to see what fate has in store for you.`], 
-                    [`You have interfered for the last time,`, `Now, you shall die.`], 
-                    [`My children, you have come to me. For who now is your father if it is not me?`, `When I am gone, you will have never been. What would your world be without me?`], 
-                    [`On its own, humanity is a destructive force,`, `It needs a master.`], 
+                    [`My, what a brave, handsome group,`, `Perhaps it would interest you to see what fate has in store for you.`],
+                    [`You have interfered for the last time,`, `Now, you shall die.`],
+                    [`My children, you have come to me. For who now is your father if it is not me?`, `When I am gone, you will have never been. What would your world be without me?`],
+                    [`On its own, humanity is a destructive force,`, `It needs a master.`],
                     [`Your meddling grows weary,`, `The time has come for us to end this, and it is my pleasure to grant you release from this foolish errand.`],
                     [`Your manipulation ends now. People aren't pawns in your grand scheme," you assert, your stance embodying the defiance you feel. "Ah, but that's where you're mistaken,`,`Every move, every choice, it all leads back to the chessboard I've laid out.`],
-                    [`How can you justify this control? This isn't guidance; it's tyranny," you challenge, the air around you charged with tension. "Tyranny? A narrow perspective,"`,`I offer a path to order, to purpose. My methods are not for the faint-hearted, but the results... undeniable.`],                    
-                    [`Humanity stands on the brink, teetering between enlightenment and oblivion,`,`They need a shepherd, someone who sees the grand picture. I've glimpsed what could be — a world remade.`],                
-                    [`Your incessant meddling has become quite tiresome," Shadow says, his voice dripping with disdain. "You underestimate the will of those you seek to control," you retort, undeterred. "Your maze has an end, and we're here to find it." "Ah, such naiveté. It's almost... endearing,`,`My maze, as you call it, is infinite. Your persistence is futile.`],                    
-                    [`Why continue this charade? You know we'll never stop coming for you," you state boldly. "Charade? This is no mere game,`,`And that, Gladiator, is your folly. You see a villain to be defeated, but I am the architect of the future.`],                    
+                    [`How can you justify this control? This isn't guidance; it's tyranny," you challenge, the air around you charged with tension. "Tyranny? A narrow perspective,"`,`I offer a path to order, to purpose. My methods are not for the faint-hearted, but the results... undeniable.`],
+                    [`Humanity stands on the brink, teetering between enlightenment and oblivion,`,`They need a shepherd, someone who sees the grand picture. I've glimpsed what could be — a world remade.`],
+                    [`Your incessant meddling has become quite tiresome," Shadow says, his voice dripping with disdain. "You underestimate the will of those you seek to control," you retort, undeterred. "Your maze has an end, and we're here to find it." "Ah, such naiveté. It's almost... endearing,`,`My maze, as you call it, is infinite. Your persistence is futile.`],
+                    [`Why continue this charade? You know we'll never stop coming for you," you state boldly. "Charade? This is no mere game,`,`And that, Gladiator, is your folly. You see a villain to be defeated, but I am the architect of the future.`],
                     [`You Gladiators and your Citadel.. you cling to your ideals like driftwood in a storm, unaware that I am the tempest. You disrupt the delicate balance, blind to the chaos you propagate in your ignorance,`,`But no matter. Your meddling is but a footnote in the grand scheme.`],
-                    ], 
+                    ],
                     expression: _.template(`his calculating eyes reflecting a cold, merciless intellect`), keywords: ["blade"], blade: "ephemeral blade" },
 
-                { name: "Nahualli", expansion: "stretchgoals17", boss: "Tlazolteotl", bosstitle: _.template('Aztec ${randFrom(["goddess of death", "empress", "sorcerer"])}'), gender: "female", desc: "the ancient force of restless warriors", addressing: "mortals", minions: _.template('${randFrom(["necromancers", "ancient callers", "pale wizards"])} and ${randFrom(["shambling cadavers", "walking dead", "rotten corpses"])}'), threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller", "Pale Caller"], preparedboss: [["Decaying Blast", "and play it"]], gloat: [[`You must be taught what has been forgotten,`, `You must be taught the wrath of the old gods.`], [`I will have your soul!`, `I will taste its sins!`], [`You have strayed from the cycle of life and death,`, `I will make you my next sacrifice.`], [`I have conquered this world before,`, `I will not be stopped by the likes of you children!`], [`Enough of these games!`, `I will take what I am due!`], [`You will pay your goddess her due respect!`, `I will make you my next sacrifice!`], [`Even the strongest warriors will fall!`, `Fall to the power of death!`]], expression: _.template(`beautiful and terrible all at once`), attacks: { antiair: `hurled magical spells`, detonation: `She touches the amulet around her neck. The world around you seems to blow away in a deafening explosion of arcane energy` }, keywords: ["undead", "swarmed"], ritual: "Mictecacihuatl", blade: "ritual dagger", swarm: "zombies" },
-
-                { name: "Oni", expansion: "legendofoni", boss: "Yokai", bosstitle: _.template('${randFrom(["cursed, powerful warrior","warrior born of mystery and fire"])}'), gender: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: _.template('${randFrom([`ancient`,`immortal`,`lost`,`undead`,`cursed`,`shadow`])} ${randFrom([`warriors`,`ninja`,`doppelgangers`])} and ${randFrom([`powerful`,`seductive`,`nine-tailed`])} ${randFrom([`spirits`,`fox spirits`,`shapeshifters`])}'), threat: "lifts his mighty fist, suddenly engulfed in eldritch flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike", "and play it"]], gloat: [[`Are you prepared to face the wrath of Shin Yokai?`, `No, you’re not prepared!`], [`The hunger of the Oni is insatiable!`, `And you will be the food!`]], expression: _.template(`his fiery stare and gritted teeth sending a message of barely contained fury`), attacks: { antiair: `hurled bolts of eldritch energy`, detonation: `With one enraged scream, he explodes with a tremendous flash of energy from within, causing a blazing ring of fire to spread outwards` }, keywords: ["oni", "swarm"], ritual: "Oni", swarm: "shadow ninja" },
-
-                { name: "Onyx League", expansion: "twintiger", boss: "Mack", bosstitle: _.template('${randFrom(["black-hearted","mysterious"])} overlord'), gender: "male", desc: "the league of street gangs", addressing: "pigs", minions: _.template("vicious gangers and street criminals"), threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim", "and put it into play"]], 
+                { name: "Nahualli", expansion: "stretchgoals17", boss: "Tlazolteotl", bosstitle: _.template('Aztec ${randFrom(["goddess of death", "empress", "sorcerer"])}'), gender: "female", desc: "the ancient force of restless warriors", addressing: "mortals", minions: _.template('${randFrom(["necromancers", "ancient callers", "pale wizards"])} and ${randFrom(["shambling cadavers", "walking dead", "rotten corpses"])}'), threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller", "Pale Caller"], preparedboss: [["Decaying Blast", "and play it"]], 
                 gloat: [
-                    [`Fists versus bullets?`, `I will use your butts as target practice!`], 
-                    [`What's the end game with all this madness, Mack? You're tearing the community apart," you challenge, your posture ready for whatever may come. "Madness? This is clarity. Strip away rules, and what's left?`, `Freedom. Pure and simple.`], 
-                    [`People are getting hurt. You call this freedom?" you push, trying to reach the man behind the mayhem. "Hurt? Maybe. But it's like hitting reset. Sometimes, things gotta burn to build something better,`, `You see chaos; I see change.`], 
-                    [`Let it all come crashing down. From the ashes, we'll see what's really worth saving,`, `Society's a joke. I'm just the guy brave enough to point it out. And you? You're in the punchline.`], 
-                    [`Seems we are outgunned," you say, clenching your fists, the determination in your stance a stark contrast to the arsenal at his disposal. He chuckles, admiring the audacity. "Fists against guns? That's either bravery or madness. But I like the style,`, `Still, you can forget a fair fight.`], 
-                    [`You really think you can intimidate us with that?" you ask, nodding towards the machine gun in his hands, your fists clenched not in fear, but in defiance. "Intimidate? No, this is about making a statement,`, `And trust me, nothing speaks louder than a few well-placed bullets. But, by all means, let's see what those fists can do.`], 
-                    [`Bringing a gun to a fistfight, Mack, that's your idea of control?" you challenge, stepping closer, the resolve in your eyes unwavering. "Control is an illusion,`, `But fear, now that's real. And very, very persuasive. Let's just call this an insurance policy.`], 
-                    [`Here we stand, the ultimate showdown. You come with fists in a world ruled by steel,`, `Let's see if courage alone can withstand the storm I'm about to unleash. This is the chaos I live for.`], 
+                    [`You must be taught what has been forgotten,`, `You must be taught the wrath of the old gods.`], 
+                    [`I will have your soul!`, `I will taste its sins!`], 
+                    [`You have strayed from the cycle of life and death,`, `I will make you my next sacrifice.`], 
+                    [`I have conquered this world before,`, `I will not be stopped by the likes of you children!`], 
+                    [`Enough of these games!`, `I will take what I am due!`], 
+                    [`You will pay your goddess her due respect!`, `I will make you my next sacrifice!`], 
+                    [`Even the strongest warriors will fall!`, `Fall to the power of death!`],
+                    [`The world has changed. Your time has passed," you declare, standing firm in the face of this ancient power. "Changed? Time? Mortal concepts,`,`My dominion is eternal, as is my right to rule!`],
+                    [`Your army of the dead... It's an abomination. We'll stop you, no matter the cost," you vow, the resolve in your voice a beacon of hope in the gathering darkness. "Abomination? No, they are my faithful subjects, returned to enact my will,`,`As for stopping me — try, and you will find your place among them.`],
+                    [`The world trembles at the prospect of my return,`,`They remember, in their bones and their souls, the reign I once held.`],
+                    [`You build, you strive, you fight against the dying of the light,`,`Yet, in the end, all will return to dust under my gaze.`],
+                    [`The era of the living ends, and the age of the dead begins anew,`,`The cycle will complete, with me as its harbinger.`],
+                    [`Your arrogance blinds you. The world will not cower before you as it once might have," you assert, the courage in your voice defying the oppressive aura of decay that surrounds her. "Arrogance? I simply state the truth. I am a god, and my reign is preordained,`,`Your resistance is but a fleeting defiance against the tide of eternity, and all will knee before my might.`]
+                    ], expression: _.template(`beautiful and terrible all at once`), attacks: { antiair: `hurled magical spells`, detonation: `She touches the amulet around her neck. The world around you seems to blow away in a deafening explosion of arcane energy` }, keywords: ["undead", "swarmed"], ritual: "Mictecacihuatl", blade: "ritual dagger", swarm: "zombies" },
+
+                { name: "Oni", expansion: "legendofoni", boss: "Yokai", bosstitle: _.template('${randFrom(["cursed, powerful warrior","warrior born of mystery and fire"])}'), gender: "male", desc: "the group of cursed spirits", addressing: "you fools", minions: _.template('${randFrom([`ancient`,`immortal`,`lost`,`undead`,`cursed`,`shadow`])} ${randFrom([`warriors`,`ninja`,`doppelgangers`])} and ${randFrom([`powerful`,`seductive`,`nine-tailed`])} ${randFrom([`spirits`,`fox spirits`,`shapeshifters`])}'), threat: "lifts his mighty fist, suddenly engulfed in eldritch flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike", "and play it"]], 
+                gloat: [
+                    [`Are you prepared to face the wrath of Shin Yokai?`, `No, you’re not prepared!`], 
+                    [`The hunger of the Oni is insatiable!`, `And you will be the food!`],
+                    [`Your quest for power will consume you. There's more to existence than the destruction you seek," you assert, the heat of the Oni's presence a tangible force. "Consume me? It fuels me. Existence is but a series of challenges to be overcome, enemies to be crushed,`,`I do not seek to rule over ashes; I seek the flame, the fight, the undeniable proof of my strength!`],
+                    [`You believe yourself invincible, but every fire can be quenched," you challenge. "Quenched? By what? Your hope? Your defiance?`,`"Hope withers in the face of true power. Defiance evaporates into despair. I am the unquenchable fire, the apex of strength.`],
+                    [`In my wake, nothing stands — only the echoes of the battles fought, the adversaries defeated,`,`Power is not a means to an end; it is the end. `],
+                    [`You fail to understand, all of you mortals, that domination is fleeting, but power — power is eternal.  I do not desire your lands or your allegiance,`,`I desire their spirit, fueling my hunger!`],
+                    [`Your hunger will lead you to solitude. What victory is there in a world left in ruins?" you ask, the intensity in your eyes foundation of Yokai's desires. "Victory is not in the aftermath but in the moment,`,`My hunger is boundless, as is my might!`],
+                    [`Bound by no realm, hindered by no moral, my hunger is the forge upon which my power is tempered,`,`In the end, you will see: to hunger is to live, and to feed is to conquer.`]
+                    ], expression: _.template(`his fiery stare and gritted teeth sending a message of barely contained fury`), attacks: { antiair: `hurled bolts of eldritch energy`, detonation: `With one enraged scream, he explodes with a tremendous flash of energy from within, causing a blazing ring of fire to spread outwards` }, keywords: ["oni", "swarm"], ritual: "Oni", swarm: "shadow ninja" },
+
+                { name: "Onyx League", expansion: "twintiger", boss: "Mack", bosstitle: _.template('${randFrom(["black-hearted","mysterious"])} overlord'), gender: "male", desc: "the league of street gangs", addressing: "pigs", minions: _.template("vicious gangers and street criminals"), threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim", "and put it into play"]],
+                gloat: [
+                    [`Fists versus bullets?`, `I will use your butts as target practice!`],
+                    [`What's the end game with all this madness, Mack? You're tearing the community apart," you challenge, your posture ready for whatever may come. "Madness? This is clarity. Strip away rules, and what's left?`, `Freedom. Pure and simple.`],
+                    [`People are getting hurt. You call this freedom?" you push, trying to reach the man behind the mayhem. "Hurt? Maybe. But it's like hitting reset. Sometimes, things gotta burn to build something better,`, `You see chaos; I see change.`],
+                    [`Let it all come crashing down. From the ashes, we'll see what's really worth saving,`, `Society's a joke. I'm just the guy brave enough to point it out. And you? You're in the punchline.`],
+                    [`Seems we are outgunned," you say, clenching your fists, the determination in your stance a stark contrast to the arsenal at his disposal. He chuckles, admiring the audacity. "Fists against guns? That's either bravery or madness. But I like the style,`, `Still, you can forget a fair fight.`],
+                    [`You really think you can intimidate us with that?" you ask, nodding towards the machine gun in his hands, your fists clenched not in fear, but in defiance. "Intimidate? No, this is about making a statement,`, `And trust me, nothing speaks louder than a few well-placed bullets. But, by all means, let's see what those fists can do.`],
+                    [`Bringing a gun to a fistfight, Mack, that's your idea of control?" you challenge, stepping closer, the resolve in your eyes unwavering. "Control is an illusion,`, `But fear, now that's real. And very, very persuasive. Let's just call this an insurance policy.`],
+                    [`Here we stand, the ultimate showdown. You come with fists in a world ruled by steel,`, `Let's see if courage alone can withstand the storm I'm about to unleash. This is the chaos I live for.`],
                     [`Does it ever weigh on you, the chaos you've chosen? Or is that gun your only answer to everything?" you inquire, your voice steady. "A gun answers more questions than you'd think. But it's not about the chaos; it's about what comes after. As for weighing on me?`, `Let's just say I sleep just fine.`]
-                    ], 
+                    ],
                     expression: _.template(`his keen eyes and predatory sneer reeking of confidence and ruthlessness`), attacks: { antiair: `hail of machine-gun fire` }, keywords: ["guns"], get gunmen() { return `${this.bosstitle()} and his gangers` } },
 
-                { name: "Parasol", expansion: "aftershock", boss: "The Proxy", bosstitle: _.template('mysterious agent'), gender: "male", desc: "the evil pharmaseutical business", addressing: "you fools", minions: _.template('${randFrom([`corporate`,`efficient`])} ${randFrom([`killers`,`sweepers`])} and ${randFrom([`ruthless`,`calculating`])} ${randFrom([`assassins`,`suits`])}'), threat: "pulls up his sleeves", minionnames: ["Executive","Clean Sweep","Mr. Russo"], preparedboss: [["Unshceluded Meeting", "and play it"]], 
+                { name: "Parasol", expansion: "aftershock", boss: "The Proxy", bosstitle: _.template('mysterious agent'), gender: "male", desc: "the evil pharmaseutical business", addressing: "you fools", minions: _.template('${randFrom([`corporate`,`efficient`])} ${randFrom([`killers`,`sweepers`])} and ${randFrom([`ruthless`,`calculating`])} ${randFrom([`assassins`,`suits`])}'), threat: "pulls up his sleeves", minionnames: ["Executive","Clean Sweep","Mr. Russo"], preparedboss: [["Unshceluded Meeting", "and play it"]],
                 gloat: [
                     [`Innovation doesn't pause for ethics,`, `We're writing the future, not reading history,`],
                     [`Profit is not a dirty word in my office,`, `It's the only word.`],
                     [`There has to be a limit to what you're willing to do for success," you question his morality. "Limits are for those lacking vision,`, `My eyes are set on the horizon, not the ground at my feet.`],
                     [`Your actions have consequences beyond the boardroom," you remind him. "Every action drives profit, and progress, Gladiator,`, `Consequences are just the cost of doing business.`],
                     [`Your pursuit of progress disregards the very essence of our humanity," you say, stepping forward. "Humanity is not static; it's ever-evolving,`, `To hesitate is to stagnate. I prefer to lead us into the future, regardless of the cost.`],
-                    [`There's a moral responsibility you're blatantly ignoring," you argue, your gaze unwavering. "Moral responsibility? That's a luxury of the spectator, not the player,`, `In this arena, my only responsibility is to the profits. Everything else is secondary.`],                
-                    [`Profit at the expense of people—is that the legacy you want?" you question, the disappointment clear in your tone. "Legacy is determined by the victors, and those who innovate stand triumphant,`, `Profit, power, progress—they're all intertwined. People will remember the breakthroughs, not the sacrifices it took to achieve them.`],                    
-                    [`How can you justify this relentless push, knowing the harm it causes?" you demand, your stance firm.  "Justify? It's not about justification; it's about inevitability,`, `Change is coming, with or without our actions. I choose to be at the helm of that change.`],                    
+                    [`There's a moral responsibility you're blatantly ignoring," you argue, your gaze unwavering. "Moral responsibility? That's a luxury of the spectator, not the player,`, `In this arena, my only responsibility is to the profits. Everything else is secondary.`],
+                    [`Profit at the expense of people—is that the legacy you want?" you question, the disappointment clear in your tone. "Legacy is determined by the victors, and those who innovate stand triumphant,`, `Profit, power, progress—they're all intertwined. People will remember the breakthroughs, not the sacrifices it took to achieve them.`],
+                    [`How can you justify this relentless push, knowing the harm it causes?" you demand, your stance firm.  "Justify? It's not about justification; it's about inevitability,`, `Change is coming, with or without our actions. I choose to be at the helm of that change.`],
                     [`Progress demands sacrifice — a truth as old as time, yet it falls to me to remind the world of its validity,`, `My critics see a cold-hearted executive, but I am a visionary.`]
-                    ], 
+                    ],
                     expression: _.template(`his calculating stare making the chills run up your spine`), keywords: ["guns"], gunmen: "armed executives" }
             ];
 
@@ -906,7 +949,7 @@
                     prologue: _.template(randFrom([
                     '${trail} you find ${bossDescription(enemy)} in the middle of a ritual at a remote ${evilPlace()}. The ${mysticalSynonym()} powers float ${gPron(enemy, "object")} as ${gPron(enemy, "subject")} draws in a portion of the hellfire of the cursed Oni. You rush in to disrupt the ritual, scattering the unholy urns positioned around the temple.${stagevar} "${gloat[0]}" ${gPron(enemy, "subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}<br><br>You stand ready to face ${gPron(enemy, "object")}, and suddenly wince as your hands begin burning with a searing hot pain. You look down to see bright red lines snaking their way along your hands. You must have disrupted some ancient power by scattering the urns. Gritting your teeth, you pick up the urns and prepare to return them to their rightful place<%=rivalpresence ? `${rivaltext}` : ``%>.',
                     '${trail} you are led deep into the heart of ${evilPlace()}, where you\'re met with a scene of ominous power. ${bossDescription(enemy)}, caught in the act of harnessing the hellfire of the Oni, turns to face you with a look of disdain. The air floating ${gPron(enemy, "object")} shimmers with ${mysticalSynonym()} energy, as the sacred urns — key to controlling the inferno — lay scattered due to your sudden intrusion.${stagevar} "${gloat[0]}" ${gPron(enemy, "subject")} addresses you: "${gloat[1]}" It\'s clear: the disrupted urns must be returned to their rightful place to halt the spreading flames and the summoning of of the hellish powers of The Oni. The ${enemy.minions()}, bolstered by these ethereal attackers, add to the pandemonium, their presence a testament to the chaos unleashed by the ritual. You step forth<%=rivalpresence ? `${rivaltext}` : `, ready to end this at any cost.`%>.'
-                    ])), 
+                    ])),
                     captured: _.template('You awaken to searing hot pain, and look down to see bright red lines snaking their way along your hands. ${bossDescription(enemy)} is floated by some ${mysticalSynonym()} powers as ${gPron(enemy, "subject")} draws in a portion of the igniting hellfire. You see ${mysticalSynonym()} urns scattered nearby - ${gPron(enemy, "subject")} must have used you to activate the ${mysticalSynonym()} powers of the cursed Oni!${stagevar} "${gloat[0]}" ${gPron(enemy, "subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}<br><br>You rip your bonds, grit your teeth, and prepare to return the urns to their rightful place<%=rivalpresence ? `${rivaltext}` : ``%>.'),
                     finalvar: _.template('You rush in to disrupt the ritual, scattering the unholy urns positioned around the temple.<br><br>${enemy.boss} falls down to the floor of the temple, landing solidly on ${gPron(enemy, "possessive")} feet.  ${ucInit(gPron(enemy, "subject"))} flexes ${gPron(enemy, "possessive")} muscles slowly, staring at ${gPron(enemy, "possessive")} clenched fists, an evil grin on ${gPron(enemy, "possessive")} face. ${ucInit(gPron(enemy, "subject"))} then looks up to you, and laughs. "${gloat[0]}" ${gPron(enemy, "subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}<br><br>You stand ready to face ${gPron(enemy, "object")}, and suddenly wince as your hands begin burning with a searing hot pain. You look down to see bright red lines snaking their way along your hands. You must have disrupted some ancient power by scattering the urns. Gritting your teeth, you pick up the urns and prepare to return them to their rightful place<%=rivalpresence ? `${rivaltext}` : ``%>.'),
                     actsofterror: _.template('${trail}, you find out that the ${getMasterPlan()} of ${enemy.boss} is to channel the full power of the demonic force Oni through ${enemy.boss} to create a world molded from the flames of destruction, where ${enemy.name} reigns supreme over the cinders of the old. You arrive at the remote ${evilPlace()}. The ${mysticalSynonym()} powers float ${gPron(enemy, "object")} as ${gPron(enemy, "subject")} undoes the ${mysticalSynonym()} bindings of the cursed Oni. ${finalvar}'),
@@ -924,9 +967,9 @@
                     masterplan: randFrom(["actsofterror", "illegalgains"]), keywords: ["hostages", "retrieval", "guns"],
                     gunmen: "armed dealers", hostages: "innocent gamblers", loot: "the money",
                     gloat: [
-                        [`If you have a gun, you can rob a casino,`, `But if you have a casino, you can rob everyone!`], 
+                        [`If you have a gun, you can rob a casino,`, `But if you have a casino, you can rob everyone!`],
                         [`You think fighting me in some nightclub is going to stop the downfall of Ransom?`, `I'm not your problem. I'm just doing business.`],
-                        [`Gambling with lives is a bet you're going to lose.", you state matter-of factly. "Ah, but everyone loves a gamble, Gladiators. Let's see if luck is in your favor...`, `Too bad the house always wins!`],
+                        [`Gambling with lives is a bet you're going to lose,", you state matter-of factly. "Ah, but everyone loves a gamble, Gladiators. Let's see if luck is in your favor...`, `Too bad the house always wins!`],
                         [`You've stepped into a game where the stakes are life and death,`,`Ready to play, or will you fold?`]
                         ],
                     rivaltext: _.template(' But ${gPron(enemy,"subject")} is not alone. Alongside ${gPron(enemy,"object")} is ${rival.name}, <%=rivalboost ? `eyes glowing green of Vandal!` : `here to sell an encrypted ${gizmo} to ${enemy.boss}.`%>'),
@@ -990,8 +1033,8 @@
                     explosions: "stray grenades", gunmen: "armed minions", loot: "the weapons",
                     rivaltext: _.template(' turns to you as ${gPron(enemy, "possessive")} partner in trade, ${rival.name},<%=rivalboost ? ` heavily armed and armored,`: ``%> stashes <%=(knowledge == "clueless" || knowledge == "captured") ? "a" : "the"%> ${gizmo}.'),
                     gloat: [
-                        [`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`], 
-                        [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`], 
+                        [`It's better to have a gun and not need it,`, `Than to need a gun and not have it.`],
+                        [`This is my boomstick,`, `Good or bad, I'm the one with the gun.`],
                         [`Seems like you're expecting a war. Or is this just your idea of a negotiating tactic?" you ask, your gaze coolly appraising the arsenal that surrounds your opponent. "In our line of work, firepower is persuasion,`,`But don't worry, I'm sure we can come to an... understanding.`],
                         [`All these guns, yet here you are, still afraid to face me without them," you taunt, your confidence undiminished by the overwhelming display of weaponry.  "Afraid? No,`,`I prefer to think of it as being prepared.`],
                         [`These aren't just guns, they're a statement`,`Let the city whisper about tonight. Let them know that when it comes to arms, we're the only game in town.`],
@@ -1028,9 +1071,9 @@
                     masterplan: randFrom(["personalpower", "kidnapping","actsofterror"]), keywords: ["heights", "labyrinth"], labyrinth: "twisting mountain paths",
                     rivaltext: _.template('<%=rivalboost ? `. Leaping from the shadows in the trees, ${rival.name} ambushes you!` : ` and to your dismay you find that ${rival.name} has joined forces with ${enemy.boss}.` %>'),
                     gloat: [
-                        [`Even the strongest warriors cannot take this fall,`, `And you are not the strongest.`], 
-                        [`It'll not be the fall that kills you,`, `It's the sudden stop at the end!`], 
-                        [`It's a long way down, Gladiators,`, `You'll have a lot of time to reflect on your mistakes.`], 
+                        [`Even the strongest warriors cannot take this fall,`, `And you are not the strongest.`],
+                        [`It'll not be the fall that kills you,`, `It's the sudden stop at the end!`],
+                        [`It's a long way down, Gladiators,`, `You'll have a lot of time to reflect on your mistakes.`],
                         [`Only one way down for you,`, `The quickest possible!`],
                         [`Think you can beat nature at its own game?`,`This mountain bows to me, and soon, so will you!`],
                         [`One wrong step here could be your last. This mountain doesn't forgive," you say, your eyes scanning the precarious ledge that stands between you and your goal. "Ah, but the mountain is an old friend of mine,`,` It knows better than to betray me.`],
@@ -1057,10 +1100,10 @@
                     stagepenalty: { setup: `Put 1 damage on this card.`, activate: `Each fighter suffers 1 direct damage if there is damage on this card. Then, if any fighter is on or adjacent to an objective space, remove 1 damage from this card.` },
                     masterplan: randFrom(["strengtheningforces", "personalpower", "kidnapping"]), keywords: ["swarmed", "gunk", "experiment", "labyrinth", "retrieval"], gunk: "a vat of green gel", loot: `the ${randFrom(["Dark Matter", "Vandal", "Dynasty Cell"])} samples`, swarm: "clones", labyrinth: "underground passages",
                     gloat: [
-                        [`New subjects have arrived,`, `Contain them and proceed with the experiments.`], 
-                        [`You have played your part well,`, `But do you think you were born and not made?`], 
-                        [`You always are so predictable,`, `Where do you think you were made in?`], 
-                        [`We couldn't have asked for better specimens,`, `It's time you provide your skills and abilities to the Kingdom.`],
+                        [`New subjects have arrived,`, `Contain them and proceed with the experiments.`],
+                        [`You have played your part well,`, `But do you think you were born and not made?`],
+                        [`You always are so predictable,`, `Where do you think you were made in?`],
+                        [`I couldn't have asked for better specimens,`, `It's time you provide your skills and abilities to the Kingdom.`],
                         [`So this is your vision? An army of soulless copies, each one a mockery of human life?" you say, your voice echoing off the cold surfaces. "Mockery? No, improvement,`,`You see mere clones; I see the future of evolution, beyond the limits nature imposed upon us.`],
                         [`You've turned creation into a weapon, experimenting without conscience. Where does it end?" you ask, your gaze sweeping over the lab's vast array of genetic experiments. "It ends where I say it does,`,`With these resources, I'll sculpt a new world order. And you? You're just an outdated model, destined for obsolescence.`],
                         [`Activate the cloning sequence,`,`It's time to test the limits of what these shells can become.`],
@@ -1089,15 +1132,15 @@
                     stagepenalty: { activate: `The boss gains 1 random defense token for each Remnant engaged with a fighter.` },
                     masterplan: randFrom(["strengtheningforces", "personalpower"]), keywords: ["ritual", "undead", "swarmed"], ritual: "Death", swarm: "undead",
                     gloat: [
-                        [`Klaatu verata..`, `Nikto!`], 
-                        [`Even the strongest warriors will fall,`, `In the face of the power of death!`], 
-                        [`Now I call upon my army of the dead,`, `Arise, my messengers of death! Our time has arrived!`], 
-                        [`Magic, the darkest magic,`, `My soul swims in it..`], 
+                        [`Klaatu verata..`, `Nikto!`],
+                        [`Even the strongest warriors will fall,`, `In the face of the power of death!`],
+                        [`Now I call upon my army of the dead,`, `Arise, my messengers of death! Our time has arrived!`],
+                        [`Magic, the darkest magic,`, `My soul swims in it..`],
                         [`I am the Alpha and the Omega. Death and rebirth,`, `And, as you die, so will I be reborn!`],
-                        [`You've delved into depths that were meant to stay hidden. For what? Power that corrupts your very soul?" you challenges, your piercing gaze set to your enemy.  "Corrupts? No, it enlightens,`, `This power, drawn from the veil itself, is the ultimate liberation. With it, I am bound by neither death nor mortal whims.`]
+                        [`You've delved into depths that were meant to stay hidden. For what? Power that corrupts your very soul?" you challenges, your piercing gaze set to your enemy.  "Corrupts? No, it enlightens,`, `This power, drawn from the veil itself, is the ultimate liberation. With it, I am bound by neither death nor mortal whims.`],
                         [`Your quest for power has blinded you to the cost. How many spirits have you ensnared to feed your ambition?" you question, stepping closer, undaunted by the swirling vortex. "Every great achievement demands its price,`,`The spirits are merely stepping stones on the path to transcendence. Soon, none will question my might!`],
                         [`Behold the fruits of my labor, a tapestry woven from the essence of the afterlife itself,`,`With each spirit I command, my dominion over life and death grows!`],
-                        [`This power, ancient and untamed, recognizes no master,`,`But I have tamed it, bent it to my will. Let the living cower and the dead whisper my name in fear. I am the architect of my destiny, the harbinger of a new era!`],
+                        [`This power, ancient and untamed, recognizes no master,`,`But I have tamed it, bent it to my will. Let the living cower and the dead whisper my name in fear. I am the architect of my destiny, the harbinger of a new era!`]
                         ],
                     rivaltext: _.template(' To your horror, you see <%=rivalboost ? `the rotting corpse of ${rival.name} dig itself out of the ground!`: `${rival.name} joining ${enemy.boss} in the atrocious rite!`%>'),
                     hottrail: _.template('${ucInit(gPron(enemy, "subject"))} is just starting a ghastly ritual, and ominous clouds are gathering above you.<br><br>The wind is rising and the air feels heavy'),
@@ -1118,7 +1161,7 @@
                     gunk: "the disgusting sewer channel", labyrinth: "endless tunnels", swarm: "mutated rats",
                     // After setting up the stage, flip 1 objective token to its active side.
                     gloat: [
-                        [`You will get a bath,`, `A bath that will melt the skin off of you!`], 
+                        [`You will get a bath,`, `A bath that will melt the skin off of you!`],
                         [`How nice that you decided to show up,`, `Better to test the cocktail before deployment!`],
                         [`You will have a proper burial for a Gladiator,`, `Within the sewage!`],
                         [`So this is your plan? Poison the city from its veins with this gunk? Not on my watch," you proclaim, your gaze fixed on the ominous machinery. "Poison? A crude term for enlightenment,`,`But go ahead, try to stop the inevitable. This 'gunk', as you so eloquently put it, is my magnum opus.`],
@@ -1159,10 +1202,10 @@
                     stagepenalty: { setup: `Place 1P damage on the Stage Rules card.` },
                     masterplan: randFrom(["actsofterror", "strengtheningforces"]), keywords: ["ritual", "undead", "swarmed"], ritual: "Death", swarm: "undead",
                     gloat: [
-                        [`Klaatu verata..`, `Nikto!`], 
-                        [`Even the strongest warriors will fall,`, `In the face of the power of death!`], 
-                        [`Now I call upon my army of the dead,`, `Arise, my messengers of death! Our time has arrived!`], 
-                        [`Raising the dead won't give you the world," you shout in defiance. "It'll only bring more darkness. We're here to end this nightmare!" "Ah, but darkness is where power lies, Gladiators. My army grows with every moment,`, `Soon, you too will serve the shadow.`]
+                        [`Klaatu verata..`, `Nikto!`],
+                        [`Even the strongest warriors will fall,`, `In the face of the power of death!`],
+                        [`Now I call upon my army of the dead,`, `Arise, my messengers of death! Our time has arrived!`],
+                        [`Raising the dead won't give you the world," you shout in defiance. "It'll only bring more darkness. We're here to end this nightmare!" "Ah, but darkness is where power lies, Gladiators. My army grows with every moment,`, `Soon, you too will serve the shadow.`],
                         [`This is wrong. These souls deserve peace, not enslavement to your twisted will," you assert, your voice a beacon of resolve in the oppressive darkness. "Peace? Peace is a lie for the weak,`,`True power demands sacrifice!`],
                         [`Every incantation you utter, every life you disturb, it's all coming back to you. The darkness won't protect you forever," you warn, your stance defiant as you confronts the practitioner of dark arts.  "Ah, but darkness is an old friend,`,` It whispers secrets of ancient power, of dominion over life and death. Fear it if you must, but I have embraced it.`],
                         [`You think you control the dead, but you're just another pawn in a game older than time itself," you state, matter-of-factly, even as the ground trembles with the stirring of restless spirits.  "Control? No, I am their liberator,`,`Their shepherd to a new dawn where death is but a journey to a different kind of power.`],
@@ -1185,9 +1228,9 @@
                     stagepenalty: { setup: `Each fighter places 3 random defense tokens on their copy of "Hunt for the Idols".`, persistent: `The defense tokens on "Hunt for the Idols" block search successes and are discarded as normal.` },
                     masterplan: randFrom(["illegalgains", "personalpower", "actsofterror"]), keywords: ["labyrinth", "retrieval"], labyrinth: "dense woods", loot: "the idols",
                     gloat: [
-                        [`You won’t stop the inevitable!`, `I’ll end you here, with or without the Oni!`], 
-                        [`With the idols in my hands,`, `You and the Citadel will burn.`], 
-                        [`The idols belong in a museum," you say. "You got some nerve, Gladiators!`, `The idols belong to me!`]
+                        [`You won’t stop the inevitable!`, `I’ll end you here, with or without the Oni!`],
+                        [`With the idols in my hands,`, `You and the Citadel will burn.`],
+                        [`The idols belong in a museum," you say. "You got some nerve, Gladiators!`, `The idols belong to me!`],
                         [`These idols hold more than just power; they're the key to stopping what's coming," you mutter. "You think you're the first to try?`,`Many have lost themselves to the forest's embrace!`],
                         [`Each step could be a trap, but we can't afford to turn back now," you state, matter-of-factly, your eyes scanning the shadowy terrain for any sign of the relics. "Your bravery is commendable, but futile,`,`The forest guards its secrets well.`],
                         [`I can feel the idols calling out. We're close," you whisper to your companions.  "So near, yet so far,`,`This forest is my domain, and it does not yield its treasures lightly!`],
@@ -1214,7 +1257,7 @@
                     stagepenalty: { setup: `Each fighter must <b>Recruit</b>.` },
                     masterplan: randFrom(["actsofterror", "kidnapping"]), keywords: ["swarmed", "labyrinth"], swarm: "new fighters", labyrinth: "winding passages",
                     gloat: [
-                        ["Believe me when I say this, Global Gladiators,", "Nobody will leave this room alive!"], 
+                        ["Believe me when I say this, Global Gladiators,", "Nobody will leave this room alive!"],
                         ["I'm not even going to kill you myself!", "I'll let my minions take care of that."],
                         [`Looks like you brought an army. Good thing I didn't come to play fair," you say with a confident grin. "This?`,`This is just the welcoming committee. Let's see if you can get past the front door.`],
                         [`An impressive crowd. Planning a parade or just scared to face Gladiators without extra help?" you throw out, tone laced with mockery. "Strength in numbers, Gladiators,`,`But by all means, take your best shot.`],
@@ -1222,7 +1265,7 @@
                         [`You're surrounded!`,`Today, we teach you a lesson in futility!`],
                         [`You see this army? Each one stands ready to lay down their life for the cause,`,`What do you stand for?`],
                         [`You've come alone, facing an ocean of devotion,`,`Brave, but foolish.`],
-                        [`This isn't a battle; it's an execution. Witness the power of true loyalty`]
+                        [`This isn't a battle; it's an execution.`, `Witness the power of true loyalty.`]
                         ],
                     rivaltext: _.template(' accompanied by ${rival.name}<%=rivalboost ? `, eyes green from Vandal dosage, both`: `, both`%>'),
                     hottrail: _.template('surprised by the rapid assault on ${gPron(enemy, "possessive")} fortress. "${gloat[0]}" ${enemy.boss} says as ${gPron(enemy, "subject")} ${enemy.threat}. "${gloat[1]}"'),
@@ -1249,7 +1292,7 @@
                     stagepenalty: { setup: `All the objective tokens advance 2 spaces toward the boss.` },
                     masterplan: randFrom(["kidnapping", "strengtheningforces"]), keywords: ["hostages"], hostages: "fighters",
                     gloat: [
-                        [`This is a private affair, Gladiators,`, `You should not have intervened.`], 
+                        [`This is a private affair, Gladiators,`, `You should not have intervened.`],
                         [`In the end,`, `There can be only one!`],
                         [`This is madness. These fighters don't stand a chance," you observe, scanning the fighters with a determined gaze. "They seek glory in the wrong place,`,`But you, you're different.`],
                         [`You're using these people," you accuse, your voice cutting through the noise of the crowd. "They choose their fate,`,`As do you.`],
@@ -1275,7 +1318,7 @@
                     masterplan: randFrom(["strengtheningforces", "illegalgains"]), keywords: ["guns", "retrieval"],
                     gunmen: "armed gangers", loot: "the drugs and the money",
                     gloat: [
-                        [`You think fighting me in some landfill is going to stop the downfall of Ransom?`, `I'm not your problem. I'm just doing business.`], 
+                        [`You think fighting me in some landfill is going to stop the downfall of Ransom?`, `I'm not your problem. I'm just doing business.`],
                         [`Just like your plans, drugs lead nowhere but down. We're here to clean up the mess, starting with you." you tell it like it is. "Hah! You think you're the cure? I am the high that this world craves,`, `But you're about to hit rock bottom.`],
                         [`This ends now. Your poison won't find its way to the streets anymore," you make your statement. "Ha! You think you can stop the tide?`,`I'm just a drop in the ocean, Gladiators.`],
                         [`Dealing death in the shadows, you've just hit a wall. A Citadel wall," you state matter-of-factly. "Bold words for someone standing alone in the dark,`,`Let's see if you're as tough as you talk.`],
@@ -1300,13 +1343,13 @@
                     stagepenalty: { setup: `Each fighter chooses an objective card and places 1 power on that objective.` },
                     masterplan: randFrom(["actsofterror"]), keywords: ["explosion", "labyrinth"], explosions: "timed bombs", labyrinth: "labyrinth-like construction area",
                     gloat: [
-                        [`Cool guys don't look at explosions,`, `So gape all you want!`], 
-                        [`Most problems can be solved with an appropriate charge of high explosives,`, `The trick is not to be around when they go off.`], 
-                        [`Why do you have to nuke the whole building?" you ask. "Well, when you do something insignificant, you can just disappear,`, `When you do something big, they will find you unless they think you're dead.`], 
-                        [`Enough bombs have been planted in this building so none survive,`, `You'll die with us," you answer. "Could be.`], 
-                        [`Explosives, buzzsaws, a good old-fashioned beating.. There are so many alternatives,`, `How do you wish to die?`], 
+                        [`Cool guys don't look at explosions,`, `So gape all you want!`],
+                        [`Most problems can be solved with an appropriate charge of high explosives,`, `The trick is not to be around when they go off.`],
+                        [`Why do you have to nuke the whole building?" you ask. "Well, when you do something insignificant, you can just disappear,`, `When you do something big, they will find you unless they think you're dead.`],
+                        [`Enough bombs have been planted in this building so none survive,`, `You'll die with us," you answer. "Could be.`],
+                        [`Explosives, buzzsaws, a good old-fashioned beating.. There are so many alternatives,`, `How do you wish to die?`],
                         [`Playing with explosives, huh? This isn't a game. Lives are at stake, and we're defusing your plans along with these bombs," you call out. "Games, Gladiators? This is about change, about demolishing the old to make way for the new. And you?`, `You're just debris waiting to be cleared.`],
-                        [`You think you can engineer destruction and walk away? Not on our watch. It's time to dismantle your plot brick by brick," you shout. "Oh, but destruction is just the first step to creation. You're merely an obstacle in the blueprint for a new order,`,`Tick-tock, Gladiators.`], 
+                        [`You think you can engineer destruction and walk away? Not on our watch. It's time to dismantle your plot brick by brick," you shout. "Oh, but destruction is just the first step to creation. You're merely an obstacle in the blueprint for a new order,`,`Tick-tock, Gladiators.`],
                         [`Wiring this place to blow? That's a new low. But it's your ambitions that are about to implode, not this city," you say. "Low? We prefer 'foundational.' You see, every great construction begins with a clear site,`, `And you are part of the old structure to be razed.`]
                         ],
                     rivaltext: _.template(', and ${rival.name} emerges from the shadows<%=rivalboost ? `, eyes glowing green` : ``%>.'),
@@ -1394,7 +1437,7 @@
             ];
 
             alliesandrivals = alliesandrivals.filter(character => expansionfilter.some(xp => character.expansion.includes(xp)))
-    
+
             for (i = alliesandrivals.length - 1; i > 0; i--) {
                 if (supportingcast.includes(alliesandrivals[i].name)) {
                     alliesandrivals.splice([i], 1)
@@ -1581,7 +1624,7 @@
                 case "actsofterror": masterplan = `the vicious criminal syndicate ${enemy.name} believes they do not have to bow to the government or even the
     police force of Ransom City. ${enemy.boss} is going to let everyone know that Ransom has become a center of violence and crime where no-one is safe. `
                     break;
-                case "illegalgains": masterplan = `the ${possessiveSuffix(enemy.name)} vast network of crime and 
+                case "illegalgains": masterplan = `the ${possessiveSuffix(enemy.name)} vast network of crime and
         ${(enemy.desc).replace("the", "")} require substantial financial pipelines, and ${enemy.boss} is organizing a big score to fund
         ${gPron(enemy, "possessive")} operations. `
                     break;
@@ -1929,10 +1972,10 @@
             let storyenemies = [], randomenemy;
 
             function pickAndSlice() {
-                if (storyenemies.length <= 3) { 
+                if (storyenemies.length <= 3) {
                     randomenemy = randFrom(enemies)
-                    do { randomenemy = randFrom(enemies) } while (heroenemies.includes(randomenemy.boss)) } else { 
-                        randomenemy = randFrom(enemies) 
+                    do { randomenemy = randFrom(enemies) } while (heroenemies.includes(randomenemy.boss)) } else {
+                        randomenemy = randFrom(enemies)
                         }
                 enemies = filterArray(enemies, "boss", randomenemy.boss, true)
             }
@@ -1986,7 +2029,7 @@
             let evilterm = ["ancient", "cursed", "damned", "eldritch", "evil", "unholy", "unclean", "vile"]
             let place = ["burial ground", "altar", "sanctum", "shrine", "temple"]
 
-            let evilplace = //evilterm.splice(Math.floor(Math.random()*evilterm.length), 1) + " and " + 
+            let evilplace = //evilterm.splice(Math.floor(Math.random()*evilterm.length), 1) + " and " +
                 evilterm.splice(Math.floor(Math.random() * evilterm.length), 1) + " " +
                 place.splice(Math.floor(Math.random() * place.length), 1)
 
@@ -2101,10 +2144,10 @@
                 `${enemy.boss} kicks you while you're down, and then pushes you hard into the ground. You look up slowly to see two others join him — ${nextenemy.boss} and ${nextminion} of the ${nextenemy.name}. "Wholly unimpressive," ${nextenemy.boss} comments.  "Perhaps, with a little more work, they can become somehow... useful?" `,
                 `${enemy.boss} looks down at you. "So this is the sad excuse for a fighter that has been harrying the ${finalboss.name}?" ${gPron(enemy, "subject")} says looking you over. "You've thrown a wrench
         in our plans, ${enemy.addressing}." And then ${gPron(enemy, "subject")} grins, and you feel your heart stop. "And so now you will go to ${nextenemy.boss}!" and then laughs at your fate.`,
-                `"Just as I thought," ${enemy.boss} says with calm confidence as he paces around you. "Absolutely pathetic." "What should we do with them?" ${minion} asks. "They are worthless."<br><br>"Not entirely," 
+                `"Just as I thought," ${enemy.boss} says with calm confidence as he paces around you. "Absolutely pathetic." "What should we do with them?" ${minion} asks. "They are worthless."<br><br>"Not entirely,"
         ${enemy.boss} says. "Bind them. Perhaps ${nextenemy.boss} will have a use for their inadequate talents."`,
                 `"Your pitiful ${enemy.boss == "Jackal" ? `genes` : `husks`} won't serve me," ${enemy.boss} says. "Perhaps you'll be worth something on the black market. ${ucInit(gPron(enemy, "possessive"))} ${enemy.minions()} approach to apprehend you.`,
-                `${enemy.boss} ${enemy.threat} before ${nextenemy.boss} gestures for ${gPron(enemy, "object")} to stop. "No," ${gPron(nextenemy, "subject")} says. We have a better use for the Gladiators. 
+                `${enemy.boss} ${enemy.threat} before ${nextenemy.boss} gestures for ${gPron(enemy, "object")} to stop. "No," ${gPron(nextenemy, "subject")} says. We have a better use for the Gladiators.
         After all, who better to think ${enemy.boss == finalboss.boss ? `the Master` : finalboss.boss} would want than the Citadel's best?" ${minion} and ${nextenemy.boss == finalboss.boss ? nextenemy.minion : nextenemy.boss} share an amused glance as ${enemy.boss} opens a secret passage. The three of them lead you to the unknown.`,
                 `Cackling maniacally the whole time, ${enemy.boss} and ${gPron(enemy, "possessive")} ${enemy.minions()} surround you, overwhelming you. Their constant attacks become too much for you, and soon you black out, ${possessiveSuffix(enemy.boss)} haunting laughter echoing through your head all the while.`,
                 `${enemy.boss} laughs quietly and sinisterly as ${gPron(enemy, "subject")} slowly licks a bleeding wound on ${gPron(enemy, "possessive")} hand. "${finalboss.boss == enemy.boss ? `I'm proud of your efforts` : `${finalboss.boss} would be proud`}," ${gPron(enemy, "subject")} tells as you are tied and your vision fades. You barely hear ${possessiveSuffix(enemy.boss)} final command: "Take them to the ${nextenemy.name}!"`,
@@ -2358,7 +2401,7 @@
                 `After your victory over ${possessiveSuffix(enemy.boss)} goons and a short call to Agent Fletch, Citadel forces secure the area and begin their investigation with you. ${enemy.boss} might have slipped away, but among the debris of the fight, you find out`
             ]
 
-            // remote: nextmission.hasOwnProperty("captured"): If the Fighters lose: Tlazolteotl looks down at you, a smug smirk spreading across her face.  She reaches up and holds her amulet gingerly, reciting a few strange words in a language you've never heard before.  In an instant, the world blows away around you in a deafening explosion of arcane energy, and for a moment, all you can see is the blackness Advance to Part 5B.  
+            // remote: nextmission.hasOwnProperty("captured"): If the Fighters lose: Tlazolteotl looks down at you, a smug smirk spreading across her face.  She reaches up and holds her amulet gingerly, reciting a few strange words in a language you've never heard before.  In an instant, the world blows away around you in a deafening explosion of arcane energy, and for a moment, all you can see is the blackness Advance to Part 5B.
             if (location == "base") {
                 gatherclues = gatherclues.concat([
                     `With a hail of attacks, ${enemy.boss} and ${gPron(enemy, "possessive")} surviving cronies fled the encounter. Taking a moment to catch your breath, you managed to find the most conscious of the ${bystanders}s. "${ucInit(gPron(enemy, "subject"))} never told us the plan!" ${lowerCaseInitial(contact)} cried. ${contact} tells that`,
@@ -2661,7 +2704,7 @@
             let casino = getCasino(enemy)
 
             let masterplan = stage.masterplan
-            
+
             gloat === undefined ? console.log(stage) : ``
             gloat === undefined ? console.log(enemy) : ``
 
@@ -3018,7 +3061,7 @@
                 `"Your plan ends here, ${enemy.boss}!" you say, and drop in your ready stance.`,
                 `Either you dismantle the ${enemy.name} from the upper echelons of its leadership, or you go down swinging.`,
                 `The fight for the future starts now, in the shadow of ${enemy.name}!`,
-                `The clash of ideals, the race against time, and the battle for the fate of everything has begun!`, 
+                `The clash of ideals, the race against time, and the battle for the fate of everything has begun!`,
                 `Every moment counts as you push forward, determined to avert disaster and secure a victory not just for yourself, but for everything you care for.`,
                 `The fate of all hangs in the balance as you navigate this challenge, a testament to courage in the face of overwhelming odds.`
             ]
@@ -3140,22 +3183,22 @@
                 case "Beast": text = (stance == "Ally" ?
                     `${oneP ? "This individual is" : "These individuals are"} little more than savage beasts, but ${oneP ? "this one seems" : "these seem"} to have been tamed - for now.
             The strength of the ${oneP ? "beast" : "beasts"} is welcome if unnerving addition to your mission to end ${possessiveSuffix(finalboss.boss)} plans.` :
-                    `${oneP ? "This individual is" : "These individuals are"} little more than savage beasts, and ${oneP ? "this one is" : "they are"} in the tight leash of ${finalboss.boss}, who has sent them to hunt you. 
+                    `${oneP ? "This individual is" : "These individuals are"} little more than savage beasts, and ${oneP ? "this one is" : "they are"} in the tight leash of ${finalboss.boss}, who has sent them to hunt you.
             ${oneP ? "It" : "They"} won't stop hunting their quarry.`);
                     break;
                 case "Blade": text = (stance == "Ally" ?
                     `A wandering ${oneP ? "blademaster" : "host of blademasters"} sees ${finalboss.boss} as an opportunity to test their mettle, and has decided to walk with you.` :
                     `A wandering ${oneP ? "blademaster" : "host of blademasters"} sees you as an opportunity to test their mettle. They seem to show up wherever you go.`);
                     break;
-                case "Black Ops": text = (stance == "Ally" ? `Citadel has many spies and assassins in their contacts, and a ${oneP ? "single operative" : "team of specialists"} 
+                case "Black Ops": text = (stance == "Ally" ? `Citadel has many spies and assassins in their contacts, and a ${oneP ? "single operative" : "team of specialists"}
             has been assigned with you to eliminate the threat ${finalboss.boss} poses.` :
-                    `The world is full of shadowy organizations with spies and assassins everywhere. A mysterious malefactor has sent a 
+                    `The world is full of shadowy organizations with spies and assassins everywhere. A mysterious malefactor has sent a
             ${oneP ? "single operative" : "team of specialists"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
                     break;
                 case "Boss": text = (stance == "Ally" ?
-                    `A secret cabal of powerful and influential individuals have decided that ${possessiveSuffix(finalboss.boss)} plans are a threat to the long game, and fixing it is far too hazardous for them to leave it to the 
-            rank and file of their organizations - or to you. 
-            ${group.length == 1 ? `${bossclone ? `The have created a clone of ${finalboss.boss} who has` : `${group[0].name} has`}` : `${bossclone ? `They have created a clone of ${finalboss.boss} and have` : `Several of them have`}`} 
+                    `A secret cabal of powerful and influential individuals have decided that ${possessiveSuffix(finalboss.boss)} plans are a threat to the long game, and fixing it is far too hazardous for them to leave it to the
+            rank and file of their organizations - or to you.
+            ${group.length == 1 ? `${bossclone ? `The have created a clone of ${finalboss.boss} who has` : `${group[0].name} has`}` : `${bossclone ? `They have created a clone of ${finalboss.boss} and have` : `Several of them have`}`}
             joined you in your mission whether you wish it or not.` :
                     `Whatever ${possessiveSuffix(finalboss.boss)} endgame is, it will serve the powerful men and women of different shadowy organizations well. You are considered such a threat that this cabal
             has ${bossclone ? `created a clone of ${finalboss.boss}` : `decided no mere mooks are enough`} to stop you.`);
@@ -3176,56 +3219,56 @@
                     `If ${finalboss.boss} can just do what ${gPron(finalboss, "subject")} wants in Ransom, maybe Brook City will be left in peace? ${group.length == 1 ? "A citizen" : "A group of citizens"} has traveled to Ransom to see that ${gPron(finalboss, "subject")} will.`);
                     break;
                 case "Brotherhood": text = (stance == "Ally" ?
-                    `${bossclone ? `"An impostor has taken over my organization, and he must go down," Dmitri tells you. You're wary of the Brotherhood, 
-            but you think you can count on them this one time. But which one is the clone?`: `"The enemy of my enemy is my friend, and a friend with money is a friend indeed," ${group[0].name} tells you. You're wary of the Brotherhood, 
+                    `${bossclone ? `"An impostor has taken over my organization, and he must go down," Dmitri tells you. You're wary of the Brotherhood,
+            but you think you can count on them this one time. But which one is the clone?`: `"The enemy of my enemy is my friend, and a friend with money is a friend indeed," ${group[0].name} tells you. You're wary of the Brotherhood,
             but there is no job they wouldn't handle for the right price, and you can't deny their effectiveness.`}` :
-                    `Your intel tells you that the mercenaries of the Brotherhood have been paid to make sure you will not interfere with ${possessiveSuffix(finalboss.boss)} plans, 
+                    `Your intel tells you that the mercenaries of the Brotherhood have been paid to make sure you will not interfere with ${possessiveSuffix(finalboss.boss)} plans,
             and you can be certain they will not stop until you have been eliminated.`);
                     break;
                 case "Cartel": text = (stance == "Ally" ?
-                    `${bossclone ? `"An impostor has taken over my family, and he must go down," Juan tells you. Juan and his Cartel might be criminals, 
-            but you think you can count on them this one time. But which one is the clone?`: `"${finalboss.boss} puts the family at risk, and we will not allow that," ${group[0].name} says, and continues: "The enemy of our enemy is our friend." 
+                    `${bossclone ? `"An impostor has taken over my family, and he must go down," Juan tells you. Juan and his Cartel might be criminals,
+            but you think you can count on them this one time. But which one is the clone?`: `"${finalboss.boss} puts the family at risk, and we will not allow that," ${group[0].name} says, and continues: "The enemy of our enemy is our friend."
             Juan and his Cartel might be criminals, but at least you know they are honorable and willing to even die for their "family".`}` :
-                    `You have been a thorn in the side of the Cartel for a long time. While you are busy with your mission to get ${finalboss.boss}, they have sent a 
+                    `You have been a thorn in the side of the Cartel for a long time. While you are busy with your mission to get ${finalboss.boss}, they have sent a
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
                     break;
                 case "Celebrity": text = (stance == "Ally" ?
-                    `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : `these ${numberAsString(group.length)} are`} the worst. With  
+                    `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : `these ${numberAsString(group.length)} are`} the worst. With
             ${group.length == 1 ? "this fool" : "these fools"} appearing everywhere for cheap publicity, you just hope nobody gets hurt.` :
-                    `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : `these ${numberAsString(group.length)} are`} the worst. With  
+                    `Some celebrities, socialites and influencers want all the attention, and ${group.length == 1 ? "this one is" : `these ${numberAsString(group.length)} are`} the worst. With
             ${group.length == 1 ? "this fool" : "these fools"} appearing everywhere for cheap publicity, you're afraid someone will get hurt.. not that it would deter them.`);
                     break;
                 case "Chi": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "This warriors is" : "These warriors are"} privy to ${mysticalSynonym()} Chi powers. Their deep understanding of the flow of 
+                    `${group.length == 1 ? "This warriors is" : "These warriors are"} privy to ${mysticalSynonym()} Chi powers. Their deep understanding of the flow of
             ${mysticalSynonym()} energies that flow through all life has revealed to them that ${finalboss.boss} is a great disturbance in this force. For the balance to be regained ${gPron(finalboss, "subject")} must be stopped.` :
-                    `${group.length == 1 ? "This warrior is" : "These warriors are"} privy to ${mysticalSynonym()} Chi powers. Their deep understanding of the flow of 
+                    `${group.length == 1 ? "This warrior is" : "These warriors are"} privy to ${mysticalSynonym()} Chi powers. Their deep understanding of the flow of
             ${mysticalSynonym()} energies that flow through all life has revealed to them that you are a great disturbance in this force. For the balance to be regained you must be stopped.`);
                     break;
                 case "Cifarelli": text = (stance == "Ally" ?
-                    `The ongoing plans of ${finalboss.boss} risks the stability that the operation of the Cifarelli family requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"} 
+                    `The ongoing plans of ${finalboss.boss} risks the stability that the operation of the Cifarelli family requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"}
             has been sent to crush the opposition. You're lucky to have them on your side!` :
-                    `The Cifarelli family sees the ongoing plans of ${finalboss.boss} a perfect time to hit law enforcement everywhere, and Citadel is no exception to their plans. A 
+                    `The Cifarelli family sees the ongoing plans of ${finalboss.boss} a perfect time to hit law enforcement everywhere, and Citadel is no exception to their plans. A
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to take you out.`);
                     break;
                 case "Clone": text = (stance == "Ally" ?
-                    `With the multitude of clones unleashed upon the world from Jackal's secret experiments, you are bound to run into some from time to time that 
+                    `With the multitude of clones unleashed upon the world from Jackal's secret experiments, you are bound to run into some from time to time that
             ${finalboss.boss == "Jackal" ? `seek their creator and want more life` : `would ally themselves to your cause`}.` :
-                    `With the multitude of clones unleashed upon the world from Jackal's secret experiments, sometimes you find surprising parties of people working together, 
+                    `With the multitude of clones unleashed upon the world from Jackal's secret experiments, sometimes you find surprising parties of people working together,
             furthering the goals of the Kingdom.`);
                     break;
                 case "Competitor": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighters"} 
+                    `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighters"}
             of competetive - and deadly - events. Now they pursue the victory of the ultimate challenge: ${finalboss.boss}!` :
-                    `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighters"} 
+                    `${group.length == 1 ? "This gladiator is not a Global Gladiator, but a seasoned fighter" : "These gladiators are not Global Gladiators, but seasoned fighters"}
             of competetive - and deadly - events. Now they pursue the victory of the ultimate challenge: you!`);
                     break;
                 case "Dark Matter": text = (stance == "Ally" ?
-                    `${bossclone ? `"My mother is insane, and evil to an extent you cannot begin to understand," an exact replica of Jackal tells you. You're extremely wary of the Kingdom, but you think you can count on Jackal this one time. But which one is really the clone?` : `The Jackal feels ${finalboss.boss} interferes with her research, and 
-            ${_.map(group, 'name').includes("Jackal") ? `${group.length == 1 ? "has joined you" : "leads her creations alongside you"}` : `has sent a ${group.length == 1 ? "creation of hers" : "force of her creations"} alongside you`} 
+                    `${bossclone ? `"My mother is insane, and evil to an extent you cannot begin to understand," an exact replica of Jackal tells you. You're extremely wary of the Kingdom, but you think you can count on Jackal this one time. But which one is really the clone?` : `The Jackal feels ${finalboss.boss} interferes with her research, and
+            ${_.map(group, 'name').includes("Jackal") ? `${group.length == 1 ? "has joined you" : "leads her creations alongside you"}` : `has sent a ${group.length == 1 ? "creation of hers" : "force of her creations"} alongside you`}
             to remove the interference.`}` :
-                    `${bossclone ? `The Jackal knows the Citadel will move against her, and has created a clone of herself${group.length == 1 ? "" : " to lead her creations"} 
-            to eliminate the threat.`: `The Jackal feels you interfere with her research, and 
-            ${_.map(group, 'name').includes("Jackal") ? `${group.length == 1 ? "has left her fortress" : "leads her creations"}` : `has sent a persistent ${group.length == 1 ? "creation of hers" : "force of her creations"}`} 
+                    `${bossclone ? `The Jackal knows the Citadel will move against her, and has created a clone of herself${group.length == 1 ? "" : " to lead her creations"}
+            to eliminate the threat.`: `The Jackal feels you interfere with her research, and
+            ${_.map(group, 'name').includes("Jackal") ? `${group.length == 1 ? "has left her fortress" : "leads her creations"}` : `has sent a persistent ${group.length == 1 ? "creation of hers" : "force of her creations"}`}
             to remove the interference.`}`);
                     break;
                 case "Dmitri":
@@ -3234,13 +3277,13 @@
                     } else if (stance == "Ally") { text = personalstory_ally } else { text = personalstory_enemy };
                     break;
                 case "Extraplanar": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "This individual is" : "These individuals are"} privy to the secrets of planes of existence beyond yours. For whatever ${mysticalSynonym()} 
+                    `${group.length == 1 ? "This individual is" : "These individuals are"} privy to the secrets of planes of existence beyond yours. For whatever ${mysticalSynonym()}
             reason, the stars are right for them to stop ${finalboss.boss}, no matter the cost.` :
-                    `${group.length == 1 ? "This individual is" : "These individuals are"} privy to the secrets of planes of existence beyond yours. For whatever ${mysticalSynonym()} 
+                    `${group.length == 1 ? "This individual is" : "These individuals are"} privy to the secrets of planes of existence beyond yours. For whatever ${mysticalSynonym()}
             reason, the stars are right for them to stop you, no matter the cost.`);
                     break;
                 case "Fraud": text = (stance == "Ally" ?
-                    `The lost reputation and ridicule of some unlucky or incapable fighters has driven them to desperation, and now they believe the only way to restore their name 
+                    `The lost reputation and ridicule of some unlucky or incapable fighters has driven them to desperation, and now they believe the only way to restore their name
             is to defeat ${finalboss.boss}. You just hope nobody gets too badly hurt.` :
                     `The lost reputation and ridicule of some unlucky or incapable fighters has driven them to desperation, and ${finalboss.boss} has manipulated them
             think that the only way to restore their name is to defeat you. Sadly the fools absolutely will not stop hounding you no matter what you do.`);
@@ -3259,14 +3302,14 @@
                     break;
                 case "Global Gladiator": text = (stance == "Ally" ?
                     `Citadel has determined this mission to be of topmost priority. Agent Fletch has pulled all Global Gladiators available from less important tasks to aid you here.` :
-                    `Miscommunication, misunderstanding and misdirection has led Citadel to deploy a ${group.length == 1 ? "single Global Gladiator" : "group of Global Gladiators"} 
+                    `Miscommunication, misunderstanding and misdirection has led Citadel to deploy a ${group.length == 1 ? "single Global Gladiator" : "group of Global Gladiators"}
             against you, and nothing you say can sway them from their mission.`);
                     break;
                 case "Golden Dragons": text = (stance == "Ally" ?
-                    `${bossclone ? `"An impostor has taken over my business, and he must go down," Ah Long tells you. You are not sure the Golden Dragons is the sort of ally you'd want to have, 
-            but you think you can count on them this one time. But which one is the clone?`: `"What ${finalboss.boss} is attempting is a risk to our businesses. The enemy of our enemy is our friend," ${group[0].name} says. 
+                    `${bossclone ? `"An impostor has taken over my business, and he must go down," Ah Long tells you. You are not sure the Golden Dragons is the sort of ally you'd want to have,
+            but you think you can count on them this one time. But which one is the clone?`: `"What ${finalboss.boss} is attempting is a risk to our businesses. The enemy of our enemy is our friend," ${group[0].name} says.
             You are not sure the Golden Dragons are the sort of friends you'd want to have, but they might be the ones you need.`}` :
-                    `You have been a thorn in the side of the Golden Dragons for a long time. While you are busy with your mission to get ${finalboss.boss}, they have sent a 
+                    `You have been a thorn in the side of the Golden Dragons for a long time. While you are busy with your mission to get ${finalboss.boss}, they have sent a
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
                     break;
                 case "Gunslinger": text = (stance == "Ally" ?
@@ -3278,15 +3321,15 @@
                     `The mysterious Master must believe you truly are an immense threat to his secretive goals, as ${group.length == 1 ? "a Horseman has" : `not one, but ${numberAsString(group.length)} horsemen have`} been sent to take you down.`);
                     break;
                 case "Indines": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King 
+                    `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King
             Greyheart being freed and save their world they have to save yours!` :
-                    `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King 
+                    `${group.length == 1 ? "This warrior" : "These warriors"} have been sent through from another world, a world of conflict and adventure. To stop Dragon King
             Greyheart being freed and save their world they have to doom yours!`);
                     break;
                 case "Insane": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "This individual is" : "These individuals are"} unpredictable and dangerously unhinged. For their own reasons, 
+                    `${group.length == 1 ? "This individual is" : "These individuals are"} unpredictable and dangerously unhinged. For their own reasons,
             they are following you around, dead set on taking on ${finalboss.boss}. You just have to hope they will not turn on you.` :
-                    `${group.length == 1 ? "This individual is" : "These individuals are"} unpredictable and dangerously unhinged. For whatever deranged reason, 
+                    `${group.length == 1 ? "This individual is" : "These individuals are"} unpredictable and dangerously unhinged. For whatever deranged reason,
             they are dead set on taking you out.`);
                     break;
                 case "Jackal":
@@ -3315,14 +3358,14 @@
                     } else { text = personalstory_enemy };
                     break;
                 case "Kingdom": text = (stance == "Ally" ?
-                    `${bossclone ? `"An impostor has taken over my place in the Kingdom, and must go down," ${finalboss.boss} tells you. You're extremely wary of the Kingdom, 
-            but you think you can count on ${finalboss.boss} this one time. But which one is the clone?` : `The Kingdom knows you are their most dangerous enemy, but all their plans are smoke and mirrors. For some devious reason ${group.length == 1 ? "this warrior has" : "these warriors have"} 
+                    `${bossclone ? `"An impostor has taken over my place in the Kingdom, and must go down," ${finalboss.boss} tells you. You're extremely wary of the Kingdom,
+            but you think you can count on ${finalboss.boss} this one time. But which one is the clone?` : `The Kingdom knows you are their most dangerous enemy, but all their plans are smoke and mirrors. For some devious reason ${group.length == 1 ? "this warrior has" : "these warriors have"}
             joined you to stop ${finalboss.boss}. You are quite sure this alliance is tenuous and temporary at best, but you know you will need the help.`}` :
                     `The Kingdom knows you are the only credible threat to their long-term plans, and ${group.length == 1 ? "this warrior has" : "these warriors have"} been
             sent to make sure the threat you pose will be neutralized.`);
                     break;
                 case "Law Enforcement": text = (stance == "Ally" ?
-                    `The law enforcement agencies around the world do not really understand the threat the Kingdom poses and are not equipped to properly fight it, but 
+                    `The law enforcement agencies around the world do not really understand the threat the Kingdom poses and are not equipped to properly fight it, but
             sometimes their operations align with your efforts.` :
                     `The law enforcement agencies and their contacts and informants around the world are not immune to the reach of the Kingdom, and ${group.length == 1 ? "this corrupt individual" : "these corrupt officers or informants"}
             are determined to take you in - or take you out!`);
@@ -3345,13 +3388,13 @@
                     } else { text = `After and exhibition Sensei Apple was surrounded by an unknown group of martial artists. Unfortunately, due to lack of music Sensei Apple lost his rhythm and it didn't take long for him to be overwhelmed. ${_.map(group, 'name').includes(motivation) ? `Confused and angry, he is determined you are the assailants, and tries to face you at every turn${group.length == 2 ? `, and drags his apprentice along` : ``}.` : `Confused and angry, he is determined you are the assailants, and his protege is determined to return the honor of her master.`}` };
                     break;
                 case "Monk": text = (stance == "Ally" ?
-                    `${group.length == 1 ? `A lone warrior monk has` : `A group of warrior monks have`} left their distant monastery to deliver ${finalboss.boss} the wisdom to leave the corrupt way. 
+                    `${group.length == 1 ? `A lone warrior monk has` : `A group of warrior monks have`} left their distant monastery to deliver ${finalboss.boss} the wisdom to leave the corrupt way.
             Wisdom often comes with pain.` :
-                    `${group.length == 1 ? `A lone warrior monk has` : `A group of warrior monks have`} left their distant monastery to bring down the oppressor. 
+                    `${group.length == 1 ? `A lone warrior monk has` : `A group of warrior monks have`} left their distant monastery to bring down the oppressor.
             You certainly didn't see Citadel that way.`);
                     break;
                 case "Music": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "This talent is" : "These talents are"} true royalty of rhythm, while they find ${finalboss.boss} clearly is not. 
+                    `${group.length == 1 ? "This talent is" : "These talents are"} true royalty of rhythm, while they find ${finalboss.boss} clearly is not.
             To show ${finalboss.boss} who should be crowned the Majesty of Music, the ${group.length == 1 ? "artist has" : "artists have"} unfortunately decided to follow you to face ${gPron(finalboss, "object")} in a dance-off.` :
                     `Wherever you go, ${group.length == 1 ? "this talent" : "these talents are"} there, ready for a dance-off. For what purpose, you cannot fathom, but you're afraid they will get hurt.`);
                     break;
@@ -3363,27 +3406,27 @@
                     } else { text = personalstory_enemy };
                     break;
                 case "Onyx League": text = (stance == "Ally" ?
-                    `The ongoing plans of ${finalboss.boss} will lead only to mindless destruction, not anarcy through strength the Onyx League is after. 
+                    `The ongoing plans of ${finalboss.boss} will lead only to mindless destruction, not anarcy through strength the Onyx League is after.
             A ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to correct this course. You're lucky to have them on your side!` :
-                    `You have been a thorn in the side of the Onyx League for a long time. While you are busy with your mission to get ${finalboss.boss}, they have sent a 
+                    `You have been a thorn in the side of the Onyx League for a long time. While you are busy with your mission to get ${finalboss.boss}, they have sent a
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} to remove that thorn.`);
                     break;
                 case "Organized Crime": text = (stance == "Ally" ?
-                    `The ongoing plans of ${finalboss.boss} risks the stability that organized crime requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"} 
+                    `The ongoing plans of ${finalboss.boss} risks the stability that organized crime requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"}
             has been sent to crush the opposition. You're lucky to have them on your side!` :
-                    `Organized crime sees the ongoing plans of ${finalboss.boss} a perfect time to hit law enforcement everywhere, and Citadel is no exception to their plans. A 
+                    `Organized crime sees the ongoing plans of ${finalboss.boss} a perfect time to hit law enforcement everywhere, and Citadel is no exception to their plans. A
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to take you out.`);
                     break;
-                case "Parasol": text = (stance == "Ally" ? (bossclone ? `"An impostor has taken over my place in Parasol, and he must go down," ${finalboss.boss} tells you. You're extremely wary of Parasol, 
+                case "Parasol": text = (stance == "Ally" ? (bossclone ? `"An impostor has taken over my place in Parasol, and he must go down," ${finalboss.boss} tells you. You're extremely wary of Parasol,
             but you think you can count on ${finalboss.boss} this one time. But which one is the clone?`:
                     `The ongoing plans of ${finalboss.boss} risks the stability that the operation of Parasol requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to crush the opposition. You're lucky to have them on your side!`) :
-                    `Parasol sees the ongoing plans of ${finalboss.boss} a perfect time to hit their opponents hard, and Citadel is no exception to their plans. A 
+                    `Parasol sees the ongoing plans of ${finalboss.boss} a perfect time to hit their opponents hard, and Citadel is no exception to their plans. A
             ${group.length == 1 ? "single enforcer" : "group of enforcers"} has been sent to take you out.`);
                     break;
                 case "Past": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the past holds archaic knowledge that they will use to determine the future. 
+                    `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the past holds archaic knowledge that they will use to determine the future.
             Fortunately for you, you seem to be a part of that future.` :
-                    `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the past holds archaic knowledge that they will use to determine the future. 
+                    `${group.length == 1 ? "A single warrior" : "A group of warriors"} from the past holds archaic knowledge that they will use to determine the future.
             Unfortunately for you, you need to be erased from that future.`);
                     break;
                 case "Project X":
@@ -3392,21 +3435,21 @@
                     } else if (stance == "Ally") { text = personalstory_ally } else { text = personalstory_enemy };
                     break;
                 case "Psychic": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future. 
+                    `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future.
             They have determined ${possessiveSuffix(finalboss.boss)} plans will have to change.` :
-                    `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future. 
+                    `${group.length == 1 ? "This mysterious figure" : "This mysterious group"} has mastered the ${mysticalSynonym()} powers of the mind, and has foreseen the future.
             They have determined ${possessiveSuffix(finalboss.boss)} plans must come to fruition. They seem to know your every move, and appear wherever you go!`);
                     break;
                 case "Science": text = (stance == "Ally" ?
-                    `What ${finalboss.boss} is planning has a scientific angle that an inquiring mind cannot bypass. This ${group.length == 1 ? "analyst" : "group of analysts"} 
+                    `What ${finalboss.boss} is planning has a scientific angle that an inquiring mind cannot bypass. This ${group.length == 1 ? "analyst" : "group of analysts"}
             will follow you for research purposes.` :
-                    `What ${finalboss.boss} is planning has a scientific angle that an inquiring mind cannot bypass. This ${group.length == 1 ? "analyst" : "group of analysts"} 
+                    `What ${finalboss.boss} is planning has a scientific angle that an inquiring mind cannot bypass. This ${group.length == 1 ? "analyst" : "group of analysts"}
             is trying to stop you so they can observe this interesting event first hand!`);
                     break;
                 case "Sensei": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "A wandering sensei has" : "Wandering sensei have"} decided your training is not quite complete, and they oversee your journey to 
+                    `${group.length == 1 ? "A wandering sensei has" : "Wandering sensei have"} decided your training is not quite complete, and they oversee your journey to
             ensure your discipline will reach its potential.` :
-                    `${group.length == 1 ? "A wandering sensei has" : "Wandering sensei have"} decided your training is not quite complete, and they follow you on your path to teach you a lesson in 
+                    `${group.length == 1 ? "A wandering sensei has" : "Wandering sensei have"} decided your training is not quite complete, and they follow you on your path to teach you a lesson in
             discipline and skill.`);
                     break;
                 case "Sera O'Quinn":
@@ -3437,15 +3480,15 @@
                     } else { text = personalstory_enemy };
                     break;
                 case "Soldier": text = (stance == "Ally" ?
-                    `Citadel has many soldiers and mercenaries in their contacts, and a ${group.length == 1 ? "single soldier" : "team of soldiers"} 
+                    `Citadel has many soldiers and mercenaries in their contacts, and a ${group.length == 1 ? "single soldier" : "team of soldiers"}
             has been assigned with you to eliminate the threat ${finalboss.boss} poses.` :
-                    `The world is full of rogue nations and terrorist organizations with soldiers for hire and private armies everywhere. A mysterious malefactor has sent a 
+                    `The world is full of rogue nations and terrorist organizations with soldiers for hire and private armies everywhere. A mysterious malefactor has sent a
             ${group.length == 1 ? "a formidable mercernary" : "team of mercenaries"} to eliminate the Citadel's finest. They will not stop until you are dead.`);
                     break;
                 case "Street": text = (stance == "Ally" ?
-                    `The streets have had enought of the constant threat the evil machinations of ${finalboss.boss} and ${gPron(finalboss, "possessive")} ilk pose to the common people. 
+                    `The streets have had enought of the constant threat the evil machinations of ${finalboss.boss} and ${gPron(finalboss, "possessive")} ilk pose to the common people.
             ${group.length == 1 ? "A defender of the streets has" : "Defenders of the streets have"} decided to aid you in taking ${finalboss.boss} out!` :
-                    `Your perpetual fights with ${finalboss.boss} and ${gPron(finalboss, "possessive")} ilk pose a constant threat to the common people. 
+                    `Your perpetual fights with ${finalboss.boss} and ${gPron(finalboss, "possessive")} ilk pose a constant threat to the common people.
             ${group.length == 1 ? "A defender of the streets has" : "Defenders of the streets have"} decided you are the worse of two evils!`);
                     break;
                 case "Tlazolteotl":
@@ -3460,14 +3503,14 @@
                     `${group.length == 1 ? "This warrior has" : "These warriors have"} received a vision of the future from toxin experimentation. They have determined ${finalboss.boss} must be allowed to continue on this path. They attempt to stop you at every turn.`);
                     break;
                 case "Twin Tiger": text = (stance == "Ally" ?
-                    `Twin Tiger dojo has decided your skills are lacking, and ${group.length == 1 ? `${group[0].name}` : "these fighters"} oversee your journey to 
+                    `Twin Tiger dojo has decided your skills are lacking, and ${group.length == 1 ? `${group[0].name}` : "these fighters"} oversee your journey to
             ensure your discipline will reach its potential.` :
                     `Twin Tiger dojo has decided your recklessness is not a good example to the community, and ${group.length == 1 ? `${group[0].name} follows` : "these fighters follow"} you on your path to teach you a lesson in discipline and skill.`);
                     break;
                 case "Wanderer": text = (stance == "Ally" ?
-                    `Some wander the world on their personal quests, and now your goals seem to have aligned. 
+                    `Some wander the world on their personal quests, and now your goals seem to have aligned.
             They will travel with you, and if defeating ${finalboss.boss} is what is needed to accomplish their goals, they would die trying.` :
-                    `Some wander the world on their personal quests, and now you seem to be in the way of ${group.length == 1 ? `the goal of this individual` : `the mutual purpose of these fighters`}. 
+                    `Some wander the world on their personal quests, and now you seem to be in the way of ${group.length == 1 ? `the goal of this individual` : `the mutual purpose of these fighters`}.
             They will go wherever it takes, and if your defeat is what is needed to accomplish their goals, then so be it.`);
                     break;
                 case "Ying Hua":
@@ -3478,9 +3521,9 @@
                     } else { text = personalstory_enemy };
                     break;
                 case "Youth": text = (stance == "Ally" ?
-                    `${group.length == 1 ? "This youth" : "These youths"} hold more power than anyone of their age should have. With recklessness of their age, they are trying to 
+                    `${group.length == 1 ? "This youth" : "These youths"} hold more power than anyone of their age should have. With recklessness of their age, they are trying to
             stop the evil of ${finalboss.boss}. You don't think you can restrain them, so the only way you can look after them is to let them accompany you.` :
-                    `${group.length == 1 ? "This exceptionally powerful youth" : "These exceptionally powerful youths"} are trying to find their place in the world. 
+                    `${group.length == 1 ? "This exceptionally powerful youth" : "These exceptionally powerful youths"} are trying to find their place in the world.
             ${finalboss.boss} has manipulated them to follow the path of darkness. They seem to be wherever you go, and you have no choice but to fight them.`);
                     break;
                 default: text = (stance == "Ally" ? "For whatever reason, these people stand with you againt the schemes of the Kingdom." : "For whatever reason, these people stand with the Kingdom against you.");
