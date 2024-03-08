@@ -2484,7 +2484,7 @@
                     break;
                 case "Under Destruction": clue = [
                     `suspicious activity has been detected by ${nextenemy.name}${cahoots} at an unfinished construction site.`,
-                    `yhe blueprint of an unfinished skyscraper reveals alterations not part of the original design, apparently by ${nextenemy.name}${cahoots}.`
+                    `the blueprint of an unfinished skyscraper reveals alterations not part of the original design, apparently by ${nextenemy.name}${cahoots}.`,
                     `the ${nextenemy.name}${cahoots} - had something going down at an unfinished construction site`]
                     break;
                 case "Running Wild": clue = [
@@ -2579,7 +2579,7 @@
                     break;
                 case "personalpower":
                     masterplanclues = [
-                        `Investigating the aftermath of the battle reveals extensive research into surpassing human limits, seemingly connected to ${finalboss.name}. "Seeking to surpass human boundaries," you deduce, the evidence pointing towards`,
+                        `Investigating the aftermath of the battle reveals extensive research into surpassing human limits, seemingly connected to ${finalboss.name}. "Seeking to surpass human boundaries.." you wonder out loud, the evidence pointing towards`,
                         `You come across heavily encrypted files detailing experimental trials under ${possessiveSuffix(enemy.boss)} orders, aimed at significant power enhancements. "For ${possessiveSuffix(finalboss.boss)} ambition?" It becomes evident, the findings hinting at`,
                         `Uncovering a series of confidential documents, there's a clear trail back to ${finalboss.name}, outlining a comprehensive study for transcending physical and mental human capacities. "A blueprint for ${possessiveSuffix(finalboss.boss)} supremacy," you conclude. The research suggests`,
                         `The defeated ${enemy.minions()} speak of a hidden gym where ${enemy.boss} is seen entering at odd hours, sometimes with ${finalboss.boss}. "Training, or something more?" you wonder, the whispers in the wind nudging you towards`,
@@ -2642,7 +2642,7 @@
                 `the place where history will be made in your confrontation with ${finalboss.boss}.`,
                 `the exact coordinates of ${possessiveSuffix(finalboss.boss)} location, marking the beginning of the end.`,
                 `the ultimate arena, chosen by ${finalboss.boss} for your final clash.`,
-                `where ${finalboss.boss} plots have ripened in the shadows, awaiting your arrival with bated breath.`,
+                `where ${possessiveSuffix(finalboss.boss)} plots have ripened in the shadows, awaiting your arrival with bated breath.`,
                 `the culmination of your journey, directly leading you to ${possessiveSuffix(finalboss.boss)} lair.`,
                 `the nexus of fate, where you and ${finalboss.boss} will decide the future.`,
                 `the last stand of ${finalboss.boss}, where all scores will be settled.`,
@@ -2650,7 +2650,7 @@
                 `the showdown site with ${finalboss.boss}, where legends will be forged and fates sealed.`,
                 `the gateway to ${finalboss.boss}, where the final act of this drama unfolds.`,
                 `the stage is set at the location of ${possessiveSuffix(finalboss.boss)} choosing, where the ultimate test of courage beckons.`,
-                `the final battlefield, meticulously chosen by ${finalboss.boss} for its endgame.`,
+                `the final battlefield, meticulously chosen by ${finalboss.name} for their endgame.`,
                 `the epicenter of conflict, where ${finalboss.boss} awaits to challenge the very essence of your resolve.`
                 ])
             let finality = randFrom([``, `You're going to stop this once and for all.`, `You prepare for a fight this one last time.`, `This is it!`, `This is the end, at last.`, `No escape for ${finalboss.boss} now!`, `You can almost taste the victory!`, `Everything has led to this moment.`, `It is in your hands now.`, `The time has come for your final confrontation!`, `You know this, the final confrontation, won't be easy!`])
@@ -2821,7 +2821,7 @@
             }
 
             pregameprologue = stageindex == 0 ? pregameprologue : ``
-            let find_out_words = [`you discover`, `you find out`, `you learn`, `you get wind`, `you determine`, `it seems`, `turns out`]
+            let find_out_words = [`you discover`, `you find out`, `you learn of`, `you get wind of`, `you determine`, `it seems`, `turns out`]
             let this_boss = finalboss.name == enemy.name ? enemy.boss : randFrom([enemy.boss, `the ${enemy.name}`])
             let this_finalboss = finalboss.name == enemy.name ? finalboss.boss : randFrom([finalboss.boss, `the ${finalboss.name}`])
             if (stageindex >= Math.max($("#storylength").val() * 2 - 3, 0) || finalboss.boss == enemy.boss) { this_finalboss = trueMastermind() }
