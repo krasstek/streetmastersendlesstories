@@ -1069,20 +1069,7 @@
 
             let masterplan
 
-            let vip = randFrom([["President", "White House"], ["Colonel", "Pentagon"], ["Mayor", "city hall"], ["Police Chief", "Ransom P.D. headquarters"], ["Citadel commander", "Citadel HQ"],
-            ["CEO", "the Corporate Tower"],
-  ["Tech Mogul", "the Innovation Hub"],
-  ["Diplomat", "the Embassy"],
-  ["Journalist", "the News Agency headquarters"],
-  ["Scientist", "the Research Facility"],
-  ["Spy Master", "the Secret Service Bureau"],
-  ["Rebel Leader", "the Hidden Rebel Base"],
-  ["Banker", "the Central Bank"],
-  ["Art Curator", "the National Museum"],
-  ["Archbishop", "the Cathedral"],
-  ["Film Star", "the Movie Studio"],
-  ["Philanthropist", "the Charity Foundation"],
-  ["Judge", "the Supreme Court"]])
+            let vip = randFrom([["President", "White House"], ["Colonel", "Pentagon"], ["Mayor", "city hall"], ["Police Chief", "Ransom P.D. headquarters"], ["Citadel commander", "Citadel HQ"]])
 
             switch (stage.masterplan) {
                 case "actsofterror": masterplan = `the vicious criminal syndicate ${enemy.name} believes they do not have to bow to the government or even the
@@ -1408,7 +1395,9 @@
 
 
             } else { storystages.push(finalstage) }
-
+            //console.log(JSON.stringify(storystages))
+//            storystages[8] = stages.filter(stage => stage.name == "Supply & Demand")[0]
+ //           storystages[7] = stages.filter(stage => stage.name == "Supply & Demand")[0]
             return [storystages, stages]
 
         }
@@ -1971,7 +1960,7 @@
                     masterplanclues = [
                         `A torn map is found among the gear of ${enemy.minions()}, marked with specific locations and times. "Could ${finalboss.name} be planning the victim's transfer here?" you wonder, the clues ${ambiguity_element}`,
                         `Recovered communications between ${enemy.boss} and unknown contacts discuss a "precious cargo" being moved at dawn. "Could this be ${possessiveSuffix(finalboss.boss)} doing?" you ponder, the message ${ambiguity_element}`,
-                        `A witness comes forward, shaken, reporting a suspicious exchange in the shadows of the city. "They were talking about a key location for ${finalboss.name}," the witness recalls, their account ${ambiguity_element}`,
+                        `A witness comes forward, shaken, reporting a suspicious exchange in the shadows of the city. "They were talking about a key location for ${possessiveSuffix(finalboss.name)} 'cargo'," the witness recalls, their account ${ambiguity_element}`,
                         `A hastily deleted email recovered from ${possessiveSuffix(enemy.boss)} computer mentions a change in the pickup location. "They're on the move," you realize, the digital paper trail ${ambiguity_element}`,
                         `Surveillance footage of the area captures a van with obscured plates frequently visiting. "Could have been their holding spot," you theorize, the video evidence ${ambiguity_element}`,
                         `A forgotten diary at the skirmish site contains veiled references to "the taken" and "the exchange." "Codes for the kidnapping operation?" you speculate, the diary's entries ${ambiguity_element}`,
@@ -1983,7 +1972,7 @@
                         `Investigating the aftermath of the battle reveals extensive research into surpassing human limits, seemingly connected to ${finalboss.name}. "Seeking to surpass human boundaries.." you wonder out loud, the evidence ${ambiguity_element}`,
                         `You come across heavily encrypted files detailing experimental trials under ${possessiveSuffix(enemy.boss)} orders, aimed at significant power enhancements. "For ${possessiveSuffix(finalboss.boss)} ambition?" It becomes evident, the findings ${ambiguity_element}`,
                         `Uncovering a series of confidential documents, there's a clear trail back to ${finalboss.name}, outlining a comprehensive study for transcending physical and mental human capacities. "A blueprint for ${possessiveSuffix(finalboss.boss)} supremacy," you conclude. The research ${ambiguity_element}`,
-                        `The defeated ${enemy.minions()} speak of a hidden gym where ${enemy.boss} is seen entering at odd hours, sometimes with ${finalboss.boss}. "Training, or something more?" you wonder, the whispers in the wind ${ambiguity_element}`,
+                        `The defeated ${enemy.minions()} speak of a hidden gym where ${enemy.boss} is seen entering at odd hours, sometimes with ${finalboss.boss === enemy.boss ? `a mysterious trainer` : possessiveSuffix(finalboss.boss)}. "Training, or something more?" you wonder, the whispers in the wind ${ambiguity_element}`,
                         `In the aftermath you find a ${gizmo}, filled with cellular modification records. "${finalboss.boss} playing god," you mutter, the clues ${ambiguity_element}`,
                         `Scattered notes about harnessing untapped potential suggest a pursuit of dangerous knowledge. "What limits is ${finalboss.name} trying to break?" you wonder, the notes ${ambiguity_element}`,
                         `An artefact is found in the aftermath, with no clear function but emitting a low hum of energy. You get a feeling this has to have something to do with ${finalboss.boss}. "A tool for empowerment or destruction?" you question. Investigation of the trail of possession ${ambiguity_element}`
@@ -1995,9 +1984,9 @@
                         `Recovery of a hacked ${gizmo} reveals bids for illegal deals under the guidance of ${enemy.boss}, implicating ${finalboss.name}. "This is how they've been funding their schemes," you realize, the digital breadcrumbs subtly leading to`,
                         `Upon inspecting the area post-skirmish, you find forged documents and counterfeit currencies likely tied to ${finalboss.name}. "A financial foundation built on deception for ${finalboss.boss}," you note, the evidence ${ambiguity_element}`,
                         `A coded ledger reveals a meeting point for a high-stakes underground auction. "Artifacts or weapons?" you ponder, the coded messages ${ambiguity_element}`,
-                        `Interrogation of a captured ${enemy.minions()} uncovers plans to raid a ${possessiveSuffix(finalboss.boss)} cache. "Infighting for profit," you surmise, the confession ${ambiguity_element}`,
+                        `Interrogation of a captured ${enemy.minions()} uncovers plans to raid a ${finalboss.boss === enemy.boss ? possessiveSuffix(finalboss.name) : possessiveSuffix(finalboss.boss)} cache. "Infighting for profit," you surmise, the confession ${ambiguity_element}`,
                         `Ledgers with coded entries recovered on-site reveal a network far more extensive than anticipated. "${possessiveSuffix(finalboss.name)} web of illicit trade?" you think, the ledgers ${ambiguity_element}`,
-                        `An unmarked container nearby filled with rare minerals hints at unregulated trade. "Funding ${possessiveSuffix(finalboss.boss)} operations through the shadows?" you guess, the contents ${ambiguity_element}`
+                        `An unmarked container nearby filled with rare minerals hints at unregulated trade. "Funding ${finalboss.boss === enemy.boss ? possessiveSuffix(finalboss.name) : possessiveSuffix(finalboss.boss)} operations through the shadows?" you guess, the contents ${ambiguity_element}`
                         ];
                     break;
                 case "strengtheningforces":
@@ -2017,7 +2006,7 @@
                         `The evacuation plans of several key buildings, a maneuver likely ordered by ${finalboss.name}, under questionable pretenses catches your attention. "A diversion crafted by ${finalboss.boss}?" you speculate, the circumstances ${ambiguity_element}`,
                         `Discovery of detailed city blueprints, after defeating ${enemy.boss}, alongside notes on public gatherings and infrastructure vulnerabilities, alarms you. "Is this ${finalboss.name} strategizing for terror?" you ponder, the information ${ambiguity_element}`,
                         `Among the debris of the recent skirmish, a set of encrypted ${gizmo}s is discovered. "Communication by  ${finalboss.name}, for coordinated chaos?" you muse, the devices ${ambiguity_element}`,
-                        `In the aftermath, you find meticulously drawn maps of Random with certain areas circled. "Targets or diversions for  ${finalboss.name}?" you ponder, the ambiguity of the markings ${ambiguity_element}`,
+                        `In the aftermath, you find meticulously drawn maps of Ransom with certain areas circled. "Targets or diversions for  ${finalboss.name}?" you ponder, the ambiguity of the markings ${ambiguity_element}`,
                         `Investigating the site you finally come across a whiteboard covered in complex timelines and event predictions, with clear ${finalboss.name} handiwork. "Plotting out terror, or preventing it?" you debate, the timelines ${ambiguity_element}`,
                         `Recovered documents contain fragmented discussions about disrupting the city's equilibrium. "${finalboss.name} is sowing chaos, but how?" you reflect, the documents ${ambiguity_element}`
                         ];
@@ -2280,7 +2269,7 @@
                     `After the previous encounter, you see a familiar silhouette materialize from the smoke and dust before you: ${ally.name}. Your occasional ally approaches, smirking slyly. "Fancy meeting you here", you say to ${gPron(ally, "object")}. "Thanks for the heads-up."`,
                     `You meet ${ally.name} on the corner of a warehouse. "Glad you found the place alright," ${ally.name} says. "This is a big catch," you answer. "Good work finding it." "It's easy to find ${enemy.name} activity if you merely keep your eyes open," ${ally.name} responds.<br><br>"Let's do this," you say.`,
                     `${ally.name} follows you and gives you a warning. "${enemy.boss} will make you regret your challenge, Gladiators," ${gPron(ally, "subject")} calls. "Prepare to meet your fate by ${gPron(enemy, "possessive")} hands." "Hah" you laugh.`,
-                    `The Citadel has assigned you a handler for this mission. "I don't understand," you say, looking at ${ally.name} with skepticism. "Why such a reckless attack plan? Agent Fletch would not risk everything like this." "I'm not Agent Fletch," ${ally.name} says. Now prepare yourself, and we are almost out of time.`,
+                    `The Citadel has assigned you a handler for this mission. "I don't understand," you say, looking at ${ally.name} with skepticism. "Why such a reckless attack plan? Agent Fletch would not risk everything like this." "I'm not Agent Fletch," ${ally.name} says. "Now prepare yourself, and we are almost out of time."`,
                     `The Citadel has assigned you a handler for this mission. "And what of now?" you ask, frustrated with the unexpected addition. "Today, I will personally oversee your actions and I will give detailed report to my superiors," ${ally.name} answers.`,
                     `"It is dangerous out there. You shouldn't go alone," ${ally.name} tells you. "Take me with you."`,
                     `"I see you have taken the lonely path", you tell ${ally.name} in your chance meeting. "I care not about company. I care about vengeance," ${gPron(ally, "subject")} answers. "I take you have tracked ${enemy.boss} down?"`,
@@ -2345,7 +2334,7 @@
 
             template_settings["rivaltext"] = stageriv
 
-            if(stage.name === "Right to Remain Silent") { console.log(stage.name) }
+            if(stage.name === "Sudden Death") { console.log(stage.name) }
             
             let stagevar
             switch (knowledge) {
@@ -2364,11 +2353,11 @@
             } else if (stageindex >= Math.max($("#storylength").val() * 2 - 2, 0) && enemy.boss != finalboss.boss) {
                 masterplan = stage.masterplan
                 stageindex != 0 ? template_settings.trail = changeOfPlans(trail, finalboss, enemy, stage) : ``
-                stage.hasOwnProperty(masterplan) ? prologue = stage[masterplan](template_settings) : prologue = stage.prologue(template_settings)
+                stage.hasOwnProperty(masterplan) ? prologue = stage[masterplan](template_settings) : prologue = stage.prologue()(template_settings)
             } else if (stageindex >= Math.max($("#storylength").val() * 2 - 3, 0) && stage.hasOwnProperty(masterplan) && knowledge != "clueless") {
                 prologue = stage[masterplan](template_settings)
             } else {
-                prologue = stage.prologue(template_settings)
+                prologue = stage.prologue()(template_settings)
             }
 
 
@@ -2444,7 +2433,7 @@
             let winresult = [
                 `You have finally beaten the last of the minions of ${enemy.desc}, and try find their defeated boss. But ${gPron(enemy, "subject")} has disappeared! At least the ${neutralize}.`,
                 `"The ${neutralize}," you report to Agent Fletch. "But ${enemy.boss} is nowhere to be found."`,
-                `"Gladiator?" Agent Fletch's voice sounds in your ear, small and tinny from your damaged communicator. "What's the status?" You press your finger to the comm button. "The ${neutralize}," you respond, breathing heavily. "${enemy.boss} has been defeated but is nowhere to be found. `,
+                `"Gladiator?" Agent Fletch's voice sounds in your ear, small and tinny from your damaged communicator. "What's the status?" You press your finger to the comm button. "The ${neutralize}," you respond, breathing heavily. "${enemy.boss} has been defeated but is nowhere to be found."`,
                 `"You may have me," ${enemy.boss} says as the Citadel agents surround them. "But I am only one." Agent Fletch approaches. "Say goodbye to your precious ${enemy.name}," he says. ${randFrom([rival.name, randFrom(enemy.minionnames)])} laughs. "Who do you think you're working for?"`,
                 `"You may think you have me," ${enemy.boss} says as the Citadel agents surround them. Suddenly, ${gPron(enemy, "subject")} starts to deteriorate, and in mere seconds, there's nothing but dust left. Agent Fletch approaches. "It must have been a clone! At least the ${neutralize}, that's a victory in my books."`,
                 `In a blinding flash, ${enemy.boss} disappears just as Agent Fletch approaches. "The ${neutralize}," you report. "We may have won the battle, but the war is not over," Agent Fletch says.`,
@@ -2711,7 +2700,8 @@
                 `The fight for the future starts now, in the shadow of ${enemy.name}!`,
                 `The clash of ideals, the race against time, and the battle for the fate of everything has begun!`,
                 `Every moment counts as you push forward, determined to avert disaster and secure a victory not just for yourself, but for everything you care for.`,
-                `The fate of all hangs in the balance as you navigate this challenge, a testament to courage in the face of overwhelming odds.`
+                `The fate of all hangs in the balance as you navigate this challenge, a testament to courage in the face of overwhelming odds.`,
+                `You steel yourself for the trials ahead.`
             ]
 
             return randFrom([randFrom(laconicstatements), ``])
