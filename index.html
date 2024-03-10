@@ -343,7 +343,7 @@
             $(".storycardfront-title").each(function () {
                 if ($(this).prop('scrollHeight') > ($(this).height() + 9)) {
                     do {
-                        $(this).css({ 'font-size': '-=1' })
+                        $(this).css({ 'font-size': '-=0.5' })
                     } while (
                         $(this).prop('scrollHeight') > ($(this).height() + 9)
                     )
@@ -353,7 +353,7 @@
             $(".storycardfront-prologue").each(function () {
                 if ($(this).prop('scrollHeight') > ($(this).height() + 30)) {
                     do {
-                        $(this).css({ 'font-size': '-=1', "padding-top": "-=1mm" })
+                        $(this).css({ 'font-size': '-=0.5', "padding-top": "-=0.5mm" })
                     } while (
                         $(this).prop('scrollHeight') > ($(this).height() + 30)
                     )
@@ -363,7 +363,7 @@
             $(".storycardback-epilogue-top, .storycardback-epilogue-bottom").each(function () {
                 if ($(this).prop('scrollHeight') > ($(this).height() + 50)) {
                     do {
-                        $(this).css({ 'font-size': '-=1' })
+                        $(this).css({ 'font-size': '-=0.5' })
                     } while (
                         $(this).prop('scrollHeight') > ($(this).height() + 50)
                     )
@@ -373,7 +373,7 @@
             $(".storycardback-epiloguetitle").each(function () {
                 if ($(this).prop('scrollHeight') > ($(this).height() + 4)) {
                     do {
-                        $(this).css({ 'font-size': '-=1' })
+                        $(this).css({ 'font-size': '-=0.5' })
                     } while (
                         $(this).prop('scrollHeight') > ($(this).height() + 4)
                     )
@@ -926,7 +926,9 @@
 
             let story = compileStory(storystages, storyenemies)
 
+
             $(story).each(function (i) {
+
                 story[i].stage.knowledge = defineKnowledge(i, story)
             })
 
@@ -1396,8 +1398,9 @@
 
             } else { storystages.push(finalstage) }
             //console.log(JSON.stringify(storystages))
-//            storystages[8] = stages.filter(stage => stage.name == "Supply & Demand")[0]
- //           storystages[7] = stages.filter(stage => stage.name == "Supply & Demand")[0]
+    //        let fillstage = stages.filter(stage => stage.name == "Rude Awakening")[0]
+    //        storystages[1] = fillstage
+    //        storystages[2] = fillstage
             return [storystages, stages]
 
         }
@@ -1813,73 +1816,73 @@
                     break;
                 case "Cashed Out": clue = [
                     `the location of a gambling den operated by the ${nextenemy.name}${cahoots}`,
-                    `the location of a high-stakes underground casino operated by the ${nextenemy.name}, understood to be laundering massive sums${cahoots}.`,
-                    `exclusive gambling events hosted by ${nextenemy.name}, drawing in the city's elite${cahoots} under suspicious circumstances.`
+                    `the location of a high-stakes underground casino operated by the ${nextenemy.name}, understood to be laundering massive sums${cahoots}`,
+                    `exclusive gambling events hosted by ${nextenemy.name}, drawing in the city's elite${cahoots} under suspicious circumstances`
                     ]
                     break;
                 case "Compromised": clue = [
-                     `${nextenemy.boss} is orchestrating a large-scale hostage situation within the corporate towers of downtown${cahoots}.`,
-                     `plans uncovered for a daylight abduction by ${nextenemy.boss}${cahoots} in a bustling downtown office building.`,
+                     `${nextenemy.boss} is orchestrating a large-scale hostage situation within the corporate towers of downtown${cahoots}`,
+                     `plans uncovered for a daylight abduction by ${nextenemy.boss}${cahoots} in a bustling downtown office building`,
                      `${nextenemy.boss} is planning to take hostages in a downtown office building${cahoots}`
                      ]
                     break;
                 case "Gone Ballistic": clue = [
-                     `${nextenemy.name} - ${nextenemy.desc}${cahoots} - orchestrating an illegal arms trade, equipped for a small army.`,
-                     `a secretive military-grade arms exchange facilitated by ${nextenemy.name}${cahoots}, hidden within the industrial district.`,
+                     `${nextenemy.name} - ${nextenemy.desc}${cahoots} - orchestrating an illegal arms trade, equipped for a small army`,
+                     `a secretive military-grade arms exchange facilitated by ${nextenemy.name}${cahoots}, hidden within the industrial district`,
                     `${nextenemy.name} - ${nextenemy.desc}${cahoots} - are conducting an arms deal at a nearby warehouse`
                     ]
                     break;
                 case "One Step Ahead": clue = [
-                    `recent tracks of ${nextenemy.name} along secluded mountain routes, hinting at strategic movements${cahoots} against the Citadel.`,
-                    `evidence of encampments of ${nextenemy.name}${cahoots} dotting a hidden mountain trail, preparing for an unknown operation.`,
+                    `recent tracks of ${nextenemy.name} along secluded mountain routes, hinting at strategic movements${cahoots} against the Citadel`,
+                    `evidence of encampments of ${nextenemy.name}${cahoots} dotting a hidden mountain trail, preparing for an unknown operation`,
                     `the ${nextenemy.name} have been seen along a distant mountain path with their ${nextenemy.minions()}${cahoots}`
                     ]
                     break;
                 case "Original Copy": clue = [
-                    `illicit cloning activities linked to ${nextenemy.boss}${cahoots}, within the depths of a hidden research facility.`,
-                    `stolen genetic research being replicated at an unauthorized lab, directly involving ${nextenemy.boss}${cahoots}.`,
+                    `illicit cloning activities linked to ${nextenemy.boss}${cahoots}, within the depths of a hidden research facility`,
+                    `stolen genetic research being replicated at an unauthorized lab, directly involving ${nextenemy.boss}${cahoots}`,
                     `${nextenemy.boss} and ${gPron(nextenemy, "possessive")} ${nextenemy.minions()}${cahoots}, have been spotted at a suspicious lab`
                     ]
                     break;
                 case "Out of Time":
                 case "Rude Awakening": clue = [
-                     `the resurgence of dark magic, centered around ${evilplace}, with ${nextenemy.boss}${cahoots} orchestrating the chaos.`,
-                     `unearthly disturbances reported near ${evilplace}, where ${nextenemy.boss} has been seen with entities not of this world${cahoots}.`,
+                     `the resurgence of dark magic, centered around ${evilplace}, with ${nextenemy.boss}${cahoots} orchestrating the chaos`,
+                     `unearthly disturbances reported near ${evilplace}, where ${nextenemy.boss} has been seen with entities not of this world${cahoots}`,
                      `strange sorcery and walking corpses have been witnessed, along with ${nextenemy.boss}${cahoots} in ${whichPreposition(evilplace)}`
                     ]
                     break;
                 case "Poison the Well": clue = [
                     `the ${nextenemy.name} has hauled some equipment to the sewers${cahoots}`,
-                     `suspicious chemicals and devices being moved into the city's sewers by ${nextenemy.name}${cahoots}, hinting at a toxic plot.`,
-                     `the subterranean machinations of ${nextenemy.name}${cahoots} within the sewers, threatening the city's water supply.`
+                     `suspicious chemicals and devices being moved into the city's sewers by ${nextenemy.name}${cahoots}, hinting at a toxic plot`,
+                     `the subterranean machinations of ${nextenemy.name}${cahoots} within the sewers, threatening the city's water supply`
                     ]
                     break;
                 case "Right to Remain Silent": clue = [
-                     `the Citadel's undercover operatives gone silent within the territory of ${nextenemy.name}${cahoots} territory, feared compromised are in fact caught.`,
-                     `the extended surveillance of Citadel scouts tracking ${nextenemy.name}${cahoots}, raising alarms of their capture.`,
+                     `the Citadel's undercover operatives gone silent within the territory of ${nextenemy.name}${cahoots} territory, feared compromised are in fact caught`,
+                     `the extended surveillance of Citadel scouts tracking ${nextenemy.name}${cahoots}, raising alarms of their capture`,
                      `the undercover Citadel scouts have been captured by ${nextenemy.name}${cahoots}`
                      ]
                     break;
                 case "Supply & Demand": clue = [
-                      `the shadowy corners of Ransom City flicker with the activities of ${nextenemy.name}${cahoots}, trading in forbidden substances.`,
-                      `an intricate network led by ${nextenemy.name}${cahoots}, distributing narcotics through abandoned structures.`,
+                      `the shadowy corners of Ransom City flicker with the activities of ${nextenemy.name}${cahoots}, trading in forbidden substances`,
+                      `an intricate network led by ${nextenemy.name}${cahoots}, distributing narcotics through abandoned structures`,
                       `${nextenemy.name} - ${nextenemy.desc}${cahoots} - are conducting a drug deal at a nearby abandoned property`
                       ]
                     break;
                 case "Under Destruction": clue = [
-                    `suspicious activity has been detected by ${nextenemy.name}${cahoots} at an unfinished construction site.`,
-                    `the blueprint of an unfinished skyscraper reveals alterations not part of the original design, apparently by ${nextenemy.name}${cahoots}.`,
+                    `suspicious activity has been detected by ${nextenemy.name}${cahoots} at an unfinished construction site`,
+                    `the blueprint of an unfinished skyscraper reveals alterations not part of the original design, apparently by ${nextenemy.name}${cahoots}`,
                     `the ${nextenemy.name}${cahoots} - had something going down at an unfinished construction site`]
                     break;
                 case "Running Wild": clue = [
-                    `ancient ruins in the heart of the forest, now home to ${nextenemy.minions()} of the ${nextenemy.name}${cahoots}, hiding something valuable.`,
-                    `a labyrinthine forest becomes the stage for ${nextenemy.name}${cahoots}'s excavation, seeking relics of untold power.`,
+                    `ancient ruins in the heart of the forest, now home to ${nextenemy.minions()} of the ${nextenemy.name}${cahoots}, hiding something valuable`,
+                    `a labyrinthine forest becomes the stage for ${nextenemy.name}${cahoots}'s excavation, seeking relics of untold power`,
                     `${nextenemy.minions()} of the ${nextenemy.name}${cahoots} have set up a dig in a labyrinthine forest`
                     ]
                     break;
                 case "Steel Memories": clue = [
-                     `a once-abandoned bunker, now buzzing with activity under ${nextenemy.boss}${cahoots}.`,
-                     `a fortified hideaway, where ${nextenemy.boss}${cahoots} guards their secrets closely.`,
+                     `a once-abandoned bunker, now buzzing with activity under ${nextenemy.boss}${cahoots}`,
+                     `a fortified hideaway, where ${nextenemy.boss}${cahoots} guards their secrets closely`,
                     `the location of the secret base of ${nextenemy.boss}${cahoots}`
                     ]
                     break;
@@ -1984,7 +1987,7 @@
                         `Recovery of a hacked ${gizmo} reveals bids for illegal deals under the guidance of ${enemy.boss}, implicating ${finalboss.name}. "This is how they've been funding their schemes," you realize, the digital breadcrumbs subtly leading to`,
                         `Upon inspecting the area post-skirmish, you find forged documents and counterfeit currencies likely tied to ${finalboss.name}. "A financial foundation built on deception for ${finalboss.boss}," you note, the evidence ${ambiguity_element}`,
                         `A coded ledger reveals a meeting point for a high-stakes underground auction. "Artifacts or weapons?" you ponder, the coded messages ${ambiguity_element}`,
-                        `Interrogation of a captured ${enemy.minions()} uncovers plans to raid a ${finalboss.boss === enemy.boss ? possessiveSuffix(finalboss.name) : possessiveSuffix(finalboss.boss)} cache. "Infighting for profit," you surmise, the confession ${ambiguity_element}`,
+                        `Interrogation of a captured ${enemy.minions()} uncovers plans to raid ${finalboss.boss === enemy.boss ? possessiveSuffix(finalboss.name) : possessiveSuffix(finalboss.boss)} cache. "Infighting for profit," you surmise, the confession ${ambiguity_element}`,
                         `Ledgers with coded entries recovered on-site reveal a network far more extensive than anticipated. "${possessiveSuffix(finalboss.name)} web of illicit trade?" you think, the ledgers ${ambiguity_element}`,
                         `An unmarked container nearby filled with rare minerals hints at unregulated trade. "Funding ${finalboss.boss === enemy.boss ? possessiveSuffix(finalboss.name) : possessiveSuffix(finalboss.boss)} operations through the shadows?" you guess, the contents ${ambiguity_element}`
                         ];
@@ -2296,6 +2299,16 @@
             return randFrom(["data disc", "keycard", "tape recorder", "floppy disc", "microchip", "communicator", "cell phone", "diskette", "data cartridge", "tablet", "magnetic tape", "computer"])
         }
 
+        function removeLastBrBr(str) {
+  const index = str.lastIndexOf("<br><br>");
+  if (index === -1) {
+    // "<br><br>" not found, return the original string
+    return str;
+  }
+  // Remove the last occurrence of "<br><br>"
+  return str.substring(0, index) + str.substring(index + "<br><br>".length);
+}
+
         function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, pregameprologue, vip) {
             let finalboss = story[Math.max($("#storylength").val() * 2 - 3, 0)].enemy
             let finalstage = story[Math.max($("#storylength").val() * 2 - 3, 0)].stage
@@ -2315,7 +2328,17 @@
             let lose = determineNextStage(stageindex, story, 1)
             let gizmo = getGizmo()
 
-            let winepilogue = stageindex >= Math.max(($("#storylength").val() * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 1) + "<br><br>" + `${finalboss.boss != enemy.boss ? `You could not stop ${finalboss.boss}, but your efforts were not in vain, as a threat as serious was neutralized. ` : ``}The fighters win this story.` : victoryResult(stageindex, story, win, gizmo, finalstage.masterplan)
+            let smallvictory = randFrom([
+            `You could not stop ${finalboss.boss}, but your efforts were not in vain, as a threat as serious was neutralized. `,
+            `While the shadow of ${finalboss.boss} looms large, your valor shines through the darkness. You may not have crossed paths with the ultimate foe, yet the downfall of ${enemy.boss} marks a critical blow to their nefarious plans. Ransom City breathes easier tonight, saved from a catastrophe just as dire, thanks to your unwavering courage. `,
+            `The elusive ${finalboss.boss} remains at large, a reminder of the battles yet to come. However, your triumph over ${enemy.boss} has severed a crucial arm of their dark ambitions. This victory, though not the final confrontation you sought, is a testament to your strength and a beacon of hope in the fight against the encroaching darkness. `,
+            `Though ${finalboss.boss} eludes justice for now, your strategic dismantling of ${possessiveSuffix(enemy.boss)} plan has dealt a significant blow to their operations. Each step you take unravels the web of terror they sought to weave. Today, you have proven that even in the face of elusive evil, the light of hope cannot be extinguished. `,
+            `In the chase for ${finalboss.boss}, fate took a different turn, leading you to confront and overcome ${enemy.boss}. Your success has not only thwarted an immediate threat but has also sown seeds of resilience and defiance against the darkness. The path ahead remains fraught with peril, but your actions have ensured that hope endures. `,
+            `Agent Fletch’s voice crackles through the comms, "You might not have caught ${finalboss.boss}, but taking down ${enemy.boss} has sent shockwaves through their ranks. You've done more than just win a battle; you've sown chaos among our enemies. That's a victory in its own right. Well done."" His words serve as a reminder that every action contributes to the larger fight for justice.`,
+            `In the aftermath of the clash, Agent Fletch meets you with a steady gaze. "Missing ${finalboss.boss} stings, I won’t lie,' he admits, 'but don’t overlook the victory you've claimed today. Defeating ${enemy.boss} was no small feat. It's a testament to your dedication and skill. We're closer to our goal because of what you've accomplished."`
+            ])
+
+            let winepilogue = stageindex >= Math.max(($("#storylength").val() * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 1) + "<br><br>" + `${finalboss.boss != enemy.boss ? smallvictory : ``}The fighters win this story.` : victoryResult(stageindex, story, win, gizmo, finalstage.masterplan)
             let loseepilogue = stageindex >= Math.max(($("#storylength").val() * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 0) + "<br><br>" + `The fighters lose this story.` : loseResult(stageindex, story, lose, gizmo, instructions.prologue, rival, rivalpresence, ally)
             let gloat = gloatingList(enemy, stage)
             let prologue
@@ -2328,13 +2351,13 @@
 
             //stage.name == "Casdft" && knowledge != "" ? console.log(stage.name + Math.random()) : ``
 
-            let template_settings = { "finalboss": finalboss, "enemy": enemy, "rival": rival, "minion": minion, "gloat": gloat, "rivalpresence": rivalpresence, "rivalboost": rivalboost, "stageindex": stageindex, "knowledge": knowledge, "gizmo": gizmo, "trail": trail, "casino": casino, "vip": vip }
+            let template_settings = { "finalboss": finalboss, "enemy": enemy, "rival": rival, "minion": minion, "gloat": gloat, "rivalpresence": rivalpresence, "rivalboost": rivalboost, "stageindex": stageindex, "knowledge": knowledge, "gizmo": gizmo, "trail": trail, "casino": casino, "vip": vip, "approach": stage.approach }
 
             let stageriv = stage.rivaltext(template_settings)
 
             template_settings["rivaltext"] = stageriv
 
-            if(stage.name === "Sudden Death") { console.log(stage.name) }
+            //if(stage.name === "Steel Memories") { console.log(stage.name) }
             
             let stagevar
             switch (knowledge) {
@@ -2361,7 +2384,7 @@
             }
 
 
-            return { chapter: story[stageindex].chapter, prologue: prologue, setup: setup, wincondition: instructions.wincondition, winepilogue: winepilogue, loseepilogue: loseepilogue }
+            return { chapter: story[stageindex].chapter, prologue: removeLastBrBr(prologue), setup: setup, wincondition: instructions.wincondition, winepilogue: winepilogue, loseepilogue: loseepilogue }
         }
 
         function textMaker(story, alliesandrivals, heronames, enemies) {
@@ -2701,7 +2724,10 @@
                 `The clash of ideals, the race against time, and the battle for the fate of everything has begun!`,
                 `Every moment counts as you push forward, determined to avert disaster and secure a victory not just for yourself, but for everything you care for.`,
                 `The fate of all hangs in the balance as you navigate this challenge, a testament to courage in the face of overwhelming odds.`,
-                `You steel yourself for the trials ahead.`
+                `You steel yourself for the trials ahead.`,
+                `With determination, you stand your ground, ready to face ${gPron(enemy,"object")} and the trials that lie ahead.`,
+                `The moment of truth is upon you, a test of wills where only one can prevail.`,
+                `With the stakes now clear, your resolve hardens.`
             ]
 
             return randFrom([randFrom(laconicstatements), ``])
