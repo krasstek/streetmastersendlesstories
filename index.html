@@ -1797,99 +1797,92 @@
             let detonationaction = getEnemyAttack(enemy, "detonation", `${gPron(enemy, "subject")} produces a remote and presses a button. An explosion knocks you down`)
 
             let wanting = randFrom(["you are after", "you want", "", "you pursue", "the Citadel is after", "behind all this", "all too familiar to you"])
-            let finalcahoots = finalboss.name == nextenemy.name ? randFrom([finalboss.boss, (finalboss.desc.replace("the", "a certain"), finalboss.desc)]) : randFrom([`the ${finalboss.name}`, `${finalboss.desc} ${wanting}`, `${finalboss.minions()} ${wanting}`, `the ${finalboss.bosstitle()} ${wanting}`, finalboss.boss])
-            let thiscahoots = enemy.name == nextenemy.name ? randFrom([enemy.boss, (enemy.desc.replace("the", "this very")), `this ${enemy.bosstitle()}`]) : randFrom([`the ${enemy.name}`, (enemy.desc.replace("the", "this")), `these ${enemy.minions()}`, `the ${enemy.bosstitle()}`, enemy.boss])
-            let cahoots = randFrom([finalcahoots, thiscahoots])
-            let supposition = randFrom(["", "supposedly ", "rumored to be ", "who to your understanding are ", "who according to Agent Fletch are ", "apparently ", "probably ", "believed to be ", "most likely ", "in all likelihood ",
-                "presumably ", "surely ", "assumably ", "who you believe are ", "the Citadel analysts are saying is ", "apparently ", "in fact ", "indeed ", "as a matter of fact ", "in truth "])
-            cahoots = randFrom([``, ` - ${supposition}in cahoots with ${cahoots}`, `, ${supposition}in league with ${cahoots}`, `, ${supposition}allied to ${cahoots}`,
-                `, ${supposition}working for ${cahoots} this time`, `, ${supposition}in alliance with ${cahoots}`, `, ${supposition}hired by ${cahoots}`, `, ${supposition}linked to ${cahoots}`, `, ${supposition}tied to ${cahoots}`,
-                `, ${supposition}connected to ${cahoots}`], `, somehow connected to all of this`, ``, ` that ${supposition}is connected to this`, `, that the Citadel confirms warrants further investigation`, `, who doesn't serve the Kingdom, but instead someone known only as The Master`, `, and seems more important than you originally thought`)
-            cahoots = (nextstage >= Math.max($("#storylength").val() * 2 - 3, 0)) ? `` : cahoots
+
+            let supposition = randFrom(["", "supposedly ", "rumored to be ", "who to your understanding are ", "who according to Agent Fletch are ", "apparently ", "probably ", "believed to be ", "most likely ", "in all likelihood ","presumably ", "surely ", "assumably ", "who you believe are ", "the Citadel analysts are saying is ", "apparently ", "in fact ", "indeed ", "as a matter of fact ", "in truth "])
 
             switch (nextmission.name) {
                 case "Ashes of the Eternal":
                 case "The Ceremony": clue = [
-                    `${nextenemy.boss}${cahoots}, has an interest on a certain ${evilplace}`,
-                    `mysterious rituals taking place in a distant ${evilplace}, closely tied to grand scheme of ${nextenemy.boss}${cahoots}.`
+                    `${nextenemy.boss} has an interest on a certain ${evilplace}`,
+                    `mysterious rituals taking place in a distant ${evilplace}, closely tied to grand scheme of ${nextenemy.boss}.`
                 ]
                     break;
                 case "Cashed Out": clue = [
-                    `the location of a gambling den operated by the ${nextenemy.name}${cahoots}`,
-                    `the location of a high-stakes underground casino operated by the ${nextenemy.name}, understood to be laundering massive sums${cahoots}`,
-                    `exclusive gambling events hosted by ${nextenemy.name}, drawing in the city's elite${cahoots} under suspicious circumstances`
+                    `there is a gambling den operated by the ${nextenemy.name}`,
+                    `you need to investigate the location of a high-stakes underground casino operated by the ${nextenemy.name}, understood to be laundering massive sums`,
+                    `exclusive gambling events are hosted by ${nextenemy.name}, drawing in the city's elite under suspicious circumstances`
                     ]
                     break;
                 case "Compromised": clue = [
-                     `${nextenemy.boss} is orchestrating a large-scale hostage situation within the corporate towers of downtown${cahoots}`,
-                     `plans uncovered for a daylight abduction by ${nextenemy.boss}${cahoots} in a bustling downtown office building`,
-                     `${nextenemy.boss} is planning to take hostages in a downtown office building${cahoots}`
+                     `${nextenemy.boss} is orchestrating a large-scale hostage situation within the corporate towers of downtown`,
+                     `plans uncovered for a daylight abduction by ${nextenemy.boss} in a bustling downtown office building`,
+                     `${nextenemy.boss} is planning to take hostages in a downtown office building`
                      ]
                     break;
                 case "Gone Ballistic": clue = [
-                     `${nextenemy.name} - ${nextenemy.desc}${cahoots} - orchestrating an illegal arms trade, equipped for a small army`,
-                     `a secretive military-grade arms exchange facilitated by ${nextenemy.name}${cahoots}, hidden within the industrial district`,
-                    `${nextenemy.name} - ${nextenemy.desc}${cahoots} - are conducting an arms deal at a nearby warehouse`
+                     `${nextenemy.name} - ${nextenemy.desc} - orchestrating an illegal arms trade, equipped for a small army`,
+                     `a secretive military-grade arms exchange facilitated by ${nextenemy.name}, hidden within the industrial district`,
+                    `${nextenemy.name} - ${nextenemy.desc} - are conducting an arms deal at a nearby warehouse`
                     ]
                     break;
                 case "One Step Ahead": clue = [
-                    `recent tracks of ${nextenemy.name} along secluded mountain routes, hinting at strategic movements${cahoots} against the Citadel`,
-                    `evidence of encampments of ${nextenemy.name}${cahoots} dotting a hidden mountain trail, preparing for an unknown operation`,
-                    `the ${nextenemy.name} have been seen along a distant mountain path with their ${nextenemy.minions()}${cahoots}`
+                    `recent tracks of ${nextenemy.name} along secluded mountain routes, hinting at strategic movements against the Citadel`,
+                    `evidence of encampments of ${nextenemy.name} dotting a hidden mountain trail, preparing for an unknown operation`,
+                    `the ${nextenemy.name} have been seen along a distant mountain path with their ${nextenemy.minions()}`
                     ]
                     break;
                 case "Original Copy": clue = [
-                    `illicit cloning activities linked to ${nextenemy.boss}${cahoots}, within the depths of a hidden research facility`,
-                    `stolen genetic research being replicated at an unauthorized lab, directly involving ${nextenemy.boss}${cahoots}`,
-                    `${nextenemy.boss} and ${gPron(nextenemy, "possessive")} ${nextenemy.minions()}${cahoots}, have been spotted at a suspicious lab`
+                    `illicit cloning activities linked to ${nextenemy.boss}, within the depths of a hidden research facility`,
+                    `stolen genetic research being replicated at an unauthorized lab, directly involving ${nextenemy.boss}`,
+                    `${nextenemy.boss} and ${gPron(nextenemy, "possessive")} ${nextenemy.minions()}, have been spotted at a suspicious lab`
                     ]
                     break;
                 case "Out of Time":
                 case "Rude Awakening": clue = [
-                     `the resurgence of dark magic, centered around ${evilplace}, with ${nextenemy.boss}${cahoots} orchestrating the chaos`,
-                     `unearthly disturbances reported near ${evilplace}, where ${nextenemy.boss} has been seen with entities not of this world${cahoots}`,
-                     `strange sorcery and walking corpses have been witnessed, along with ${nextenemy.boss}${cahoots} in ${whichPreposition(evilplace)}`
+                     `the resurgence of dark magic, centered around ${evilplace}, with ${nextenemy.name} orchestrating the chaos`,
+                     `unearthly disturbances reported near ${evilplace}, where ${nextenemy.boss} has been seen with entities not of this world`,
+                     `strange sorcery and walking corpses have been witnessed, along with ${nextenemy.boss} in ${whichPreposition(evilplace)}`
                     ]
                     break;
                 case "Poison the Well": clue = [
-                    `the ${nextenemy.name} has hauled some equipment to the sewers${cahoots}`,
-                     `suspicious chemicals and devices being moved into the city's sewers by ${nextenemy.name}${cahoots}, hinting at a toxic plot`,
-                     `the subterranean machinations of ${nextenemy.name}${cahoots} within the sewers, threatening the city's water supply`
+                    `the ${nextenemy.name} has hauled some equipment to the sewers`,
+                     `suspicious chemicals and devices being moved into the city's sewers by ${nextenemy.name}, hinting at a toxic plot`,
+                     `the subterranean machinations of ${nextenemy.name} within the sewers, threatening the city's water supply`
                     ]
                     break;
                 case "Right to Remain Silent": clue = [
-                     `the Citadel's undercover operatives gone silent within the territory of ${nextenemy.name}${cahoots} territory, feared compromised are in fact caught`,
-                     `the extended surveillance of Citadel scouts tracking ${nextenemy.name}${cahoots}, raising alarms of their capture`,
-                     `the undercover Citadel scouts have been captured by ${nextenemy.name}${cahoots}`
+                     `the Citadel's undercover operatives gone silent within the territory of ${nextenemy.name} territory, feared compromised are in fact caught`,
+                     `the extended surveillance of Citadel scouts tracking ${nextenemy.name}, raising alarms of their capture`,
+                     `the undercover Citadel scouts have been captured by ${nextenemy.name}`
                      ]
                     break;
                 case "Supply & Demand": clue = [
-                      `the shadowy corners of Ransom City flicker with the activities of ${nextenemy.name}${cahoots}, trading in forbidden substances`,
-                      `an intricate network led by ${nextenemy.name}${cahoots}, distributing narcotics through abandoned structures`,
-                      `${nextenemy.name} - ${nextenemy.desc}${cahoots} - are conducting a drug deal at a nearby abandoned property`
+                      `the shadowy corners of Ransom City flicker with the activities of ${nextenemy.name}, trading in forbidden substances`,
+                      `an intricate network led by ${nextenemy.name}, distributing narcotics through abandoned structures`,
+                      `${nextenemy.name} - ${nextenemy.desc} - are conducting a drug deal at a nearby abandoned property`
                       ]
                     break;
                 case "Under Destruction": clue = [
-                    `suspicious activity has been detected by ${nextenemy.name}${cahoots} at an unfinished construction site`,
-                    `the blueprint of an unfinished skyscraper reveals alterations not part of the original design, apparently by ${nextenemy.name}${cahoots}`,
-                    `the ${nextenemy.name}${cahoots} - had something going down at an unfinished construction site`]
+                    `suspicious activity has been detected by ${nextenemy.name} at an unfinished construction site`,
+                    `the blueprint of an unfinished skyscraper reveals alterations not part of the original design, apparently by ${nextenemy.name}`,
+                    `the ${nextenemy.name} - had something going down at an unfinished construction site`]
                     break;
                 case "Running Wild": clue = [
-                    `ancient ruins in the heart of the forest, now home to ${nextenemy.minions()} of the ${nextenemy.name}${cahoots}, hiding something valuable`,
-                    `a labyrinthine forest becomes the stage for ${nextenemy.name}${cahoots}'s excavation, seeking relics of untold power`,
-                    `${nextenemy.minions()} of the ${nextenemy.name}${cahoots} have set up a dig in a labyrinthine forest`
+                    `ancient ruins in the heart of the forest, now home to ${nextenemy.minions()} of the ${nextenemy.name}, hiding something valuable`,
+                    `a labyrinthine forest becomes the stage for ${nextenemy.name}'s excavation, seeking relics of untold power`,
+                    `${nextenemy.minions()} of the ${nextenemy.name} have set up a dig in a labyrinthine forest`
                     ]
                     break;
                 case "Steel Memories": clue = [
-                     `a once-abandoned bunker, now buzzing with activity under ${nextenemy.boss}${cahoots}`,
-                     `a fortified hideaway, where ${nextenemy.boss}${cahoots} guards their secrets closely`,
-                    `the location of the secret base of ${nextenemy.boss}${cahoots}`
+                     `a once-abandoned bunker, now buzzing with activity under ${nextenemy.boss}`,
+                     `a fortified hideaway, where ${nextenemy.boss} guards their secrets closely`,
+                    `the location of the secret base of ${nextenemy.boss}`
                     ]
                     break;
                 case "Sudden Death": clue = [
-                      `a revival of gladiatorial combats by ${nextenemy.name}${cahoots}, mirroring the dark traditions you thought you had already shut down.`,
-                      `the underbelly of Ransom City stirs with whispers of a deadly tournament, resurrected by ${nextenemy.name}${cahoots} for grim purposes.`,
-                    `the ${nextenemy.name == "Kingdom" ? nextenemy.boss + ` was back to ${gPron(nextenemy, "possessive")} previous practice` : " the customary recruitment methods of the Kingdom been duplicated by " + nextenemy.name}${cahoots}`]
+                      `a revival of gladiatorial combats by ${nextenemy.name}, mirroring the dark traditions you thought you had already shut down.`,
+                      `the underbelly of Ransom City stirs with whispers of a deadly tournament, resurrected by ${nextenemy.name} for grim purposes.`,
+                    `the ${nextenemy.name == "Kingdom" ? nextenemy.boss + ` was back to ${gPron(nextenemy, "possessive")} previous practice` : " the customary recruitment methods of the Kingdom been duplicated by " + nextenemy.name}`]
                     break;
             };
 
@@ -1897,13 +1890,13 @@
 
             let gatherclues = [
                 `${enemy.boss} forces you to dodge ${gPron(enemy, "possessive")} attack, and when you return to your stance, ${gPron(enemy, "subject")} is gone! Rather than give chase, you interrogate ${minion} who reveals`,
-                `After the skirmish, the ${enemy.name} scared away, you rush to one of the ${bystanders}s' side - an undercover Citadel scout, who holds ${whichPreposition(gizmo)} in hand. ${contact}'s alive, bleeding out from an attack. "The ${gizmo}!" you ask. "What's in it?" ${contact} doesn't make it, but the intel you recovered tells`,
+                `After the skirmish, the ${enemy.name} scared away, you rush to one of the ${bystanders}s' side - an undercover Citadel scout, who holds ${whichPreposition(gizmo)} in hand. ${contact}'s alive, bleeding out from an attack. "The ${gizmo}!" you ask. "What's in it?" ${contact} doesn't make it, but the intel you recovered tells of`,
                 `Before you can finish the job, ${enemy.boss} leaps through ${stage.hasOwnProperty("pit") ? stage.pit : "a bottomless pit"}. You race to the edge after ${gPron(enemy, "object")}, but ${gPron(enemy, "subject")} is nowhere to be seen. You doubt this is the last you see of the ${enemy.bosstitle()} of the ${enemy.name}. You turn to the ${bystanders}s and one of them approaches you.  "Thank you!" ${lowerCaseInitial(contact)} says, and tells of overhearing that`,
                 `As you tie up the unconscious members of the ${enemy.name}, left on their own devices by ${enemy.boss}, you're shocked when ${minion} approaches you calmly. ${minion} - a double agent - informs you that`,
                 `"Sir, we've captured one of the ${enemy.minions()} and are holding them for questioning."  The technician got to Agent Fletch, and then paused for a moment.  "Find out what they are up to!" Fletch told the technician.  "By any means necessary!" ${minion} revealed that`,
                 `${enemy.boss} made a hasty retreat, but thanks to the information you got after the encounter, you have learned`,
                 `"Thank you!" one of the ${bystanders}s said as ${lowerCaseInitial(contact)} approached, as the forces of ${enemy.boss} made their retreat. "I overheard what they're planning." ${contact} goes on to explain about `,
-                `With the last of the ${enemy.minions()} defeated, you turn to face ${enemy.boss} again. You're confident that if you could only get close to ${gPron(enemy, "object")}, you could end this game of cat and mouse. But ${gPron(enemy, "subject")} has disappeared into the thin air! You don't have the time to ponder this, as the intel from here tells`,
+                `With the last of the ${enemy.minions()} defeated, you turn to face ${enemy.boss} again. You're confident that if you could only get close to ${gPron(enemy, "object")}, you could end this game of cat and mouse. But ${gPron(enemy, "subject")} has disappeared into the thin air! You don't have the time to ponder this, as the intel from here tells of`,
                 `After your victory over ${possessiveSuffix(enemy.boss)} goons and a short call to Agent Fletch, Citadel forces secure the area and begin their investigation with you. ${enemy.boss} might have slipped away, but among the debris of the fight, you find out`,
                 `${enemy.boss} forces you to dodge ${gPron(enemy, "possessive")} ferocious onslaught, and when you regain your footing, ${gPron(enemy, "subject")} has vanished into the shadows! Rather than giving yet another futile chase, you corner ${minion}, whose fear overpowers loyalty. ${minion} spills the beans, revealing`,
                 `In the aftermath of the skirmish that sent the ${enemy.name} scrambling for cover, you rush to the aid of one of the ${bystanders}s — an undercover agent of the Citadel, clutching ${whichPreposition(gizmo)}. "The secrets?" you demand urgently. With last breaths, ${lowerCaseInitial(contact)} entrusts the device to you. Analyzing the ${gizmo}, you uncover`,
@@ -1957,7 +1950,7 @@
             let hinting_word = randFrom([`indicating`,`leading to`, `pointing towards`, `suggesting`, `leading towards`, `guiding you towards`, `hinting at`, `suggests`, `nudging you towards`,
         `revealing`, `alluding to`,  `directing you towards`, `suggesting`
         ])
-            let ambiguity_element = (nextstage >= $("#storylength").val() * 2 - 3) ? `${definite_word} ${hinting_word}` : `${ambiguous_word} ${hinting_word}` 
+            let ambiguity_element = (nextstage >= $("#storylength").val() * 2 - 3) ? `${definite_word} ${hinting_word}` : `${ambiguous_word} ${hinting_word}`
             switch (masterplan) {
                 case "kidnapping":
                     masterplanclues = [
@@ -1999,8 +1992,8 @@
                         `Eyewitness accounts nearby describe groups gathering under the guise of night, likely for ${possessiveSuffix(finalboss.boss)} cause. "A gathering force for ${finalboss.name}, but to what end?" you wonder, the reports ${ambiguity_element}`,
                         `Found among ${possessiveSuffix(enemy.boss)} belongings, a recruitment flyer for private military training by ${finalboss.name}. "Expanding their reach," you determine, the propaganda piece ${ambiguity_element}`,
                         `A defector from ${enemy.name} speaks of a secret initiation ceremony. "An oath of loyalty," you ponder, the insider's knowledge ${ambiguity_element}`,
-                        `A collection of foreign military manuals found among the enemy's possessions. "${finalboss.name} preparing for a bigger fight?" you surmise, the manuals ${ambiguity_element}`,
-                        `Training schedules for with high-intensity regimens but for tactics generally not associated with ${finalboss.name} hint at an imminent escalation. "Who are they readying for battle?" you question, the schedules ${ambiguity_element}`
+                        `A collection of foreign military manuals is found among the enemy's possessions. "${finalboss.name} preparing for a bigger fight?" you surmise, the manuals ${ambiguity_element}`,
+                        `Training schedules for with high-intensity regimens but for tactics generally not associated with ${finalboss.name} hint at an imminent escalation have been left behind. "Who are they readying for battle?" you question, the schedules ${ambiguity_element}`
                         ];
                     break;
                 case "actsofterror":
@@ -2300,13 +2293,12 @@
         }
 
         function removeLastBrBr(str) {
-  const index = str.lastIndexOf("<br><br>");
-  if (index === -1) {
-    // "<br><br>" not found, return the original string
-    return str;
+  if (str.endsWith("<br><br>")) {
+    // Remove "<br><br>" only at the end of the string
+    return str.substring(0, str.length - "<br><br>".length);
   }
-  // Remove the last occurrence of "<br><br>"
-  return str.substring(0, index) + str.substring(index + "<br><br>".length);
+  // If "<br><br>" is not at the end, return the original string
+  return str;
 }
 
         function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, pregameprologue, vip) {
@@ -2358,7 +2350,7 @@
             template_settings["rivaltext"] = stageriv
 
             //if(stage.name === "Steel Memories") { console.log(stage.name) }
-            
+
             let stagevar
             switch (knowledge) {
                 case "hottrail": stagevar = stage.hottrail()(template_settings);
@@ -2471,7 +2463,7 @@
                 `"If you strike me down, I shall become more powerful than you possibly can imagine," ${enemy.boss} says. ${ucInit(gPron(enemy, "subject"))} drops ${gPron(enemy, "possessive")} guard, and you strike ${gPron(enemy, "object")} one last time, and there's a blinding flash! ${ucInit(possessiveSuffix(gPron(enemy, "subject")))} gone! Disappeared! At least the ${neutralize}.`,
                 `The screens of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "${Math.ceil(Math.random() * 100000)} points! You beat the high score for this simulation! Good job, Gladiators!" Agent Fletch calls from beyond the observation screen. "When you have to face ${enemy.boss} for real, you just might be ready."`,
                 `With the last of the adversaries down, you realize ${enemy.boss} has eluded capture once more. Despite this, the immediate danger has been averted because the ${neutralize}`,
-                `"We've secured the area," you communicate over the radio. "The immediate threat is contained. The ${neutralize}, but we've lost track of ${enemy.boss}."`,
+                `"We've secured the area," you communicate over the radio. "The immediate threat is contained. The ${neutralize}, but we've lost track of ${enemy.boss} ${gPron(enemy, 'reflexive')}."`,
                 `Catching your breath, you survey the scene of the last stand. Although ${enemy.boss} slipped through the net, the ${neutralize}, ensuring the city's safety for now.`,
                 `As the dust settles, you find ${possessiveSuffix(enemy.boss)} plans in ruins, though ${gPron(enemy, "subject")} remains at large. "At least the ${neutralize}," you remind yourself, a small victory amid the uncertainty.`,
                 `The operation concludes with ${possessiveSuffix(enemy.boss)} forces dismantled, yet the mastermind behind the chaos has vanished. "Still, the ${neutralize}," you report back, focusing on the positive outcome.`,
@@ -2481,7 +2473,7 @@
                 `In the quiet that follows the storm, you reflect on the battle's outcomes. "${enemy.boss} may have escaped, but the ${neutralize}, disrupting their network significantly."`,
                 `As you regroup with your team, the reality of ${enemy.boss}'s escape settles in. Despite the setback, the ${neutralize}, marking a crucial win against their operations.`,
                 `Just as victory seemed within grasp, ${enemy.boss} smirks. ${getEnemyAttack(enemy, "detonation", `${gPron(enemy, "subject")} produces a remote and presses a button. The room shudders with the force of an explosion`)}, momentarily obscuring everything. "Coward's exit," you cough out, once the debris settles. Though ${enemy.boss} has vanished, the ${neutralize}, ensuring their immediate plan crumbles to dust along with ${possessiveSuffix(enemy.name)} escape route.`,
-                `The confrontation reaches its peak and ${enemy.boss} is cornered and desperate. ${getEnemyAttack(enemy, "detonation", `${ucInit(gPron(enemy, "subject"))} reveals a detonator and triggers the explosives`)}, vanishing amidst chaos. Rubble and confusion fill the space where ${gPron(enemy, "subject")} once stood. "Gone, but not victorious," you declare to your team, as the dust clears revealing that, despite the dramatic escape, the ${neutralize}, dismantling the threat piece by piece.`
+                `The confrontation reaches its peak and ${enemy.boss} is cornered and desperate. ${getEnemyAttack(enemy, "detonation", `${ucInit(gPron(enemy, "subject"))} reveals a detonator and triggers the explosives`)},  ${gPron(enemy, "object")} vanishing amidst chaos. Rubble and confusion fill the space where ${gPron(enemy, "subject")} once stood. "Gone, but not victorious," you declare to your team, as the dust clears revealing that, despite the dramatic escape, the ${neutralize}, dismantling the threat piece by piece.`
             ]
 
             let finisher = randFrom(["Finish them", "Show no mercy", "End them", "Put an end to this", "Kill them, and send what remains to Agent Fletch", "Wipe them out, all of them", "Put a stop to this"])
