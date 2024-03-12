@@ -753,17 +753,17 @@
         function bossDescription(enemy) {
             let bossynonym = randFrom(["boss", "boss", "boss", "leader", "leader", "head", "chief", "kingpin"])
             let fame = randFrom(["notorious", "infamous", "ill-famed"])
-
+            let these_minions = enemy.minions()
             let boss_part = `the ${randFrom([``, ``, `${fame}`])} ${randFrom([bossynonym, enemy.bosstitle()])}`
 
-            let of_whom = [` of the ${enemy.name}`, ` of ${enemy.desc}`, ` of the ${enemy.minions()}`]
+            let of_whom = [` of the ${enemy.name}`, ` of ${enemy.desc}`, ` of the ${these_minions}`]
             if (boss_part.includes(`${enemy.bosstitle()}`)) { of_whom.push(``) }
             of_whom = randFrom(of_whom)
 
             let description = [``, ``, `, ${enemy.expression()}`]
             if (of_whom.includes(enemy.desc)) {
                 description.push(`, the ${enemy.name}`)
-            } else if (of_whom.includes(enemy.minions())) {
+            } else if (of_whom.includes(these_minions)) {
                 description.push(` of the ${enemy.name}`)
             }
             description = randFrom(description)
@@ -1398,9 +1398,11 @@
 
             } else { storystages.push(finalstage) }
             //console.log(JSON.stringify(storystages))
-    //        let fillstage = stages.filter(stage => stage.name == "Rude Awakening")[0]
-    //        storystages[1] = fillstage
-    //        storystages[2] = fillstage
+            if(true===false) {
+            let fillstage = stages.filter(stage => stage.name == "Ashes of the Eternal")[0]
+            storystages[1] = fillstage
+            storystages[2] = fillstage
+            }
             return [storystages, stages]
 
         }
