@@ -2213,7 +2213,7 @@
             let this_boss = finalboss.name == enemy.name ? enemy.boss : randFrom([enemy.boss, `the ${enemy.name}`])
             let this_finalboss = finalboss.name == enemy.name ? finalboss.boss : randFrom([finalboss.boss, `the ${finalboss.name}`])
             if (stageindex >= Math.max($("#storylength").val() * 2 - 3, 0) || finalboss.boss == enemy.boss) { this_finalboss = trueMastermind() }
-            let intel_words = ["intel", "knowledge", "information", "a clue", "a word", "lowdown"]
+            let intel_words = ["intel", "intelligence", "information", "a clue", "a word", "lowdown"]
             let location_words = ["locale", "location", "whereabouts", "position", "scene", "station", "bearings"]
             let investigator_words = ["Citadel analysts", "you", "Agent Fletch and you"]
             let citadel_words = [`the Gladiators`, `you`, `Citadel`, `Global Gladiators`, `Agent Fletch`]
@@ -2221,7 +2221,7 @@
             let decision_words = [`resolve`, `determine`, `come to a decision`, `decide`, `come to a conclusion`]
             let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence`]
             let turns_out_words = [`it turns out`, `it emerges`, `it comes to light`, `it transpires`, `you find out`, `${randFrom(investigator_words)} ${randFrom(assumption_words)}`]
-            let intel_words_2 = [`intel`, `evidence`, `knowledge`, `information`]
+            let intel_words_2 = [`intel`, `evidence`, `intelligence`, `information`]
 
             let first_is_final = enemy.boss != finalboss.boss && stageindex == 0 ?
                 `Without ${randFrom(intel_words)} on the current ${randFrom(location_words)} of ${finalboss.boss}, ${randFrom(investigator_words)} ${randFrom(assumption_words)} ${enemy.boss} is the best source for more information.<br><br>` : ``
@@ -2230,24 +2230,38 @@
             let default_clues = [
                 "Based on current intel", "Chasing the clues", "Following your leads", "In pursuit of clues", "After a little more intel-gathering", "Following this lead", "As you investigated further", "After searching for more intel", "Following the intel you had", "After searching for more information", "Reviewing what you got", "With the information you gathered", `You tracked down some of the ${enemy.name} associates and tailed their movements. ${randFrom(hence_words)}`, `Following the trail of money leading from the previous encounter`, `"We've traced them," Agent Fletch says, seated across the table. He takes out a satellite image and lays it on the table, pointing to a small red dot near the image's center. ${randFrom(hence_words)}`, `"Here," Agent Fletch stabs his finger onto the table, pointing on a map unfolded there. "Is where there your next stop is." ${randFrom(hence_words)}`, `"The ${randFrom(intel_words_2)} has been confirmed," the Citadel analyst turns from ${randFrom([`his`, `her`])} computer. ${randFrom(hence_words)}`,
                 `A Vandal-addicted informat had some oddly specific ${randFrom(intel_words_2)}, and you decided to follow that up. Surprised by the accuracy`,
-                `Your ${randFrom(intel_words_2)} was not specific enough, but a mysterious government official approaches you to lead you further. "The most important thing is that you cannot tell anyone that I was here or that we spoke," ${randFrom([`he`, `she`])} reminds you. ${randFrom(hence_words)}`, `"With the clues pieced together," you remark, looking over the compiled data. "It's time we follow where they point." ${randFrom(hence_words)}`,`"This breadcrumb trail is leading us somewhere," you muse aloud, studying the patterns of the enemy's recent activities. ${randFrom(hence_words)}`,`"Our latest intel sheds new light on their operations," your teammate observes, handing you a file of gathered evidence. ${randFrom(hence_words)}`,`"Cross-referencing the information," you begin, laying out the connections on the digital map. "Leads us right here." ${randFrom(hence_words)}`,`After decrypting the last of the ${randFrom(intel_words_2)}, "We've got a lead worth chasing," you declare. ${randFrom(hence_words)}`,`"This snippet," you replay the audio, "pinpoints their next move." ${randFrom(hence_words)}`,`"The satellite images don't lie," you note, zooming in on a suspicious compound. "They've been busy." ${randFrom(hence_words)}`,`"Their mistake was leaving traces," you say, scanning through ${randFrom(intel_words_2)}. "Now, we're on their trail." ${randFrom(hence_words)}`,`"The ledger reveals more than they intended," you point out, highlighting the anomalies. "Follow the money." ${randFrom(hence_words)}`,`"Detaled analysis of the recovered ${randFrom(intel_words_2)} confirms us our next target." ${randFrom(hence_words)}`,`"The pattern is no coincidence," you deduce, plotting out the ${randFrom(intel_words_2)} you have over your map. "It all connects here." ${randFrom(hence_words)}`,`After a confidential informant comes forward, "This might just be the breakthrough we needed," you realize. ${randFrom(hence_words)}`,`"Correlating the ${randFrom(intel_words_2)} with the witness statements," you conclude, "points us directly to their next operation." ${randFrom(hence_words)}`,`"Surveillance footage gave us the last piece," you highlight the key moments. "Time to act on it." ${randFrom(hence_words)}`,`"The intercepted communique is clear," you decipher the coded message with the aid of existing ${randFrom(intel_words_2)}. "Their next move is imminent." ${randFrom(hence_words)}`
+                `Your ${randFrom(intel_words_2)} was not specific enough, but a mysterious government official approaches you to lead you further. "The most important thing is that you cannot tell anyone that I was here or that we spoke," ${randFrom([`he`, `she`])} reminds you. ${randFrom(hence_words)}`,
+                `"With the clues pieced together," you remark, looking over the compiled data. "It's time we follow where they point." ${randFrom(hence_words)}`,
+                `"This breadcrumb trail is leading us somewhere," you muse aloud, studying the patterns of the enemy's recent activities. ${randFrom(hence_words)}`,`"Our latest intel sheds new light on their operations," your teammate observes, handing you a file of gathered evidence. ${randFrom(hence_words)}`,`"Cross-referencing the information," you begin, laying out the connections on the digital map. "Leads us right here." ${randFrom(hence_words)}`,`After decrypting the last of the ${randFrom(intel_words_2)}, "We've got a lead worth chasing," you declare. ${randFrom(hence_words)}`,`"This snippet," you replay the audio, "pinpoints their next move." ${randFrom(hence_words)}`,`"The satellite images don't lie," you note, zooming in on a suspicious compound. "They've been busy." ${randFrom(hence_words)}`,`"Their mistake was leaving traces," you say, scanning through ${randFrom(intel_words_2)}. "Now, we're on their trail." ${randFrom(hence_words)}`,`"The ledger reveals more than they intended," you point out, highlighting the anomalies. "Follow the money." ${randFrom(hence_words)}`,`"Detaled analysis of the recovered ${randFrom(intel_words_2)} confirms us our next target." ${randFrom(hence_words)}`,`"The pattern is no coincidence," you deduce, plotting out the ${randFrom(intel_words_2)} you have over your map. "It all connects here." ${randFrom(hence_words)}`,`After a confidential informant comes forward, "This might just be the breakthrough we needed," you realize. ${randFrom(hence_words)}`,`"Correlating the ${randFrom(intel_words_2)} with the witness statements," you conclude, "points us directly to their next operation." ${randFrom(hence_words)}`,`"Surveillance footage gave us the last piece," you highlight the key moments. "Time to act on it." ${randFrom(hence_words)}`,`"The intercepted communique is clear," you decipher the coded message with the aid of existing ${randFrom(intel_words_2)}. "Their next move is imminent." ${randFrom(hence_words)}`
             ]
             let wincondition_txt = ""
 
             if (wincondition == "intel") {
 
-                let evidence_clues = [` that ${this_boss} knows more about ${possessiveSuffix(this_finalboss)} than you expected.`, ` ${this_boss} has detailed ${randFrom(intel_words_2)} on the plans of ${this_finalboss}.`, ` ${this_boss} has ${randFrom(intel_words_2)} that will lead you to ${this_finalboss}.`]
+                let evidence_clues = [
+                    ` that ${this_boss} possesses unexpected insights into ${possessiveSuffix(this_finalboss)} weaknesses and strategies.`,
+                    ` reveals ${this_boss} has meticulously compiled ${randFrom(intel_words_2)} on the hidden agendas of ${this_finalboss}.`,
+                    ` uncovers ${this_boss} secretly harboring ${randFrom(intel_words_2)} crucial for dismantling ${this_finalboss}'s network.`,
+                    ` indicates ${this_boss} recently brokered a deal with ${this_finalboss}, exchanging sensitive ${randFrom(intel_words_2)} for mutual benefit.`,
+                    ` that ${this_boss} was once a confidant of ${this_finalboss}, privy to intimate ${randFrom(intel_words_2)} on ${possessiveSuffix(this_finalboss)} plans and vulnerabilities.`,
+                    ` shows ${this_boss} maintains a covert communication channel with ${this_finalboss}, offering a direct line to intercept critical ${randFrom(intel_words_2)}.`,
+                    ` suggests ${this_boss} holds the key to deciphering ${this_finalboss}'s next move, thanks to a cache of encrypted ${randFrom(intel_words_2)}.`,
+                    ` that ${this_boss} has been tracking ${this_finalboss}'s movements and alliances, amassing a detailed dossier that could expose ${possessiveSuffix(this_finalboss)} ultimate endgame.`
+                ]
                 let acquire_words = [`obtaining`, `acquiring`, `securing`, `procuring`, `getting`, `finding`]
                 let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence`]
                 let decision_txt = `${ucInit(randFrom(investigator_words))} ${randFrom(decision_words)} ${randFrom(acquire_words)} the ${randFrom(intel_words_2)} is ${randFrom(priority_words)}.`
-                wincondition_txt = `${randFrom(default_clues)} ${randFrom(find_out_words)}${randFrom(evidence_clues)} ${decision_txt} ${randFrom(hence_words)}`
+                wincondition_txt = `${ucInit(randFrom(find_out_words))}${randFrom(evidence_clues)} ${decision_txt} ${randFrom(hence_words)}`
 
             } else if (wincondition == "rival") {
 
                 let rivals_fate_words = [`capturing`, `seizing`, `arresting`, `catching`, `interrogating`, `grilling`, `questioning`]
                 let rival_capture = `${ucInit(randFrom(investigator_words))} ${randFrom(decision_words)} ${randFrom(rivals_fate_words)} ${gPron(rival, "object")} is ${randFrom(priority_words)}`
 
-                wincondition_txt = `${randFrom(default_clues)} ${randFrom(find_out_words)} ${this_boss} has an associate who knows more about the plans of ${this_finalboss}. ${rival_capture}. ${randFrom(default_clues)}`
+                wincondition_txt = randFrom([
+                    `${ucInit(randFrom(find_out_words))} ${this_boss} has an associate who knows more about the plans of ${this_finalboss}. ${rival_capture}. ${randFrom(hence_words)}`,
+                    `${ucInit(randFrom(find_out_words))} ${this_boss}  is linked to an insider with key insights on the operations of ${this_finalboss}. ${rival_capture}. ${randFrom(hence_words)}`
+                ])
 
             } else if (wincondition == "escort") {
 
@@ -2257,21 +2271,28 @@
                     `${ally.name} has approached ${randFrom(citadel_words)} for assistance in exchange for ${randFrom(intel_words_2)} on ${this_finalboss}. ${ucInit(gPron(ally, "subject"))} needs your protection from ${this_boss}.`,
                     `${ally.name} is on a parallel Citadel mission to yours, and you need to protect ${gPron(ally, "object")} so ${gPron(ally, "subject")} can obtain whatever ${randFrom(intel_words_2)} ${gPron(ally, "subject")} is after.`,
                     `After the previous encounter, you see a familiar silhouette materialize from the smoke and dust before you: ${ally.name}. Your occasional ally approaches, smirking slyly. "Fancy meeting you here", you say to ${gPron(ally, "object")}. "Thanks for the heads-up." ${ucInit(gPron(ally, "subject"))} claps ${gPron(ally, "possessive")} hand on your shoulder. "Help me defeat ${enemy.desc}, and I will tell you all about ${this_finalboss}."`,
-                    `"${ally.name}!" you shout at ${gPron(ally, "object")}. "Is this on you? What do you know about ${this_finalboss}?" "I can tell you something," ${gPron(ally, "subject")} answers. "But not for nothing. Are you willing to help me with something?"`
+                    `"${ally.name}!" you shout at ${gPron(ally, "object")}. "Is this on you? What do you know about ${this_finalboss}?" "I can tell you something," ${gPron(ally, "subject")} answers. "But not for nothing. Are you willing to help me with something?"`,
+                    `As you navigate through the remnants of a recent skirmish, a coded message from ${ally.name} lands in your hands. "I've got a lead on ${this_finalboss}," the note reads, "but I'm in a tight spot with ${this_boss}. Lend a hand?" It seems your paths are intertwined once more.`,
+                    `"Look who it is," ${ally.name} exclaims, emerging from the shadows. "Got a bit of a situation here involving ${this_boss}. Sort this out with me, and I've got crucial info on ${this_finalboss}." Trust and suspicion mingle in the air as past alliances are put to the test.`,
+                    `In the hush of a clandestine meeting, ${ally.name} lays out a map, fingers tracing a path to ${possessiveSuffix(this_boss)} location. "We strike here, we strike hard," ${gPron(ally, "subject")} asserts. "And after? I'll spill everything I know about ${this_finalboss}." The promise of secrets untold sharpens your resolve.`,
+                    `A sudden alliance forms in the chaos as ${ally.name} steps from ${this_boss} ranks, a defector with invaluable knowledge. "I can help you with ${this_finalboss}," ${gPron(ally, "subject")} proposes, "but first, we deal with ${this_boss}." A flicker of trust sparks amidst the turmoil, offering a beacon of hope.`
                 ]
-                wincondition_txt = `${randFrom(escort_prologue)} ${randFrom(default_clues)}`
+                wincondition_txt = `${randFrom(escort_prologue)} ${randFrom(hence_words)}`
 
             } else if (wincondition == "guide") {
 
                 let guide_prologue = [
-                    `After the previous encounter, you see a familiar silhouette materialize from the smoke and dust before you: ${ally.name}. Your occasional ally approaches, smirking slyly. "Fancy meeting you here", you say to ${gPron(ally, "object")}. "Thanks for the heads-up."`,
-                    `You meet ${ally.name} on the corner of a warehouse. "Glad you found the place alright," ${ally.name} says. "This is a big catch," you answer. "Good work finding it." "It's easy to find ${enemy.name} activity if you merely keep your eyes open," ${ally.name} responds.<br><br>"Let's do this," you say.`,
-                    `${ally.name} follows you and gives you a warning. "${enemy.boss} will make you regret your challenge, Gladiators," ${gPron(ally, "subject")} calls. "Prepare to meet your fate by ${gPron(enemy, "possessive")} hands." "Hah" you laugh.`,
+                    `You meet ${ally.name} on the corner of a warehouse. "Glad you found the place alright," ${ally.name} says. "This is a big catch," you answer. "Good work finding it." "It's easy to find ${enemy.name} activity if you merely keep your eyes open," ${ally.name} responds. "Let's do this," you say.`,
+                    `${ally.name} follows you and gives you a warning. "${enemy.boss} will make you regret your challenge, Gladiators," ${gPron(ally, "subject")} calls. "Prepare to meet your fate by ${gPron(enemy, "possessive")} hands." "Hah" you laugh. "I better come and show the right approach," ${ally.name} says, unamused by your flippant attitude.`,
                     `The Citadel has assigned you a handler for this mission. "I don't understand," you say, looking at ${ally.name} with skepticism. "Why such a reckless attack plan? Agent Fletch would not risk everything like this." "I'm not Agent Fletch," ${ally.name} says. "Now prepare yourself, and we are almost out of time."`,
                     `The Citadel has assigned you a handler for this mission. "And what of now?" you ask, frustrated with the unexpected addition. "Today, I will personally oversee your actions and I will give detailed report to my superiors," ${ally.name} answers.`,
                     `"It is dangerous out there. You shouldn't go alone," ${ally.name} tells you. "Take me with you."`,
                     `"I see you have taken the lonely path", you tell ${ally.name} in your chance meeting. "I care not about company. I care about vengeance," ${gPron(ally, "subject")} answers. "I take you have tracked ${enemy.boss} down?"`,
-                    `A mysterious stranger approaches you. "I can help you with the ${enemy.name}," a voice of a ${gPron(ally, "sex")} calls you from the shadows. You're sure you've heard that voice before. "Are you.. ${ally.name}? Why the mystery?"`
+                    `A mysterious stranger approaches you. "I can help you with the ${enemy.name}," a voice of a ${gPron(ally, "sex")} calls you from the shadows. You're sure you've heard that voice before. "Are you.. ${ally.name}? Why the mystery?"`,
+                    `"Under the cover of night, ${ally.name} slips from the darkness to join you. "Every shadow conceals secrets, and every secret is a weapon," ${gPron(ally, "subject")} murmurs, eyeing your battle plan. "Tonight, we turn their secrets against them."`,
+                    `In a quiet, tension-filled moment, ${ally.name} appears at your side, as if conjured by the very need for an edge in the looming battle. "In the art of war, knowledge is power," they intone. "Let's ensure we're the ones wielding it tonight."`,
+                    `"This mission could change everything," you assert, finding ${ally.name} already surveying the analysts' plan with experienced eye. "Indeed," ${gPron(ally, "subject")} agrees, offering a rare smile of camaraderie. "And it's the reason I'm here. Together, we'll turn the tide."`,
+                    `As dawn breaks, casting long shadows over your rendezvous point, ${ally.name} approaches with a determined stride. "The early bird," ${gPron(ally, "subject")} quips, handing you a dossier. "Gets the intel. Let's make sure it also gets the worm."`
                 ]
                 wincondition_txt = `${randFrom(guide_prologue)} ${randFrom(hence_words)}`
 
@@ -2286,7 +2307,8 @@
             } else { wincondition_txt = randFrom(default_clues) }
 
             let lead_in = pregameprologue + first_is_final + wincondition_txt
-
+console.log(wincondition)
+console.log(wincondition_txt)
             return lead_in
         }
 
