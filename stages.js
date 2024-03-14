@@ -90,7 +90,7 @@ function getEnemies(expansionfilter) {
                 [`You fight with fury, but your eyes tell a different story. What are you truly fighting for?" you inquire, seeking the being within the beast. "What I fight for? Survival... not mine, but theirs," Kemono rumbles, a momentary glimpse of the sentient being trapped within the guise of a monster, but already you see the monster returning. "Freedom is a distant dream for the likes of me,`, `But you won't be dreaming again.`],
                 [`Do you not dream of a life beyond this, beyond the commands of your masters?" you probe, attempting to peel back the layers of resignation that cloak Kemono's spirit. "Dreams... are dangerous," he mutters, a trace of melancholy weaving through his gruff exterior. "Once, perhaps, I dreamt of open skies and the earth beneath my feet, untainted by blood." The fury returns to Kemono's eyes. "But dreams are luxuries afforded to the free,`, `My reality is bound by duty and the will of those I serve.`],
                 [`Our battle, though regrettable, is unavoidable,`, `I am bound to this path, as you are to yours.`],
-                [`Is there no other way? Must we be enemies, bound by the whims of those you call masters?" you press, an effort to reach the being behind the beast. "Enemies? Perhaps in this arena, but not in spirit,`, `I challenge you not out of desire, but duty. Forgive me, for I cannot defy the hand that controls me.`], [`To you Glardiators, I extend my silent apologies, my regret not for the strength I wield, but for the freedom I lack,`, `May the day come when these chains break, not by the might of my arms, but by the strength of my will.`],
+                [`Is there no other way? Must we be enemies, bound by the whims of those you call masters?" you press, an effort to reach the being behind the beast. "Enemies? Perhaps in this arena, but not in spirit,`, `I challenge you not out of desire, but duty. Forgive me, for I cannot defy the hand that controls me.`], [`To you Gladiators, I extend my silent apologies, my regret not for the strength I wield, but for the freedom I lack,`, `May the day come when these chains break, not by the might of my arms, but by the strength of my will.`],
                 [`Can't you see? This violence, it's what they want from you. Break free from their hold!" you shout. "Break free? If only it were so simple,`, `I am a creature of conflict, molded for battle!`],
                 [`Your masters, they've made you a puppet. Fight back, Kemono, reclaim your will!" you urge. "Puppet? No, I am no one's puppet,`, `Know this: my spirit, though caged, is not broken.`],
                 [`I am a warrior bound by blood and duty. In my savagery, I am unmatched, a force of nature unleashed,`, `Yet, in my heart, I harbor a regret as vast as the skies—regret for a path chosen not by me but for me.`]
@@ -859,4 +859,139 @@ function getStages(expansionfilter) {
 
     return stages.filter(stage => expansionfilter.includes(stage.expansion))
 
+}
+
+function getGladiators(expansionfilter, enemies, stages) {
+    let gladiators = [
+        {
+            name: "Ah Long", expansion: "redemption", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
+            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy[1].boss} as the boss in part 2B of your personal story.` }
+        },
+        { name: "Axel", expansion: "twintiger", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Mary Ann"], rival: ["Mary Ann"], stage: "Under Destruction",
+        dialogue: [
+            [`My defiance wasn't just against the Onyx League; it's against anyone who dares to corrupt this city. For my daughter, for us all, I stand ready," your stance is unwavering, your determination evident in your eyes.  "Such gallantry, Axel. But righteousness alone doesn't win wars,`, `Your stand ends with me. Let's see how ready you truly are.`],
+            [`In the force, I learned the cost of integrity. Now, as a father and a fighter, I know what I'm fighting for," you say, the fire that fuels your commitment burning bright. "And you think you can shield them from the storm with your integrity, Alex?`, `I'll show you the true cost of your so-called 'fight'.`],
+            [`I've refused to bend, to break, to falter under the weight of corruption. My battles now are not just for justice, but for the future of those I hold dear," your say, as your gaze remains fixed, a beacon of defiance. "Refuse all you want, Axel. But everyone has a breaking point,`,`I look forward to finding yours.`]
+        ]
+    },
+        { name: "Brandon", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Isabella"], rival: ["Isabella"], stage: ["Cashed Out", "Steel Memories"],
+        dialogue: [
+            [`Behind the facade of fame, I carry a quest for truth. The lights of the stage won't blind me from the darkness that took her away," you say, as a man on a mission. "A noble pursuit shadowed by naivety. The truth has many layers, Brandon,`, `Peel them back, and you might just find your own undoing.`],
+            [`This journey, it's more than personal vengeance. It's a search for clarity, for closure. My audience awaits not just my performance, but my story's next chapter," you say, your eyes hardened by loss, your drive fueled by determination. "Closure? An elusive end, especially for those entangled with entities like us,`, `Your next chapter could well be your last, superstar.`],
+            [`Every script I've read, every character I've become, none were as complex as my own story. Now, I'm the protagonist in a tale of truth and retribution," you say with shadows cast on your determined face. "You think life follows a script, Brandon? That your search will lead to a tidy resolution?`,`This isn't cinema. There are no guarantees of a happy ending, no promise of applause. Only the harsh reality that some stories end in silence.`]
+        ]
+     },
+        {
+            name: "Clint", expansion: "stretchgoals17", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: [""], rival: [""]/*random rival*//*random rival*/, stage: [randFrom(stages).name],
+            dialogue: [
+                [`You prey on the innocent, the vulnerable. You remind me of a darkness I've known too well. It ends here, with me," you say, your hand hovering on your revolver, eyes steady and unwavering. "You think you're some kind of hero, Clint? Taking justice into your own hands?`, `You're just a man, Clint. A man playing at being a ghost.`],
+                [`I was taken, lost everything to a tale as old as fear itself. Now, I'm the story to fear — the one that comes for you in the night," you say, standing resolute despite the odds.  "A ghost story, Clint? We deal in realities, and the reality is, you're outnumbered,`, `But every story has an end, Clint. Let's write yours.`],
+                [`This path I walk, it's not for redemption or glory. It's for those who've suffered as I have, for the children who deserve a chance at a different story," you whisper quietly, more to yourself than anyone. "Noble intentions for a gunman. How quaint. But you're in over your head,`,`This place will be your grave, Clint. Your legend ends in the dust.`]
+            ],
+            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${this.stage} as the stage in part 3 of your personal story.`
+        }
+        },
+        {
+            name: "Dmitri", expansion: "redemption", enemy: randFrom(enemies), ally: [""], rival: ["Anastasia"], stage: "Right to Remain Silent",
+            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
+        },
+        {
+            name: "Gabriel", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Drago"], rival: ["Drago"], stage: "Original Copy",
+            get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
+        },
+        {
+            name: "Ikuchi", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Megan"], rival: [""], stage: "Original Copy",
+            get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2 of your personal story.` }
+        },
+        { name: "Jackal", expansion: "redemption", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Project X"], rival: ["Kemono", "Project X"], stage: "Steel Memories" },
+        { name: "Jirou", expansion: "tideofthedragon", enemy: "", ally: [""], rival: [""], stage: "" },
+        {
+            name: "Juan", expansion: "redemption", enemy: randFrom(enemies), ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: "Compromised",
+            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
+        },
+        {
+            name: "Kemono", expansion: "redemption", enemy: randFrom(filterArray(enemies, "boss", "Shadow", true)), ally: ["Darius"], rival: ["Shadow", "Darius"], stage: "Sudden Death",
+            dialogue: [
+                [`You see a beast, a relic of past games, but within me burns a desire for more than servitude," you declare, your voice resonating with newfound determination, a stark contrast to the silent obedience of your past.  "Desire? A beast like you knows only loyalty to those who wield power over you,`, `But freedom? It's an illusion, Kemono. You'll always be a monster, bound by your nature.`],
+                [`I've fought in arenas, spilled blood for entertainment. My loyalty was to a warrior's honor, not to the chains of The Kingdom," you say, your gaze unwavering, piercing through the facades of power and control. "Honor? Your kind knows only the thrill of the fight, the rush of bloodlust,`, `You may seek freedom, but the shadow of your past will always follow you, Kemono.`],
+                [`My loyalty was earned through respect, not fear. And now, I seek a freedom that respects my strength, not exploits it," you articulate, each word a measured step away from your legacy of violence towards a future you yearn to control.  "Freedom? You're a weapon, Kemono. Weapons don't control — they're controlled,`,`Try as you might, the beast within can never truly be free. You'll find no peace in your quest, only more chains.`]
+            ],
+            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2 of your personal story.` }
+        },
+        { name: "Kenshin", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Brandon"], rival: ["Shadow", "Jackal", "Kemono"], stage: "Cashed Out" },
+        {
+            name: "Kyoryu", expansion: "riseofthekingdom", enemy: randFrom(enemies), ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Steel Memories", "Sudden Death"],
+            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2A of your personal story.` }
+        },
+        { name: "Leeta", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
+        { name: "Mack", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death" },
+        {
+            name: "Max", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised",
+            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2A of your personal story.` }
+        },
+        { name: "Megan", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"],
+        dialogue: [
+            [`I once thought martial arts was about rhythm and show. That night, under the neon lights, I learned it's about survival," you say, your stance firm, your eyes reflecting the resolve of a warrior shaped by betrayal. "Ah, the heiress turned fighter. Do you think you've found your rhythm now?`, `Let's see if you have learned enough to dance with death.`],
+            [`You target the innocent, exploit the vulnerable. I've seen your kind before. I survived," you say with cold determination. "Survived? You were thrown away, forgotten. What makes you think you can stand against me?`, `This city will break you, just like it did your sensei.`],
+            [`Every villain I face, every shadow I chase, brings me one step closer to the justice my family was denied," you say, resolve unwavering. "Justice? In Ransom City? You're chasing ghosts, girl,`,`Let's see if your ghosts can save you now.`]
+        ]
+    
+    },
+        { name: "Miss Matrix", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Ying Hua"], rival: ["Ah Long", "Kemono"], stage: "Cashed Out" },
+        { name: "Muprhy", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
+        {
+            name: "Natalia", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"],
+            get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2B of your personal story.` }
+        },
+        { name: "Phoenix", expansion: "tideofthedragon", enemy: "", ally: [""], rival: [""], stage: "" },
+        {
+            name: "Project X", expansion: "redemption2", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: ["Natalia"], rival: ["Natalia", "Jackal"], stage: "Original Copy",
+            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
+        },
+        { name: "Rhys", expansion: "twintiger", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Leeta"], rival: ["Leeta"], stage: "Poison the Well",
+        dialogue: [
+            [`Life threw its worst at me, thought it could break me. Here I stand, forged from those fires," you smirk, and edge of defiance in your eyes. "Ah, the prodigal son turned hero. Think you're untouchable now?`, `I'll enjoy reminding you of your place, Murdock.`],
+            [`I've danced with death more times than I can count. For family, I'll waltz into hell itself," you say, barely able to hold your rage. "Such melodrama. You think love makes you strong?`, `It makes you vulnerable, Rhys. And I'll exploit every weakness.`],
+            [`This city, its shadows, I know them better than anyone. Used to be part of them. Now, I'm its guardian," you say, your resolve unshaken. "From shadow to guardian? You're playing a dangerous game, Rhys.`,`Let's see how long you can keep playing.`]
+        ]
+    
+    },
+        { name: "Ronny", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
+        {
+            name: "Shadow", expansion: "redemption", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Shin Yokai"], rival: ["Ah Long", "Dmitri", "Shin Yokai", "Kemono"], stage: [randFrom(stages).name],
+            dialogue: [
+                [`You stand before me, thinking you know power, thinking you understand control. You know nothing," you say, your voice as calm and as fearsome as the eye of a storm. "Shadow, the myth, the legend. Do you think your ancient tricks scare us?`, `We'll see how your arrogance fares against real strength.`],
+                [`Humility is not your strength, I see. Let me teach you its value—the hard way," you say with an aura of danger that even the bravest of hearts can't ignore. "Teach me? You're one man,`, `Your empire crumbles today, Shadow. We no longer bow to phantoms.`],
+                [`The path I've walked is paved with the lessons of the ancients, the whispers of the wind, and the fury of the dragon. You, however, have strayed," you say, your gaze piercing through the darkness, a beacon of unwavering conviction.  "Strayed? We've risen in the vacuum you left behind. Your time has passed, Shadow,`,`This world has no place for relics. Your teachings die with you.`]
+            ],
+            get instructions() { return `If you choose to use ${this.name}, choose ${this.stage} as the stage in part 2A of your personal story.` }
+        },
+        { name: "Selene", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: [""], rival: ["Genesis"], stage: "Estate of Decay" },
+        { name: "The Don", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Gabriel"], rival: ["Juan", "Gabriel"], stage: "Gone Ballistic" },
+        { name: "The Proxy", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Power Soldier"], rival: ["Power Soldier"], stage: "Compromised" },
+        {
+            name: "Tiger Azules", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""], stage: "Supply and Demand",
+            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2 of your personal story.` }
+        },
+        {
+            name: "Tlazolteotl", expansion: "stretchgoals17", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Kemono"], rival: ["Kemono", "Tlazolteotl"], stage: "Original Copy",
+            get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
+        },
+        { name: "Vada", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
+        { name: "Ying Hua", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Jin"], rival: ["Jin"], stage: ["Cashed Out"],
+        dialogue: [
+            [`You underestimate the light I carry within me. My fight is for those silenced by fear, not for the glory of victors in hidden arenas," you state, your presence seeming to pierce the darkness.  "Light? Noble, but naive. We seek to test your limits, Ying Hua,`, `See this as an opportunity. An opportunity to truly understand the depth of your convictions.`],
+            [`You lure me with challenges, thinking it will sway my path. Know this — I walk the path of righteousness, and no invitation, no challenge, can deter me," you say, standing against the turmoil wrought by your adversary.  "Righteousness? A flimsy shield against the storm we bring,`, `We'll see how long your shield holds, Ying Hua. The storm approaches.`],
+            [`The invitation through the gateway to your world of shadows and deceit, I accept not as a contestant, but as a herald of justice. Your games end with me," you say, spirit unbroken. "Justice? A quaint concept in our world. But entertain us, Ying Hua. Entertain us with your futile attempts at heroism,`,`Perhaps you'll provide a lesson in futility, or maybe, just maybe, you'll surprise us.`]
+        ]
+    },
+        { name: "Yokai", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Marionette Doll"], rival: ["Marionette Doll"], stage: "Steel Memories",
+        dialogue: [
+            [`This curse, this power, it was awoken by the same cruelty that now festers in the hearts of those like you," you say, your voice a low rumble, as flames flicker in your eyes. "A curse? To us, it's just another tool for chaos. Your vengeance, Yokai, is just a game to keep us entertained,`, `And we'll watch with delight as you burn out, consumed by your own fire.`],
+            [`I've seen the world through the eyes of a monster, and it's the likes of you who have made me this way," you say, your presence a somber force that even the shadows seem to retreat from.  "Made you this way? Oh, you were merely provided a spark. It's you who've relished the flames, Yokai. Embraced the destruction,`, `Keep blazing your trail of vengeance. It only makes our work easier, as you leave nothing but despair in your wake.`],
+            [`They once called me Yuuto, a name meant for a life of peace. Now, Yokai is all that remains—an echo of vengeance in a world that turned its back on me," you say, your voice a mixture of sorrow and resolve. "Yuuto, Yokai — it matters not. You're a puppet in a grand design. Your 'vengeance' is just another scene in a grander play,`,`Dance, puppet, dance. Your fury serves us well, fueling the chaos that is our lifeblood.`]
+        ] }
+    ]
+
+    return gladiators.filter(gladiator => expansionfilter.includes(gladiator.expansion))
 }
