@@ -657,87 +657,9 @@
 
         function globalGladiators(enemies, stages) {
 
-            let gladiators = [
-                {
-                    name: "Ah Long", expansion: "redemption", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
-                    get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy[1].boss} as the boss in part 2B of your personal story.` }
-                },
-                { name: "Axel", expansion: "twintiger", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Mary Ann"], rival: ["Mary Ann"], stage: "Under Destruction" },
-                { name: "Brandon", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Isabella"], rival: ["Isabella"], stage: ["Cashed Out", "Steel Memories"] },
-                {
-                    name: "Clint", expansion: "stretchgoals17", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: [""], rival: [""]/*random rival*//*random rival*/, stage: [randFrom(stages).name],
-                    get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${this.stage} as the stage in part 3 of your personal story.` }
-                },
-                {
-                    name: "Dmitri", expansion: "redemption", enemy: randFrom(enemies), ally: [""], rival: ["Anastasia"], stage: "Right to Remain Silent",
-                    get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
-                },
-                {
-                    name: "Gabriel", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Drago"], rival: ["Drago"], stage: "Original Copy",
-                    get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
-                },
-                {
-                    name: "Ikuchi", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Megan"], rival: [""], stage: "Original Copy",
-                    get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2 of your personal story.` }
-                },
-                { name: "Jackal", expansion: "redemption", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Project X"], rival: ["Kemono", "Project X"], stage: "Steel Memories" },
-                { name: "Jirou", expansion: "tideofthedragon", enemy: "", ally: [""], rival: [""], stage: "" },
-                {
-                    name: "Juan", expansion: "redemption", enemy: randFrom(enemies), ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: "Compromised",
-                    get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
-                },
-                {
-                    name: "Kemono", expansion: "redemption", enemy: randFrom(filterArray(enemies, "boss", "Shadow", true)), ally: ["Darius"], rival: ["Shadow", "Darius"], stage: "Sudden Death",
-                    get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2 of your personal story.` }
-                },
-                { name: "Kenshin", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Brandon"], rival: ["Shadow", "Jackal", "Kemono"], stage: "Cashed Out" },
-                {
-                    name: "Kyoryu", expansion: "riseofthekingdom", enemy: randFrom(enemies), ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Steel Memories", "Sudden Death"],
-                    get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2A of your personal story.` }
-                },
-                { name: "Leeta", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
-                { name: "Mack", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death" },
-                {
-                    name: "Max", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised",
-                    get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2A of your personal story.` }
-                },
-                { name: "Megan", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"] },
-                { name: "Miss Matrix", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Ying Hua"], rival: ["Ah Long", "Kemono"], stage: "Cashed Out" },
-                { name: "Muprhy", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
-                {
-                    name: "Natalia", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"],
-                    get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2B of your personal story.` }
-                },
-                { name: "Phoenix", expansion: "tideofthedragon", enemy: "", ally: [""], rival: [""], stage: "" },
-                {
-                    name: "Project X", expansion: "redemption2", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: ["Natalia"], rival: ["Natalia", "Jackal"], stage: "Original Copy",
-                    get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
-                },
-                { name: "Rhys", expansion: "twintiger", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Leeta"], rival: ["Leeta"], stage: "Poison the Well" },
-                { name: "Ronny", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
-                {
-                    name: "Shadow", expansion: "redemption", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Shin Yokai"], rival: ["Ah Long", "Dmitri", "Shin Yokai", "Kemono"], stage: [randFrom(stages).name],
-                    get instructions() { return `If you choose to use ${this.name}, choose ${this.stage} as the stage in part 2A of your personal story.` }
-                },
-                { name: "Selene", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: [""], rival: ["Genesis"], stage: "Estate of Decay" },
-                { name: "The Don", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Gabriel"], rival: ["Juan", "Gabriel"], stage: "Gone Ballistic" },
-                { name: "The Proxy", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Power Soldier"], rival: ["Power Soldier"], stage: "Compromised" },
-                {
-                    name: "Tiger Azules", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""], stage: "Supply and Demand",
-                    get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2 of your personal story.` }
-                },
-                {
-                    name: "Tlazolteotl", expansion: "stretchgoals17", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Kemono"], rival: ["Kemono", "Tlazolteotl"], stage: "Original Copy",
-                    get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
-                },
-                { name: "Vada", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
-                { name: "Ying Hua", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Jin"], rival: ["Jin"], stage: ["Cashed Out"] },
-                { name: "Yokai", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Marionette Doll"], rival: ["Marionette Doll"], stage: "Steel Memories" }
-            ]
-
             let expansionfilter = $('.exp_selector').map((_, el) => $(el).hasClass("ui-icon-check") ? el.name : ``).get().filter(el => el != "")
 
-            gladiators = gladiators.filter(gladiator => expansionfilter.includes(gladiator.expansion))
+            gladiators = getGladiators(expansionfilter, enemies, stages)
 
             let globalgladiators = []
 
@@ -804,6 +726,7 @@
             let supportingcast = []
             let heronames = []
             let heroenemies = []
+            let herodialogue = []
 
             $(globalgladiators).each(function () {
                 herostages.push(this.stage)
@@ -811,6 +734,7 @@
                 supportingcast = _.union(supportingcast, this.rival)
                 heronames.push(this.name)
                 $(this.enemy).each(function () { heroenemies.push(this) })
+                $(this.dialogue).each(function () { herodialogue.push(this) })
             })
 
             herostages = _.flatten(herostages)
@@ -823,7 +747,7 @@
                 { name: "Ah Long", expansion: "riseofthekingdom", gender: "male", keywords: ["Boss", "Golden Dragons", "Organized Crime", "Martial Arts Master", "Chi", "Clone", "Ah Long"] },
                 { name: "Ah Long of Brook City", expansion: "keystothekingdom", gender: "male", keywords: ["Boss", "Brook City", "Golden Dragons", "Organized Crime", "Past", "Clone", "Ah Long of Brook City"] },
                 { name: "Anastasia", expansion: "redemption", gender: "female", keywords: ["Brotherhood", "Black Ops", "Gunslinger", "Soldier", "Clone"] },
-                { name: "Brandon", expansion: "redemption2", gender: "male", keywords: ["Celebrity", "Fraud", "Martial Arts Master", "Global Gladiator", "Wanderer", "Clone", "Brandon"] },
+                { name: "Brandon", expansion: "redemption2", gender: "male", keywords: ["Celebrity", "Fraud", "Martial Arts Master", "Global Gladiator", "Wanderer", "Clone", "Brandon", "Music"] },
                 { name: "Chan Chan", expansion: "stretchgoals17", gender: "female", keywords: ["Beast", "Dark Matter", "Martial Arts Master", "Kingdom", "Insane", "Clone"] },
                 { name: "Clinhyde Eight", expansion: "battlecon", gender: "male", keywords: ["Black Ops", "Indines", "Psychic", "Toxic", "Clone"] },
                 { name: "Darius", expansion: "redemption", gender: "male", keywords: ["Past", "Kingdom", "Martial Arts Master", "Toxic", "Clone", "Kemono"] },
@@ -940,7 +864,7 @@
 
             let referencetext = referenceText(globalgladiators, allygroup, allymotivation, rivalgroup, rivalmotivation, finalboss)
 
-            let cardtexts = textMaker(story, alliesandrivals, heronames, enemies);
+            let cardtexts = textMaker(story, alliesandrivals, heronames, enemies, herodialogue);
 
             let pagecontent = { reference: referencetext, text: cardtexts, storyname: storyname, finalboss: finalboss.name }
 
@@ -1071,7 +995,7 @@
 
             let masterplan
 
-            let vip = randFrom([["President", "White House"], ["Colonel", "Pentagon"], ["Mayor", "city hall"], ["Police Chief", "Ransom P.D. headquarters"], ["Citadel commander", "Citadel HQ"]])
+            let vip = randFrom([["President", "White House"], ["Colonel", "Pentagon"], ["Mayor", "City Hall"], ["Police Chief", "Ransom P.D. Headquarters"], ["Citadel Commander", "Citadel HQ"],["Foreign Ambassador","Foreign Embassy"],["Head of LoN","League of Nations"]])
 
             switch (stage.masterplan) {
                 case "actsofterror": masterplan = `the vicious criminal syndicate ${enemy.name} believes they do not have to bow to the government or even the
@@ -2312,7 +2236,7 @@
         }
 
         function getGizmo() {
-            return randFrom(["data disc", "keycard", "tape recorder", "floppy disc", "microchip", "communicator", "cell phone", "diskette", "data cartridge", "tablet", "magnetic tape", "computer"])
+            return randFrom(["data disc", "keycard", "tape recorder", "floppy disc", "microchip", "communicator", "cell phone", "diskette", "data cartridge", "tablet", "magnetic tape", "computer","laser disc","minidisc","memory ribbon","data crystal","neural interface card","cyberdeck","video wristwatch"])
         }
 
         function removeLastBrBr(str) {
@@ -2324,7 +2248,7 @@
   return str;
 }
 
-        function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, pregameprologue, vip) {
+        function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, pregameprologue, vip, herodialogue) {
             let finalboss = story[Math.max($("#storylength").val() * 2 - 3, 0)].enemy
             let finalstage = story[Math.max($("#storylength").val() * 2 - 3, 0)].stage
             let enemy = story[stageindex].enemy
@@ -2355,7 +2279,7 @@
 
             let winepilogue = stageindex >= Math.max(($("#storylength").val() * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 1) + "<br><br>" + `${finalboss.boss != enemy.boss ? smallvictory : ``}The fighters win this story.` : victoryResult(stageindex, story, win, gizmo, finalstage.masterplan)
             let loseepilogue = stageindex >= Math.max(($("#storylength").val() * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 0) + "<br><br>" + `The fighters lose this story.` : loseResult(stageindex, story, lose, gizmo, instructions.prologue, rival, rivalpresence, ally)
-            let gloat = gloatingList(enemy, stage)
+            let gloat = gloatingList(enemy, stage, herodialogue)
             let prologue
             let casino = getCasino(enemy)
 
@@ -2402,7 +2326,7 @@
             return { chapter: story[stageindex].chapter, prologue: removeLastBrBr(prologue), setup: setup, wincondition: instructions.wincondition, winepilogue: winepilogue, loseepilogue: loseepilogue }
         }
 
-        function textMaker(story, alliesandrivals, heronames, enemies) {
+        function textMaker(story, alliesandrivals, heronames, enemies, herodialogue) {
 
             let cardtext
             let cardtexts = []
@@ -2411,7 +2335,7 @@
             let pregameprologue = preGamePrologue(story[Math.max($("#storylength").val() * 2 - 3, 0)].stage, story[Math.max($("#storylength").val() * 2 - 3, 0)].enemy)
 
             for (i = 0; i < story.length; i++) {
-                cardtext = createPrologue(i, story, alliesandrivals, heronames, enemies, pregameprologue.storytext, pregameprologue.vip);
+                cardtext = createPrologue(i, story, alliesandrivals, heronames, enemies, pregameprologue.storytext, pregameprologue.vip, herodialogue);
                 cardtexts.push(cardtext)
             }
 
@@ -2628,7 +2552,8 @@
             return randFrom(lastthoughts)
         }
 
-        function gloatingList(enemy, stage) {
+        function gloatingList(enemy, stage, herodialogue = []) {
+
             let gloating = [
                 ["You've fought well,", "There will be no-one to mourn your death."],
                 ["I'm not even going to kill you myself!", "I'll let my minions take care of that."],
@@ -2709,9 +2634,17 @@
                 [`When you are out of my way, there's nothing holding the ${enemy.name} back,`, `From prosperity in my hands!`]
             ]
 
-            let gloat = randFrom(gloating)
+            let gloat = [randFrom(gloating)]
 
-            return randFrom([gloat, (stage.hasOwnProperty("gloat") ? randFrom(stage.gloat) : gloat), (enemy.hasOwnProperty("gloat") ? randFrom(enemy.gloat) : gloat)])
+            stage.hasOwnProperty("gloat") ? gloat.push(randFrom(stage.gloat)) : () => { }
+            stage.hasOwnProperty("gloat") ? gloat.push(randFrom(stage.gloat)) : () => { }
+            enemy.hasOwnProperty("gloat") ? gloat.push(randFrom(enemy.gloat)) : () => { }
+            enemy.hasOwnProperty("gloat") ? gloat.push(randFrom(enemy.gloat)) : () => { }
+//            enemy.hasOwnProperty("gloat") ? console.log(enemy.gloat) : () => { }
+            herodialogue.length > 0 ? gloat.push(randFrom(Array.from(herodialogue))) : () => { }
+            herodialogue.length > 0 ? console.log("herodialogue present") : () => { }
+            gloat = randFrom(gloat)
+            return gloat
 
         }
 
