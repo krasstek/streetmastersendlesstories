@@ -219,7 +219,7 @@
                     </li>
                     <li><a href="#" class="exp_selector ui-icon-minus ui-icon-right ui-disabled"
                             name="essenceofevil">Essence of Evil</a></li>
-                    <li><a href="#" class="exp_selector ui-icon-minus ui-icon-right ui-disabled"
+                    <li><a href="#" class="exp_selector ui-icon-minus ui-icon-right"
                             name="stretchgoals18">Aftershock Stretch Goals</a></li>
                     <li><a href="#" class="exp_selector ui-icon-check ui-icon-right" name="redemption2">Redemption 2</a>
                     </li>
@@ -2279,7 +2279,7 @@
 
             let winepilogue = stageindex >= Math.max(($("#storylength").val() * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 1) + "<br><br>" + `${finalboss.boss != enemy.boss ? smallvictory : ``}The fighters win this story.` : victoryResult(stageindex, story, win, gizmo, finalstage.masterplan)
             let loseepilogue = stageindex >= Math.max(($("#storylength").val() * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 0) + "<br><br>" + `The fighters lose this story.` : loseResult(stageindex, story, lose, gizmo, instructions.prologue, rival, rivalpresence, ally)
-            let gloat = gloatingList(enemy, stage, herodialogue)
+            let gloat = gloatingList(enemy, stage, herodialogue, heronames)
             let prologue
             let casino = getCasino(enemy)
 
@@ -2552,7 +2552,7 @@
             return randFrom(lastthoughts)
         }
 
-        function gloatingList(enemy, stage, herodialogue = []) {
+        function gloatingList(enemy, stage, herodialogue = [], heronames = undefined) {
 
             let gloating = [
                 ["You've fought well,", "There will be no-one to mourn your death."],
@@ -2634,15 +2634,47 @@
                 [`When you are out of my way, there's nothing holding the ${enemy.name} back,`, `From prosperity in my hands!`]
             ]
 
-            let gloat = [randFrom(gloating)]
+            let gloat = [randFrom(gloating)];
+            let clone_present = false;
+            if(heronames !== undefined) {
+                clone_present = heronames.filter(str => str.includes(enemy.boss)).length > 0
+                }
 
+            if(clone_present) {
+                console.log("clouuun")
+                let clone_dialogue = [
+                    [`We stand face to face, yet worlds apart. Your actions have cast a long shadow, one I intend to erase," you state, your voice steady, revealing a resolve as unwavering as steel. "Erase? You're a part of me,`,`Denying my deeds is denying yourself`],
+                    [`I've seen the chaos you've sown, felt the pain you've inflicted. It ends now, even if I must end with it," you declare, a note of finality in your voice that echoes in the emptiness between you "End with it? Don't be naive,`,`You can no more end me than you can end your own heartbeat.`],
+                    [`You're a shadow, a dark reflection of what I could have become. I'm here to ensure that never happens," you assert, your gaze locked on your mirror image of your darkest fears. "A dark reflection? Foolish. I am the truth of our soul laid bare,`,`You cannot fight the inevitable.`],
+                    [`Your reign of terror, it's a path I refuse to walk. I'll dismantle everything you've built, piece by piece," you vow, each word imbued with the weight of your shared history. "Dismantle? You aim to destroy your own legacy,`,`Without me, what are you?`],
+                    [`I could have been you, but I chose a different path. A path of light, away from your darkness," you proclaim, standing firm in the face of your dark counterpart's malevolence. "Chose? There is no choice. There's only power, and how one chooses to wield it,`,`You'll learn.`],
+                    [`This ends here, with me. I won't let your deeds define our legacy. I fight for redemption, for a chance to right your wrongs," you promise, your voice echoing a deep-seated yearning for change. "Redemption? There's no redemption for us. `,`Only the abyss that awaits when you finally realize we are one and the same.`],
+                    [`I stand before you, not as your enemy nor your ally. My mission... I thought I knew, but now, the lines blur," you admit, your voice tinged with uncertainty as you regard your counterpart. "Blur? The only thing that's blurred is your conviction,`,`How pitiful, to be so lost,`],
+                    [`They say we're two sides of the same coin, but I find myself wondering if the coin ever existed at all," you muse, your gaze distant, as if searching for answers in the void between you. "Existential doubts now? How delightful,`,`While you ponder, I act. That's what separates us!`],
+                    [`Your actions, they mirror the darkness I've fought within myself. Yet here we stand, divided by more than just ideals," you reflect, your words heavy with the burden of your internal struggle."Fought and lost, it seems,`,`There's clarity in embracing your nature. You should try it sometime.`],
+                    [`What if the hero I sought to be was never meant to fight you, but to understand you?" you ponder aloud, your voice a mix of resolve and confusion, a paradox personified. "Understand me? You can't even understand yourself,`,`Don't flatter yourself thinking you can unravel me!`],
+                    [`I walked this path believing I could be the barrier between your chaos and the world's peace. Now, I'm not so sure," you confess, a shadow of doubt clouding your once-clear purpose. "Doubt is a luxury I cannot afford, and neither can you,`,`Make up your mind, or I'll make it up for you.`],
+                    [`Maybe in trying to stop you, I've become you. What separates us now but the choices we've made?" you question, your identity crisis casting a long shadow over your confrontation.  "You becoming me? Don't flatter yourself,`,` You lack the conviction, the strength. You're but a shadow of a shadow.`],
+                    [`How could you stray so far from what we were meant to be? Your existence is a betrayal of our very essence," you accuse, your voice trembling with rage. "Betrayal? I am the culmination of our potential,`,`Your fury is but a sign of your inability to comprehend our destiny`],
+                    [`You wear our face, but your deeds? From a world I don't recognize. I'll correct the course you've corrupted with my own hands if need be!" you declare, fists clenched in righteous indignation. "Correct the course? You're nothing more than a pale shadow,`,`An echo of my greatness. Your indignation is pathetic!`],
+                    [`Your reign ends with me. I am the fury, the justice you've forsaken. This aberration stops now!" you vow, your voice a beacon of resolve amidst the darkness your counterpart has wrought. "Justice? You're a mere byproduct of my ambition,`,`Your fury will extinguish in the face of my indomitable will.`],
+                    [`The audacity to stand against me, to claim you could ever rectify my deeds. You're an insult to our name," your dark reflection's words aim to cut, but the your stance is unwavering. "An insult? I am the redemption you're too cowardly to pursue. Your deeds end with me," you reply, your voice a mix of defiance and determination, a clear light in the darkness the villain casts. "Redemption?`,`You're a mere glitch in my grand design. I'll erase you as easily as a mistake on paper.`],
+                    [`You dare mimic my power, challenge my reign? You're a flawed copy, a mistake I'll rectify," your counterpart says in contempt. Flawed? No, I am the correction to your mistake. I am what we should have been," you assert, standing firm, a beacon against the villain's shadow. "Correction? You're but a footnote in my saga,`,`Prepare to be expunged from the narrative I've written!`],
+                    [`You're a blemish on our legacy, a footnote I'll erase from our story," your clone says with hatred burning in the eyes. "A blemish? I am the clean slate, the new chapter. You're the past, and I am the future," you state, your conviction clear in your steady gaze. "Future? There is no future for you, only the oblivion I grant you,`,`Your chapter ends before it begins!`]
+                ]
+
+                gloat.push(randFrom(clone_dialogue))
+                gloat.push(randFrom(clone_dialogue))
+
+            } else {
+                herodialogue.length > 0 ? gloat.push(randFrom(Array.from(herodialogue))) : () => { }
+                herodialogue.length > 0 ? console.log("herodialogue present") : () => { }
+                stage.hasOwnProperty("gloat") ? gloat.push(randFrom(stage.gloat)) : () => { }
+                enemy.hasOwnProperty("gloat") ? gloat.push(randFrom(enemy.gloat)) : () => { }
+            }
             stage.hasOwnProperty("gloat") ? gloat.push(randFrom(stage.gloat)) : () => { }
-            stage.hasOwnProperty("gloat") ? gloat.push(randFrom(stage.gloat)) : () => { }
-            enemy.hasOwnProperty("gloat") ? gloat.push(randFrom(enemy.gloat)) : () => { }
             enemy.hasOwnProperty("gloat") ? gloat.push(randFrom(enemy.gloat)) : () => { }
 //            enemy.hasOwnProperty("gloat") ? console.log(enemy.gloat) : () => { }
-            herodialogue.length > 0 ? gloat.push(randFrom(Array.from(herodialogue))) : () => { }
-            herodialogue.length > 0 ? console.log("herodialogue present") : () => { }
             gloat = randFrom(gloat)
             return gloat
 

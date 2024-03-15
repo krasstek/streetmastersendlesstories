@@ -9,7 +9,7 @@ function getEnemies(expansionfilter) {
                 [`Why continue running? There can be help, a way to control what you've become," you offer, searching for a sliver of hope in her tortured gaze. "Control? There is no control, only the illusion of it. Mother made sure of that,`, `I am not a project to be fixed. I am not a mistake to be erased.`],
                 [`Mother sought to play god, and she birthed a monster,`, `But I am no puppet. If this world refuses me peace, I will carve it out with my own hands.`],
                 [`There's still a chance for understanding, to coexist," you suggest, seeking to penetrate the walls built by betrayal. "Coexist? With a world that sees me as an abomination?`, `I've been the subject of their fears. I will give them a reason for that fear.`],
-                [`Born from the shadows of mother's ambition, I was never meant to walk in the light,"`, `You seek to extinguish what little freedom I've found, and you will find why not that is.`]
+                [`Born from the shadows of mother's ambition, I was never meant to walk in the light,"`, `You seek to extinguish what little freedom I've found, and you will find just why I was not meant to walk in the light.`]
             ], expression: _.template(`turning the pits she has for eyes toward you`), attacks: { detonation: `She curls up, and in an instant arches out, emitting a blast of acid from her every pore` }, keywords: ["swarm"], swarm: "horrifying growths",
         },
 
@@ -75,7 +75,7 @@ function getEnemies(expansionfilter) {
                 [`This isn't evolution; it's manipulation on a global scale," you argue, taking a step forward, your determination casting a stark contrast to Jackal's madness. "Manipulation is just another tool for evolution,`, `You fail to see the beauty in the control I wield.`],
                 [`As I stand at the precipice of a new era`, `I can't help but marvel at the simplicity of my solution. A world free from the chaos of free will.`],
                 [`Why stop at clones, Jackal? Why not reshape the entire cosmos with your madness?" you ask, sarcasm lacing your words. "Ah, you jest, but there's wisdom in your mockery. Why indeed?`, `Perhaps that will be my next masterpiece, once I've tired of this world.`],
-                [`Your army, your powers, Jackal — it's all just a facade to hide how truly lost you are," you say, challenging not just her plans but his very purpose. "Lost? On the contrary, I've never been more found,`, `This chaos, this 'madness' you see, it's the clarity of purpose.`],
+                [`Your army, your powers, Jackal — it's all just a facade to hide how truly lost you are," you say, challenging not just her plans but her very purpose. "Lost? On the contrary, I've never been more found,`, `This chaos, this 'madness' you see, it's the clarity of purpose.`],
                 [`The mind holds such delicate power, a plaything for those with the will to manipulate it. My abilities are a paintbrush, reality my canvas`, `Let's see what masterpieces I can create.`],
                 [`Your clones, they're abominations, not advancements," you assert. "Abominations? My children, you lack vision. They are the next step in your evolution. And you? `, `You're just relics.`],
                 [`How can you justify this? Playing god with lives avenging what?" you question, the weight of your moral conviction clashing against hers. "Justify? I have no need for justification. You see toys; I see the future,`, ` You perceive my actions as revenge, but I am merely setting the stage for a grand rebirth`],
@@ -682,7 +682,7 @@ function getStages(expansionfilter) {
             ])),
             strengtheningforces: _.template(randFrom([
                 '${trail} you find the covert entrance to an underground facility where ${enemy.boss} trains his elite army. Slipping past the guards, you enter a world of discipline and darkness. The air hums with the sound of recruits being molded into merciless soldiers under the watchful eyes of ${enemy.minions()}. You steel yourself for the impending clash that will decide the fate of Ransom City and the very fabric the nation. Global Gladiators are the last bastion against the enemy\'s legion, their foot soldiers amassing for a war that threatens to engulf all in its wake. This moment, charged with destiny, stands as the fulcrum upon which the future balances.<br><br>"${gloat[0]}" ${enemy.boss} meets your gaze, recognition dawning. "${gloat[1]}" ${gPron(enemy, "subject")} taunts, poised for battle.',
-                '${trail}, the intel has led you here, to a fortified compound where ${enemy.boss} is amassing an army with ambitions that threaten the Ransom City\'s very fabric. As you breach the perimeter, the air crackles with energy; you can feel the intensity of the preparations underway.<br><br>Inside, you witness a scene of controlled chaos. Troops are being drilled by ${enemy.minions()}, their numbers greater than any intel suggested. Amidst the cacophony, ${bossDescription(enemy)} orchestrates the might of a growing force, a dark general preparing for war. "This ends now," you whisper, stepping from the shadows, the element of surprise your ally. As ${enemy.boss} turns <%=rivalpresence ? `${rivaltext} with surprise etched on their faces` : `surprise etched on ${gPron(enemy, "possessive")} face`%>, the battle for the future begins.${gloat[0]}" ${enemy.boss} growls. "${gloat[1]}"<br><br>${laconicStatement(enemy)}'
+                '${trail}, the intel has led you here, to a fortified compound where ${enemy.boss} is amassing an army with ambitions that threaten the Ransom City\'s very fabric. As you breach the perimeter, the air crackles with energy; you can feel the intensity of the preparations underway.<br><br>Inside, you witness a scene of controlled chaos. Troops are being drilled by ${enemy.minions()}, their numbers greater than any intel suggested. Amidst the cacophony, ${bossDescription(enemy)} orchestrates the might of a growing force, a dark general preparing for war. "This ends now," you whisper, stepping from the shadows, the element of surprise your ally. As ${enemy.boss} turns <%=rivalpresence ? `${rivaltext} with surprise etched on their faces` : `surprise etched on ${gPron(enemy, "possessive")} face`%>, the battle for the future begins. "${gloat[0]}" ${enemy.boss} growls. "${gloat[1]}"<br><br>${laconicStatement(enemy)}'
             ])),
             actsofterror: _.template(randFrom([
                 '${trail}, Agent Fletch explains to you the ${getMasterPlan()} of the ${enemy.name}: "${enemy.boss} has provided the citizens of Ransom City a release for all the hatred, violence, and aggression that they keep up inside them." He leans over the satellite image of the city and continues. "With the people whipped up to a frenzy, a 12 hour marathon of crimes of every imaginable sort - including murder - will start right here," he points at the map. "Unless you can stop the spread of the mob mentality, I don\'t think Ransom will survive the night."<br><br>You move in to confront the mob and the perturbing ${enemy.minions()} of the ${enemy.name}.',
@@ -865,6 +865,11 @@ function getGladiators(expansionfilter, enemies, stages) {
     let gladiators = [
         {
             name: "Ah Long", expansion: "redemption", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
+                    dialogue: [
+            [`I walked a path few dare to tread, uniting under my banner what once was divided. Your interference in my affairs is a misstep you'll regret," you state, your presence commanding even without the backdrop of his criminal empire. "Misstep? Your empire, your Golden Dragons are new leadership. What can a lone master do against the might I wield?`, `But go ahead, show me the strength of your Heavenly Dragon, if it still answers to you. I'm eager to see if legends truly die hard.`],
+            [`The unity I built was not just of power, but of purpose. You, who sow discord for petty gains, cannot fathom the strength that comes from true allegiance," you say, your voice a blend of lament and resolve. "True allegiance? Your Golden Dragons have a new head, and stand stronger for it. Your time has passed, old 'master',`, `Let's put your so-called mastery to the test then. The Golden Dragons no longer heed your call. What hope do you have?`],
+            [`You mistake my absence for weakness, my silence for surrender. The Golden Dragons were more than a symbol of power; they were a testament to honor and strength. I will reclaim what was usurped, starting with dismantling your ambitions," you articulate, your voice resonating with a calm yet unmistakable threat. "Ambitious words for a fallen leader. Your era is over, Ah Long. The winds of change have swept through, and your Golden Dragons have evolved beyond you,`,`Evolve or perish, that is the law of nature. And you, Ah Long, seem all too ready to become a relic of the past. Let's see if your Heavenly Dragon still has any fire left, or if it's merely smoke and ashes.`]
+        ],
             get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy[1].boss} as the boss in part 2B of your personal story.` }
         },
         { name: "Axel", expansion: "twintiger", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Mary Ann"], rival: ["Mary Ann"], stage: "Under Destruction",
@@ -897,11 +902,23 @@ function getGladiators(expansionfilter, enemies, stages) {
         },
         {
             name: "Gabriel", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Drago"], rival: ["Drago"], stage: "Original Copy",
+                        dialogue: [
+                [`My journey through shadows isn't to seek vengeance, but to reunite what was torn apart, and you stand in my way," you state, with determination clear in your eyes. "Your past, however tragic, does not elevate you to my level. Your quest, noble as it may seem, ends here. The Kingdom, your mentor.. it's all connected in ways you can't fathom,`, `But go ahead Gabriel, fight for what you believe in. It makes no difference. In the grand scheme, you're just another pawn.`],
+                [`This search has led me through darkness, molded me into a warrior for those I've lost. You stand before me, embodying the very essence of what I've fought against," you declare, your voice a mixture of resolve and a haunting pain. "A warrior, Santos? You flatter yourself. Your struggles, your loss — they make for a touching tale but offer no protection against the reality of power,`, `Let's see if your 'warrior's spirit' can withstand the storm that's coming. I doubt you'll find what you're searching for, especially not through me!`],
+                [`I've been a shadow among shadows, searching for a light that seems ever elusive. You, and all you represent, are the darkness I've vowed to dispel," you state, your determination unshaken. "Dispelling darkness? You're more delusional than I thought. The world thrives in shades of grey, Santos. Your quest for light is but a fool's errand,`,`But by all means, try to prove me wrong. It will be amusing to watch you try and fail, just as you've failed to find those you seek.`]
+                ],
             get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
         },
         {
             name: "Ikuchi", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Megan"], rival: [""], stage: "Original Copy",
             get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2 of your personal story.` }
+        },
+        { name: "Jack", expansion: "stretchgoals18", enemy: "", ally: [""], rival: [""], stage: "",
+            dialogue: [
+                [`You prey on the weak because you see them as easy targets. I've been where they are, and I'll be their shield if that's what it takes," you states, the conviction in your voice as steadfast as the ground beneath your feet. "A shield? Noble, but futile, Jack. You're just one man against the tide,`, `Let's see how long you can stand before you're swept away.`],
+                [`This city taught me the cost of indifference. I lost Jen to these streets, and I won't stand by and watch others suffer the same fate," you say, each word tinged with the pain of loss and the strength it birthed. "Lost? Or just another casualty to your misguided crusade?`, `Your quest for redemption is a path littered with despair, Gatsby. Ready to add more names to your conscience?`],
+                [`I've seen the best and worst of what this city has to offer. I chose to stand for something more, to be the difference Jen believed we could all be," you declare, your determination lighting up the shadows cast by the city's corruption. "Belief? In this city, belief is as cheap as the lives you're trying to save,`,`But every beacon eventually burns out, Gatsby. Yours is no different.`]
+            ]
         },
         { name: "Jackal", expansion: "redemption", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Project X"], rival: ["Kemono", "Project X"], stage: "Steel Memories" },
         { name: "Jirou", expansion: "tideofthedragon", enemy: "", ally: [""], rival: [""], stage: "" },
@@ -927,6 +944,11 @@ function getGladiators(expansionfilter, enemies, stages) {
         { name: "Mack", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death" },
         {
             name: "Max", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised",
+                    dialogue: [
+            [`You thought you could break me, but every attempt only forged me stronger. I stand here, not just for Ransom City, but for all who seek justice," you say, your voice carrying the weight of your trials and the strength of your convictions.  "Strength? You're a man pieced back together, a project of science. What can you possibly hope to achieve?`, `We'll dismantle you again, Max. Piece by piece if we must.`],
+            [`The Onyx League, The Kingdom... You all underestimate the power of unwavering resolve. My commitment to justice has only deepened," you declare, the glint of determination in your eyes undimmed by the scars of your past. "Commitment? Your idealism is outdated, Governor. The world has changed,`, `But sure, let's see how far your resolve takes you in our new world order.`],
+            [`I've faced down your kind before, stood firm against your storms of terror. With the Global Gladiators, I bring not just my resolve but a united front against your tyranny," you say, your commitment igniting hope in those who stand with you. "A united front? You bring together a band of broken toys to face us? Amusing,`,`Your new limbs won't save you, Max. Nor will your little team. We'll see you broken again.`]
+        ],
             get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2A of your personal story.` }
         },
         { name: "Megan", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"],
@@ -935,10 +957,17 @@ function getGladiators(expansionfilter, enemies, stages) {
             [`You target the innocent, exploit the vulnerable. I've seen your kind before. I survived," you say with cold determination. "Survived? You were thrown away, forgotten. What makes you think you can stand against me?`, `This city will break you, just like it did your sensei.`],
             [`Every villain I face, every shadow I chase, brings me one step closer to the justice my family was denied," you say, resolve unwavering. "Justice? In Ransom City? You're chasing ghosts, girl,`,`Let's see if your ghosts can save you now.`]
         ]
-    
+
     },
+        { name: "Micky", expansion: "stretchgoals18", enemy: "", ally: "", rival: "", stage: "",
+        dialogue: [
+            [`Look at you, trying to script Ransom's downfall like it's some sorta sellout pop ballad. Me? I'm the punk rock chaos that rips up the setlist and spits on the rulebook. Your plan's just another track I'm gonna skip," you sneers, your stance rebellious. "Your so-called 'chaos' is nothing but a minor disturbance. Ransom will march to my rhythm, not your discordant noise,`, `We'll snuff out your rebellion, Scott. Your final encore is at hand.`],
+            [`You're just another mindless drone masquerading as a big bad. I've brought down bigger with nothing but a guitar and a sneer. You? You're just roadkill on my highway to infamy," you taunt, your voice cutting through the air. "Infamy? You're a footnote in my grand design. Prepare to be erased,`, `This city will forget you, Scott. Your rebellion dies here.`],
+            [`You think you've got the city in your grip, but all you've got is a ticket to the mosh pit where I'm king. My rebellion isn't just noise; it's the anthem for every soul you tried to silence,"the raw edge in your voice like a challenge thrown down in the face of oppression. "An anthem? I'll turn your so-called rebellion into a silent disco no one attends. You're outmatched, Scott,`,`I'll have you singing a swan song before this night is over,`]
+        ]
+        },
         { name: "Miss Matrix", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Ying Hua"], rival: ["Ah Long", "Kemono"], stage: "Cashed Out" },
-        { name: "Muprhy", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
+        { name: "Murphy", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
         {
             name: "Natalia", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"],
             get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2B of your personal story.` }
@@ -954,7 +983,7 @@ function getGladiators(expansionfilter, enemies, stages) {
             [`I've danced with death more times than I can count. For family, I'll waltz into hell itself," you say, barely able to hold your rage. "Such melodrama. You think love makes you strong?`, `It makes you vulnerable, Rhys. And I'll exploit every weakness.`],
             [`This city, its shadows, I know them better than anyone. Used to be part of them. Now, I'm its guardian," you say, your resolve unshaken. "From shadow to guardian? You're playing a dangerous game, Rhys.`,`Let's see how long you can keep playing.`]
         ]
-    
+
     },
         { name: "Ronny", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
         {
@@ -971,6 +1000,11 @@ function getGladiators(expansionfilter, enemies, stages) {
         { name: "The Proxy", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Power Soldier"], rival: ["Power Soldier"], stage: "Compromised" },
         {
             name: "Tiger Azules", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""], stage: "Supply and Demand",
+             dialogue: [
+                [`In the ring of this city, I am the champion who fights for the forgotten and the fallen. You face Tiger Azules, a spirit reborn to cleanse these streets," you bellow, bold and defiant. "Ah, the famed Tiger Azules. Your theatrics amuse me. Let's see if your moves are as sharp as your words,`, `Dance, luchador, but know this: I will unmask you and reveal the mortality beneath your legend.`],
+                [`You dare defile the honor of these streets with your vile deeds? As the mask I wear channels the ancient powers, I vow to restore peace. Beware, for Tiger Azules stands ready to strike," you roar, the vibrancy of his your matching the intensity in your eyes. "Tiger Azules, the masked avenger. Your 'ancient powers' are no match for the new world order we bring,`, `We'll strip away your power, piece by piece, starting with that mask you hide behind.`],
+                [`This mask is not just a mask; it's a symbol — a symbol of justice, strength, and the indomitable will of the people. You face not just a man, but an idea. And ideas, señor, are bulletproof," you declare, your voice booming across the area. "An idea? How quaint. But even ideas can be corrupted, destroyed. You will learn that the hard way,`,`Your idealism will be your downfall. We'll see how long you can keep up this charade, 'Tiger'.`]
+            ],
             get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2 of your personal story.` }
         },
         {
@@ -982,7 +1016,7 @@ function getGladiators(expansionfilter, enemies, stages) {
         dialogue: [
             [`You underestimate the light I carry within me. My fight is for those silenced by fear, not for the glory of victors in hidden arenas," you state, your presence seeming to pierce the darkness.  "Light? Noble, but naive. We seek to test your limits, Ying Hua,`, `See this as an opportunity. An opportunity to truly understand the depth of your convictions.`],
             [`You lure me with challenges, thinking it will sway my path. Know this — I walk the path of righteousness, and no invitation, no challenge, can deter me," you say, standing against the turmoil wrought by your adversary.  "Righteousness? A flimsy shield against the storm we bring,`, `We'll see how long your shield holds, Ying Hua. The storm approaches.`],
-            [`The invitation through the gateway to your world of shadows and deceit, I accept not as a contestant, but as a herald of justice. Your games end with me," you say, spirit unbroken. "Justice? A quaint concept in our world. But entertain us, Ying Hua. Entertain us with your futile attempts at heroism,`,`Perhaps you'll provide a lesson in futility, or maybe, just maybe, you'll surprise us.`]
+            [`The invitation through the gateway to the world of shadows and deceit, I accept not as a contestant, but as a herald of justice. Your games end with me," you say, spirit unbroken. "Justice? A quaint concept in our world. But entertain us, Ying Hua. Entertain us with your futile attempts at heroism,`,`Perhaps you'll provide a lesson in futility, or maybe, just maybe, you'll surprise us.`]
         ]
     },
         { name: "Yokai", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Marionette Doll"], rival: ["Marionette Doll"], stage: "Steel Memories",
