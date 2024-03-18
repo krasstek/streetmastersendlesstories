@@ -181,8 +181,8 @@ function getEnemies(expansionfilter) {
         }
     ];
 
-    return enemies.filter(enemy => expansionfilter.includes(enemy.expansion))
-    // Yokai special setup?
+    enemies = expansionfilter === undefined ? enemies : enemies.filter(enemy => expansionfilter.includes(enemy.expansion))
+    return enemies
 
 }
 
@@ -198,7 +198,7 @@ function getStages(expansionfilter) {
                 [`You won’t stop the inevitable!`, `I’ll end you here, with or without the Oni!`],
                 [`Fire is a living thing, Gladiators,`, `It breaths, it eats. And it hates.`],
                 [`You should be glad to go out like this,`, `You will have a funeral pyre of a true warrior!`],
-                [`The fire you've unleashed will consume everything! We're putting an end to this madness," you shout over the roar of the flames. "You think you can douse the flames of destiny with such simple acts? Those urns are mine by right, the key to the power I've sought all along,`, `The fires are but a trial, one I am prepared to endure for my ascension!`],
+                [`The fire you've unleashed will consume everything! We're putting an end to this madness," you shout over the roar of the rising flames. "You think you can douse the flames of destiny with such simple acts? Those urns are mine by right, the key to the power I've sought all along,`, `The fires are but a trial, one I am prepared to endure for my ascension!`],
                 [`This isn't power; it's destruction! Can't you see the ruin you're bringing upon us all?" you argue. "Ruin? No, it is purification! Only through destruction can we rebuild, stronger and unbound by the old ways. You aim to lock away the future I am offering,`, `Fools! I will not allow it!`],
                 [`The fire, it purifies, it transforms,`, `The flames are but a fraction of the inferno within me, a blaze of ambition and power!`],
                 [`You believe you can save the day by returning the urns,`, `But my vision cannot be so easily extinguished!`]
@@ -209,7 +209,7 @@ function getStages(expansionfilter) {
                 '<br><br>You were not too late! ${enemy.boss} falls on the floor, barely able to stand up, and stares at ${gPron(enemy, "possessive")} hands with astonishment.  "This can\'t be," ${gPron(enemy, "subject")} says hoarsely.  "I have come so far..." ${ucInit(gPron(enemy, "subject"))} looks up to you with a look of shock.'
             ])),
             coldtrail: () => _.template(randFrom([
-                '<br><br>${enemy.boss} drops lightly to the floor, the interrupted ritual\'s power already coursing through ${gPron(enemy, "subject")}. ${gPron(enemy, "subject")} examines ${gPron(enemy, "possessive")} hands, now emblazoned with symbols of power. "So, it comes to this," ${gPron(enemy, "subject")} murmurs. ${ucInit(gPron(enemy, "subject"))} locks eyes with you, ${gPron(enemy, "possessive")} initial shock giving way to a smoldering fury.',
+                '<br><br>${enemy.boss} drops lightly to the floor, the interrupted ritual\'s power already coursing through ${gPron(enemy, "object")}. ${ucInit(gPron(enemy, "subject"))} examines ${gPron(enemy, "possessive")} hands, now emblazoned with symbols of power. "So, it comes to this," ${gPron(enemy, "subject")} murmurs. ${ucInit(gPron(enemy, "subject"))} locks eyes with you, ${gPron(enemy, "possessive")} initial shock giving way to a smoldering fury.',
                 '<br><br>${enemy.boss} descends on the floor, then straightens ${gPron(enemy,"reflexive")} up, standing up and staring at ${gPron(enemy, "possessive")} hands with astonishment.  "The power," ${gPron(enemy, "subject")} says calmly. "This can\'t be all..." ${ucInit(gPron(enemy, "subject"))} looks up to you,  ${gPron(enemy, "possessive")} look of shock changing to one of pure rage.',
             ])),
             clueless: () => _.template(randFrom([
@@ -218,7 +218,7 @@ function getStages(expansionfilter) {
                 ])),
             prologue: () =>_.template(randFrom([
                 '${trail} you find ${bossDescription(enemy)} in the middle of a ritual at a remote ${evilPlace()}. The ${mysticalSynonym()} powers float ${gPron(enemy, "object")} as ${gPron(enemy, "subject")} draws in a portion of the hellfire of the cursed Oni. You rush in to disrupt the ritual, scattering the unholy urns positioned around the temple.${stagevar} "${gloat[0]}" ${gPron(enemy, "subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}<br><br>You stand ready to face ${gPron(enemy, "object")}, and suddenly wince as your hands begin burning with a searing hot pain. You look down to see bright red lines snaking their way along your hands. You must have disrupted some ancient power by scattering the urns. Gritting your teeth, you pick up the urns and prepare to return them to their rightful place<%=rivalpresence ? `${rivaltext}` : ``%>.',
-                '${trail} you are led deep into the heart of ${evilPlace()}, where you\'re met with a scene of ominous power. ${bossDescription(enemy)}, caught in the act of harnessing the hellfire of the Oni, turns to face you with a look of disdain. The air floating ${gPron(enemy, "object")} shimmers with ${mysticalSynonym()} energy, as the sacred urns — key to controlling the inferno — lay scattered due to your sudden intrusion.${stagevar} "${gloat[0]}" ${gPron(enemy, "subject")} addresses you: "${gloat[1]}" It\'s clear: the disrupted urns must be returned to their rightful place to halt the spreading flames and the summoning of of the hellish powers of The Oni. The ${enemy.minions()} add to the pandemonium. You step forth<%=rivalpresence ? `${rivaltext}` : `, ready to end this at any cost.`%>.'
+                '${trail} you are led deep into the heart of ${evilPlace()}, where you\'re met with a scene of ominous power. ${bossDescription(enemy)}, caught in the act of harnessing the hellfire of the Oni, turns to face you with a look of disdain. The air floating ${gPron(enemy, "object")} shimmers with ${mysticalSynonym()} energy, as the sacred urns — key to controlling the inferno — lay scattered due to your sudden intrusion.${stagevar} "${gloat[0]}" ${gPron(enemy, "subject")} addresses you: "${gloat[1]}" It\'s clear: the disrupted urns must be returned to their rightful place to halt the spreading flames and the summoning of of the hellish powers of the Oni. You step forth<%=rivalpresence ? `${rivaltext}` : `, ready to end this at any cost.`%>.'
             ])),
             captured: _.template('You awaken to searing hot pain, and look down to see bright red lines snaking their way along your hands. ${bossDescription(enemy)} is floated by some ${mysticalSynonym()} powers as ${gPron(enemy, "subject")} draws in a portion of the igniting hellfire. You see ${mysticalSynonym()} urns scattered nearby - ${gPron(enemy, "subject")} must have used you to activate the ${mysticalSynonym()} powers of the cursed Oni!${stagevar} "${gloat[0]}" ${gPron(enemy, "subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}<br><br>You rip your bonds, grit your teeth, and prepare to return the urns to their rightful place<%=rivalpresence ? `${rivaltext}` : ``%>.'),
             finalvar: _.template('You rush in to disrupt the ritual, scattering the unholy urns positioned around the temple.<br><br>${enemy.boss} falls down to the floor of the temple, landing solidly on ${gPron(enemy, "possessive")} feet.  ${ucInit(gPron(enemy, "subject"))} flexes ${gPron(enemy, "possessive")} muscles slowly, staring at ${gPron(enemy, "possessive")} clenched fists, an evil grin on ${gPron(enemy, "possessive")} face. ${ucInit(gPron(enemy, "subject"))} then looks up to you, and laughs. "${gloat[0]}" ${gPron(enemy, "subject")} says. "${gloat[1]}" ${laconicStatement(enemy)}<br><br>You stand ready to face ${gPron(enemy, "object")}, and suddenly wince as your hands begin burning with a searing hot pain. You look down to see bright red lines snaking their way along your hands. You must have disrupted some ancient power by scattering the urns. Gritting your teeth, you pick up the urns and prepare to return them to their rightful place<%=rivalpresence ? `${rivaltext}` : ``%>.'),
@@ -499,7 +499,7 @@ function getStages(expansionfilter) {
             masterplan: randFrom(["illegalgains", "kidnapping","strengtheningforces","personalpower","actsofterror"]), keywords: ["hostages", "guns"], gunmen: "armed guards", hostages: "hostages", loot: "the sensitive intel",
             rivaltext: _.template(' ${rival.name} stands guard<%= rivalboost ? `, vigilant and keen-eyed.`: `.`%>'),
             gloat: [
-                [`Welcome to my humble abode," your enemy sneers. "Too bad you won't be leaving." "Not without the captives," you retort. "Oh, I think you'll find leaving without them much easier,`,`But that won't be an option.`],
+                [`Welcome to my humble abode," your opponent sneers. "Too bad you won't be leaving." "Not without the captives," you retort. "Oh, I think you'll find leaving without them much easier,`,`But that won't be an option.`],
                 [`Ah, I see you've found our little 'guests'," the cruel captor mocks. "Planning a rescue, are we?" "They're leaving with us," you declare. "Ambitious,`,`But foolish.`],
                 [`You've made it farther than I expected," the captor admits. "But this is where your story ends." "Not today," you respond. "Today, everyone goes home." "A bold statement,`,`Let's see if you can back it up.`],
                 [`Do you like what I've done with the place?" the boss quips, gesturing to the dark, damp room. "Seems a little tight for company," you shoot back. "Oh, they won't be staying long,`,`Neither will you.`],
@@ -526,7 +526,7 @@ function getStages(expansionfilter) {
 
             ])),
             captured: _.template(randFrom([
-                'Grogginess gives way to sharp clarity as you realize you\'re not in your own bunkroom but a makeshift cell. "Thought you\'d never wake up," a gruff voice sneers from the shadows. The ${enemy.name} has made you their guest — and not the honored kind. <%=stageindex == 0 ? `What was meant to be a stealth operation has turned into a dire standoff, and y` : `Y`%>our resilience has been tested under their relentless scrutiny. From the darkness, ${bossDescription(enemy)} emerges, ${enemy.threat}. "Last chance to sing," ${gPron(enemy, "subject")} taunts, the threat hanging heavy in the air. Silence fills the room as you meet their gaze with defiance. "Have it your way," ${gPron(enemy, "subject")} scoffs, exiting with a promise of return. <%=rivalpresence ? `${rivaltext} You take advantage of a momentarily lapse in attention, and make your move!` : `You waste no moment, plotting your escape with the resolve of the cornered.`%>',
+                'Grogginess gives way to sharp clarity as you realize you\'re not in your own bunkroom but a makeshift cell. "Thought you\'d never wake up," a gruff voice sneers from the shadows. The ${enemy.name} has made you their guest — and not the honored kind. <%=stageindex == 0 ? `What was meant to be a stealth operation has turned into a dire standoff, and y` : `Y`%>our resilience has been tested under their relentless scrutiny. From the darkness, ${bossDescription(enemy)} emerges, and ${enemy.threat}. "Last chance to sing," ${gPron(enemy, "subject")} taunts, the threat hanging heavy in the air. Silence fills the room as you meet their gaze with defiance. "Have it your way," ${gPron(enemy, "subject")} scoffs, exiting with a promise of return. <%=rivalpresence ? `${rivaltext} You take advantage of a momentarily lapse in attention, and make your move!` : `You waste no moment, plotting your escape with the resolve of the cornered.`%>',
                 '"Finally awake?" That\'s the first thing you hear after the splash of stale water jolts you awake. You have no idea how long you\'ve been a hostage of the ${enemy.name}, ${enemy.desc} — but you\'d guess it\'s been at least a few days.<br><br><%=stageindex == 0 ? `Your simple recon mission went south, and now y` : `Y`%>ou\'ve been enduring  their tortures as they\'ve tried to get everything they could out of you. You\'ve held out for now but don\'t know how long you\'ll be able to keep it up. ${bossDescription(enemy)} ${enemy.threat} as ${gPron(enemy, "subject")} stares at you down. "I\'ll give you this one chance to come clean before we start our procedures again." Your silence is deafening as you stare at the floor. "Very well," ${enemy.boss} sneers. "I won\'t be gone for too long, ${defineAddressing(enemy)}. Don\'t get comfortable."<br><br>${ucInit(gPron(enemy, "subject"))} exits,<%=rivalpresence ? `while ${rivaltext}` : ` and as soon as the door closes behind ${gPron(enemy, "object")}, you begin working at your bonds.`%>'
             ])),
             finalvar: _.template(randFrom([
@@ -638,7 +638,7 @@ function getStages(expansionfilter) {
             ])),
             finalvar: _.template('You make your way to this forest and soon find yourself lost in its natural labyrinth.<br><br>You eventually find ${bossDescription(enemy)}<%=rivalpresence ? `${rivaltext}.` : `.`%> "${gloat[0]}" ${gPron(enemy,"subject")} greets you. "${gloat[1]}" If you hope to be the first to find the idols, there\'s no time to waste.'),
             personalpower: _.template('${trail}, you have learned the ${getMasterPlan()} of ${enemy.boss}. The ${enemy.name} intend to conduct a ritual with enchanted idols hidden deep in the Forest of Sorrow. If they succeed, they will draw the full power of the mystical Oni to ${enemy.boss} ${gPron(enemy,"reflexive")}, and become a force so relentless that the Citadel and the Global Gladiators will not be able to keep them in check. ${finalvar}'),
-            illegalgains: _.template('${trail}, you have learned the ${getMasterPlan()} of ${enemy.boss}. The ${enemy.name} intend to retrieve the idols deep within the Forest of Sorrows that according to legend are used to in the ritual to channel Oni\'s power. They will sell them to the highest bidder among a multitude of rogue nations and shadowy organizations. With the funding they will be able to expand their criminal operations in Ransom so that Global Gladiators can to contain them no more. ${finalvar}'),
+            illegalgains: _.template('${trail}, you have learned the ${getMasterPlan()} of ${enemy.boss}. The ${enemy.name} intend to retrieve the idols deep within the Forest of Sorrows that according to legend are used to in the ritual to channel Oni\'s power. They will sell them to the highest bidder among a multitude of rogue nations and shadowy organizations. With the funding they will be able to expand their criminal operations in Ransom so that Global Gladiators can contain them no more. ${finalvar}'),
             actsofterror: _.template('${trail}, you have learned the ${getMasterPlan()} of ${enemy.boss}. The ${enemy.name} intend to conduct a ritual with enchanted idols hidden deep in the Forest of Sorrow. If they succeed, they will use the idols to release the full power of the mystical Oni in Ransom, wiping out most of the city in a calamitous firestorm. ${finalvar}'),
         },
 
@@ -730,7 +730,7 @@ function getStages(expansionfilter) {
              randFrom([
                 'You awaken to find yourself in a dimly lit arena, surrounded by the echoing cheers of the crowd. Disoriented and groggy from whatever concoction the ${possessiveSuffix(enemy.boss)} lackeys administered, you struggle to piece together your surroundings. As the haze begins to lift, you realize the gravity of your situation: you\'ve been captured and thrust into a gladiatorial match against your will. With every passing moment, the crowd\'s anticipation builds, eager for the spectacle about to unfold. Just as the announcer\'s voice booms overhead, signaling the start of the match, a surge of adrenaline floods your veins. With sheer determination, you shake off the effects of the drugs and prepare to fight for your freedom. The fate of the other fighters hangs in the balance, their lives depending on your ability to defeat ${bossDescription(enemy)} before it\'s too late.',
                 'A blinding light floods your vision as you slowly regain consciousness, only to find yourself shackled to the walls of a vast underground arena. The air is thick with anticipation, the sounds of the crowd\'s cheers echoing off the damp stone walls. Through the haze, you catch glimpses of fighters, each a lean and mean, but unfortunately unqualified for the ${possessiveSuffix(enemy.boss)} twisted game of survival. As the announcer\'s voice reverberates through the arena, declaring the commencement of the match, a surge of determination courses through your veins. With the odds stacked against you and your every move scrutinized by the watchful eyes of your captors, you steel yourself for the battle ahead. It\'s time to show ${enemy.boss} and the entire underworld who the real champions are, and to rescue your fellow fighters from the clutches of tyranny.',
-                'As your vision slowly clears, you find yourself bound to crude wooden chairs in the dimly lit backroom of a seedy underground club. The muffled sounds of a rowdy crowd and blaring music seep through the walls, indicating that you\'re in the heart of the ${possessiveSuffix(enemy.boss)} illicit operations. Across from you, your companions stir groggily, their eyes darting around the room in confusion. With a sinking feeling, you realize that you\'ve fallen into the ${possessiveSuffix(enemy.boss)} trap. The sight of the other captured fighters, battered and bruised, fuels your determination. Your senses sharpen and adrenaline kicks in, and you break free from your flimsy restraints - ${enemy.name} may think ${gPron(enemy, "subject")} has you cornered, but little does ${gPron(enemy, "subject")} know, you\'re just getting started.',
+                'As your vision slowly clears, you find yourself bound to crude wooden chairs in the dimly lit backroom of a seedy underground club. The muffled sounds of a rowdy crowd and blaring music seep through the walls, indicating that you\'re in the heart of the ${possessiveSuffix(enemy.boss)} illicit operations. Across from you, your companions stir groggily, their eyes darting around the room in confusion. With a sinking feeling, you realize that you\'ve fallen into the ${possessiveSuffix(enemy.boss)} trap.<br><br>The sight of the other captured fighters, battered and bruised, fuels your determination. Your senses sharpen and adrenaline kicks in, and you break free from your flimsy restraints - the ${enemy.name} may think ${gPron(enemy, "subject")} has you cornered, but little does ${gPron(enemy, "subject")} know, you\'re just getting started.',
              ])
             ),
             finalvar: _.template('${trail}, you learn the ${getMasterPlan()} of the ${enemy.name}. They have arranged a competition modeled after <%=enemy.name == "Kingdom" ? `their`: `the Kingdom\'s`%> original grand tournament where <%= enemy.name == "Kingdom" ? "they" : "the Kingdom"%> initially revealed their diabolical motives'),
@@ -857,11 +857,12 @@ function getStages(expansionfilter) {
         }
     ];
 
-    return stages.filter(stage => expansionfilter.includes(stage.expansion))
+    stages = expansionfilter === undefined ? stages : stages.filter(stage => expansionfilter.includes(stage.expansion))
+    return stages
 
 }
 
-function getGladiators(expansionfilter, enemies, stages) {
+function getGladiators(expansionfilter, enemies = getEnemies(), stages = getStages()) {
     let gladiators = [
         {
             name: "Ah Long", expansion: "redemption", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
@@ -896,8 +897,20 @@ function getGladiators(expansionfilter, enemies, stages) {
             get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${this.stage} as the stage in part 3 of your personal story.`
         }
         },
+        { name: "Darius", expansion: "newchallengers", enemy: "", ally: [""], rival: [""], stage: "",
+        dialogue: [
+            [`I've walked through time, a specter from an age when honor and valor dictated the fate of men. Freed from one form of bondage, I refuse to shackle myself to the whims of another," you declares, your voice echoing the resolve of centuries. "Ah, Darius, the ancient warrior, thinks he can defy the currents of time. Your ancient values have no place in this new world order,`, `The world you fought for is gone. Welcome to your nightmare.`],
+            [`I am no one's pawn, no mere relic to be wielded for a cause. My allegiance is to principles that have outlasted empires," your responds, your tone as steady as a phalax.  "Principles? Your adherence to such outdated concepts will be your undoing. The world is not black and white, Darius. It's time you learned that,`, `Your defiance only seals your fate.`],
+            [`I've fought against darker tides than you can fathom. Your threats are but whispers in the wind," you declare, undeterred, your legacy a shield against <%=possessiveSuffix(boss)%> ambition. "Whispers that will become roars,`,` You may have outlasted time, Darius, but you won't outlast us!`]
+            ]
+        },
         {
             name: "Dmitri", expansion: "redemption", enemy: randFrom(enemies), ally: [""], rival: ["Anastasia"], stage: "Right to Remain Silent",
+            dialogue: [
+                [`Betrayal forged me in its fire. I've outlived those who sought my end. You think you can use me? I am no one's pawn," you say, your voice cold as the Russian winters of your youth. "No pawn, you say? Perhaps not. But even kings fall, Dmitri. And when you do, it will be by my hand. Your defiance only marks you for a swifter demise,`, `The shadows you have embraced will consume you.`],
+                [`I've danced with death more times than I can count. Each step was a defiance of fate. You're just another shadow in a long night," you declare, defiance blazing in your eyes. "Dance, then, Dmitri. Dance until your legs give out and you collapse into the grave we've prepared for you. Your defiance has been noted,`, `You will not see the dawn.`],
+                [`For every shadow that falls, I stand taller. I am the retribution that comes at the end of the night. Your empire of fear ends with me," you vow, every line of your body written with the promise of battle. "Retribution? How dramatic. But it's not your stand that interests us, Dmitri — it's your fall, and fall you will,`,`Your war ends, not with a victory, but with your silent submission.`]
+                ],
             get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
         },
         {
@@ -909,10 +922,18 @@ function getGladiators(expansionfilter, enemies, stages) {
                 ],
             get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
         },
+        { name: "Hanzo", expansion: "essenceofevil", enemy: "", ally: [""], rival: [""], stage: "",
+        dialogue: [
+            [`I emerge from the shadows not as a savior but as the storm itself. My battle is with the unworthy who dare to disrupt the balance," you state, your voice a low rumble, reminiscent of distant thunder. "So, the ghost decides to walk among us once more. Your ancient codes and prideful posturing will find no purchase here. The world has moved on,`, `Let us see if your so-called mastery can weather the storm we bring. You are a relic, Hanzo.`],
+            [`Your arrogance blinds you to the true nature of strength. I have faced down empires, seen dynasties rise and fall. Your ambition is but a footnote in the annals of combat," you retort, your words slicing through the air with the sharpness of a well-honed blade.  "A relic speaking of relevance? You'll find that the world cares little for your philosophies. Strength rules, and you, Hanzo, are an anachronism,`, `Your end approaches, ancient one. We will bury you and your outdated honor beneath the foundations of our new order.`],
+            [`You view me as an echo of the past, yet fail to see the lessons it teaches. I am the culmination of centuries of warfare, a force of nature that your fleeting power cannot comprehend," you say, each word imbued with the weight of history. "A force of nature? We are the cataclysm that will sweep you away. Your history ends with me,`,` Prepare for oblivion, Hanzo. This is where your legend dies.`]
+            ]
+        },
         {
             name: "Ikuchi", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Megan"], rival: [""], stage: "Original Copy",
             get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2 of your personal story.` }
         },
+        { name: "Isabella", expansion: "newchallengers", enemy: "", ally: [""], rival: [""], stage: "" },
         { name: "Jack", expansion: "stretchgoals18", enemy: "", ally: [""], rival: [""], stage: "",
             dialogue: [
                 [`You prey on the weak because you see them as easy targets. I've been where they are, and I'll be their shield if that's what it takes," you states, the conviction in your voice as steadfast as the ground beneath your feet. "A shield? Noble, but futile, Jack. You're just one man against the tide,`, `Let's see how long you can stand before you're swept away.`],
@@ -935,12 +956,22 @@ function getGladiators(expansionfilter, enemies, stages) {
             ],
             get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2 of your personal story.` }
         },
-        { name: "Kenshin", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Brandon"], rival: ["Shadow", "Jackal", "Kemono"], stage: "Cashed Out" },
+        { name: "Kenshin", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Brandon"], rival: randFrom(["Shadow", "Jackal", "Kemono"]), stage: "Cashed Out",
+        dialogue: [
+            [`You carry the weight of many sins, Kenshin," <%=boss%> says, voice dripping with disdain. "Do you really think you can wash them away by playing the hero?" "My path is one of atonement, not redemption," you respond, your stance ready, the legacy of the Hattori flowing through your movements. "I will stop you and any like you, not for forgiveness, but because it is right." "Atonement? There's no atonement in this life, only power and those too weak to seek it,`, `Let's see if your resolve holds as firm as your convictions.`],
+            [`Kenshin Hattori, the legendary warrior turned peacemaker," <%=boss%> taunts, circling you like a predator. "Have you finally realized the futility of your quest?" "I realized long ago the price of my actions," you reply, calm and resolute amidst the growing tension. "It's a price I pay willingly to ensure others don't suffer as I have." "Noble words for a killer,`, `Let's see if your skills are as sharp as your tongue!`],
+            [`You seek to cleanse this place with your blood and blade?" <%=boss%> mocks. "You are but one man against the tide of darkness." "One man with a will to make a difference," you state, resolve in your voice. "Your darkness ends here." "Then come, Kenshin Hattori,`,`Let us see if your light can outshine the darkness we embrace.`]
+        ]  },
         {
             name: "Kyoryu", expansion: "riseofthekingdom", enemy: randFrom(enemies), ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Steel Memories", "Sudden Death"],
             get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2A of your personal story.` }
         },
-        { name: "Leeta", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
+        { name: "Leeta", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "",
+        dialogue: [
+            [`You're far from your old haunts, Leeta," <%=boss%> begins. "Old haunts, new battles," you retort. "Vengeance is a volatile motivator. It burns hot, consumes much, and leaves little but ash. Are you sure you're prepared for the fire?" comes the amused response. "My fire's been burning long before Parasol decided to fan the flames," you snap back with fierce defiance. "Bold words, Leeta. But you seek to dismantle what you don't fully understand. And that,`, `Is a path to self-destruction.`],
+            [`You've strayed from your roots, Leeta," <%=boss%> observes. "Roots can be replanted," you reply, the edge in your voice as sharp as your resolve. "Especially when the soil's been poisoned." The smirk in response barely masks the threat beneat. "But not all things thrive in toxic ground,`, `Some legacies end up buried.`],
+            [`Turning against your own kind, Leeta?" <%=boss%> taunts, the contempt in the voice mirroring the decay surrounding them. "Kind?" you scoff, your stance firm and your spirit unyielding. "My kind are those who stand for justice, not those who hide behind it." A laugh devoid of true amusement accompanies the answer. "Justice? In this city, justice is just another word for revenge,`,`Seeking revenge, you might just find your own end.`]
+        ] },
         { name: "Mack", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death" },
         {
             name: "Max", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised",
@@ -951,6 +982,7 @@ function getGladiators(expansionfilter, enemies, stages) {
         ],
             get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2A of your personal story.` }
         },
+        { name: "Mary Ann", expansion: "newchallengers", enemy: "", ally: [""], rival: [""], stage: "" },
         { name: "Megan", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"],
         dialogue: [
             [`I once thought martial arts was about rhythm and show. That night, under the neon lights, I learned it's about survival," you say, your stance firm, your eyes reflecting the resolve of a warrior shaped by betrayal. "Ah, the heiress turned fighter. Do you think you've found your rhythm now?`, `Let's see if you have learned enough to dance with death.`],
@@ -967,7 +999,13 @@ function getGladiators(expansionfilter, enemies, stages) {
         ]
         },
         { name: "Miss Matrix", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Ying Hua"], rival: ["Ah Long", "Kemono"], stage: "Cashed Out" },
-        { name: "Murphy", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
+        { name: "Mr. Apple", expansion: "newchallengers", enemy: "", ally: [""], rival: [""], stage: "" },
+        { name: "Murphy", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "",        
+        dialogue: [
+            [`Looks can be deceiving. Beneath this uniform, there's something you wouldn't want to face. Best keep it that way," you say, your tone even but your gaze steady, challenging, a silent dare. "Threats from a janitor? You're out of your depth. This city has no room for your kind of 'cleanup',`, `We'll see how tough you talk when you're scrubbing away your failure. This is where your story ends, Murphy.`],
+            [`Every shadow hides potential, every silence a storm. I'm no exception. It's your choice whether to force my hand," you hint, your voice a low rumble. "Dramatic, aren't we? Hide behind your metaphors, janitor. It won't save you from the reality we're shaping,`, `But indulge your fantasies if it amuses you. In the end, it's not your potential I fear, but your obsolescence!`],
+            [`Don't underestimate the quiet ones," you advice, the warning clear in your low, steady tone. "A philosopher janitor? How quaint. Your sage advice falls on deaf ears here. We're beyond warnings and veiled threats,`,`Continue with your mopping, Murphy. It's the only storm you'll be brewing. As for quiet ones? Silence is easily broken.`]
+        ] },
         {
             name: "Natalia", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"],
             get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2B of your personal story.` }
@@ -977,6 +1015,14 @@ function getGladiators(expansionfilter, enemies, stages) {
             name: "Project X", expansion: "redemption2", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: ["Natalia"], rival: ["Natalia", "Jackal"], stage: "Original Copy",
             get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
         },
+        { name: "Raven", expansion: "stretchgoals18", enemy: "", ally: [""], rival: [""], stage: "",
+        dialogue: [
+            [`You dare tread where shadows reign supreme?" <%=boss%> hisses. "I dare more than tread," you respond, your voice steady, infused with the power and conviction of your lineage and destiny. "I come to banish the darkness you spread." "Foolish Hallower, do you not realize? Each victory you claim only draws more attention, more enemies,`, `Your path is one of endless night!`],
+            [`"You think you can stop what's already in motion?" <%=boss%> taunts. "My fight is against all who ally with darkness," you reply, unwavering, the resolve in your voice a clear signal of your readiness to confront whatever evil stands before you. "Then prepare yourself, Hallower. For every shadow you dispel, a dozen more will rise,`, `You're fighting a losing battle.`],
+            [`"Another challenger," <%=boss%> growls. "I'm no mere challenger," you state, your presence commanding, a beacon of light in the enveloping darkness. "I am the Hallower, and I will not be deterred." "Then you will fall like all before you,`,`The darkness is endless, and your light will eventually flicker and die.`]
+        ]
+    },
+
         { name: "Rhys", expansion: "twintiger", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Leeta"], rival: ["Leeta"], stage: "Poison the Well",
         dialogue: [
             [`Life threw its worst at me, thought it could break me. Here I stand, forged from those fires," you smirk, and edge of defiance in your eyes. "Ah, the prodigal son turned hero. Think you're untouchable now?`, `I'll enjoy reminding you of your place, Murdock.`],
@@ -985,7 +1031,14 @@ function getGladiators(expansionfilter, enemies, stages) {
         ]
 
     },
-        { name: "Ronny", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
+        { name: "Ronny", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "",
+        dialogue: [
+            [`What's your stake in this city's pain? In its fights?" you question. "The city's agony is my arena, and its despair, my prize. Fighters like you, like your father, are merely pawns in a larger game.`, `Challenge the order and you'll find yourself in a fight with no referee, no rules, and no mercy. Just like your father.`],
+            [`You've built an empire on sorrow," you assert, the weight of your accusation as heavy as the air around you.  "Sorrow? It's the foundation of strength. Your strength, Ronny, born of loss and honed in grief,`, `Pursue this path, and the sorrow that made you will also undo you. Like father, like daughter.`],
+            [`"Chasing ghosts, Ronny?" <%=boss%> taunts, their voice a sinister whisper. "Chasing justice," you reply, unwavering, your determination a beacon in the gloom. "Justice is a luxury in Ransom City,`,`Seek it at your peril, for many have fallen on less treacherous quests.`]
+        ]
+    
+    },
         {
             name: "Shadow", expansion: "redemption", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Shin Yokai"], rival: ["Ah Long", "Dmitri", "Shin Yokai", "Kemono"], stage: [randFrom(stages).name],
             dialogue: [
@@ -996,13 +1049,14 @@ function getGladiators(expansionfilter, enemies, stages) {
             get instructions() { return `If you choose to use ${this.name}, choose ${this.stage} as the stage in part 2A of your personal story.` }
         },
         { name: "Selene", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: [""], rival: ["Genesis"], stage: "Estate of Decay" },
+        { name: "Sera", expansion: "newchallengers", enemy: "", ally: [""], rival: [""], stage: "" },
         { name: "The Don", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Gabriel"], rival: ["Juan", "Gabriel"], stage: "Gone Ballistic" },
         { name: "The Proxy", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Power Soldier"], rival: ["Power Soldier"], stage: "Compromised" },
         {
             name: "Tiger Azules", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""], stage: "Supply and Demand",
              dialogue: [
                 [`In the ring of this city, I am the champion who fights for the forgotten and the fallen. You face Tiger Azules, a spirit reborn to cleanse these streets," you bellow, bold and defiant. "Ah, the famed Tiger Azules. Your theatrics amuse me. Let's see if your moves are as sharp as your words,`, `Dance, luchador, but know this: I will unmask you and reveal the mortality beneath your legend.`],
-                [`You dare defile the honor of these streets with your vile deeds? As the mask I wear channels the ancient powers, I vow to restore peace. Beware, for Tiger Azules stands ready to strike," you roar, the vibrancy of his your matching the intensity in your eyes. "Tiger Azules, the masked avenger. Your 'ancient powers' are no match for the new world order we bring,`, `We'll strip away your power, piece by piece, starting with that mask you hide behind.`],
+                [`You dare defile the honor of these streets with your vile deeds? As the mask I wear channels the ancient powers, I vow to restore peace. Beware, for Tiger Azules stands ready to strike," you roar, the vibrancy of your voice matching the intensity in your eyes. "Tiger Azules, the masked avenger. Your 'ancient powers' are no match for the new world order we bring,`, `We'll strip away your power, piece by piece, starting with that mask you hide behind.`],
                 [`This mask is not just a mask; it's a symbol — a symbol of justice, strength, and the indomitable will of the people. You face not just a man, but an idea. And ideas, señor, are bulletproof," you declare, your voice booming across the area. "An idea? How quaint. But even ideas can be corrupted, destroyed. You will learn that the hard way,`,`Your idealism will be your downfall. We'll see how long you can keep up this charade, 'Tiger'.`]
             ],
             get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2 of your personal story.` }
@@ -1011,7 +1065,12 @@ function getGladiators(expansionfilter, enemies, stages) {
             name: "Tlazolteotl", expansion: "stretchgoals17", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Kemono"], rival: ["Kemono", "Tlazolteotl"], stage: "Original Copy",
             get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
         },
-        { name: "Vada", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "" },
+        { name: "Vada", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "",
+        dialogue: [
+            [`You're treading on dangerous ground," you say, your voice steady. <%=boss%> leans in slightly to reply. "And you, Vada, dance on the edge of a knife. Brave, or perhaps foolhardy" "I've danced with danger longer than you might think," you reply, your tone as firm as your stance. "Then perhaps it's time you learned the steps can be fatal,`, `For in this dance, the music can stop at any moment, and not all dancers rise again.`],
+            [`Seems we're at an impasse," <%=boss%> muses aloud, the threat in their voice veiled by a veneer of civility. "An impasse suggests equality," you counter, your words slicing through the air with precision. "I'm not here to negotiate." "Bold girl. But boldness without caution is recklessness,`, `In this city, recklessness is punished by more than just harsh words.`],
+            [`You've caught my attention, which is no small feat," the enemy boss acknowledges, their tone laced with intrigue and danger. "And yet, attention was not what I sought," you reply, your stance relaxed yet ready. "Careful, Vada. Ambition drives us all, but it can also drive us to ruin,`,`Especially when it blinds us to the knives at our backs.`]
+        ] },
         { name: "Ying Hua", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Jin"], rival: ["Jin"], stage: ["Cashed Out"],
         dialogue: [
             [`You underestimate the light I carry within me. My fight is for those silenced by fear, not for the glory of victors in hidden arenas," you state, your presence seeming to pierce the darkness.  "Light? Noble, but naive. We seek to test your limits, Ying Hua,`, `See this as an opportunity. An opportunity to truly understand the depth of your convictions.`],
@@ -1024,8 +1083,11 @@ function getGladiators(expansionfilter, enemies, stages) {
             [`This curse, this power, it was awoken by the same cruelty that now festers in the hearts of those like you," you say, your voice a low rumble, as flames flicker in your eyes. "A curse? To us, it's just another tool for chaos. Your vengeance, Yokai, is just a game to keep us entertained,`, `And we'll watch with delight as you burn out, consumed by your own fire.`],
             [`I've seen the world through the eyes of a monster, and it's the likes of you who have made me this way," you say, your presence a somber force that even the shadows seem to retreat from.  "Made you this way? Oh, you were merely provided a spark. It's you who've relished the flames, Yokai. Embraced the destruction,`, `Keep blazing your trail of vengeance. It only makes our work easier, as you leave nothing but despair in your wake.`],
             [`They once called me Yuuto, a name meant for a life of peace. Now, Yokai is all that remains—an echo of vengeance in a world that turned its back on me," you say, your voice a mixture of sorrow and resolve. "Yuuto, Yokai — it matters not. You're a puppet in a grand design. Your 'vengeance' is just another scene in a grander play,`,`Dance, puppet, dance. Your fury serves us well, fueling the chaos that is our lifeblood.`]
-        ] }
+        ] },
+        { name: "Zane", expansion: "newchallengers", enemy: "", ally: [""], rival: [""], stage: "" },
     ]
 
-    return gladiators.filter(gladiator => expansionfilter.includes(gladiator.expansion))
+    gladiators = expansionfilter === undefined ? gladiators : gladiators.filter(gladiator => expansionfilter.includes(gladiator.expansion))
+    return gladiators
+
 }
