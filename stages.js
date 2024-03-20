@@ -496,7 +496,7 @@ function getStages(expansionfilter) {
             name: "Right to Remain Silent", expansion: "riseofthekingdom", instory: 0, location: "base", bystander: "captive",
             stagebonus: { setup: `Each fighter searches the stage deck for a copy of Sneaking, and puts it in their play area.` },
             stagepenalty: { setup: `Add two power to Recoverd Intel.` },
-            masterplan: randFrom(["illegalgains", "kidnapping","strengtheningforces","personalpower","actsofterror"]), keywords: ["hostages", "guns"], gunmen: "armed guards", hostages: "hostages", loot: "the sensitive intel",
+            masterplan: randFrom(["illegalgains", "kidnapping","strengtheningforces","personalpower","actsofterror"]), keywords: ["hostages", "guns"], gunmen: "armed guards", hostages: "captives", loot: "the sensitive intel",
             rivaltext: _.template(' ${rival.name} stands guard<%= rivalboost ? `, vigilant and keen-eyed.`: `.`%>'),
             gloat: [
                 [`Welcome to my humble abode," your opponent sneers. "Too bad you won't be leaving." "Not without the captives," you retort. "Oh, I think you'll find leaving without them much easier,`,`But that won't be an option.`],
@@ -573,7 +573,7 @@ function getStages(expansionfilter) {
             ],
             rivaltext: _.template(' To your horror, you see <%=rivalboost ? `the rotting corpse of ${rival.name} among the zombies that climb out of the ground at ${gPron(enemy, "possessive")} feet.`: `${rival.name} joining ${enemy.boss} in the atrocious rite! Even more zombies climb out of the ground at their feet.`%>'),
             hottrail: () => _.template(randFrom([
-                'Beneath the cloak of night, your team advances, forewarned and forearmed with the knowledge of what awaits. In the distance, ${bossDescription(enemy)} orchestrates a ghastly ritual with vile ${randFrom(["sorcerers", "wizards", "acolytes", "priests", "necromancers"])} at ${gPron(enemy,"object")} command. The air hums with malevolent energy as the earth splits, unleashing the undead. "We have the element of surprise on our side," you remind your team, confidence bolstered by your preparedness for the confrontation.',
+                'Beneath the cloak of night, your team advances, forewarned and forearmed with the knowledge of what awaits. In the distance, ${bossDescription(enemy)} orchestrates a ghastly ritual with vile ${randFrom(["sorcerers", "wizards", "acolytes", "priests", "necromancers"])} at ${gPron(enemy,"object")} command. The air hums with malevolent energy as the earth splits, unleashing the undead. "We have the element of surprise on our side," you remind your team.',
                 'You notice in the distance ${bossDescription(enemy)}. A coven of dark ${randFrom(["sorcerers","wizards","acolytes","priests","necromancers"])} is gathering around ${gPron(enemy,"object")}, and broken and decayed bodies are rising from the ground. Maybe you can stop this before it has really begun.'
             ])),
             coldtrail: () => _.template(randFrom([
@@ -1000,7 +1000,7 @@ function getGladiators(expansionfilter, enemies = getEnemies(), stages = getStag
         },
         { name: "Miss Matrix", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Ying Hua"], rival: ["Ah Long", "Kemono"], stage: "Cashed Out" },
         { name: "Mr. Apple", expansion: "newchallengers", enemy: "", ally: [""], rival: [""], stage: "" },
-        { name: "Murphy", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "",        
+        { name: "Murphy", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "",
         dialogue: [
             [`Looks can be deceiving. Beneath this uniform, there's something you wouldn't want to face. Best keep it that way," you say, your tone even but your gaze steady, challenging, a silent dare. "Threats from a janitor? You're out of your depth. This city has no room for your kind of 'cleanup',`, `We'll see how tough you talk when you're scrubbing away your failure. This is where your story ends, Murphy.`],
             [`Every shadow hides potential, every silence a storm. I'm no exception. It's your choice whether to force my hand," you hint, your voice a low rumble. "Dramatic, aren't we? Hide behind your metaphors, janitor. It won't save you from the reality we're shaping,`, `But indulge your fantasies if it amuses you. In the end, it's not your potential I fear, but your obsolescence!`],
@@ -1037,7 +1037,7 @@ function getGladiators(expansionfilter, enemies = getEnemies(), stages = getStag
             [`You've built an empire on sorrow," you assert, the weight of your accusation as heavy as the air around you.  "Sorrow? It's the foundation of strength. Your strength, Ronny, born of loss and honed in grief,`, `Pursue this path, and the sorrow that made you will also undo you. Like father, like daughter.`],
             [`"Chasing ghosts, Ronny?" <%=boss%> taunts, their voice a sinister whisper. "Chasing justice," you reply, unwavering, your determination a beacon in the gloom. "Justice is a luxury in Ransom City,`,`Seek it at your peril, for many have fallen on less treacherous quests.`]
         ]
-    
+
     },
         {
             name: "Shadow", expansion: "redemption", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Shin Yokai"], rival: ["Ah Long", "Dmitri", "Shin Yokai", "Kemono"], stage: [randFrom(stages).name],
