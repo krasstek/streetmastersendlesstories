@@ -963,7 +963,7 @@ After all, who better to think ${enemy.boss == finalboss.boss ? `the Master` : f
         `${captured ? randFrom(capture) : `The ${enemy.name} was able to escape with ${rival.name}. ${randFrom(intel)}`}`,
         `${captured ? randFrom(capture) : `${rival.name} showed ${gPron(rival, "reflexive")} to be a true coward and fled before you could make ${gPron(rival, "object")} reveal what ${randFrom(intel_words)} ${gPron(rival, "subject")} has. ${generic}`}`,
         `"${captured ? nextenemy.boss : finalboss.boss} will hear of your interference," ${rival.name} says. "And you will beg for ${gPron(captured ? nextenemy : finalboss, "possessive")} mercy." ${ucInit(gPron(rival, "subject"))} then reaches out to a ${getGizmo()}. "This is what you were after?"`,
-        `You could not reach ${randFrom(intel_words)}, ${rival.name} evading you at every opportunity. With a screech, ${gPron(rival.name, "subject")} leaps down on you from the shadows, ${captured ? `and you lose your balance.<br><br>${randFrom(capture)}` : `and you react the only way you can. You knock ${gPron(rival, "object")} away, and use the opportunity to escape. ${randFrom(intel)}`}`,
+        `You could not reach ${randFrom(intel_words)}, ${rival.name} evading you at every opportunity. With a screech, ${gPron(rival, "subject")} leaps down on you from the shadows, ${captured ? `and you lose your balance.<br><br>${randFrom(capture)}` : `and you react the only way you can. You knock ${gPron(rival, "object")} away, and use the opportunity to escape. ${randFrom(intel)}`}`,
         `${captured ? randFrom(capture) : `"Dammit!" you contact Agent Fletch with your communicator. "${rival.name} got away."<br><br>"It was a long shot," he answers. "We caused a stir. That's something." You hang up and pick yourselves up. ${randFrom(intel)}`}`,
         captured ? randFrom(capture) : `"We've failed to catch ${rival.name}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`]
 
@@ -1099,14 +1099,14 @@ function victoryResult(stageindex, story, nextstage, gizmo, masterplan, wincondi
             break;
         case "Original Copy": clue = [
             `there are illicit cloning activities linked to ${nextenemy.boss}, within the depths of a hidden research facility`,
-            `there are stolen genetic research being replicated at an unauthorized lab, directly involving ${nextenemy.boss}`,
+            `there is stolen genetic research being replicated at an unauthorized lab, directly involving ${nextenemy.boss}`,
             `${nextenemy.boss} and ${gPron(nextenemy, "possessive")} ${nextenemy.minions()}, have been spotted at a suspicious lab`
             ]
             break;
         case "Out of Time":
         case "Rude Awakening": clue = [
-             `there is a resurgence of dark magic, centered around ${evilplace}, with ${nextenemy.name} orchestrating the chaos`,
-             `there are unearthly disturbances reported near ${evilplace}, where ${nextenemy.boss} has been seen with entities not of this world`,
+             `there is a resurgence of dark magic, centered around ${whichPreposition(evilplace)}, with ${nextenemy.name} orchestrating the chaos`,
+             `there are unearthly disturbances reported near ${whichPreposition(evilplace)}, where ${nextenemy.boss} has been seen with entities not of this world`,
              `strange sorcery and walking corpses have been witnessed, along with ${nextenemy.boss} in ${whichPreposition(evilplace)}`
             ]
             break;
@@ -1117,7 +1117,7 @@ function victoryResult(stageindex, story, nextstage, gizmo, masterplan, wincondi
             ]
             break;
         case "Right to Remain Silent": clue = [
-             `the Citadel's undercover operatives already gone silent within the territory of ${nextenemy.name} territory, are compromised.`,
+             `the Citadel's undercover operatives, already gone silent within the territory of ${nextenemy.name}, are compromised.`,
              `there has been an extended surveillance of Citadel scouts by ${nextenemy.name}, raising alarms of their capture`,
              `the undercover Citadel scouts have been captured by ${nextenemy.name}`
              ]
@@ -1148,7 +1148,7 @@ function victoryResult(stageindex, story, nextstage, gizmo, masterplan, wincondi
         case "Sudden Death": clue = [
               `there's a revival of gladiatorial combats by ${nextenemy.name}, mirroring the dark traditions you thought you had already shut down.`,
               `the underbelly of Ransom City stirs with whispers of a deadly tournament, resurrected by ${nextenemy.name} for grim purposes.`,
-            `the ${nextenemy.name == "Kingdom" ? nextenemy.boss + ` was back to ${gPron(nextenemy, "possessive")} previous practice` : " the customary recruitment methods of the Kingdom been duplicated by " + nextenemy.name}`]
+            `${nextenemy.name == "Kingdom" ? `the ${nextenemy.boss} was back to ${gPron(nextenemy, "possessive")} previous practice` : ` the customary recruitment methods of the Kingdom been have duplicated by the ${nextenemy.name}`}`]
             break;
     };
 
@@ -1235,7 +1235,7 @@ if (masterodds < 0.33) {
                 `Uncovering a series of confidential documents, there's a clear trail back to ${finalboss.name}, outlining a comprehensive study for transcending physical and mental human capacities. "A blueprint for ${possessiveSuffix(finalboss.boss)} supremacy," you conclude. The research ${ambiguity_element}`,
                 `The defeated ${enemy.minions()} speak of a hidden gym where ${enemy.boss} is seen entering at odd hours, sometimes with ${finalboss.boss === enemy.boss ? `a mysterious trainer` : `${possessiveSuffix(finalboss.boss)} company`}. "Merely training, or something more?" you wonder, the whispers in the wind ${ambiguity_element}`,
                 `In the aftermath you find a ${gizmo}, filled with cellular modification records. "${finalboss.boss} playing god," you mutter, the clues ${ambiguity_element}`,
-                `Scattered notes about harnessing untapped potential suggest a pursuit of dangerous knowledge. "What limits is ${finalboss.name} trying to break?" you wonder, the notes ${ambiguity_element}`,
+                `Scattered notes about harnessing untapped potential suggest a pursuit of dangerous knowledge. "What limits is the ${finalboss.name} trying to break?" you wonder, the notes ${ambiguity_element}`,
                 `An artefact is found in the aftermath, with no clear function but emitting a low hum of energy. You get a feeling this has to have something to do with ${finalboss.boss}. "A tool for empowerment or destruction?" you question. Investigation of the trail of possession ${ambiguity_element}`
                 ];
             break;
@@ -1310,7 +1310,7 @@ if (masterodds < 0.33) {
         ])
 
         hostage_condition = randFrom([
-            `"Everyone's safe," you announce, a sigh of relief shared among your team as the last of the bystanders is brought to safety. This operation wasn't just about thwarting the ${enemy.name}; it was about preserving lives. As the rescued individuals recount their experiences, they inadvertently revealing a threat looming on the horizon:`,
+            `"Everyone's safe," you announce, a sigh of relief shared among your team as the last of the bystanders is brought to safety. This operation wasn't just about thwarting the ${enemy.name}; it was about preserving lives. As the rescued individuals recount their experiences, you piece together a threat looming on the horizon:`,
             `As the dust settles and the area is secured, you take a moment to look over the people you've just saved. Their gratitude is palpable, but it's the unexpected intel they provide that catches your attention. In their accounts of captivity, they mention details uncovering that`,
             `"It's over, you're safe now," you reassure the bystanders, guiding them to the extraction point. The mission was fraught with danger, but every risk taken was worth the lives saved today. Among the expressions of thanks, one of the bystanders shares a crucial piece of information, opening up new avenues for your mission's objectives:`,
             `With the area finally clear of threats, you gather the rescued bystanders for a quick debrief. It's standard procedure, but today it yields something far from ordinary. One of the people you've saved begins tell what they had overheard, the information being the breakthrough you've been searching for:`,
@@ -1818,7 +1818,7 @@ function finalResult(stage, enemy, rival, vip = null, result) {
         `"All objectives completed," you announce, though the victory feels incomplete without ${enemy.boss} in custody. "Nonetheless, the ${neutralize}, putting an end to their immediate plans."`,
         `In the quiet that follows the storm, you reflect on the battle's outcomes. "${enemy.boss} may have escaped, but the ${neutralize}, disrupting their network significantly."`,
         `As you regroup with your team, the reality of ${enemy.boss}'s escape settles in. Despite the setback, the ${neutralize}, marking a crucial win against their operations.`,
-        `Just as victory seemed within grasp, ${enemy.boss} smirks. ${getEnemyAttack(enemy, "detonation", `${gPron(enemy, "subject")} produces a remote and presses a button. The room shudders with the force of an explosion`)}, momentarily obscuring everything. "Coward's exit," you cough out, once the debris settles. Though ${enemy.boss} has vanished, the ${neutralize}, ensuring their immediate plan crumbles to dust along with ${possessiveSuffix(enemy.name)} escape route.`,
+        `Just as victory seemed within grasp, ${enemy.boss} smirks. ${getEnemyAttack(enemy, "detonation", `${ucInit(gPron(enemy, "subject"))} produces a remote and presses a button. The room shudders with the force of an explosion`)}, momentarily obscuring everything. "Coward's exit," you cough out, once the debris settles. Though ${enemy.boss} has vanished, the ${neutralize}, ensuring their immediate plan crumbles to dust along with ${possessiveSuffix(enemy.name)} escape route.`,
         `The confrontation reaches its peak and ${enemy.boss} is cornered and desperate. ${getEnemyAttack(enemy, "detonation", `${ucInit(gPron(enemy, "subject"))} reveals a detonator and triggers the explosives`)},  ${gPron(enemy, "object")} vanishing amidst chaos. Rubble and confusion fill the space where ${gPron(enemy, "subject")} once stood. "Gone, but not victorious," you declare to your team, as the dust clears revealing that, despite the dramatic escape, the ${neutralize}, dismantling the threat piece by piece.`
     ]
 
@@ -1994,7 +1994,7 @@ function gloatingList(enemy, stage, herodialogue = [], heronames = undefined) {
         [`You lived for something!`, `But you will die for nothing.`],
         [`Game over, Gladiators! Game over!`, `What are you going to do now?`],
         [`Gladiators! You know, I.. I expected more from you,`, `I thought you'd be tougher than this.`],
-        [`Wait!" you shout.<br><br>"Wait? Are you kidding me? Did you just say 'Wait'?`, `You know what? I expected more from you. Wait for what? Wait for me to change my mind?`],
+        [`Wait!" you shout.<br><br>"Wait? Are you kidding me? Did you just say 'Wait'?`, `You know what? I expected more from you. Wait for what?`],
         [`Any last words?", ${enemy.boss} asks. You deprive ${gPron(enemy, "object")} of an answer. "Any?`, `Thought as much.`],
         [`Have you any last words?`, `Before I dispatch you?`],
         [`You're quite the piece of work, ${defineAddressing(enemy)},`, `But I am superior!`],
