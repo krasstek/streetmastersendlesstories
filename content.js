@@ -31,7 +31,7 @@ function createPageContent(pagecontent) {
                 <div class = "storycard-divider"></div>
                 <div class = "storycardfront-subtitle">CHARACTER OVERVIEW</span></div>
                 <div class = "storycard-divider"></div>
-                <div class = "storycardfront-prologue" style = "font-size: 10px; font-style: normal;">
+                <div class = "storycardfront-prologue" style = "font-size: 10px; font-style: normal">
                     ${referencetext[0][0].trim()}<br>The reverse side of this card gives suggestions for additional Allies and Rivals to be used during this story.
                 </div>
                 <div class = "storycard-divider"></div>

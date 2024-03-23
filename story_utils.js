@@ -827,7 +827,9 @@ function loseResult(stageindex, story, nextstage, gizmo, wincondition, rival, ri
         `Bleeding from multiple cuts, you distract the ${enemy.bosstitle()} and make your retreat in the moment of confusion. You escape ${enemy.boss}, but just barely.`,
         `You gasp for breath, refusing this defeat to stop you from confronting ${finalboss.boss}.`,
         `"I am done with you," the ${enemy.bosstitle()} says, and tosses you aside like a rag. You are left in a heap, beaten and humiliated.`,
-        `You have no option but to retreat.`
+        `You have no option but to retreat.`,
+        `"Do not revel in this victory," you say to ${enemy.boss}, who is leaving after dismissing you as inconsequential. "For it will be short-lived."`,
+        `You make a hasty retreat.`
     ]
 
     let rescue = [`Suddenly, Citadel agents rappel down out of nowhere. ${enemy.boss} and ${gPron(enemy, "possessive")} ${enemy.minions()} flee as the agents free you.`,
@@ -846,10 +848,11 @@ function loseResult(stageindex, story, nextstage, gizmo, wincondition, rival, ri
     `You see your first welcome sight; Agent Fletch approaches with ${whichPreposition(fletch_gadget)} in hand. "Don't get comfy," Fletch said, booting up the ${fletch_gadget}. "After this fiasco, we might recover if we rapidly strike at key targets, and hopefully throw the ${finalboss.name} off-balance."`,
         `Citadel soldiers take a moment to patch up your wounds, getting you prepared to return to the Citadel.`,
         `With no clue what to do next, you have no choice but to reconnect with Agent Fletch and hope the Citadel has more intel.`,
-    `You call Agent Fletch and request a cleanup team, and then you begin searching through the area, and find ${whichPreposition(getGizmo())} placed almost intentionally where you would find it. From the device you find maps and coordinates.`,
-    `You vow to catch the ${finalboss.name} before their ${getMasterPlan()} is complete!`,
-    `This was only a delay in the inevitable. You know ${enemy.boss} is only a beatstick, not the mastermind. ${ucInit(gPron(enemy, "subject"))} will lead you to ${finalboss.boss == enemy.boss ? `The Master` : finalboss.boss}, and you will be making examples of them both.`,
-        `Just then, you got a call on your communicator from Agent Fletch. "Heads up, Gladiators." Agent Fletch said. "We've got a a problem."`
+        `You call Agent Fletch and request a cleanup team, and then you begin searching through the area, and find ${whichPreposition(getGizmo())} placed almost intentionally where you would find it. From the device you find maps and coordinates.`,
+        `You vow to catch the ${finalboss.name} before their ${getMasterPlan()} is complete!`,
+        `This was only a delay in the inevitable. You know ${enemy.boss} is only a beatstick, not the mastermind. ${ucInit(gPron(enemy, "subject"))} will lead you to ${finalboss.boss == enemy.boss ? `The Master` : finalboss.boss}, and you will be making examples of them both.`,
+        `Just then, you got a call on your communicator from Agent Fletch. "Heads up, Gladiators." Agent Fletch said. "We've got a a problem."`,
+        `You look down to your hands, confused as to why your abilities failed you. You decide to pay a visit to someone you hadn't spoken to in a long time - your old instructor - to find out what's next.`
     ]
 
     let capture = [
@@ -866,7 +869,8 @@ After all, who better to think ${enemy.boss == finalboss.boss ? `the Master` : f
         `You find yourself immediately surrounded by ${possessiveSuffix(enemy.boss)} ${enemy.minions()}. "You're due at the next stop," ${enemy.boss} says menacingly. "The ${nextenemy.name} still has some uses for you.`,
         `"You were close, ${defineAddressing(enemy)}", ${enemy.boss} calls to you. "But not close enough." ${ucInit(gPron(enemy, "subject"))} clutches at ${gPron(enemy, "possessive")} wounds, and though they are serious, at least ${gPron(enemy, "subject")} is still standing. ${ucInit(gPron(enemy, "subject"))} watches you writhe on the ground for a moment longer, and spits in your direction. "Subdue them," ${gPron(enemy, "subject")} orders the ${enemy.minions()}.`,
         `You fall on your back, and ${enemy.boss} rushes in, planting ${gPron(enemy, "possessive")} foot on your chest, keeping you down. "No more," ${enemy.boss} says and ${enemy.threat}, ready, should you try to retaliate. "We are done."`,
-        `"You want to bring me down? You have to do it yourself, ${enemy.boss}! Take your shot!" you challenge the ${enemy.bosstitle()}, ignoring the ${enemy.minions()}, even though you can barely stand. "I need not fight you. I have done as I was bid," ${gPron(enemy, "subject")} answers. "None shall harm you here, angry little ${defineAddressing(enemy)}. You are awaited.. by ${nextenemy.boss}!"`
+        `"You want to bring me down? You have to do it yourself, ${enemy.boss}! Take your shot!" you challenge the ${enemy.bosstitle()}, ignoring the ${enemy.minions()}, even though you can barely stand. "I need not fight you. I have done as I was bid," ${gPron(enemy, "subject")} answers. "None shall harm you here, angry little ${defineAddressing(enemy)}. You are awaited.. by ${nextenemy.boss}!"`,
+        `"It seems the Citadel is marred with failure across all of their ranks. Such a shame that ${finalboss.boss == enemy.boss ? `I` : finalboss.boss} once thought so highly of you." ${enemy.name} circles you confidently, while your companions are doubled over, broken and defeated. "${finalboss.boss == enemy.boss ? `The Master` : finalboss.boss} wants you done with, but I think ${nextenemy.name} may still have a use for you," ${gPron(enemy, "subject")} chuckles.`
     ]
 
     let intel_words = [`intel`, `evidence`, `knowledge`, `information`]
@@ -892,6 +896,7 @@ After all, who better to think ${enemy.boss == finalboss.boss ? `the Master` : f
         `${ally.name} had limped away, bleeding, and the others had gone after ${gPron(ally, "object")}, probably to finish ${gPron(ally, "object")} off.${captured ? `<br><br> ${randFrom(capture)}` : ` You could do nothing. They'd already finished with you.<br><br>${randFrom(intel)}`}`,
         captured ? randFrom(capture) : `"We've failed ${gPron(ally, "object")}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`,
         `"Go! Now! Get to the chopper!" ${ally.name} shouts as ${enemy.boss} steps over ${gPron(ally,"object")}. ${captured ? `You are in no shape to move. ${randFrom(capture)}`: `<br><br>${randFrom(retreat)} ${randFrom(intel)}`}`,
+        `${ally.name} had vanished during the skirmish. After everything you had shared, after all your assistance! ${captured ? `<br><br>${randFrom(capture)}`: `<br><br>${randFrom(retreat)} ${randFrom(intel)}`}`
     ]
 
     let experiment = [captured ? `You are strapped in a metal apparatus, and ${randFrom(enemy.minionnames)} injects you with the vile substance. Immediately you start to lose consciousness. "The serum is not working as expected, we need to run more tests," you hear ${enemy.boss} saying, before you're out cold.` : `"Should we not test the serum on the Gladiators?" ${randFrom(enemy.minionnames)} asks ${enemy.boss}. "No. They are completely worthless."<br><br>${randFrom(intel)}`]
@@ -916,6 +921,8 @@ After all, who better to think ${enemy.boss == finalboss.boss ? `the Master` : f
         `"You cannot expect to win every conflict," ${ally.name} says. "You almost got me killed!" you shout back, looking down at your bruised body. You are about to apologize, but when you look up, ${captured ? `you are faced with ${enemy.minions()}. ${randFrom(capture)}` : ` ${gPron(ally, "subject")} is gone. ${randFrom(intel)}`}`,
         `${captured ? randFrom(capture) : `"Dammit!" you say to ${ally.name}. "They got away."<br><br>"It was a long shot. I'm sorry." ${gPron(ally, "subject")} answers. "Don't be," you answer. "We caused a stir. That's something." ${randFrom(intel)}`}`,
         `"Go! Now! Get to the chopper!" ${ally.name} shouts as ${enemy.boss} steps over ${gPron(ally,"object")}. ${captured ? `You are in no shape to move. ${randFrom(capture)}`: `<br><br>${randFrom(retreat)} ${randFrom(intel)}`}`,
+        `${ally.name} had led you astray. That was the only explanation. ${ucInit(gPron(ally, "subject"))} had always delighted in seeing you struggle to learn, and apparently nothing had changed.${captured ? `<br><br>${randFrom(capture)}`: `<br><br>${randFrom(retreat)} ${randFrom(intel)}`}`,
+        `${ally.name} had vanished during the skirmish. After everything you had shared, after all those promises! ${captured ? `<br><br>${randFrom(capture)}`: `<br><br>${randFrom(retreat)} ${randFrom(intel)}`}`
     ]
 
     let gunmen = []
@@ -987,7 +994,7 @@ After all, who better to think ${enemy.boss == finalboss.boss ? `the Master` : f
     wincondition != "" ? keywords = [wincondition, wincondition, wincondition, wincondition, ...keywords] : () => { }
 
     stage.hasOwnProperty("keywords") ? keywords = [...keywords, ...stage.keywords, ...stage.keywords] : () => { }
-    enemy.hasOwnProperty("keywords") ? keywords = [...keywords, ...enemy.keywords, ...stage.keywords] : () => { }
+    enemy.hasOwnProperty("keywords") ? keywords = [...keywords, ...enemy.keywords, ...enemy.keywords] : () => { }
     let keyword = randFrom(keywords)
 
     switch (keyword) {
@@ -1204,6 +1211,7 @@ function victoryResult(stageindex, story, nextstage, gizmo, masterplan, wincondi
             `The dust settles from the battle, revealing ancient inscriptions that were previously hidden. These cryptic messages seem to foretell ${possessiveSuffix(enemy.boss)} plans, indicating that`,
             `As the ritual is disrupted, a spectral figure materializes, offering a warning and a clue. With a voice echoing through the chambers, it divulges that`,
             `In the aftermath, amidst the relics and arcane symbols, a shattered artifact whispers its secrets. Piecing together its history, you uncover that`,
+            `"You have lost your way," a shifting ethereal voice says. You sit in deep meditation, surrounded by the invisible presence of the spirits in the area. "The ways of the Citadel have served me well," you respond. "Yes, but your time with the Citadel has taught you that true power resides in how well you can investigate, not how hard you punch." "What must I do?" "Attack the ${nextenemy.name} and show them your power." The spirits guide you with information that`,
 
         ])
     }
@@ -1297,7 +1305,7 @@ if (masterodds < 0.33) {
             `"This is what we came for," you say, holding the ${randFrom([`newly acquired intel`,`${gizmo}`])} securely. Despite the ${possessiveSuffix(enemy.name)} formidable defenses, you've managed to outmaneuver them, securing a critical advantage. As you and your team process the implications of your victory, it becomes clear that you now hold information revealing that`,
             `"Got it," you whisper into the comms, feeling the weight of victory as you secure the ${gizmo}. Through cunning and guile, you've extracted data that could shift the balance of power. The true value of this operation becomes apparent as you make your escape, understanding that you've obtained information that`,
             `The dust settles, and you find yourself looking over the secured ${gizmo}, a testament to the risks taken and the success achieved. This operation's payoff is immense, offering a beacon of hope as you realize the ${nextenemy.boss == finalboss.boss ? `once-impenetrable facade of ${trueMastermind(finalboss)}` : `${possessiveSuffix(finalboss.name)} once-impenetrable facade`} begins to show cracks, ready to be exploited:`,
-            `"The pieces are finally coming together," you muse, after successfully intercepting encrypted ${randFrom([`messages`,`messages in a ${gizmo}`])} from ${nextenemy.boss == finalboss.boss ? `the ${trueMastermind(finalboss)}` : `${finalboss.boss}`}. The decrypted ${randFrom([`data`,`${gizmo}`])} not only shifts the dynamics of your conflict but also marks the beginning of a new chapter in your campaign against the darkness as it reveals that`,
+            `"The pieces are finally coming together," you muse, after successfully intercepting encrypted ${randFrom([`messages`,`messages in a ${gizmo}`])} from ${nextenemy.boss == finalboss.boss ? trueMastermind(finalboss) : finalboss.boss}. The decrypted ${randFrom([`data`,`${gizmo}`])} not only shifts the dynamics of your conflict but also marks the beginning of a new chapter in your campaign against the darkness as it reveals that`,
             `"We've broken through," announces Agent Fletch, as the ${randFrom([`data`,`${gizmo}`])} decryption completes. The room buzzes with a renewed sense of purpose and direction, as what you've secured from ${enemy.boss} finally becomes clear. The decrypted intel paints a new target and opens a path forward, showing that`
         ])
 
@@ -1531,7 +1539,7 @@ function setUpInstructions2(stageindex, enemy, rival, ally, knowledge, stagebonu
 function createLeadIn(pregameprologue, stageindex, wincondition, enemy, stage, finalboss, rival, ally) {
 
     pregameprologue = stageindex == 0 ? pregameprologue : ``
-    let find_out_words = [`you discover`, `you find out`, `you learn of`, `you get wind of`, `you determine`, `it seems`, `turns out`]
+    let find_out_words = [`you discover`, `you find out`, `you learn`, `you get wind`, `you determine`, `it seems`, `turns out`]
     let this_boss = finalboss.name == enemy.name ? enemy.boss : randFrom([enemy.boss, `the ${enemy.name}`])
     let this_finalboss = finalboss.name == enemy.name ? finalboss.boss : randFrom([finalboss.boss, `the ${finalboss.name}`])
     if (stageindex >= Math.max($("#storylength").val() * 2 - 3, 0) || finalboss.boss == enemy.boss) { this_finalboss = trueMastermind(finalboss) }
@@ -1562,18 +1570,18 @@ function createLeadIn(pregameprologue, stageindex, wincondition, enemy, stage, f
 
         let evidence_clues = [
             ` that ${this_boss} possesses unexpected insights into ${possessiveSuffix(this_finalboss)} weaknesses and strategies.`,
-            ` reveals ${this_boss} has meticulously compiled ${randFrom(intel_words_2)} on the hidden agendas of ${this_finalboss}.`,
-            ` uncovers ${this_boss} secretly harboring ${randFrom(intel_words_2)} crucial for dismantling ${this_finalboss}'s network.`,
-            ` indicates ${this_boss} recently brokered a deal with ${this_finalboss}, exchanging sensitive ${randFrom(intel_words_2)} for mutual benefit.`,
+            ` ${this_boss} has meticulously compiled ${randFrom(intel_words_2)} on the hidden agendas of ${this_finalboss}.`,
+            ` you've uncovered ${this_boss} secretly harboring ${randFrom(intel_words_2)} crucial for dismantling ${this_finalboss}'s network.`,
+            ` your ${randFrom(intel_words_2)} indicates ${this_boss} recently brokered a deal with ${this_finalboss}, exchanging sensitive ${randFrom(intel_words_2)} for mutual benefit.`,
             ` that ${this_boss} was once a confidant of ${this_finalboss}, privy to intimate ${randFrom(intel_words_2)} on ${possessiveSuffix(this_finalboss)} plans and vulnerabilities.`,
-            ` shows ${this_boss} maintains a covert communication channel with ${this_finalboss}, offering a direct line to intercept critical ${randFrom(intel_words_2)}.`,
-            ` suggests ${this_boss} holds the key to deciphering ${this_finalboss}'s next move, thanks to a cache of encrypted ${randFrom(intel_words_2)}.`,
+            ` the ${randFrom(intel_words_2)} shows ${this_boss} maintains a covert communication channel with ${this_finalboss}, offering a direct line to intercept critical ${randFrom(intel_words_2)}.`,
+            ` the ${randFrom(intel_words_2)} suggests ${this_boss} holds the key to deciphering ${this_finalboss}'s next move, thanks to a cache of encrypted ${randFrom(intel_words_2)}.`,
             ` that ${this_boss} has been tracking ${this_finalboss}'s movements and alliances, amassing a detailed dossier that could expose ${possessiveSuffix(this_finalboss)} ultimate endgame.`
         ]
         let acquire_words = [`obtaining`, `acquiring`, `securing`, `procuring`, `getting`, `finding`]
         let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence`]
         let decision_txt = `${ucInit(randFrom(investigator_words))} ${randFrom(decision_words)} ${randFrom(acquire_words)} the ${randFrom(intel_words_2)} is ${randFrom(priority_words)}.`
-        wincondition_txt = `${ucInit(randFrom(find_out_words))}${randFrom(evidence_clues)} ${decision_txt} ${randFrom(hence_words)}`
+        wincondition_txt = `${ucInit(randFrom(find_out_words))} ${randFrom(evidence_clues)} ${decision_txt} ${randFrom(hence_words)}`
 
     } else if (wincondition == "rival") {
 
@@ -1614,7 +1622,9 @@ function createLeadIn(pregameprologue, stageindex, wincondition, enemy, stage, f
             `"Under the cover of night, ${ally.name} slips from the darkness to join you. "Every shadow conceals secrets, and every secret is a weapon," ${gPron(ally, "subject")} murmurs, eyeing your battle plan. "Tonight, we turn their secrets against them."`,
             `In a quiet, tension-filled moment, ${ally.name} appears at your side, as if conjured by the very need for an edge in the looming battle. "In the art of war, knowledge is power," they intone. "Let's ensure we're the ones wielding it tonight."`,
             `"This mission could change everything," you assert, finding ${ally.name} already surveying the analysts' plan with experienced eye. "Indeed," ${gPron(ally, "subject")} agrees, offering a rare smile of camaraderie. "And it's the reason I'm here. Together, we'll turn the tide."`,
-            `As dawn breaks, casting long shadows over your rendezvous point, ${ally.name} approaches with a determined stride. "The early bird," ${gPron(ally, "subject")} quips, handing you a dossier. "Gets the intel. Let's make sure it also gets the worm."`
+            `As dawn breaks, casting long shadows over your rendezvous point, ${ally.name} approaches with a determined stride. "The early bird," ${gPron(ally, "subject")} quips, handing you a dossier. "Gets the intel. Let's make sure it also gets the worm."`,
+            `You are still in your meditation. You know who is approaching, but you do not greet ${gPron(ally,"object")}", instead remaining motionless. "I am disappointed in your performance," ${ally.name} says as ${gPron(ally, "subject")} approaches. "Agent Fletch told me of your difficulties." "This is only a minor setback," you respond coolly, not looking up. "Regardless, I have come to lead you. Citadel cannot afford another failure."`,
+            `${ally.name} stands face to face with you since your previous encounter. "I've heard of your efforts," ${gPron(ally, "subject")} states. "What are your intentions?" "To end the reign of ${finalboss.name} and let the people of Ransom City be free once more." ${ally.name}nods.`
         ]
         wincondition_txt = `${randFrom(guide_prologue)} ${randFrom(hence_words)}`
 
@@ -1869,7 +1879,8 @@ function finalResult(stage, enemy, rival, vip = null, result) {
         `Your body spasms, fighting against the green gel. Unable to breathe, you claw wildly at the hard, translucent surface encasing you. Shadowy figures move about on the other side of the barrier, and suddenly the lid slides open, and you fall to the ground. The lights are blindingly bright to your aching eyes, and you draw air in your lungs like it's the first time in your life. "Welcome, my children!" you hear a woman calling. What is happening? Was that a dream?`,
         `The screens of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "Gladiators!" Agent Fletch calls from beyond the observation screen, his face dark with disappointment. "Only ${Math.ceil(Math.random() * 10000)} points! How do you think you can face the real ${enemy.name}?!"`,
         `${enemy.boss} cackles as you fall back, defeated. "${gloat[0]}" "You will fall. If not now, then one day," you retort. "${gloat[1]}"`,
-        `"${gloat[0]}" ${enemy.boss} taunts you. "${gloat[1]}"`
+        `"${gloat[0]}" ${enemy.boss} taunts you. "${gloat[1]}"`,
+        `You are thrown to the ground, and you know at once your time is up. You don't know if Agent Fletch is finishded. You don't know whether ${enemy.name} will succeed in ${gPron(enemy,"possessive")} ${getMasterPlan()}, or if the Citadel will still have time to counter the plan.But you do know you will not survive.`
     ]
 
     let finalresult
@@ -2041,25 +2052,31 @@ function gloatingList(enemy, stage, herodialogue = [], heronames = undefined) {
 
     if(clone_present) {
 //        console.log("clouuun")
+        let evil_word = randFrom(["evil ","villainous ","","dark "])
+        let clone_word = randFrom(["mirror image","counterpart","clone","analogue","twin","shadow"])
         let clone_dialogue = [
-            [`We stand face to face, yet worlds apart. Your actions have cast a long shadow, one I intend to erase," you state, your voice steady, revealing a resolve as unwavering as steel. "Erase? You're a part of me,`,`Denying my deeds is denying yourself`],
-            [`I've seen the chaos you've sown, felt the pain you've inflicted. It ends now, even if I must end with it," you declare, a note of finality in your voice that echoes in the emptiness between you "End with it? Don't be naive,`,`You can no more end me than you can end your own heartbeat.`],
-            [`You're a shadow, a dark reflection of what I could have become. I'm here to ensure that never happens," you assert, your gaze locked on your mirror image of your darkest fears. "A dark reflection? Foolish. I am the truth of our soul laid bare,`,`You cannot fight the inevitable.`],
+            [`We stand face to face, yet worlds apart. Your actions have cast a long shadow, one I intend to erase," you state, your voice steady, revealing a resolve as unwavering as steel facing your ${evil_word}${clone_word}. "Erase? I'm a part of you,`,`But you're not a part of me. Erasing you is but an afterthought.`],
+            [`I've seen the chaos you've sown, felt the pain you've inflicted. It ends now, even if I must end with it," you declare, a note of finality in your voice that echoes in the emptiness between you and your ${evil_word}${clone_word}. "End with it? Don't be naive. You can no more end me than you can end your own heartbeat,`,`While I have no problem ending your.`],
+            [`You're a shadow, a dark reflection of what I could have become. I'm here to ensure that never happens," you assert, your gaze locked on your ${evil_word}${clone_word}, your darkest fear. "A dark reflection? Foolish. I am the truth of our soul laid bare,`,`You cannot fight the inevitable. You cannot win.`],
             [`Your reign of terror, it's a path I refuse to walk. I'll dismantle everything you've built, piece by piece," you vow, each word imbued with the weight of your shared history. "Dismantle? You aim to destroy your own legacy,`,`Without me, what are you?`],
-            [`I could have been you, but I chose a different path. A path of light, away from your darkness," you proclaim, standing firm in the face of your dark counterpart's malevolence. "Chose? There is no choice. There's only power, and how one chooses to wield it,`,`You'll learn.`],
-            [`This ends here, with me. I won't let your deeds define our legacy. I fight for redemption, for a chance to right your wrongs," you promise, your voice echoing a deep-seated yearning for change. "Redemption? There's no redemption for us,`,`Only the abyss that awaits when you finally realize we are one and the same.`],
-            [`I stand before you, not as your enemy nor your ally. My mission... I thought I knew, but now, the lines blur," you admit, your voice tinged with uncertainty as you regard your counterpart. "Blur? The only thing that's blurred is your conviction,`,`How pitiful, to be so lost. You don't deserve to carry my name nor my face. You will lose them both!`],
-            [`They say we're two sides of the same coin, but I find myself wondering if the coin ever existed at all," you muse, your gaze distant, as if searching for answers in the void between you. "Existential doubts now? How delightful,`,`While you ponder, I act. That's what separates us!`],
-            [`Your actions, they mirror the darkness I've fought within myself. Yet here we stand, divided by more than just ideals," you reflect, your words heavy with the burden of your internal struggle."Fought and lost, it seems,`,`There's clarity in embracing your nature. You should try it sometime.`],
-            [`What if the hero I sought to be was never meant to fight you, but to understand you?" you ponder aloud, your voice a mix of resolve and confusion, a paradox personified. "Understand me? You can't even understand yourself,`,`Don't flatter yourself thinking you can unravel me!`],
-            [`I walked this path believing I could be the barrier between your chaos and the world's peace. Now, I'm not so sure," you confess, a shadow of doubt clouding your once-clear purpose. "Doubt is a luxury I cannot afford, and neither can you,`,`Make up your mind, or I'll make it up for you.`],
-            [`Maybe in trying to stop you, I've become you. What separates us now but the choices we've made?" you question, your identity crisis casting a long shadow over your confrontation.  "You becoming me? Don't flatter yourself,`,` You lack the conviction, the strength. You're but a shadow of a shadow.`],
-            [`How could you stray so far from what we were meant to be? Your existence is a betrayal of our very essence," you accuse, your voice trembling with rage. "Betrayal? I am the culmination of our potential,`,`Your fury is but a sign of your inability to comprehend our destiny`],
-            [`You wear our face, but your deeds? From a world I don't recognize. I'll correct the course you've corrupted with my own hands if need be!" you declare, fists clenched in righteous indignation. "Correct the course? You're nothing more than a pale shadow,`,`An echo of my greatness. Your indignation is pathetic!`],
-            [`Your reign ends with me. I am the fury, the justice you've forsaken. This aberration stops now!" you vow, your voice a beacon of resolve amidst the darkness your counterpart has wrought. "Justice? You're a mere byproduct of my ambition,`,`Your fury will extinguish in the face of my indomitable will.`],
-            [`The audacity to stand against me, to claim you could ever rectify my deeds. You're an insult to our name," your dark reflection's words aim to cut, but the your stance is unwavering. "An insult? I am the redemption you're too cowardly to pursue. Your deeds end with me," you reply, your voice a mix of defiance and determination, a clear light in the darkness the villain casts. "Redemption?`,`You're a mere glitch in my grand design. I'll erase you as easily as a mistake on paper.`],
-            [`You dare mimic my power, challenge my reign? You're a flawed copy, a mistake I'll rectify," your counterpart says in contempt. Flawed? No, I am the correction to your mistake. I am what we should have been," you assert, standing firm, a beacon against the villain's shadow. "Correction? You're but a footnote in my saga,`,`Prepare to be expunged from the narrative I've written!`],
-            [`You're a blemish on our legacy, a footnote I'll erase from our story," your clone says with hatred burning in the eyes. "A blemish? I am the clean slate, the new chapter. You're the past, and I am the future," you state, your conviction clear in your steady gaze. "Future? There is no future for you, only the oblivion I grant you,`,`Your chapter ends before it begins!`]
+            [`I could have been you, but I chose a different path. A path of light, away from your darkness," you proclaim, standing firm in the face of your ${evil_word}${possessiveSuffix(clone_word)} malevolence. "Chose? There is no choice. There's only power, and how one chooses to wield it,`,`You'll learn.`],
+            [`This ends here, with me. I won't let your deeds define our legacy. I fight for redemption, for a chance to right your wrongs," you promise, your voice echoing a deep-seated yearning for change. "Redemption?" your  ${evil_word}${clone_word} questions. "There's no redemption for us,`,`Only the abyss that awaits when you finally realize we are one and the same.`],
+            [`I stand before you, not as your enemy nor your ally. My mission... I thought I knew, but now, the lines blur," you admit, your voice tinged with uncertainty as you regard your ${clone_word}. "Blur? The only thing that's blurred is your conviction,`,`How pitiful, to be so lost. You don't deserve to carry my name nor my face. You will lose them both!`],
+            [`They say we're two sides of the same coin, but I find myself wondering if the coin ever existed at all," you muse, your gaze distant, as if searching for answers in the void as you finally face your ${clone_word}. "Existential doubts now? How delightful,`,`While you ponder, I act. That's what separates us!`],
+            [`Your actions, they mirror the darkness I've fought within myself. Yet here we stand, divided by more than just ideals," you reflect, your words heavy with the burden of your internal struggle as you are face to face with your ${clone_word}. "Fought and lost, it seems,`,`There's clarity in embracing your nature. You should try it sometime. Here, let me demonstrate.`],
+            [`What if the hero I sought to be was never meant to fight you, but to understand you?" you ponder aloud, your voice a mix of resolve and confusion as you face your ${clone_word}, a paradox personified. "Understand me? You can't even understand yourself,`,`Don't flatter yourself thinking you can unravel me. Not that you will get the opportunity.`],
+            [`I walked this path believing I could be the barrier between your chaos and the world's peace. Now, I'm not so sure," you confess, a shadow of doubt clouding your once-clear purpose. "Doubt is a luxury I cannot afford," the ${clone_word} responds. "And neither can you,`,`You can't make up your mind, so I'll make it up for you!`],
+            [`Maybe in trying to stop you, I've become you. What separates us now but the choices we've made?" you question, your identity crisis casting a long shadow over your confrontation.  "You becoming me?" the ${clone_word} lets out an evil laughter. "Don't flatter yourself,`,` You lack the conviction, the strength. You're but a shadow of a shadow. I will sow you true strength!`],
+            [`How could you stray so far from what we were meant to be? Your existence is a betrayal of our very essence," you accuse your ${evil_word}${clone_word}, your voice trembling with rage. "Betrayal? I am the culmination of our potential,`,`Your fury is but a sign of your inability to comprehend our destiny. It is an act of mercy to end such a blind fool.`],
+            [`You wear our face, but your deeds? From a world I don't recognize. I'll correct the course you've corrupted with my own hands if need be!" you declare, fists clenched in righteous indignation in front of the ${evil_word}${clone_word}. "Correct the course? You're nothing more than a pale shadow,`,`An echo of my greatness. Your indignation is pathetic, and your downfall a relief.`],
+            [`Your reign ends with me. I am the fury, the justice you've forsaken. This aberration stops now!" you vow, your voice a beacon of resolve amidst the darkness your ${evil_word}${clone_word} has wrought. "Justice? You're a mere byproduct of my ambition,`,`Your fury will extinguish in the face of my indomitable will.`],
+            [`The audacity to stand against me, to claim you could ever rectify my deeds. You're an insult to our name," your dark reflection's words aim to cut, but the your stance is unwavering. "An insult? I am the redemption you're too cowardly to pursue. Your deeds end with me," you reply, your voice a mix of defiance and determination, a clear light in the darkness the ${evil_word}${clone_word} casts. "Redemption?`,`You're a mere glitch in my grand design. I'll erase you as easily as a mistake on paper.`],
+            [`You dare mimic my power, challenge my reign? You're a flawed copy, a mistake I'll rectify," your ${evil_word}${clone_word} says in contempt. Flawed? No, I am the correction to your mistake. I am what we should have been," you assert, standing firm, a beacon against shadow. "Correction? You're but a footnote in my saga,`,`Prepare to be expunged from the narrative I've written!`],
+            [`You're a blemish on our legacy, a footnote I'll erase from our story," your ${evil_word}${clone_word} says with hatred burning in the eyes. "A blemish? I am the clean slate, the new chapter. You're the past, and I am the future," you state, your conviction clear in your steady gaze. "Future? There is no future for you, only the oblivion I grant you,`,`Your chapter ends before it begins!`],
+            [`Impostor!`,`Prepare for your end!`],
+            [`Your efforts are very admirable," the ${evil_word}${clone_word} says, bowing mockingly. "As you can see, the ${enemy.name} are in good hands. Perhaps you should take some time off?" You glare at ${enemy.name} but don't say anything.`,`I've been designed better than the real thing, so why not retire you right now?`],
+            [`You have much to answer for," the ${evil_word}${clone_word} says. "I am not one to sit idly by while those beneath me vie for their own measure of control." "I seek not control, but freedom," you respond. "Freedom?`,`I will liberate you from your burdens right now!`],
+            [`${enemy.name == "Kingdom" ? `The Kingdom is finished` : `The ${enemy.name} is finished with the Kingdom`}," you tell your ${evil_word}${clone_word}. "This treason will be your end!" ${gPron(enemy,"subject")} snaps back. "Perhaps, but the ${enemy.name} will find honor once more," you respond. "Honor, you say?`,`What we will find is pleasure in ending your little quest.`]
         ]
 
         gloat.push(randFrom(clone_dialogue))

@@ -418,7 +418,7 @@
             $(".storycardfront-title").each(function () {
                 if ($(this).prop('scrollHeight') > ($(this).height() + 9)) {
                     do {
-                        $(this).css({ 'font-size': '-=0.5' })
+                        $(this).css({ 'font-size': '-=1' })
                     } while (
                         $(this).prop('scrollHeight') > ($(this).height() + 9)
                     )
@@ -427,8 +427,16 @@
 
             $(".storycardfront-prologue").each(function () {
                 if ($(this).prop('scrollHeight') > ($(this).height() + 30)) {
+                    var lineh = 1.4
+                    var fons
                     do {
-                        $(this).css({ 'font-size': '-=0.5', "padding-top": "-=0.5mm" })
+                        fons = Math.round(parseFloat($(this).css('font-size')));
+                        lineh = lineh - 0.1
+                        lineh = Math.round(Math.min(fons*lineh, fons*1.1))
+                        $(this).css('line-height', `${lineh}px`);
+                        if ($(this).prop('scrollHeight') > ($(this).height() + 30)) {
+                            $(this).css({ 'font-size': '-=1', "padding-top": "-=0.5mm"})
+                        }
                     } while (
                         $(this).prop('scrollHeight') > ($(this).height() + 30)
                     )
@@ -438,7 +446,7 @@
             $(".storycardback-epilogue-top, .storycardback-epilogue-bottom").each(function () {
                 if ($(this).prop('scrollHeight') > ($(this).height() + 50)) {
                     do {
-                        $(this).css({ 'font-size': '-=0.5' })
+                        $(this).css({ 'font-size': '-=1' })
                     } while (
                         $(this).prop('scrollHeight') > ($(this).height() + 50)
                     )
@@ -448,7 +456,7 @@
             $(".storycardback-epiloguetitle").each(function () {
                 if ($(this).prop('scrollHeight') > ($(this).height() + 4)) {
                     do {
-                        $(this).css({ 'font-size': '-=0.5' })
+                        $(this).css({ 'font-size': '-=1' })
                     } while (
                         $(this).prop('scrollHeight') > ($(this).height() + 4)
                     )
