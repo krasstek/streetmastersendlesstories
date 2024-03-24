@@ -1,6 +1,11 @@
 function createPageContent(pagecontent) {
 
-    $("#printable_cards").html("").css("display", "flex")
+    $("#printable_cards").html("").css(
+        {"display": "flex", 
+        "opacity": "0", 
+        "transition": "opacity 0.5s ease", 
+        "background-image": 'url("Street Masters background.png")',
+        "background-size": "100% auto"})
 
     deletePages()
 
@@ -243,9 +248,10 @@ let savegamecontent
             }
         })
 
-        $(document).one("pageinit", function () { //Ennen minkä tahansa sivun luomista, tehdään kerran (.one)
+        $(window).on("load", function () {
+            // This ensures everything, including images and CSS, is fully loaded
             $("body").show();
-        });
+          });
 
         $(document).on("pagecontainerbeforeshow", function (event, ui) {
             let toPage = ui.toPage[0].id;

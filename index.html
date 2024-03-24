@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="preload" href="Street Masters background.png" as="image">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -406,7 +407,7 @@
         $("#savepop").enhanceWithin().popup();
 
         $(document).on("pagecontainerbeforeshow", "#printcards", function () {
-            $("div[class=print-card-container]").each(function () {
+            $("#printable_cards").each(function () {
                 $(this).css("opacity", "0")
             })
         });
@@ -433,7 +434,7 @@
                         fons = Math.round(parseFloat($(this).css('font-size')));
                         lineh = lineh - 0.1
                         lineh = Math.round(Math.min(fons*lineh, fons*1.1))
-                        $(this).css('line-height', `${lineh}px`);
+                        $(this).css({'line-height': `${lineh}px`, 'padding-top': "-=0.5mm"});
                         if ($(this).prop('scrollHeight') > ($(this).height() + 30)) {
                             $(this).css({ 'font-size': '-=1', "padding-top": "-=0.5mm"})
                         }
@@ -445,8 +446,16 @@
 
             $(".storycardback-epilogue-top, .storycardback-epilogue-bottom").each(function () {
                 if ($(this).prop('scrollHeight') > ($(this).height() + 50)) {
+                    var lineh = 1.2
+                    var fons
                     do {
-                        $(this).css({ 'font-size': '-=1' })
+                        fons = Math.round(parseFloat($(this).css('font-size')));
+                        lineh = lineh - 0.1
+                        lineh = Math.round(Math.min(fons*lineh, fons*1.1))
+                        $(this).css('line-height', `${lineh}px`);
+                        if ($(this).prop('scrollHeight') > ($(this).height() + 30)) {
+                            $(this).css({ 'font-size': '-=1' })
+                        }
                     } while (
                         $(this).prop('scrollHeight') > ($(this).height() + 50)
                     )
@@ -463,7 +472,7 @@
                 }
             })
 
-            $("div[class=print-card-container]").each(function () {
+            $("#printable_cards").each(function () {
                 $(this).css("opacity", "1")
             })
 
