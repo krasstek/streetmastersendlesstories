@@ -1,4 +1,5 @@
 <script>
+  import Portal from 'svelte-portal';
   import { saveSlots, refreshSaveSlots } from '$lib/stores/saveSlots';
   import { pageContent } from '$lib/stores/pageContent';
 
@@ -10,7 +11,7 @@
   function saveGame(slot) {
     const story = $pageContent;
     const data = { ...story, page: currentPage, outcome };
-    console.log(slot)
+    //console.log(slot)
     localStorage.setItem(`save_game_content_${slot}`, JSON.stringify(data));
     refreshSaveSlots();
     showPopup = false;
@@ -22,7 +23,8 @@
 </div>
 
 {#if showPopup}
-  <div class="story-overlay save-overlay" on:click={() => showPopup = false}>
+<Portal>
+  <div class="save-overlay" on:click={() => showPopup = false}>
     <div class="save-popup" on:click|stopPropagation>
       <div class = "save-header">Save Game<button on:click={() => showPopup = false} class="close-button"aria-label="Close popup">&times;</button></div>
       {#each $saveSlots as slot, i}
@@ -30,12 +32,24 @@
       {/each}
     </div>
   </div>
+</Portal>
 {/if}
 
 <style>
-  .save-overlay {
-    left: -20vw;
-    }
+
+.save-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 3000; /* high enough to escape nav-buttons context */
+	pointer-events: all;
+}
 
    .save-header {
     background: black;
@@ -53,10 +67,9 @@
   .save-popup {
     background: white;
     color: black;
-    border: 1px solid white;
     border-radius: 8px;
     backdrop-filter: blur(8px);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+	  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
   }
 
   	.save-button {

@@ -125,6 +125,7 @@ select.dropdown {
 
 	.story-card {
 	  background: url('/background.png');
+	  background-size: cover;
 		color: white;
 		padding: 1.5rem;
 		border-radius: 10px;
@@ -163,6 +164,7 @@ select.dropdown {
 	}
 
 .story-popup {
+  top:0;
   position: fixed;
 	background: rgba(0, 0, 0, 0.6);
   color: white;
@@ -194,15 +196,17 @@ select.dropdown {
 
 .story-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 2000; /* make sure it's above the parent popup */
+	margin: 0;
+	padding: 0;
 }
 
 

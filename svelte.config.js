@@ -1,7 +1,13 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
 
 export default {
-  kit: {
-    adapter: adapter()
-  }
+	kit: {
+		adapter: adapter({
+			fallback: 'index.html', // 👈 this enables SPA mode
+			strict: false            // 👈 avoids the error you're getting
+		}),
+		paths: {
+			base: '/streetmastersendlesstories' // or '/repo-name' if not hosted at root
+		}
+	}
 };

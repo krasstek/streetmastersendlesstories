@@ -18,6 +18,12 @@
 	import LoadHandler from '$lib/components/LoadHandler.svelte';
 	 import { clickOutside } from '$lib/actions/clickOutside';
 
+	let storyRendererRef;
+
+  function goToStartFromHandler(page = 0) {
+		storyRendererRef?.goToStart(page);
+	  }
+
 	let showExpansionDropdown = false;
 	let expansions = initialExpansions.map(e => ({
 	...e,
@@ -55,6 +61,7 @@
   function handleStoryGeneration() {
   const result = createStory(selectedExpansions, filteredGladiators.filter(e => e.selected).map(e => e.name), players, stages)
   pageContent.set(result); // Trigger render
+  storyRendererRef?.goToStart();
 	}
 
 	$: console.log('pageContent updated:', $pageContent);
@@ -76,8 +83,8 @@
 </select>
 {/if}
 <button class="menu-button" on:click={handleStoryGeneration}>GENERATE A STORY</button>
-<StoryPageRenderer />
-<LoadHandler />
+<StoryPageRenderer bind:this={storyRendererRef} />
+<LoadHandler {goToStartFromHandler}/>
 <button class="menu-button" on:click={toggleDropdown}>SELECT EXPANSIONS</button>
 {#if showExpansionDropdown}
 	<div use:clickOutside={() => showExpansionDropdown = false} class="exp-dropdown">

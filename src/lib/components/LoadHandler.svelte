@@ -3,7 +3,7 @@
   import { saveSlots, refreshSaveSlots } from '$lib/stores/saveSlots';
   import { onMount } from 'svelte';
 
-  export let setPage;
+  export let goToStartFromHandler;
   export let setOutcome;
 
   let showPopup = false;
@@ -13,8 +13,7 @@
     if (saved) {
       const parsed = JSON.parse(saved);
       pageContent.set(parsed);
-      setPage(parsed.page ?? 0);
-      setOutcome(parsed.outcome ?? null);
+      goToStartFromHandler?.(parsed.page ?? 0);
     }
     showPopup = false;
   }
@@ -39,7 +38,11 @@
     <div class="load-popup" on:click|stopPropagation>
       <div class = 'load-header'>Load Game<button on:click={() => showPopup = false} class="close-button"aria-label="Close popup">&times;</button></div>
       {#each $saveSlots as slot, i}
-        <button class = 'load-button' on:click={() => loadGame(i)}>
+        <button class = 'load-button' on:click={() => {
+        //console.log("click")
+        loadGame(i)
+        showPopup = false
+        }}>
           {i+1}. {slot ? `${slot.storyname} – ${slot.finalboss.toUpperCase()} STORY` : '<empty slot>'}
         </button>
       {/each}
@@ -78,10 +81,9 @@
   .load-popup {
     background: white;
     color: black;
-    border: 1px solid white;
     border-radius: 8px;
     backdrop-filter: blur(8px);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+	  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
   }
 
   	.load-button {

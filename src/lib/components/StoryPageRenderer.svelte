@@ -18,7 +18,7 @@
 		cardtexts = $pageContent.text ?? [];
 		card = cardtexts[currentPage];
 		storytitle = $pageContent.storyname;
-		showOverlay = true ;
+		showOverlay = true;
 	}
 
 	function handleOutcome(result) {
@@ -29,7 +29,7 @@
 		if (currentPage >= cardtexts.length - 1) return;
 
 		const currentScen = Math.ceil(currentPage / 2) + 1;
-		console.log(currentScen)
+		//console.log(currentScen)
 		const nextIndex = (currentScen - 1) * 2 + (outcome === 'win' ? 1 : 2);
 
 		if (nextIndex < cardtexts.length) {
@@ -48,8 +48,10 @@
 		}
 	}
 
-	function goToStart() {
-		currentPage = 0;
+	export function goToStart(page = 0) {
+	  console.log(currentPage)
+		currentPage = page;
+		console.log(currentPage)
 		outcome = null;
 	}
 
@@ -121,7 +123,7 @@
 					<svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 	<path d="M5 12h14M13 6l6 6-6 6" />
 </svg></button>
-			<button class = "next-button" on:click={goToStart}>
+			<button class = "next-button" on:click={() => goToStart(0)}>
 								<span class="next-label">Go to Part 1</span>
 					<svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 	<path d="M5 12h14M13 6l6 6-6 6" />
