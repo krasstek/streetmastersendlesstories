@@ -64,7 +64,7 @@
   storyRendererRef?.goToStart();
 	}
 
-	$: console.log('pageContent updated:', $pageContent);
+	//$: console.log('pageContent updated:', $pageContent);
 
 </script>
 

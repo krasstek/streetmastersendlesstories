@@ -13,8 +13,8 @@ export default defineConfig({
 				name: 'Endless Stories',
 				short_name: 'Stories',
 				description: 'Street Masters story generator',
-				start_url: '/',
-				scope: '/',
+				start_url: '/streetmastersendlesstories/',
+				scope: '/streetmastersendlesstories/',
 				display: 'standalone',
 				background_color: '#000000',
 				theme_color: '#0a612b',
@@ -34,5 +34,3 @@ export default defineConfig({
 		})
 	]
 });
-
-

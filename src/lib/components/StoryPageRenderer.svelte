@@ -49,9 +49,7 @@
 	}
 
 	export function goToStart(page = 0) {
-	  console.log(currentPage)
-		currentPage = page;
-		console.log(currentPage)
+	  currentPage = page;
 		outcome = null;
 	}
 
