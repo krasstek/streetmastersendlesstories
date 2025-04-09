@@ -7,7 +7,7 @@ export default {
 			strict: false            // 👈 avoids the error you're getting
 		}),
 		paths: {
-			base: '/streetmastersendlesstories' // or '/repo-name' if not hosted at root
+			base: '' // or '/repo-name' if not hosted at root
 		}
 	}
 };
