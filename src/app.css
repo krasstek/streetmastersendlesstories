@@ -1,0 +1,302 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background: url('/background.png') no-repeat center center fixed;
+	background-size: cover;
+	color: white;
+	backdrop-filter: blur(3px);
+}
+
+/* Container for layout */
+.app-container {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* Header styles */
+.app-header {
+	text-align: center;
+	background: black;
+	padding: 1.5rem 1rem 0;
+	width: 100%;
+}
+
+.logo {
+	display: block;
+	margin: 0 auto;
+	max-width: 200px;
+	height: auto;
+}
+
+.app-header h1 {
+	margin-top: 1rem;
+	font-size: 1.6rem;
+	color: white;
+}
+
+/* Wrapper for page content */
+.app-wrapper {
+	width: 100%;
+	max-width: 700px;
+	padding: 2rem 1rem;
+	box-sizing: border-box;
+}
+
+/* Dropdowns */
+label {
+	display: block;
+	background: #333;
+	padding: 1rem;
+	margin: 1rem 0 0.5rem;
+	font-weight: bold;
+	text-align: center;
+}
+
+select.dropdown {
+	width: 100%;
+	padding: 0.6em 2.5em 0.6em 1em; /* right padding added here */
+	font-size: 1rem;
+	background: #fbbf24;
+	border: 2px solid white;
+	border-radius: 5px;
+	color: #333;
+	text-align: center;
+	appearance: none; /* remove default arrow */
+	background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.41.59L6 5.17l4.59-4.58L12 2l-6 6-6-6z' fill='%23000'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 1em center;
+	background-size: 1em;
+}
+
+/* Buttons */
+.menu-button {
+	width: 100%;
+	background: #333;
+	color: white;
+	padding: 1rem;
+	margin: 0.5rem 0;
+	border: none;
+	border-radius: 5px;
+	font-size: 1rem;
+	font-weight: 700;
+	text-align: center;
+	cursor: pointer;
+}
+
+.exp-dropdown {
+		background: #2d2d2d;
+		border-radius: 5px;
+		box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+		margin-top: 0.5rem;
+		overflow: hidden;
+	}
+
+	.exp-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.75em 1em;
+		cursor: pointer;
+		border-bottom: 1px solid #444;
+	}
+
+	.exp-item:last-child {
+		border-bottom: none;
+	}
+
+	.exp-item:hover {
+		background: #3a3a3a;
+	}
+
+	.exp-item.disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	.exp-icon {
+		margin-left: 1em;
+		font-size: 1.2em;
+	}
+
+
+
+	.story-card {
+	  background: url('/background.png');
+		color: white;
+		padding: 1.5rem;
+		border-radius: 10px;
+		width: 90%;
+		max-width: 800px;
+		margin: 2rem auto;
+		backdrop-filter: blur(4px);
+	}
+
+	.card-header,
+	.story-title
+	{
+		background: #111;
+		padding: 0.5rem 1rem;
+		font-weight: bold;
+		font-size: 1rem;
+		border-radius: 0;
+	}
+	.story-title
+	{
+		font-size: 1.2rem;
+	  border-radius: 6px 6px 0 0;
+	}
+
+.card-prologue,
+.card-outcome-text {
+		background: url('/card_background.png');
+		padding: 1rem;
+		white-space:normal !important;
+    border-color: #bbb;
+    color: #333 !important;
+		line-height: 1.5;
+    background-size:cover;
+    font-family: 'IBM Plex Sans', sans-serif !important;
+		margin-bottom: 1rem;
+	}
+
+.story-popup {
+  position: fixed;
+	background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 90%;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+
+
+}
+
+.card-section {
+	margin-top: 1rem;
+}
+
+.card-section-title {
+		background: #000;
+		padding: 0.5rem 1rem;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+
+.card-section-content {
+		background: #000;
+		padding: 0.75rem 1rem;
+}
+
+.story-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+	.outcome-buttons,
+	.nav-buttons {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+	.win-button {
+		background-color: #0a612b;
+		color: white;
+		font-size: 1.1rem;
+		padding: 1rem;
+		border: none;
+		border-radius: 6px;
+		cursor: pointer;
+		font-weight: bold;
+	}
+	.lose-button {
+		background-color: #c4331a;
+		color: white;
+		font-size: 1.1rem;
+		padding: 1rem;
+		border: none;
+		border-radius: 6px;
+		cursor: pointer;
+		font-weight: bold;
+	}
+	.next-button {
+	  text-align: left;
+		border: unset;
+		font-size: 1.1rem;
+	  border-color: #bbb;
+	  font-weight: 700;
+    color: #333 !important;
+	  border-radius: 6px;
+	  padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+		background: url('/Advance.png');
+		display:flex;
+		flex-flow: row;
+		justify-content: space-between;
+	}
+	.next-button .arrow {
+	opacity: 0;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+	transform: translateX(-4px);
+}
+
+.next-button:hover .arrow {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+	.story-conclusion {
+		font-size: 1.1rem;
+		text-align: center;
+		margin-top: 1rem;
+		font-weight: bold;
+	  background: rgba(0, 0, 0, 0.6);
+	  color: white;
+	  padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+	}
+.app-footer {
+	text-align: center;
+	font-size: 0.75rem;
+	color: #aaa;
+	padding: 1rem 0;
+	background: rgba(0, 0, 0, 0.8);
+	position: relative;
+	z-index: 10;
+}
+.app-footer a {
+	color: #aaa;
+	text-decoration: underline;
+}
+
+.close-button {
+  width: 2.2rem;
+	height: 2.2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	background-color: black;
+	color: white;
+	border: 2px solid white;
+	font-size: 1.4rem;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+	button:hover {
+		opacity: 0.9;
+	}

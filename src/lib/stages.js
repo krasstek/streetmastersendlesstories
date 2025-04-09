@@ -1,4 +1,7 @@
-function getEnemies(expansionfilter) {
+import _ from 'lodash';
+import { randFrom, filterArray, getRandomMinions } from '$lib/story_utils';
+
+export function getEnemies(expansionfilter) {
     let enemies = [
 
         {
@@ -186,7 +189,7 @@ function getEnemies(expansionfilter) {
 
 }
 
-function getStages(expansionfilter) {
+export function getStages(expansionfilter) {
 
     let stages = [
         {
@@ -832,7 +835,7 @@ function getStages(expansionfilter) {
                   ])),
             prologue: () =>_.template(randFrom(
                 [
-                    '${trail}, you are led to a grim discovery: the ${enemy.name} has been orchestrating a sinister plot. The ${enemy.minions()} have toiled in secrecy, setting up an intricate web of explosives at a construction site shrouded in shadows and mystery. The air is thick with tension as you contemplate the magnitude of the impending disaster. How is the ${finalboss.name} connected to this nefarious scheme? The answers lie within the heart of the construction site, waiting to be uncovered.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}',
+                    '${trail}, you are led to a grim discovery: the ${enemy.name} has been orchestrating a sinister plot. The ${enemy.minions()} have toiled in secrecy, setting up an intricate web of explosives at a construction site shrouded in shadows and mystery. The air is thick with tension as you con_.template the magnitude of the impending disaster. How is the ${finalboss.name} connected to this nefarious scheme? The answers lie within the heart of the construction site, waiting to be uncovered.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}',
                     '${trail}, it didn\'t take long to find out the ${enemy.name} had been busy setting up an intricate series of explosives at a construction site for a planned ${randFrom([`research facility`,`headquarters`,`manufacturing facility`])} of a ${randFrom([`cutting edge medical company`,`weapons manufacturer`,`chemical manufacturer`,`cybernetics research company`])}. How is the ${finalboss.name} connected? There is only one way to find out.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}'
                 ]
             )),
@@ -862,7 +865,7 @@ function getStages(expansionfilter) {
 
 }
 
-function getGladiators(expansionfilter, enemies = getEnemies(), stages = getStages()) {
+export function getGladiators(expansionfilter, enemies = getEnemies(), stages = getStages()) {
     let gladiators = [
         {
             name: "Ah Long", expansion: "redemption", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",

@@ -1,25 +1,39 @@
-function randFrom(array) {
+import _ from 'lodash';
+
+import { getEnemies, getStages, getGladiators } from '$lib/stages';
+
+
+export function randFrom(array) {
     return array[Math.floor(Math.random() * array.length)]
 }
 
-function filterArray(array, key, filter, exclusion = false) {
+export function filterArray(array, key, filter, exclusion = false) {
     if (exclusion == false) {
         array = _.filter(array, function (o) { return o[key] == filter })
     } else array = _.filter(array, function (o) { return o[key] != filter });
     return array
 }
 
-function globalGladiators(enemies, stages) {
+function cleanStages(stages) {
+    for (let i = 0; i < stages.length; i++) {
+        if (stages[i].instory >= 2) {
+            stages.splice(i, 1);
+            i = i - 1;
 
-    let expansionfilter = $('.exp_selector').map((_, el) => $(el).hasClass("ui-icon-check") ? el.name : ``).get().filter(el => el != "")
+        }
+    }
+    return stages
 
-    gladiators = getGladiators(expansionfilter, enemies, stages)
-    let gladiatorselect = $('.glad_selector').map((_, el) => $(el).hasClass("ui-icon-check") && !$(el).hasClass("ui-disabled") ? el.name : ``).get().filter(el => el != "")
-    selected_gladiators = gladiators.filter(g => gladiatorselect.includes(g.name))
+}
+
+export function globalGladiators(enemies, stages, expansionfilter, gladiatorselect, players) {
+
+    let gladiators = getGladiators(expansionfilter, enemies, stages)
+    let selected_gladiators = gladiators.filter(g => gladiatorselect.includes(g.name))
     gladiators = gladiators.filter(g => !gladiatorselect.includes(g.name))
     let globalgladiators = []
 
-    while (globalgladiators.length < $("#players").val()) {
+    while (globalgladiators.length < players) {
         if(selected_gladiators.length > 0) {
             let random = Math.floor(Math.random() * selected_gladiators.length)
             let newgladiator = selected_gladiators[random]
@@ -35,7 +49,7 @@ function globalGladiators(enemies, stages) {
     return globalgladiators;
 }
 
-function bossDescription(enemy) {
+export function bossDescription(enemy) {
     let bossynonym = randFrom(["boss", "boss", "boss", "leader", "leader", "head", "chief", "kingpin"])
     let fame = randFrom(["notorious", "infamous", "ill-famed"])
     let these_minions = enemy.minions()
@@ -56,18 +70,14 @@ function bossDescription(enemy) {
     return `${enemy.boss}, ${boss_part}${of_whom}${description}`
 }
 
-function createStory() {
-
-    $(document).on('pageinit')
-
-    let expansionfilter = $('.exp_selector').map((_, el) => $(el).hasClass("ui-icon-check") ? el.name : ``).get().filter(el => el != "")
+export function createStory(expansionfilter, gladiatorfilter, players, nstages) {
 
     let enemies = getEnemies(expansionfilter);
     let stages = getStages(expansionfilter);
 
-    enemiescopy = enemies.slice(0, enemies.length)
+    let enemiescopy = enemies.slice(0, enemies.length)
 
-    let globalgladiators = globalGladiators(enemies, stages)
+    let globalgladiators = globalGladiators(enemies, stages, expansionfilter, gladiatorfilter, players)
 
     let herostages = []
     let supportingcast = []
@@ -75,14 +85,21 @@ function createStory() {
     let heroenemies = []
     let herodialogue = []
 
-    $(globalgladiators).each(function () {
-        herostages.push(this.stage)
-        supportingcast = _.union(supportingcast, this.ally)
-        supportingcast = _.union(supportingcast, this.rival)
-        heronames.push(this.name)
-        $(this.enemy).each(function () { heroenemies.push(this) })
-        $(this.dialogue).each(function () { herodialogue.push(this) })
-    })
+    globalgladiators.forEach(g => {
+	herostages.push(g.stage);
+	supportingcast = _.union(supportingcast, g.ally);
+	supportingcast = _.union(supportingcast, g.rival);
+	heronames.push(g.name);
+
+	if (Array.isArray(g.enemy)) {
+		heroenemies.push(...g.enemy);
+	}
+
+	if (Array.isArray(g.dialogue)) {
+		herodialogue.push(...g.dialogue);
+	}
+
+    });
 
     herostages = _.flatten(herostages)
 
@@ -139,17 +156,17 @@ function createStory() {
 
     alliesandrivals = alliesandrivals.filter(character => expansionfilter.some(xp => character.expansion.includes(xp)))
 
-    for (i = alliesandrivals.length - 1; i > 0; i--) {
+    for (let i = alliesandrivals.length - 1; i > 0; i--) {
         if (supportingcast.includes(alliesandrivals[i].name)) {
             alliesandrivals.splice([i], 1)
 
         }
     }
-    let allymotivation = getMotivation(alliesandrivals)
+    let allymotivation = getMotivation(alliesandrivals, players)
 
     let allygroup = []
 
-    while (allygroup.length < $("#players").val()) {
+    while (allygroup.length < players) {
         let random = Math.floor(Math.random() * alliesandrivals.length)
         let ally = alliesandrivals[random]
         if (ally.keywords.includes(allymotivation)) {
@@ -158,10 +175,10 @@ function createStory() {
         }
     }
 
-    let rivalmotivation = getMotivation(alliesandrivals)
+    let rivalmotivation = getMotivation(alliesandrivals, players)
 
     let rivalgroup = []
-    while (rivalgroup.length < $("#players").val()) {
+    while (rivalgroup.length < players) {
         let random = Math.floor(Math.random() * alliesandrivals.length)
         let rival = alliesandrivals[random]
         if (rival.keywords.includes(rivalmotivation)) {
@@ -171,8 +188,8 @@ function createStory() {
     }
 
 
-    for (i = 0; i < stages.length; i++) {
-        for (y = 0; y < herostages.length; y++) {
+    for (let i = 0; i < stages.length; i++) {
+        for (let y = 0; y < herostages.length; y++) {
             if (herostages[y] === stages[i].name) {
                 stages[i].instory = stages[i].instory + 1
             }
@@ -181,7 +198,7 @@ function createStory() {
 
     stages = cleanStages(stages);
 
-    let storystages = storyStages(stages);
+    let storystages = storyStages(stages, nstages);
 
     stages = storystages[1].splice(0)
 
@@ -189,45 +206,45 @@ function createStory() {
 
     /*             console.log(JSON.stringify(storystages, ["name"])) */
 
-    let storyenemies = storyEnemies(storystages, enemies, heroenemies);
+    let storyenemies = storyEnemies(storystages, enemies, heroenemies, nstages);
 
     enemies = storyenemies[1].splice(0)
 
     storyenemies = storyenemies[0].splice(0)
 
-    let story = compileStory(storystages, storyenemies)
+    let story = compileStory(storystages, storyenemies, nstages)
 
+    story.forEach((entry, i) => {
+        entry.stage.knowledge = defineKnowledge(i, story);
 
-    $(story).each(function (i) {
+    });
 
-        story[i].stage.knowledge = defineKnowledge(i, story)
-    })
-
-    let finalboss = story[Math.max($("#storylength").val() * 2 - 3, 0)].enemy
+    let finalboss = story[Math.max(nstages * 2 - 3, 0)].enemy
 
     let stageindex = 0;
 
-    let storyname = String(storyNamer(finalboss, story[Math.max($("#storylength").val() * 2 - 3, 0)].stage))
+    let storyname = String(storyNamer(finalboss, story[Math.max(nstages * 2 - 3, 0)].stage))
 
     let referencetext = referenceText(globalgladiators, allygroup, allymotivation, rivalgroup, rivalmotivation, finalboss)
 
-    let cardtexts = textMaker(story, alliesandrivals, heronames, enemies, herodialogue);
+    let cardtexts = textMaker(story, alliesandrivals, heronames, enemies, herodialogue, nstages);
 
     let pagecontent = { reference: referencetext, text: cardtexts, storyname: storyname, finalboss: finalboss.name }
 
-    createPageContent(pagecontent)
+    return pagecontent
+//    createPageContent(pagecontent)
 
 
 }
 
-function defineAddressing(enemy) {
+export function defineAddressing(enemy) {
 
     let addressing = randFrom([enemy.addressing, "Global Gladiators", "Gladiators"])
 
     return addressing
 }
 
-function gPron(character, form) {
+export function gPron(character, form) {
     let gPron
 
     switch (character.gender) {
@@ -268,17 +285,17 @@ function gPron(character, form) {
 
 }
 
-function ucInit(word) {
+export function ucInit(word) {
     let result = word.charAt(0).toUpperCase() + word.substring(1);
     return result
 }
 
-function lowerCaseInitial(word) {
+export function lowerCaseInitial(word) {
     let result = word.charAt(0).toLowerCase() + word.substring(1);
     return result
 }
 
-function whichPreposition(word) {
+export function whichPreposition(word) {
     if (/[aeiou]/.test(word.toLowerCase().charAt(0))) {
         return "an " + word
     } else {
@@ -286,7 +303,7 @@ function whichPreposition(word) {
     }
 }
 
-function latestScheme(enemy) {
+export function latestScheme(enemy) {
     let latestscheme = [
         `In Citadel's ongoing investigations, rumors have been uncovered that`,
         `In the wake of the Kingdom's latest scheme, the Citadel has learned a new threat on the rise: `,
@@ -334,7 +351,7 @@ function latestScheme(enemy) {
     return latestscheme
 }
 
-function preGamePrologue(stage, enemy) {
+export function preGamePrologue(stage, enemy) {
 
     //more masterplans: complete desctruction; activate superweapon?
 
@@ -371,7 +388,7 @@ just might become invincible. `
     return masterplan
 }
 
-function mysticalSynonym() {
+export function mysticalSynonym() {
 
 
     let mystical = ["esoteric", "magical", "arcane", "ethereal", "mystical", "cabalistic", "mysterious", "occult", "obscure", "cryptic", "fabulous secret", "strange"];
@@ -381,24 +398,25 @@ function mysticalSynonym() {
 
 }
 
-function getMotivation(alliesandrivals) {
+export function getMotivation(alliesandrivals, players) {
 
     let supportmotivate = []
-    $(alliesandrivals).each(function () {
-        supportmotivate = supportmotivate.concat(this.keywords)
+
+    alliesandrivals.forEach(g => {
+        supportmotivate = supportmotivate.concat(g.keywords)
     })
 
     let motivations = supportmotivate.reduce((r, k) => { r[k] = 1 + r[k] || 1; return r }, {})
 
     motivations = _.pickBy(motivations, function (o) {
-        return o >= $("#players").val();
+        return o >= players;
     })
 
     return (randFrom(Object.keys(motivations)))
 
 }
 
-function storyNamer(finalboss, finalstage, number = 16) {
+export function storyNamer(finalboss, finalstage, number = 16) {
 
     let bossadjectives
     let bossnouns
@@ -580,7 +598,7 @@ function storyNamer(finalboss, finalstage, number = 16) {
 
 }
 
-function compileStory(stages, enemies) {
+export function compileStory(stages, enemies, storylength) {
 
 
     let story = []
@@ -588,7 +606,7 @@ function compileStory(stages, enemies) {
     let chapters = ["1", "2A", "2B", "3A", "3B", "4A", "4B", "5A", "5B"];
 
     var chapter
-    for (i = 0; i < Math.ceil($("#storylength").val() * 2) - 1; i++) {
+    for (let i = 0; i < Math.ceil(storylength * 2) - 1; i++) {
         chapter = { chapter: chapters[i], stage: _.cloneDeep(stages[i]), enemy: enemies[i] }
         story.push(chapter)
     }
@@ -597,7 +615,7 @@ function compileStory(stages, enemies) {
 
 }
 
-function storyStages(stages) {
+export function storyStages(stages, storylength) {
 
 
     let storystages = []
@@ -607,7 +625,7 @@ function storyStages(stages) {
     let finalstage = stages[randomstage];
     stages.splice(randomstage, 1);
 
-    if ($("#storylength").val() > 1) {
+    if (storylength > 1) {
 
         randomstage = Math.floor(Math.random() * stages.length);
 
@@ -615,7 +633,7 @@ function storyStages(stages) {
         stages[randomstage].instory = stages[randomstage].instory + 1
         stages = cleanStages(stages);
 
-        if ($("#storylength").val() > 2) {
+        if (storylength > 2) {
             let i = 0
             do {
                 (Math.random() <= 0.75 ?
@@ -643,7 +661,7 @@ function storyStages(stages) {
                         stages = cleanStages(stages))
                 )
                 i = i + 1
-            } while (i < $("#storylength").val() - 2);
+            } while (i < storylength - 2);
         }
 
 
@@ -666,15 +684,15 @@ function storyStages(stages) {
 
 }
 
-function getMasterPlan() {
+export function getMasterPlan() {
 
-    final_texts = ["final", "ultimate", "diabolical", "culminating", "terminal", "paramount", "consummate", "paramount", "utmost", "fiendish"]
-    plan_texts = ["plan", "master plan", "scheme", "endgame", "design"]
+    let final_texts = ["final", "ultimate", "diabolical", "culminating", "terminal", "paramount", "consummate", "paramount", "utmost", "fiendish"]
+    let plan_texts = ["plan", "master plan", "scheme", "endgame", "design"]
     return `${randFrom(final_texts)} ${randFrom(plan_texts)}`
 
 }
 
-function loungeMusic() {
+export function loungeMusic() {
 
     let music = randFrom(["Don't Stop Believing", "Faithfully", "Don't Stop Me Now", "Open Arms", "Wheel in the Sky", "Separate Ways", "Livin' on a Prayer", "Any Way You Want It", "We Are the Champions", "Chariots of Fire", "We Will Rock You", "Hero", "Walking on Sunshine", "Always Look on the Bright Side of Life",
         "Eye of the Tiger", "The Final Countdown", "Burning Heart", "Every Breath You Take", "Another One Bites the Dust", "Never Gonna Give You Up", "Gonna Fly Now", "One Moment In Time"])
@@ -682,7 +700,7 @@ function loungeMusic() {
     return music
 }
 
-function storyEnemies(storystages, enemies, heroenemies) {
+export function storyEnemies(storystages, enemies, heroenemies, storylength) {
 
     heroenemies = heroenemies.map(enemy => enemy.boss);
 
@@ -701,7 +719,7 @@ function storyEnemies(storystages, enemies, heroenemies) {
 
     let finalboss = randomenemy
 
-    if ($("#storylength").val() > 1) {
+    if (storylength > 1) {
 
         let r = randFrom([1, 2])
         switch (r) {
@@ -710,9 +728,9 @@ function storyEnemies(storystages, enemies, heroenemies) {
             case 2: pickAndSlice(), storyenemies.push(randomenemy);
         }
 
-        for (i = 0; storyenemies.length < Math.ceil($("#storylength").val() / 2) * 2 + 1; i++) {
+        for (let i = 0; storyenemies.length < Math.ceil(storylength / 2) * 2 + 1; i++) {
 
-            let random = randFrom([1, 2, 3])
+            let random = (enemies.length <= (Math.ceil(storylength / 2) * 2 + 1) - storyenemies.length + 1) == true ? 1 : randFrom([1, 2, 3])
             switch (random) {
                 case 1: pickAndSlice(), storyenemies.push(randomenemy), storyenemies.push(randomenemy);
                     break;
@@ -727,7 +745,7 @@ function storyEnemies(storystages, enemies, heroenemies) {
 
     storyenemies.push(finalboss);
 
-    if ($("#storylength").val() > 1) {
+    if (storylength > 1) {
 
         if (storystages[storystages.length - 2].name == storystages[storystages.length - 1].name) {
             storyenemies.push(finalboss);
@@ -741,7 +759,7 @@ function storyEnemies(storystages, enemies, heroenemies) {
 
 }
 
-function evilPlace() {
+export function evilPlace() {
 
     let evilterm = ["ancient", "cursed", "damned", "eldritch", "evil", "unholy", "unclean", "vile"]
     let place = ["burial ground", "altar", "sanctum", "shrine", "temple"]
@@ -755,7 +773,7 @@ function evilPlace() {
 
 const possessiveSuffix = (name) => `${name}'${name.endsWith('s') ? '' : 's'}`;
 
-function allyNamer(alliesandrivals, enemy, heronames, finalboss) {
+export function allyNamer(alliesandrivals, enemy, heronames, finalboss) {
 
     let ally = _.cloneDeep(randFrom(alliesandrivals))
 
@@ -772,7 +790,7 @@ function allyNamer(alliesandrivals, enemy, heronames, finalboss) {
     return ally
 }
 
-function defineKnowledge(i, story) {
+export function defineKnowledge(i, story) {
     let knowledge
 
 
@@ -793,9 +811,9 @@ function defineKnowledge(i, story) {
     return knowledge
 }
 
-function loseResult(stageindex, story, nextstage, gizmo, wincondition, rival, rivalpresence, ally) {
+export function loseResult(stageindex, story, nextstage, gizmo, wincondition, rival, rivalpresence, ally, nstages) {
 
-    let finalboss = story[Math.max($("#storylength").val() * 2 - 3, 0)].enemy
+    let finalboss = story[Math.max(nstages * 2 - 3, 0)].enemy
 
     let enemy = story[stageindex].enemy
     let stage = story[stageindex].stage
@@ -1035,7 +1053,7 @@ After all, who better to think ${enemy.boss == finalboss.boss ? `the Master` : f
     return loseresult
 }
 
-function getEnemyAttack(enemy, attack, alternative) {
+export function getEnemyAttack(enemy, attack, alternative) {
 
     if (enemy.hasOwnProperty("attacks") && enemy.attacks.hasOwnProperty(attack)) {
 
@@ -1047,9 +1065,9 @@ function getEnemyAttack(enemy, attack, alternative) {
 
 }
 
-function victoryResult(stageindex, story, nextstage, gizmo, masterplan, wincondition, ally, rival) {
+export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, wincondition, ally, rival, nstages) {
 
-    let finalboss = story[Math.max($("#storylength").val() * 2 - 3, 0)].enemy
+    let finalboss = story[Math.max(nstages * 2 - 3, 0)].enemy
     let enemy = story[stageindex].enemy
     let stage = story[stageindex].stage
     let nextenemy = story[nextstage].enemy
@@ -1215,7 +1233,7 @@ if (masterodds < 0.33) {
     let definite_word = randFrom(['explicitly', 'precisely', 'unmistakably', 'definitively', 'conclusively', 'unequivocally', 'directly', 'specifically', 'clearly', 'unambiguously', 'decisively']);
     let hinting_word = randFrom([`indicating that`,`leading to conclusion that`, `pointing towards the conclusion that`, `suggesting the idea that`, `leading to a realization:`, `guiding you to a conclusion:`, `hinting that`, `suggests that`, `revealing that`, `alluding that`,  `directing you towards a surprising conclusion:`, `suggesting the idea that`
 ])
-    let ambiguity_element = (nextstage >= $("#storylength").val() * 2 - 3) ? `${definite_word} ${hinting_word}` : `${ambiguous_word} ${hinting_word}`
+    let ambiguity_element = (nextstage >= nstages * 2 - 3) ? `${definite_word} ${hinting_word}` : `${ambiguous_word} ${hinting_word}`
     switch (masterplan) {
         case "kidnapping":
             masterplanclues = [
@@ -1293,7 +1311,7 @@ if (masterodds < 0.33) {
                `The safe passage you've secured for ${ally.name} feels like a significant victory, not just for the mission, but for the principles you stand for. "We've done more than survive; we've thrived," you reflect aloud. ${ally.name} agrees, and in the aftermath of your success, presents you with a coded message. Deciphering it leads to the realization that the  ${nextenemy.boss == finalboss.boss ? `plans of ${trueMastermind(finalboss)}` : `${possessiveSuffix(finalboss.name)} plans`} are far from thwarted:`,
                `"Your courage is the reason we're here," ${ally.name} tells you once you've both emerged from the shadows of danger. The sense of accomplishment is overwhelming, but so is the sense of impending challenges. As ${ally.name} debriefs you on the mission's findings, you uncover a clue hinting that`
         ]);
-        intel_condition = randFrom([
+        let intel_condition = randFrom([
             `"This is what we came for," you say, holding the ${randFrom([`newly acquired intel`,`${gizmo}`])} securely. Despite the ${possessiveSuffix(enemy.name)} formidable defenses, you've managed to outmaneuver them, securing a critical advantage. As you and your team process the implications of your victory, it becomes clear that you now hold information revealing that`,
             `"Got it," you whisper into the comms, feeling the weight of victory as you secure the ${gizmo}. Through cunning and guile, you've extracted data that could shift the balance of power. The true value of this operation becomes apparent as you make your escape, understanding that you've obtained information that`,
             `The dust settles, and you find yourself looking over the secured ${gizmo}, a testament to the risks taken and the success achieved. This operation's payoff is immense, offering a beacon of hope as you realize the ${nextenemy.boss == finalboss.boss ? `once-impenetrable facade of ${trueMastermind(finalboss)}` : `${possessiveSuffix(finalboss.name)} once-impenetrable facade`} begins to show cracks, ready to be exploited:`,
@@ -1301,7 +1319,7 @@ if (masterodds < 0.33) {
             `"We've broken through," announces Agent Fletch, as the ${randFrom([`data`,`${gizmo}`])} decryption completes. The room buzzes with a renewed sense of purpose and direction, as what you've secured from ${enemy.boss} finally becomes clear. The decrypted intel paints a new target and opens a path forward, showing that`
         ])
 
-        rival_condition = randFrom([
+        let rival_condition = randFrom([
             `"You know why we're here," you start, eyeing  ${rival.name} bound before you. Despite their resistance, your determination pays off. As the questioning proceeds, ${gPron(rival,"subject")} finally breaks. The moment is pivotal, marking not just a victory in interrogation but a crucial turning point in your quest, revealing that`,
             `${rival.name} sits across from you, defiance in ${gPron(rival,"possessive")} eyes. Yet, as the conversation unfolds, your skillful probing begins to erode ${gPron(rival,"possessive")} resolve. What comes next is a flood of information that could very well be the key to dismantling your greatest adversary. A testament to your interrogation prowess, you uncover that`,`
             "Talk," you urge, your voice a mix of command and persuasion. ${rival.name}, cornered and outmatched, starts with hesitations but soon divulges secrets you had only hoped to learn. The breakthrough comes when ${gPron(rival,"subject")} discloses that`,
@@ -1309,7 +1327,7 @@ if (masterodds < 0.33) {
             `Under the pressure of your unyielding gaze, the ${possessiveSuffix(rival.name)} facade begins to crack. What starts as a trickle of reluctance turns into a cascade of revelations. The climax of your interrogation changes the course of your mission:`
         ])
 
-        hostage_condition = randFrom([
+        let hostage_condition = randFrom([
             `"Everyone's safe," you announce, a sigh of relief shared among your team as the last of the bystanders is brought to safety. This operation wasn't just about thwarting the ${enemy.name}; it was about preserving lives. As the rescued individuals recount their experiences, they inadvertently revealing a threat looming on the horizon:`,
             `As the dust settles and the area is secured, you take a moment to look over the people you've just saved. Their gratitude is palpable, but it's the unexpected intel they provide that catches your attention. In their accounts of captivity, they mention details uncovering that`,
             `"It's over, you're safe now," you reassure the bystanders, guiding them to the extraction point. The mission was fraught with danger, but every risk taken was worth the lives saved today. Among the expressions of thanks, one of the bystanders shares a crucial piece of information, opening up new avenues for your mission's objectives:`,
@@ -1364,25 +1382,25 @@ if (masterodds < 0.33) {
         ])
     let finality = randFrom([``, `You're going to stop this once and for all.`, `You prepare for a fight this one last time.`, `This is it!`, `This is the end, at last.`, `No escape for ${finalboss.boss} now!`, `You can almost taste the victory!`, `Everything has led to this moment.`, `It is in your hands now.`, `The time has come for your final confrontation!`, `You know this, the final confrontation, won't be easy!`])
 
-    let victoryresult = (nextstage >= $("#storylength").val() * 2 - 3) ? randFrom(gatherclues).replace(" that", "").replace("continues", "reveals") + " " + finalclue + "<br><br>" + finality : randFrom(gatherclues) + " " + clue + randFrom(planning)
+    let victoryresult = (nextstage >= nstages * 2 - 3) ? randFrom(gatherclues).replace(" that", "").replace("continues", "reveals") + " " + finalclue + "<br><br>" + finality : randFrom(gatherclues) + " " + clue + randFrom(planning)
 
     return victoryresult
 }
 
-function determineNextStage(stageindex, story, result) {
+export function determineNextStage(stageindex, story, result, nstages) {
 
     let nextstage = Math.ceil(stageindex / 2) * 2 + 1 + result
 
-    if (stageindex >= $("#storylength").val() * 2 - 3) { nextstage = 0 }
+    if (stageindex >= nstages * 2 - 3) { nextstage = 0 }
 
     return nextstage
 }
 
-function getRandomMinions(enemy, getdeck = false) {
+export function getRandomMinions(enemy, getdeck = false, enemies = getEnemies()) {
 
-    let clones = randFrom(enemiescopy)
+    let clones = randFrom(enemies)
 
-    while (clones.name === enemy) { clones = randFrom(enemiescopy) }
+    while (clones.name === enemy) { clones = randFrom(enemies) }
 
     if (getdeck == false) {
         return `choose ${randFrom([clones.minionnames[0], clones.minionnames[1]])} from the ${clones.name} deck as the minion`
@@ -1390,7 +1408,7 @@ function getRandomMinions(enemy, getdeck = false) {
 }
 
 
-function setUpInstructions2(stageindex, enemy, rival, ally, knowledge, stagebonus, stagemalus) {
+export function setUpInstructions2(stageindex, enemy, rival, ally, knowledge, stagebonus, stagemalus) {
 
     let addrival
 
@@ -1499,16 +1517,37 @@ function setUpInstructions2(stageindex, enemy, rival, ally, knowledge, stagebonu
     let wincondition = [`If the fighters win:`, `If the fighters lose:`]
     let prologue = ""
 
-    $(directions).each(function () {
-        this.hasOwnProperty("setup") ? (setuptext = `${setuptext} ${this.setup}`) : () => { }
-        this.hasOwnProperty("activate") ? (persistence = true, activate = true, activatetext = `${activatetext} ${this.activate}`) : () => { }
-        this.hasOwnProperty("persistent") ? (persistence = true, persistenttext = `${persistenttext} ${this.persistent}`) : () => { }
-        this.hasOwnProperty("allysetup") ? (allysetup = true, setuptext = `${setuptext} ${this.allysetup}`) : () => { }
-        this.hasOwnProperty("rivalsetup") ? (rivalsetup = true, setuptext = `${setuptext} ${this.rivalsetup}`) : () => { }
-        this.hasOwnProperty("rivalboost") ? rivalboost = true : () => { }
-        this.hasOwnProperty("wincondition") ? wincondition = this.wincondition : () => { }
-        this.hasOwnProperty("prologue") ? prologue = this.prologue : () => { }
-    })
+   directions.forEach(dir => {
+	if ('setup' in dir) {
+		setuptext += ` ${dir.setup}`;
+	}
+	if ('activate' in dir) {
+		persistence = true;
+		activate = true;
+		activatetext += ` ${dir.activate}`;
+	}
+	if ('persistent' in dir) {
+		persistence = true;
+		persistenttext += ` ${dir.persistent}`;
+	}
+	if ('allysetup' in dir) {
+		allysetup = true;
+		setuptext += ` ${dir.allysetup}`;
+	}
+	if ('rivalsetup' in dir) {
+		rivalsetup = true;
+		setuptext += ` ${dir.rivalsetup}`;
+	}
+	if ('rivalboost' in dir) {
+		rivalboost = true;
+	}
+	if ('wincondition' in dir) {
+		wincondition = dir.wincondition;
+	}
+	if ('prologue' in dir) {
+		prologue = dir.prologue;
+	}
+});
 
     let instructions = `<b>Stage Setup:</b> ${setuptext}${persistence ? ` Put this card into play in the stage play area.` : ""} ${persistence ? persistenttext : ""}${activate ? ` <b>Activate:</b> ` : ""}${activate ? activatetext : ""}`
 
@@ -1519,22 +1558,22 @@ function setUpInstructions2(stageindex, enemy, rival, ally, knowledge, stagebonu
 }
 
  function trueMastermind(finalboss) {
-        true_words = ["true", "real", "paramount", "utmost", "mysterious"]
-        mastermind_words = ["mastermind", "architect", "engineer", "intellect", "prime mover"]
-        description_words = [`recent`, `devious`, `criminal`, `insidious`]
-        plot_words = [`plot`, `masterplan`, `events`, `incidents`]
-        finalboss_words = [`the ${randFrom(description_words)} ${randFrom(plot_words)}`, `the ${randFrom(description_words)} ${randFrom(plot_words)}`, `${finalboss.boss}`, `the ${finalboss.name}`]
+        let true_words = ["true", "real", "paramount", "utmost", "mysterious"]
+        let mastermind_words = ["mastermind", "architect", "engineer", "intellect", "prime mover"]
+        let description_words = [`recent`, `devious`, `criminal`, `insidious`]
+        let plot_words = [`plot`, `masterplan`, `events`, `incidents`]
+        let finalboss_words = [`the ${randFrom(description_words)} ${randFrom(plot_words)}`, `the ${randFrom(description_words)} ${randFrom(plot_words)}`, `${finalboss.boss}`, `the ${finalboss.name}`]
         return `the ${randFrom(true_words)} ${randFrom(mastermind_words)} behind ${randFrom(finalboss_words)}`
 
     }
 
-function createLeadIn(pregameprologue, stageindex, wincondition, enemy, stage, finalboss, rival, ally) {
+export function createLeadIn(pregameprologue, stageindex, wincondition, enemy, stage, finalboss, rival, ally, nstages) {
 
     pregameprologue = stageindex == 0 ? pregameprologue : ``
     let find_out_words = [`you discover`, `you find out`, `you learn of`, `you get wind of`, `you determine`, `it seems`, `turns out`]
     let this_boss = finalboss.name == enemy.name ? enemy.boss : randFrom([enemy.boss, `the ${enemy.name}`])
     let this_finalboss = finalboss.name == enemy.name ? finalboss.boss : randFrom([finalboss.boss, `the ${finalboss.name}`])
-    if (stageindex >= Math.max($("#storylength").val() * 2 - 3, 0) || finalboss.boss == enemy.boss) { this_finalboss = trueMastermind(finalboss) }
+    if (stageindex >= Math.max(nstages * 2 - 3, 0) || finalboss.boss == enemy.boss) { this_finalboss = trueMastermind(finalboss) }
     let intel_words = ["intel", "intelligence", "information", "a clue", "a word", "lowdown"]
     let location_words = ["locale", "location", "whereabouts", "position", "scene", "station", "bearings"]
     let investigator_words = ["Citadel analysts", "you", "Agent Fletch and you"]
@@ -1634,11 +1673,11 @@ function createLeadIn(pregameprologue, stageindex, wincondition, enemy, stage, f
     return lead_in
 }
 
-function getGizmo() {
+export function getGizmo() {
     return randFrom(["data disc", "keycard", "tape recorder", "floppy disc", "microchip", "communicator", "cell phone", "diskette", "data cartridge", "tablet", "magnetic tape", "computer","laser disc","minidisc","memory ribbon","data crystal","neural interface card","cyberdeck","video wristwatch"])
 }
 
-function removeLastBrBr(str) {
+export function removeLastBrBr(str) {
 if (str.endsWith("<br><br>")) {
 // Remove "<br><br>" only at the end of the string
 return str.substring(0, str.length - "<br><br>".length);
@@ -1647,9 +1686,9 @@ return str.substring(0, str.length - "<br><br>".length);
 return str;
 }
 
-function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, pregameprologue, vip, herodialogue) {
-    let finalboss = story[Math.max($("#storylength").val() * 2 - 3, 0)].enemy
-    let finalstage = story[Math.max($("#storylength").val() * 2 - 3, 0)].stage
+export function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, pregameprologue, vip, herodialogue, nstages) {
+    let finalboss = story[Math.max(nstages * 2 - 3, 0)].enemy
+    let finalstage = story[Math.max(nstages * 2 - 3, 0)].stage
     let enemy = story[stageindex].enemy
     let stage = story[stageindex].stage
     let rival = allyNamer(alliesandrivals, enemy, heronames, finalboss)
@@ -1660,10 +1699,10 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, 
     let allypresence = instructions.allysetup
     let rivalpresence = instructions.rivalsetup
     let rivalboost = instructions.rivalboost
-    let trail = createLeadIn(pregameprologue, stageindex, instructions.prologue, enemy, stage, finalboss, rival, ally)
+    let trail = createLeadIn(pregameprologue, stageindex, instructions.prologue, enemy, stage, finalboss, rival, ally, nstages)
     let setup = `<b>${stage.name}: ${enemy.name} ${enemy.name == "Kingdom" ? `(${enemy.boss})` : ""}</b><br>` + ((stage.name == "Original Copy") ? ucInit(getRandomMinions(enemy.name)) + ".<br>" : ``) + instructions.setup
-    let win = determineNextStage(stageindex, story, 0)
-    let lose = determineNextStage(stageindex, story, 1)
+    let win = determineNextStage(stageindex, story, 0, nstages)
+    let lose = determineNextStage(stageindex, story, 1, nstages)
     let gizmo = getGizmo()
 
     let smallvictory = randFrom([
@@ -1676,8 +1715,8 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, 
     `In the aftermath of the clash, Agent Fletch meets you with a steady gaze. "Missing ${finalboss.boss} stings, I won’t lie,' he admits, 'but don’t overlook the victory you've claimed today. Defeating ${enemy.boss} was no small feat. It's a testament to your dedication and skill. We're closer to our goal because of what you've accomplished."`
     ])
 
-    let winepilogue = stageindex >= Math.max(($("#storylength").val() * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 1) + "<br><br>" + `${finalboss.boss != enemy.boss ? smallvictory : ``}The fighters win this story.` : victoryResult(stageindex, story, win, gizmo, finalstage.masterplan, instructions.prologue, ally, rival)
-    let loseepilogue = stageindex >= Math.max(($("#storylength").val() * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 0) + "<br><br>" + `The fighters lose this story.` : loseResult(stageindex, story, lose, gizmo, instructions.prologue, rival, rivalpresence, ally)
+    let winepilogue = stageindex >= Math.max((nstages * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 1) + "<br><br>" + `${finalboss.boss != enemy.boss ? smallvictory : ``}The fighters win this story.` : victoryResult(stageindex, story, win, gizmo, finalstage.masterplan, instructions.prologue, ally, rival, nstages)
+    let loseepilogue = stageindex >= Math.max((nstages * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 0) + "<br><br>" + `The fighters lose this story.` : loseResult(stageindex, story, lose, gizmo, instructions.prologue, rival, rivalpresence, ally, nstages)
     let gloat = gloatingList(enemy, stage, herodialogue, heronames)
     let prologue
     let casino = getCasino(enemy)
@@ -1711,11 +1750,11 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, 
 
     if (knowledge == "captured") {
         prologue = stage.captured(template_settings)
-    } else if (stageindex >= Math.max($("#storylength").val() * 2 - 2, 0) && enemy.boss != finalboss.boss) {
+    } else if (stageindex >= Math.max(nstages * 2 - 2, 0) && enemy.boss != finalboss.boss) {
         masterplan = stage.masterplan
         stageindex != 0 ? template_settings.trail = changeOfPlans(trail, finalboss, enemy, stage) : ``
         stage.hasOwnProperty(masterplan) ? prologue = stage[masterplan](template_settings) : prologue = stage.prologue()(template_settings)
-    } else if (stageindex >= Math.max($("#storylength").val() * 2 - 3, 0) && stage.hasOwnProperty(masterplan) && knowledge != "clueless") {
+    } else if (stageindex >= Math.max(nstages * 2 - 3, 0) && stage.hasOwnProperty(masterplan) && knowledge != "clueless") {
         prologue = stage[masterplan](template_settings)
     } else {
         prologue = stage.prologue()(template_settings)
@@ -1725,16 +1764,16 @@ function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, 
     return { chapter: story[stageindex].chapter, prologue: removeLastBrBr(prologue), setup: setup, wincondition: instructions.wincondition, winepilogue: winepilogue, loseepilogue: loseepilogue }
 }
 
-function textMaker(story, alliesandrivals, heronames, enemies, herodialogue) {
+export function textMaker(story, alliesandrivals, heronames, enemies, herodialogue, nstages) {
 
     let cardtext
     let cardtexts = []
     let winepilogue = "Victory text"
     let loseepilogue = "Defeat text"
-    let pregameprologue = preGamePrologue(story[Math.max($("#storylength").val() * 2 - 3, 0)].stage, story[Math.max($("#storylength").val() * 2 - 3, 0)].enemy)
+    let pregameprologue = preGamePrologue(story[Math.max(nstages * 2 - 3, 0)].stage, story[Math.max(nstages * 2 - 3, 0)].enemy)
 
-    for (i = 0; i < story.length; i++) {
-        cardtext = createPrologue(i, story, alliesandrivals, heronames, enemies, pregameprologue.storytext, pregameprologue.vip, herodialogue);
+    for (let i = 0; i < story.length; i++) {
+        cardtext = createPrologue(i, story, alliesandrivals, heronames, enemies, pregameprologue.storytext, pregameprologue.vip, herodialogue, nstages);
         cardtexts.push(cardtext)
     }
 
@@ -1742,7 +1781,7 @@ function textMaker(story, alliesandrivals, heronames, enemies, herodialogue) {
 
 }
 
-function changeOfPlans(trail, finalboss, enemy, stage) {
+export function changeOfPlans(trail, finalboss, enemy, stage) {
 
 
     let newintel = randFrom([
@@ -1767,7 +1806,7 @@ function changeOfPlans(trail, finalboss, enemy, stage) {
     return conclusion
 }
 
-function finalResult(stage, enemy, rival, vip = null, result) {
+export function finalResult(stage, enemy, rival, vip = null, result) {
 
     let masterplan = stage.masterplan
     let neutralize
@@ -1880,7 +1919,7 @@ function finalResult(stage, enemy, rival, vip = null, result) {
 
 }
 
-function heroSpeech() {
+export function heroSpeech() {
     let effort = [` `, ` manage to `,]
     let speak = [`cough out`, `wheeze`, `utter`, `gasp`, `say`, `hiss`, `groan`]
     let descriptive = [`with your last bit of strength`, `with a smile`, `through bloodied lips`]
@@ -1888,7 +1927,7 @@ function heroSpeech() {
     return "you" + randFrom(effort) + randFrom(speak)
 }
 
-function defiantEnd(enemy) {
+export function defiantEnd(enemy) {
     let defiance = [
         [`You're sick,`, `Where do people like you come from?`],
         [`You won't get away with this!`, `Citadel will make sure of it!`],
@@ -1904,7 +1943,7 @@ function defiantEnd(enemy) {
     return randFrom(defiance)
 }
 
-function lastWords(enemy) {
+export function lastWords(enemy) {
     let lastwords = [
         [`Tomorrow, at sunrise..`, `I shall no longer be here.`],
         [`I was not supposed to die, not here..`, `Not like this.`],
@@ -1936,7 +1975,7 @@ function lastWords(enemy) {
     return randFrom(lastwords)
 }
 
-function lastThoughts(enemy) {
+export function lastThoughts(enemy) {
     let lastthoughts = [
         `You can only think of all the innocent lives that will perish because of this insane scheme you failed to thwart.`,
         `Your only regret is that you failed to stop the ${possessiveSuffix(enemy.name)} scheme, and your failure has doomed Ransom.`,
@@ -1951,7 +1990,7 @@ function lastThoughts(enemy) {
     return randFrom(lastthoughts)
 }
 
-function gloatingList(enemy, stage, herodialogue = [], heronames = undefined) {
+export function gloatingList(enemy, stage, herodialogue = [], heronames = undefined) {
 
     let gloating = [
         ["You've fought well,", "There will be no-one to mourn your death."],
@@ -2085,8 +2124,8 @@ function gloatingList(enemy, stage, herodialogue = [], heronames = undefined) {
 
 }
 
-function laconicStatement(enemy) {
-    laconicstatements = [
+export function laconicStatement(enemy) {
+    let laconicstatements = [
         `${ucInit(gPron(enemy, "subject"))} might be right, but you have to try and stop ${gPron(enemy, "object")}.`,
         "You agree to disagree.",
         `You don't know if this a fight you can win, but you have to try to stop ${gPron(enemy, "object")}.`,
@@ -2117,10 +2156,10 @@ function laconicStatement(enemy) {
     return randFrom([randFrom(laconicstatements), ``])
 }
 
-function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalmotivation, finalboss) {
+export function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalmotivation, finalboss) {
 
     let ourheroes = "This story is best experienced with "
-    for (i = 0; i < gladiators.length; i++) {
+    for (let i = 0; i < gladiators.length; i++) {
         ourheroes = ourheroes + "<b>" + gladiators[i].name + "</b>" + (i == gladiators.length - 2 ? " and " : ", ")
     }
 
@@ -2130,7 +2169,7 @@ function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalm
 
 
     let personalsetup = ""
-    for (i = 0; i < gladiators.length; i++) {
+    for (let i = 0; i < gladiators.length; i++) {
         if (gladiators[i].hasOwnProperty('instructions'))
             personalsetup = personalsetup + " " + gladiators[i].instructions + " "
     }
@@ -2146,7 +2185,7 @@ function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalm
 
     let allysetup = setup
 
-    for (i = 0; i < allygroup.length; i++) {
+    for (let i = 0; i < allygroup.length; i++) {
         allysetup = allysetup + " " + allygroup[i].name + " (Ally)" + (i == allygroup.length - 2 ? " and " : ", ")
     }
 
@@ -2154,7 +2193,7 @@ function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalm
 
     let rivalsetup = setup
 
-    for (i = 0; i < rivalgroup.length; i++) {
+    for (let i = 0; i < rivalgroup.length; i++) {
         rivalsetup = rivalsetup + " " + rivalgroup[i].name + " (Rival)" + (i == rivalgroup.length - 2 ? " and " : ", ")
     }
 
@@ -2171,7 +2210,7 @@ function referenceText(gladiators, allygroup, allymotivation, rivalgroup, rivalm
     return text
 }
 
-function numberAsString(number) {
+export function numberAsString(number) {
     switch (number) {
         case 1: number = "one";
             break;
@@ -2186,7 +2225,7 @@ function numberAsString(number) {
     return number
 }
 
-function motivationText(motivation, group, stance, finalboss, gladiators) {
+export function motivationText(motivation, group, stance, finalboss, gladiators) {
 
     gladiators = _.map(gladiators, 'name')
 
@@ -2583,12 +2622,12 @@ function motivationText(motivation, group, stance, finalboss, gladiators) {
 
 }
 
-function getTransformationSequence(enemy, blade = null, source = null) {
+export function getTransformationSequence(enemy, blade = null, source = null) {
 
     source == null ? source = enemy.name : () => { }
     blade == null ? blade = `blade` : () => { }
 
-    tranformations = [`Standing in the middle of the temple, ${gPron(enemy, "subject")} rises up off the stone floor, the ${mysticalSynonym()} powers swirling around ${gPron(enemy, "object")}. You watch as ${gPron(enemy, "possessive")} muscles grow, ${gPron(enemy, "possessive")} eyes burn, and ${gPron(enemy, "possessive")} body pulses with the ${mysticalSynonym()} energies!`,
+    let tranformations = [`Standing in the middle of the temple, ${gPron(enemy, "subject")} rises up off the stone floor, the ${mysticalSynonym()} powers swirling around ${gPron(enemy, "object")}. You watch as ${gPron(enemy, "possessive")} muscles grow, ${gPron(enemy, "possessive")} eyes burn, and ${gPron(enemy, "possessive")} body pulses with the ${mysticalSynonym()} energies!`,
     `Surrounded by an aura as dark and ominous as ${gPron(enemy, "possessive")} very reputation, ${gPron(enemy, "subject")} steps forth. ${ucInit(gPron(enemy, "possessive"))} eyes glow with a deep red energy, and ${gPron(enemy, "subject")} turns those burning orbs on you.`,
     `With a release of ${mysticalSynonym()} energy that leaves a crater beneath ${gPron(enemy, "object")}, ${gPron(enemy, "possessive")} skin peels off and ${gPron(enemy, "possessive")} blood turns into a red-black layer of horned carapace. Bony spurs burst forth, connected to ${gPron(enemy, "possessive")} body by ligaments. ${ucInit(gPron(enemy, "subject"))} turns ${gPron(enemy, "possessive")} dead-white, glowing eyes on you.`,
     `${ucInit(gPron(enemy, "subject"))} makes a strangling sound, and the ${mysticalSynonym()} transformation begins. ${ucInit(gPron(enemy, "possessive"))} skin turns gray all over, like a corpse. Every part of ${gPron(enemy, "possessive")} body swells up like it is about to burst. You hear the cracking noise of ${gPron(enemy, "possessive")} bones stretching. ${ucInit(gPron(enemy, "subject"))} rises to ${gPron(enemy, "possessive")} new, full height, towering over you, and slams ${gPron(enemy, "possessive")} mighty fists against ${gPron(enemy, "possessive")} chest with a release of ${mysticalSynonym()} energy.`,
@@ -2600,7 +2639,7 @@ function getTransformationSequence(enemy, blade = null, source = null) {
 
 }
 
-function getCasino(enemy) {
+export function getCasino(enemy) {
 
     let animal, prefix
 
@@ -2632,3 +2671,18 @@ function getCasino(enemy) {
 
     return casino
 }
+
+_.templateSettings.imports = {
+	randFrom,
+    gPron,
+    possessiveSuffix,
+    ucInit,
+    mysticalSynonym,
+	loungeMusic,
+	bossDescription,
+	getMasterPlan,
+	laconicStatement,
+	getEnemyAttack,
+	defineAddressing,
+	whichPreposition
+};
