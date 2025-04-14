@@ -16,7 +16,7 @@
 	import { pageContent } from '$lib/stores/pageContent';
 	import StoryPageRenderer from '$lib/components/StoryPageRenderer.svelte';
 	import LoadHandler from '$lib/components/LoadHandler.svelte';
-	 import { clickOutside } from '$lib/actions/clickOutside';
+	import { clickOutside } from '$lib/actions/clickOutside';
 
 	let storyRendererRef;
 
@@ -60,6 +60,7 @@
 
   function handleStoryGeneration() {
   const result = createStory(selectedExpansions, filteredGladiators.filter(e => e.selected).map(e => e.name), players, stages)
+//  console.log(result)
   pageContent.set(result); // Trigger render
   storyRendererRef?.goToStart();
 	}
@@ -69,6 +70,7 @@
 </script>
 
 {#if typeof players === 'number' && typeof stages === 'number'}
+<div class="app-selects">
 <label for="players">Number of players:</label>
 <select bind:value={$playerCount} id="players" class="dropdown">
 	{#each [1, 2, 3, 4] as n}
@@ -81,6 +83,8 @@
 		<option value={n} selected={n === stages}>{n}</option>
 	{/each}
 </select>
+</div>
+
 {/if}
 <button class="menu-button" on:click={handleStoryGeneration}>GENERATE A STORY</button>
 <StoryPageRenderer bind:this={storyRendererRef} />
@@ -89,7 +93,7 @@
 {#if showExpansionDropdown}
 	<div use:clickOutside={() => showExpansionDropdown = false} class="exp-dropdown">
 		{#each expansions as exp, i}
-			<a
+			<button
 				class="exp-item {exp.disabled ? 'disabled' : ''}"
 				on:click={() => toggleExpansion(i)}
 			>
@@ -103,7 +107,7 @@
 						◻️
 					{/if}
 				</span>
-			</a>
+			</button>
 		{/each}
 	</div>
 {/if}
@@ -114,7 +118,7 @@
 {#if showGladiatorDropdown}
 	<div use:clickOutside={() => showGladiatorDropdown = false} class="exp-dropdown">
 		{#each filteredGladiators as glad, i}
-			<a
+			<button
 				class="exp-item"
 				on:click={() => toggleGladiator(i)}
 			>
@@ -122,7 +126,7 @@
 				<span class="exp-icon">
 					{glad.selected ? '✔️' : '◻️'}
 				</span>
-			</a>
+			</button>
 		{/each}
 	</div>
 {/if}

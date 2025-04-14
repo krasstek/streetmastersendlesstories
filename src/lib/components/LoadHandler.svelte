@@ -4,7 +4,6 @@
   import { onMount } from 'svelte';
 
   export let goToStartFromHandler;
-  export let setOutcome;
 
   let showPopup = false;
 
@@ -34,8 +33,8 @@
   <button class = "menu-button" on:click={() => showPopup = true}>LOAD STORY</button>
 
 {#if showPopup}
-  <div class="story-overlay" on:click={() => showPopup = false}>
-    <div class="load-popup" on:click|stopPropagation>
+  <div  role="presentation" class="story-overlay" on:click={() => showPopup = false}>
+    <div  role="presentation" class="load-popup" on:click|stopPropagation>
       <div class = 'load-header'>Load Game<button on:click={() => showPopup = false} class="close-button"aria-label="Close popup">&times;</button></div>
       {#each $saveSlots as slot, i}
         <button class = 'load-button' on:click={() => {
@@ -52,18 +51,6 @@
 {/if}
 
 <style>
-  .load-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
 
   .load-header {
     background: black;

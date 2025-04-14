@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import SaveHandler from  '$lib/components/SaveHandler.svelte';
 	import ReferenceCard from '$lib/components/ReferenceCard.svelte';
+  import { escClose } from '$lib/actions/escClose';
 
 	let currentPage = 0;
 	let outcome = null;
@@ -11,7 +12,8 @@
 	let card = null;
 	let storytitle = ''
 	let showOverlay = true ;
-
+  let showReference = false;
+  let showSave = false;
 
 	$: if ($pageContent) {
 		story = $pageContent;
@@ -19,6 +21,8 @@
 		card = cardtexts[currentPage];
 		storytitle = $pageContent.storyname;
 		showOverlay = true;
+		showReference = false;
+		showSave = false;
 	}
 
 	function handleOutcome(result) {
@@ -72,9 +76,24 @@
 
 </script>
 
-{#if card && showOverlay}
-  <div class="story-overlay" on:click={() => showOverlay = false}>
-    <div class="story-popup" on:click|stopPropagation>
+{#if showReference}
+  <div use:escClose={() => (showReference = false)}>
+  </div>
+	<ReferenceCard
+	reference={story?.reference}
+	on:close={() => (showReference = false)}
+	/>
+{:else if card && showSave}
+  <div use:escClose={() => (showSave = false)}>
+  </div>
+	<SaveHandler
+	on:close={() => (showSave = false)}
+	/>
+{:else if card && showOverlay}
+  <div use:escClose={() => (showOverlay = false)}>
+  </div>
+  <div  role="presentation" class="story-overlay" on:click={() => showOverlay = false}>
+    <div role="presentation" class="story-popup" on:click|stopPropagation>
      {#if card && outcome === null}
 	<div class="story-card">
     <div class = "story-title">{storytitle}</div>
@@ -93,8 +112,8 @@
 			<button class="lose-button" on:click={() => handleOutcome('lose')}>
 				{card.wincondition[1]}
 			</button>
-				<ReferenceCard />
-				<SaveHandler />
+			<button class = "menu-button" on:click={() => (showReference = true)}>Gladiator Reference</button>
+			<button class = "menu-button" on:click={() => showSave = true}>Save Game</button>
 		</div>
 	</div>
 {:else if card && outcome}
@@ -126,7 +145,6 @@
 					<svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 	<path d="M5 12h14M13 6l6 6-6 6" />
 </svg></button>
-	<SaveHandler />
 		</div>
 	</div>
 {:else}
@@ -139,7 +157,6 @@
 {#if card}
 <button class = "menu-button" on:click={() => showOverlay = true}>OPEN STORY</button>
 {/if}
-
 <style>
 
 </style>

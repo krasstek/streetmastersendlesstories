@@ -1,6 +1,9 @@
 <script>
-  export const prerender = false;
 	import '../app.css';
+	import { onMount } from 'svelte';
+	onMount(() => {
+		document.body.classList.add('ready');
+	});
 </script>
 
 <div class="app-container">

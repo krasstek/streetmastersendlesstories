@@ -1,13 +1,15 @@
 import adapter from '@sveltejs/adapter-static';
+import preprocess from 'svelte-preprocess';
+
+const dev = process.env.NODE_ENV === 'development';
 
 export default {
-	kit: {
-		adapter: adapter({
-			fallback: 'index.html', // 👈 this enables SPA mode
-			strict: false            // 👈 avoids the error you're getting
-		}),
-		paths: {
-			base: '/streetmastersendlesstories' // or '/repo-name' if not hosted at root
-		}
-	}
+  preprocess: preprocess(),
+  kit: {
+    adapter: adapter(),
+    paths: {
+      base: dev ? '' : '/streetmastersendlesstories',
+      relative: false
+    }
+  }
 };

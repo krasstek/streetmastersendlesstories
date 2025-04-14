@@ -50,7 +50,7 @@ export function getEnemies(expansionfilter) {
                 [`As you parade around, shotgun in hand, what's the endgame? To become a martyr for your so-called community?" you probe, challenging the narrative he's crafted around himself. "Martyr? No. Guardian. Protector. And when threats loom at our doorstep,`, `I say, 'Say hello to my little friend'.`],
                 [`You claim to be the shield against chaos, but it's a thin line between protector and oppressor," you argue, the tension between you palpable. "Juan methodically loads each shell into his shotgun, savoring the anticipation. "Ah, but in times of peace, the protector rests.." With a decisive snap, he closes the weapon, the ominous click echoing through the surroundings. "In times of war,`, `Always ready to defend what's ours.`],
                 [`This cycle of violence... when does it end?" you demand, seeking a crack in his facade. He smirks. "It ends when the threats do." he chambers a round, his resolve clear, "Okay,`, `I'm reloaded. Here comes the pain!`],
-                [`What's the deal today? Two crimes for the price of one, or just a bargain on second-hand villainy?" you can't help but quip. "Ah, comparing me to a used car salesman? Well, you've just walked onto the lot`, `Let's see if you're ready to pay the price.`]
+                [`What's the deal today? Two crimes for the price of one, or just a bargain on second-hand villainy?" you can't help but quip. "Ah, you've just walked onto the lot,`, `Let's see if you're ready to pay the price.`]
             ], expression: _.template(`flicking a cigar in your direction`), keywords: ["guns"], gunmen: "gangsters"
         },
 
@@ -319,7 +319,7 @@ export function getStages(expansionfilter) {
                 '${trail}, you arrive at the offices just in the nick of time. <%=randFrom([`The ${enemy.name}`,ucInit(enemy.desc)])%> is ushering their people in, ready to take hostages. You manage to slip ahead of them.  "There\'s no escape," a ${gPron(enemy,"sex")} shouts out. "The ${finalboss.name} needs your operation, and you will abide by our demands. We speak for <%=finalboss.boss == enemy.boss ? `the ${finalboss.name}` : finalboss.boss%> and  ${gPron(finalboss, "subject")} speaks for the <%=finalboss.name != "Kingdom" && enemy.name != "Kingdom" ? `Kingdom` : `Master`%>." As panic ensues around the offices, you manage to calm several employees, making sure they keep their heads. Then you make your move on the ${enemy.name}.'
             ])),
             coldtrail: () => _.template('${trail} you conclude the next target of the ${enemy.name}. You arrive at an office building, and know it is too late. Gunshots can be heard inside the building, followed by screams inside and out.  "Call the police!"  several fleeing employees shout, but you know it is futile.  The chances of any Ransom P.D. response is beyond unlikely. The police are as corrupt as the very criminals they are charged to protect the city against. You rush into the building, heedless of all the warnings shouted at you.'),
-            clueless: () => randFrom([_.template('${trail}, you investigate a building you believe ${finalboss.name} have been operating out of. As you make your way into the darkened interior, you see a number of people through the windows, held at gunpoint. Hostages! While ${finalboss.boss} is your primary objective, you can\'t let ${enemy.boss} get away with this!'),
+            clueless: () => randFrom([_.template('${trail}, you investigate a building you believe ${finalboss.name} have been operating out of. As you make your way into the darkened interior, you see a number of people through the windows, held at gunpoint. Hostages! <%= finalboss.boss == enemy.boss ? `You can\'t let ${enemy.boss} get away with this!` : `While ${finalboss.boss} is your primary objective, you can\'t let ${enemy.boss} get away with this!`%>'),
             _.template('<%=stageindex == 0 ? `You are preparing for a hard-earned vacation, but just as you are about to take your leave from Citadel HQ` : `${trail}, you are at the Citadel HQ, reviewing what you\'ve got.  "We\'ve had the intel for a week," Fletch says. "I need to show something to the top brass." "There\'s a lot of dead ends," the analyst says.  "It\'s like they expected us to get the data."  Fletch considers those words.  What if the ${finalboss.name} wanted the Citadel to get a hold of the intel? Just as he was about to call his superiors`%>, a klaxon starts blaring in the facility."Sir!" a technician says. "I\'m picking up multiple hostiles on the scanners!" "Scramble our defenses!" Fletch commands.  "And alert the Global Gladiators!"')]),
             prologue: () =>_.template('${stagevar}<br><br>"${gloat[0]}" greets a familiar face that you hoped you might have seen the last of: ${bossDescription(enemy)}. "${gloat[1]}"<%=!rivalpresence ? ``:` ${rivaltext}`%>'),
             captured: _.template('Your hands bound, bags over your heads, you\'re finally dropped off on a cold concrete floor. "Not here!" you hear a ${gPron(enemy, "sex")} shout in anger.  "What can I do with them here?!"  There is a pause, and you hear footsteps receding until the door closes and your world is silent once more.<br><br>You quickly work yourself out of the bonds - the ${enemy.name} needs to invest in a stronger rope! - and make your way to the door you heard close a moment ago. Pushing slowly through it, you see an office on the other side. Standing in there is ${bossDescription(enemy)} and ${gPron(enemy,"possessive")} ${enemy.minions()}, surrounding a group of scared-looking scientists.<%=rivalpresence ? rivaltext : ``%> You know you have to stop ${gPron(enemy,"object")} and free the researchers at once!'),
@@ -366,6 +366,93 @@ export function getStages(expansionfilter) {
             strengtheningforces: _.template('${trail}, you learn that the ${getMasterPlan()} of ${enemy.boss} is to arm ${enemy.desc} of the ${enemy.name} with enough firepower to take over a small country. Not even the military could stop them - it is up to the Global Gladiators to stop ${gPron(enemy, "object")} before it is too late!<br><br>You arrive at the warehouse where the ${enemy.name} is arming themselves. ${ucInit(bossDescription(enemy))} watches your approach rashly. "${gloat[0]}" ${gPron(enemy,"subject")} says to you while ${gPron(enemy, "subject")} hands a gun to <%=rivalpresence ? rival.name : minion%>. "${gloat[1]}"<br><br>${laconicStatement(enemy)}'),
             actsofterror: _.template('${trail}, you find yourself outside a weapons facility operated by <%=rivalpresence ? rival.name : `${enemy.name}`%>. You have learned from your investigations that the ${getMasterPlan()} of ${enemy.boss} is to arm the ${enemy.minions()} with heavy artillery for a targeted, brutal strike on Ransom with maximum civilian casualties. You have no clue what the ${enemy.name} would gain from such orchestrated chaos, but that does not matter now. You will end this here and now.<br><br>"${gloat[0]}" ${bossDescription(enemy)} says to you, while ${gPron(enemy, "subject")} examines a gun handed by <%=rivalpresence ? rival.name : randFrom(enemy.minionnames)%>. "${gloat[1]}"<br><br>${laconicStatement(enemy)}')
         },
+
+         {
+            name: "Higher Purpose", expansion: "lamentofthebloodmoon", instory: 0,
+            location: "base", bystander: "startled dockworker",
+            pit: "a yawning shaft of industrial silence",
+            stagebonus: { setup: `Any fighter may place this card in their play area. <b>Feint:</b> Remove this card from the game to force a minion of your choice drop an objective it is carrying to an adjacent space.` },
+            stagepenalty: { setup: `Place 1P power on "Elevator".` },
+            masterplan: randFrom(["actsofterror", "kidnapping", "strengtheningforces", "illegalgains"]),
+            keywords: ["heights", "retrieval", "swarmed"], explosions: `scattering crate shrapnel`, swarm: `dockhands`, loot: `the cargo`,
+            rivaltext: _.template(', but ${rival.name} appears'),
+            prologue: () => _.template(randFrom([
+                "${trail}, you arrive at a decaying warehouse hub tucked between forgotten shipping lanes. The only way forward is down—and the elevator’s waiting.<br><br>${stagevar}",
+                "${trail}, you find youself at an old industrial site, lights flickering and machinery humming below. A battered freight lift stands open.<br><br>${stagevar}",
+                "${trail}, you arrive at a seemingly abandoned freight central. The smell of oil and ozone hangs thick in the air. An elevator platform sits idle nearby, just large enough for you and your answers.<br><br>${stagevar}",
+                "${trail}, you arrive at an abandoned shipping depot with more power running through it than expected. The elevator beckons.<br><br>${stagevar}",
+                "${trail}, you arrive at a decaying warehouse complex — the air still hums with recent activity. An old industrial elevator waits, open and ready.<br><br>${stagevar}",
+                "${trail}, you come to a freight zone wrapped in scaffolding and shadows. The only path down is the battered elevator before you.<br><br>${stagevar}",
+                "${trail}, the trail ends at a derelict cargo bay — quiet, but not abandoned. A flickering lift platform rumbles softly, its cage door ajar.<br><br>${stagevar}",
+                "${trail}, you push through broken fencing into an overgrown loading area. Ahead, the elevator platform hums with power.<br><br>${stagevar}"
+        ])),
+            hottrail: () => _.template(randFrom([
+                "You hit the warehouse hard and fast — whatever they were doing here, you caught it mid-step. ${randFrom(enemy.minionnames)} yells, \"They’re here!\" as you leap onto the descending freight elevator.",
+                "You charge through the upper floor, forcing your way past scattered crates and fleeing workers. The freight lift is still warm. You slam the button and drop in.",
+                "You burst through a side entrance as the last of the ${enemy.minions()} flees below. You jump onto the freight lift just before it locks into motion. Someone on the intercom panics: \"They’re on the platform!\"",
+                "The upper level is chaos— gear scattered, footsteps fresh. You catch the elevator just as it starts descending. From the intercom: \"Stop that lift! They made it in!\" But you're already moving."
+
+        ])),
+            coldtrail: () => _.template(randFrom([
+                "The elevator whines as it lowers — you might be too late to stop the cargo, but maybe not the ${enemy.name}. A monitor flickers to life. ${bossDescription(enemy)} stares into the camera, calm and calculating. \"${gloat[0]}\" ${gPron(enemy,\"subject\")} says and glances at a datapad. \"${gloat[1]}\"",
+                "You catch the scent of ozone and fresh oil as the platform descends. A nearby speaker crackles. \"Let them come. We're ready.\" You recognize the voice: it's ${enemy.boss}, expecting a confrontation.",
+                "The lift drops through half-lit levels—each one buzzing with hurried movement. From a busted panel above, the all-too familiar voice of ${enemy.boss} breaks through: \"ETA sixty seconds. Jump them before they reach us.\" It’s not panic. It’s preparation.",
+                "The freight shaft hums. You descend just in time to see shadows moving — too organized for retreat. They knew someone was coming.",
+                "Halfway down, a dusty screen springs to life. ${ucInit(bossDescription(enemy))} leans toward the lens, expression flat. \"${gloat[0]}\" ${gPron(enemy,\"subject\")} says while someone yells \"Crate four is sealed!\" offscreen. \"${gloat[1]}\"",
+                "You're late — but not forgotten. The elevator groans, lights flicker, and an intercom cuts in: \"They finally made it. Begin phase two.\" No need for introductions. ${enemy.boss} was waiting for you.",
+                "The platform descends into cold concrete and rhythmic machinery. From the walls, you hear muffled voices: \"They're on the way down.\" Someone was briefed. Someone was waiting.",
+                "You spot motion on the camera display just before the feed cuts in. ${enemy.boss} is giving orders fast, then turns to the lift feed. \"${gloat[0]}\" ${gPron(enemy,\"subject\")} says with ${gPron(enemy,\"possessive\")} voice distorted by the cheap system. \"${gloat[1]}\""
+
+        ])),
+            clueless: () => _.template(randFrom([
+                "You expected silence — but the elevator responds too quickly. As it descends, a screen blinks on. ${bossDescription(enemy)} is already watching. \"${gloat[0]}\", ${gPron(enemy,\"subject\")} says more loudly as crates shift behind ${gPron(enemy,\"object\")} leaning closer to the lens. \"${gloat[1]}\"",
+                "You thought this was just another empty warehouse—until the platform began to drop. Midway down, a voice cuts through an overhead speaker: \"They finally found it. Let's give them a welcome.\" You weren’t expected — but you’re definitely noticed.",
+                "The lift jolts into motion, and you almost regret pressing the button. Then, the screen flickers on. ${ucInit(bossDescription(enemy))} smirks like this was always part of the plan. \"${gloat[0]}\" ${gPron(enemy,\"subject\")} says, with smirk widening. A faint alarm pulses in the background. \"${gloat[1]}\"",
+                "You step into the elevator assuming it's just for recon. Halfway down, you hear it — footsteps. Movement. An unseen voice from a wall speaker: \"Camera two active. They're on their way.\" You suddenly wish you'd knocked.",
+                "The lift descends, slower than expected, as if it knows you're hesitating. A screen crackles on. ${enemy.boss} glances at the monitor, not surprised at all. \"${gloat[0]}\", ${gPron(enemy,\"subject\")} raises ${gPron(enemy,\"possessive\")} voice as behind ${gPron(enemy,\"object\")}, equipment is already being moved. \"${gloat[1]}\"",
+                "You weren’t sure you’d find anything. But now, descending into dim light and echoing steel, you hear a faint voice through the static: \"Don’t stop the lift, we don't want any interruptions. Just stop them.\" That wasn’t a random message.",
+                "The elevator cage rattles downward. You were expecting dust, not broadcast. But here it is — an active screen. ${bossDescription(enemy)} turns from a console and speaks directly to the camera. \"${gloat[0]}\" ${gPron(enemy,\"subject\")} exclaims, while a container is sealed in the background. \"${gloat[1]}\"",
+                "You enter cautiously, thinking this was just another empty lead. The elevator lowers—then a PA system crackles to life: \"They’re coming. Finish the loadout. And finish those Gladiators!\" You’re not intruding. You’re invited."
+        ])),
+            captured: _.template(randFrom([
+                "You come to with a dull ache and the taste of rust. The platform rattles beneath you, descending into shadow. ${ucInit(enemy.minions())} stand guard, silent but alert. One mutters, 'The boss wants eyes on 'em till the end.' You steel yourself, snap the restraints with a surge of fury, and drive your knee into the nearest jaw.",
+                "The lift groans like a dying beast. You're zip-tied to a railing, half-slumped between crates. ${randFrom(enemy.minionnames)} leans in and says, \"You're lucky they want you alive.\" But luck cuts both ways. You rip free, swing the crate lid up, and make it count.",
+                "Flickering lights and the screech of pulleys greet you as you wake. ${ucInit(enemy.minions())} line the edges of the platform like statues. One checks their weapon. No one speaks. You twist your wrists, pop the cuffs loose, and launch yourself forward like a coiled spring.",
+                "You're bound at the wrists, knees stiff, sitting between crates marked with hazard symbols. The elevator drops deeper with every second. ${randFrom(enemy.minionnames)} smirks, \"Hope you like surprises.\" You give 'em one, back—shatter your binds and drive an elbow into their ribs.",
+                "Everything smells like oil and blood. You blink, chained to a support bar, flanked by ${enemy.minions()}. ${randFrom(enemy.minionnames)} mutters, '${enemy.boss} will want to see these personally.' You grunt, brace yourself, and hurl the chain over their head like a whip.",
+                "Chains clink as the elevator descends. ${ucInit(enemy.minions())} stand still, but you can feel their eyes. Someone whispers, \"They wake up again, break something.\" So you do. Your arms snap free, and the nearest guard hits the floor before they even know you’re up."
+        ])),
+        strengtheningforces: _.template(randFrom([
+            "${trail}, you arrive at a warehouse that functions as the armory, the factory, and the bootcamp. Crates of riot armor, ordnance, combat drug injectors, and encrypted comms are being locked down and shipped out. The recruits are ready. The war is starting. ${finalvar}",
+            "${trail}, you arrive at a fortified loading zone where they’ve been building toward this for months — tanks tuned, enhancements tested, loyalty bought. The cargo floor is swarming with loaders packing assault kits and synthetic soldier vests. You’re here to stop a deployment. ${finalvar}"
+          ])),
+          actsofterror: _.template(randFrom([
+            "${trail}, you arrive at a warehouse that isn’t just where the terror was made—it’s where it’s being launched. Below, crates of explosive devices are being loaded into trucks bound for the city. The ${enemy.minions()} aren't running—they're delivering destruction. ${finalvar}",
+            "${trail}, you arrive at the final link in the chain. The warehouse floor below is alive with movement: timers are being set, payloads are being sealed. They're not hiding anymore. They're sending a message in flame. ${finalvar}"
+          ])),
+/*          personalpower: _.template(randFrom([
+            "${trail} Beneath the warehouse, power thrums through ritualized tech. Minions load arcane fuel cells, grafted limbs, and sealed stasis crates onto glowing platforms. Whatever’s inside them is feeding the thing ${enemy.boss} is becoming. ${finalvar}",
+            "${trail} This place was a lab, then a shrine — now it’s a crucible. Crates of bio-mechanical constructs, restructured nerves, and pulsing machinery are being transported into a central core. ${enemy.boss} isn’t leaving. ${ucInit(gPron(enemy,'subject'))} is ascending. ${finalvar}",
+          ])),*/
+          illegalgains: _.template(randFrom([
+            "${trail}, you follow the money — right into its distribution center. The ground level alone is covered in shrink-wrapped bricks of currency, contraband tech, and liquid narcotics.${finalvar}",
+            "${trail}, you arrive at the edge of a fast-moving operation. Below, forklifts rush to finish the payout: cases of forged credentials, high-grade stimulants, and military surplus get packed like candy. This isn’t just profit — it’s pure power. ${enemy.boss} is cashing out hard. ${finalvar}"
+          ])),
+          kidnapping: _.template(randFrom([
+            "${trail}, you arrive to find that ${vip[0]} isn’t just bait — they’re cargo. Below, containment crates are being bolted shut, with ${gPron(enemy,'possessive')} agents loading them next to escort tech and decoy intel. Whatever they’re planning for ${vip[1]}, it’s already in motion. This isn’t an escape. It’s a final exchange. ${finalvar}",
+            "${trail}, you arrive just as the extraction begins. ${vip[0]} is in one of the sealed capsules on the warehouse floor below, indistinguishable from the rest—unless you act fast. ${enemy.boss} doesn’t just want them gone. There’s something huge coming for ${vip[1]}, and this is the first move. ${finalvar}"
+          ])),
+          finalvar: _.template(randFrom([
+            "<br><br>The freight elevator descends with a shriek of steel cables. Cargo sways. A flickering monitor flares to life — ${bossDescription(enemy)} grins into the feed. \"${gloat[0]}\" ${gPron(enemy,'subject')} says as sparks scatter across the screen. \"${gloat[1]}\" Then the ceiling above ruptures. ${ucInit(enemy.minions())} drop in through a service hatch, landing hard and ready. No time to breathe.",
+            "You enter the cargo elevator.<br><br>Chains rattle. The platform creaks. The screen flickers to life, showing ${enemy.boss}, arms crossed, flanked by loading equipment. \"${gloat[0]}\" ${gPron(enemy,'subject')} says coolly as cargo cranes move behind. \"${gloat[1]}\" Then the wall panels burst open — ${ucInit(enemy.minions())} flood in from side alcoves, shouting and swinging. It's on.",
+            "<br><br>The elevator slams downward past an open maintenance floor — too fast to react. Too late. ${ucInit(enemy.minions())} leap from the ledge above, landing between you and the nearest crate. Before you can shout, the monitor lights up. ${ucInit(bossDescription(enemy))} smirks into the lens. \"${gloat[0]}\" ${gPron(enemy,'subject')} says as alarms flicker in the background. \"${gloat[1]}\"",
+            "<br><br>As the elevator drops, a low hum pulses through the deck beneath you. You’re not alone. From beneath tarps and false crates, ${enemy.minions()} erupt with a yell. The screen activates mid-motion — ${enemy.boss} leans toward the camera. \"${gloat[0]}\" ${gPron(enemy,'subject')} snarls, barely audible over the chaos. \"${gloat[1]}\"",
+            "There's only one way - down.<br><br>You brace yourself as the platform descends — but the threat isn’t below. From scaffolding above, ${ucInit(enemy.minions())} rappel down, feet slamming onto crates, hands already swinging. The screen hisses to life. ${bossDescription(enemy)} speaks through static. \"${gloat[0]}\" ${gPron(enemy,'subject')} says with a cruel smile as sparks dance on steel. \"${gloat[1]}\"",
+            "You enter the elevator cabin and hit the button.<br><br>The descent starts calm — too calm. Then floor access hatches clang open. ${ucInit(enemy.minions())} rise from hidden compartments, ready for a scrap. The screen overhead buzzes to life. ${enemy.boss} watches with satisfaction. \"${gloat[0]}\" ${gPron(enemy,'subject')} says as explosions rock the bay beneath you. \"${gloat[1]}\""
+          ]))
+
+         },
+
 
         {
             name: "One Step Ahead", expansion: "legendofoni", instory: 0, location: "remote", bystander: "mountain climber", pit: "the edge of the cliff",
@@ -646,6 +733,84 @@ export function getStages(expansionfilter) {
         },
 
         {
+            name: "Snowdown", expansion: "lamentofthebloodmoon", instory: 0, location: "cursed", bystander: "wandering pilgrim",
+            stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Remove this card from the game to flip one objective to its inactive side.` },
+            stagepenalty: { setup: `The boss gains 1 defense token of each type. Each fighter is dealt 1 direct damage.` },
+            masterplan: randFrom(["actsofterror", "kidnapping", "strengtheningforces", "personalpower"]),
+            keywords: ["ritual", "blade"],
+            ritual: "Blood", blade: "ritual knife",
+            rivaltext: _.template(', but ${rival.name}<%=rivalboost ? `, swept up in the rite’s unholy fervor` : `, hoping to steal power from the ceremony`%> steps into the circle to oppose you'),
+            prologue: () => _.template(randFrom([
+                "${trail}, you arrive at a distant highland ${evilPlace()}, surrounded by solemn pines and coated in silent snowfall. <br><br>${stagevar}",
+                "${trail}, the air shifts as you approach the courtyard of the ${evilPlace()} — snowfall slow and deliberate, the kind that hides things instead of covering them. Crimson glistens in the frost.<br><br>${stagevar}",
+                "${trail}, you reach the outskirts of the ${evilPlace()} by foot after a drop from a low-flying cargo plane. The snowfall started hours ago... but only here. Candlelight flickers through the trees. <br><br>${stagevar}",
+                "${trail}, deep in the woods, the open temple grounds of await. A quiet snowfall veils the blood-marked stones — but the rite is far from silent.<br><br>${stagevar}"
+            ])),
+            hottrail: () => _.template(randFrom([
+                "You charge into the courtyard as the last verse of the chant rings out. ${ucInit(enemy.minions())} stagger back, caught mid-circle. ${randFrom(enemy.minionnames)} hisses, 'They made it this far? Stop them!' as you leap toward the blood-soaked altar.",
+                "The trail was hot — and you arrived just in time to interrupt the rite. The snowfall swirls around you as ${enemy.minions()} throw down incense ready for the fight. ${laconicStatement(enemy)}",
+                "You reach the courtyard before the rite ends. Snow sticks to your shoulders. ${possessiveSuffix(bossDescription(enemy))} voice cracks as you interrupt the verse. \"${gloat[0]}\" ${gPron(enemy,\"subject\")} spits while a blood torch is knocked over in the chaos. \"${gloat[1]}\" ${laconicStatement(enemy)}",
+                "The ceremony is active — the blood is warm, the symbols still glowing. ${enemy.minions()} turn at once, ready for violence. \"${gloat[0]}\" ${enemy.boss} barks. \"${gloat[1]}\" ${laconicStatement(enemy)}"
+            ])),
+            coldtrail: () => _.template(randFrom([
+                "You arrive too late to stop the incantation — but not too late to matter. The courtyard's snow turning deep red. ${bossDescription(enemy)} looks down at you. \"${gloat[0]}\" ${gPron(enemy,\"subject\")} says. \"${gloat[1]}\"",
+                "The ritual is already underway. Blood spills across sacred stones, warming the snow. ${enemy.boss} stands in the courtyard, arms raised. As you approach, ${gloat[0]} ${gPron(enemy, \"subject\")} says without breaking the chant. \"${gloat[1]}\"",
+                "You enter the yard as the final phrase of the ritual echoes. ${bossDescription(enemy)} turns slowly, unafraid. Snowflakes melt on fresh blood at ${gPron(enemy, \"possessive\")} feet. \"${gloat[0]}\" ${gPron(enemy, \"subject\")} murmurs. \"${gloat[1]}\"",
+                "You step between statues and ritual fires. The ceremony is nearly complete. ${enemy.boss} meets your eyes with cruel certainty. \"${gloat[0]}\" ${gPron(enemy, \"subject\")} intones. \"${gloat[1]}\" ${laconicStatement(enemy)}"
+            ])),
+            clueless: () => _.template(randFrom([
+                "You thought you were alone — until you step into the temple yard. Snow falls in perfect spirals. The moment your boots touch the stones, braziers ignite and a screen clicks on. ${bossDescription(enemy)} leans into view. \"${gloat[0]}\" ${gPron(enemy,\"subject\")} says. \"${gloat[1]}\"",
+                "The shrine looked abandoned from the ridge. But as you step into the courtyard, voices rise in chorus — not of welcome. The snowfall hushes your movement, but a monitor awakens with static. ${enemy.boss} was already watching.",
+                "You approach cautiously, unaware you’re already in the circle. The snow carries no sound, but the symbols on the stone respond to your presence. ${bossDescription(enemy)} appears on a flickering screen embedded in the altar. \"${gloat[0]}\" ${gPron(enemy,\"subject\")} intones. \"${gloat[1]}\"",
+                "You enter Snowdown expecting silence and find purpose. The chanting rises slowly, measured — this was always part of the ritual. A screen buzzes. ${enemy.boss} turns to face you. \"${gloat[0]}\" ${gPron(enemy,\"subject\")} calls. \"${gloat[1]}\""
+            ])),
+            captured: _.template(randFrom([
+                "You come to at the foot of a blood shrine — your wrists bound with ritual cloth. The snowfall is soft, but the chanting is loud. ${ucInit(enemy.minions())} stand around you in a tight ring. One whispers, 'Offer them before the cycle completes.' You snap free before they can finish.",
+                "Your head aches. You lie in the temple yard, shackled to a blood-crusted idol. The snow falls gently. ${randFrom(enemy.minionnames)} mutters, 'Don't spill too much — the boss wants them awake for the mark.' You twist loose and send the bowl flying.",
+                "You awaken tied to a shrine beneath gently falling snow. ${ucInit(enemy.minions())} hold you while ${enemy.boss} watches the sky, muttering words older than pain. You tear free before the ${blade}> descends.",
+                "You blink away blood and snow to find yourself at the foot of a blood altar. ${randFrom(enemy.minionnames)} leans in. 'The offering lives,' they say. ${enemy.boss} lifts a chalice nearby, unaware you’re already loosening your restraints.",
+                "Snow dusts your face as you awaken on frozen ground. Your limbs are bound, but your will isn’t. ${enemy.boss} chants above you, ${blade} drawn. You break free with a roar, and the yard erupts in chaos.",
+                "You stir on sacred ground — snow gathering on your skin. The blood circle is closing. ${ucInit(enemy.minions())} chant in low, rhythmic tones. One leans down. 'Time to bleed.' You break the bonds and rise into fury."
+            ])),
+            finalvar: _.template(randFrom([
+                "<br><br>Snow swirls in sharp spirals as ${enemy.boss} turns to you, voice echoing like frost cracking stone. \"${gloat[0]}\" ${gPron(enemy, 'subject')} says, raising bloodied arms toward the altar. \"${gloat[1]}\" A deep rumble tears through the courtyard as ${ucInit(enemy.minions())} rise from the snow.",
+                "<br><br>The final glyph ignites beneath ${possessiveSuffix(enemy.boss)} feet. A shockwave bursts from the altar, sending snow and blood into the air. \"${gloat[0]}\" ${gPron(enemy, 'subject')} calls out over the howling wind. \"${gloat[1]}\" ${ucInit(enemy.minions())} descend upon you. ${laconicStatement(enemy)}",
+                "<br><br>The snow stops falling. ${enemy.boss} stands in the stillness, surrounded by flickering braziers. \"${gloat[0]}\" ${gPron(enemy, 'subject')} says, voice now inhuman. \"${gloat[1]}\" Then the symbols crack open the earth, and the cult leaps into action. ${laconicStatement(enemy)}",
+                "<br><br>The last verse of the rite hangs in the air. Snow falls upward now. ${enemy.boss} grins, eyes glowing from within. \"${gloat[0]}\" ${gPron(enemy, 'subject')} hisses. \"${gloat[1]}\" A red bolt of blood made lightning snaps through the courtyard as ${enemy.minions()} swarm forward."
+            ])),
+            actsofterror: _.template(randFrom([
+                "${trail}, you come to the realization that ${possessiveSuffix(enemy.name)} ritual isn't about worship — it's a threat. Symbols carved into the mountain channel the blood downward. If completed, the rite will awaken the long-slumbering dead across nearby cities. ${finalvar}",
+                "${trail}, it becomes clear: the ${getMasterPlan()} isn’t just a ceremony, it’s a message in gore. The ${enemy.name} plans to trigger seismic destruction with sacrificial blood tied to ley lines. The shrines at the ${evilPlace()} are part of a bomb. ${finalvar}",
+                "${trail}, Agent Fletch pieces it together — the ${getMasterPlan()} hinges on a psychic scream across the region — one strong enough to drive entire city blocks to madness. Blood is the amplifier. The chant is almost complete. ${finalvar}",
+                "${trail}, Citadel analysts confirm what you feared: the ${getMasterPlan()} involves the ${possessiveSuffix(enemy.name)} using sacrifices as living runes — terror, encoded in suffering. ${enemy.boss} steps forward, ${blade} ready. ${finalvar}"
+            ])),
+            kidnapping: _.template(randFrom([
+                "${trail}, there's no more doubt — the ${getMasterPlan()} is written into every stone and symbol here: you find ${vip[0]} bound at the heart of the yard, daubed in ritual ink. Their eyes are wide with terror. ${enemy.boss} is preparing them for something — maybe a vessel, maybe an offering. ${finalvar}",
+                "${trail}, you realize the horrifying truth: this is the ${getMasterPlan()}. The cult has already begun carving sigils into the altar stone near ${vip[0]}. ${ucInit(enemy.minions())} whisper about 'the chosen one’s blood'. You only have seconds. ${finalvar}",
+                "${trail}, the evidence aligns — ${enemy.boss} is enacting ${gPron(enemy,'possessive')} ${getMasterPlan()} through this ceremony. The ${vip[0]} is in the circle — and it’s not clear if they even *know* they’re the center of the rite. ${enemy.boss} watches you with a calm smile. This was the plan. ${finalvar}"
+            ])),
+            strengtheningforces: _.template(randFrom([
+                "${trail}, you realize the blood spilled across the yard is not symbolic — it’s a summoning medium. ${enemy.boss} intends to call forth an ancient evil, long-buried beneath the shrine. The earth pulses. ${finalvar}",
+                "${trail}, the scope finally comes into focus: the ceremony channels energy into ancient shrines ringing the yard. ${enemy.minions()} chant louder. ${enemy.boss} grins, basking in the imminent birth of new daemonic soldiers. ${finalvar}",
+                "${trail}, the details click into place: they’re not calling for help — they’re creating it. The ritual infuses corpses from previous sacrifices with rage and ice. You watch a blood mixes in with the snow, slowly forming daemonic shapes. You must stop this before it is too late! ${finalvar}",
+                "${trail}, the meaning of the blood rites becomes undeniable: the ${enemy.minions()} are just vessels. If ${enemy.boss} can finish speaking the invocation they will all drop dead — only to rise as horrors of blood and bone, and army for ${finalboss.name} more powerful than Citadel could ever handle. ${finalvar}"
+            ])),
+            personalpower: _.template(randFrom([
+                "${trail}, you finally understand, ${enemy.boss} is the sacrifice *and* the beneficiary. Their blood binds the rite to the ancient one buried beneath the yard. You watch their flesh begin to twist and shine. Ascension is close. ${finalvar}",
+                "${trail}, you realize the ${enemy.minions()} aren’t just channeling power — they’re *feeding* it to ${enemy.boss}. ${ucInit(gPron(enemy, 'possessive'))} body glows with unnatural heat. Glyphs burn into ${gPron(enemy, 'possessive')} skin, and ${gPron(enemy, 'possessive')} voice deepens into something unholy. ${finalvar}",
+                "${trail}, the conclusion stings — the ${getMasterPlan()} was never meant to be subtle. ${enemy.boss} takes the final step onto the altar as the chanting stops. The snow halts mid-air. Silence. Then ${gPron(enemy, 'possessive')} skin starts to cracks like glass and light pours through. The deity is coming — through them. ${finalvar}"
+            ])),
+            gloat: [
+                 ["You hear the snow falling? It's not silence — it's surrender. Soon, even the sky will kneel.", "And you're next."],
+                 ["They said no one would dare interrupt the rite. I'm *glad* they were wrong — I do like an audience.","Now watch something truly divine."],
+                 ["The altar drank well tonight... but not enough. You, though — you're practically overflowing.","Let’s spill it all!"],
+                 ["I carved the circle. I lit the fires. I even made the storm. And you think this is YOUR story?","It ends with MY name!"],
+                 ["You came all this way through the snow... just to die where you stand? That’s dedication.","Let’s make it legendary!"],
+                 ["I summoned the storm, built the shrine, and fed it power. You brought fists to a prophecy.", "Now get ready to vanish from history."],
+                 ["I thought we were going to finish the ritual alone... but you? You’re a bonus round.","Let’s see what you’re worth in screams."]
+            ]
+        },
+        {
             name: "Steel Memories", expansion: "riseofthekingdom", instory: 0, location: "base", bystander: "nameless goon", pit: "a pitch-black elevator shaft",
             stagebonus: { setup: `One fighter may move 3 spaces toward the nearest objective.` },
             stagepenalty: { setup: `Each fighter must <b>Recruit</b>.` },
@@ -676,7 +841,7 @@ export function getStages(expansionfilter) {
             prologue: () =>_.template(randFrom([
                 '<%=knowledge == "clueless" ? ``: `${trail}, you accompany a large squad of Citadel agents as they storm the ${possessiveSuffix(enemy.name)} base. ${ucInit(enemy.minions())} of the ${enemy.name} fall before you as you make your way through the maze-like halls until you finally reach an elevator, indicated as your goal on your map. As you call it, you hear the sounds of more approaching soldiers. The Citadel agents engage these reinforcements as you head up to face ${enemy.boss}.${randFrom([` You wait patiently while a lounge version of ${loungeMusic()} plays over the cheap speakers.`,``])}<br><br>The elevator doors open to reveal ${bossDescription(enemy)} ${rivalpresence ? rivaltext : ``} ` %>${stagevar} ${laconicStatement(enemy)}',
                 '${trail}, you infiltrate <%=knowledge == "hottrail" ? `the` : `a suspected`%> ${enemy.name} base.<br><br>"You have skill," ${enemy.boss} says to the group of recruits before ${gPron(enemy,"object")}. "And with the ${enemy.name}, you will become the greatest fighting force across the entire globe!"<br><br>"Still spreading your lies, ${enemy.boss}?" you call out across the training grounds.<br><br>${enemy.boss} turns,<%=rivalpresence ? `${rivaltext} ` : `` %>ready to face you. "${gloat[0]}" ${gPron(enemy,"subject")} says. "${gloat[1]}" ${enemy.boss} then turns to look at the recruits gathered there. "Alright, rookies, now is your chance to prove yourselves."',
-                '<%=knowledge == "clueless" ? ``: `${trail}, you find yourself amidst a chaotic battleground as you lead a squad of Citadel agents through the heart of the ${enemy.name} base. The walls reverberate with the thunderous clash of steel and gunfire as you carve a path forward. With each step, the enemy forces fall before you, but the sound of reinforcements echoes ominously from every corridor. You know that the true test awaits at the top, where ${bossDescription(enemy)} awaits.${randFrom([` The soft melody of jazzy interpretation of ${loungeMusic()} drifts through the air, a stark contrast to the violence surrounding you.`,``])}<br><br>As the elevator doors slide open, revealing your destination, you brace yourself for the final showdown against ${enemy.boss}${rivalpresence ? rivaltext : ``}. ${gPron(enemy,"subject")} is `%>${stagevar} ${laconicStatement(enemy)}',
+                '<%=knowledge == "clueless" ? ``: `${trail}, you find yourself amidst a chaotic battleground as you lead a squad of Citadel agents through the heart of the ${enemy.name} base. The walls reverberate with the thunderous clash of steel and gunfire as you carve a path forward. With each step, the enemy forces fall before you, but the sound of reinforcements echoes ominously from every corridor. You know that the true test awaits at the top, where ${bossDescription(enemy)} awaits.${randFrom([` The soft melody of jazzy interpretation of ${loungeMusic()} drifts through the air, a stark contrast to the violence surrounding you.`,``])}<br><br>As the elevator doors slide open, revealing your destination, you brace yourself for the final showdown against ${enemy.boss}${rivalpresence ? rivaltext : ``}. ${ucInit(gPron(enemy,"subject"))} is `%>${stagevar} ${laconicStatement(enemy)}',
                 '<%=knowledge == "clueless" ? ``: `${trail}, you slip into the heart of the ${enemy.name} stronghold under the cover of darkness.<br><br>"Your reign of terror ends here, ${enemy.boss}," you declare boldly, stepping out from the shadows to confront ${bossDescription(enemy)}${rivalpresence ? rivaltext : ""} standing with the assembled recruits. The air crackles with tension as ${gPron(enemy,"subject")} turns to face you, `%>${stagevar} The announcement is a rallying cry for the recruits for the ultimate test of skill and strength.'
             ])),
             captured: _.template(randFrom([
@@ -689,7 +854,7 @@ export function getStages(expansionfilter) {
             ])),
             actsofterror: _.template(randFrom([
                 '${trail}, Agent Fletch explains to you the ${getMasterPlan()} of the ${enemy.name}: "${enemy.boss} has provided the citizens of Ransom City a release for all the hatred, violence, and aggression that they keep up inside them." He leans over the satellite image of the city and continues. "With the people whipped up to a frenzy, a 12 hour marathon of crimes of every imaginable sort - including murder - will start right here," he points at the map. "Unless you can stop the spread of the mob mentality, I don\'t think Ransom will survive the night."<br><br>You move in to confront the mob and the perturbing ${enemy.minions()} of the ${enemy.name}.',
-                '${trail}, your team deftly maneuvers through the claustrophobic maze of ancient tunnels beneath the city. ${possessiveSuffix(enemy.boss)} ${getMasterPlan()} is unfolding: to shatter the bedrock of Ransom City with underground explosions, casting the surface world into unrestrained chaos. As shadows give way to the dimly lit underbelly of the enemy\'s headquarters, you emerge from the tunnels\' veil of secrecy, directly into the tiger\'s den.  The element of surprise is momentarily yours as you disrupt the machinations of the countless foot soldiers who stand guard over a plot too vile to fester. "${gloat[0]}", ${possessiveSuffix(enemy.boss)} voice echoing off the cold, unforgiving concrete that forms the backbone of ${possessiveSuffix(enemy.boss)} fortress."${gloat[0]}<br><br>${laconicStatement(enemy)}'
+                '${trail}, your team deftly maneuvers through the claustrophobic maze of ancient tunnels beneath the city. ${possessiveSuffix(enemy.boss)} ${getMasterPlan()} is unfolding: to shatter the bedrock of Ransom City with underground explosions, casting the surface world into unrestrained chaos. As shadows give way to the dimly lit underbelly of the enemy\'s headquarters, you emerge from the tunnels\' veil of secrecy, directly into the tiger\'s den.  The element of surprise is momentarily yours as you disrupt the machinations of the countless foot soldiers who stand guard over a plot too vile to fester. "${gloat[0]}", ${possessiveSuffix(enemy.boss)} voice echoing off the cold, unforgiving concrete that forms the backbone of ${possessiveSuffix(enemy.boss)} fortress."${gloat[1]}<br><br>${laconicStatement(enemy)}'
             ])),
             kidnapping: _.template('${trail}, you accompany a large squad of Citadel agents as they storm the ${possessiveSuffix(enemy.name)} base where the ${vip[0]} is being held. ${ucInit(enemy.minions())} of the ${enemy.name} fall before you as you make your way through the maze-like halls until you finally reach an elevator, indicated as your goal on your map. As you call it, you hear the sounds of more approaching soldiers. The Citadel agents engage these reinforcements as you head up to face ${enemy.boss}.<%=randFrom([` You wait patiently while a lounge version of ${loungeMusic()} plays over the cheap speakers.`,``])%><br><br>The elevator doors open to reveal ${bossDescription(enemy)}<%=rivalpresence ? rivaltext : ``%> standing ready. "${gloat[0]}" ${enemy.boss} says. "${gloat[1]}"<br><br>${laconicStatement(enemy)}')
         },
@@ -835,7 +1000,7 @@ export function getStages(expansionfilter) {
                   ])),
             prologue: () =>_.template(randFrom(
                 [
-                    '${trail}, you are led to a grim discovery: the ${enemy.name} has been orchestrating a sinister plot. The ${enemy.minions()} have toiled in secrecy, setting up an intricate web of explosives at a construction site shrouded in shadows and mystery. The air is thick with tension as you con_.template the magnitude of the impending disaster. How is the ${finalboss.name} connected to this nefarious scheme? The answers lie within the heart of the construction site, waiting to be uncovered.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}',
+                    '${trail}, you are led to a grim discovery: the ${enemy.name} has been orchestrating a sinister plot. The ${enemy.minions()} have toiled in secrecy, setting up an intricate web of explosives at a construction site shrouded in shadows and mystery. The air is thick with tension as you consider the magnitude of the impending disaster. How is the ${finalboss.name} connected to this nefarious scheme? The answers lie within the heart of the construction site, waiting to be uncovered.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}',
                     '${trail}, it didn\'t take long to find out the ${enemy.name} had been busy setting up an intricate series of explosives at a construction site for a planned ${randFrom([`research facility`,`headquarters`,`manufacturing facility`])} of a ${randFrom([`cutting edge medical company`,`weapons manufacturer`,`chemical manufacturer`,`cybernetics research company`])}. How is the ${finalboss.name} connected? There is only one way to find out.<br><br>${stagevar}<br><br>${laconicStatement(enemy)}'
                 ]
             )),
@@ -866,6 +1031,7 @@ export function getStages(expansionfilter) {
 }
 
 export function getGladiators(expansionfilter, enemies = getEnemies(), stages = getStages()) {
+
     let gladiators = [
         {
             name: "Ah Long", expansion: "redemption", enemy: [filterArray(enemies, "boss", "Ah Long")[0], randFrom(filterArray(enemies, "name", "Kingdom"))], ally: ["Wan Bo"], rival: ["Shadow", "Jackal", "Wan Bo"], stage: "Steel Memories",
@@ -874,7 +1040,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
             [`The unity I built was not just of power, but of purpose. You, who sow discord for petty gains, cannot fathom the strength that comes from true allegiance," you say, your voice a blend of lament and resolve. "True allegiance? Your Golden Dragons have a new head, and stand stronger for it. Your time has passed, old 'master',`, `Let's put your so-called mastery to the test then. The Golden Dragons no longer heed your call. What hope do you have?`],
             [`You mistake my absence for weakness, my silence for surrender. The Golden Dragons were more than a symbol of power; they were a testament to honor and strength. I will reclaim what was usurped, starting with dismantling your ambitions," you articulate, your voice resonating with a calm yet unmistakable threat. "Ambitious words for a fallen leader. Your era is over, Ah Long. The winds of change have swept through, and your Golden Dragons have evolved beyond you,`,`Evolve or perish, that is the law of nature. And you, Ah Long, seem all too ready to become a relic of the past. Let's see if your Heavenly Dragon still has any fire left, or if it's merely smoke and ashes.`]
         ],
-            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy[1].boss} as the boss in part 2B of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy[1].boss} as the boss in part 2B of your personal story.` }
         },
         { name: "Axel", expansion: "twintiger", enemy: filterArray(enemies, "boss", "Mack")[0], ally: ["Mary Ann"], rival: ["Mary Ann"], stage: "Under Destruction",
         dialogue: [
@@ -891,13 +1057,13 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
         ]
      },
         {
-            name: "Clint", expansion: "stretchgoals17", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: [""], rival: [""]/*random rival*//*random rival*/, stage: [randFrom(stages).name],
+            name: "Clint", expansion: "stretchgoals17", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: ["random"], rival: ["random"]/*random rival*//*random rival*/, stage: [randFrom(stages).name],
             dialogue: [
                 [`You prey on the innocent, the vulnerable. You remind me of a darkness I've known too well. It ends here, with me," you say, your hand hovering on your revolver, eyes steady and unwavering. "You think you're some kind of hero, Clint? Taking justice into your own hands?`, `You're just a man, Clint. A man playing at being a ghost.`],
                 [`I was taken, lost everything to a tale as old as fear itself. Now, I'm the story to fear — the one that comes for you in the night," you say, standing resolute despite the odds.  "A ghost story, Clint? We deal in realities, and the reality is, you're outnumbered,`, `But every story has an end, Clint. Let's write yours.`],
                 [`This path I walk, it's not for redemption or glory. It's for those who've suffered as I have, for the children who deserve a chance at a different story," you whisper quietly, more to yourself than anyone. "Noble intentions for a gunman. How quaint. But you're in over your head,`,`This place will be your grave, Clint. Your legend ends in the dust.`]
             ],
-            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${this.stage} as the stage in part 3 of your personal story.`
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy.boss} as the boss and ${this.stage} as the stage in part 3 of your personal story.`
         }
         },
         { name: "Darius", expansion: "newchallengers", enemy: "", ally: [""], rival: [""], stage: "",
@@ -914,7 +1080,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
                 [`I've danced with death more times than I can count. Each step was a defiance of fate. You're just another shadow in a long night," you declare, defiance blazing in your eyes. "Dance, then, Dmitri. Dance until your legs give out and you collapse into the grave we've prepared for you. Your defiance has been noted,`, `You will not see the dawn.`],
                 [`For every shadow that falls, I stand taller. I am the retribution that comes at the end of the night. Your empire of fear ends with me," you vow, every line of your body written with the promise of battle. "Retribution? How dramatic. But it's not your stand that interests us, Dmitri — it's your fall, and fall you will,`,`Your war ends, not with a victory, but with your silent submission.`]
                 ],
-            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
         },
         {
             name: "Gabriel", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Drago"], rival: ["Drago"], stage: "Original Copy",
@@ -923,7 +1089,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
                 [`This search has led me through darkness, molded me into a warrior for those I've lost. You stand before me, embodying the very essence of what I've fought against," you declare, your voice a mixture of resolve and a haunting pain. "A warrior, Santos? You flatter yourself. Your struggles, your loss — they make for a touching tale but offer no protection against the reality of power,`, `Let's see if your 'warrior's spirit' can withstand the storm that's coming. I doubt you'll find what you're searching for, especially not through me!`],
                 [`I've been a shadow among shadows, searching for a light that seems ever elusive. You, and all you represent, are the darkness I've vowed to dispel," you state, your determination unshaken. "Dispelling darkness? You're more delusional than I thought. The world thrives in shades of grey, Santos. Your quest for light is but a fool's errand,`,`But by all means, try to prove me wrong. It will be amusing to watch you try and fail, just as you've failed to find those you seek.`]
                 ],
-            get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, ${getRandomMinions(this.enemy.name, false, enemies = enemies)} in part 3 of your personal story.` }
         },
         { name: "Hanzo", expansion: "essenceofevil", enemy: "", ally: [""], rival: [""], stage: "",
         dialogue: [
@@ -934,7 +1100,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
         },
         {
             name: "Ikuchi", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Megan"], rival: [""], stage: "Original Copy",
-            get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2 of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, ${getRandomMinions(this.enemy.name, false, enemies = enemies)} in part 2 of your personal story.` }
         },
         { name: "Isabella", expansion: "newchallengers", enemy: "", ally: [""], rival: [""], stage: "" },
         { name: "Jack", expansion: "stretchgoals18", enemy: "", ally: [""], rival: [""], stage: "",
@@ -948,7 +1114,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
         { name: "Jirou", expansion: "tideofthedragon", enemy: "", ally: [""], rival: [""], stage: "" },
         {
             name: "Juan", expansion: "redemption", enemy: randFrom(enemies), ally: ["Tiger Azules"], rival: ["Tiger Azules"], stage: "Compromised",
-            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 1 of your personal story.` }
         },
         {
             name: "Kemono", expansion: "redemption", enemy: randFrom(filterArray(enemies, "boss", "Shadow", true)), ally: ["Darius"], rival: ["Shadow", "Darius"], stage: "Sudden Death",
@@ -957,17 +1123,19 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
                 [`I've fought in arenas, spilled blood for entertainment. My loyalty was to a warrior's honor, not to the chains of The Kingdom," you say, your gaze unwavering, piercing through the facades of power and control. "Honor? Your kind knows only the thrill of the fight, the rush of bloodlust,`, `You may seek freedom, but the shadow of your past will always follow you, Kemono.`],
                 [`My loyalty was earned through respect, not fear. And now, I seek a freedom that respects my strength, not exploits it," you articulate, each word a measured step away from your legacy of violence towards a future you yearn to control.  "Freedom? You're a weapon, Kemono. Weapons don't control — they're controlled,`,`Try as you might, the beast within can never truly be free. You'll find no peace in your quest, only more chains.`]
             ],
-            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2 of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy.boss} as the boss in part 2 of your personal story.` }
         },
         { name: "Kenshin", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Brandon"], rival: randFrom(["Shadow", "Jackal", "Kemono"]), stage: "Cashed Out",
         dialogue: [
             [`You carry the weight of many sins, Kenshin," <%=boss%> says, voice dripping with disdain. "Do you really think you can wash them away by playing the hero?" "My path is one of atonement, not redemption," you respond, your stance ready, the legacy of the Hattori flowing through your movements. "I will stop you and any like you, not for forgiveness, but because it is right." "Atonement? There's no atonement in this life, only power and those too weak to seek it,`, `Let's see if your resolve holds as firm as your convictions.`],
             [`Kenshin Hattori, the legendary warrior turned peacemaker," <%=boss%> taunts, circling you like a predator. "Have you finally realized the futility of your quest?" "I realized long ago the price of my actions," you reply, calm and resolute amidst the growing tension. "It's a price I pay willingly to ensure others don't suffer as I have." "Noble words for a killer,`, `Let's see if your skills are as sharp as your tongue!`],
             [`You seek to cleanse this place with your blood and blade?" <%=boss%> mocks. "You are but one man against the tide of darkness." "One man with a will to make a difference," you state, resolve in your voice. "Your darkness ends here." "Then come, Kenshin Hattori,`,`Let us see if your light can outshine the darkness we embrace.`]
-        ]  },
+        ],
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.rival} as the rival in personal story.` }
+        },
         {
             name: "Kyoryu", expansion: "riseofthekingdom", enemy: randFrom(enemies), ally: ["Hanzo"], rival: ["Hanzo"], stage: ["Steel Memories", "Sudden Death"],
-            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss in part 2A of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy.boss} as the boss in part 2A of your personal story.` }
         },
         { name: "Leeta", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "",
         dialogue: [
@@ -977,13 +1145,13 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
         ] },
         { name: "Mack", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Leeta"], rival: ["Shadow"], stage: "Sudden Death" },
         {
-            name: "Max", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: [""]/*random ally*/, rival: [""]/*random rival*/, stage: "Compromised",
+            name: "Max", expansion: "stretchgoals17", enemy: randFrom(enemies), ally: ["random"]/*random ally*/, rival: ["random"]/*random rival*/, stage: "Compromised",
                     dialogue: [
             [`You thought you could break me, but every attempt only forged me stronger. I stand here, not just for Ransom City, but for all who seek justice," you say, your voice carrying the weight of your trials and the strength of your convictions.  "Strength? You're a man pieced back together, a project of science. What can you possibly hope to achieve?`, `We'll dismantle you again, Max. Piece by piece if we must.`],
             [`The Onyx League, The Kingdom... You all underestimate the power of unwavering resolve. My commitment to justice has only deepened," you declare, the glint of determination in your eyes undimmed by the scars of your past. "Commitment? Your idealism is outdated, Governor. The world has changed,`, `But sure, let's see how far your resolve takes you in our new world order.`],
             [`I've faced down your kind before, stood firm against your storms of terror. With the Global Gladiators, I bring not just my resolve but a united front against your tyranny," you say, your commitment igniting hope in those who stand with you. "A united front? You bring together a band of broken toys to face us? Amusing,`,`Your new limbs won't save you, Max. Nor will your little team. We'll see you broken again.`]
         ],
-            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2A of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2A of your personal story.` }
         },
         { name: "Mary Ann", expansion: "newchallengers", enemy: "", ally: [""], rival: [""], stage: "" },
         { name: "Megan", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Sera O'Quinn"], rival: ["Sera O'Quinn"], stage: ["Gone Ballistic", "Compromised"],
@@ -1011,12 +1179,12 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
         ] },
         {
             name: "Natalia", expansion: "riseofthekingdom", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: ["Zane"], rival: ["Zane"], stage: ["Gone Ballistic", "Original Copy"],
-            get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 2B of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, ${getRandomMinions(this.enemy.name, false, enemies = enemies)} in part 2B of your personal story.` }
         },
         { name: "Phoenix", expansion: "tideofthedragon", enemy: "", ally: [""], rival: [""], stage: "" },
         {
             name: "Project X", expansion: "redemption2", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: ["Natalia"], rival: ["Natalia", "Jackal"], stage: "Original Copy",
-            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.boss} as the boss and ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy.boss} as the boss and ${getRandomMinions(this.enemy.name, false, enemies = enemies)} in part 3 of your personal story.` }
         },
         { name: "Raven", expansion: "stretchgoals18", enemy: "", ally: [""], rival: [""], stage: "",
         dialogue: [
@@ -1049,7 +1217,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
                 [`Humility is not your strength, I see. Let me teach you its value—the hard way," you say with an aura of danger that even the bravest of hearts can't ignore. "Teach me? You're one man,`, `Your empire crumbles today, Shadow. We no longer bow to phantoms.`],
                 [`The path I've walked is paved with the lessons of the ancients, the whispers of the wind, and the fury of the dragon. You, however, have strayed," you say, your gaze piercing through the darkness, a beacon of unwavering conviction.  "Strayed? We've risen in the vacuum you left behind. Your time has passed, Shadow,`,`This world has no place for relics. Your teachings die with you.`]
             ],
-            get instructions() { return `If you choose to use ${this.name}, choose ${this.stage} as the stage in part 2A of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.stage} as the stage in part 2A of your personal story.` }
         },
         { name: "Selene", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: [""], rival: ["Genesis"], stage: "Estate of Decay" },
         { name: "Sera", expansion: "newchallengers", enemy: "", ally: [""], rival: [""], stage: "" },
@@ -1062,11 +1230,11 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
                 [`You dare defile the honor of these streets with your vile deeds? As the mask I wear channels the ancient powers, I vow to restore peace. Beware, for Tiger Azules stands ready to strike," you roar, the vibrancy of your voice matching the intensity in your eyes. "Tiger Azules, the masked avenger. Your 'ancient powers' are no match for the new world order we bring,`, `We'll strip away your power, piece by piece, starting with that mask you hide behind.`],
                 [`This mask is not just a mask; it's a symbol — a symbol of justice, strength, and the indomitable will of the people. You face not just a man, but an idea. And ideas, señor, are bulletproof," you declare, your voice booming across the area. "An idea? How quaint. But even ideas can be corrupted, destroyed. You will learn that the hard way,`,`Your idealism will be your downfall. We'll see how long you can keep up this charade, 'Tiger'.`]
             ],
-            get instructions() { return `If you choose to use ${this.name}, choose ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2 of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy.name == "Kingdom" ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} in part 2 of your personal story.` }
         },
         {
             name: "Tlazolteotl", expansion: "stretchgoals17", enemy: filterArray(enemies, "boss", "Jackal")[0], ally: ["Kemono"], rival: ["Kemono", "Tlazolteotl"], stage: "Original Copy",
-            get instructions() { return `If you choose to use ${this.name}, ${getRandomMinions(this.enemy.name)} in part 3 of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, ${getRandomMinions(this.enemy.name, false, enemies = enemies)} in part 3 of your personal story.` }
         },
         { name: "Vada", expansion: "aftershock", enemy: "", ally: "", rival: "", stage: "",
         dialogue: [

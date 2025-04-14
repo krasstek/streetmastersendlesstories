@@ -12,5 +12,7 @@ export const expansions = [
 	{ name: 'redemption2', label: 'Redemption 2', disabled: false, selected: false },
 	{ name: 'tideofthedragon', label: 'Tide of the Dragon', disabled: false, selected: false },
 	{ name: 'newchallengers', label: 'New Challengers', disabled: false, selected: false },
-	{ name: 'rumblepack', label: 'Rumble Pack', disabled: true, selected: true }
+	{ name: 'rumblepack', label: 'Rumble Pack', disabled: true, selected: true },
+	{ name: 'lamentofthebloodmoon', label: 'Lament of the Blood Moon', disabled: false, selected: true },
+	{ name: 'redemption3', label: 'Redemption 3', disabled: true, selected: true }
 ];
