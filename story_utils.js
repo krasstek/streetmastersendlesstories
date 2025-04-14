@@ -186,7 +186,6 @@ function createStory() {
         }
     }
 
-    
     stages = cleanStages(stages);
 
     let storystages = storyStages(stages);
@@ -1079,7 +1078,6 @@ function victoryResult(stageindex, story, nextstage, gizmo, masterplan, wincondi
     let bystanders = story[stageindex].stage.bystander
     let clue
     let evilplace = evilPlace()
-
     let detonationaction = getEnemyAttack(enemy, "detonation", `${gPron(enemy, "subject")} produces a remote and presses a button. An explosion knocks you down`)
 
     let wanting = randFrom(["you are after", "you want", "", "you pursue", "the Citadel is after", "behind all this", "all too familiar to you"])
