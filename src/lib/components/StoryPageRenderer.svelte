@@ -25,6 +25,10 @@
 		showSave = false;
 	}
 
+	function printCards() {
+    goto('/printcards');
+  }
+
 	function handleOutcome(result) {
 		outcome = result;
 	}
@@ -113,6 +117,7 @@
 				{card.wincondition[1]}
 			</button>
 			<button class = "menu-button" on:click={() => (showReference = true)}>Gladiator Reference</button>
+			<button on:click={printCards} class="menu-button"> Print Cards</button>
 			<button class = "menu-button" on:click={() => showSave = true}>Save Game</button>
 		</div>
 	</div>
