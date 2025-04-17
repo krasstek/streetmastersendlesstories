@@ -436,10 +436,11 @@ export function preGamePrologue(stage, enemy) {
     return masterplan
 }
 
-export function mysticalSynonym() {
+export function mysticalSynonym(ignore = "") {
 
 
-    let mystical = ["esoteric", "magical", "arcane", "ethereal", "mystical", "cabalistic", "mysterious", "occult", "obscure", "cryptic", "fabulous secret", "strange"];
+    let mystical = ["esoteric", "magical", "arcane", "ethereal", "mystical", "cabalistic", "mysterious", "occult", "obscure", "cryptic", "fabulous secret", "strange", "dark", "cursed"];
+    mystical = mystical.filter(function (e) { return e !== ignore; })
     mystical = mystical[Math.floor(Math.random() * mystical.length)];
 
     return mystical;
@@ -867,7 +868,7 @@ export function defineKnowledge(i, story) {
     return knowledge
 }
 
-function getPropertyValue(obj1, obj2, propName, defaultValue = "default") {
+function getPropertyValue(obj1, obj2, propName, defaultValue = undefined) {
   const has1 = propName in obj1;
   const has2 = propName in obj2;
 
@@ -1956,49 +1957,51 @@ export function finalResult(stage, enemy, rival, vip = null, result) {
         `The confrontation reaches its peak and ${enemy.boss} is cornered and desperate. ${getEnemyAttack(enemy, "detonation", `${ucInit(gPron(enemy, "subject"))} reveals a detonator and triggers the explosives`)},  ${gPron(enemy, "object")} vanishing amidst chaos. Rubble and confusion fill the space where ${gPron(enemy, "subject")} once stood. "Gone, but not victorious," you declare to your team, as the dust clears revealing that, despite the dramatic escape, the ${neutralize}, dismantling the threat piece by piece.`
     ]
 
-    let finisher = randFrom(["Finish them", "Show no mercy", "End them", "Put an end to this", "Kill them, and send what remains to Agent Fletch", "Wipe them out, all of them", "Put a stop to this"])
-
+    let finishorder = randFrom(["Finish them", "Show no mercy", "End them", "Put an end to this", "Kill them, and send what remains to Agent Fletch", "Wipe them out, all of them", "Put a stop to this"])
     let gloat = gloatingList(enemy, stage)
     let submission = lastWords(enemy)
     let defiance = defiantEnd(enemy)
     let lastwords = randFrom([submission, defiance])
     let lastthoughts = lastThoughts(enemy)
+    const _subject = gPron(enemy, "subject") //he
+    const _object = gPron(enemy, "object") //him
+    const _possessive = gPron(enemy, "possessive") //his
 
     let loseresult = [
-        `"${gloat[0]}" ${enemy.boss} says as ${gPron(enemy, "subject")} stalks around you, beaten. "${gloat[1]}"`,
-        `"${gloat[0]}" ${enemy.boss} says, arms crossed confidently in front of ${gPron(enemy, "object")}. "${gloat[1]}" ${ucInit(gPron(enemy, "subject"))} turns to face ${rival.name + " and " + randFrom(enemy.minionnames)}, ${gPron(enemy, "possessive")} final command echoing powerfully off the walls with a sudden finality. "${finisher}!"`,
+        `"${gloat[0]}" ${enemy.boss} says as ${_subject} stalks around you, beaten. "${gloat[1]}"`,
+        `"${gloat[0]}" ${enemy.boss} says, arms crossed confidently in front of ${_object}. "${gloat[1]}" ${ucInit(_subject)} turns to face ${rival.name + " and " + randFrom(enemy.minionnames)}, ${_possessive} final command echoing powerfully off the walls with a sudden finality. "${finishorder}!"`,
         `"${gloat[0]}" ${enemy.boss} says as your body is strapped into a large metal apparatus in ${enemy.boss == "Jackal" ? "her" : "Jackal's"} laboratory. "${gloat[1]}"`,
-        `"Gladiator?" Agent Fletch's voice sounds in your ear, small and tinny from your damaged communicator." What's the status?" You watch from your place on the floor, unable to respond as ${enemy.boss} returns to ${gPron(enemy, "possessive")} plan.`,
-        `"${lastwords[0]}" ${heroSpeech()}. "${lastwords[1]}" ${enemy.boss} laughs wickedly. "${gloat[0]}" ${gPron(enemy, "subject")} gloats. "${gloat[1]}"`,
-        `${lastthoughts} ${enemy.boss} laughs wickedly. "${gloat[0]}" ${gPron(enemy, "subject")} gloats. "${gloat[1]}"`,
-        `${enemy.boss} pushes you down, forcing you into submission. You try to fight ${gPron(enemy, "object")} off but can't, and instead watch in horror as ${gPron(enemy, "subject")} ${enemy.threat}. Your scream is lost on the winds as ${gPron(enemy, "subject")} extinguishes your life!`,
-        `Last of the Gladiators have fallen to ${enemy.boss} and ${gPron(enemy, "possessive")} ${enemy.minions()}. "${gloat[0]}" ${gPron(enemy, "subject")} says. "${gloat[1]}" ${ucInit(gPron(enemy, "subject"))} ${enemy.threat}.`,
-        `"${gloat[0]}" says ${enemy.boss} as ${gPron(enemy, "subject")} ${enemy.threat}. ${randFrom([`You can only watch, horrified.<br><br>"${gloat[1]}"`, `"${gloat[1]}"<br><br>${lastthoughts}`])}`,
+        `"Gladiator?" Agent Fletch's voice sounds in your ear, small and tinny from your damaged communicator." What's the status?" You watch from your place on the floor, unable to respond as ${enemy.boss} returns to ${_possessive} plan.`,
+        `"${lastwords[0]}" ${heroSpeech()}. "${lastwords[1]}" ${enemy.boss} laughs wickedly. "${gloat[0]}" ${_subject} gloats. "${gloat[1]}"`,
+        `${lastthoughts} ${enemy.boss} laughs wickedly. "${gloat[0]}" ${_subject} gloats. "${gloat[1]}"`,
+        `${enemy.boss} pushes you down, forcing you into submission. You try to fight ${_object} off but can't, and instead watch in horror as ${_subject} ${enemy.threat}. Your scream is lost on the winds as ${_subject} extinguishes your life!`,
+        `Last of the Gladiators have fallen to ${enemy.boss} and ${_possessive} ${enemy.minions()}. "${gloat[0]}" ${_subject} says. "${gloat[1]}" ${ucInit(_subject)} ${enemy.threat}.`,
+        `"${gloat[0]}" says ${enemy.boss} as ${_subject} ${enemy.threat}. ${randFrom([`You can only watch, horrified.<br><br>"${gloat[1]}"`, `"${gloat[1]}"<br><br>${lastthoughts}`])}`,
         `"${gloat[0]}" ${enemy.boss} says, and ${enemy.threat}. Those are the last words you ever hear.`,
-        `"Maybe The Master would have a better use for the Gladiators?" ${randFrom(enemy.minionnames)} asks. "No," ${enemy.boss} answers${randFrom([` as ${gPron(enemy, "subject")} ${enemy.threat}`, `, and orders: "${finisher}"`])}.`,
-        `You gave all you've got, but it was not enough. Not even close. "${finisher}!" ${enemy.boss} orders ${randFrom(enemy.minionnames)}.`,
-        `${enemy.boss} stands over your limp body. "${gloat[0]}" ${gPron(enemy, "subject")} says, as ${gPron(enemy, "possessive")} ${enemy.minions()} draw nearer. "${gloat[1]} ${finisher}!" The minions follow the order.`,
+        `"Maybe The Master would have a better use for the Gladiators?" ${randFrom(enemy.minionnames)} asks. "No," ${enemy.boss} answers${randFrom([` as ${_subject} ${enemy.threat}`, `, and orders: "${finishorder}"`])}.`,
+        `You gave all you've got, but it was not enough. Not even close. "${finishorder}!" ${enemy.boss} orders ${randFrom(enemy.minionnames)}.`,
+        `${enemy.boss} stands over your limp body. "${gloat[0]}" ${_subject} says, as ${_possessive} ${enemy.minions()} draw nearer. "${gloat[1]} ${finishorder}!" The minions follow the order.`,
         `As you're lying on the ground, bleeding out,${randFrom([``, ` ${heroSpeech()}: "${lastwords[0]}" but the ${enemy.bosstitle()} cuts you off.`, ` ${lowerCaseInitial(lastthoughts)}`])} "${gloat[0]}" ${enemy.boss} says. "${gloat[1]}"`,
-        `"${gloat[0]}" the ${enemy.bosstitle()} says. You don't answer anything. ${lastthoughts} ${enemy.boss} goes on: "${gloat[1]}" ${ucInit(gPron(enemy, "subject"))} ${enemy.threat}.`,
-        `"${gloat[0]}" ${enemy.boss} shouts. ${ucInit(gPron(enemy, "subject"))} ${enemy.threat}. "${gloat[1]}"`,
-        `"${gloat[0]}" ${enemy.boss} says, hellfire twinkling visibly in ${gPron(enemy, "possessive")} eyes. "${gloat[1]}"`,
-        `You are lying on the ground, defeated. "${finisher}!" ${enemy.boss} orders${randFrom([` ${gPron(enemy, "possessive")} goons.`, `. ${lastthoughts}`])}`,
-        `You try to stagger away from your defeat. "${gloat[0]}" ${enemy.boss} growls, while ${gPron(enemy, "subject")} comes at you, unrelenting. "${gloat[1]}"`,
-        `With ${gPron(enemy, "possessive")} right hand, ${enemy.boss} grabs your face and pushes your aching body, sapped of all strength, slowly backward toward ${stage.hasOwnProperty("pit") ? stage.pit : `a bottomless chasm`}. "${gloat[0]}" ${gPron(enemy, "subject")} says. "${gloat[1]}"`,
+        `"${gloat[0]}" the ${enemy.bosstitle()} says. You don't answer anything. ${lastthoughts} ${enemy.boss} goes on: "${gloat[1]}" ${ucInit(_subject)} ${enemy.threat}.`,
+        `"${gloat[0]}" ${enemy.boss} shouts. ${ucInit(_subject)} ${enemy.threat}. "${gloat[1]}"`,
+        `"${gloat[0]}" ${enemy.boss} says, hellfire twinkling visibly in ${_possessive} eyes. "${gloat[1]}"`,
+        `You are lying on the ground, defeated. "${finishorder}!" ${enemy.boss} orders${randFrom([` ${_possessive} goons.`, `. ${lastthoughts}`])}`,
+        `You try to stagger away from your defeat. "${gloat[0]}" ${enemy.boss} growls, while ${_subject} comes at you, unrelenting. "${gloat[1]}"`,
+        `With ${_possessive} right hand, ${enemy.boss} grabs your face and pushes your aching body, sapped of all strength, slowly backward toward ${stage.hasOwnProperty("pit") ? stage.pit : `a bottomless chasm`}. "${gloat[0]}" ${_subject} says. "${gloat[1]}"`,
         `Agent Fletch and Citadel soldiers have arrived just a few moments too late. "${submission[0]}" ${heroSpeech()}, and fall forever silent. Fletch lets out a scream of despairing anguish, knowing you were senselessly lost because of miscommunications and bad timing.`,
         `Agent Fletch finds you broken and battered where ${enemy.boss} left you. "${submission[0]}" ${heroSpeech()}. "${submission[1]}"<br><br>You close your eyes slowly and your head goes limp.`,
-        `"${finisher}!" ${enemy.boss} orders. The ${enemy.minions()} remorselessly beat you until you feel nothing.`,
-        `${enemy.boss} looks at you, lying at ${gPron(enemy, "possessive")} feet. "${gloat[0]}" ${gPron(enemy, "subject")} says, looking disappointedly at you. "${gloat[1]}${randFrom([` ${finisher}." ${randFrom(enemy.minionnames)} steps closer.`, `" ${ucInit(gPron(enemy, "subject"))} ${enemy.threat}.`])}`,
+        `"${finishorder}!" ${enemy.boss} orders. The ${enemy.minions()} remorselessly beat you until you feel nothing.`,
+        `${enemy.boss} looks at you, lying at ${_possessive} feet. "${gloat[0]}" ${_subject} says, looking disappointedly at you. "${gloat[1]}${randFrom([` ${finishorder}." ${randFrom(enemy.minionnames)} steps closer.`, `" ${ucInit(_subject)} ${enemy.threat}.`])}`,
         `"${lastwords[0]}" ${heroSpeech()}. "${lastwords[1]}"<br><br>"${gloat[0]}" ${enemy.boss} answers. "${gloat[1]}"`,
         `Citadel aircraft speeds you to medical care, but you know it is too late. "${submission[0]}" ${heroSpeech()} to Agent Fletch, at your side.<br><br>"${submission[1]}"`,
         `"Gladiator?" Agent Fletch's voice penetrates your fading mind. "${submission[0]}" ${heroSpeech()}, before the darkness overcomes you.`,
         `You are lying on your back, the pain preventing you from moving. ${randFrom([`${lastthoughts}. and this is the last thought you will ever have.`, `"${submission[0]}" ${heroSpeech()} to no-one in particular as you draw your last breath. "${submission[1]}"`])}`,
         `Citadel soldiers are clearing the area from the aftermath of your fight, long after victorious ${enemy.boss} has left. "${submission[0]}" ${heroSpeech()} to Agent Fletch. "Don't try to speak," he answers, but you know it will not make any difference. ${ucInit(heroSpeech())} your last words: "${submission[1]}"`,
         `"Finish them off, ${enemy.boss}! Do it now!" shouts ${randFrom(enemy.minionnames)}. "${gloat[0]}" ${enemy.boss} says, and ${enemy.threat}. "${gloat[1]}"`,
-        `"${randFrom([`No more, ${enemy.boss}! Grant me mercy!" you shout.`, `${lastwords[0]}" ${heroSpeech()}, "${lastwords[1]}"`])} ${enemy.boss} ${enemy.threat}${randFrom([`. "I thought you were made of sterner stuff," ${gPron(enemy, "subject")} responds.`, `, and orders ${gPron(enemy, "possessive")} minions: "${finisher}!"`])}`,
-        `${enemy.boss} has you pinned. Without a word, ${gPron(enemy, "subject")} ${enemy.threat}. With grim determination in ${gPron(enemy, "possessive")} eyes ${gPron(enemy, "subject")} ends your life.`,
-        `"${defiance[0]}" you spit defiantly in the face of the victorious ${enemy.bosstitle()}. "${defiance[1]}"<br><br>"${gloat[0]}" ${gPron(enemy, "subject")} answers. "${gloat[1]}"`,
-        `"${lastwords[0]}" ${heroSpeech()}, but ${enemy.boss} cuts you off by grabbing your throat. "${gloat[0]}" ${gPron(enemy, "subject")} says and starts to squeeze the life out of you. "${gloat[1]}"`,
+        `"${randFrom([`No more, ${enemy.boss}! Grant me mercy!" you shout.`, `${lastwords[0]}" ${heroSpeech()}, "${lastwords[1]}"`])} ${enemy.boss} ${enemy.threat}${randFrom([`. "I thought you were made of sterner stuff," ${_subject} responds.`, `, and orders ${_possessive} minions: "${finishorder}!"`])}`,
+        `${enemy.boss} has you pinned. Without a word, ${_subject} ${enemy.threat}. With grim determination in ${_possessive} eyes ${_subject} ends your life.`,
+        `"${defiance[0]}" you spit defiantly in the face of the victorious ${enemy.bosstitle()}. "${defiance[1]}"<br><br>"${gloat[0]}" ${_subject} answers. "${gloat[1]}"`,
+        `"${lastwords[0]}" ${heroSpeech()}, but ${enemy.boss} cuts you off by grabbing your throat. "${gloat[0]}" ${_subject} says and starts to squeeze the life out of you. "${gloat[1]}"`,
         `Suddenly, there's a blinding flash and ${possessiveSuffix(enemy.boss)} gone! It's all gone. Shockingly, you're back at Citadel HQ, surrounded by agents all going about their business. Did all that even happen?`,
         `Your body spasms, fighting against the green gel. Unable to breathe, you claw wildly at the hard, translucent surface encasing you. Shadowy figures move about on the other side of the barrier, and suddenly the lid slides open, and you fall to the ground. The lights are blindingly bright to your aching eyes, and you draw air in your lungs like it's the first time in your life. "Welcome, my children!" you hear a woman calling. What is happening? Was that a dream?`,
         `The screens of your VR helmets go dark, and the Citadel scientists and support team help you take off your training gear. "Gladiators!" Agent Fletch calls from beyond the observation screen, his face dark with disappointment. "Only ${Math.ceil(Math.random() * 10000)} points! How do you think you can face the real ${enemy.name}?!"`,
@@ -2008,10 +2011,89 @@ export function finalResult(stage, enemy, rival, vip = null, result) {
 
     let finalresult
 
-    result == 1 ? finalresult = randFrom(winresult) : finalresult = randFrom(loseresult)
+    const bladelose = bladeFinalResult(enemy, stage, gloat, finishorder, _subject, _possessive)
+    const rituallose = ritualFinalResult(enemy, stage, gloat, _subject, _possessive)
+    loseresult = [loseresult, bladelose, rituallose].filter(entry => entry !== undefined);
+    loseresult = randFrom(loseresult)
 
+    result == 1 ? finalresult = randFrom(winresult) : finalresult = randFrom(loseresult)
+    result == 0 && getPropertyValue(enemy, stage, "ritual") !== undefined ? console.log(finalresult) : () => {}
     return finalresult
 
+}
+
+function bladeFinalResult(enemy, stage, gloat, finishorder, _subject, _possessive) {
+  const blade = getPropertyValue(enemy, stage, "blade")
+  if (blade === undefined) {
+    return undefined
+  } else {
+    let result = randFrom([ `The ${blade} slices through your side, and you crumple to the ground. "${gloat[0]}" ${enemy.boss} declares. "${gloat[1]}"`,
+  `One swift swing of the ${blade} cleaves through you. "${finishorder}!" ${enemy.boss} commands as darkness overtakes you.`,
+  `You feel the ${blade} bite deep before you can react. "${gloat[0]}" ${enemy.boss} taunts. "${gloat[1]}"`,
+  `The ${blade} arcs in a blur and strikes true. "${gloat[0]}" echoes as you collapse. "${gloat[1]}" "${finishorder}!"`,
+  `Pain flares as the ${blade} finds flesh. "${gloat[0]}" ${enemy.boss} continues. "${gloat[1]}"`,
+  `Holding the ${blade}, ${enemy.boss} ends your fight with a single blow. "${gloat[0]}" you hear ${_subject} starting as you lose consciousness.`,
+  `The ${blade} whistles in the air before it lands. "${finishorder}!" ${enemy.boss} pronounces triumphantly.`,
+  `A deadly sweep of the ${blade} sends you sprawling. "${gloat[0]}" ${enemy.boss} sighs in satisfaction. "${gloat[1]}"`,
+  `The ${blade} gleams moments before it strikes. "${gloat[0]}" ${enemy.boss} murmurs as you fall. "${gloat[1]}" "${finishorder}!"`,
+  `Your last sight is the ${blade} descending. "${gloat[0]}" whispers ${enemy.boss}, sealing your fate. You never hear the rest.`,
+  `With a roar, ${enemy.boss} thrusts the ${blade} skyward—then rips it down through your torso, bisecting you. "${gloat[0]}" echoes as your halves fall apart. "${gloat[1]}"`,
+  `${enemy.boss} spins the ${blade} in a blur before sweeping it low, truncating your legs. You crawl hopelessly as ${enemy.boss} laughs. "${finishorder}!" You don't get far."`,
+  `The ${blade} flashes at lightning speed — severing your head in a single strike. Your body collapses limply.`,
+  `"${gloat[0]}" and with a twisted flourish, ${enemy.boss} plunges the ${blade} into your chest, then yanks it free — your heart comes with it. "${gloat[1]}" You gasp as life drains away.`,
+  `${enemy.boss} swings the ${blade} under your jaw; your face is peeled back in a grotesque mask. You sink to the ground as ${enemy.boss} sneers.`,
+  `The ${blade} hums as it swipes through the air, then erupts in a shower of gore — ripping your spine clean out. ${enemy.boss} holds it aloft. "Fatality," ${_subject} whispers.`,
+  `In one savage arc, ${enemy.boss} decapitates you and impales your head on the ${possessiveSuffix(blade)} tip. You spend your few last seconds watching in horror at ${_subject} unremorseful eyes.`,
+  `${enemy.boss} jabs the ${blade} into your gut, twists sharply, and pulls out your entrails like a twisted ribbon. You start to collapse as ${enemy.boss} watches, "${gloat[0]}" ${_subject} says, watching you fall. "${gloat[1]}"`,
+  `The ${blade} glints ominously as ${enemy.boss} drives it straight through your back, out your chest. You crumple; your last sight is ${enemy.boss}'s triumphant grin. "${finishorder}!"`,
+  `With chilling precision, ${enemy.boss} slices your throat with ${_possessive} ${blade}, then lifts your head by the chin as you bleed out. "${gloat[0]}" ${enemy.boss} declares as darkness claims you.`
+  ])
+  return [result]
+  }
+}
+
+function ritualFinalResult(enemy, stage, gloat, _subject, _possessive) {
+  const ritual = getPropertyValue(enemy, stage, "ritual", undefined)
+  if (ritual === undefined) {
+    return undefined
+  } else {
+    const blade = getPropertyValue(enemy, stage, "blade", "ritual blade")
+    const ritual = getPropertyValue(enemy, stage, "ritual")
+    let m1 = mysticalSynonym()
+    const ritualCurse = randFrom([
+  `By the divine will of ${ritual}, may your soul be forever shackled in darkness!`,
+  `In the name of ${ritual}, your essence is cast into the void for all eternity!`,
+  `May the wrath of ${ritual} fracture your spirit beyond repair!`,
+  `By sacred oath to ${ritual}, your memory shall vanish from the world!`,
+  `Let ${ritual} claim your being and bind you in eternal night!`,
+  `By the ancient power of ${ritual}, your final breath is stolen!`,
+  `In ${possessiveSuffix(ritual)} name, your hope is snuffed out like a dying star!`,
+  `By the cursed pact with ${ritual}, your fate is sealed beyond redemption!`
+]);
+    let result = randFrom([
+       `As ${enemy.boss} channels the ${m1} force of ${ritual}, you feel your life starting to ebb away. "${gloat[0]}" they crow. "${gloat[1]}" You can do nothing but die.`,
+       `${getTransformationSequence(enemy, blade, ritual)}. Then ${enemy.boss} finishes you without mercy. "${ritualCurse}"`,
+       `A wave of ${possessiveSuffix(ritual)} force surges through ${enemy.boss}, and you begin to collapse. "${gloat[0]}" ${_possessive} words haunt you and you cannot hold your footing. "${gloat[1]}" echoes as you fade.`,
+       `${getTransformationSequence(enemy, blade, ritual)} In that twisted form, ${enemy.boss} strikes the killing blow.`,
+       `With a final invocation of the ${m1} power of ${ritual}, ${enemy.boss} snuffs out your spark. "${ritualCurse}"`,
+       `The ${m1} gift of the ${ritual} bleeds from ${enemy.boss}, draining your will. "${gloat[0]}" rings hollow in the void you collapse into. "${gloat[1]}"`,
+       `${getTransformationSequence(enemy, blade, ritual)} Empowered by this horror, ${enemy.boss} ends you for good.`,
+       `Channeling the raw force of ${ritual}, ${enemy.boss} crushes your resistance. "${ritualCurse}"`,
+       `A sinister glow of ${m1} force of ${ritual} envelops ${enemy.boss}. Your body goes limp. "${gloat[0]}" ${_subject} says. "${gloat[1]}" Your world drifts into silence.`,
+        `With a guttural chant, ${enemy.boss} beckons ${ritual}. A torrent of ${m1} flame erupts, burning flesh from bone as you scream in agony.`,
+        `${ucInit(m1)} runes blaze on your skin as ${enemy.boss} intones the power of ${ritual}. Your veins boil and burst, sending hot ichor across the floor.`,
+        `A skeletal hand made of ${m1} shadows claws through your chest as ${enemy.boss} wields the power of ${ritual}. You collapse, organs splayed in a crimson puddle.`,
+        `${enemy.boss} raises ${_possessive} arms in a dark gesture, and the ${m1} power of ${ritual} fractures reality. Limb by limb, your body dismembers itself in a single, gruesome moment.`,
+        `Waves of ${m1} energy pulse from ${enemy.boss}. Your eyes liquify into black tar as ${ritual} consumes your sight and mind.`,
+        `The force of ${ritual} wielded by ${enemy.boss} summons wailing ${m1} spirits that tear at your flesh. You fall, voice lost among their screams, blood pooling beneath you.`,
+        `With a whispered invocation of the power of ${ritual}, ${enemy.boss} turns your blood to acid. Your muscles liquefy, dripping through your bones as ${_subject} laughs.`,
+        `A halo of ${m1} shadows surrounds ${enemy.boss}. ${ucInit(possessiveSuffix(ritual))} power animates them into blades that slice through you, piece by piece.`,
+        `${ucInit(m1)} lightning crackles from ${enemy.boss}'s fingertips as they channel ${ritual}. Your body convulses, bones shattering under the force.`,
+        `As ${enemy.boss} utters the final ${m1} words in the name of ${ritual}, a rift opens beneath you. You plummet into a chasm of living spikes, your screams echoing forever.`,
+        `${getTransformationSequence(enemy, blade, ritual)} Then ${enemy.boss} utters, "${ritualCurse}" sealing your fate.`
+  ])
+  return [result]
+  }
 }
 
 export function heroSpeech() {
@@ -2725,24 +2807,30 @@ export function getTransformationSequence(enemy, blade = null, source = null) {
     source == null ? source = enemy.name : () => { }
     blade == null ? blade = `blade` : () => { }
 
+    let m1 = mysticalSynonym()
+    let m2 = mysticalSynonym(m1)
+    const _subject = gPron(enemy, "subject") //he
+    const _object = gPron(enemy, "object") //him
+    const _possessive = gPron(enemy, "possessive") //his
+
     let tranformations = [
-      `Standing in the middle of the temple, ${gPron(enemy, "subject")} rises up off the stone floor, the ${mysticalSynonym()} powers swirling around ${gPron(enemy, "object")}. You watch as ${gPron(enemy, "possessive")} muscles grow, ${gPron(enemy, "possessive")} eyes burn, and ${gPron(enemy, "possessive")} body pulses with the ${mysticalSynonym()} energies!`,
-      `Surrounded by an aura as dark and ominous as ${gPron(enemy, "possessive")} very reputation, ${gPron(enemy, "subject")} steps forth. ${ucInit(gPron(enemy, "possessive"))} eyes glow with a deep red energy, and ${gPron(enemy, "subject")} turns those burning orbs on you.`,
-      `With a release of ${mysticalSynonym()} energy that leaves a crater beneath ${gPron(enemy, "object")}, ${gPron(enemy, "possessive")} skin peels off and ${gPron(enemy, "possessive")} blood turns into a red-black layer of horned carapace. Bony spurs burst forth, connected to ${gPron(enemy, "possessive")} body by ligaments. ${ucInit(gPron(enemy, "subject"))} turns ${gPron(enemy, "possessive")} dead-white, glowing eyes on you.`,
-      `${ucInit(gPron(enemy, "subject"))} makes a strangling sound, and the ${mysticalSynonym()} transformation begins. ${ucInit(gPron(enemy, "possessive"))} skin turns gray all over, like a corpse. Every part of ${gPron(enemy, "possessive")} body swells up like it is about to burst. You hear the cracking noise of ${gPron(enemy, "possessive")} bones stretching. ${ucInit(gPron(enemy, "subject"))} rises to ${gPron(enemy, "possessive")} new, full height, towering over you, and slams ${gPron(enemy, "possessive")} mighty fists against ${gPron(enemy, "possessive")} chest with a release of ${mysticalSynonym()} energy.`,
-      `"${ucInit(mysticalSynonym())} power has been revealed to me!" ${gPron(enemy, "subject")} says. Lifting aloft ${gPron(enemy, "possessive")} ${mysticalSynonym()} ${blade}, ${gPron(enemy, "subject")} shouts: "By the power of ${source}!" A shimmering cascade of ${mysticalSynonym()} energy rains down on ${gPron(enemy, "object")}. ${ucInit(gPron(enemy, "possessive"))} muscles bulge, and ${gPron(enemy, "subject")} brings the ${blade} in front of ${gPron(enemy, "object")} in a wide, two-handed grip. "I have the power!"`,
-      `Bathed in the flickering light of the altar, ${gPron(enemy, "subject")} lifts the ${blade} skyward. ${ucInit(gPron(enemy, "possessive"))} voice deepens as runes blaze across ${gPron(enemy, "possessive")} arms. "This is the will of ${source}," ${gPron(enemy, "subject")} growls. The ${mysticalSynonym()} energy crackles in the snow around you.`,
-      `${ucInit(gPron(enemy, "subject"))} hovers above the cracked floor, surrounded by a ring of hovering glyphs. The wind howls. "You see it now, don't you?" ${gPron(enemy, "subject")} intones. "The ${mysticalSynonym()} was never for mortals, but for ME!"`,
-      `A corona of inverted light coils around ${gPron(enemy, "object")}, and the world seems to hold its breath. The ${blade} in ${gPron(enemy, "possessive")} hands glows white-hot, veins of ${mysticalSynonym()} energy spiraling toward the heavens.`,
-      `From every direction, strands of ${mysticalSynonym()} power converge on ${gPron(enemy, "possessive")} chest. ${ucInit(gPron(enemy, "subject"))} roars—not in pain, but in triumph — as ${gPron(enemy, "possessive")} form shines like a star.`,
-      `"By the right of the forgotten gods," ${gPron(enemy, "subject")} shouts, lifting ${gPron(enemy, "possessive")} ${blade}. "I claim this world!" Energy spirals down from the air, drawn into ${gPron(enemy, "possessive")} heart. You feel it in your teeth.`,
-      `${ucInit(gPron(enemy, "subject"))} steps forward, feet leaving the ground. ${gPron(enemy, "possessive")} earthly form burns away in strands of silver fire. A pulse of ${mysticalSynonym()} power bursts from ${gPron(enemy, "object")}, freezing ${gPron(enemy, "possessive")} surroundings midair.`,
-      `${ucInit(gPron(enemy, "subject"))} lets out a soundless scream. Time seems to halt. ${gPron(enemy, "possessive")} bones twist with audible cracks, joints realigning into something no longer human. ${ucInit(gPron(enemy, "subject"))} flexes fingers that now end in talons.`,
-      `${ucInit(gPron(enemy, "possessive"))} body fractures along glowing seams, shards of former flesh falling away. A radiant exoskeleton of ${mysticalSynonym()} crystal erupts outward, and ${gPron(enemy, "subject")} steps forward as the air bends.`,
-      `${ucInit(gPron(enemy, "subject"))} convulses. A halo of dark matter forms above ${gPron(enemy, "possessive")} head as limbs elongate. The voice that emerges isn’t just deeper — it’s layered, like multiple versions of ${gPron(enemy, "object")} speaking at once.`,
-      `A ripple of energy bursts out as ${gPron(enemy, "subject")} drops the pretense of humanity. The ${blade} fuses into ${gPron(enemy, "possessive")} arm. Spines tear through fabric as their silhouette grows jagged and wrong. This isn’t a transformation — it’s a revelation.`,
-      `"No more masks," ${gPron(enemy, "subject")} snarls. ${ucInit(gPron(enemy, "possessive"))} skin hardens into obsidian shell, threaded with molten lines of ${mysticalSynonym()} light. The very ground seems to recoil.`,
-      `${ucInit(gPron(enemy, "subject"))} shakes violently as arcane tendrils snake across ${gPron(enemy, "possessive")} form. With a final snap, the ${blade} is swallowed into ${gPron(enemy, "possessive")} body — not destroyed, but *incorporated*. Everyone stops. No one dares speak.`,
+      `Standing in the middle of the temple, ${_subject} rises up off the stone floor, the ${m1} powers swirling around ${_object}. You watch as ${_possessive} muscles grow, ${_possessive} eyes burn, and ${_possessive} body pulses with the ${m2} energies!`,
+      `Surrounded by an aura as dark and ominous as ${_possessive} very reputation, ${_subject} steps forth. ${ucInit(_possessive)} eyes glow with a deep red energy, and ${_subject} turns those burning orbs on you.`,
+      `With a release of ${m1} energy that leaves a crater beneath ${_object}, ${_possessive} skin peels off and ${_possessive} blood turns into a red-black layer of horned carapace. Bony spurs burst forth, connected to ${_possessive} body by ligaments. ${ucInit(_subject)} turns ${_possessive} dead-white, glowing eyes on you.`,
+      `${ucInit(_subject)} makes a strangling sound, and the ${m1} transformation begins. ${ucInit(_possessive)} skin turns gray all over, like a corpse. Every part of ${_possessive} body swells up like it is about to burst. You hear the cracking noise of ${_possessive} bones stretching. ${ucInit(_subject)} rises to ${_possessive} new, full height, towering over you, and slams ${_possessive} mighty fists against ${_possessive} chest with a release of ${m2} energy.`,
+      `"${ucInit(m1)} power has been revealed to me!" ${_subject} says. Lifting aloft ${_possessive} ${m2} ${blade}, ${_subject} shouts: "By the power of ${source}!" A shimmering cascade of ${mysticalSynonym()} energy rains down on ${_object}. ${ucInit(_possessive)} muscles bulge, and ${_subject} brings the ${blade} in front of ${_object} in a wide, two-handed grip. "I have the power!"`,
+      `Bathed in the flickering light of the altar, ${_subject} lifts the ${blade} skyward. ${ucInit(_possessive)} voice deepens as runes blaze across ${_possessive} arms. "This is the will of ${source}," ${_subject} growls. The ${m1} energy crackles around you.`,
+      `${ucInit(_subject)} hovers above the cracked floor, surrounded by a ring of hovering glyphs. The wind howls. "You see it now, don't you?" ${_subject} intones. "The ${m1} power was never for mortals, but for ME!"`,
+      `A corona of inverted ${m1} light coils around ${_object}, and the world seems to hold its breath. The ${blade} in ${_possessive} hands glows white-hot, veins of ${m2} energy spiraling toward the heavens.<br><br>`,
+      `From every direction, strands of ${m1} power converge on ${_possessive} chest. ${ucInit(_subject)} roars—not in pain, but in triumph — as ${_possessive} form shines like a star.<br><br>`,
+      `"By the right of ${source}," ${_subject} shouts, lifting ${_possessive} ${blade}. "I claim this world!" Energy spirals down from the air, drawn into ${_possessive} heart. You feel it in your teeth.<br><br>`,
+      `${ucInit(_subject)} steps forward, feet leaving the ground. ${_possessive} earthly form burns away in strands of ${m1} fire. A pulse of ${m2} power bursts from ${_object}, freezing ${_possessive} surroundings midair.`,
+      `${ucInit(_subject)} lets out a soundless scream. Time seems to halt. ${_possessive} bones twist with audible cracks, joints realigning into something no longer human. ${ucInit(_subject)} flexes fingers that now end in talons.`,
+      `${ucInit(_possessive)} body fractures along glowing seams, shards of former flesh falling away. A radiant exoskeleton of ${m1} crystal erupts outward, and ${_subject} steps forward as the air bends.`,
+      `${ucInit(_subject)} convulses. A halo of ${m1} matter forms above ${_possessive} head as limbs elongate. The voice that emerges isn’t just deeper — it’s layered, like multiple versions of ${_object} speaking at once, speaking not words but <b>power</b>.`,
+      `A ripple of energy bursts out as ${_subject} drops the pretense of humanity. The ${blade} fuses into ${_possessive} arm. Spines tear through flesh as ${_possessive} silhouette grows jagged and wrong. This isn’t a transformation — it’s a revelation.<br><br>`,
+      `"No more masks," ${_subject} snarls. ${ucInit(_possessive)} skin hardens into obsidian shell, threaded with molten lines of ${m1} light. The very ground seems to recoil.`,
+      `${ucInit(_subject)} shakes violently as  ${m1} tendrils snake across ${_possessive} form. With a final snap, the ${blade} is swallowed into ${_possessive} body — not destroyed, but *incorporated*. Everyone stops. No one dares speak.<br><br>`,
     ]
 
     return randFrom(tranformations)

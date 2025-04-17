@@ -164,7 +164,7 @@ export function getEnemies(expansionfilter) {
                 [`Here we stand, the ultimate showdown. You come with fists in a world ruled by steel,`, `Let's see if courage alone can withstand the storm I'm about to unleash. This is the chaos I live for.`],
                 [`Does it ever weigh on you, the chaos you've chosen? Or is that gun your only answer to everything?" you inquire, your voice steady. "A gun answers more questions than you'd think. But it's not about the chaos; it's about what comes after. As for weighing on me?`, `Let's just say I sleep just fine.`]
             ],
-            expression: _.template(`his keen eyes and predatory sneer reeking of confidence and ruthlessness`), attacks: { antiair: `hail of machine-gun fire` }, keywords: ["guns"], get gunmen() { return `${this.bosstitle()} and his gangers` }
+            expression: _.template(`his keen eyes and predatory sneer reeking of confidence and ruthlessness`), attacks: { antiair: `hail of machine-gun fire` }, keywords: ["guns"], gunmen: "gangers"
         },
 
         {
