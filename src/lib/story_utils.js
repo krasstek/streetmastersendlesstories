@@ -145,6 +145,7 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
         /*add keywords*/
         { name: "Stacey", expansion: "aftershock", gender: "female", keywords: ["Clone","Parasol","Science","Organized Crime"] },
         { name: "Star Knight Iri", expansion: "battlecon", gender: "female", keywords: ["Indines", "Extraplanar", "Blade", "Soldier", "Clone"] },
+        { name: "Swiftclaw", expansion: "lamentofthebloodmoon", gender: "male", keywords: ["Extraplanar", "Blade", "Clone","Boss","Beast","Insane"] },
         /*add keywords*/
         { name: "The Proxy", expansion: "aftershock", gender: "male", keywords: ["Organized Crime","The Proxy","Parasol","Clone"] },
         { name: "Tiger Azules", expansion: "redemption", gender: "male", keywords: ["Aztec", "Street", "Cartel", "Martial Arts Master", "Clone", "Juan", "Wanderer"] },
@@ -177,7 +178,7 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
       if (g.ally.includes("random")) {
         g.ally = randFrom(alliesandrivals).name
         let remove = alliesandrivals.map(function(e) { return e.name; }).indexOf(g.ally)
-        let instructions = `select ${g.ally} as the rival in your personal story.`
+        let instructions = `select ${g.ally} as the ally in your personal story.`
         instructions = (g.instructions ||"").length > 0 ? `${g.instructions} ${ucInit(instructions)}` : `If you choose to use <i>${g.name}</i>, ${instructions}`
         alliesandrivals.splice([remove], 1)
         delete g.instructions
@@ -479,6 +480,26 @@ export function storyNamer(finalboss, finalstage, number = 16) {
             bossadjectives = ["Heavenly", "Phasing", "Golden", "Black", "Merciless", "Invincible", "Shadowy"]
             bossnouns = [["Dragon", "Dragons"], ["Businessman", "Businessmen"], ["Hook", "Hooks"], ["Karate", "Karate"], ["Kendo", "Kendo"], ["Jing Wu", "Jing Wu"], ["Punch", "Punches"], ["Triad", "Triads"], ["Yakuza", "Yakuza"], ["Monk", "Monks"], ["Typhoon", "Typhoons"], ["Kick", "Kicks"], ["Shadowson", "Shadowsons"], ["Clutch", "Clutces"], ["Katana", "Katana"], ["Staff", "Staves"], ["Knuckle-Duster", "Knuckle-Dusters"]]
             break;
+        case "Anja":
+            bossadjectives = ["Rogue","Fallen","Rallying", "Sabotaged", "Resolute", "Paid Off", "Distracted", "Sanctioned"]
+            bossnouns = [["Agent", "Agents"],["Citadel","Citadel"], ["Teamwork", "Teamwork"],["Plan","Plans"],["Resolve","Resolve"], ["Killer","Killers"]]
+            break;
+        case "Blood Moon":
+            bossadjectives = ["Ethereal","Terrible","Lunar","Bloody","Vengeful","Lamenting","Ancient","Bolstered","Exsanguinated","Eviscerating"]
+            bossnouns = [["Avenger","Avengers"],["Revenge","Revenge"],["Empire","Empires"],["Lament","Laments"],["Blood","Blood"],["Moon","Moon"],["Spirit","Spirits"],["Shade","Shades"],["Salaryman","Salarymen"],["Mirage","Mirages"]]
+            break;
+            case "Butler":
+            bossadjectives = ["Escalating", "Ascetic","Reckless","Roaming", "Collateral", "Nomadic", "Charismatic", "Unbound", "Lawless", "Drunken"]
+            bossnouns = [["Martyr", "Martyrs"],["Juggernaut","Juggernauts"],["Reckoning","Reckonings"],["Damage","Damage"],["Outcast","Outcasts"],["Nomad","Nomads"]]
+            break;
+        case "Caitlyn":
+            bossadjectives = ["Whirling", "Dancing", "Nimble", "Determined" ,"Symmetric"]
+            bossnouns = [["Yakuza", "Yakuza"],["Dervish","Dervishes"],["Blade","Blades"],["Dance","Dancers"],["Phoenix","Phoenix"], ["Fan", "Fans"],["Lady", "Ladies"]]
+            break;
+        case "Castle":
+            bossadjectives = ["Full", "New", "Marked", "Defensive", "Wet", "Ruthless"]
+            bossnouns = [["Brotherhood", "Brotherhood"],["Agent","Agents"], ["Castle", "Castles"],["Unload","Unload"],["Target","Targets"], ["Killer","Killers"],["Sniper","Snipers"],["Work","Works"], ["Lion","Lions"], ["Reinforcements","Reinforcements"], ["Soldier","Soldiers"], ["Hit","Hits"], ["Job","Jobs"]]
+            break;    
         case "Dmitri":
             bossadjectives = ["Punishing", "Modified", "Trusty", "Steely", "Loaded", "Extra", "Russian", "Eastern", "Military", "Angry", "Strong", "Skilled", "Loyal", "Espionage", "Undercover"]
             bossnouns = [["Knife", "Knives"], ["Brotherhood", "Brotherhood"], ["Knife", "Knives"], ["Rocket", "Rockets"], ["Rocket Launcher", "Rocket Launchers"], ["Kevlar", "Kevlar"], ["Defense", "Defenses"], ["Hold", "Holds"], ["Ammo", "Ammo"], ["Mercenary", "Mercenaries"], ["Soldier", "Soldiers"], ["Spy", "Spies"], ["Honor", "Honor"], ["Hit", "Hits"], ["Sabotage", "Sabotage"], ["General", "Generals"]]
@@ -510,6 +531,10 @@ export function storyNamer(finalboss, finalstage, number = 16) {
         case "Shadow":
             bossadjectives = ["Hexed", "Prescient", "Mysterious", "Ancient", "Divine", "Explosive", "Hidden"]
             bossnouns = [["Kingdom", "Kingdom"], ["Blade", "Blades"], ["Jing Wu", "Jing Wu"], ["Dragon", "Dragons"], ["Illusion", "Illusions"], ["Sword", "Swords"], ["Shadow", "Shadows"], ["Spirit", "Spirits"], ["Clone", "Clones"], ["General", "Generals"], ["Mountain", "Mountains"], ["Marionette", "Marionettes"], ["Soldier", "Soldiers"], ["Doll", "Dolls"]]
+            break;
+        case "Swiftclaw":
+            bossadjectives = ["Clawed","Infernal","Relentless","Aggressive","Swift","Lunar","Bloody"]
+            bossnouns = [["Aggression","Aggression"],["Inferno","Inferno"],["Strike","Strikes"],["Shade","Shades"],["Salaryman","Salarymen"],["Mirage","Mirages"],["Moon","Moon"],["Blood","Blood"]]
             break;
         case "Tlazolteotl":
             bossadjectives = ["Faithful", "Aztec", "Summoned", "Otherworldly", "Death", "Pale", "Avenging", "Foul", "Decaying", "Enfeebling", "Ageless", "Beautiful", "Restless", "Pestilent", "Below"]
@@ -579,8 +604,8 @@ export function storyNamer(finalboss, finalstage, number = 16) {
             stagenouns = [["Shrine", "Shrines"], ["Search", "Search"], ["Demon", "Demons"], ["Wild", "Wilds"], ["Key", "Keys"], ["Hunt", "Hunt"], ["Idol", "Idols"], ["Blessing", "Blessings"], ["Beyond", "Beyond"], ["Oni", "Oni"], ["Curse", "Curses"], ["Tree", "Trees"], ["Trail", "Trail"], ["Call", "Call"]]
             break;
       case "Snowdown":
-            stageadjectives = ["Red", "White", "Bloody","Moonlit"]
-            stagenouns = [["Altar", "Altars"], ["Shrine", "Shrines"],["Ritual", "Rituals"],["Moon","Moons"],["Blood","Blood"]]
+            stageadjectives = ["Red", "White", "Bloody","Moonlit","Lunar","Quiet"]
+            stagenouns = [["Altar", "Altars"], ["Shrine", "Shrines"],["Ritual", "Rituals"],["Moon","Moon"],["Blood","Blood"],["Snowfall","Snowfalls"]]
             break;
         case "Steel Memories":
             stageadjectives = ["New", "Steel", "Fresh", "True", "Demoralizing", "Upcoming", "Encircling", "Dark", "Brutal", "Overwhelming"]
@@ -1483,7 +1508,10 @@ export function getRandomMinions(enemy, getdeck = false, enemies = getEnemies())
     while (clones.name === enemy) { clones = randFrom(enemies) }
 
     if (getdeck == false) {
-        return `select ${randFrom([clones.minionnames[0], clones.minionnames[1]])} from the ${clones.name} deck as the minion`
+        const final = [clones.minionnames[0], clones.minionnames[1]];
+        const exclude = ["Goliath", "Lion"];
+        const filtered = final.filter(word => !exclude.includes(final));
+        return `select ${randFrom(filtered)} from the ${clones.name} deck as the minion`
     } else { return clones.name }
 }
 
@@ -1723,6 +1751,7 @@ export function createLeadIn(pregameprologue, stageindex, wincondition, enemy, s
     } else if (wincondition == "guide") {
 
         let guide_prologue = [
+            `You turn around in the safehouse, and see ${ally.name} sitting in another room. "${ally.name}! You old dog!" You clasp hands in a fierce, arm-wrestle shake. The two of you strain, muscles flexing. "${ally.name}... still pushing too many pencils?" you ask. "You never did know when to quit," ${gPron(ally, "subject")} replies. "Neither did you. So what’s the real story?" you say, narrowing your eyes. ${ally.name} smirks. "Same old mission. Just... more complications." You let go and crack your knuckles. "Let’s get to work."`,
             `You meet ${ally.name} on the corner of a warehouse. "Glad you found the place alright," ${ally.name} says. "This is a big catch," you answer. "Good work finding it." "It's easy to find ${enemy.name} activity if you merely keep your eyes open," ${ally.name} responds. "Let's do this," you say.`,
             `${ally.name} follows you and gives you a warning. "${enemy.boss} will make you regret your challenge, Gladiators," ${gPron(ally, "subject")} calls. "Prepare to meet your fate by ${gPron(enemy, "possessive")} hands." "Hah" you laugh. "I better come and show the right approach," ${ally.name} says, unamused by your flippant attitude.`,
             `The Citadel has assigned you a handler for this mission. "I don't understand," you say, looking at ${ally.name} with skepticism. "Why such a reckless attack plan? Agent Fletch would not risk everything like this." "I'm not Agent Fletch," ${ally.name} says. "Now prepare yourself, and we are almost out of time."`,
