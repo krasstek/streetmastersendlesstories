@@ -239,7 +239,7 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
     let story = compileStory(storystages, storyenemies, nstages)
 
     story.forEach((entry, i) => {
-      if(entry.stage.expansion == "lamentofthebloodmoon") { console.log(i)}
+/*      if(entry.stage.expansion == "lamentofthebloodmoon") { console.log(i)}*/
         entry.stage.knowledge = defineKnowledge(i, story);
 
     });
@@ -1296,7 +1296,6 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
         `Victory is yours, but as the dust settles and Citadel forces secure the perimeter, ${enemy.boss} remains a ghost. Amidst the chaos, a crucial piece of intel emerges from the ruins — a ${gizmo}, something ${enemy.boss} believed destroyed. It hints that`
     ]
 
-    // remote: nextmission.hasOwnProperty("captured"): If the Fighters lose: Tlazolteotl looks down at you, a smug smirk spreading across her face.  She reaches up and holds her amulet gingerly, reciting a few strange words in a language you've never heard before.  In an instant, the world blows away around you in a deafening explosion of arcane energy, and for a moment, all you can see is the blackness Advance to Part 5B.
     if (location == "base") {
         gatherclues = gatherclues.concat([
             `With a hail of attacks, ${enemy.boss} and ${gPron(enemy, "possessive")} surviving cronies fled the encounter. Taking a moment to catch your breath, you managed to find the most conscious of the ${bystanders}s. "${ucInit(gPron(enemy, "subject"))} never told us the plan!" ${lowerCaseInitial(contact)} cried. ${contact} tells that`,
@@ -1315,7 +1314,7 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
         gatherclues = gatherclues.concat([
             `"You think you have won?"  ${enemy.boss} says you're closing in. "You have won nothing!" ${detonationaction}, and the floor collapses beneath you as ${gPron(enemy, "subject")} escapes. You save who you can and ${minion} returns the favor by telling you`,
             `After the fight, with no sight of ${enemy.boss}, you couldn't help but wonder what ${gPron(enemy, "subject")} was trying to cover up with this. Inside you found a ${gizmo} with intel that ${enemy.boss} definitely didn't want you to find:`,
-            `In the midst of the chaos, a discarded ${gizmo} belonging to ${enemy.boss} reveals communications between ${gPron(enemy, "subject")} and an unknown entity. The messages hint that`,
+            `In the midst of the chaos, a discarded ${gizmo} belonging to ${enemy.boss} reveals communications between ${gPron(enemy, "object")} and an unknown entity. The messages hint of`,
             `Inspecting the area, you stumble upon a hastily abandoned safe house used by ${enemy.boss}. Among the personal effects left behind, a set of encoded documents stands out. Deciphering them, you learn that`,
             `Amid the area, ${minion}, a loyalist to ${enemy.boss}, cornered and desperate, offers a trade for their life. The information they provide is chilling, revealing that`,
         ])
@@ -1347,7 +1346,7 @@ if (masterodds < 0.33) {
                 `A hastily deleted email recovered from ${possessiveSuffix(enemy.boss)} computer mentions a change in the pickup location. "They're on the move," you realize, the digital paper trail ${ambiguity_element}`,
                 `Surveillance footage of the area captures a van with obscured plates frequently visiting. "Could have been their holding spot," you theorize, the video evidence ${ambiguity_element}`,
                 `A forgotten diary at the skirmish site contains veiled references to "the taken" and "the exchange." "Codes for the kidnapping operation?" you speculate, the diary's entries ${ambiguity_element}`,
-                `You discover a series of burner phones with only one number dialed. "A direct line to ${bossDescription(finalboss)}?" you ponder, the call logs ${ambiguity_element}`
+                `You discover a series of burner phones with only one number dialed. "A direct line to ${finalboss.boss}?" you ponder, the call logs ${ambiguity_element}`
                 ];
             break;
         case "personalpower":
@@ -1374,7 +1373,7 @@ if (masterodds < 0.33) {
             break;
         case "strengtheningforces":
             masterplanclues = [
-                `An increase in secure communications and suspicious activity around certain facilities after the last fight raises questions. "Is ${finalboss.name} mobilizing, but for what purpose?" you ponder, each piece of evidence collectively ${ambiguity_element}`,
+                `An increase in secure communications and suspicious activity around certain facilities after the last fight raises questions. "Is ${finalboss.name} mobilizing? For what purpose?" you ponder, each piece of evidence collectively ${ambiguity_element}`,
                 `Citadel agents recover detailed logs of recent acquisitions, ordered by ${enemy.boss} for ${finalboss.name}, hint at extensive preparations. "They're gearing up for something big," you note, the variety of resources ${ambiguity_element}`,
                 `Eyewitness accounts nearby describe groups gathering under the guise of night, likely for ${possessiveSuffix(finalboss.boss)} cause. "A gathering force for ${finalboss.name}, but to what end?" you wonder, the reports ${ambiguity_element}`,
                 `Found among ${possessiveSuffix(enemy.boss)} belongings, a recruitment flyer for private military training by ${finalboss.name}. "Expanding their reach," you determine, the propaganda piece ${ambiguity_element}`,
@@ -1711,7 +1710,7 @@ export function createLeadIn(pregameprologue, stageindex, wincondition, enemy, s
             ` ${this_boss} has meticulously compiled ${randFrom(intel_words_2)} on the hidden agendas of ${this_finalboss}.`,
             ` how ${this_boss} is secretly harboring ${randFrom(intel_words_2)} crucial for dismantling ${this_finalboss}'s network.`,
             ` the ${randFrom(intel_words_2)} indicating ${this_boss} recently brokered a deal with ${this_finalboss}, exchanging sensitive ${randFrom(intel_words_2)} for mutual benefit.`,
-            ` that ${this_boss} was once a confidant of ${this_finalboss}, privy to intimate ${randFrom(intel_words_2)} on ${possessiveSuffix(this_finalboss)} plans and vulnerabilities.`,
+            ` that ${this_boss} used to be a confidant of ${this_finalboss}, privy to intimate ${randFrom(intel_words_2)} on ${possessiveSuffix(this_finalboss)} plans and vulnerabilities.`,
             ` there is ${randFrom(intel_words_2)} that shows ${this_boss} maintains a covert communication channel with ${this_finalboss}, offering a direct line to intercept critical ${randFrom(intel_words_2)}.`,
             ` ${randFrom(intel_words_2)} suggests ${this_boss} holds the key to deciphering ${this_finalboss}'s next move, thanks to a cache of encrypted ${randFrom(intel_words_2)}.`,
             ` that ${this_boss} has been tracking ${this_finalboss}'s movements and alliances, amassing a detailed dossier that could expose ${possessiveSuffix(this_finalboss)} ultimate endgame.`
@@ -1808,7 +1807,7 @@ export function createPrologue(stageindex, story, alliesandrivals, heronames, en
     let rivalpresence = instructions.rivalsetup
     let rivalboost = instructions.rivalboost
     let trail = createLeadIn(pregameprologue, stageindex, instructions.prologue, enemy, stage, finalboss, rival, ally, nstages)
-    let setup = `<b>${stage.name}: ${enemy.name} ${enemy.name == "Kingdom" ? `(${enemy.boss})` : ""}</b><br>` + ((stage.name == "Original Copy") ? ucInit(getRandomMinions(enemy.name, false, enemies = getEnemies(expansions))) + ".<br>" : ``) + instructions.setup
+    let setup = `<b>${stage.name}: ${enemy.name} ${(["Kingdom","Empire"]).includes(enemy.name) ? `(${enemy.boss})` : ""}</b><br>` + ((stage.name == "Original Copy") ? ucInit(getRandomMinions(enemy.name, false, enemies = getEnemies(expansions))) + ".<br>" : ``) + instructions.setup
     let win = determineNextStage(stageindex, story, 0, nstages)
     let lose = determineNextStage(stageindex, story, 1, nstages)
     let gizmo = getGizmo()
@@ -2766,7 +2765,7 @@ export function getTransformationSequence(enemy, blade = null, source = null) {
       `From every direction, strands of ${mysticalSynonym()} power converge on ${gPron(enemy, "possessive")} chest. ${ucInit(gPron(enemy, "subject"))} roars—not in pain, but in triumph — as ${gPron(enemy, "possessive")} form shines like a star.`,
       `"By the right of the forgotten gods," ${gPron(enemy, "subject")} shouts, lifting ${gPron(enemy, "possessive")} ${blade}. "I claim this world!" Energy spirals down from the air, drawn into ${gPron(enemy, "possessive")} heart. You feel it in your teeth.`,
       `${ucInit(gPron(enemy, "subject"))} steps forward, feet leaving the ground. ${gPron(enemy, "possessive")} earthly form burns away in strands of silver fire. A pulse of ${mysticalSynonym()} power bursts from ${gPron(enemy, "object")}, freezing ${gPron(enemy, "possessive")} surroundings midair.`,
-      `${ucInit(gPron(enemy, "subject"))} lets out a soundless scream. Time seems to halt. ${gPron(enemy, "possessive")} bones twist with audible cracks, joints realigning into something no longer human. ${ucInit(gPron(enemy, "subject"))} flexes fingers that now end in talons.`,
+      `${ucInit(gPron(enemy, "subject"))} lets out a soundless scream. Time seems to halt. ${ucInit(gPron(enemy, "possessive"))} bones twist with audible cracks, joints realigning into something no longer human. ${ucInit(gPron(enemy, "subject"))} flexes fingers that now end in talons.`,
       `${ucInit(gPron(enemy, "possessive"))} body fractures along glowing seams, shards of former flesh falling away. A radiant exoskeleton of ${mysticalSynonym()} crystal erupts outward, and ${gPron(enemy, "subject")} steps forward as the air bends.`,
       `${ucInit(gPron(enemy, "subject"))} convulses. A halo of dark matter forms above ${gPron(enemy, "possessive")} head as limbs elongate. The voice that emerges isn’t just deeper — it’s layered, like multiple versions of ${gPron(enemy, "object")} speaking at once.`,
       `A ripple of energy bursts out as ${gPron(enemy, "subject")} drops the pretense of humanity. The ${blade} fuses into ${gPron(enemy, "possessive")} arm. Spines tear through fabric as their silhouette grows jagged and wrong. This isn’t a transformation — it’s a revelation.`,
