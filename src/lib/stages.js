@@ -558,6 +558,84 @@ export function getStages(expansionfilter) {
          },
 
 
+            {
+            name: "Meltdown", expansion: "aftershock", instory: 0, location: "base", bystander: "panicking power plant worker",
+            stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Resolve the <b>Interact</b> on the Stage Rules card as if you were standing in any one objective's space.` },
+            stagepenalty: { setup: `Discard the top 3 cards from the stage deck.` },
+            masterplan: randFrom(["personalpower", "actsofterror", "illegalgains"]),
+            keywords: ["hostages", "gunk","explosions"],
+            explosion: "reactor bursts",
+            pit: randFrom(["hollow coolant shaft","silent heat chute","dusty turbine hollow","empty reactor core"]),
+            gunk: "container of radioactive waste",
+            hostages: "innocent power plant workers",
+            gloat: [
+                [`Shut it down, <%=enemy.boss}%>! There’s still time!" you yell. "Time is the fuel,`, `And it’s already burning.`],
+                [`You can't possibly control this!" you shout as the reactor pulses violently. "Control? Maybe not,`, `But I can RIDE it to glory!`],
+                [`This will kill you too!" you say, looking through the steam. "If I die, I die,`, `But I’ll die eternal, remembered!`],
+                [`So this is your solution? Meltdown and madness?" you challenge <%=enemy.boss%>. "No... <b>Deterrence</b>,`, `The world listens when it glows red-hot.`],
+                [`You’d kill thousands just to feel powerful?" you shout, amazed at the audacity. "Power isn’t felt — it’s <b>measured</b>,`, `In megatons.`],
+                [`We’ve shut you down before. We’ll do it again," you say with gravity. "And yet here you are,`, `Glowing with fear and radiation.`],
+                [`You’re just in time to witness the chain reaction,`, `And just too late to stop it.`],
+                [`So many safeguards, so many protocols,`, `And not one of them stopped me.`],
+                [`The rods are out, the core is primed,`, `And you brought nothing but hope.`],
+                [`You fear the meltdown,`, `But I AM the meltdown.`],
+                [`You think I’d risk annihilation without reward?`, `This is <b>investment</b>.`],
+                [`Let it melt. Let it roar,`, `Only the strong will survive the fire.`]
+            ],
+            rivaltext: _.template('<%=rivalboost ? ` Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It stands, slowly, powerfully built, dripping with greel gel. It is the ultimate clone, ${rival.name.toUpperCase()}-EX!<br><br>` : ` Apparently ${enemy.boss} is taking blood samples from ${rival.name}.`%>'),
+            hottrail: () => _.template(
+              randFrom([
+                "you intercept scrambled reactor logs and arrive through a rear ventilation shaft, bypassing the main alarms. The reactor is unstable — but not lost. ${ucInit(enemy.desc)} haven’t noticed your entry. You’ve got a chance — if you act fast.",
+                "you intercept the ${enemy.name} schematics and reroute through a forgotten access corridor. You breach the facility just as ${enemy.boss} begins the startup sequence. ${ucInit(gPron(enemy, 'subject'))} hasn’t noticed you — yet."
+              ])),
+            coldtrail: () => _.template(
+              randFrom([
+                "you trace the reports to this facility, arriving just as the lockdown begins. ${ucInit(enemy.minions())} flood the command tier, and the core glows dangerously. There’s no turning back now.",
+                "you follow traces of radiation spikes and black-market energy siphons straight to the plant. The facility’s been overrun by ${enemy.description}, and the control rods are already being extracted. ${enemy.boss} sees you enter—and smiles."
+                ])
+            ),
+            clueless: () => _.template(
+              randFrom([
+                "arriving at the power plant you expected an energy theft or weapons deal — not a facility seconds from implosion. You step inside just as the inner blast doors seal. The temperature’s climbing, and every screen flashes with ${enemy.name} encryption.",
+                "you arrive at the power facility, expecting at most sabotage, not a full meltdown. There are no guards — just open doors and rising heat. Then you see the symbol of ${enemy.name} etched into the steel floor… and realize you’ve walked into something far worse."
+                ])
+            ),
+            prologue: () =>_.template(
+              randFrom([
+                "${trail}, ${stagevar}<br><br>Once inside, heat rolls out at you like a furnace blast. ${ucInit(enemy.minions())} scatter across catwalks and stairwells, frantically carrying components and canisters. ${enemy.boss} stands beside the glowing reactor control panel, arms spread in triumph. \"${gloat[0]}\" ${gPron(enemy, \"subject\")} calls out. \"${gloat[1]}\"<br><br>${laconicStatement(enemy)}",
+                "${trail}, ${stagevar}<br><br>Warning sirens wail overhead as you enter the lobby — a concrete cathedral of steam, cables, and panic. Control panels spark, and hazmat suits lie crumpled on the floor. ${ucInit(enemy.minions())} swarm the walkways, bolting down components or tossing them aside. ${enemy.boss} turns, flanked by glowing coolant tanks. \"${gloat[0]}\" ${gPron(enemy, 'subject')} says, voice calm against the chaos. \"${gloat[1]}\"<br><br>${laconicStatement(enemy)}"
+              ])),
+            captured: _.template(
+              randFrom([
+                "You wake in the dim glow of the control room. Red strobes pulse with every alarm. On a cracked monitor, ${enemy.boss} appears — grinning in silhouette. ${ucInit(enemy.desc)} scurry across the catwalks above the reactor core. \"${gloat[0]}\" ${gPron(enemy,'subject')} declares, voice cutting through blaring alarms. \"${gloat[1]}\"",
+                "Your vision clears just as another klaxon erupts. You’re strapped into a chair in what looks like a reactor access terminal. Monitors show core temperature rising fast. ${enemy.name} symbols flash on every console. ${enemy.boss}, haloed in green light has been observing you. \"${gloat[0]}\" ${gPron(enemy,'subject')} sneers. \"${gloat[1]}\"",
+                "You come to on a steel platform suspended over the exposed reactor chamber. Radiation warnings blare from every speaker. Below, ${enemy.minions()} move with eerie coordination. ${ucInit(bossDescription(enemy))} stands at the far end, watching you stir. \"${gloat[0]}\" ${gPron(enemy, 'subject')} hisses. \"${gloat[1]}\""
+              ])),
+            finalvar: _.template(
+              randFrom([
+                'You <%= randFrom([`step into the lobby where the linoleum has begun to bubble`, `descend a buckled access ramp under sparking fluorescent lights`, `enter the turbine chamber repurposed as a staging ground`, `force your way through a collapsing service tunnel`]) %>. The walls hiss with escaping steam. Pressure valves scream in protest. Warning klaxons overlap — one for radiation, one for coolant failure, and another that simply reads: \'NO RETURN\'.<br><br>',
+                'You <%= randFrom([`arrive in the reinforced central lobby`, `push through the half-melted blast doors`, `emerge from the service tunnel into the heart of the plant`, `descend into the main control concourse`]) %>. Radiation alarms blare in short bursts, and emergency lights flicker above cracked concrete walls. The reactor pulses behind layered glass, its glow rising and falling like a mechanical heartbeat. Panic lingers in the air—but the real danger hasn’t yet escaped.<br><br>',
+              ])
+            ),
+            personalpower: _.template(
+              randFrom([
+                 '${trail}, the ${getMasterPlan()} becomes clear—${enemy.boss} isn’t running from the meltdown. ${ucInit(gPron(enemy,"subject"))} is embracing it, merging with it. The core’s radiation twists around ${gPron(enemy,"possessive")} body, transforming it into something elemental. ${finalvar}${bossDescription(enemy)} hovers above the control rods, eyes burning like twin suns. \"${gloat[0]}\" ${gPron(enemy,"subject")} intones, voice warping with energy. \"${gloat[1]}\"<br><br<${laconicStatement(enemy)}',
+                  '${trail}, your realize the ${getMasterPlan()}: the reactor isn’t a target — it’s a crucible. ${enemy.boss} intends to absorb the core’s energy and emerge reborn as something post-human. ${finalvar}${bossDescription(enemy)} stands at the heart of a containment ring, tendrils of energy crawling toward their skin. \"${gloat[0]}\" ${gPron(enemy,"subject")} whispers as the lights dim around ${gPron(enemy,"object")}. \"${gloat[1]}\"<br><br<${laconicStatement(enemy)}'
+                  ])),
+            actsofterror: _.template(
+              randFrom([
+                '${trail}, the panic was never a cover or a trick — it IS the ${getMasterPlan()}. ${enemy.boss} wants the world to see what happens when civilization melts. The reactor core has minutes left, and the failsafes are offline. ${finalvar}From the catwalk above the control floor, ${enemy.boss} watches the countdown tick down. \"${gloat[0]}\" ${gPron(enemy,"subject")} says as klaxons rise to a scream. \"${gloat[1]}\"',
+                '${trail}, you uncover the full horror of the ${getMasterPlan()}: this isn’t just a meltdown — it’s a live event. The ${enemy.name} has hijacked every broadcast frequency in Ransom City to make the city watch itself burn. ${finalvar}Cameras hover midair, capturing the chaos from every angle. ${enemy.boss} raises a trembling hand to the lens. \"${gloat[0]}\" ${gPron(enemy,"subject")} says, smiling as the countdown beeps escalate. \"${gloat[1]}\"<br><br<${laconicStatement(enemy)}'
+              ])
+            ),
+            illegalgains: _.template(
+              randFrom([
+                '${trail}, you uncover a darker angle to ${possessiveSuffix(enemy.boss)} ${getMasterPlan()}: the reactor core isn\'t the weapon—it\'s the <b>product</b>. Rare unstable isotopes harvested mid-meltdown are being sold to warlords, rogue states, and arcane engineers. ${finalvar}${ucInit(enemy.minions())} in lead-lined suits extract glowing canisters from open chambers as ${enemy.boss} oversees the auction feed. \"${gloat[0]}\" ${gPron(enemy,"subject")} announces, watching the value rise. \"${gloat[1]}\"<br><br<${laconicStatement(enemy)}',
+                 '${trail}, you discover the ${getMasterPlan()}: ${enemy.boss} isn’t trying to destroy the city — ${gPron(enemy,"subject")} is *selling* the meltdown. Energy derivatives, chaos-futures, black-market core fragments—an economy of destruction. ${finalvar}Hazmat-suited ${enemy.minions()} work terminals beside glowing coolant tanks. ${enemy.boss} gestures grandly to a reactor graph ticking upward. \"${gloat[0]}\" ${gPron(enemy,`subject`)} says as currency figures roll in. \"${gloat[1]}\"<br><br<${laconicStatement(enemy)}'
+              ])
+            )
+        },
+
         {
             name: "One Step Ahead", expansion: "legendofoni", instory: 0, location: "remote", bystander: "mountain climber", pit: "the edge of the cliff",
             stagebonus: { setup: `Each fighter may search the enemy deck for a Minion card to discard. Shuffle the enemy deck.` },

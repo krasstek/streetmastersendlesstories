@@ -239,7 +239,7 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
     let story = compileStory(storystages, storyenemies, nstages)
 
     story.forEach((entry, i) => {
-      if(entry.stage.expansion == "stretchgoals18") { console.log(i)}
+      if(entry.stage.expansion == "aftershock") { console.log(i)}
         entry.stage.knowledge = defineKnowledge(i, story);
 
     });
@@ -768,7 +768,7 @@ export function storyStages(stages, storylength) {
 
 export function getMasterPlan() {
 
-    let final_texts = ["final", "ultimate", "diabolical", "culminating", "terminal", "paramount", "consummate", "paramount", "utmost", "fiendish"]
+    let final_texts = ["final", "ultimate", "diabolical", "culminating", "terminal", "paramount", "consummate", "paramount", "utmost", "fiendish", "shocking"]
     let plan_texts = ["plan", "master plan", "scheme", "endgame", "design"]
     return `${randFrom(final_texts)} ${randFrom(plan_texts)}`
 
@@ -1214,6 +1214,15 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
                 `a warehouse full of unmarked boxes is used by the ${nextenemy.name}, and whatever they are moving, it ain’t legal`
               ]
               break;
+        case "Meltdown": clue = [
+             `${nextenemy.name} - ${nextenemy.desc} - have seized control of a nuclear facility under the guise of emergency drills`,
+            `there are radiation spikes that suggest ${nextenemy.name} - ${nextenemy.desc} - are tampering with active reactor cores`,
+            `${nextenemy.boss} appears to be initiating a deliberate meltdown at a civilian energy plant`,
+            `a suspicious shutdown at a local nuclear site has been traced to ${nextenemy.name}, who now occupy the control wing`,
+            `${nextenemy.name} are preparing a large-scale energy surge, likely tied to reactor manipulation`,
+            `you must prevent ${possessiveSuffix(enemy.name)} unauthorized fission experiments deep within a decommissioned plant`
+          ]
+            break;
         case "One Step Ahead": clue = [
             `recent tracks of ${nextenemy.name} along secluded mountain routes have been observed, hinting at strategic movements against the Citadel`,
             `evidence of encampments of ${nextenemy.name} are dotting a hidden mountain trail, preparing for an unknown operation`,
