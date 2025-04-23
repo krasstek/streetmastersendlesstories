@@ -239,7 +239,7 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
     let story = compileStory(storystages, storyenemies, nstages)
 
     story.forEach((entry, i) => {
-      if(entry.stage.expansion == "lamentofthebloodmoon") { console.log(i)}
+      if(entry.stage.expansion == "stretchgoals18") { console.log(i)}
         entry.stage.knowledge = defineKnowledge(i, story);
 
     });
@@ -499,7 +499,7 @@ export function storyNamer(finalboss, finalstage, number = 16) {
         case "Castle":
             bossadjectives = ["Full", "New", "Marked", "Defensive", "Wet", "Ruthless"]
             bossnouns = [["Brotherhood", "Brotherhood"],["Agent","Agents"], ["Castle", "Castles"],["Unload","Unload"],["Target","Targets"], ["Killer","Killers"],["Sniper","Snipers"],["Work","Works"], ["Lion","Lions"], ["Reinforcements","Reinforcements"], ["Soldier","Soldiers"], ["Hit","Hits"], ["Job","Jobs"]]
-            break;    
+            break;
         case "Dmitri":
             bossadjectives = ["Punishing", "Modified", "Trusty", "Steely", "Loaded", "Extra", "Russian", "Eastern", "Military", "Angry", "Strong", "Skilled", "Loyal", "Espionage", "Undercover"]
             bossnouns = [["Knife", "Knives"], ["Brotherhood", "Brotherhood"], ["Knife", "Knives"], ["Rocket", "Rockets"], ["Rocket Launcher", "Rocket Launchers"], ["Kevlar", "Kevlar"], ["Defense", "Defenses"], ["Hold", "Holds"], ["Ammo", "Ammo"], ["Mercenary", "Mercenaries"], ["Soldier", "Soldiers"], ["Spy", "Spies"], ["Honor", "Honor"], ["Hit", "Hits"], ["Sabotage", "Sabotage"], ["General", "Generals"]]
@@ -1238,6 +1238,12 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
             `suspicious chemicals and devices being moved into the city's sewers by ${nextenemy.name}, hinting at a toxic plot`,
             `there are subterranean machinations of ${nextenemy.name} within the sewers, threatening the city's water supply`
             ]
+            break;
+        case "Reel Terror": clue = [
+          `the curtain rises as ${nextenemy.boss} is planning something downtown`,
+          `the ${nextenemy.name} is preparing a major move in the city center. The previews are over`,
+          `the opening act from ${nextenemy.boss} is about to happen downtown`
+]
             break;
         case "Right to Remain Silent": clue = [
              `the Citadel's undercover operatives already gone silent within the territory of ${nextenemy.name} territory, are compromised.`,
