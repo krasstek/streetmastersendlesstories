@@ -235,7 +235,7 @@ export function getEnemies(expansionfilter) {
                 [`Bound by no realm, hindered by no moral, my hunger is the forge upon which my power is tempered,`, `In the end, you will see: to hunger is to live, and to feed is to conquer.`]
             ], expression: _.template(`his fiery stare and gritted teeth sending a message of barely contained fury`), antiair: `hurled bolts of eldritch energy`, detonation: `With one enraged scream, he explodes with a tremendous flash of energy from within, causing a blazing ring of fire to spread outwards`, keywords: ["oni", "swarm", "ritual"], ritual: "Oni", swarm: "shadow ninja"
         },
-        
+
         {
             name: "Onyx League", expansion: "twintiger", boss: "Mack", bosstitle: _.template('${randFrom(["black-hearted","mysterious"])} overlord'), gender: "male", desc: "the league of street gangs", addressing: "sheeple", minions: _.template("vicious gangers and street criminals"), threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim", "and put it into play"]], execution: "shoots the man dead",
             gloat: [
@@ -266,7 +266,7 @@ export function getEnemies(expansionfilter) {
                 [`Progress demands sacrifice — a truth as old as time, yet it falls to me to remind the world of its validity,`, `My critics see a cold-hearted executive, but I am a visionary.`]
             ],
             expression: _.template(`his calculating stare making the chills run up your spine`), keywords: ["guns"], gunmen: "armed executives"
-        }, 
+        },
         {
             name: "Silver Phoenix", expansion: "lamentofthebloodmoon", also: "tideofthedragon", boss: "Caitlyn", bosstitle: _.template('${randFrom(["vengeful","tenacious","patient"])} empress'), gender: "female", desc: "the legacy of syndicates reborn as one", addressing: "pawn", minions: _.template("${randFrom([`elite`,`ruthless`,`trained`])} ${randFrom([`killers`,`soldiers`])}"), threat: "draws a line through the air with her finger — across her throat, just for you", minionnames: ["Reina", "Marionette Doll", "Lucille"], preparedboss: [["Blade Shield", "and put it into play"]], execution: "slices his throat", gloat: [
             ["You don’t have to do this. There’s still a way back,\" you try to reason with Caitlyn. Her eyes narrow, unreadable, but there's a glint of something buried—anger, or maybe memory. \"Back to what? Scraps? Graves? Empty ideals? I’ve built something. And I won’t let you break it,","Vengeace renewed me."],
@@ -559,6 +559,84 @@ export function getStages(expansionfilter) {
          },
 
 
+            {
+            name: "Meltdown", expansion: "aftershock", instory: 0, location: "base", bystander: "panicking power plant worker",
+            stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Resolve the <b>Interact</b> on the Stage Rules card as if you were standing in any one objective's space.` },
+            stagepenalty: { setup: `Discard the top 3 cards from the stage deck.` },
+            masterplan: randFrom(["personalpower", "actsofterror", "illegalgains"]),
+            keywords: ["hostages", "gunk","explosions"],
+            explosion: "reactor bursts",
+            pit: randFrom(["hollow coolant shaft","silent heat chute","dusty turbine hollow","empty reactor core"]),
+            gunk: "container of radioactive waste",
+            hostages: "innocent power plant workers",
+            gloat: [
+                [`Shut it down, <%=enemy.boss}%>! There’s still time!" you yell. "Time is the fuel,`, `And it’s already burning.`],
+                [`You can't possibly control this!" you shout as the reactor pulses violently. "Control? Maybe not,`, `But I can RIDE it to glory!`],
+                [`This will kill you too!" you say, looking through the steam. "If I die, I die,`, `But I’ll die eternal, remembered!`],
+                [`So this is your solution? Meltdown and madness?" you challenge <%=enemy.boss%>. "No... <b>Deterrence</b>,`, `The world listens when it glows red-hot.`],
+                [`You’d kill thousands just to feel powerful?" you shout, amazed at the audacity. "Power isn’t felt — it’s <b>measured</b>,`, `In megatons.`],
+                [`We’ve shut you down before. We’ll do it again," you say with gravity. "And yet here you are,`, `Glowing with fear and radiation.`],
+                [`You’re just in time to witness the chain reaction,`, `And just too late to stop it.`],
+                [`So many safeguards, so many protocols,`, `And not one of them stopped me.`],
+                [`The rods are out, the core is primed,`, `And you brought nothing but hope.`],
+                [`You fear the meltdown,`, `But I AM the meltdown.`],
+                [`You think I’d risk annihilation without reward?`, `This is <b>investment</b>.`],
+                [`Let it melt. Let it roar,`, `Only the strong will survive the fire.`]
+            ],
+            rivaltext: _.template('<%=rivalboost ? ` Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It stands, slowly, powerfully built, dripping with greel gel. It is the ultimate clone, ${rival.name.toUpperCase()}-EX!<br><br>` : ` Apparently ${enemy.boss} is taking blood samples from ${rival.name}.`%>'),
+            hottrail: () => _.template(
+              randFrom([
+                "you intercept scrambled reactor logs and arrive through a rear ventilation shaft, bypassing the main alarms. The reactor is unstable — but not lost. ${ucInit(enemy.desc)} haven’t noticed your entry. You’ve got a chance — if you act fast.",
+                "you intercept the ${enemy.name} schematics and reroute through a forgotten access corridor. You breach the facility just as ${enemy.boss} begins the startup sequence. ${ucInit(gPron(enemy, 'subject'))} hasn’t noticed you — yet."
+              ])),
+            coldtrail: () => _.template(
+              randFrom([
+                "you trace the reports to this facility, arriving just as the lockdown begins. ${ucInit(enemy.minions())} flood the command tier, and the core glows dangerously. There’s no turning back now.",
+                "you follow traces of radiation spikes and black-market energy siphons straight to the plant. The facility’s been overrun by ${enemy.description}, and the control rods are already being extracted. ${enemy.boss} sees you enter—and smiles."
+                ])
+            ),
+            clueless: () => _.template(
+              randFrom([
+                "arriving at the power plant you expected an energy theft or weapons deal — not a facility seconds from implosion. You step inside just as the inner blast doors seal. The temperature’s climbing, and every screen flashes with ${enemy.name} encryption.",
+                "you arrive at the power facility, expecting at most sabotage, not a full meltdown. There are no guards — just open doors and rising heat. Then you see the symbol of ${enemy.name} etched into the steel floor… and realize you’ve walked into something far worse."
+                ])
+            ),
+            prologue: () =>_.template(
+              randFrom([
+                "${trail}, ${stagevar}<br><br>Once inside, heat rolls out at you like a furnace blast. ${ucInit(enemy.minions())} scatter across catwalks and stairwells, frantically carrying components and canisters. ${enemy.boss} stands beside the glowing reactor control panel, arms spread in triumph. \"${gloat[0]}\" ${gPron(enemy, \"subject\")} calls out. \"${gloat[1]}\"<br><br>${laconicStatement(enemy)}",
+                "${trail}, ${stagevar}<br><br>Warning sirens wail overhead as you enter the lobby — a concrete cathedral of steam, cables, and panic. Control panels spark, and hazmat suits lie crumpled on the floor. ${ucInit(enemy.minions())} swarm the walkways, bolting down components or tossing them aside. ${enemy.boss} turns, flanked by glowing coolant tanks. \"${gloat[0]}\" ${gPron(enemy, 'subject')} says, voice calm against the chaos. \"${gloat[1]}\"<br><br>${laconicStatement(enemy)}"
+              ])),
+            captured: _.template(
+              randFrom([
+                "You wake in the dim glow of the control room. Red strobes pulse with every alarm. On a cracked monitor, ${enemy.boss} appears — grinning in silhouette. ${ucInit(enemy.desc)} scurry across the catwalks above the reactor core. \"${gloat[0]}\" ${gPron(enemy,'subject')} declares, voice cutting through blaring alarms. \"${gloat[1]}\"",
+                "Your vision clears just as another klaxon erupts. You’re strapped into a chair in what looks like a reactor access terminal. Monitors show core temperature rising fast. ${enemy.name} symbols flash on every console. ${enemy.boss}, haloed in green light has been observing you. \"${gloat[0]}\" ${gPron(enemy,'subject')} sneers. \"${gloat[1]}\"",
+                "You come to on a steel platform suspended over the exposed reactor chamber. Radiation warnings blare from every speaker. Below, ${enemy.minions()} move with eerie coordination. ${ucInit(bossDescription(enemy))} stands at the far end, watching you stir. \"${gloat[0]}\" ${gPron(enemy, 'subject')} hisses. \"${gloat[1]}\""
+              ])),
+            finalvar: _.template(
+              randFrom([
+                'You <%= randFrom([`step into the lobby where the linoleum has begun to bubble`, `descend a buckled access ramp under sparking fluorescent lights`, `enter the turbine chamber repurposed as a staging ground`, `force your way through a collapsing service tunnel`]) %>. The walls hiss with escaping steam. Pressure valves scream in protest. Warning klaxons overlap — one for radiation, one for coolant failure, and another that simply reads: \'NO RETURN\'.<br><br>',
+                'You <%= randFrom([`arrive in the reinforced central lobby`, `push through the half-melted blast doors`, `emerge from the service tunnel into the heart of the plant`, `descend into the main control concourse`]) %>. Radiation alarms blare in short bursts, and emergency lights flicker above cracked concrete walls. The reactor pulses behind layered glass, its glow rising and falling like a mechanical heartbeat. Panic lingers in the air—but the real danger hasn’t yet escaped.<br><br>',
+              ])
+            ),
+            personalpower: _.template(
+              randFrom([
+                 '${trail}, the ${getMasterPlan()} becomes clear—${enemy.boss} isn’t running from the meltdown. ${ucInit(gPron(enemy,"subject"))} is embracing it, merging with it. The core’s radiation twists around ${gPron(enemy,"possessive")} body, transforming it into something elemental. ${finalvar}${bossDescription(enemy)} hovers above the control rods, eyes burning like twin suns. \"${gloat[0]}\" ${gPron(enemy,"subject")} intones, voice warping with energy. \"${gloat[1]}\"<br><br<${laconicStatement(enemy)}',
+                  '${trail}, your realize the ${getMasterPlan()}: the reactor isn’t a target — it’s a crucible. ${enemy.boss} intends to absorb the core’s energy and emerge reborn as something post-human. ${finalvar}${bossDescription(enemy)} stands at the heart of a containment ring, tendrils of energy crawling toward their skin. \"${gloat[0]}\" ${gPron(enemy,"subject")} whispers as the lights dim around ${gPron(enemy,"object")}. \"${gloat[1]}\"<br><br<${laconicStatement(enemy)}'
+                  ])),
+            actsofterror: _.template(
+              randFrom([
+                '${trail}, the panic was never a cover or a trick — it IS the ${getMasterPlan()}. ${enemy.boss} wants the world to see what happens when civilization melts. The reactor core has minutes left, and the failsafes are offline. ${finalvar}From the catwalk above the control floor, ${enemy.boss} watches the countdown tick down. \"${gloat[0]}\" ${gPron(enemy,"subject")} says as klaxons rise to a scream. \"${gloat[1]}\"',
+                '${trail}, you uncover the full horror of the ${getMasterPlan()}: this isn’t just a meltdown — it’s a live event. The ${enemy.name} has hijacked every broadcast frequency in Ransom City to make the city watch itself burn. ${finalvar}Cameras hover midair, capturing the chaos from every angle. ${enemy.boss} raises a trembling hand to the lens. \"${gloat[0]}\" ${gPron(enemy,"subject")} says, smiling as the countdown beeps escalate. \"${gloat[1]}\"<br><br<${laconicStatement(enemy)}'
+              ])
+            ),
+            illegalgains: _.template(
+              randFrom([
+                '${trail}, you uncover a darker angle to ${possessiveSuffix(enemy.boss)} ${getMasterPlan()}: the reactor core isn\'t the weapon—it\'s the <b>product</b>. Rare unstable isotopes harvested mid-meltdown are being sold to warlords, rogue states, and arcane engineers. ${finalvar}${ucInit(enemy.minions())} in lead-lined suits extract glowing canisters from open chambers as ${enemy.boss} oversees the auction feed. \"${gloat[0]}\" ${gPron(enemy,"subject")} announces, watching the value rise. \"${gloat[1]}\"<br><br<${laconicStatement(enemy)}',
+                 '${trail}, you discover the ${getMasterPlan()}: ${enemy.boss} isn’t trying to destroy the city — ${gPron(enemy,"subject")} is *selling* the meltdown. Energy derivatives, chaos-futures, black-market core fragments—an economy of destruction. ${finalvar}Hazmat-suited ${enemy.minions()} work terminals beside glowing coolant tanks. ${enemy.boss} gestures grandly to a reactor graph ticking upward. \"${gloat[0]}\" ${gPron(enemy,`subject`)} says as currency figures roll in. \"${gloat[1]}\"<br><br<${laconicStatement(enemy)}'
+              ])
+            )
+        },
+
         {
             name: "One Step Ahead", expansion: "legendofoni", instory: 0, location: "remote", bystander: "mountain climber", pit: "the edge of the cliff",
             stagebonus: { setup: `Each fighter may search the enemy deck for a Minion card to discard. Shuffle the enemy deck.` },
@@ -685,6 +763,91 @@ export function getStages(expansionfilter) {
             finalvar: _.template('${trail}, you find out that ${possessiveSuffix(enemy.boss)} ${getMasterPlan()} is to pump something dangerous in the city waters. By the information you\'ve gathered, you are eventually able to find your way through the Ransom City sewers to ${possessiveSuffix(enemy.name)} secret lair.<br><br>As you enter a large chamber, you find what used to be a water treatment facility that is now being used as some sort of insane science experiment. "${gloat[0]}"  comes a voice, echoing from somewhere else in the chamber. "${gloat[1]}" ${bossDescription(enemy)} steps ouf of the shadows<%=rivalpresence ? rivaltext : ``%>. "Once we get these pumps working, all the water in Ransom City will be'),
             actsofterror: _.template('${finalvar} poisoned by our new toxic cocktail. Many will die, but the surviving will be all the stronger for it. So now you have a choice: join us, or die!" ${ucInit(getPropertyValue(enemy, stage, "antiair", "the approaching enemy minions"))} eliminated one option.'),
             strengtheningforces: _.template('${finalvar} blessed by our new ${randFrom(["Dynasty", "Vandal", "Dark Matter"])} serum. The weak will die, and the surviving strong will join our ranks as thralls! So now you have a choice: join us, or die!" ${ucInit(getPropertyValue(enemy, stage, "antiair", "the approaching enemy minions"))} eliminated one option.')
+        },
+
+            {
+            name: "Reel Terror", expansion: "stretchgoals18", instory: 0, location: "remote", bystander: "terrified moviegoer",
+            stagebonus: { setup: `Any fighter may put this card in their play area. <b>Feint:</b> Advance any active objective 3 spaces to its corresponding objective space.` },
+            stagepenalty: { setup: `Flip an inactive objective to its active side.` },
+            masterplan: randFrom(["strengtheningforces", "actsofterror", "illegalgains"]),
+            keywords: ["swarmed", "ritual", "hostages"],
+            hostages: "audience",
+            swarm: `${randFrom("celluloid","reel","projector","cinematic","filmstrip","silver-screen")} ${randFrom("nightmares","fiends","terrors","horrors","shadows")}`,
+            gloat: [
+                [`The show's just begun,`, `Make sure you won't leave before the climax.`],
+                [`You walked straight into the spotlight,`, `And now the reel plays out exactly as I wrote it.`],
+                [`You always arrive just in time,`, `Right on cue for the final act.`],
+                [`So many eager viewers, so little reality left to spare,`, `Soon they won’t just *watch* the monsters — they'll get to meet them!`],
+                [`You turned fiction into a weapon. These poor people, do they even know what’s real anymore?" you demand, pushing through the chaos. "Real?" the villain laughs,`, `Reality is what the audience believes. And they believe in *fear*.`],
+                [`You're using the screen as a gateway. This is more than a film — it’s a summoning!" you shout. "Exactly," comes the reply,`, `"And with each scream, the barrier weakens. Soon, even the credits won’t save you."`],
+                [`Lights, camera, ritual,`, `Let the horror bleed through and the stars of pain take the stage!`],
+                [`This cinema is more than a relic,`, `It's a shrine — to stories, yes, but also to power. And now, the final tale begins.`],
+                [`This isn’t entertainment. It's a slaughterhouse wrapped in celluloid!" you accuse. <%=enemy.boss%> smiles,`, `No — it's art. And you, my dear critics, are about to be *moved*.`],
+                [`The curtain rises, the veil tears,`, `And reality takes its final bow.`]
+            ],
+            rivaltext: _.template('<%=rivalboost ? ` Suddenly, one of the tubes crashes open, and a figure can be seen within the steam, kneeling, faced away. It stands, slowly, powerfully built, dripping with greel gel. It is the ultimate clone, ${rival.name.toUpperCase()}-EX!<br><br>` : ` Apparently ${enemy.boss} is taking blood samples from ${rival.name}.`%>'),
+            hottrail: () => _.template(
+              randFrom([
+                 "${trail}, you uncover the final piece of ${possessiveSuffix(enemy.name)} scheme - ${whichPreposition(mysticalSynonym())} ritual disguised as a midnight premiere — and rush to the cinema, heart pounding.",
+                 "${trail}, you confirm that ${enemy.boss} plans to breach reality during tonight’s screening, and you head straight for the theater before the summoning completes.",
+                 "${trail} you realize the late-night showing is a ruse to gather victims for something monstrous — and you arrive just as the first scream cuts through the silence."
+              ])),
+            coldtrail: () => _.template(
+              randFrom([
+                "${trail}, you follow the signs to an off-strip cinema, unsure of what you’ll find — but expecting the worst.",
+                "${trail}, you arrive at a quiet screenhouse moments too late — the screams have already begun, and the lobby lights are flickering.",
+                "${trail}, the clues point to just an obscure moviehouse. You double-check your leads and decide to press on. The moment you arrive, you can tell something's terribly wrong, and you should not have lingered."
+                ])
+            ),
+            clueless: () => _.template(
+              randFrom([
+                "${trail}, you follow the last thread of evidence to a a faded old cinema, its marquee missing letters and its windows clouded with age, unsure if it’s a trap, a dead end, or something worse.",
+                "${trail}, you arrive to an forgotten theater wedged between shuttered shops. The trail leads here, though nothing adds up — and everything about this place feels off.",
+                "${trail}, you find youself standing outside of a a run-down moviehouse where the posters haven’t changed in years — and none of them match the current listings. It’s the only lead left, and while it doesn’t make sense, instinct tells you this is the right place.",
+                "${trail}, the clues are scattered and conflicting, but they all point to this obscure little cinema.",
+                "${trail}, you're not sure why the pattern ends here — but the a narrow brick building with a crooked ticket booth is where you're at.",
+                "${trail}, it feels wrong, but too many things lead here to ignore — so you push open the doors to a crumbling neighborhood relic still clinging to its old glamour beneath layers of grime and step inside.",
+                "You gave up the chase hours ago. Now you're standing outside a narrow two-screen theater with a sun-bleached marquee and a popcorn machine older than you are. The doors open like it's any other night — until you hear the screaming.",
+                "You just needed a place to sit for a while. The theater's neon buzzes overhead, flickering pink and blue above rusted lettering: \"Tonight Only\". The ticket girl is gone. The glass is cracked. And you see movement inside.",
+                "You were done asking questions. And yet here you are, in front of an old cinema you don’t remember choosing, its lights dimmed and its windows too dark to see through. Something inside is waiting, and it knows your name."
+                ])
+            ),
+            prologue: () =>_.template(
+              randFrom([
+                "${stagevar}<br><br>The lobby is a war zone — moviegoers scream, tripping over each other as shattered glass rains down from the balcony. Something crawled out of the screen and never went back. Amid the flashing lights and flickering reels, ${bossDescription(enemy)} watches the panic unfold. \"${gloat[0]}\" ${enemy.boss} smirks, unfazed by the chaos. \"${gloat[1]}\"<br><br>${laconicStatement(enemy)}",
+                "${stagevar}<br><br>By the time you push through the broken doors, it's already madness. Theaters have emptied into the lobby, where shrieking patrons claw at locked exits. A reel of darkness unspools from the projection booth — and ${enemy.minions()} herd the victims toward the rising evil. \"${gloat[0]}\" ${enemy.boss} cackles, stepping over a fallen usher. \"${gloat[1]}\"<br><br>${laconicStatement(enemy)}",
+                "${stagevar}<br><br>Chaos has already taken hold. Screaming patrons flee past overturned concession stands and shattered posters, while shadows twist and flicker beneath the projection’s dying light. ${enemy.boss} stands center stage in the lobby, surrounded by ${enemy.desc}. \"${gloat[0]}\" ${bossDescription(enemy)} says with theatrical calm, arms spread as if introducing an encore. \"${gloat[1]}\"<br><br>${laconicStatement(enemy)}",
+                "${stagevar}<br><br>The lobby's been turned into a waking nightmare — stampeding moviegoers crash through velvet ropes and broken glass, trying to escape the horrors now loose among them. Framed by the stuttering glow of a possessed projector, ${enemy.boss} surveys the scene with eerie satisfaction. \"${gloat[0]}\" A single reel turns slowly behind ${gPron(enemy, 'object')}, glowing with ${mysticalSynonym()} force. \"${gloat[1]}\"<br><br>${laconicStatement(enemy)}"
+              ])),
+            captured: _.template(
+              randFrom([
+                "Dazed and slumped in a cinema seat, you blink awake to sirens, shouting, and flashing lights. The audience is in full retreat, bolting for the exit. You rise and follow — only to halt as the lobby doors swing open, revealing ${enemy.boss} waiting with a flourish and a bow. \"${gloat[0]}\" ${gPron(enemy,'subject')} beams. \"${gloat[1]}\"",
+                "You're jolted awake by screams and the sound of trampling feet. The theater shakes as patrons push past you, eyes wide with terror. You follow them into the lobby — just in time to see ${enemy.boss} step from the shadows. \"${gloat[0]}\" ${gPron(enemy,'subject')} says. \"${gloat[1]}\"",
+                "You awaken in darkness as panicked moviegoers surge past you in a frantic stampede. Disoriented, you stumble after the fleeing crowd into the lobby — only to find ${enemy.boss} standing amid the chaos, grinning at your arrival \"${gloat[0]}\" ${gPron(enemy,'subject')} laughs. \"${gloat[1]}\""
+              ])),
+            finalvar: _.template(
+              randFrom([
+                'You <%= randFrom([`step into the lobby`, `push through the lobby doors`, `burst into the foyer`, `emerge from the side hall into the main lobby`]) %> to find chaos in full bloom. Panic has swallowed the crowd—patrons stampede across broken tiles, dodging overturned furniture and falling light fixtures. Above them, the screen still flickers, but what it projects is no longer fiction. Cracks shimmer in the air where celluloid meets reality, and through them, silhouettes crawl free.<br><br>',
+                'You <%= randFrom([`stride into the lobby`, `arrive amid the screams`, `step through the torn velvet drapes`, `rush in just ahead of the flood of fleeing moviegoers`]) %>. Popcorn litters the ground like ash. The lobby\'s lights strobe as though caught between reels. Patrons crash into furniture and one another in blind terror, while the air itself pulses with unnatural heat. Where the screen’s image should end, something writhes — its form stitched together from flickering frames and projected madness.<br><br>'
+              ])
+            ),
+            strengtheningforces: _.template(
+              randFrom([
+                  '${trail}, you uncover the true scope of ${possessiveSuffix(enemy.name)} ${getMasterPlan()}: not a spell, not a performance — this is a full-scale summoning. ${finalvar}At the heart of it, ${enemy.boss} stands atop the concession counter like a conductor before an orchestra, arms raised to the glow of the screen. "${gloat[0]}" ${gPron(enemy,"subject")} cries, as the summoned horrors take shape in the flickering light. "${gloat[1]}"<br><br>${laconicStatement(enemy)}',
+                  '${trail}, you uncover the horrifying truth: ${enemy.boss} isn’t just summoning monsters — ${gPron(enemy,"subject")} is building an army, pulled straight from the darkest corners of cinema itself. ${finalvar}Above the chaos, ${enemy.boss} gestures theatrically from a staircase landing, as film-born entities — glitching, half-rendered, too large for this world — climb free from the light. "${gloat[0]}" ${gPron(enemy,"subject")} proclaims, voice distorted through the projection. "${gloat[1]}"'
+                ])),
+            actsofterror: _.template(
+              randFrom([
+                '${trail}, you realize the broadcast isn’t meant to be watched—it’s meant to *breach*. Across Ransom City, theaters flicker in sync, each one a gateway. But here, at the epicenter, it’s already begun. ${finalvar}As ${enemy.boss} chants before the screen, the audience collapses into hysteria, and a terrible face begins to form in the frame. "${gloat[0]}" ${gPron(enemy,"subject")} intones. "${gloat[1]}"',
+                '${trail}, it becomes clear: this isn’t a ritual for power—it’s a *broadcast*. ${enemy.name} intends for all of Ransom City to watch — and in watching, let the nightmare through. ${finalvar}Cameras rise from behind shattered counters, filming everything. As ${enemy.boss} raises their arms to the flickering screen, the shadows themselves begin to cheer. "${gloat[0]}" ${gPron(enemy,"subject")} shouts, as the lens turns your way. "${gloat[1]}"'
+              ])
+            ),
+            illegalgains: _.template(
+              randFrom([
+                 '${trail}, you uncover ${enemy.boss}’s true goal: not terror for power — but profit. ${ucInit(gPron(enemy,"subject"))} has turned the ritual into a business model, where the extradimensional creatures of the night pay to experience the horror and suffering of the audience — night after night. ${finalvar}${ucInit(mysticalSynonym())} concession stands churn out cursed merchandise, and audience members vanish after the credits roll. "${gloat[0]}" ${gPron(enemy,"subject")} announces, surrounded by VIP spirits with premium seating. "${gloat[1]}"',
+                 '${trail}, it all comes together—${enemy.name} is running a supernatural investment scheme. By binding entities from across the cinematic netherworld, ${enemy.boss} has monetized horror itself. ${finalvar}On a flickering screen, you see futures traded in fear, agony bottled and sold to infernal shareholders. "${gloat[0]}" ${gPron(enemy,"subject")} grins, gesturing to a reel spinning gold threads. "${gloat[1]}"'
+              ])
+            )
         },
 
         {
@@ -1200,7 +1363,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
               ],
               ["You’re not the first thug I’ve followed into a fight — and you won’t be the last to regret it.\" Your knuckles crack, your eyes shine. You're wrecked. You're ready. \"I don’t regret anything but wasting time on you,",
               "You chase shadows. I leave bodies."]
-      ]      
+      ]
      },
      {
         name: "Caitlyn", expansion: "lamentofthebloodmoon", enemy: "", ally: "", rival: "", stage: "",
@@ -1223,7 +1386,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
             ["You think just because you don’t speak, you scare people more.\" You don't answer — you just adjust your tie with bruised, disciplined hands, observing every detail about  <%=boss%>. \"But fear’s a waste on someone already marked,","You walked in like a shadow. I’ll leave you in pieces."],
             ["I heard about you. Castle. Precision. Restraint. No mess.\" You say nothing. You simply straighten your jacket. \"So what’s with the look? Planning to break your streak?","I’ll make the cleanup worth it."]
             ]
-          
+
     },
     { name: "Chan Chan", expansion: "stretchgoals18", enemy: "", ally: [""], rival: [""], stage: "" },
         {
