@@ -9,7 +9,7 @@
   const storyname = pagecontent.storyname;
   const finalboss = pagecontent.finalboss;
 
-  function resizeElementToFit(el, buffer = 0, lineHeightStart = 1.4, padStep = 0.5, dev) {
+  function resizeElementToFit(el, buffer = 0, lineHeightStart = 1.4, padStep = 0.5, flex, dev) {
   if (!el) return;
 
   const computed = getComputedStyle(el);
@@ -17,60 +17,64 @@
   let lineHeight = lineHeightStart;
   let paddingTop = parseFloat(computed.paddingTop);
   const minFontSize = 8; // Prevent shrinking below this
+  let flexGrow = parseFloat(computed.flexGrow)
 
   const overflowCheck = () => el.scrollHeight > (el.clientHeight + buffer);
 
   let attempts = 0;
-  const maxAttempts = 50;
+  const maxAttempts = 10;
 
   while (overflowCheck() && fontSize > minFontSize && attempts < maxAttempts) {
-    if (dev) {
-      console.log(`Attempt ${attempts}: scrollHeight = ${el.scrollHeight}, allowed = ${el.clientHeight + buffer}`);
-    }
 
     fontSize -= 1;
     el.style.fontSize = `${fontSize}px`;
+    
+    if (padStep && overflowCheck()) {
+      paddingTop -= 4;
+      paddingTop = Math.max(0, paddingTop); // don't go negative
+      el.style.paddingTop = `${paddingTop}px`;
+    }
 
-    if (lineHeightStart) {
+    if(flex == true && overflowCheck()) {
+      flexGrow += 0.1;
+      el.style.flexGrow = `${flexGrow}`;
+    } else if (flex == false) {
+      flexGrow -=0.01
+      el.style.flexGrow = flexGrow
+    }
+    if (lineHeightStart && overflowCheck()) {
       lineHeight = Math.max(1, lineHeight - 0.1);
       const calculatedLineHeight = Math.min(fontSize * lineHeight, fontSize * 1.1);
       el.style.lineHeight = `${calculatedLineHeight}px`;
     }
 
-    if (padStep) {
-      paddingTop = Math.max(0, paddingTop - padStep); // don't go negative
-      el.style.paddingTop = `${paddingTop}px`;
-    }
-
     attempts++;
   }
 
-  if (dev) {
-    console.log("Finished adjusting");
-    console.log(`Final scrollHeight: ${el.scrollHeight}`);
-    console.log(`Client height + buffer: ${el.clientHeight + buffer}`);
-    console.log(`Final fontSize: ${fontSize}px, lineHeight: ${lineHeight}, paddingTop: ${paddingTop}px`);
-    console.log({
-  scroll: el.scrollHeight,
-  client: el.clientHeight,
-  offset: el.offsetHeight
-});
-  }
 }
 
 
   function resizeCards() {
     const titles = document.querySelectorAll('.card-storycardfront-title');
+
     titles.forEach(el => {
-      if (el.scrollHeight > el.clientHeight + 9) {
+      if (el.scrollHeight > el.clientHeight + 2) {
         resizeElementToFit(el, 2, 1.5, 0.5);
       }
     });
 
     const prologues = document.querySelectorAll('.card-storycardfront-prologue');
+    const storySetups = document.querySelectorAll('.card-storycardfront-setup');
     prologues.forEach(el => {
-      resizeElementToFit(el, 12, 1.2, 0.4);
-      el.style.overflow = 'visible';
+
+      if (el.scrollHeight > el.clientHeight) {
+            storySetups.forEach(el => {
+                el.style.flexGrow -=0.1;
+              }) 
+
+      }
+      resizeElementToFit(el, 2, 1.4, 0.4, true);
+//      el.style.overflow = 'visible';
     });
 
     const epilogues = document.querySelectorAll('.card-storycardback-epilogue-top, .card-storycardback-epilogue-bottom');
@@ -82,6 +86,13 @@
     epilogueTitles.forEach(el => {
       if (el.scrollHeight > el.clientHeight + 4) {
         resizeElementToFit(el, 4, 1, 0);
+      }
+    });
+
+    storySetups.forEach(el => {
+      el.style.overflow = "hidden"
+      if (el.scrollHeight > el.clientHeight + 4) {
+        resizeElementToFit(el, 2, 1, 0.5, true);
       }
     });
 
@@ -122,11 +133,11 @@
                 <div class = "card-storycard-divider"></div>
                 <div class = "card-storycardfront-subtitle">CHARACTER OVERVIEW</div>
                 <div class = "card-storycard-divider"></div>
-                <div class = "card-storycardfront-prologue" style = "font-size: 10px; font-style: normal">
+                <div class = "card-storycardfront-prologue" style = "flex: 2.5; font-size: 10px; font-style: normal">
                     {@html referencetext[0][0].trim()}<br>The reverse side of this card gives suggestions for additional Allies and Rivals to be used during this story.
                 </div>
                 <div class = "card-storycard-divider"></div>
-                <div class = "card-storycardfront-setup" style = "flex: 0.2">
+                <div class = "card-storycardfront-setup" style = "flex: 1">
                     {@html referencetext[0][1].trim()}
                     <div class = "expansionicon">
                         <span class="infinity-before"></span><span class="infinity-after"></span>
@@ -136,21 +147,21 @@
 
             <div class = "print-card-container">
                 <div class = "card-storycardback-bar-top" style = "height: 6mm;"></div>
-                <div class = "card-storycardback-epilogue-top" style = "font-style: normal; overflow: none; padding-top: 8mm;">
+                <div class = "card-storycardback-epilogue-top" style = "flex: 1; font-style: normal; overflow: none; padding-top: 8mm;">
                     {@html referencetext[1]}
                 </div>
                 <div class = "card-storycard-divider"></div>
-                <div class = "card-storycardfront-setup" style = "flex: 0.2; border-radius: 0px;"><span>{@html referencetext[3]}</span></div>
+                <div class = "card-storycardfront-setup" style = "flex: 0.36; border-radius: 0px;"><span>{@html referencetext[3]}</span></div>
                 <div class = "card-storycardback-titlebar" style = "top: 3.8mm">
                         <div class = "card-storycardback-epiloguetitle">If you choose to use Allies</div>
                 </div>
                 <div class = "card-storycardback-colorbar-back" style = "top: 5.7mm"></div>
                 <div class = "card-storycardback-colorbar-green" style = "top: 5.7mm"></div>
-                <div class = "card-storycardback-epilogue-bottom" style = "font-style: normal; overflow:none; padding-top: 8mm;">
+                <div class = "card-storycardback-epilogue-bottom" style = "flex:1; font-style: normal; overflow:none; padding-top: 8mm;">
                     {@html referencetext[2]}
                 </div>
                 <div class = "card-storycard-divider"></div>
-                <div class = "card-storycardfront-setup" style = "flex: 0.2; border-radius: 0px; padding-bottom: 3mm;"><span>{@html referencetext[4]}</span></div>
+                <div class = "card-storycardfront-setup" style = "flex: 0.18; border-radius: 0px; padding-bottom: 3mm;"><span>{@html referencetext[4]}</span></div>
                 <div class = "card-storycardback-titlebar" style = "top: 4.35cm">
                         <div class = "card-storycardback-epiloguetitle">If you choose to use Rivals</div>
                 </div>
@@ -178,9 +189,9 @@
                 <div class = "card-storycard-divider"></div>
                 <div class = "card-storycardfront-subtitle">{finalboss.toUpperCase()} STORY <span style="float:right;">PART {@html card.chapter}</span></div>
                 <div class = "card-storycard-divider"></div>
-                <div class = "card-storycardfront-prologue">{@html card.prologue.trim()}</div>
+                <div class = "card-storycardfront-prologue" style = "flex: 4">{@html card.prologue.trim()}</div>
                 <div class = "card-storycard-divider"></div>
-                <div class = "card-storycardfront-setup">
+                <div class = "card-storycardfront-setup" style = "flex: 1">
                     {@html card.setup.trim()}
                     <div class = "expansionicon">
                         <span class="infinity-before"></span><span class="infinity-after"></span>
@@ -315,7 +326,6 @@
           font-size: 10px;
           font-weight: 100;
           position: relative;
-          text-shadow: none !important;
       }
       
       .circleicon {

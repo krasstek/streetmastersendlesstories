@@ -80,7 +80,7 @@
 <label for="stages">Number of stages:</label>
 <select bind:value={$storyLength} id="stages" class="dropdown">
 	{#each [1, 2, 3, 4, 5] as n}
-		<option value={n} selected={n === stages}>{n}</option>
+		<option value={n} selected={n === stages}>{n === 1 ? '1 (Arcade Mode)' : n}</option>
 	{/each}
 </select>
 </div>
