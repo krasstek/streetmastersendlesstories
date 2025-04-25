@@ -27,4 +27,39 @@
 {/if}
 
 <style>
+
+  @media print {
+    :global(body) {
+        background: none;
+        }
+
+    :global(.app-header) {
+        display: none;
+        }
+    
+    :global(.menu-button) {
+        display: none;
+        }
+
+:global(.app-container) {
+        overflow: visible;
+        }
+
+        :global(.app-wrapper) {
+max-width: none!important;
+        }
+
+   :global(.printable-cards) {
+      display: table !important;
+  height: auto !important;
+  overflow: visible !important;
+  width: 100%;
+    }
+
+    :global(.card-both-sides) {
+      display: inline-block !important;
+     break-inside: avoid;
+      page-break-inside: avoid;
+  }
+  }
 </style>

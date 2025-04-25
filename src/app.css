@@ -4,6 +4,7 @@ body, html {
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
+	font-family: 'IBM Plex Sans', sans-serif;
 }
 
 body {
@@ -34,13 +35,20 @@ body:not(.ready) {
 	background: black;
 	padding: 1.5rem 1rem 0;
 	width: 100%;
+	font-size: 2rem;
+}
+
+.app-header h1 {
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-size: 2.2rem!important;
 }
 
 .logo {
 	display: block;
 	margin: 0 auto;
-	max-width: 200px;
-	height: auto;
+	width: auto;
+	height: 18dvw;
+	max-height: 200px;
 }
 
 .app-header h1 {
@@ -52,9 +60,12 @@ body:not(.ready) {
 /* Wrapper for page content */
 .app-wrapper {
 	width: 100%;
-	max-width: 700px;
 	padding: 2rem 1rem;
 	box-sizing: border-box;
+}
+
+.app-wrapper:not(.printcards-mode) {
+	max-width: 700px;
 }
 
 /* Dropdowns */
@@ -65,12 +76,15 @@ label {
 	margin: 1rem 0 0.5rem;
 	font-weight: bold;
 	text-align: center;
+	font-size: 1.5rem;
 }
 
 .app-selects {
 	text-align: center;
 	text-align-last: center;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
 }
+
 
 .app-selects select.dropdown {
   font-weight: 700;
@@ -98,13 +112,14 @@ label {
 /* Buttons */
 .menu-button {
 	width: 100%;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
 	background: #333;
 	color: white;
 	padding: 1rem;
 	margin: 0.5rem 0;
 	border: none;
 	border-radius: 5px;
-	font-size: 1rem;
+	font-size: 1.5rem;
 	font-weight: 700;
 	text-align: center;
 	cursor: pointer;
@@ -167,12 +182,13 @@ label {
 		background: #111;
 		padding: 0.5rem 1rem;
 		font-weight: bold;
-		font-size: 1rem;
+		font-size: 1.5rem;
 		border-radius: 0;
+		font-family: 'Yanone Kaffeesatz', sans-serif;
 	}
 	.story-title
 	{
-		font-size: 1.2rem;
+		font-size: 1.8rem;
 	  border-radius: 6px 6px 0 0;
 	}
 
@@ -185,9 +201,14 @@ label {
     color: #333 !important;
 		line-height: 1.5;
     background-size:cover;
-    font-family: 'IBM Plex Sans', sans-serif !important;
 		margin-bottom: 1rem;
 	}
+
+
+.setup-section .card-section-title {
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-size: 1.5rem;
+}
 
 .card-section {
 	margin-top: 1rem;

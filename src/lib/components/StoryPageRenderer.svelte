@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import SaveHandler from  '$lib/components/SaveHandler.svelte';
 	import ReferenceCard from '$lib/components/ReferenceCard.svelte';
+	import { base } from '$app/paths';
   import { escClose } from '$lib/actions/escClose';
 
 	let currentPage = 0;
@@ -26,7 +27,7 @@
 	}
 
 	function printCards() {
-    goto('/printcards');
+    	goto(base + "/printcards");
   }
 
 	function handleOutcome(result) {
@@ -105,7 +106,7 @@
 			{story.finalboss.toUpperCase()} STORY – PART {card.chapter}
 		</div>
 		<div class="card-prologue"><i>{@html card.prologue}</i></div>
-		<div class="card-section">
+		<div class="card-section setup-section">
 			<div class="card-section-title">SETUP</div>
 			<div class="card-section-content">{@html card.setup}</div>
 		</div>
@@ -117,7 +118,7 @@
 				{card.wincondition[1]}
 			</button>
 			<button class = "menu-button" on:click={() => (showReference = true)}>Gladiator Reference</button>
-			<button on:click={printCards} class="menu-button"> Print Cards</button>
+			<button on:click={printCards} class="menu-button">View Cards</button>
 			<button class = "menu-button" on:click={() => showSave = true}>Save Game</button>
 		</div>
 	</div>
