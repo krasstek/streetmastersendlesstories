@@ -1020,10 +1020,9 @@ export function allyNamer(alliesandrivals, enemy, heronames, finalboss) {
 
 export function defineKnowledge(i, story) {
     let knowledge
-
-
     switch (i) {
-        case 0: knowledge = story[i].stage.hasOwnProperty(`captured`) ? randFrom(["coldtrail", "clueless", "captured"]) : randFrom(["coldtrail", "clueless"])
+        case 0: 
+          knowledge = randFrom([story.length === 1 ? "hottrail" : "coldtrail","coldtrail","clueless","clueless", story[i].stage.captured ? "captured" : "clueless"])
             break;
         case 1: case 3: case 5: case 7:
             knowledge = "hottrail"
@@ -1031,9 +1030,9 @@ export function defineKnowledge(i, story) {
         case 2: case 4: case 6: case 8:
             if (story[i].stage.name === story[i - 1].stage.name) {
                 knowledge = "coldtrail"
-            } else if (story[i].stage.hasOwnProperty(`captured`) && i > 3) {
-                knowledge = randFrom(["clueless", "captured"])
-            } else knowledge = "clueless"
+            } else {
+                knowledge = randFrom(["clueless", story[i].stage.captured ? "captured" : "clueless"])
+            }
             break;
     }
     return knowledge
