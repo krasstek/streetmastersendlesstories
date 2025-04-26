@@ -27,7 +27,8 @@
     <div  role="presentation" class="story-popup save-popup" on:click|stopPropagation>
       <div class = "save-header">Save Game<button on:click={closeCard} class="close-button"aria-label="Close popup">&times;</button></div>
       {#each $saveSlots as slot, i}
-        <button class = "save-button" on:click={() => saveGame(i)}>{slot ? `Overwrite slot ${i+1}: ${slot.storyname} – ${slot.finalboss.toUpperCase()} STORY` : `Save to slot ${i+1}`}</button>
+        <button class = "save-button" on:click={() => saveGame(i)}>
+          {slot ? `Overwrite slot ${i+1}: ${slot.storyname} – ${slot.finalboss.toUpperCase()} STORY` : `Save to slot ${i+1}`}</button>
       {/each}
     </div>
   </div>

@@ -15,12 +15,14 @@
 	let showOverlay = true ;
   let showReference = false;
   let showSave = false;
+  let isArcade = false
 
 	$: if ($pageContent) {
 		story = $pageContent;
 		cardtexts = $pageContent.text ?? [];
 		card = cardtexts[currentPage];
 		storytitle = $pageContent.storyname;
+		isArcade = cardtexts.length == 1 
 		showOverlay = true;
 		showReference = false;
 		showSave = false;
@@ -103,7 +105,7 @@
 	<div class="story-card">
     <div class = "story-title">{storytitle}</div>
 		<div class="card-header">
-			{story.finalboss.toUpperCase()} STORY – PART {card.chapter}
+		{story.finalboss.toUpperCase()} {isArcade ? `ENCOUNTER` : `STORY – PART ${card.chapter}` }
 		</div>
 		<div class="card-prologue"><i>{@html card.prologue}</i></div>
 		<div class="card-section setup-section">

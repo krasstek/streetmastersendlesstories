@@ -499,7 +499,7 @@ export function latestScheme(enemy) {
         `An unmarked submarine surfaces in Delta Keys and vanishes before anyone can respond. Sensor data shows it dropped something. This means `,
         `After weeks of decoding layered comms traffic, Citadel’s linguists stumble across a phrase repeated in multiple dialects: “Phase Two begins.” It’s now clear that `,
         `A respected senator’s aide is found unconscious with a burned symbol carved into their desk — the same one traced to ${enemy.name}. This means `,
-        `A drone returning from routine surveillance delivers a unexpected footage that proves your worst suspicions: `,
+        `A drone returning from routine surveillance delivers unexpected footage that proves your worst suspicions: `,
         `Someone is erasing enemy records from Citadel databases in real time. Whoever’s doing it knows the system. This must mean `,
         `A smuggling route used for decades suddenly dries up — and then reactivates, now flowing in the other direction. Experts believe this indicates `,
         `An elite strike team sent to dismantle a cartel stronghold down south goes dark. The only signal left behind is a looping audio message: `,
@@ -2785,14 +2785,14 @@ function pitFinalResult(enemy, stage, gloat, _subject, _possessive, _object, col
         let gunmenresults = undefined
         if (gunmen) {
             gunmenresults = [
-                `The ${gunmen} open fire. You throw yourself sideways, but the ground gives way beneath your feet. ${ucInit(pit)} doesn’t wait for a second chance.`,
+                `The ${gunmen} open fire. You throw yourself sideways, but lose your balance. ${ucInit(pit)} doesn’t wait for a second chance, and they don't need to shoot again.`,
                 `${collapse}A bullet grazes your arm. The pain jolts you off-balance — your next step lands on nothing. ${ucInit(pit)} takes care of the rest.`,
-                `You’re out of cover, trying to regroup, when the ${gunmen} advance. One step back becomes your last — straight into ${pit}.`,
-                `Shots slam into the wall behind you. You turn to run, but you’ve already stepped over the edge. ${ucInit(pit)} meets you halfway.`,
-                `You duck the first volley from the ${gunmen}, but stumble on uneven ground. There’s no time to recover. You fall backward into the waiting ${pit}.`,
+                `You’re out of cover, trying to regroup, when the ${gunmen} advance. One step back becomes your last — straight into ${pit}. A resounding <b>crack</b> tells them the essentials.`,
+                `Shots slam into the wall behind you. You turn to run, but you’ve already stepped over the edge. ${ucInit(pit)} meets you halfway, and the fall finishes the job.`,
+                `You duck the first volley from the ${gunmen}, but stumble on a downed henchman. There’s no time to recover. Riddled with bullets, you fall backward straight into ${pit}.`,
                 `${collapse}The ${gunmen} close in from all sides. You pivot left, then back — and find only ${pit} waiting. The drop is instant. The silence after, permanent.`,
-                `You try to zig left to avoid the firing ${gunmen}, but your foot lands badly. One slip, and the rest is falling. ${ucInit(pit)} was closer than you realized.`,
-                `Bullets tear through cover behind you as the ${gunmen} have you from multiple angles. You backpedal fast, too fast — until there's nothing left to stand on. ${ucInit(pit)} opens wide.`,
+                `You try to zig left to avoid the firing ${gunmen}, but your foot lands badly. One slip, and the rest is falling. ${ucInit(pit)} was closer than you realized, but at least you didn't have to ponder your mistake for long.`,
+                `Bullets tear through cover behind you as the ${gunmen} have you from multiple angles. You backpedal fast, too fast — until there's nothing left to stand on. ${ucInit(pit)} is open wide and welcomes you to your demise.`,
                 `You're driven back by a constant spray of gunfire from the ${gunmen}. The moment your foot finds nothing but air, you know it's over. ${ucInit(pit)} doesn't forgive panic.`
             ]
 
@@ -2801,10 +2801,11 @@ function pitFinalResult(enemy, stage, gloat, _subject, _possessive, _object, col
         let bladeresults = undefined
         if (blade) {
             bladeresults = [
-                `${collapse}${enemy.boss} circles you slowly, the ${blade} glinting with intent. You dodge too wide, too fast—there’s nothing behind you. Only space. ${ucInit(pit)} waits without judgment.`,
-                `${collapse}You charge one last time, but ${enemy.boss} sidesteps effortlessly. The ${blade} drives through your gut, stopping you cold. For a moment, the world is silent — just the two of you, locked in place. Then ${_subject} leans close. "${gloat[0]}" ${_subject} murmurs, yanking the it free. One swift kick to your chest, and you stagger backward, falling helplessly into ${pit} as "${gloat[1]}" fades into the dark.`,
-                `${enemy.boss} slashes wide with ${_possessive} ${blade}, not to kill — but to drive you back. It works. You stagger once, twice, and then there’s no more floor. ${ucInit(pit)} takes you whole.`, `The ${blade} cuts across your shoulder. The pain blinds you for a second — just long enough to miss the edge. You fall, spinning, and ${pit} swallows you.`,
-                `A feint, then a sudden lunge — ${possessiveSuffix(enemy.boss)} ${blade} doesn't strike, but it herds you back a step too far. The ledge gives way. ${ucInit(pit)} finishes what steel didn't.`
+                `${collapse}${enemy.boss} circles you slowly, the ${blade} glinting with intent. You dodge too wide, too fast — there’s nothing behind you. Only space. ${ucInit(pit)} waits without judgment.`,
+                `${collapse}You charge one last time, but ${enemy.boss} sidesteps effortlessly. The ${blade} drives through your gut, stopping you cold. For a moment, the world is silent — just the two of you, locked in place. Then ${_subject} leans close. "${gloat[0]}" ${_subject} murmurs, yanking the it free. One swift kick to your chest, and you stagger backward, falling helplessly into ${pit}. "${gloat[1]}" is the last thing you hear before everything goes dark.`,
+                `${enemy.boss} slashes wide with ${_possessive} ${blade}. You stagger once, twice, and then there’s no more floor. ${ucInit(pit)} takes you whole.`, 
+                `The ${blade} cuts across your shoulder. The pain blinds you for a second — and ${enemy.boss} kicks you hard. You fall, spinning, and ${pit} swallows you.`,
+                `A feint, then a sudden lunge — ${possessiveSuffix(enemy.boss)} ${blade} doesn't score a lethal hit, but herds you back a step too far. ${ucInit(pit)} finishes what ${_subject} didn't.`
             ]
 
         }
@@ -3306,7 +3307,7 @@ export function gloatingList(enemy, stage, herodialogue = [], heronames = undefi
         [`There is still time to stop this," you plead to ${enemy.boss}. "No,`, `It is far too late for that.`],
         [`You can still end this," you plead to ${enemy.boss}. "Yes,`, `It is you who I shall end!`],
         [`Do you expect me to yield?" you ask defiantly. "No, ${defineAddressing(enemy)},`, `I expect you to die.`],
-        [`Poor ${defineAddressing(enemy)}!`, `I would offer you a place in the ${enemy.name}, but you fail to see the bigger picture." "I still believe in Global Gladiators, not the ${randFrom([enemy.name, "Kingdom"])}!" you retort through gritted teeth. "That will always be your downfall.`],
+        [`Poor ${defineAddressing(enemy)}! I would offer you a place in the ${enemy.name}." "I still believe in Global Gladiators, not the ${randFrom([enemy.name, "Kingdom"])}!" you retort through gritted teeth. "But of course, you fail to see the bigger picture,`, `That will be your downfall.`],
         [`When you are out of my way, there's nothing holding the ${enemy.name} back,`, `From prosperity in my hands!`]
     ]
 
@@ -3350,13 +3351,13 @@ export function gloatingList(enemy, stage, herodialogue = [], heronames = undefi
         }
 
         herodialogue.length > 0 ? gloat.push(herodialogue) : () => { }
-        stage.hasOwnProperty("gloat") ? (g = randFrom(stage.gloat)) => gloat.push([_.template(g[0])({ enemy: enemy }), _.template(g[0])({ enemy: enemy })]) : () => { }
-        enemy.hasOwnProperty("gloat") ? (g = randFrom(enemy.gloat)) => gloat.push([_.template(g[0])({ enemy: enemy }), _.template(g[0])({ enemy: enemy })]) : () => { }
+        stage.hasOwnProperty("gloat") ? (g = randFrom(stage.gloat)) => gloat.push([_.template(g[0])({ enemy: enemy }), _.template(g[1])({ enemy: enemy })]) : () => { }
+        enemy.hasOwnProperty("gloat") ? (g = randFrom(enemy.gloat)) => gloat.push([_.template(g[0])({ enemy: enemy }), _.template(g[1])({ enemy: enemy })]) : () => { }
     }
     //    enemy.hasOwnProperty("gloat") ? console.log(_.template(randFrom(enemy.gloat))({enemy: enemy})) : () => { console.log(enemy.name) }
 
-    stage.hasOwnProperty("gloat") ? (g = randFrom(stage.gloat)) => gloat.push([_.template(g[0])({ enemy: enemy }), _.template(g[0])({ enemy: enemy })]) : () => { }
-    enemy.hasOwnProperty("gloat") ? (g = randFrom(enemy.gloat)) => gloat.push([_.template(g[0])({ enemy: enemy }), _.template(g[0])({ enemy: enemy })]) : () => { }
+    stage.hasOwnProperty("gloat") ? (g = randFrom(stage.gloat)) => gloat.push([_.template(g[0])({ enemy: enemy }), _.template(g[1])({ enemy: enemy })]) : () => { }
+    enemy.hasOwnProperty("gloat") ? (g = randFrom(enemy.gloat)) => gloat.push([_.template(g[0])({ enemy: enemy }), _.template(g[1])({ enemy: enemy })]) : () => { }
     //            enemy.hasOwnProperty("gloat") ? console.log(enemy.gloat) : () => { }
     gloat = randFrom(gloat)
 
