@@ -330,7 +330,7 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
 
     story.forEach((entry, i) => {
 
-        //if(entry.stage.expansion == "aftershock") { console.log(i)}
+        if(entry.stage.expansion == "aftershock") { console.log(i)}
         entry.stage.knowledge = defineKnowledge(i, story);
 
     });
@@ -484,7 +484,7 @@ export function latestScheme(enemy) {
         `A VIP extraction went south fast  —every backup team disappeared off the grid. The only remaining trace is a bloodied badge and a half-written message telling a harrowing story: `,
         `A street gang known for petty thefts suddenly escalates into military-grade tactics. Citadel suspects they're no longer acting alone, which can only mean one thing: `,
         `While analyzing thermal signatures around a remote bunker, analysts notice a pulse of energy unlike anything on file. Preliminary readings suggest that `,
-        `An elite arms dealer was taken out in his own compound — no one saw the assailants leave. Surveillance blacked out at exactly 0200. It's clear that `,
+        `An elite arms dealer was taken out in his own compound — no one saw the assailants leave. Surveillance blacked out at exactly 0200. It's now clear that `,
         `A storm shutter in the Citadel archives rattled loose during maintenance, revealing a long-forgotten case file marked "DO NOT OPEN." Inside: classified evidence that `,
         `During a public gala meant to celebrate peace between factions, a rogue drone detonates near the dais. As chaos unfolds, intel confirms: `,
         `The global black market has gone eerily quiet. A dozen arms deals have been pulled in under 48 hours. The reason? Citadel analysts have concluded that `,
@@ -563,7 +563,7 @@ export function preGamePrologue(stage, enemy) {
                 `${enemy.boss} walks a path few would dare — one of whispers, symbols, and secrets. Whatever awaits at the end, ${gPron(enemy, "subject")} intends to claim it.`,
                 `power calls to the ambitious, and ${enemy.boss} is listening. The ${enemy.name} follow not out of loyalty, but awe.`,
                 `the air around ${enemy.boss} feels heavier now. Something is changing, and those closest to ${gPron(enemy, "object")} can feel it in their bones.`,
-                `${enemy.boss} is no longer bound by the city, the law, or the rules others follow. ${gPron(enemy, "subject")} is becoming something else — something dangerous.`,
+                `${enemy.boss} is no longer bound by the city, the law, or the rules others follow. ${ucInit(gPron(enemy, "subject"))} is becoming something else — something dangerous.`,
                 `the ${enemy.bosstitle()} ${enemy.boss} has moved across the region with ${gPron(enemy, "possessive")} ${enemy.minions()} in search for power. If ${gPron(enemy, "possessive")} power levels will near five figures, ${gPron(enemy, "subject")} just might become invincible. `
             ]);
     }
@@ -1339,7 +1339,16 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
             `${nextenemy.boss} is planning to take hostages in a downtown office building`
         ]
             break;
-        case "Gone Ballistic": clue = [
+        case "Derailed": clue = [
+                `there are unauthorized shipments being loaded by the ${nextenemy.name} at the freight yard`,
+                `you need to investigate suspicious cargo movements at the city's railyard, where the ${nextenemy.name} have been seen operating`,
+                `the ${nextenemy.name} are moving high-value shipments through a covert rail network to avoid detection`,
+                `${nextenemy.name} operatives are controlling freight traffic after dark`,
+                `the ${nextenemy.name} have secured a section of the freight yard for clandestine operations`,
+                `unregistered trains linked to the ${nextenemy.name} have been spotted departing with unknown cargo`
+        ]
+            break;
+            case "Gone Ballistic": clue = [
             `${nextenemy.name} - ${nextenemy.desc} - orchestrating an illegal arms trade, equipped for a small army`,
             `a secretive military-grade arms exchange facilitated by ${nextenemy.name} is going on hidden within the industrial district`,
             `${nextenemy.name} - ${nextenemy.desc} - are conducting an arms deal at a nearby warehouse`
@@ -1406,10 +1415,19 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
             `the ${nextenemy.name} - ${nextenemy.desc} - are conducting a drug deal at a nearby abandoned property`
         ]
             break;
-        case "Under Destruction": clue = [
-            `there has been suspicious activity by ${nextenemy.name} at an unfinished construction site`,
-            `the blueprint of an unfinished skyscraper reveals alterations not part of the original design, apparently by ${nextenemy.name}`,
-            `the ${nextenemy.name} has something going down at an unfinished construction site`]
+
+            case "Supply & Demand": clue = [
+                `the shadowy corners of Ransom City flicker with the activities of ${nextenemy.name}, trading in forbidden substances`,
+                `an intricate network led by ${nextenemy.name}, distributing narcotics through abandoned structures`,
+                `the ${nextenemy.name} - ${nextenemy.desc} - are conducting a drug deal at a nearby abandoned property`
+            ]
+                break;
+        case "Triage": clue = [
+            `there have been reports of suspicious movements by ${nextenemy.name} around the hospital after dark`,
+            `security footage shows unauthorized personnel from ${nextenemy.name} accessing restricted wings of the hospital`,
+            `there are suspicious supply deliveries arriving at the hospital, linked to the ${nextenemy.name}`
+          ]
+          
             break;
         case "Running Wild": clue = [
             `the ancient ruins in the heart of the forest, now home to ${nextenemy.minions()} of the ${nextenemy.name}, are hiding something valuable`,
@@ -1540,7 +1558,7 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
                 break;
             case "actsofterror":
                 masterplanclues = [
-                    `Following the clash with ${enemy.boss}, an uptick in encrypted messages across networks known for shadowy dealings, coinciding with unusual power outages. "Is this ${possessiveSuffix(finalboss.name)} coordination for something covert?" you question, the odd correlation ${ambiguity_element}`,
+                    `Following the clash with ${enemy.boss}, an uptick is detected in encrypted messages across networks known for shadowy dealings, coinciding with unusual power outages. "Is this ${possessiveSuffix(finalboss.name)} coordination for something covert?" you question, the odd correlation ${ambiguity_element}`,
                     `The evacuation plans of several key buildings, a maneuver likely ordered by ${finalboss.name}, under questionable pretenses catches your attention. "A diversion crafted by ${finalboss.boss}?" you speculate, the circumstances ${ambiguity_element}`,
                     `Discovery of detailed city blueprints, after defeating ${enemy.boss}, alongside notes on public gatherings and infrastructure vulnerabilities, alarms you. "Is this ${finalboss.name} strategizing for terror?" you ponder, the information ${ambiguity_element}`,
                     `Among the debris of the recent skirmish, a set of encrypted ${gizmo}s is discovered. "Communication by  ${finalboss.name}, for coordinated chaos?" you muse, the devices ${ambiguity_element}`,
@@ -1877,7 +1895,7 @@ export function createLeadIn(pregameprologue, stageindex, wincondition, enemy, s
         `"Their mistake was leaving traces," you say, scanning through ${randFrom(intel_words_2)}. "Now, we're on their trail." ${_hence}`, 
         `"The ledger reveals more than they intended," you point out, highlighting the anomalies. "Follow the money." ${_hence}`, `"Detaled analysis of the recovered ${randFrom(intel_words_2)} confirms us our next target." ${_hence}`, 
         `"The pattern is no coincidence," you deduce, plotting out the ${randFrom(intel_words_2)} you have over your map. "It all connects here." ${_hence}`, 
-        `After a confidential informant comes forward, "This might just be the breakthrough we needed," you realize. ${_hence}`, 
+        `After a confidential informant comes forward, you realize it might just be the breakthrough you needed. ${_hence}`, 
         `"Correlating the ${randFrom(intel_words_2)} with the witness statements," you conclude, "points us directly to their next operation." ${_hence}`, 
         `"Surveillance footage gave us the last piece," you highlight the key moments. "Time to act on it." ${_hence}`, 
         `"The intercepted communique is clear," you decipher the coded message with the aid of existing ${randFrom(intel_words_2)}. "Their next move is imminent." ${_hence}`,
@@ -1898,10 +1916,10 @@ export function createLeadIn(pregameprologue, stageindex, wincondition, enemy, s
             ` ${this_boss} has meticulously compiled ${randFrom(intel_words_2)} on the hidden agendas of ${this_finalboss}.`,
             ` how ${this_boss} is secretly harboring ${randFrom(intel_words_2)} crucial for dismantling ${this_finalboss}'s network.`,
             ` the ${randFrom(intel_words_2)} indicating ${this_boss} recently brokered a deal with ${this_finalboss}, exchanging sensitive ${randFrom(intel_words_2)} for mutual benefit.`,
-            ` that ${this_boss} used to be a confidant of ${this_finalboss}, privy to intimate ${randFrom(intel_words_2)} on ${possessiveSuffix(this_finalboss)} plans and vulnerabilities.`,
+            ` that ${this_boss} used to be a confidant of ${this_finalboss}, privy to intimate ${randFrom(intel_words_2)} on the plans and vulnerabilities of ${possessiveSuffix(this_finalboss)}.`,
             ` there is ${randFrom(intel_words_2)} that shows ${this_boss} maintains a covert communication channel with ${this_finalboss}, offering a direct line to intercept critical ${randFrom(intel_words_2)}.`,
             ` ${randFrom(intel_words_2)} suggests ${this_boss} holds the key to deciphering ${this_finalboss}'s next move, thanks to a cache of encrypted ${randFrom(intel_words_2)}.`,
-            ` that ${this_boss} has been tracking ${this_finalboss}'s movements and alliances, amassing a detailed dossier that could expose ${possessiveSuffix(this_finalboss)} ultimate endgame.`
+            ` that ${this_boss} has been tracking ${this_finalboss}'s movements and alliances, amassing a detailed dossier that could expose the ultimate endgame of ${this_finalboss}.`
         ]
         let acquire_words = [`obtaining`, `acquiring`, `securing`, `procuring`, `getting`, `finding`]
         let priority_words = [`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence`]
@@ -1945,7 +1963,7 @@ export function createLeadIn(pregameprologue, stageindex, wincondition, enemy, s
             `"It is dangerous out there. You shouldn't go alone," ${ally.name} tells you. "Take me with you."`,
             `"I see you have taken the lonely path", you tell ${ally.name} in your chance meeting. "I care not about company. I care about vengeance," ${gPron(ally, "subject")} answers. "I take you have tracked ${enemy.boss} down?"`,
             `A mysterious stranger approaches you. "I can help you with the ${enemy.name}," a voice of a ${gPron(ally, "sex")} calls you from the shadows. You're sure you've heard that voice before. "Are you.. ${ally.name}? Why the mystery?"`,
-            `"Under the cover of night, ${ally.name} slips from the darkness to join you. "Every shadow conceals secrets, and every secret is a weapon," ${gPron(ally, "subject")} murmurs, eyeing your battle plan. "Tonight, we turn their secrets against them."`,
+            `Under the cover of night, ${ally.name} slips from the darkness to join you. "Every shadow conceals secrets, and every secret is a weapon," ${gPron(ally, "subject")} murmurs, eyeing your battle plan. "Tonight, we turn their secrets against them."`,
             `In a quiet, tension-filled moment, ${ally.name} appears at your side, as if conjured by the very need for an edge in the looming battle. "In the art of war, knowledge is power," they intone. "Let's ensure we're the ones wielding it tonight."`,
             `"This mission could change everything," you assert, finding ${ally.name} already surveying the analysts' plan with experienced eye. "Indeed," ${gPron(ally, "subject")} agrees, offering a rare smile of camaraderie. "And it's the reason I'm here. Together, we'll turn the tide."`,
             `As dawn breaks, casting long shadows over your rendezvous point, ${ally.name} approaches with a determined stride. "The early bird," ${gPron(ally, "subject")} quips, handing you a dossier. "Gets the intel. Let's make sure it also gets the worm."`
@@ -3232,6 +3250,9 @@ export function lastThoughts(enemy) {
 export function gloatingList(enemy, stage, herodialogue = [], heronames = undefined) {
 
     let gloating = [
+        [`You're a monster," you say through gritted teeth. "Maybe I am, maybe I am..`, `And monsters don't need your approval.`],
+        [`You won't get away with this!" you yell. "I'm not <span class = "emphasis">getting away</span>,`, `I'm making history!`],
+        [`You fought your way here for what?`, `A front-row seat to your own failure!`],
         ["You've fought well,", "There will be no-one to mourn your death."],
         ["I'm not even going to kill you myself!", "I'll let my minions take care of that."],
         [`Everything comes to ${gPron(enemy, "object")} who waits,`, "And I have waited for so very long for this moment."],
@@ -3346,8 +3367,8 @@ export function gloatingList(enemy, stage, herodialogue = [], heronames = undefi
     } else {
         if (herodialogue.length > 0) {
             herodialogue = randFrom(Array.from(herodialogue))
-            herodialogue[0] = _.template(herodialogue[0])({ boss: enemy.boss })
-            herodialogue[1] = _.template(herodialogue[1])({ boss: enemy.boss })
+            herodialogue[0] = _.template(herodialogue[0])({ enemy: enemy })
+            herodialogue[1] = _.template(herodialogue[1])({ enemy: enemy })
         }
 
         herodialogue.length > 0 ? gloat.push(herodialogue) : () => { }
