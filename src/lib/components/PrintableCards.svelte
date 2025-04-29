@@ -27,7 +27,11 @@
     const overflowCheck = () => el.scrollHeight > el.clientHeight + buffer;
 
     let attempts = 0;
-    const maxAttempts = 50;
+    const maxAttempts = 1;
+    
+    if(!overflowCheck()) {
+        el.style.flexShrink += 0.1;
+    }
 
     while (
       overflowCheck() &&
@@ -37,10 +41,8 @@
       if (flex === true && overflowCheck()) {
         flexGrow += 0.1;
         el.style.flexGrow = `${flexGrow}`;
-      } else if (flex === false) {
-        flexGrow -= 0.01;
-        el.style.flexGrow = flexGrow;
       }
+      
       if (lineHeightStart && overflowCheck()) {
         lineHeight = Math.max(1, lineHeight - 0.01);
         const calculatedLineHeight = Math.min(
@@ -64,14 +66,23 @@
 
       attempts++;
     }
+    
+    const isoverflow = overflowCheck();
+    return(isoverflow)
   }
 
   function resizeCards() {
     const titles = document.querySelectorAll(".card-storycardfront-title");
 
+    let ttl = true
+    let prol = true
+    let ep = true
+    let epttl = true
+    let storystp = true
+    
     titles.forEach((el) => {
       if (el.scrollHeight > el.clientHeight + 2) {
-        resizeElementToFit(el, 0, 1.5, 0.5);
+        ttl = resizeElementToFit(el, 0, 1.5, 0.5);
       }
     });
 
@@ -80,12 +91,7 @@
     );
     const storySetups = document.querySelectorAll(".card-storycardfront-setup");
     prologues.forEach((el) => {
-      if (el.scrollHeight > el.clientHeight) {
-        storySetups.forEach((el) => {
-          el.style.flexGrow -= 0.1;
-        });
-      }
-      resizeElementToFit(el, 2, 1.4, 0.4, true);
+      prol = resizeElementToFit(el, 2, 1.4, 0.4, true);
       //      el.style.overflow = 'visible';
     });
 
@@ -93,29 +99,42 @@
       ".card-storycardback-epilogue-top, .card-storycardback-epilogue-bottom"
     );
     epilogues.forEach((el) => {
-      resizeElementToFit(el, 0, 1.4, 0.5);
+      ep = resizeElementToFit(el, 0, 1.4, 0.5);
     });
 
     const epilogueTitles = document.querySelectorAll(
       ".card-storycardback-epiloguetitle"
     );
     epilogueTitles.forEach((el) => {
-      if (el.scrollHeight > el.clientHeight + 4) {
-        resizeElementToFit(el, 0, 1.1, 0);
+      if (el.scrollHeight > el.clientHeight) {
+        epttl = resizeElementToFit(el, 0, 1.1, 0);
       }
     });
 
     storySetups.forEach((el) => {
       el.style.overflow = "hidden";
-      if (el.scrollHeight > el.clientHeight + 4) {
-        resizeElementToFit(el, 0, 1.2, 0.5, true);
+      if (el.scrollHeight > el.clientHeight) {
+        storystp = resizeElementToFit(el, 0, 1.2, 0.5, true);
       }
     });
+    
+    const fits = [ttl, prol, ep, epttl, storystp].every(e => e == true)
+    return fits
+  }
+  
+  function resizeAll() {
+      let attempts = 0;
+      const maxAttempts = 50;
+      let resize = !resizeCards();
+      while(resize && attempts <= maxAttempts) {
+        resize = !resizeCards();
+        attempts ++;
+      }
   }
 
   onMount(() => {
     requestAnimationFrame(() => {
-      resizeCards();
+    resizeAll()
     });
   });
 
@@ -123,7 +142,7 @@
     // Useful if pagecontent updates or card content changes
     requestAnimationFrame(() => {
       document.fonts.ready.then(() => {
-        resizeCards(); // or your function
+        resizeAll(); // or your function
       });
     });
   });
@@ -140,7 +159,14 @@
     overflow-y: hidden; /* Hide overflow if it somehow escapes */
     overflow-x: scroll;
     box-sizing: border-box;
+    scrollbar-width: none; /* Firefox */
+	  -ms-overflow-style: none;  /* IE/Edge */
   }
+  
+  .printable-cards::-webkit-scrollbar {
+	display: none; /* Chrome, Safari */
+}
+
 
   .card-both-sides {
     margin: 0.2mm 1mm;
@@ -517,7 +543,7 @@
         this story.
       </div>
       <div class="card-storycard-divider" />
-      <div class="card-storycardfront-setup" style="flex: 1.5">
+      <div class="card-storycardfront-setup" style="flex-grow: 1.2;">
         {@html referencetext[0][1].trim()}
         <div class="expansionicon">
           <span class="infinity-before" /><span class="infinity-after" />
@@ -527,17 +553,15 @@
 
     <div class="print-card-container" style = "flex-flow: column;">
       <div class="card-storycardback-bar-top" style="height: 6mm;" />
-      <div class = "reference-back-container" style = "height: 48%;">
+      <div class = "reference-back-container" style = "height: 50%;">
         <div
           class="card-storycardback-epilogue-top"
-          style="flex-grow: 0.5; font-style: normal; overflow: none; padding-top: 8mm; height: unset;">
+          style="flex: 1; font-style: normal; overflow: none; padding-top: 8mm; height: unset;">
           {@html referencetext[1]}
         </div>
         <div class="card-storycard-divider" />
-        <div class="card-storycardfront-setup" style="border-radius: 0px;">
-          <span>
+        <div class="card-storycardfront-setup" style="border-radius: 0px; flex-grow: 0.5">
             {@html referencetext[3]}
-          </span>
         </div>
         <div class="card-storycardback-titlebar" style="top: 3.8mm">
           <div class="card-storycardback-epiloguetitle">
@@ -550,26 +574,24 @@
       <div class = "reference-back-container" style = "height: 45%">
         <div
         class="card-storycardback-epilogue-bottom"
-        style="flex-grow: 0.5; font-style: normal; overflow:none; padding-top: 8mm; height: unset;">
+        style="flex: 1.5; font-style: normal; overflow:none;">
         {@html referencetext[2]}
       </div>
         <div class="card-storycard-divider" />
         <div
           class="card-storycardfront-setup"
-          style="border-radius: 0px; padding-bottom: 3mm;">
-          <span>
+          style="flex-grow: 0.5; border-radius: 0px; padding-bottom: 3mm;  border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;">
             {@html referencetext[4]}
-          </span>
         </div>
-        <div class="card-storycardback-titlebar" style="top: 4.35cm">
+        <div class="card-storycardback-titlebar" style="top: 4.85cm">
           <div class="card-storycardback-epiloguetitle">
             If you choose to use Rivals
           </div>
         </div>
-        <div class="card-storycardback-colorbar-back" style="top: 4.54cm" />
-        <div class="card-storycardback-colorbar-red" style="top: 4.54cm" />
+        <div class="card-storycardback-colorbar-back" style="top: 5.04cm" />
+        <div class="card-storycardback-colorbar-red" style="top: 5.04cm" />
       </div>
-      <div class="card-storycardback-bar-bottom" style="height: 6mm" />
     </div>
   </div>
 
@@ -596,7 +618,7 @@
           {@html card.prologue.trim()}
         </div>
         <div class="card-storycard-divider" />
-        <div class="card-storycardfront-setup" style="flex: 2">
+        <div class="card-storycardfront-setup" style="flex-grow: 1.5">
           {@html card.setup.trim()}
           <div class="expansionicon">
             <span class="infinity-before" /><span class="infinity-after" />
@@ -611,13 +633,13 @@
           {@html card.winepilogue.trim()}
           {@html index == cardtexts.length - 1 || index == cardtexts.length - 2 ? `` : `<br><br>Advance to part ${cardtexts[Math.ceil(index / 2) * 2 + 1].chapter}.`}
         </div>
-        <div class="card-storycardback-titlebar" style="top: 3.8mm">
+        <div class="card-storycardback-titlebar" style="top: 2.8mm">
           <div class="card-storycardback-epiloguetitle">
             {@html card.wincondition[0]}
           </div>
         </div>
-        <div class="card-storycardback-colorbar-back" style="top: 5.7mm" />
-        <div class="card-storycardback-colorbar-green" style="top: 5.7mm" />
+        <div class="card-storycardback-colorbar-back" style="top: 4.7mm" />
+        <div class="card-storycardback-colorbar-green" style="top: 4.7mm" />
         <div class="card-storycardback-epilogue-bottom">
           {@html card.loseepilogue.trim()}
           {@html index == cardtexts.length - 1 || index == cardtexts.length - 2 ? `` : `<br><br>Advance to part ${cardtexts[Math.ceil(index / 2) * 2 + 2].chapter}.`}

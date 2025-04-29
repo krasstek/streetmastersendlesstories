@@ -4,6 +4,7 @@
   import { goto } from '$app/navigation';
   import { get } from 'svelte/store';
   import PrintableCards from '$lib/components/PrintableCards.svelte';
+  import { escClose } from '$lib/actions/escClose';
 
   let content;
 
@@ -22,6 +23,8 @@
 </script>
 
 {#if content}
+  <div use:escClose={() => goBack()}>
+  </div>
   <PrintableCards pagecontent={content}/>
   <button class="menu-button" on:click={goBack}>Back to Story</button>
 {/if}

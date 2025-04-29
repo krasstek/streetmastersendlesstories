@@ -247,7 +247,7 @@ label {
 	-ms-overflow-style: none;  /* IE/Edge */
 
 }
-.story-overlay::webkit-scrollbar, .story-overlay::-webkit-scrollbar {
+.story-overlay::-webkit-scrollbar {
 	display: none; /* Chrome, Safari */
 }
 
