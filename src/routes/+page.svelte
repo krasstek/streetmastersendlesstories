@@ -59,10 +59,15 @@
 	}
 
   function handleStoryGeneration() {
-  const result = createStory(selectedExpansions, filteredGladiators.filter(e => e.selected).map(e => e.name), players, stages)
-//  console.log(result)
-  pageContent.set(result); // Trigger render
-  storyRendererRef?.goToStart();
+	  console.log("click")
+		let result = undefined 
+		try{
+			result = createStory(selectedExpansions, filteredGladiators.filter(e => e.selected).map(e => e.name), players, stages)
+			pageContent.set(result); // Trigger render
+  	  		storyRendererRef?.goToStart();
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	//$: console.log('pageContent updated:', $pageContent);
