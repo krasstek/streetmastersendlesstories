@@ -59,7 +59,7 @@
 	}
 
   function handleStoryGeneration() {
-	  console.log("click")
+//	  console.log("click")
 		let result = undefined 
 		try{
 			result = createStory(selectedExpansions, filteredGladiators.filter(e => e.selected).map(e => e.name), players, stages)
