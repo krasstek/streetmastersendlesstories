@@ -1,6 +1,19 @@
 <!doctype html>
 <html lang="en">
 	<head>
+<!-----		<script>
+			if (typeof window !== "undefined") {
+			  window.onerror = function (msg, src, line, col, err) {
+				console.error("GLOBAL ERROR:", { msg, src, line, col, err });
+				alert("ERROR: " + msg);
+			  };
+		  
+			  window.onunhandledrejection = function (event) {
+				console.error("UNHANDLED REJECTION:", event.reason);
+				alert("ASYNC ERROR: " + (event.reason?.message || event.reason));
+			  };
+			}
+		  </script>--->
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.ico" />
 		<link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest" />

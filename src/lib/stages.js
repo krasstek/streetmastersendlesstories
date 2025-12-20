@@ -1,12 +1,12 @@
 import _ from 'lodash';
-import { randFrom, filterArray, getRandomMinions } from '$lib/story_utils';
+import { randFrom, filterArray, getRandomMinions, random_template } from '$lib/story_utils';
 import { getStages } from '$lib/getStages';
 
 export function getEnemies(expansionfilter) {
     let enemies = [
 
         {
-            name: "Abandoned", expansion: "aftershock", boss: "Project X", bosstitle: _.template('${randFrom(["mutating","vengeful","horrendous","tortured"])} ${randFrom(["experiment","creature","monster","bioweapon"])}'), gender: "female", desc: () => "irradiated mutants", addressing: "playthings", minions: _.template("${randFrom(['insane','unhinged'])} nurses and ${randFrom(['mutated','monstrous'])} ${randFrom(['experiments','patients'])}"), threat: "whips her creeping tendrils menacingly at you", minionnames: ["Stacey", "Amalgam", "The Baron"], preparedboss: [["Biological Mind Link", "and put it into play"]], execution: "crushes the man with her tendrils", brute: `${randFrom(["writhing", "twitching", "branching", "rope-like", "tangled mass of", "sinewy", "glistening", "massive"])} ${randFrom(["tendrils", "tentacles", "appendages"])}`,
+            name: "Abandoned", expansion: "aftershock", showdown: "aftershock", boss: "Project X", bosstitle: _.template('${randFrom(["mutating","vengeful","horrendous","tortured"])} ${randFrom(["experiment","creature","monster","bioweapon"])}'), gender: "female", desc: () => "irradiated mutants", addressing: "playthings", minions: _.template("${randFrom(['insane','unhinged'])} nurses and ${randFrom(['mutated','monstrous'])} ${randFrom(['experiments','patients'])}"), threat: "whips her creeping tendrils menacingly at you", minionnames: ["Stacey", "Amalgam", "The Baron"], preparedboss: [["Biological Mind Link", "and put it into play"]], execution: random_template("crushes ${gPron(contact,'sex')} with her tendrils"), brute: `${randFrom(["writhing", "twitching", "branching", "rope-like", "tangled mass of", "sinewy", "glistening", "massive"])} ${randFrom(["tendrils", "tentacles", "appendages"])}`,
             gloat: [
                 [`I will not let you hurt me,`, `You will not hurt anyone anymore.`],
                 [`You don't have to be what Jackal designed you to be,\" you say, hoping to bridge the gap with empathy. \"Intentions matter little in the face of survival,`, `I've been hunted, hurt... No more. I cannot trust. I cannot give in.`],
@@ -22,7 +22,7 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "All-Heaven Gang", expansion: "tideofthedragon", boss: "Train", bosstitle: _.template('${randFrom(["multibillionaire","hard-hearted","ruthless","determined"])} ${randFrom(["CEO","businessman","monk","dragon head","triad leader"])}'), gender: "male", desc: () => "the covert triad", addressing: "fools", minions: _.template("cultists, triads and convicts"), threat: "draws his finger under his chin", minionnames: ["Reina", "Big Dragon", "Goliath"], preparedboss: [["Heightened Reflexes", "and put it into play"]], execution: "snaps the man's neck",
+            name: "All-Heaven Gang", expansion: "tideofthedragon", showdown: "tideofthedragon", boss: "Train", bosstitle: _.template('${randFrom(["multibillionaire","hard-hearted","ruthless","determined"])} ${randFrom(["CEO","businessman","monk","dragon head","triad leader"])}'), gender: "male", desc: () => "the covert triad", addressing: "fools", minions: _.template("cultists, triads and convicts"), threat: "draws his finger under his chin", minionnames: ["Reina", "Big Dragon", "Goliath"], preparedboss: [["Heightened Reflexes", "and put it into play"]], execution: random_template("snaps the ${gPron(contact,'sex')}'s neck"),
             gloat: [
                 [`Your methods betray the teachings of your masters. What happened to the path of peace?" you confront Train. "The path of peace? A noble but naive ideal. The world isn't changed from the sidelines,`, `True power demands sacrifice and shadows.`],
                 [`You've taken the wisdom of your betters and twisted it into something unrecognizable. How do you justify this betrayal?" you confront Train, the tension palpable in the air between the stark lines of morality drawn. "Justify? There's no betrayal in utilizing every weapon at my disposal,`, ` The world operates on a simple principle — power.`],
@@ -36,7 +36,7 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Atonement", expansion: "lamentofthebloodmoon", also: "twintiger", boss: "Anja", bosstitle: _.template('${randFrom(["fallen","methodical","cold-hearted","rogue","meticulous"])} ${randFrom(["agent", "manipulator"])}'), gender: "female", desc: () => "cadre of hitmen", addressing: "agents", minions: _.template("${randFrom([`merciless`,`hardened`])} ${randFrom([`assassins`,`hitmen`,`killers`])}"), threat: "folds her coat with quiet care, like she’s preparing for something clinical — something final", minionnames: ["Jin", "Anastasia", "Veronica"], preparedboss: [["Teamwork", "and put it into play"]], execution: "breaks his neck", gunmen: "Atonement snipers",
+            name: "Atonement", expansion: "lamentofthebloodmoon", also: "twintiger", showdown: "none", boss: "Anja", bosstitle: _.template('${randFrom(["fallen","methodical","cold-hearted","rogue","meticulous"])} ${randFrom(["agent", "manipulator"])}'), gender: "female", desc: () => "cadre of hitmen", addressing: "agents", minions: _.template("${randFrom([`merciless`,`hardened`])} ${randFrom([`assassins`,`hitmen`,`killers`])}"), threat: "folds her coat with quiet care, like she’s preparing for something clinical — something final", minionnames: ["Jin", "Anastasia", "Veronica"], preparedboss: [["Teamwork", "and put it into play"]], execution: random_template("breaks ${gPron(contact,'possessive')} neck"), gunmen: "Atonement snipers",
             gloat: [
                 ["Do you know how many threats I’ve ended with one kill and zero headlines?\" Anja's voice is calm, almost instructional. \"And how many futures you buried with them, Anja? That’s not justice. That’s silence.\" You pause to give her time to think. \"Sometimes silence is the only mercy we can still afford,", "Justice doesn’t always come with applause. Sometimes, it comes with precision."
                 ],
@@ -62,7 +62,7 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Ayakashi", expansion: "essenceofevil", boss: "Ikuchi", bosstitle: _.template('${randFrom(["raging","tempestous","furious","mighty"])} ${randFrom(["monster lord","demon king"])}'), gender: "male", desc: () => randFrom([`soldiers of storm`, "servants of the tempest"]), addressing: "flotsam", minions: _.template(`${randFrom([`brooding`, `storm-born`, `grim`])} ${randFrom([`soldiers`, `ninja`, `warriors`, `sentinels`])}`), threat: "raises his fist while the ground at his feet begins to blacken and smoke, lightning rooting upward", minionnames: ["Envoy", "Naruguard", "Stormthrall"], preparedboss: [["Shrouded", "and play it"]], execution: "summons a spear of lightning on the man, leaving only smoke and silence",
+            name: "Ayakashi", expansion: "essenceofevil", showdown: "essenceofevil", boss: "Ikuchi", bosstitle: _.template('${randFrom(["raging","tempestous","furious","mighty"])} ${randFrom(["monster lord","demon king"])}'), gender: "male", desc: () => randFrom([`soldiers of storm`, "servants of the tempest"]), addressing: "flotsam", minions: _.template(`${randFrom([`brooding`, `storm-born`, `grim`])} ${randFrom([`soldiers`, `ninja`, `warriors`, `sentinels`])}`), threat: "raises his fist while the ground at his feet begins to blacken and smoke, lightning rooting upward", minionnames: ["Envoy", "Naruguard", "Stormthrall"], preparedboss: [["Shrouded", "and play it"]], execution: random_template("summons a spear of lightning on the ${gPron(contact, 'sex')}, leaving only smoke and silence"),
             gloat: [
                 [`You were supposed to protect people, Kyoryu! you shout. "Kyoryu drowned,`, `Only the storm remains.`],
                 [`You can still turn back!" you plead desperately. "The tides are rising,`, `And there’s no shore left for me.`],
@@ -88,7 +88,7 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Brotherhood", expansion: "riseofthekingdom", boss: "Dmitri", bosstitle: _.template('callous mercenary'), gender: "male", desc: () => randFrom(["the ruthless band of mercenaries","the soldiers of fortune for the highest bidder"]), addressing: "comrades", minions: _.template("mercenaries, soldiers and spies"), threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar", "and put it into play"], ["N-40 Punisher", "and put it into play"]], execution: randFrom(["cuts the man's throat", "shoots the man dead"]), brute: randFrom(["arms swollen with muscle", "arms with biceps like cannonballs, veined and hard a steel", "arms too big for the sleeves that dared try", "muscles so overbuilt they looked sculpted by an angry god", "arms glistening with sweat and menace"]),
+            name: "Brotherhood", expansion: "riseofthekingdom", showdown: "stretchgoals18", boss: "Dmitri", bosstitle: _.template('callous mercenary'), gender: "male", desc: () => randFrom(["the ruthless band of mercenaries","the soldiers of fortune for the highest bidder"]), addressing: "comrades", minions: _.template("mercenaries, soldiers and spies"), threat: "unsheaths his knife, running it along his fingers", minionnames: ["Anastasia", "Boris", "Drago"], preparedboss: [["Trusty Kevlar", "and put it into play"], ["N-40 Punisher", "and put it into play"]], execution: random_template("cuts the ${gPron(contact, 'sex')}'s neck","shoots the ${gPron(contact, 'sex')} dead"), brute: randFrom(["arms swollen with muscle", "arms with biceps like cannonballs, veined and hard a steel", "arms too big for the sleeves that dared try", "muscles so overbuilt they looked sculpted by an angry god", "arms glistening with sweat and menace"]),
             gloat: [
                 [`Brute force isn't the end-all of conflict, you know," you say, meeting the gaze of your enemy. The tension in the air matches his demeanor, but your voice remains steady, challenging. "Strength is inevitability,`, `Like the inevitability of change, unavoidable. I will break you.`],
                 [`All this firepower, for what? A shadow of a bygone era?" you ask, your determination illuminating the standoff. "The era never ended; the battlefield merely shifted,`, `And here, now, you face its relentless truth.`],
@@ -103,7 +103,7 @@ export function getEnemies(expansionfilter) {
             }
         },
         {
-            name: "Cybertooth Crew", expansion: "stretchgoals18", boss: "Miss Matrix", bosstitle: _.template(`${randFrom(["legendary", "unparalleled"])} ${randFrom(["ghost", "hacker", "slicer"])}`), gender: "female", desc: () => `${randFrom(["crew", "posse", "gang"])} of ${randFrom(["ruthless cyber-criminals", "glitch-riding anarchists", "datajackers, street punks and digital saboteurs"])}`, addressing: "flatliners", minions: _.template(`${randFrom(["neon-drenched", "wired", "amped", "dark web"])} ${randFrom(["thrashers", "freaks", "deckers"])}`), threat: "draws her blade, pointing at your heart", minionnames: ["Pux", "Lola", "Sin-D"], preparedboss: [["Neoplating", "and put it into play"]], execution: randFrom(["slices his throat clean"]),
+            name: "Cybertooth Crew", expansion: "stretchgoals18", showdown: "stretchgoals18", boss: "Miss Matrix", bosstitle: _.template(`${randFrom(["legendary", "unparalleled"])} ${randFrom(["ghost", "hacker", "slicer"])}`), gender: "female", desc: () => `${randFrom(["crew", "posse", "gang"])} of ${randFrom(["ruthless cyber-criminals", "glitch-riding anarchists", "datajackers, street punks and digital saboteurs"])}`, addressing: "flatliners", minions: _.template(`${randFrom(["neon-drenched", "wired", "amped", "dark web"])} ${randFrom(["thrashers", "freaks", "deckers"])}`), threat: "draws her blade, pointing at your heart", minionnames: ["Pux", "Lola", "Sin-D"], preparedboss: [["Neoplating", "and put it into play"]], execution: random_template("slices ${gPron(contact, 'possessive')} throat clean","glitches the ${gPron(contact, 'sex')}'s mind like a buggy app"),
             gloat: [
                 ["You think a firewall makes you safe? You’re standing inside my code now.\" \"Then let’s see how you run on a clean reboot,\" you retort. Miss Matrix grins. \"You can’t uninstall a god,", "I debug people like you for sport."],
                 ["I’ve been chasing your code across a dozen shattered servers. Found a lot of corpses along the way,\" you growl. Miss Matrix tilts her head. \"Each one a user who misunderstood the terms of service,", "You’re next to accept the license agreement."],
@@ -120,7 +120,8 @@ export function getEnemies(expansionfilter) {
             }
         },
         {
-            name: "Cartel", expansion: "riseofthekingdom", boss: "Juan", bosstitle: _.template("ruthless gangster"), gender: "male", desc: () => randFrom(["the gang of vicious drug smugglers","the gang of street dealers"]), addressing: "gringos", minions: _.template("vicious gangers and hardened outcasts"), threat: "levels his shotgun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert", "and put it into play"]], execution: "shoots the man dead",
+            name: "Cartel", expansion: "riseofthekingdom", boss: "Juan", showdown: "stretchgoals18", bosstitle: _.template("ruthless gangster"), gender: "male", desc: () => randFrom(["the gang of vicious drug smugglers","the gang of street dealers"]), addressing: "gringos", minions: _.template("vicious gangers and hardened outcasts"), threat: "levels his shotgun straight at you", minionnames: ["Tyrone", "Ignacio", "Lucille"], preparedboss: [["On Alert", "and put it into play"]], execution: random_template("lifts the shotgun and blasts the ${gPron(contact,'sex')} point-blank","pulls the trigger and drops the ${gPron(contact,'sex')} instantly","lets the shotgun roar, and the ${gPron(contact,'sex')} is gone."
+            ),
             gloat: [
                 [`You cloak your actions in the guise of community service, but at what cost, Juan? How many lives have been ruined in your so-called protection?" you challenge, your voice firm, refusing to be swayed by his veneer of benevolence. "Ruined? No, you misunderstand. I've provided safety, opportunities where there were none,`, `Without me, the community faces chaos. I am not their oppressor; I am their savior.`],
                 [`Your empire is built on suffering, no matter how you justify it. You're no hero to your community," you assert, stepping closer, the resolve in your eyes mirroring the strength of your words. "Suffering? You see only the surface. I've turned blood into the lifeblood of progress,`, `In this harsh world, I am the lesser evil, the shield against greater dangers.`],
@@ -140,12 +141,12 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Cifarelli family", expansion: "stretchgoals18", boss: "The Don", bosstitle: _.template('${randFrom(["street","merciless","cold-hearted","ruthless","crime", "mafia", "mob"])} ${randFrom(["kingpin", "godfather", "boss"])}'), gender: "male", desc: () => randFrom([
+            name: "Cifarelli family", expansion: "stretchgoals18", showdown: "stretchgoals18", boss: "The Don", bosstitle: _.template('${randFrom(["street","merciless","cold-hearted","ruthless","crime", "mafia", "mob"])} ${randFrom(["kingpin", "godfather", "boss"])}'), gender: "male", desc: () => randFrom([
                 "the empire of smugglers, fixers, and killers in fine shoes",
                 "the syndicate of gamblers, enforcers, and people who never forget a slight",
                 "the family of merchants, murderers, and people who never forget a debt",
                 "the quiet rulers of streets, docks, and graves"
-            ]), addressing: "mutts", minions: _.template("${randFrom([`menacing`,`stone-hearted`,`dangerous`])} ${randFrom([`mobsters`,`hitmen`,`suits`])}"), threat: "slowly adjusts his leather gloves while staring at you", minionnames: ["Tommy", "Bonnie", "The Plumber"], preparedboss: [["Increased Protection", "and put it into play"]], execution: randFrom(["he pulls a sleek pistol from his coat, and fires once. The shot cracks like a closing door, and the man collapses sideways, lifeless before he hits the floor", "produces a boxcutter and slices the man's throat"]),
+            ]), addressing: "mutts", minions: _.template("${randFrom([`menacing`,`stone-hearted`,`dangerous`])} ${randFrom([`mobsters`,`hitmen`,`suits`])}"), threat: "slowly adjusts his leather gloves while staring at you", minionnames: ["Tommy", "Bonnie", "The Plumber"], preparedboss: [["Increased Protection", "and put it into play"]], execution: random_template("pulls a sleek pistol from his coat, and fires once. The shot cracks like a closing door, and the ${gPron(contact, 'sex')} collapses sideways, lifeless before he hits the floor", "produces a boxcutter and slices the ${gPron(contact, 'sex')}'s throat"),
             gloat: [
                 ["I gave you a chance. Hell, I gave this whole city a chance. No one took it,", "So now, I take everything."],
                 ["Honor’s a funny thing. You break yourself trying to keep it, and the world laughs while you drown,", "Me? I stopped drowning years ago."],
@@ -166,7 +167,9 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Davenport Manor", expansion: "stretchgoals18", boss: "Selene", bosstitle: _.template('${randFrom(["insane","terrifying","maniac","masked", "Salem Street\'s"])} ${randFrom(["butcher","widow","witch"])}'), gender: "female", desc: () => randFrom(["the legion of darkness","the servitors of the Ashen Lord"]), addressing: "victim", minions: _.template(randFrom(["creatures of the night","children of dark","vile demons and cadavers","cursed hunters and killers"])), threat: randFrom(["she laughs, chainsaw teeth spinning to life","revs her chainsaw with a screech, spattering gore everywhere"]), minionnames: ["Bartholomew", "Ylfa", "Doloers"], preparedboss: [["Slaughterspell", "and play it"]], execution: "tears through the man from shoulder to hip with the roaring chainsaw, a crimson fan painting the area.",
+            name: "Davenport Manor", expansion: "stretchgoals18", showdown: "stretchgoals18", boss: "Selene", bosstitle: _.template('${randFrom(["insane","terrifying","maniac","masked", "Salem Street\'s"])} ${randFrom(["butcher","widow","witch"])}'), gender: "female", desc: () => randFrom(["the legion of darkness","the servitors of the Ashen Lord"]), addressing: "victim", minions: _.template(randFrom(["creatures of the night","children of dark","vile demons and cadavers","cursed hunters and killers"])), threat: randFrom(["she laughs, chainsaw teeth spinning to life","revs her chainsaw with a screech, spattering gore everywhere"]), minionnames: ["Bartholomew", "Ylfa", "Doloers"], preparedboss: [["Slaughterspell", "and play it"]], execution: random_template("tears through the ${gPron(contact, 'sex')} from shoulder to hip with the roaring chainsaw, a crimson fan painting the area","drives the chainsaw forward, dropping the ${gPron(contact,'sex')} instantly","revs the chainsaw, dashes in, and obliterates the ${gPron(contact,'sex')} with a single, unstoppable finisher"
+
+            ),
             gloat: [
                 [`This place reeks of death, doesn’t it?" You decline to answer. "Good. I brought enough for everyone,`, `Now let’s carve up the silence.`],               
                 [`I killed my family, burned their dreams, and wore their screams as a crown," Selene says softly, tilting her head. "For what? Why.." you start, but get cut off. "And you think you’ll stop me with speeches?"`, `No, sweet fool. Only screams matter here.`],                
@@ -174,8 +177,8 @@ export function getEnemies(expansionfilter) {
                 [`Behind this mask? Only truth remains — stripped raw and howling,`, `Let me show you.`], 
                 [`Summon the Ashen Lord, raise the dead, shred the living — all paths lead to me. And you?`, `You're just decoration for the ruins.`], 
                 [`It always ends the same, Gladiator. Screams, ashes, and silence beneath my feet,`, `You’ll be beautiful in ruin.`],                
-                [`Fear the quiet, not the chaos," Selene grins, revving the chainsaw. "Because when it’s quiet, I’m already behind you.`, `And it’s too late.`],
-                [`You look surprised," Selene sneers. "I thought the Widow of Salen Street was just a story.." you mutter. "Then let me show you the final chapter,`, `It's written in blood.`],
+                [`Fear the quiet, not the chaos," Selene grins, revving the chainsaw. "Because when it’s quiet, I’m already behind you,`, `And then your'e too late!`],
+                [`You look surprised," Selene sneers. "I thought the Widow of Salem Street was just a story.." you mutter. "Then let me show you the final chapter,`, `It's written in blood.`],
                 [`You think you can save this cursed place?" She tilts her mask, amused. "Someone has to try," you growl. "Then you’ll make a lovely failure,`, `The Ashen Lord will thank me for your bones.`],
                 [`You shouldn't have come here," Selene says quietly, chainsaw thrumming in her grasp. "Neither should you," you snap. Her laughter cuts the air. "But only one of us is leaving,`, `Guess who holds the key.`],
                 [`You still believe you’ll stop me?" Selene asks, voice velvet over steel. "If we don’t, who will?" you shout. She spins the chainsaw once, grinning behind her mask. "No one,`, `Not in this lifetime.`],
@@ -191,9 +194,9 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Empire", expansion: "lamentofthebloodmoon", boss: "Blood Moon", bosstitle: _.template('${randFrom(["unearthly","harrowing","ethereal"])} ${randFrom(["queen", "goddess"])}'), gender: "female", desc: () => randFrom([
+            name: "Empire", expansion: "lamentofthebloodmoon", boss: "Blood Moon", showdown: "none", bosstitle: _.template('${randFrom(["unearthly","harrowing","ethereal"])} ${randFrom(["queen", "goddess"])}'), gender: "female", desc: () => randFrom([
                 "the cult of martial artists, shadows and businessmen","the fanatic followers of an ancient entity"
-            ]), addressing: "interlopers", minions: _.template("${randFrom([`loyal`,`fanatical`])} ${randFrom([`contract killers`,`mirages`,`yakuza`])}"), threat: "rests her blade across her shoulder, eyes unreadable, like she’s already chosen where it will land", minionnames: ["Salaryman", "Mirage", "Jinrou"], preparedboss: [["Bolster Spirit", "and put it into play"]], execution: "slices the man open from gut to throat", swarm: "blood shades", pit: "a portal of supernatural blood", gunk: "a pool of unearthly blood",
+            ]), addressing: "interlopers", minions: _.template("${randFrom([`loyal`,`fanatical`])} ${randFrom([`contract killers`,`mirages`,`yakuza`])}"), threat: "rests her blade across her shoulder, eyes unreadable, like she’s already chosen where it will land", minionnames: ["Salaryman", "Mirage", "Jinrou"], preparedboss: [["Bolster Spirit", "and put it into play"]], execution: random_template("slices the ${gPron(contact, 'sex')} open from gut to throat"), swarm: "blood shades", pit: "a portal of supernatural blood", gunk: "a pool of unearthly blood",
             gloat: [
                 ["I don’t hate you. That would make this easier.\" Blood Moon's voice is quiet. A little cracked. \"But you’re still in my way,", "So I’ll do what I have to. Like always."
                 ],
@@ -201,7 +204,7 @@ export function getEnemies(expansionfilter) {
                 ],
                 ["If I stop now, it was all for nothing. So I won’t.\" Blood Moon's shoulders tense, but her eyes stay tired. \"You’d understand, if you’d lost what I did,", "And if you don’t? Then you’ll die not knowing why."
                 ],
-                ["There’s always someone trying to stop me. Always someone with hope in their eyes.\" Blood Moon meets your gaze. There’s no cruelty there. Just silence. \"I used to look like that.,", "Let’s end this before I remember too much."
+                ["There’s always someone trying to stop me. Always someone with hope in their eyes.\" Blood Moon meets your gaze. There’s no cruelty there. Just silence. \"I used to look like that,", "Let’s end this before I remember too much."
                 ],
                 ["It’s not personal. Not anymore. Just the next name, the next obstacle.\" Blood Moon exhales slowly, as if trying to feel human again. \"I’m sorry it has to be you,", "But I can’t stop. And you won’t step aside."
                 ]
@@ -213,8 +216,8 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Empire", expansion: "lamentofthebloodmoon", boss: "Swiftclaw", bosstitle: _.template('${randFrom(["fiery","unstoppable","infernal","mythical"])} ${randFrom(["dragon", "priest", "monster"])}'), gender: "male", desc: () => randFrom(["the cult of martial artists, shadows and businessmen","the fanatic followers of an ancient entity"
-            ]), addressing: "unbelievers", minions: _.template("${randFrom([`loyal`,`fanatical`])} ${randFrom([`contract killers`,`mirages`,`yakuza`])}"), threat: "scrapes his claws together, showering sparks as he stares without blinking", minionnames: ["Salaryman", "Mirage", "Jinrou"], preparedboss: [["Inferno", "and put it into play"]], execution: "burns the man to a crisp in an instant", swarm: "shades of the moon",
+            name: "Empire", expansion: "lamentofthebloodmoon", boss: "Swiftclaw", showdown: "none", bosstitle: _.template('${randFrom(["fiery","unstoppable","infernal","mythical"])} ${randFrom(["dragon", "priest", "monster"])}'), gender: "male", desc: () => randFrom(["the cult of martial artists, shadows and businessmen","the fanatic followers of an ancient entity"
+            ]), addressing: "unbelievers", minions: _.template("${randFrom([`loyal`,`fanatical`])} ${randFrom([`contract killers`,`mirages`,`yakuza`])}"), threat: "scrapes his claws together, showering sparks as he stares without blinking", minionnames: ["Salaryman", "Mirage", "Jinrou"], preparedboss: [["Inferno", "and put it into play"]], execution: random_template("burns the ${gPron(contact, 'sex')} to a crisp in an instant"), swarm: "shades of the moon",
             //blade: "fist with razor-sharp claws", 
             brute: randFrom(["arms of scaled muscle layered like armor beneath cracked hide", "draconic limbs packed with corded strength and ancient fury", "reptilian muscle coiled over bone like forged steel"]),
             gloat: [
@@ -235,12 +238,30 @@ export function getEnemies(expansionfilter) {
             }
         },
 
+        {
+            name: "Fire Cloud Gang", expansion: "tideofthedragon", showdown: "tideofthedragon", boss: "Tiger Ip", bosstitle: _.template('${randFrom(["vengeful","fallen","skilled"])} ${randFrom(["prodigy","martial artist","son of a legend","champion"])}'), gender: "male", desc: () => randFrom(["the gang of ruthless martial artists-turned criminals","the elite martial artists gone criminal","the skilled fighters ruling the streets"]), addressing: "weaklings", minions: _.template("${randFrom([`merciless`,`remorseless`,`cold`])} ${randFrom([`fighters`,`enforcers`,`soldiers`])} and ${randFrom([`unbreakable`,`vicious`,`violent`])} ${randFrom([`warriors`,`troopers`,`gangers`])}"), threat: "rolls his neck, slow and lazy, like the fight's already been decided", minionnames: ["Luke", "Oscar", "Lion"], preparedboss: [["Dragon Pole", "and put it into play"], ["Butterfly Swords", "and put it into play"]], execution: random_template("grips the ${gPron(contact, 'sex')}'s jaw, forces eye contact, and ends ${gPron(contact, 'possessive')} life with a swift, practiced strike", "places his palm against the ${gPron(contact, 'sex')}'s chest, exhales once, and strikes with a furious force, leaving the victim dead", "raises his butterfly sword in a controlled arc and ends the ${gPron(contact, 'sex')} with a single, flawless motion"),
+            keywords: ["blade"], 
+            blade: randFrom(["compact, heavy butterfly sword","wide-bladed heavy sword","short, wide and brutal blade"]),
+            gloat: [
+                [`You stand there thinking strength is loud. Real power is quiet - and absolute,`, `I'll show you the silence after a lesson is learned.`],
+                [`I've faced better fighters than you... and buried them in memory, not the ground." "You'll remember us differently," you retort. "No,`, `You I'll just bury deeper.`],
+                [`You have trained for victory. I have trained because losing isn't an option,`, `Today, you will learn the difference.`],
+                [`You call yourselves 'Gladiators'? Titles don't make warriors.. scars do," Tiger Ip says coldly. "We've earned plenty!" you respond with certainty. "How quaint,`, `I will carve your last.`],
+                [`You are not here to defeat me,`, `You're here to understand why you never could.`],
+                [`You know of my past? The tournaments? The glory? Tell me, does the story frighten you?" Tiger Ip asks with unintelligible look. "You merely blame others for your fall," you shrug. "Blame is for the weak,`,`I prefer consequences.`]
+            ], expression: _.template(randFrom([`tilting his head, a slow smirk forming`,`rolling his shoulders loose, cracking his neck, smiling`, `pressing his fist into his palm and bowing just enough to be insulting`])),
+            casino: {
+                descriptor: ["Fallen", "Iron", "Burning", "Red", "Broken"],
+                animal: ["Tiger", "Crane", "Wolf", "Cobra", "Boar"]
+            }
+        },
+
 
         {
-            name: "Golden Dragons", expansion: "riseofthekingdom", boss: "Ah Long", bosstitle: _.template("unrelenting martial arts master"), gender: "male", desc: () => randFrom([
+            name: "Golden Dragons", expansion: "riseofthekingdom", showdown: "stretchgoals18", boss: "Ah Long", bosstitle: _.template("unrelenting martial arts master"), gender: "male", desc: () => randFrom([
                 "the enterprise of martial artists, thugs and businessmen",
                 "the alliance of criminal organizations"
-            ]), addressing: "interlopers", minions: _.template("ruthless triads and yakuza"), threat: "lifts his hand, dark, malevolent energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"], preparedboss: [["Merciless Clutch", "and put it into play"]], execution: "snaps the man's neck",
+            ]), addressing: "interlopers", minions: _.template("ruthless triads and yakuza"), threat: "lifts his hand, dark, malevolent energy flaring on his fist", minionnames: ["Jin", "Dao", "Wan Bo"], preparedboss: [["Merciless Clutch", "and put it into play"]], execution: random_template("snaps the ${gPron(contact, 'sex')}'s neck"),
             gloat: [
                 [`You've bound these criminals under one rule, but what's the cost to the innocent?" you challenge. "Dominion founded on intimidation is a hollow victory." Ah Long stares at you with oppressive aura emanating from him. "This consolidation is our fortitude,`, `Your interference is a mere echo against the monolith of my ambition.`],
                 [`Admirable martial skill, yet it's wielded without honor. What legacy are you leaving behind?" you inquire, your voice steady. "Legacy? I am forging a legacy of power and prosperity,`, `My art is the axis upon which a new era will turn.`],
@@ -257,7 +278,7 @@ export function getEnemies(expansionfilter) {
         
 
         {
-            name: "Kingdom", expansion: "riseofthekingdom", boss: "Jackal", bosstitle: _.template("mad scientist"), gender: "female", desc: () => randFrom(["the mysterious criminal syndicate","the ancient shadowy sect"]), addressing: "test subjects", minions: _.template("${randFrom([`enhanced`,`monstrous`,`zombie`])} ${randFrom([`soldiers`,`ninja`,`creations`])} and ${randFrom([`clone`,`molded`,`genetic`])} ${randFrom([`dolls`,`marionettes`,`puppets`,`sisters`])}"), threat: "smiles, her eyes start to glow malevolently, and you feel pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion", "and play it"]], execution: "stares at the man who simply falls dead", gunk: randFrom(['a slow-churning vat of Jackal’s mutagenic ooze', 'a vat of Jackal’s pulsing, toxic green fluid', 'a bubbling vat of green gel marked with Jackal’s insignia', 'a glowing container of Jackal’s bio-reactive gel']), lab: "clone",
+            name: "Kingdom", expansion: "riseofthekingdom", showdown: "stretchgoals18", boss: "Jackal", bosstitle: _.template("mad scientist"), gender: "female", desc: () => randFrom(["the mysterious criminal syndicate","the ancient shadowy sect"]), addressing: "test subjects", minions: _.template("${randFrom([`enhanced`,`monstrous`,`zombie`])} ${randFrom([`soldiers`,`ninja`,`creations`])} and ${randFrom([`clone`,`molded`,`genetic`])} ${randFrom([`dolls`,`marionettes`,`puppets`,`sisters`])}"), threat: "smiles, her eyes start to glow malevolently, and you feel pressure behind your eyes", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Neural Invasion", "and play it"]], execution: random_template("stares at the ${gPron(contact, 'sex')} who simply falls dead"), gunk: randFrom(['a slow-churning vat of Jackal’s mutagenic ooze', 'a vat of Jackal’s pulsing, toxic green fluid', 'a bubbling vat of green gel marked with Jackal’s insignia', 'a glowing container of Jackal’s bio-reactive gel']), lab: "clone",
             gloat: [
                 [`How noble of you,`, `To donate your bodies for science.`],
                 [`You won't get out of here,`, `I never turn down new specimens!`],
@@ -283,7 +304,7 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Kingdom", expansion: "riseofthekingdom", boss: "Kemono", bosstitle: _.template('${randFrom(["imposing ","four-armed ",""])}green ${randFrom(["mutant","monster"])}'), gender: "male", desc: () => randFrom(["the mysterious criminal syndicate","the ancient shadowy sect"]), addressing: "insects", minions: _.template("mysterious ninja and martial arts masters"), threat: "lifts his mighty fists, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge", "and put it into play"]], execution: randFrom(["rips off the man's head", "picks the man up and snaps him like a twig"]), brute: randFrom(["four massive arms knotted with muscle and tension", "four-fisted might", "four arms, each muscle carved in pain and power", "four arms bulging with raw, unnatural strength"]),
+            name: "Kingdom", expansion: "riseofthekingdom", showdown: "stretchgoals18", boss: "Kemono", bosstitle: _.template('${randFrom(["imposing ","six-armed ",""])}green ${randFrom(["mutant","monster"])}'), gender: "male", desc: () => randFrom(["the mysterious criminal syndicate","the ancient shadowy sect"]), addressing: "insects", minions: _.template("mysterious ninja and martial arts masters"), threat: "lifts his mighty fists, lightning crackling", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Uncontrollable Surge", "and put it into play"]], execution: random_template("rips off the ${gPron(contact, 'sex')}'s head", "picks the ${gPron(contact, 'sex')} up and snaps ${gPron(contact, 'object')} like a twig"), brute: randFrom(["six massive arms knotted with muscle and tension", "six-fisted might", "six arms, each muscle carved in pain and power", "six arms bulging with raw, unnatural strength"]),
             gloat: [
                 [`You fight with fury, but your eyes tell a different story. What are you truly fighting for?" you inquire, seeking the being within the beast. "What I fight for? Survival... not mine, but theirs," Kemono rumbles, a momentary glimpse of the sentient being trapped within the guise of a monster, but already you see the monster returning. "Freedom is a distant dream for the likes of me,`, `But you won't be dreaming again.`],
                 [`Do you not dream of a life beyond this, beyond the commands of your masters?" you probe, attempting to peel back the layers of resignation that cloak Kemono's spirit. "Dreams... are dangerous," he mutters, a trace of melancholy weaving through his gruff exterior. "Once, perhaps, I dreamt of open skies and the earth beneath my feet, untainted by blood." The fury returns to Kemono's eyes. "But dreams are luxuries afforded to the free,`, `My reality is bound by duty and the will of those I serve.`],
@@ -300,7 +321,8 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Kingdom", expansion: "riseofthekingdom", boss: "Shadow", bosstitle: _.template("ominous mastermind"), gender: "male", desc: () => randFrom(["the mysterious criminal syndicate","the ancient shadowy sect"]), addressing: "fools", minions: _.template("${randFrom([`mysterious`,`tireless`,`silent`])} ${randFrom([`soldiers`,`ninja`,`generals`])} and ${randFrom([`clone`,`identical`,`psychic`])} ${randFrom([`marionettes`,`puppets`,`martial artists`])}"), threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades", "and put it into play"]], execution: randFrom(["cuts the man's throat", "snaps the man's neck"]),
+            name: "Kingdom", expansion: "riseofthekingdom", showdown: "stretchgoals18", boss: "Shadow", bosstitle: _.template("ominous mastermind"), gender: "male", desc: () => randFrom(["the mysterious criminal syndicate","the ancient shadowy sect"]), addressing: "fools", minions: _.template("${randFrom([`mysterious`,`tireless`,`silent`])} ${randFrom([`soldiers`,`ninja`,`generals`])} and ${randFrom([`clone`,`identical`,`psychic`])} ${randFrom([`marionettes`,`puppets`,`martial artists`])}"), threat: "lifts his hand, and dark blades materialize out of thin air", minionnames: ["Power Soldier", "Marionette Doll", "Mountain General"], preparedboss: [["Fan of Blades", "and put it into play"]], execution: random_template("steps through the shadows — one precise strike ends the ${gPron(contact,'sex')} instantly","snaps forward, and the ${gPron(contact,'sex')} falls dead without any visible injury","moves like a viper, palm landing once, force rippling out, and the ${gPron(contact,'sex')} collapses without a sound","strikes with a  sliver of darkness flickers, and the ${gPron(contact,'sex')} is finished in a single motion"
+            ),
             gloat: [
                 [`My, what a brave, handsome group,`, `Perhaps it would interest you to see what fate has in store for you.`],
                 [`You have interfered for the last time,`, `Now, you shall die.`],
@@ -322,7 +344,7 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Nahualli", expansion: "stretchgoals17", boss: "Tlazolteotl", bosstitle: _.template('Aztec ${randFrom(["goddess of death", "empress", "sorcerer"])}'), gender: "female", desc: () => randFrom(["the ancient force of restless warriors","the reawakened dead of the Afflicted Realm"]), addressing: "mortals", minions: _.template('${randFrom(["necromancers", "ancient callers", "pale wizards"])} and ${randFrom(["shambling cadavers", "walking dead", "rotten corpses"])}'), threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller", "Pale Caller"], preparedboss: [["Decaying Blast", "and play it"]], execution: "touches the man, killing him instantly", pit: "a yawning portal of purple energy",
+            name: "Nahualli", expansion: "stretchgoals17", showdown: "rumblepack", boss: "Tlazolteotl", bosstitle: _.template('Aztec ${randFrom(["goddess of death", "empress", "sorcerer"])}'), gender: "female", desc: () => randFrom(["the ancient force of restless warriors","the reawakened dead of the Afflicted Realm"]), addressing: "mortals", minions: _.template('${randFrom(["necromancers", "ancient callers", "pale wizards"])} and ${randFrom(["shambling cadavers", "walking dead", "rotten corpses"])}'), threat: "reaches for you, fingers spread wide, purple arcane energy crackling between them", minionnames: ["Pale Caller", "Pale Caller"], preparedboss: [["Decaying Blast", "and play it"]], execution: random_template("touches the ${gPron(contact, 'sex')}, killing him instantly"), pit: "a yawning portal of purple energy",
             gloat: [
                 [`You must be taught what has been forgotten,`, `You must be taught the wrath of the old gods.`],
                 [`I will have your soul!`, `I will taste its sins!`],
@@ -345,7 +367,7 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "New Brotherhood", expansion: "lamentofthebloodmoon", also: "twintiger", boss: "Castle", bosstitle: _.template('${randFrom(["legendary","disciplined","silent"])} ${randFrom(["agent", "hitman", "director", "sniper"])}'), gender: "male", desc: () => "squad of mercenaries", addressing: "marks", minions: _.template("${randFrom([`elite`,`disciplined`,`hardened`])} ${randFrom([`sweepers`,`ghosts`,`killers`])}"), threat: "glances at his watch, then at you — like measuring the delay", minionnames: ["Power Soldier", "Lion", "Drago"], preparedboss: [["Ambush", "and put it into play"]], execution: "puts a bullet between his eyes",
+            name: "New Brotherhood", expansion: "lamentofthebloodmoon", also: "twintiger", showdown: "none", boss: "Castle", bosstitle: _.template('${randFrom(["legendary","disciplined","silent"])} ${randFrom(["agent", "hitman", "director", "sniper"])}'), gender: "male", desc: () => "squad of mercenaries", addressing: "marks", minions: _.template("${randFrom([`elite`,`disciplined`,`hardened`])} ${randFrom([`sweepers`,`ghosts`,`killers`])}"), threat: "glances at his watch, then at you — like measuring the delay", minionnames: ["Power Soldier", "Lion", "Drago"], preparedboss: [["Ambush", "and put it into play"]], execution: random_template("puts a bullet between the ${gPron(contact, 'sex')}'s eyes"),
             gloat: [
                 ["You’re Castle. Of course you are,\" you state matter-of-factly. Castle doesn’t blink. \"Then you know how this ends,", "Fast. Clean. Unavoidable."
                 ],
@@ -363,13 +385,13 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Nomads", expansion: "lamentofthebloodmoon", also: "tideofthedragon", boss: "Butler", bosstitle: _.template('${randFrom(["charismatic","grinning","reckless"])} ${randFrom(["vagrant","wildcard","warlord","juggernaut"])}'), gender: "male", desc: () => "the ragtag band of outcasts", addressing: "buddies", minions: _.template("${randFrom([`ragged`,`hardened`])} ${randFrom([`nomads`,`outcasts`,`drifters`])}"), threat: "raises one hand, palm out, then slowly clenches it into a fist — without breaking eye contact", minionnames: ["Goliath", "Felicia Salt", "Mountain General"], preparedboss: [["Juggernaut", "and put it into play"]], execution: "breaks his neck", brute: randFrom(["arms carved from pure muscle", "arms thick as tree trunks", "sweat-slicked arms coiled like springs"]),
+            name: "Nomads", expansion: "lamentofthebloodmoon", also: "tideofthedragon", showdown: "none", boss: "Butler", bosstitle: _.template('${randFrom(["charismatic","grinning","reckless"])} ${randFrom(["vagrant","wildcard","warlord","juggernaut"])}'), gender: "male", desc: () => "the ragtag band of outcasts", addressing: "buddies", minions: _.template("${randFrom([`ragged`,`hardened`])} ${randFrom([`nomads`,`outcasts`,`drifters`])}"), threat: "raises one hand, palm out, then slowly clenches it into a fist — without breaking eye contact", minionnames: ["Goliath", "Felicia Salt", "Mountain General"], preparedboss: [["Juggernaut", "and put it into play"]], execution: random_template("breaks ${gPron(contact, 'sex')}'s neck"), brute: randFrom(["arms carved from pure muscle", "arms thick as tree trunks", "sweat-slicked arms coiled like springs"]),
             gloat: [
                 ["You think I'm what’s wrong with the world? Buddy, I’m what’s <span class = 'emphasis'>left</span> of it.\" Butler's grin is too wide, too calm, like he’s already counted your bones. \"Try and fix me, and I’ll show you how much worse broken can get,", "You don’t stop storms - you drown in them."
                 ],
-                ["Justice? That’s a bedtime story for people who haven’t lost anything real.\" Butler wipes blood off his knuckles like he's cleaning paint. \"You came looking for answers — I'll give you scars instead.", "Some people heal. I found something better."
+                ["Justice? That’s a bedtime story for people who haven’t lost anything real.\" Butler wipes blood off his knuckles like he's cleaning paint. \"You came looking for answers — I'll give you a beating instead,", "Some people heal. I found something better."
                 ],
-                ["I was the guy who begged for help once. Know what that got me? Buried friends and a one-way ticket to reality.\" Butler takes a step forward, not fast — but like the fight already started. \"You’re next in line for the wake-up call,", "Hope’s just fear with a nice haircut."],
+                ["I was the guy who begged for help once. Know what that got me? Buried friends and a one-way ticket to reality.\" Butler takes a step forward, not fast - but heavy. \"You’re next in line for the wake-up call,", "Hope’s just fear with a nicer haircut."],
                 ["Nice posture. Bet you still believe in clean fights too,\" Butler calls out and shrugs, rolling his shoulder like he’s shaking off morality. \"Come on then. Teach me something before I ruin your day,", "Heroism’s cute. Messy, but cute."
                 ],
                 ["You’re here to stop me? Please. I’ve been off the rails so long, I built my own tracks.\" Butler's voice is low, friendly, like he might just invite you for drinks — after he breaks your jaw. \"If you’re lucky, I’ll leave you teeth to lie with,", "This isn't rebellion. It's recreation."
@@ -383,7 +405,7 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Oni", expansion: "legendofoni", boss: "Yokai", bosstitle: _.template('${randFrom(["cursed, powerful warrior","warrior born of mystery and fire"])}'), gender: "male", desc: () => randFrom(["the group of cursed spirits","the servitors of hellfire"]), addressing: "mortals", minions: _.template('${randFrom([`ancient`,`immortal`,`lost`,`undead`,`cursed`,`shadow`])} ${randFrom([`warriors`,`ninja`,`doppelgangers`])} and ${randFrom([`powerful`,`seductive`,`nine-tailed`])} ${randFrom([`spirits`,`fox spirits`,`shapeshifters`])}'), threat: "lifts his mighty fist, suddenly engulfed in eldritch flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike", "and play it"]], execution: "snaps the man's neck", brute: randFrom(["arms with muscles drawn tight like cables over a forge-warmed frame", "sinewy arms coiled with the weight of something ancient and burning", "arms with flesh hardened by centuries of pressure, pulsing with smoldering strength", "arms of power bound in brute form"]),
+            name: "Oni", expansion: "legendofoni", showdown: "rumblepack", boss: "Yokai", bosstitle: _.template('${randFrom(["cursed, powerful warrior","warrior born of mystery and fire"])}'), gender: "male", desc: () => randFrom(["the group of cursed spirits","the servitors of hellfire"]), addressing: "mortals", minions: _.template('${randFrom([`ancient`,`immortal`,`lost`,`undead`,`cursed`,`shadow`])} ${randFrom([`warriors`,`ninja`,`doppelgangers`])} and ${randFrom([`powerful`,`seductive`,`nine-tailed`])} ${randFrom([`spirits`,`fox spirits`,`shapeshifters`])}'), threat: "lifts his mighty fist, suddenly engulfed in eldritch flames", minionnames: ["Yurei Ninja", "Kitsune"], preparedboss: [["Eldritch Strike", "and play it"]], execution: random_template("snaps the ${gPron(contact, 'sex')}'s neck"), brute: randFrom(["arms with muscles drawn tight like cables over a forge-warmed frame", "sinewy arms coiled with the weight of something ancient and burning", "arms with flesh hardened by centuries of pressure, pulsing with smoldering strength", "arms of power bound in brute form"]),
             gloat: [
                 [`Are you prepared to face the wrath of Shin Yokai?`, `No, you’re not prepared!`],
                 [`The hunger of the Oni is insatiable!`, `And you will be the food!`],
@@ -401,7 +423,7 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Onyx League", expansion: "twintiger", boss: "Mack", bosstitle: _.template('${randFrom(["black-hearted","mysterious"])} overlord'), gender: "male", desc: () => "the league of street gangs", addressing: "sheeple", minions: _.template("vicious gangers and street criminals"), threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim", "and put it into play"]], execution: "shoots the man dead",
+            name: "Onyx League", expansion: "twintiger", showdown: "stretchgoals18", boss: "Mack", bosstitle: _.template('${randFrom(["black-hearted","mysterious"])} overlord'), gender: "male", desc: () => "the league of street gangs", addressing: "sheeple", minions: _.template("vicious gangers and street criminals"), threat: "levels his gun straight at you", minionnames: ["Abolo", "Felicia Salt", "Veronica Pepper"], preparedboss: [["Taking Aim", "and put it into play"]], execution: random_template("shoots the ${gPron(contact, 'sex')} dead"),
             gloat: [
                 [`Fists versus bullets?`, `I will use your butts as target practice!`],
                 [`What's the end game with all this madness, Mack? You're tearing the community apart," you challenge, your posture ready for whatever may come. "Madness? This is clarity. Strip away rules, and what's left?`, `Freedom. Pure and simple.`],
@@ -421,7 +443,7 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Parasol", expansion: "aftershock", boss: "The Proxy", bosstitle: _.template('mysterious agent'), gender: "male", desc: () => "the evil pharmaseutical business", addressing: "you fools", minions: _.template('${randFrom([`corporate`,`efficient`])} ${randFrom([`killers`,`sweepers`])} and ${randFrom([`ruthless`,`calculating`])} ${randFrom([`assassins`,`suits`])}'), threat: "pulls up his sleeves", minionnames: ["Executive", "Clean Sweep", "Mr. Russo"], preparedboss: [["Unshceluded Meeting", "and play it"]], execution: "shoots the man dead", lab: "drugs",
+            name: "Parasol", expansion: "aftershock", showdown: "aftershock", boss: "The Proxy", bosstitle: _.template('mysterious agent'), gender: "male", desc: () => "the evil pharmaseutical business", addressing: "you fools", minions: _.template('${randFrom([`corporate`,`efficient`])} ${randFrom([`killers`,`sweepers`])} and ${randFrom([`ruthless`,`calculating`])} ${randFrom([`assassins`,`suits`])}'), threat: "pulls up his sleeves", minionnames: ["Executive", "Clean Sweep", "Mr. Russo"], preparedboss: [["Unshceluded Meeting", "and play it"]], execution: random_template("breaks the ${gPron(contact, 'sex')}'s neck"), lab: "drugs",
             gloat: [
                 [`Innovation doesn't pause for ethics,`, `We're writing the future, not reading history,`],
                 [`Profit is not a dirty word in my office,`, `It's the only word.`],
@@ -441,7 +463,7 @@ export function getEnemies(expansionfilter) {
         },
 
         {
-            name: "Recyclord", expansion: "stretchgoals18", boss: "Recyclord", bosstitle: _.template(`${randFrom(["toxic", "sewer-born", "mutated", "biohazard"])} ${randFrom(["mutant", "abomination", "juggernaut", "ecoterrorist"])}`), gender: "male", desc: () => "sludge-born horrors shaped from decay", addressing: "polluters", minions: _.template(`${randFrom(["crawling", "runoff", "toxic"])} ${randFrom(["spawn", "remnants", "abominations"])}`), threat: "extends a sludge-caked limb, mass shifting like boiling tar", minionnames: ["Grasping Garbage", "Trashmouth", "Shielding Rubbish"], preparedboss: [["Waste Not, Want Not", "and play it"]], execution: randFrom(["crushes the man in one squeeze"]),
+            name: "Recyclord", expansion: "stretchgoals18", showdown: "none", boss: "Recyclord", bosstitle: _.template(`${randFrom(["toxic", "sewer-born", "mutated", "biohazard"])} ${randFrom(["mutant", "abomination", "juggernaut", "ecoterrorist"])}`), gender: "male", desc: () => "sludge-born horrors shaped from decay", addressing: "polluters", minions: _.template(`${randFrom(["crawling", "runoff", "toxic"])} ${randFrom(["spawn", "remnants", "abominations"])}`), threat: "extends a sludge-caked limb, mass shifting like boiling tar", minionnames: ["Grasping Garbage", "Trashmouth", "Shielding Rubbish"], preparedboss: [["Waste Not, Want Not", "and play it"]], execution: random_template("crushes the ${gPron(contact, 'sex')} in one squeeze"),
             gloat: [
                 ["What… what are you?\", you ask in horror. Recyclord shifts, wet and massive. \"I’m the consequence you threw in the gutter,", "Now I’m throwing it back."],
                 ["Your weapons won’t work here. This whole place feeds me.\" \"Then we’ll starve you,\" you answer with determination. Recyclord laughs, low and slow. \"You’ll run dry long before I do,", "Even your bones are recyclable."],
@@ -458,7 +480,7 @@ export function getEnemies(expansionfilter) {
             }
         },
         {
-            name: "Silver Phoenix", expansion: "lamentofthebloodmoon", also: "tideofthedragon", boss: "Caitlyn", bosstitle: _.template('${randFrom(["vengeful","tenacious","patient"])} empress'), gender: "female", desc: () => "the legacy of syndicates reborn as one", addressing: "pawn", minions: _.template("${randFrom([`elite`,`ruthless`,`trained`])} ${randFrom([`killers`,`soldiers`])}"), threat: "draws a line through the air with her finger — across her throat, just for you", minionnames: ["Reina", "Marionette Doll", "Lucille"], preparedboss: [["Blade Shield", "and put it into play"]], execution: "slices his throat", gloat: [
+            name: "Silver Phoenix", expansion: "lamentofthebloodmoon", also: "tideofthedragon", showdown: "none", boss: "Caitlyn", bosstitle: _.template('${randFrom(["vengeful","tenacious","patient"])} empress'), gender: "female", desc: () => "the legacy of syndicates reborn as one", addressing: "pawn", minions: _.template("${randFrom([`elite`,`ruthless`,`trained`])} ${randFrom([`killers`,`soldiers`])}"), threat: "draws a line through the air with her finger — across her throat, just for you", minionnames: ["Reina", "Marionette Doll", "Lucille"], preparedboss: [["Blade Shield", "and put it into play"]], execution: random_template("slices the ${gPron(contact, 'sex')}'s throat"), gloat: [
                 ["You don’t have to do this. There’s still a way back,\" you try to reason with Caitlyn. Her eyes narrow, unreadable, but there's a glint of something buried—anger, or maybe memory. \"Back to what? Scraps? Graves? Empty ideals? I’ve built something. And I won’t let you break it,", "Vengeace renewed me."],
                 ["You act like I lost my way. But I know exactly where I’m going.\" Her gaze is razor-sharp, her mouth a tight line — cool control with no room for doubt. \"And if you can’t accept that — then you’re just another obstacle,", "You don’t stop a storm by telling it who it used to be."],
                 ["You want a fight? I run a syndicate. I don't swing fists — I *erase* problems.\" Her eyes never blink. \"But if you insist... I’ll make an example of you,", "When you're gone, no one will admit they knew you."
@@ -498,7 +520,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
                 [`The unity I built was not just of power, but of purpose. You, who sow discord for petty gains, cannot fathom the strength that comes from true allegiance," you say, your voice a blend of lament and resolve. "True allegiance? Your Golden Dragons have a new head, and stand stronger for it. Your time has passed, old 'master',`, `Let's put your so-called mastery to the test then. The Golden Dragons no longer heed your call. What hope do you have?`],
                 [`You mistake my absence for weakness, my silence for surrender. The Golden Dragons were more than a symbol of power; they were a testament to honor and strength. I will reclaim what was usurped, starting with dismantling your ambitions," your voice resonating with a calm threat. "Ambitious words for a fallen leader. Your era is over, Ah Long. The winds of change have swept through, and your Golden Dragons have evolved beyond you,`, `Evolve or perish, that is the law of nature. Let's see if your Heavenly Dragon still has any fire left, or if it's merely smoke and ashes.`]
             ],
-            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy[1].boss} as the boss in part 2B of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy.boss} as the boss in part 2B of your personal story.` }
         },
         {
             name: "Anja", expansion: "lamentofthebloodmoon", enemy: "", ally: [""], rival: ["random"], stage: "",
@@ -633,7 +655,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
             dialogue: [
                 ["Nice outfit. What is that, rave reject meets swamp monster?\" \"It’s called range, darling. Look it up,\" you quip with a wink. \"I’ll look down on you soon enough,", "Let’s see how well you spin in pieces."],
                 ["Used to be a pop star, huh? Now you’re just a backup dancer in a sewer.\" \"Better than headlining your funeral,\" you retort and blow a bubblegum bubble. \"Keep flapping that mouth,", "I’ll drop the mic myself."],
-                ["You always move like that, or are you just showing off?\" you smirks. \"You keeping up or falling behind?\" <%=possessiveSuffix(enemy.boss)%> eye flash darkly. \"You’ll be flat on beat one,", "Let’s turn this stage into a grave."],
+                ["You always move like that, or are you just showing off?\" you smirk. \"You keeping up or falling behind?\" <%=possessiveSuffix(enemy.boss)%> eye flash darkly. \"You’ll be flat on beat one,", "Let’s turn this stage into a grave."],
                 ["All that grace. All that spin. Still just a freak. Let's make this your final performance,", "Time to drop the curtain."],
                 ["You dance, you dodge, you pose. What are you, a cartoon?\" \"Aww. Jealous much?\" you pout dramatically. \"Jealous of roadkill?", "I'll rip the glam right off you."],
                 ["They said you used to light up the stage. Now you’re glowing green and hiding underground.\" \"Still getting applause, though,\" you smile. \"This one’s a standing ovation — over your body,", "Final act’s gonna be messy."],
@@ -743,7 +765,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
             ]
         },
         { name: "Miss Matrix", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Ah Long")[0], ally: ["Ying Hua"], rival: ["Ah Long", "Kemono"], stage: "Cashed Out" },
-        { name: "Mr. Apple", expansion: "newchallengers", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: ["random"], rival: ["Isabella"], stage: "Cashed Out" },
+        { name: "Mr. Apple", expansion: "newchallengers", enemy: randFrom(filterArray(enemies, "name", "Kingdom")), ally: ["random"], rival: ["Isabella"], stage: "Cashed Out",  get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy.boss} as the boss in part 2B of your personal story.`} },
         {
             name: "Murphy", expansion: "aftershock", enemy: filterArray(enemies, "name", "Abandoned")[0], ally: [""], rival: [""], stage: "",
             dialogue: [
@@ -804,14 +826,14 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
             get instructions() { return `If you choose to use <i>${this.name}</i>, select ${["Kingdom", "Empire"].includes(this.enemy.name) ? `${this.enemy.boss} from the ${this.enemy.name} as the boss` : `${this.enemy.name} as the enemy`} and ${getRandomMinions(this.enemy, false, enemies = enemies)} in part 2 of your personal story.` }
 
         },
-        {
+        { // shadow needs the stage 2B enemy handling
             name: "Shadow", expansion: "redemption", enemy: filterArray(enemies, "boss", "Juan")[0], ally: ["Shin Yokai"], rival: ["Ah Long", "Dmitri", "Shin Yokai", "Kemono"], stage: [randFrom(stages).name],
             dialogue: [
                 [`You stand before me, thinking you know power, thinking you understand control. You know nothing,\" you say, your voice an eye of a storm. \"Shadow, the myth, the legend. Do you think your ancient tricks scare us?`, `We'll see how your arrogance fares against real strength.`],
                 [`Humility is not your strength, I see. Let me teach you its value — the hard way,\" you say with an aura of danger. \"Teach me? You're one man,`, `Your empire crumbles today, Shadow. We no longer bow to phantoms.`],
                 [`The path I've walked is paved with the lessons of the ancients, the whispers of the wind, and the fury of the dragon. You, however, have strayed,\" you say, your gaze piercing through the soul of <%=enemy.boss%>.  \"Strayed? We've risen in the vacuum you left behind. Your time has passed, Shadow,`, `This world has no place for relics. Your teachings die with you.`]
             ],
-            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.stage} as the stage in part 2A of your personal story.` }
+            get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.stage} as the stage in part 2 of your personal story.` }
         },
         { name: "Selene", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: [""], rival: ["Genesis"], stage: "Estate of Decay" },
         { name: "Sera O'Quinn", expansion: "newchallengers", enemy: filterArray(enemies, "boss", "Dmitri")[0], ally: [""], rival: [""], stage: "Supply and Demand" },
@@ -838,7 +860,7 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
             dialogue: [
                 [`You're treading on dangerous ground," you say, your voice steady. <%=enemy.boss%> leans in slightly to reply. "And you, Vada, dance on the edge of a knife. Brave, or perhaps foolhardy." "I've danced with danger longer than you might think," you reply, your tone firm. "Then perhaps it's time you learned the steps can be fatal,`, `For in this dance, the music can stop at any moment, and not all dancers rise again.`],
                 [`Seems we're at an impasse," <%=enemy.boss%> muses aloud, dripping threat. "An impasse suggests equality," you counter, words slicing through the air. "I'm not here to negotiate." "Bold girl. But boldness without caution is recklessness,`, `In Ransom City, recklessness is punished by more than just harsh words.`],
-                [`You've caught my attention, which is no small feat," <%=enemy.boss%> acknowledges, tone laced with intrigue and danger. "And yet, attention was not what I sought," you reply. "Careful, Vada. Ambition drives us all, but it can also drive us to ruin,`, `Especially when it blinds us to the knives at our backs.`]
+                [`You've caught my attention, which is no small feat," <%=enemy.boss%> acknowledges, tone laced with intrigue and danger. "And yet, attention was not what I sought," you reply. "Careful, Vada. Ambition drives us all,`, `But it can also drive one to ruin.`]
             ],
             get instructions() { return `If you choose to use <i>${this.name}</i>, select ${this.enemy.boss} from the ${this.enemy.name} as the boss in part 2 of your personal story.` }
         },
@@ -846,12 +868,12 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
         {
             name: "Wicked", expansion: "stretchgoals18", enemy: "", ally: [""], rival: [""], stage: "",
             dialogue: [
-                ["Nice knives, sweetheart. You bring those for decoration?\" \"No, just for you,\" you grin. <%=enemy.boss%> scowls. \"Then come carve your last mistake,", "I’ll bury those blades in your spine."],
+                ["Nice knives, sweetheart. You bring those for decoration?\" <%=enemy.boss%> laughs. \"No, just for you,\" you grin.The laugh turns to a scowl. \"Then come carve your last mistake,", "I’ll bury those blades in your spine."],
                 ["You got a mouth on you. What happens when I shut it?\" \"I growl louder,\" you smirk. \"Then let’s hear you scream,", "I like my goths quiet and broken."],
-                ["They say you’re fast. I say you’re overrated.\" \"And I say you’re leaking soon,\" you snap back. <%=enemy.boss%> laughs. \"Talk is cheap — your blood’s not,", "Let’s see if lizards scream like humans."],
-                ["All that attitude. All that eyeliner. None of it scares me.\" \"I’m not here to scare you,\" you roll your eyes. \"I’m here to cut you. \"Then make it quick — I hate waiting,", "Pretty sure you’ll look better in red."],
-                ["You're just a hissy little mutant with sharp toys.\" \"And you're just a meatbag about to get ventilated,\" you chuckle. \"Let’s see who pops first,", "Hope your skin’s tougher than your ego."],
-                ["I know your type. Loud. Mad. Broken.\" \"And still sharper than you,\" you retort and sharpen your eyes. \"Not for long,", "I break blades and brats alike."],
+                ["They say you’re fast. I say you’re overrated,\" <%=gPron(enemy, 'subject')%> says. \"And I say you’re leaking soon,\" you snap back. <%=enemy.boss%> laughs. \"Talk is cheap — your blood’s not,", "Let’s see if lizards scream like humans."],
+                ["All that attitude. All that eyeliner. None of it scares me.\"  <%=enemy.boss%> eyes you.. cautiously. \"I’m not here to scare you,\" you roll your eyes. \"I’m here to cut you. \"Then make it quick — I hate waiting,", "Pretty sure you’ll look better in red."],
+                ["You're just a meatbag about to get ventilated,\" you chuckle. \"You're just a hissy little mutant with sharp toys- Let’s see who pops first,", "Hope your skin’s tougher than your ego."],
+                ["I know your type. Loud. Mad. Broken,\" <%=gPron(enemy, 'subject')%> says. \"And still sharper than you,\" you retort and sharpen your eyes. \"Not for long,", "I break blades and brats alike."],
                 ["You come out the sewer like you’re royalty,", "Back into the gutter with you."],
                 ["You ain't scary. Just weird,\" you smirk. \"Weird enough to ruin your day. Let’s end it on something memorable,", "I’ll carve ‘FAILURE’ into your cold-blooded chest."
                 ]
@@ -883,18 +905,21 @@ export function getGladiators(expansionfilter, enemies = getEnemies(), stages = 
             dialogue: [
                 [`You underestimate the light I carry within me. My fight is for those silenced by fear, not for the glory of victors in hidden arenas," you state.  "Light? Noble, but naive. We seek to test your limits, Ying Hua,`, `See this as an opportunity. An opportunity to truly understand the depth of your convictions.`],
                 [`You lure me with challenges, thinking it will sway my path. Know this — I walk the path of righteousness, and no invitation, no challenge, can deter me," you stand for your principles.  "Righteousness? A flimsy shield against the storm we bring,`, `We'll see how long your shield holds, Ying Hua. The storm approaches.`],
-                [`The invitation through the gateway to the world of shadows and deceit, I accept not as a contestant, but as a herald of justice. Your games end with me," you say, spirit unbroken. "Justice? A quaint concept in our world. But entertain us, Ying Hua. Entertain us with your futile attempts at heroism,`, `Perhaps you'll provide a lesson in futility, or maybe, just maybe, you'll surprise us.`]
+                [`The invitation through the gateway to the world of shadows and deceit I accept as a herald of justice. Your games end with me," you say, spirit unbroken. "Justice? A quaint concept in our world. But entertain us, Ying Hua. Entertain us with your futile attempts at heroism,`, `Perhaps you'll provide a lesson in futility, or maybe, just maybe, you'll surprise us.`]
             ]
         },
         {
             name: "Yokai", expansion: "redemption2", enemy: filterArray(enemies, "boss", "Shadow")[0], ally: ["Marionette Doll"], rival: ["Marionette Doll"], stage: "Steel Memories",
             dialogue: [
-                [`This curse, this power, it was awoken by the same cruelty that now festers in the hearts of those like you," you say with a low rumble,. "A curse? To us, it's just another tool for chaos. Your vengeance, Yokai, is just a game to keep us entertained,`, `And we'll watch with delight as you burn out, consumed by your own fire.`],
+                [`This curse, this power, it was awoken by the same cruelty that now festers in the hearts of those like you," you say with a low rumble. "A curse? To us, it's just another tool for chaos. Your vengeance, Yokai, is just a game to keep us entertained,`, `And we'll watch with delight as you burn out, consumed by your own fire.`],
                 [`I've seen the world through the eyes of a monster, and it's the likes of you who have made me this way," you say with a somber force. "Made you this way? Oh, you were merely provided a spark. It's you who've relished the flames, Shin Yokai. Embraced the destruction,`, `Keep blazing your trail of vengeance. It only makes our work easier, as you leave nothing but despair in your wake.`],
-                [`They once called me Yuuto, a name meant for a life of peace. Now, Yokai is all that remains — an echo of vengeance in a world that turned its back on me," your voice a mixture of sorrow and resolve. "Yuuto, Yokai — it matters not. You're a puppet in a grand design. Your 'vengeance' is just another scene in a grander play,`, `Dance, puppet, dance. Your fury serves us well, fueling the chaos that is our lifeblood.`]
+                [`They once called me Yuuto, a name meant for a life of peace. Now, Yokai is all that remains — an echo of vengeance in a world that turned its back on me," your voice a mixture of sorrow and resolve. "Yuuto, Yokai — it matters not. You're a puppet in a grand design. Your 'vengeance' is just another scene in a grander play,`, `Dance, puppet, dance! Your fury serves us well, fueling the chaos that is our lifeblood.`]
             ]
         },
-        { name: "Zane", expansion: "newchallengers", enemy: filterArray(enemies, "boss", "Juan")[0], ally: [""], rival: ["random","random"], stage: "Original Copy" },
+        { name: "Zane", expansion: "newchallengers", enemy: filterArray(enemies, "boss", "Juan")[0], ally: [""], rival: ["random","random"], stage: "Original Copy",
+        get instructions() {
+            return `If you choose to use <i>${this.name}</i>, ${getRandomMinions(this.enemy, false, enemies = enemies)} in part 2 of your personal story.`
+        } },
     ]
 
     gladiators = expansionfilter === undefined ? gladiators : gladiators.filter(gladiator => expansionfilter.includes(gladiator.expansion))

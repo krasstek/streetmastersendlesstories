@@ -3,6 +3,12 @@ import _ from 'lodash';
 import { getEnemies, getGladiators } from '$lib/stages';
 import { getStages } from '$lib/getStages';
 
+export function random_template(...options) {
+    return function(params) {
+      const chosen = randFrom(options);
+      return _.template(chosen)(params);
+    };
+  }
 
 export function randFrom(array, dev = false) {
     let item = Math.floor(Math.random() * array.length)
@@ -85,9 +91,9 @@ function combineWords(words, { conjunction = 'and', oxfordComma = true } = {}) {
     if (len === 2) return `${words[0]} ${conjunction} ${words[1]}`;
     const last = `${oxfordComma ? ',' : ''} ${conjunction} ${words[len - 1]}`;
     return `${words.slice(0, len - 1).join(', ')}${last}`;
-  }
+}
 
-export function createStory(expansionfilter, gladiatorfilter, players, nstages) {
+export function createStory(expansionfilter, gladiatorfilter, players, nstages, showdown) {
 
     let enemies = getEnemies(expansionfilter);
 
@@ -123,6 +129,7 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
 
     if (nstages > 1) { // only if more than one stage
         herostages = (_.uniq(herostages)).filter(function (el) { return el; });
+        herostages = herostages.filter(el => el !== "Original Copy");
         supportingcast = (_.uniq(supportingcast)).filter(function (el) { return el; });
         heroenemies = (_.uniq(heroenemies)).filter(function (el) { return el; });
     } else {
@@ -181,13 +188,13 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
         // add keywords:
         { name: "Ignacio", expansion: "rumblepack", gender: "male", keywords: ["Street", "Organized Crime", "Cartel", "Gunslinger"] },
         // add keywords: maybe "Oni" would be better..
-        { name: "Ikuchi", expansion: "essenceofevil", gender: "male", keywords: ["Extraplanar", "Raijin", "Horseman","Chi","Boss"] },
+        { name: "Ikuchi", expansion: "essenceofevil", gender: "male", keywords: ["Extraplanar", "Raijin", "Horseman", "Chi", "Boss"] },
         { name: "Isabella", expansion: "riseofthekingdom", gender: "female", keywords: ["Celebrity", "Martial Arts Master", "Wanderer", "Brandon", "Golden Dragons", "Music"] },
         { name: "Jackal", expansion: "riseofthekingdom", gender: "female", keywords: ["Dark Matter", "Insane", "Kingdom", "Psychic", "Science", "Jackal"] },
         /*add keywords*/
         { name: "Jade", expansion: "aftershock", gender: "female", keywords: [] },
         // add keywords:
-        { name: "James Wong", expansion: ["rumblepack","keystothekingdom"], gender: "male", keywords: ["Black Ops", "Brook City", "James Wong", "Law Enforcement", "Kingdom", "Past"] },
+        { name: "James Wong", expansion: ["rumblepack", "keystothekingdom"], gender: "male", keywords: ["Black Ops", "Brook City", "James Wong", "Law Enforcement", "Kingdom", "Past"] },
         { name: "Jin", expansion: "riseofthekingdom", gender: "male", keywords: ["Golden Dragons", "Organized Crime", "Blade", "Law Enforcement", "Ying Hua"] },
         // add keywords:
         { name: "Jirou", expansion: "tideofthedragon", gender: "male", keywords: [] },
@@ -287,7 +294,7 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
 
 
     alliesandrivals = alliesandrivals.map(a => {
-        a.keywords = a.keywords.concat(["Arcade","Clone"]);
+        a.keywords = a.keywords.concat(["Arcade", "Clone"]);
         return a
     })
 
@@ -306,11 +313,11 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
         globalgladiators.forEach(g => {
             if (g.ally.includes("random")) {
                 let these_allies = g.ally.filter(r => r === "random").map(r => {
-                        r = randFrom(alliesandrivals).name
-                        let remove = alliesandrivals.map(function (e) { return e.name; }).indexOf(r)
-                        alliesandrivals.splice([remove], 1)
-                        g.ally[g.ally.indexOf("random")] = r
-                        return r
+                    r = randFrom(alliesandrivals).name
+                    let remove = alliesandrivals.map(function (e) { return e.name; }).indexOf(r)
+                    alliesandrivals.splice([remove], 1)
+                    g.ally[g.ally.indexOf("random")] = r
+                    return r
                 })
                 let instructions = `select ${combineWords(these_allies)} as the random all${these_allies.length > 1 ? "ies in that order" : "y"} in your personal story.`
                 instructions = (g.instructions || "").length > 0 ? `${g.instructions} ${ucInit(instructions)}` : `If you choose to use <i>${g.name}</i>, ${instructions}`
@@ -319,11 +326,11 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
             }
             if (g.rival.includes("random")) {
                 let these_rivals = g.rival.filter(r => r === "random").map(r => {
-                        r = randFrom(alliesandrivals).name
-                        let remove = alliesandrivals.map(function (e) { return e.name; }).indexOf(r)
-                        alliesandrivals.splice([remove], 1)
-                        g.rival[g.rival.indexOf("random")] = r
-                        return r
+                    r = randFrom(alliesandrivals).name
+                    let remove = alliesandrivals.map(function (e) { return e.name; }).indexOf(r)
+                    alliesandrivals.splice([remove], 1)
+                    g.rival[g.rival.indexOf("random")] = r
+                    return r
                 })
                 let instructions = `select ${combineWords(these_rivals)} as the random rival${these_rivals.length > 1 ? "s in that order" : ""} in your personal story.`
                 instructions = (g.instructions || "").length > 0 ? `${g.instructions} ${ucInit(instructions)}` : `If you choose to use <i>${g.name}</i>, ${instructions}`
@@ -339,7 +346,7 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
     let allymotivation = "Arcade"
     let rivalmotivation = "Arcade"
 
-    if(alliesandrivals.length > players * 2) {
+    if (alliesandrivals.length > players * 2) {
 
         allymotivation = nstages == 1 ? "Arcade" : getMotivation(alliesandrivals, players)
         while (allygroup.length < players) {
@@ -351,7 +358,7 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
             }
         }
         allygroup = allygroup.sort((a, b) => a.name.localeCompare(b.name));
-    
+
         rivalmotivation = nstages == 1 ? "Arcade" : getMotivation(alliesandrivals, players)
         while (rivalgroup.length < players) {
             let random = Math.floor(Math.random() * alliesandrivals.length)
@@ -361,7 +368,7 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
                 alliesandrivals.splice(random, 1)
             }
         }
-    
+
         rivalgroup = rivalgroup.sort((a, b) => a.name.localeCompare(b.name));
         nstages == 1 ? allymotivation = getMotivation(allygroup, players) : () => { }
         nstages == 1 ? rivalmotivation = getMotivation(rivalgroup, players) : () => { }
@@ -393,19 +400,30 @@ export function createStory(expansionfilter, gladiatorfilter, players, nstages) 
     let story = compileStory(storystages, storyenemies, nstages)
 
     story.forEach((entry, i) => {
-                if(["Davenport Manor"].includes(entry.enemy.name)) { console.log(i+1)}
+        if (["Davenport Manor"].includes(entry.enemy.name)) { console.log(i + 1) }
         entry.stage.knowledge = defineKnowledge(i, story);
 
     });
 
     let finalboss = story[Math.max(nstages * 2 - 3, 0)].enemy
 
+
+    let showdownboss = undefined
+    if (showdown && nstages > 1) {
+        showdownboss = getEnemies(expansionfilter).filter(e => expansionfilter.some(xp => e.showdown.includes(xp))).filter(e => finalboss.boss != e.boss)
+        if (showdownboss.length === 0) {
+            showdownboss = undefined
+        } else {
+            showdownboss = randFrom(showdownboss)
+        }
+    }
+
     let storyname = String(storyNamer(finalboss, story[Math.max(nstages * 2 - 3, 0)].stage))
 
     let referencetext = referenceText(globalgladiators, allygroup, allymotivation, rivalgroup, rivalmotivation, finalboss, nstages)
 
 
-    let cardtexts = textMaker(story, alliesandrivals, heronames, enemies, herodialogue, nstages, expansionfilter);
+    let cardtexts = textMaker(story, alliesandrivals, heronames, enemies, herodialogue, nstages, expansionfilter, showdownboss);
 
     let pagecontent = { reference: referencetext, text: cardtexts, storyname: storyname, finalboss: finalboss.name }
 
@@ -422,7 +440,7 @@ export function defineAddressing(enemy) {
     return addressing
 }
 
-export function gPron(character, form) {
+export function gPron(character, form, uc = false) {
     let gPron
 
     switch (character.gender) {
@@ -473,6 +491,7 @@ export function gPron(character, form) {
             gPron = "UNDEFINED"
 
     }
+    if(uc) {gPron = ucInit(gPron)}
     return gPron
 
 }
@@ -588,7 +607,11 @@ export function preGamePrologue(stage, enemy) {
 
     let masterplan
 
-    let vip = randFrom([["President", "White House"], ["Colonel", "Pentagon"], ["Mayor", "City Hall"], ["Police Chief", "Ransom P.D. Headquarters"], ["Citadel Commander", "Citadel HQ"], ["Foreign Ambassador", "Foreign Embassy"], ["Head of UN", "UN Headquarters"]])
+    let vip = randFrom([{vip: "President", location: "White House"}, {vip: "Colonel", location: "Pentagon"}, {vip: "Mayor", location: "City Hall"}, {vip: "Police Chief", location: "Ransom P.D. Headquarters"}, {vip: "Citadel Commander", location: "Citadel HQ"}, {vip: "Foreign Ambassador", location: "Foreign Embassy"}, {vip: "Head of UN", location: "UN Headquarters"}, {vip: "Principal", location: "Ransom City University"}, {vip: "Head Researcher", location: "Medical Research Center"}])
+
+    vip.gender = randFrom(["male","female"])
+
+
     switch (stage.masterplan) {
         case "actsofterror":
             masterplan = randFrom([
@@ -610,10 +633,10 @@ export function preGamePrologue(stage, enemy) {
             break;
         case "kidnapping":
             masterplan = randFrom([
-                `the ${vip[1]} is not the exception to the rampant crimes related to the Kingdom these days. The ${vip[0]} has been kidnapped by the ${enemy.minions()} of ${enemy.boss}. Are you a bad enough dude to rescue the ${vip[0]}?`,
-                `${enemy.boss} is holding Ransom City captive and the ${vip[0]} hostage. With ${gPron(enemy, "possessive")} gang of ${enemy.minions()}, nobody but you can stop ${gPron(enemy, "object")} now.`,
-                `${enemy.boss} has captured the ${vip[0]}, and via a live two-way radio broadcast, demands the ${vip[1]} to secure a one hundred billion dollar ransom in three days.`,
-                `the ${vip[1]} stands silent, its halls emptied by fear. The ${vip[0]} has vanished, and all signs point to the ${enemy.minions()} of ${enemy.boss}.`,
+                `the ${vip.location} is not the exception to the rampant crimes related to the Kingdom these days. The ${vip.vip} has been kidnapped by the ${enemy.minions()} of ${enemy.boss}. Are you a bad enough dude to rescue the ${vip.vip}?`,
+                `${enemy.boss} is holding Ransom City captive and the ${vip.vip} hostage. With ${gPron(enemy, "possessive")} gang of ${enemy.minions()}, nobody but you can stop ${gPron(enemy, "object")} now.`,
+                `${enemy.boss} has captured the ${vip.vip}, and via a live two-way radio broadcast, demands the ${vip.location} to secure a one hundred billion dollar ransom in three days.`,
+                `the ${vip.location} stands silent, its halls emptied by fear. The ${vip.vip} has vanished, and all signs point to the ${enemy.minions()} of ${enemy.boss}.`,
             ])
             break;
         case "strengtheningforces":
@@ -809,7 +832,7 @@ export function storyNamer(finalboss, finalstage, number = 16, descriptor = fals
             break;
         case "Ring of Fire":
             stageadjectives = ["Possessed", "High", "Burning", "Desperate", "Exploding", "Raging", "Flaming"]
-            stagenouns = [["Ring","Rings"], ["Fire","Fires"], ["Engine", "Engines"], ["Rage","Rage"], ["Flame", "Flames"], ["Oil", "Oil"], ["Explosion", "Explosions"], ["Gunpowder", "Gunpowder"], ["Path", "Paths"], ["Plea", "Pleas"]]
+            stagenouns = [["Ring", "Rings"], ["Fire", "Fires"], ["Engine", "Engines"], ["Rage", "Rage"], ["Flame", "Flames"], ["Oil", "Oil"], ["Explosion", "Explosions"], ["Gunpowder", "Gunpowder"], ["Path", "Paths"], ["Plea", "Pleas"]]
             break;
         case "Rude Awakening":
             stageadjectives = ["Rude", "Afflicted", "Decayed", "Rotting", "Summoned", "Risen", "Awakened", "Rotten", "Dark", "Black"]
@@ -997,8 +1020,8 @@ export function loungeMusic(what = "lounge") {
 
     let music = randFrom(["Don't Stop Believing", "Faithfully", "Don't Stop Me Now", "Open Arms", "Wheel in the Sky", "Separate Ways", "Livin' on a Prayer", "Any Way You Want It", "We Are the Champions", "Chariots of Fire", "We Will Rock You", "Hero", "Walking on Sunshine", "Always Look on the Bright Side of Life", "Eye of the Tiger", "The Final Countdown", "Burning Heart", "Every Breath You Take", "Another One Bites the Dust", "Never Gonna Give You Up", "Gonna Fly Now", "One Moment In Time", "Enter Sandman"])
 
-    switch(what) {
-        case "rave": music  = randFrom([
+    switch (what) {
+        case "rave": music = randFrom([
             `a thumping remix of ${music}, twisted beyond recognition by brutal bass drops and digital distortion`,
             `a chopped and looped reinterpretation of ${music}, layered over a relentless industrial techno beat`,
             `a psytrance remix of ${music} that spirals faster and faster until the crowd seems to blur in the strobes`,
@@ -1007,7 +1030,7 @@ export function loungeMusic(what = "lounge") {
             `a grime-infused remix of ${music}, slowing and speeding erratically as the lights flicker overhead`,
             `an overclocked hyperpop take on ${music}, melting the melody into chaotic bursts of static and synth`
         ]);
-        break;
+            break;
         case "lounge": music = randFrom([
             `a sterile elevator rendition of ${music}, played on a thin synth keyboard over canned strings`,
             `a painfully slow instrumental of ${music}`,
@@ -1018,7 +1041,7 @@ export function loungeMusic(what = "lounge") {
             `a soft melody jazzy interpretation of ${music}`,
             `a lounge version of ${music}`
         ]);
-        break;
+            break;
         case "restaurant": music = randFrom([
             `A scratchy old recording of ${music} drifts from the kitchen radio between the sounds of sizzling oil.`,
             `A warm accordion cover of ${music} is rolling gently over the clink of plates and glasses.`,
@@ -1030,7 +1053,7 @@ export function loungeMusic(what = "lounge") {
             `A mellow guitar rendition of ${music} sets a quiet, nostalgic mood despite the tension in the room.`
         ]);
     }
-    
+
 
     return music
 }
@@ -1162,7 +1185,7 @@ function getPropertyValue(obj1, obj2, propName, defaultValue = undefined) {
     }
 }
 
-export function loseResult(stageindex, story, nextstage, gizmo, wincondition, rival, rivalpresence, ally, nstages) {
+export function loseResult(stageindex, story, nextstage, gizmo, wincondition, rival, rivalpresence, ally, nstages, contact) {
 
     let finalboss = story[Math.max(nstages * 2 - 3, 0)].enemy
 
@@ -1177,7 +1200,6 @@ export function loseResult(stageindex, story, nextstage, gizmo, wincondition, ri
     let nextminion = randFrom(nextenemy.minionnames)
 
     let evilplace = evilPlace()
-    let contact = randFrom(["he", "she"])
 
     let captured = nextmission.hasOwnProperty("captured") && nextmission.knowledge == "captured" ? true : false
 
@@ -1218,7 +1240,7 @@ export function loseResult(stageindex, story, nextstage, gizmo, wincondition, ri
     `You call Agent Fletch and request a cleanup team, and then you begin searching through the area, and find ${whichPreposition(getGizmo())} placed almost intentionally where you would find it. From the device you find maps and coordinates.`,
     `You vow to catch the ${finalboss.name} before their ${getMasterPlan()} is complete!`,
     `This was only a delay in the inevitable. You know ${enemy.boss} is only a beatstick, not the mastermind. ${ucInit(gPron(enemy, "subject"))} will lead you to ${finalboss.boss == enemy.boss ? `The Master` : finalboss.boss}, and you will be making examples of them both.`,
-        `Just then, you got a call on your communicator from Agent Fletch. "Heads up, Gladiators." Agent Fletch said. "We've got a a problem."`
+        `Just then, you got a call on your communicator from Agent Fletch. "Heads up, Gladiators." Agent Fletch said. "We've got a problem."`
     ]
 
     let capture = [
@@ -1301,6 +1323,8 @@ ${enemy.boss} says. "Bind them. Perhaps ${nextenemy.boss} will have a use for th
     let hostages = [
         `${captured ? `You are lying on the ground, defeated and helpless, as` : `Despite all of your efforts,`} ${enemy.boss} executes another one of the ${the_hostages}.<br><br>${captured ? randFrom(capture) : generic}`,
         `You weren't able to save the ${the_hostages}, and now their lives are on your hands. ${captured ? randFrom(capture) : generic}`,
+        captured ? randFrom(capture) : `You hit the ground hard, vision swimming as ${enemy.boss} steps past you without even slowing. You can barely lift your arms, let alone stand. Around you, the ${the_hostages} shrink back in terror as ${enemy.boss} seizes one. You try to force your body to move, but nothing answers. With effortless precision, ${gPron(enemy, "subject")} ${enemy.execution({contact: contact})}, and there’s nothing you can do to stop it.`
+        ,
         captured ? randFrom(capture) : `"We've failed to save them," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch was right.`,
         `"Go! Now! Get to the chopper!" one of the ${the_hostages} shouts as ${enemy.boss} steps over ${randFrom([`him`, `her`])}. ${captured ? `You are in no shape to move. ${randFrom(capture)}` : `<br><br>${randFrom(retreat)} ${randFrom(intel)}`}`,]
 
@@ -1347,7 +1371,7 @@ ${enemy.boss} says. "Bind them. Perhaps ${nextenemy.boss} will have a use for th
 
     let undead = [
         `Looking out over the battlefield, you see the zombies are too many for you to keep at bay. ${captured ? `You fight as long as you can, but eventually you are overrun by the horde.` : `"Agent Fletch," you say into your radio. "The target's fled, and the horde is loose. Requesting extraction."`}`,
-        `"Go!" ${whichPreposition(stage.bystander)} yells at you from where ${contact} lies, wounded and pinned. "Get out of here!" You turn and flee as the unstoppable horde of zombies approaches${captured ? `, but you are not fast enough in your current state.` : `. Sounds of fighting can be heard as ${contact} fights them off as long as ${contact} can, but all too soon those sounds give way to screams of pain.<br><br>${randFrom(intel)}`}`
+        `"Go!" ${whichPreposition(stage.bystander)} yells at you from where ${gPron(contact, "subject")} lies, wounded and pinned. "Get out of here!" You turn and flee as the unstoppable horde of zombies approaches${captured ? `, but you are not fast enough in your current state.` : `. Sounds of fighting can be heard as ${gPron(contact, "subject")} fights them off as long as ${gPron(contact, "subject")} can, but all too soon those sounds give way to screams of pain.<br><br>${randFrom(intel)}`}`
     ]
 
     let loseresult
@@ -1407,14 +1431,13 @@ ${enemy.boss} says. "Bind them. Perhaps ${nextenemy.boss} will have a use for th
     return loseresult
 }
 
-export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, wincondition, ally, rival, nstages) {
+export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, wincondition, ally, rival, nstages, showdown, contact) {
     let finalboss = story[Math.max(nstages * 2 - 3, 0)].enemy
     let enemy = story[stageindex].enemy
     let stage = story[stageindex].stage
     let nextenemy = story[nextstage].enemy
     let nextmission = story[nextstage].stage
     let minion = randFrom(enemy.minionnames)
-    let contact = randFrom(["He", "She"])
     let location = story[stageindex].stage.location
     let bystanders = story[stageindex].stage.bystander
     let clue
@@ -1480,6 +1503,20 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
             `a warehouse full of unmarked boxes is used by the ${nextenemy.name}, and whatever they are moving, it ain’t legal`
         ]
             break;
+        case "Market Crash": clue = [
+            `the ${nextenemy.name} have taken control of the open-air market and are extorting stall owners`,
+            `the open-air market has become a collection point for the ${nextenemy.name}'s protection payments`,
+            `the ${nextenemy.name} are enforcing territory at the open-air market`,
+            `vendors at the open-air market are being forced to pay the ${nextenemy.name} for "security"`,
+            `the ${nextenemy.name} have stationed enforcers at the open-air market to oversee collections`,
+            `extortion crews tied to the ${nextenemy.name} are shaking down merchants at the open-air market`,
+            `the open-air market is now under ${nextenemy.name} control and guarded during business hours`,
+            `patrols linked to the ${nextenemy.name} have been seen escorting cash bags out of the open-air market`,
+            `the ${nextenemy.name} are directing all forced payments to a controlled sector of the open-air market`,
+            `that civilians are being threatened by the ${nextenemy.name} at the open-air market`,
+            `the ${nextenemy.name} presence at the open-air market has increased sharply in the last 24 hours`
+        ]
+            break;
         case "Meltdown": clue = [
             `${nextenemy.name} - ${nextenemy.desc()} - have seized control of a nuclear facility under the guise of emergency drills`,
             `there are radiation spikes that suggest ${nextenemy.name} - ${nextenemy.desc()} - are tampering with active reactor cores`,
@@ -1491,9 +1528,9 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
             break;
         case "Mob Rules": clue = [
             `the ${nextenemy.name} have been meeting with some shady characters at Matteo's Pizzeria`,
-            `wiretaps catch ${nextenemy.name} operatives arranging a payment drop with the mob at an old pizza joint downtown`,
+            `${nextenemy.name} operatives arranging a payment drop with the mob at an old pizza joint downtown`,
             `the ${nextenemy.name} are using Matteo's as a neutral ground for a high-stakes weapons deal`,
-            `large cash withdrawals linked to the ${nextenemy.name}, matching the timeframe of a mob meeting at Matteo's`,
+            `large cash withdrawals are linked to the ${nextenemy.name}, matching the timeframe of a mob meeting at Matteo's`,
             `the ${nextenemy.name} couriers have been seen entering Matteo's carrying unmarked cases and leaving empty-handed`
         ]
             break;
@@ -1523,14 +1560,14 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
         ]
             break;
         case "Pier Pressure": clue = [
-                `the shipping manifests linked to the ${nextenemy.name} show a last-minute charter departing from the docks`,
-                `the ${nextenemy.name} are preparing a rapid extraction route through the industrial harbor`,
-                `unusual nighttime cargo movements tied to the ${nextenemy.name} reported by the dockworkers`,
-                `${nextenemy.name} operatives have been seen fueling a private boat`,
-                `rumors spread through the harbor gangs that ${nextenemy.boss} is skipping town with something big`,
-                `${enemy.boss} is making a break by sea before dawn`,
-                `the ${nextenemy.name} have been quietly shifting their operations to the waterfront in preparation for something major`
-            ]
+            `the shipping manifests linked to the ${nextenemy.name} show a last-minute charter departing from the docks`,
+            `the ${nextenemy.name} are preparing a rapid extraction route through the industrial harbor`,
+            `unusual nighttime cargo movements tied to the ${nextenemy.name} reported by the dockworkers`,
+            `${nextenemy.name} operatives have been seen fueling a private boat`,
+            `rumors spread through the harbor gangs that ${nextenemy.boss} is skipping town with something big`,
+            `${enemy.boss} is making a break by sea before dawn`,
+            `the ${nextenemy.name} have been quietly shifting their operations to the waterfront in preparation for something major`
+        ]
             break;
         case "Reel Terror": clue = [
             `the curtain rises as ${nextenemy.boss} is planning something downtown`,
@@ -1546,7 +1583,7 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
             `local legends and modern readings overlap: someone is waking the storm gods — and all signs point to ${nextenemy.boss}`,
             `a growing thunderhead has remained stationary for days, defying all natural patterns — with ${nextenemy.name} activity reported at its center`,
             `there are rising energy readings and sudden blackouts across the region, all converging toward a ritual site guarded by ${nextenemy.boss}`
-          ]
+        ]
             break;
         case "Right to Remain Silent": clue = [
             `the Citadel's undercover operatives already gone silent within the territory of ${nextenemy.name} territory, are compromised.`,
@@ -1555,11 +1592,23 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
         ]
             break;
         case "Ring of Fire":
-                clue = [
-                    `locals in the surrounding region have reported strange lights and chanting near an abandoned village, connected to the ${nextenemy.name}`,
-                    `rumors spread of ${nextenemy.name} operatives moving through distant settlements, bribing or intimidating villagers to stay silent about the fires in the hills`,
-                    `old comm intercepts mention the ${nextenemy.name} seeking out remote villages rumored to be built atop forgotten Oni worship sites`
-                ]
+            clue = [
+                `locals in the surrounding region have reported strange lights and chanting near an abandoned village, connected to the ${nextenemy.name}`,
+                `rumors spread of ${nextenemy.name} operatives moving through distant settlements, bribing or intimidating villagers to stay silent about the fires in the hills`,
+                `old comm intercepts mention the ${nextenemy.name} seeking out remote villages rumored to be built atop forgotten Oni worship sites`
+            ]
+            break;
+        case "Sky High": 
+        clue = [
+                `that one of the ritziest buildings in the city is a front for the ${nextenemy.name}`,
+                `the ${nextenemy.name} have taken control of a corporate broadcast tower downtown`,
+                `the ${nextenemy.name} are wiring rooftop arrays with military-grade encryption`,
+                `the ${nextenemy.name} deploying equipment to the top of a skyscraper`,
+                `that a restricted-access rooftop has become a fortified communications hub for the ${nextenemy.name}`,
+                `the ${nextenemy.name} are modifying satellite uplinks from a high-altitude building`,
+                `that helicopters tied to the ${nextenemy.name} have been landing on a downtown rooftop`,
+                `the ${nextenemy.name} are preparing a large-scale signal boost from a corporate tower helipad`
+            ]
             break;
         case "Supply & Demand": clue = [
             `the shadowy corners of Ransom City flicker with the activities of ${nextenemy.name}, trading in forbidden substances`,
@@ -1608,27 +1657,27 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
 
     let gatherclues = [
         `${enemy.boss} forces you to dodge ${gPron(enemy, "possessive")} attack, and when you return to your stance, ${gPron(enemy, "subject")} is gone! Rather than give chase, you interrogate ${minion} who reveals`,
-        `After the skirmish, the ${enemy.name} scared away, you rush to one of the ${bystanders}s' side - an undercover Citadel scout, who holds ${whichPreposition(gizmo)} in hand. ${contact}'s alive, bleeding out from an attack. "The ${gizmo}!" you ask. "What's in it?" ${contact} doesn't make it, but the intel you recovered tells that`,
-        `Before you can finish the job, ${enemy.boss} leaps through ${stage.hasOwnProperty("pit") ? stage.pit : "a bottomless pit"}. You race to the edge after ${gPron(enemy, "object")}, but ${gPron(enemy, "subject")} is nowhere to be seen. You doubt this is the last you see of the ${enemy.bosstitle()} of the ${enemy.name}. You turn to the ${bystanders}s and one of them approaches you.  "Thank you!" ${lowerCaseInitial(contact)} says, and tells of overhearing that`,
+        `After the skirmish, the ${enemy.name} scared away, you rush to one of the ${bystanders}s' side - an undercover Citadel scout, who holds ${whichPreposition(gizmo)} in hand. ${gPron(contact, "subject", true)}'s alive, bleeding out from an attack. "The ${gizmo}!" you ask. "What's in it?" ${gPron(contact, "subject", true)} doesn't make it, but the intel you recovered tells that`,
+        `Before you can finish the job, ${enemy.boss} leaps through ${stage.hasOwnProperty("pit") ? stage.pit : "a bottomless pit"}. You race to the edge after ${gPron(enemy, "object")}, but ${gPron(enemy, "subject")} is nowhere to be seen. You doubt this is the last you see of the ${enemy.bosstitle()} of the ${enemy.name}. You turn to the ${bystanders}s and one of them approaches you.  "Thank you!" ${gPron(contact, "subject")} says, and tells of overhearing that`,
         `As you tie up the unconscious members of the ${enemy.name}, left on their own devices by ${enemy.boss}, you're shocked when ${minion} approaches you calmly. ${minion} - a double agent - informs you that`,
         `"Sir, we've captured one of the ${enemy.minions()} and are holding them for questioning."  The technician got to Agent Fletch, and then paused for a moment.  "Find out what they are up to!" Fletch told the technician.  "By any means necessary!" ${minion} revealed that`,
         `${enemy.boss} made a hasty retreat, but thanks to the information you got after the encounter, you have learned`,
-        `"Thank you!" one of the ${bystanders}s said as ${lowerCaseInitial(contact)} approached, as the forces of ${enemy.boss} made their retreat. "I overheard what they're planning." ${contact} goes on to explain about `,
+        `"Thank you!" one of the ${bystanders}s says as ${gPron(contact, "subject")} approaches, as the forces of ${enemy.boss} make their retreat. "I overheard what they're planning." ${gPron(contact, "subject", true)} goes on to explain about `,
         `With the last of the ${enemy.minions()} defeated, you turn to face ${enemy.boss} again. You're confident that if you could only get close to ${gPron(enemy, "object")}, you could end this game of cat and mouse. But ${gPron(enemy, "subject")} has disappeared into the thin air! You don't have the time to ponder this, as the intel from here tells that`,
         `After your victory over ${possessiveSuffix(enemy.boss)} goons and a short call to Agent Fletch, Citadel forces secure the area and begin their investigation with you. ${enemy.boss} might have slipped away, but among the debris of the fight, you find out`,
         `${enemy.boss} forces you to dodge ${gPron(enemy, "possessive")} ferocious onslaught, and when you regain your footing, ${gPron(enemy, "subject")} has vanished into the shadows! Rather than giving yet another futile chase, you corner ${minion}, whose fear overpowers loyalty. ${minion} spills the beans, revealing`,
-        `In the aftermath of the skirmish that sent the ${enemy.name} scrambling for cover, you rush to the aid of one of the ${bystanders}s — an undercover agent of the Citadel, clutching ${whichPreposition(gizmo)}. "The secrets?" you demand urgently. With last breaths, ${lowerCaseInitial(contact)} entrusts the device to you. Analyzing the ${gizmo}, you uncover`,
+        `In the aftermath of the skirmish that sent the ${enemy.name} scrambling for cover, you rush to the aid of one of the ${bystanders}s — an undercover agent of the Citadel, clutching ${whichPreposition(gizmo)}. "The secrets?" you demand urgently. With last breaths, ${gPron(contact, "subject")} entrusts the device to you. Analyzing the ${gizmo}, you uncover`,
         `Before you can land the final blow, ${enemy.boss} executes a daring escape, leaping through ${stage.hasOwnProperty("pit") ? stage.pit : "a concealed trapdoor"}. Racing to the brink, you peer into the abyss, but ${gPron(enemy, "subject")} has slipped away. The echo of your foe's retreat lingers, but a brave ${bystanders} comes forward with crucial information overheard during the chaos:`,
         `As you secure the last of the ${possessiveSuffix(enemy.name)} underlings, left leaderless in the fray, a surprising ally emerges. ${minion}, known to you only as a face among the enemy ranks, reveals a hidden allegiance to the Citadel. "They planned all along to..." ${minion} begins, offering up the intel that`,
         `"Sir, one of the ${enemy.minions()} has been apprehended," the technician reports to Agent Fletch. After a brief, tense pause, Fletch orders, "Learn what they're scheming. Spare no method." From the coerced ${minion}, the truth emerges:`,
-        `"Thank heavens you're here!" exclaims one of the ${bystanders}s, relief evident as the imminent threat recedes with ${possessiveSuffix(enemy.boss)} forces. Drawing closer, ${lowerCaseInitial(contact)}, visibly shaken yet resolute, shares an overheard plot that sheds light on the enemy's next steps:`,
+        `"Thank heavens you're here!" exclaims one of the ${bystanders}s, relief evident as the imminent threat recedes with ${possessiveSuffix(enemy.boss)} forces. Drawing closer, ${gPron(contact, "subject")}, visibly shaken yet resolute, shares an overheard plot that sheds light on the enemy's next steps:`,
         `With ${possessiveSuffix(enemy.boss)} minions scattered and defeated, you steel yourself for the final confrontation, only to find ${gPron(enemy, "subject")} has evaded capture once more, disappearing as if into thin air. The battle may be over, but the war rages on, as indicated by the intel gathered on site:`,
         `Victory is yours, but as the dust settles and Citadel forces secure the perimeter, ${enemy.boss} remains a ghost. Amidst the chaos, a crucial piece of intel emerges from the ruins — a ${gizmo}, something ${enemy.boss} believed destroyed. It hints that`
     ]
 
     if (location.includes("base")) {
         gatherclues = gatherclues.concat([
-            `With a hail of attacks, ${enemy.boss} and ${gPron(enemy, "possessive")} surviving cronies fled the encounter. Taking a moment to catch your breath, you managed to find the most conscious of the ${bystanders}s. "${ucInit(gPron(enemy, "subject"))} never told us the plan!" ${lowerCaseInitial(contact)} cried. ${contact} tells that`,
+            `With a hail of attacks, ${enemy.boss} and ${gPron(enemy, "possessive")} surviving cronies fled the encounter. Taking a moment to catch your breath, you managed to find the most conscious of the ${bystanders}s. "${ucInit(gPron(enemy, "subject"))} never told us the plan!" ${gPron(contact, "subject")} cried. ${gPron(contact, "subject", true)} tells that`,
             `Accessing ${possessiveSuffix(enemy.boss)} ${gizmo}, you are able to determine that`,
             `"You think you have won?"  ${enemy.boss} says as you're closing in. "You have won nothing!" ${detonationaction}, and the floor collapses beneath you as ${gPron(enemy, "subject")} escapes. You save who you can and ${minion} returns the favor by telling you that`,
             `With the Citadel on the way, you head deeper to find an array of computer screens. Sifting through files, you learn that`,
@@ -1640,7 +1689,7 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
             `In the aftermath of the skirmish, a ${gizmo} left behind by ${enemy.boss} starts beeping. Upon inspection, it reveals a map with several marked locations. Piecing together the puzzle, you realize that`,
             `Despite ${possessiveSuffix(enemy.name)} abrupt withdrawal from the field, the breadcrumbs left behind weave a tale of their next move. From documents retrieved in the heat of battle to whispered confessions of a captured minion, the pieces come together to reveal`
         ])
-    } 
+    }
 
     if (location.includes("neutral")) {
         gatherclues = gatherclues.concat([
@@ -1651,7 +1700,7 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
             `Amid the area, ${minion}, a loyalist to ${enemy.boss}, cornered and desperate, offers a trade for their life. The information they provide is chilling, revealing that`,
         ])
     }
-    
+
     if (location.includes("cursed")) {
         gatherclues = gatherclues.concat([
             `You were strong and fast enough to prevent ${enemy.boss} from finishing the ritual, the ${mysticalSynonym()} powers dissipating into the temple like a voice on the wind. You search through the area, and find out that`,
@@ -1746,14 +1795,14 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
             `"Mission accomplished," ${ally.name} breathes out, the relief palpable. "Thanks to you, we've navigated through the danger." Standing side by side, you share a look of mutual respect. The journey has bonded you in ways you hadn't anticipated. Just as you begin to relax, ${ally.name} hands you a document, its contents leading to the realization that`,
             `"We've made it, against all odds," you say, marveling at the resilience both of you have shown. ${ally.name} nods, a smile of gratitude lighting up ${gPron(ally, "possessive")} face. "Your protection made all the difference." As the dust of your journey settles, ${ally.name} reveals a piece of intel, indicating that`,
             `"I owe you my life," ${ally.name} says, once you've reached safety. The journey, fraught with peril, has tested you in ways you never imagined. Yet, here you are, victorious. In the moment of victory, ${ally.name} shares a crucial piece of information, revealing that`,
-            `The safe passage you've secured for ${ally.name} feels like a significant victory, not just for the mission, but for the principles you stand for. "We've done more than survive; we've thrived," you reflect aloud. ${ally.name} agrees, and in the aftermath of your success, presents you with a coded message. Deciphering it leads to the realization that the  ${nextenemy.boss == finalboss.boss ? `plans of ${trueMastermind(finalboss)}` : `${possessiveSuffix(finalboss.name)} plans`} are far from thwarted:`,
+            `The safe passage you've secured for ${ally.name} feels like a significant victory, not just for the mission, but for the principles you stand for. "We've done more than survive; we've thrived," you reflect aloud. ${ally.name} agrees, and in the aftermath of your success, presents you with a coded message. Deciphering it leads to the realization that the  ${nextenemy.boss == finalboss.boss ? `plans of ${trueMastermind(finalboss, showdown)}` : `${possessiveSuffix(finalboss.name)} plans`} are far from thwarted:`,
             `"Your courage is the reason we're here," ${ally.name} tells you once you've both emerged from the shadows of danger. The sense of accomplishment is overwhelming, but so is the sense of impending challenges. As ${ally.name} debriefs you on the mission's findings, you uncover a clue hinting that`
         ]);
         let intel_condition = randFrom([
             `"This is what we came for," you say, holding the ${randFrom([`newly acquired intel`, `${gizmo}`])} securely. Despite the ${possessiveSuffix(enemy.name)} formidable defenses, you've managed to outmaneuver them, securing a critical advantage. As you and your team process the implications of your victory, it becomes clear that you now hold information revealing that`,
             `"Got it," you whisper into the comms, feeling the weight of victory as you secure the ${gizmo}. Through cunning and guile, you've extracted data that could shift the balance of power. The true value of this operation becomes apparent as you make your escape, understanding that you've obtained information that`,
-            `The dust settles, and you find yourself looking over the secured ${gizmo}, a testament to the risks taken and the success achieved. This operation's payoff is immense, offering a beacon of hope as you realize the ${nextenemy.boss == finalboss.boss ? `once-impenetrable facade of ${trueMastermind(finalboss)}` : `${possessiveSuffix(finalboss.name)} once-impenetrable facade`} begins to show cracks, ready to be exploited:`,
-            `"The pieces are finally coming together," you muse, after successfully intercepting encrypted ${randFrom([`messages`, `messages in a ${gizmo}`])} from ${nextenemy.boss == finalboss.boss ? `the ${trueMastermind(finalboss)}` : `${finalboss.boss}`}. The decrypted ${randFrom([`data`, `${gizmo}`])} not only shifts the dynamics of your conflict but also marks the beginning of a new chapter in your campaign against the darkness as it reveals that`,
+            `The dust settles, and you find yourself looking over the secured ${gizmo}, a testament to the risks taken and the success achieved. This operation's payoff is immense, offering a beacon of hope as you realize the ${nextenemy.boss == finalboss.boss ? `once-impenetrable facade of ${trueMastermind(finalboss, showdown)}` : `${possessiveSuffix(finalboss.name)} once-impenetrable facade`} begins to show cracks, ready to be exploited:`,
+            `"The pieces are finally coming together," you muse, after successfully intercepting encrypted ${randFrom([`messages`, `messages in a ${gizmo}`])} from ${nextenemy.boss == finalboss.boss ? `the ${trueMastermind(finalboss, showdown)}` : `${finalboss.boss}`}. The decrypted ${randFrom([`data`, `${gizmo}`])} not only shifts the dynamics of your conflict but also marks the beginning of a new chapter in your campaign against the darkness as it reveals that`,
             `"We've broken through," announces Agent Fletch, as the ${randFrom([`data`, `${gizmo}`])} decryption completes. The room buzzes with a renewed sense of purpose and direction, as what you've secured from ${enemy.boss} finally becomes clear. The decrypted intel paints a new target and opens a path forward, showing that`
         ])
 
@@ -1766,7 +1815,7 @@ export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, w
         ])
 
         let hostage_condition = randFrom([
-            `"Everyone's safe," you announce, a sigh of relief shared among your team as the last of the bystanders is brought to safety. This operation wasn't just about thwarting the ${enemy.name}; it was about preserving lives. As the rescued individuals recount their experiences, they inadvertently revealing a threat looming on the horizon:`,
+            `"Everyone's safe," you announce, a sigh of relief shared among your team as the last of the bystanders is brought to safety. This operation wasn't just about thwarting the ${enemy.name}; it was about preserving lives. As the rescued individuals recount their experiences, they inadvertently reveal a threat looming on the horizon:`,
             `As the dust settles and the area is secured, you take a moment to look over the people you've just saved. Their gratitude is palpable, but it's the unexpected intel they provide that catches your attention. In their accounts of captivity, they mention details uncovering that`,
             `"It's over, you're safe now," you reassure the bystanders, guiding them to the extraction point. The mission was fraught with danger, but every risk taken was worth the lives saved today. Among the expressions of thanks, one of the bystanders shares a crucial piece of information, opening up new avenues for your mission's objectives:`,
             `With the area finally clear of threats, you gather the rescued bystanders for a quick debrief. It's standard procedure, but today it yields something far from ordinary. One of the people you've saved begins tell what they had overheard, the information being the breakthrough you've been searching for:`,
@@ -1997,8 +2046,14 @@ export function setUpInstructions2(stageindex, enemy, rival, ally, knowledge, st
 
 }
 
-function trueMastermind(finalboss) {
+function trueMastermind(finalboss, showdown) {
     let true_words = ["true", "real", "paramount", "utmost", "mysterious"]
+
+    if (showdown !== undefined) {
+        let showdown_title = ["Kingdom"].includes(showdown.name) || finalboss.name === showdown.name ? showdown.boss : `the ${showdown.name}`
+        let showdown_titles = [`the ${getMasterPlan()} of ${showdown_title}`, showdown_title]
+        return (randFrom(showdown_titles))
+    }
     let mastermind_words = ["mastermind", "architect", "engineer", "intellect", "prime mover"]
     let description_words = [`recent`, `devious`, `criminal`, `insidious`]
     let plot_words = [`plot`, `masterplan`, `events`, `incidents`]
@@ -2036,10 +2091,10 @@ function default_clues(enemy, _hence, _citadel_word, _intel_word, _investigator_
         `"With the clues pieced together," you remark, looking over the compiled data. "It's time we follow where they point." ${_hence}`,
         `"This breadcrumb trail is leading us somewhere," you muse aloud, studying the patterns of the enemy's recent activities. ${_hence}`, `"Our latest intel sheds new light on their operations," your teammate observes, handing you a file of gathered evidence. ${_hence}`, `"Cross-referencing the information," you begin, laying out the connections on the digital map. "Leads us right here." ${_hence}`,
         `After decrypting the last of the ${_intel_word}, "We've got a lead worth chasing," you declare. ${_hence}`,
-        `"This snippet," you replay the audio, "pinpoints their next move." ${_hence}`,
+        `"This snippet," you replay the audio, "Pinpoints their next move." ${_hence}`,
         `"The satellite images don't lie," you note, zooming in on a suspicious compound. "They've been busy." ${_hence}`,
         `"Their mistake was leaving traces," you say, scanning through ${_intel_word}. "Now, we're on their trail." ${_hence}`,
-        `"The ledger reveals more than they intended," you point out, highlighting the anomalies. "Follow the money." ${_hence}`, `"Detaled analysis of the recovered ${_intel_word} confirms us our next target." ${_hence}`,
+        `"The ledger reveals more than they intended," you point out, highlighting the anomalies. "Follow the money." ${_hence}`, `"Detailed analysis of the recovered ${_intel_word} confirms us our next target." ${_hence}`,
         `"The pattern is no coincidence," you deduce, plotting out the ${_intel_word} you have over your map. "It all connects here." ${_hence}`,
         `After a confidential informant comes forward, "This might just be the breakthrough we needed," you realize. ${_hence}`,
         `"Correlating the ${_intel_word} with the witness statements," you conclude, "Points us directly to their next operation." ${_hence}`,
@@ -2077,7 +2132,7 @@ function winConditionLeadIn(wincondition, default_text, enemy, this_boss, this_f
             ` that ${this_boss} used to be a confidant of ${this_finalboss}, privy to intimate ${_intel_word_2} on their forces' plans and vulnerabilities.`,
             ` there is ${_intel_word_2} that shows ${this_boss} maintains a covert communication channel with ${this_finalboss}, offering a direct line to intercept critical ${_intel_word_2}.`,
             ` the ${_intel_word_2} suggests ${this_boss} holds the key to deciphering the next move of ${this_finalboss}, thanks to a cache of encrypted ${_intel_word_2}.`,
-            ` that ${this_boss} has been tracking the movements and alliances of ${this_finalboss} movements and alliances, amassing a detailed dossier that could expose the ${getMasterPlan()} of ${this_finalboss}.`
+            ` that ${this_boss} has been tracking the movements and alliances of ${this_finalboss}, amassing a detailed dossier that could expose the ${getMasterPlan()} of ${this_finalboss}.`
         ]
         let acquire_words = [`obtaining`, `acquiring`, `securing`, `procuring`, `getting`, `finding`]
         let decision_txt = `${ucInit(_investigator_word)} ${_decision_word} ${randFrom(acquire_words)} the ${_intel_word_2} is ${_priority_word}.`
@@ -2140,12 +2195,12 @@ function winConditionLeadIn(wincondition, default_text, enemy, this_boss, this_f
     return wincondition_txt
 }
 
-export function createLeadIn(pregameprologue, stageindex, wincondition, enemy, stage, finalboss, rival, ally, nstages) {
+export function createLeadIn(pregameprologue, stageindex, wincondition, enemy, stage, finalboss, rival, ally, nstages, showdown) {
 
     pregameprologue = stageindex == 0 ? pregameprologue : ``
     let this_boss = finalboss.name == enemy.name ? enemy.boss : randFrom([enemy.boss, `the ${enemy.name}`])
     let this_finalboss = finalboss.name == enemy.name ? finalboss.boss : randFrom([finalboss.boss, `the ${finalboss.name}`])
-    if (stageindex >= Math.max(nstages * 2 - 3, 0) || finalboss.boss == enemy.boss) { this_finalboss = trueMastermind(finalboss) }
+    if (stageindex >= Math.max(nstages * 2 - 3, 0) || finalboss.boss == enemy.boss) { this_finalboss = trueMastermind(finalboss,showdown) }
     let intel_words = ["intel", "intelligence", "information", "a clue", "a word", "lowdown", "leads"]
     let location_words = ["locale", "location", "whereabouts", "position", "scene", "station", "bearings"]
     let _investigator_word = investigator_words()
@@ -2186,7 +2241,73 @@ export function removeLastBrBr(str) {
     return str;
 }
 
-export function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, pregameprologue, vip, herodialogue, nstages, expansions) {
+function showdownText(showdown) {
+    let showdown_title = ["Kingdom"].includes(showdown.name) ? `<b>${showdown.name} (${showdown.boss}) showdown - Part 3</b>` : `<b>${showdown.name} showdown - Part 3</b>`
+    showdown_title = `<span style = "font-style: normal;">${showdown_title}</span>`
+    const showdownLines = [
+        `Play the ${showdown_title} to find out your final fate!`,
+        `Face the ${showdown_title} and settle the final score.`,
+        `It ends here — throw down in the ${showdown_title}!`,
+        `It's time for the ${showdown_title}!`,
+        `Step into the ${showdown_title}.`,
+        `The ${showdown_title}.`,
+        `The final fight is on - It’s time for the ${showdown_title}!`,
+        `Now crush the ${showdown_title}.`,
+        `One last push. One final enemy. One ${showdown_title}.`,
+        `Play the ${showdown_title}!`,
+        `Time to bring justice... your way. Step into the ${showdown_title} to bring the final verdict.`,
+        `Ransom City is counting on you. Don’t let ‘em down — win the ${showdown_title}.`,
+        `Finish this in the ${showdown_title}.`,
+        `Glory or game over — your ultimate fate lies in the ${showdown_title}.`,
+        `The game’s not over... until the ${showdown.title} is over.`,
+        `No more lives left. No more mercy. It’s ${showdown_title} time.`,
+        `The final fight. Maximum power. It's the ${showdown_title}!`
+    ];
+
+    let preShowdownOpeners = [
+        `You’ve punched through punks and leapt over fire —`,
+        `One more stage.`,
+        `You didn’t fight through waves of goons to walk away now.`,
+        `Ready for the final boss?`,
+        `But you’re not done yet.`,
+        `You thought it was over? Not even close.`,
+        `The real fight is just beginning.`,
+        `You’ve come far... but the worst is still ahead.`,
+        `This isn’t the end. It’s the beginning of the end.`,
+        `Yet the final test still awaits:`,
+        `But you are not done yet.`,
+        `Only one more thing.`,
+        `The end of the line, Gladiators —`,
+        `You've beaten the odds — but one last battle remains.`,
+        `But don’t hang up your gloves yet. There’s one more round.`,
+        `You've cracked the code, fought the battles — but the final boss still breathes.`,
+        `Hope you saved some energy — because the final challenge starts now.`,
+        `You've made it through the fire, but the inferno is just ahead.`,
+        `Your enemies are down, but fate hasn’t had its say.`,
+        `But you didn’t think it would be that easy, did you?`,
+        `You’re bloodied, bruised... and not even close to done.`,
+        `That was just the warm-up. The real battle’s about to begin.`,
+        `You made it this far. But fate’s not done with you yet.`,
+        `Still standing? Good. You’ll need that strength where you’re going.`,
+        `But one last fight calls your name.`
+    ];
+
+    return (`<br><br>${randFrom(preShowdownOpeners)} ${randFrom(showdownLines)}`)
+}
+
+function showdownSetup(index, nstages, showdown) {
+    if (showdown === undefined) { return "" }
+    if (index === 0 || (nstages == 5 && (index == 3 || index == 4)) || (nstages < 5 && (index == 1 || index == 2))) {
+        let showdown_title = ["Kingdom"].includes(showdown.name) ? `${showdown.name} (${showdown.boss}) Showdown` : `${showdown.name} Showdown`
+        let whichpart = index === 0 ? "Part 1" : "Part 2"
+        return `<b>${showdown_title} - ${whichpart}</b><br>`
+    } else {
+        return ``
+    }
+
+}
+
+export function createPrologue(stageindex, story, alliesandrivals, heronames, enemies, pregameprologue, vip, herodialogue, nstages, expansions, showdown) {
     let finalboss = story[Math.max(nstages * 2 - 3, 0)].enemy
     let finalstage = story[Math.max(nstages * 2 - 3, 0)].stage
     let enemy = story[stageindex].enemy
@@ -2198,11 +2319,12 @@ export function createPrologue(stageindex, story, alliesandrivals, heronames, en
     let instructions = setUpInstructions2(stageindex, enemy, rival, ally, knowledge, stage.stagebonus, stage.stagepenalty, expansions)
     let rivalpresence = instructions.rivalsetup
     let rivalboost = instructions.rivalboost
-    let trail = createLeadIn(pregameprologue, stageindex, instructions.prologue, enemy, stage, finalboss, rival, ally, nstages)
-    let setup = `<b>${stage.name}: ${enemy.name} ${(["Kingdom", "Empire"]).includes(enemy.name) ? `(${enemy.boss})` : ""}</b><br>` + ((stage.name == "Original Copy") ? ucInit(getRandomMinions(enemy, false, enemies = getEnemies(expansions))) + ".<br>" : ``) + instructions.setup
+    let trail = createLeadIn(pregameprologue, stageindex, instructions.prologue, enemy, stage, finalboss, rival, ally, nstages, showdown)
+    let setup = `<b>${stage.name}: ${enemy.name} ${(["Kingdom", "Empire"]).includes(enemy.name) ? `(${enemy.boss})` : ""}</b><br>` + ((stage.name == "Original Copy") ? ucInit(getRandomMinions(enemy, false, enemies = getEnemies(expansions))) + ".<br>" : ``) + showdownSetup(stageindex, nstages, showdown) + instructions.setup
     let win = determineNextStage(stageindex, story, 0, nstages)
     let lose = determineNextStage(stageindex, story, 1, nstages)
     let gizmo = getGizmo()
+    let contact = randFrom([{gender: "male"},{gender: "female"}])
 
     let smallvictory = randFrom([
         `You could not stop ${finalboss.boss}, but your efforts were not in vain, as a threat as serious was neutralized. `,
@@ -2214,8 +2336,9 @@ export function createPrologue(stageindex, story, alliesandrivals, heronames, en
         `In the aftermath of the clash, Agent Fletch meets you with a steady gaze. "Missing ${finalboss.boss} stings, I won’t lie,' he admits, 'but don’t overlook the victory you've claimed today. Defeating ${enemy.boss} was no small feat. It's a testament to your dedication and skill. We're closer to our goal because of what you've accomplished."`
     ])
 
-    let winepilogue = stageindex >= Math.max((nstages * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 1, stageindex, story[0]) + "<br><br>" + `${finalboss.boss != enemy.boss ? smallvictory : ``}The fighters win this story.` : victoryResult(stageindex, story, win, gizmo, finalstage.masterplan, instructions.prologue, ally, rival, nstages)
-    let loseepilogue = stageindex >= Math.max((nstages * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 0, stageindex, story[0]) + "<br><br>" + `The fighters lose this story.` : loseResult(stageindex, story, lose, gizmo, instructions.prologue, rival, rivalpresence, ally, nstages)
+    let showdowntext = showdown === undefined ? "" : showdownText(showdown)
+    let winepilogue = stageindex >= Math.max((nstages * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 1, stageindex, story[0],contact) + "<br><br>" + `${finalboss.boss != enemy.boss ? smallvictory : ``}The fighters win this story.${showdowntext}` : victoryResult(stageindex, story, win, gizmo, finalstage.masterplan, instructions.prologue, ally, rival, nstages, showdown, contact)
+    let loseepilogue = stageindex >= Math.max((nstages * 2 - 3), 0) ? finalResult(stage, enemy, rival, vip, 0, stageindex, story[0],contact) + "<br><br>" + `The fighters lose this story.` : loseResult(stageindex, story, lose, gizmo, instructions.prologue, rival, rivalpresence, ally, nstages, contact)
     let gloat = gloatingList(enemy, stage, herodialogue, heronames)
     let prologue
     let casino = getCasino(enemy)
@@ -2224,7 +2347,24 @@ export function createPrologue(stageindex, story, alliesandrivals, heronames, en
     gloat === undefined ? console.log(stage) : ``
     gloat === undefined ? console.log(enemy) : ``
 
-    let approach = stage.approach === undefined ? "" : stage.approach.map(tmp => _.template(tmp)({enemy: enemy, stage: stage}))
+    let approach = ""
+    if (stage.approach !== undefined) {
+
+        // Normalize to array
+        const arr = Array.isArray(stage.approach)
+          ? stage.approach
+          : [stage.approach];   // wrap single string
+      
+        // Apply templating
+        const processed = arr.map(t =>
+          _.template(t)({ enemy, stage })
+        );
+      
+        // Return string or array depending on original type
+        approach = Array.isArray(stage.approach)
+          ? processed
+          : processed[0];
+      }
 
     //stage.name == "Casdft" && knowledge != "" ? console.log(stage.name + Math.random()) : ``
     let template_settings = {
@@ -2244,16 +2384,26 @@ export function createPrologue(stageindex, story, alliesandrivals, heronames, en
         "casino": casino,
         "vip": vip,
         "approach": approach,
+        "contact": {contact: contact},
         "blade": getPropertyValue(enemy, stage, "blade", "blade")
+    }
+
+    if(["All-Heaven Gang","Fire Cloud Gang"].includes(enemy.name)) {
+        template_settings["enemy"] = { ...template_settings["enemy"] }
+        template_settings["enemy"].name = "Dragon Gate"
     }
 
     let stageriv = stage.rivaltext(template_settings)
 
     template_settings["rivaltext"] = stageriv
 
-//    if(stage.name === "Compromised" && knowledge === "hottrail") { 
-//        console.log("ayo")
-//     }
+/*        if(stage.name === "Market Crash"// && knowledge === "hottrail"
+        ) { 
+            console.log("AYO")
+            console.log(stage)
+         }*/
+
+//    console.log(stage.name + " " + (stageindex+1))
 
     let stagevar
     switch (knowledge) {
@@ -2266,10 +2416,10 @@ export function createPrologue(stageindex, story, alliesandrivals, heronames, en
 
     template_settings["stagevar"] = stagevar
     stage.hasOwnProperty("finalvar") ? template_settings["finalvar"] = stage.finalvar(template_settings) : ``
-/*    if(stage.name == "Reign Storm") {
-        console.log(stage.name.toUpperCase())
-        console.log("   " + stage.captured(template_settings))
-    }*/
+    /*    if(stage.name == "Reign Storm") {
+            console.log(stage.name.toUpperCase())
+            console.log("   " + stage.captured(template_settings))
+        }*/
 
     if (knowledge == "captured") {
         prologue = stage.captured(template_settings)
@@ -2299,13 +2449,13 @@ export function createPrologue(stageindex, story, alliesandrivals, heronames, en
     return { chapter: story[stageindex].chapter, prologue: removeLastBrBr(prologue), setup: setup, wincondition: instructions.wincondition, winepilogue: winepilogue, loseepilogue: loseepilogue }
 }
 
-export function textMaker(story, alliesandrivals, heronames, enemies, herodialogue, nstages, expansions) {
+export function textMaker(story, alliesandrivals, heronames, enemies, herodialogue, nstages, expansions, showdown) {
     let cardtext
     let cardtexts = []
     let pregameprologue = preGamePrologue(story[Math.max(nstages * 2 - 3, 0)].stage, story[Math.max(nstages * 2 - 3, 0)].enemy)
 
     for (let i = 0; i < story.length; i++) {
-        cardtext = createPrologue(i, story, alliesandrivals, heronames, enemies, pregameprologue.storytext, pregameprologue.vip, herodialogue, nstages, expansions);
+        cardtext = createPrologue(i, story, alliesandrivals, heronames, enemies, pregameprologue.storytext, pregameprologue.vip, herodialogue, nstages, expansions, showdown);
         cardtexts.push(cardtext)
     }
 
@@ -2346,13 +2496,13 @@ export function changeOfPlans(trail, finalboss, enemy, stage, wincondition, ally
     return conclusion
 }
 
-export function finalResult(stage, enemy, rival, vip = null, result, stageindex, firstpart) {
+export function finalResult(stage, enemy, rival, vip = null, result, stageindex, firstpart, contact) {
 
     let masterplan = stage.masterplan
     let neutralize
     switch (masterplan) {
         case "kidnapping":
-            neutralize = `${randFrom([`${vip[0]} is safely returned`, `${vip[0]} is rescued`, `${vip[0]} has been liberated from ${possessiveSuffix(enemy.name)} clutches`, `${vip[0]} has been aquired from the ${enemy.name}`])}`;
+            neutralize = `${randFrom([`${vip.vip} is safely returned`, `${vip.vip} is rescued`, `${vip.vip} has been liberated from ${possessiveSuffix(enemy.name)} clutches`, `${vip.vip} has been aquired from the ${enemy.name}`])}`;
             break;
         case "personalpower":
             neutralize = `${randFrom([`power levels of the ${enemy.bosstitle()} remain in check`, `ambitions of ${enemy.boss} have been curtailed`, `ascent of ${enemy.boss} is halted`, `power surge of ${enemy.bosstitle()} is neutralized`])}`;
@@ -2456,7 +2606,7 @@ export function finalResult(stage, enemy, rival, vip = null, result, stageindex,
 
     const bladelose = bladeFinalResult(enemy, stage, gloat, finishorder, _subject, _possessive, _object, collapse)
     const rituallose = ritualFinalResult(enemy, stage, gloat, _subject, _possessive, _object, collapse)
-    const hostagelose = hostageFinalResult(enemy, stage, gloat, _subject, _possessive, collapse)
+    const hostagelose = hostageFinalResult(enemy, stage, gloat, _subject, _possessive, contact, collapse)
     const swarmlose = swarmFinalResult(enemy, stage, gloat, _subject, _possessive, collapse)
     const pitlose = pitFinalResult(enemy, stage, gloat, _subject, _possessive, _object, collapse)
     const detonationlose = detonationFinalResult(enemy, stage, gloat, _subject, _possessive, collapse)
@@ -2516,7 +2666,7 @@ function fighterCollapse(stageindex, firstpart) {
     ]
     let collapses = [
         `You wipe blood from your face and realize it’s not the first time today. Or the second.`,
-        `You take a step and feel your boot squish from your own blood. Just another detail to ignore.`,
+        `You take a step and feel your step slide from your own blood. Just another detail to ignore.`,
         `You close your eyes for half a second too long. It feels like falling asleep standing up.`,
         `You feel your heart hammering like it’s trying to run without you.`,
         `You’ve been bleeding for a while, but now you can feel it catching up.`,
@@ -2554,7 +2704,7 @@ function fighterCollapse(stageindex, firstpart) {
     return (res)
 }
 
-function hostageFinalResult(enemy, stage, gloat, _subject, _possessive, collapse) {
+function hostageFinalResult(enemy, stage, gloat, _subject, _possessive, contact, collapse) {
     const hostages = getPropertyValue(enemy, stage, "hostages")
     if (!hostages) {
         return undefined
@@ -2563,8 +2713,8 @@ function hostageFinalResult(enemy, stage, gloat, _subject, _possessive, collapse
         let gunresults
         if (gun) {
             gunresults = [
-                `"Let them go," you gasp, blood trickling down your lips. ${enemy.boss} simply smiles. "${gloat[0]}" ${_subject} answers smoothly, raising ${_possessive} ${gun} toward the ${hostages}. You surge forward—but it's too late. Your body hits the ground as the sound of "${gloat[1]}" fades into darkness.`,
-                `"Any last words?" ${enemy.boss} asks mockingly, ${gun} trained calmly on your forehead. You glare in silence. The shot is deafening, and your body falls limp as the ${hostages} watch in horror.`,
+                `"Let them go," you gasp, blood trickling down your lips. ${enemy.boss} simply smiles. "${gloat[0]}" ${_subject} answers smoothly, raising ${_possessive} ${gun} toward the ${hostages}. You surge forward — but it's too late. Your body hits the ground as the sound of "${gloat[1]}" fades into darkness.`,
+                `"Any last words?" ${enemy.boss} asks mockingly, ${gun} trained calmly on your forehead. You glare in silence. The shot is deafening, and your body falls limp as the ${hostages} watch in horror.`
             ]
 
         }
@@ -2590,9 +2740,10 @@ function hostageFinalResult(enemy, stage, gloat, _subject, _possessive, collapse
         }
 
         let results = [
+            `You try to rise, but the world spins and drops you again. ${enemy.boss} doesn’t hesitate; one of the ${hostages} is picked out like a piece chosen from a board. Your vision narrows, and through the darkening blur you see only one thing clearly — ${enemy.boss} ${enemy.execution({contact: contact})}, carried out with the same cold precision that broke you.`,
             `You stagger toward the ${hostages}, heart pounding. Before you reach them, ${enemy.boss} cuts you down effortlessly. As you fall, you wonder bitterly if it was all for nothing. "${gloat[0]}" echoes distantly, but you’re already beyond hearing.`,
             `Everything slows as ${enemy.boss} advances toward the ${hostages}, their fate sealed. You move to intercept, knowing it’s your last act. Silence falls as you collapse, the world fading to a shadowy quiet.`,
-            `Your limbs refuse to move. ${enemy.boss} steps past your broken form toward the ${hostages}. "${gloat[0]}" ${_subject} says softly. Helpless, you can only close your eyes as ${_possessive} laughter fills your final moments "${gloat[1]}"`,
+            `Your limbs refuse to move. ${enemy.boss} steps past your broken form toward the ${hostages}. "${gloat[0]}" ${_subject} says softly. Helpless, you can only close your eyes as ${_possessive} laughter fills your final moments. "${gloat[1]}"`,
             `"You'll have to kill me first!" you shout defiantly as you lunge at ${enemy.boss}. A brutal blow ends your charge instantly. As you lie broken, ${enemy.boss} whispers mockingly, "${gloat[0]}" ${_subject} turns to the ${hostages}. "${gloat[1]}"`,
             `On your knees, vision blurred, you look desperately toward the ${hostages}. Your silent plea is cut short as ${enemy.boss} delivers the finishing blow. Darkness claims you without another sound.`,
             `Bloodied and barely conscious, you whisper to the ${hostages}, "Don't give up..." ${enemy.boss} ends your speech abruptly. You fall into darkness, never knowing if your words reached them.`,
@@ -2923,7 +3074,7 @@ function swarmFinalResult(enemy, stage, gloat, _subject, _possessive, collapse) 
             `You strike, turn, strike again — but the ${st} ${swarm} never stops coming. They're endless. ${collapse}Eventually, your body gives out, and they collapse over you like a wave. There is no air left. No light. Only the end.`,
             `${collapse}You fall to one knee, then both. The ${st} ${swarm} surround you from every direction. You raise your fists one last time—then vanish beneath them without a sound.`,
             `${collapse}You can’t breathe. You can’t move. The ${st} ${swarm} are everywhere, pressing against you, pressing through you. Your screams are muffled, your fate sealed in the crush of bodies.`,
-            `${collapse}Someone once told you no one dies alone. As the ${st} ${swarm} closes in from all sides, you realize that’s not always true.`,
+            `${collapse}Someone once told you everybody dies alone. As the ${st} ${swarm} closes in from all sides, you realize that’s not always true.`,
             `${enemy.boss} doesn’t raise a hand — ${_subject} doesn’t have to. The ${st} ${swarm} pours in, endless and unfeeling. "${gloat[0]}" echoes distantly as you're buried alive in a frenzy of violence. "${gloat[1]}"`,
             `${collapse}There is no final strike. No last stand. Only the slow drowning in a ${st} ${swarm}, every breath harder than the last, until there are none left to take.`,
             `You drop one. Then two. Then a dozen. It doesn't matter. The ${st} ${swarm} pushes forward relentlessly, replacing each one with two more. When you fall, they do not stop.`,
@@ -3641,7 +3792,11 @@ export function laconicStatement(enemy) {
         `With the stakes now clear, your resolve hardens.`,
         `There's no hesitation — only hostility.`,
         `The fight begins!`,
-        `This wasn't how ${possessiveSuffix(enemy.boss)} plan was supposed to end — but it's how it's going to be.`
+        `This wasn't how ${possessiveSuffix(enemy.boss)} plan was supposed to end — but it's how it's going to be.`,
+        `Suddenly the world feels so very big and you feel so very small.`,
+        `You exchange grim looks with your allies. One way or another, it ends here.`,
+        `You clench your fists. No more running. No more warnings.`,
+        `You steady your breath. Time to fight.`
     ]
 
     return randFrom([randFrom(laconicstatements), ``])
@@ -3813,9 +3968,9 @@ export function motivationText(motivation, group, stance, finalboss, gladiators,
         case "Boss":
             text = bossclone ?
                 bM(
-                    `Normally, they’d let others do the dirty work. But ${finalboss.boss} has disrupted something bigger than you know, and powers larger than you know have stepped into the picture. The clone arrives first — steady, focused. Then the power behind it emerges, deliberate and silent, observing more than engaging. "My replicate is not authorized to act like this," the cloned ${finalboss.boss} says, already assessing your battleplans. "I’ve been deployed to prevent destabilization." You get no clarification of what will destabilize, only that this is the plan now.`, 
-                    `It looks exactly like ${finalboss.boss}. It arrives, offering no grand entrance — just a nod and the words: "I’m here to fix this." There’s no threat in its voice. Only certainty. Somewhere above this, powerful hands pushed a decision through. Resistance now would mean crossing lines that don’t un-cross. "When I find the other," it states as it scans its surroundings. "There won’t be two of us."`, 
-                    `The clone approaches without hesitation, flanked by its creators. They say nothing. They don’t need to. Their presence alone carries the weight of a decision already made: the original ${finalboss.boss} has fallen out of step with their agenda, while you’re here, still moving forward with plans don't suit them either. The message is clear: you’ve crossed a line, and there’s no buffer between you and the consequences.`, 
+                    `Normally, they’d let others do the dirty work. But ${finalboss.boss} has disrupted something bigger than you know, and powers larger than you know have stepped into the picture. The clone arrives first — steady, focused. Then the power behind it emerges, deliberate and silent, observing more than engaging. "My replicate is not authorized to act like this," the cloned ${finalboss.boss} says, already assessing your battleplans. "I’ve been deployed to prevent destabilization." You get no clarification of what will destabilize, only that this is the plan now.`,
+                    `It looks exactly like ${finalboss.boss}. It arrives, offering no grand entrance — just a nod and the words: "I’m here to fix this." There’s no threat in its voice. Only certainty. Somewhere above this, powerful hands pushed a decision through. Resistance now would mean crossing lines that don’t un-cross. "When I find the other," it states as it scans its surroundings. "There won’t be two of us."`,
+                    `The clone approaches without hesitation, flanked by its creators. They say nothing. They don’t need to. Their presence alone carries the weight of a decision already made: the original ${finalboss.boss} has fallen out of step with their agenda, while you’re here, still moving forward with plans don't suit them either. The message is clear: you’ve crossed a line, and there’s no buffer between you and the consequences.`,
                     `The clone blocks your path — calm, unmistakable, and clearly modeled after ${finalboss.boss}. "You understand why I’m here." It doesn’t posture. It doesn’t need to. Somewhere beyond your reach, powerful hands have decided your mission is no longer aligned with theirs — or with the one they once trusted. "You’re walking into something bigger than you understand," it adds, stepping forward.`
                 ) :
                 bM(
@@ -3854,18 +4009,18 @@ export function motivationText(motivation, group, stance, finalboss, gladiators,
             break;
         case "Celebrity":
             text = bM(
-                `They don’t belong here — and they know it. Faces from stages, screens, and stadiums, now standing in a place that doesn’t care how many followers they have. Maybe they came to prove something. Maybe they came to do good. But this fight could end more than their careers. Still, they showed up. That has to count for something.`, 
+                `They don’t belong here — and they know it. Faces from stages, screens, and stadiums, now standing in a place that doesn’t care how many followers they have. Maybe they came to prove something. Maybe they came to do good. But this fight could end more than their careers. Still, they showed up. That has to count for something.`,
                 `You recognize ${refer.name} instantly. Everyone does. ${ucInit(refer.subject)} has got no business being here — not in a fight like this. One wrong move, and it’s headlines, scandal, maybe worse. But here ${refer.subject} is, stepping up, camera off, reputation on the line. Whatever ${refer.possessive} reason, ${refer.subject} came to help. And that might be the most dangerous thing of all.`,
-                `They shouldn’t be here. This isn't a red carpet or a press event — it’s real. Dangerous. But that’s the point, isn’t it? These celebrities — actors, idols, champions — came looking for a confrontation, for headlines, for the kind of footage that goes viral. Or maybe they actually believe the hype. Either way, they’re in too deep. And you’re the one they’ve chosen to clash with.`, 
+                `They shouldn’t be here. This isn't a red carpet or a press event — it’s real. Dangerous. But that’s the point, isn’t it? These celebrities — actors, idols, champions — came looking for a confrontation, for headlines, for the kind of footage that goes viral. Or maybe they actually believe the hype. Either way, they’re in too deep. And you’re the one they’ve chosen to clash with.`,
                 `There’s no mistaking ${refer.name} — and no way ${refer.subject} belongs in this kind of fight. Fame doesn’t grant immunity, but it does demand attention. Maybe ${refer.subject} picked this fight for clout. Maybe ${refer.subject}'s chasing justice — or vengeance — or something they barely understand. Either way, this is a bad idea. For both of you.`);
             break;
         case "Chi":
-            text = 
-            bM(
-                `They arrive like a shift in the air — eyes calm, breath steady, marked by something greater. The energy they channel is not subtle; it coils around them, hums in their presence. All of them move as if guided by something older than language. They have not come for reward or justice. They have come because the force that flows through them has led them to this fight — and for now, it points to ${finalboss.boss}.`,
-                `${ucInit(refer.possessive)} presence is soft, but the energy around ${refer.object} is not. It drifts like smoke, hums like a buried current. ${refer.name} doesn’t explain ${refer.possessive} arrival. The force that moves through ${refer.object} does not ask — it guides. Whether it is drawn from the earth, a forgotten oath, or a breath whispered by something divine, it has brought ${refer.object} here. And today, that power has chosen to fight alongside you.`,
-                `They step forward in unison, each channeling a force that pulses visibly beneath the skin or in the air around them — elemental, spiritual, or divine. They do not speak of why you must be stopped. They don’t need to. Whatever speaks through them has chosen a side in this conflict, and it is not yours.`,
-                `${refer.name} arrives without threat, yet the moment tightens around ${refer.object}. ${ucInit(refer.subject)} movements are gentle, deliberate — guided by a power that radiates like pressure before a storm. “This is where I’m meant to stand,” ${refer.subject} says, and it’s unclear whether ${refer.subject} means it as ${refer.reflexive}, or as the mouthpiece for something else. Whatever is speaking, it has made a decision. You are the obstacle. And the energy ${refer.subject} channels will not hesitate.`)
+            text =
+                bM(
+                    `They arrive like a shift in the air — eyes calm, breath steady, marked by something greater. The energy they channel is not subtle; it coils around them, hums in their presence. All of them move as if guided by something older than language. They have not come for reward or justice. They have come because the force that flows through them has led them to this fight — and for now, it points to ${finalboss.boss}.`,
+                    `${ucInit(refer.possessive)} presence is soft, but the energy around ${refer.object} is not. It drifts like smoke, hums like a buried current. ${refer.name} doesn’t explain ${refer.possessive} arrival. The force that moves through ${refer.object} does not ask — it guides. Whether it is drawn from the earth, a forgotten oath, or a breath whispered by something divine, it has brought ${refer.object} here. And today, that power has chosen to fight alongside you.`,
+                    `They step forward in unison, each channeling a force that pulses visibly beneath the skin or in the air around them — elemental, spiritual, or divine. They do not speak of why you must be stopped. They don’t need to. Whatever speaks through them has chosen a side in this conflict, and it is not yours.`,
+                    `${refer.name} arrives without threat, yet the moment tightens around ${refer.object}. ${ucInit(refer.subject)} movements are gentle, deliberate — guided by a power that radiates like pressure before a storm. “This is where I’m meant to stand,” ${refer.subject} says, and it’s unclear whether ${refer.subject} means it as ${refer.reflexive}, or as the mouthpiece for something else. Whatever is speaking, it has made a decision. You are the obstacle. And the energy ${refer.subject} channels will not hesitate.`)
             break;
         case "Cifarelli": text = (stance == "Ally" ?
             `The ongoing plans of ${finalboss.boss} risks the stability that the operation of the Cifarelli family requires, and a ${group.length == 1 ? "single enforcer" : "group of enforcers"}
@@ -3937,9 +4092,9 @@ export function motivationText(motivation, group, stance, finalboss, gladiators,
             break;
         case "Global Gladiator":
             text = bM(
-                `Backup arrives — not amateurs, but more of your own. Global Gladiators from other branches, divisions, or old missions. Some are allies. Others, legends. All of them know what’s at stake. And when Gladiators stand together, the world watches — and villains fall.`, 
+                `Backup arrives — not amateurs, but more of your own. Global Gladiators from other branches, divisions, or old missions. Some are allies. Others, legends. All of them know what’s at stake. And when Gladiators stand together, the world watches — and villains fall.`,
                 `Backup arrives. ${refer.name} knows what’s at stake. And when Gladiators stand together, the world watches — and villains fall.`,
-                `These aren’t your enemies — they’re your reflection. Same training, same codes. But behind their cold eyes is a different agenda. Not justice. Not peace. Something sanctioned in shadow. You thought the Gladiators were united. You were wrong. And now you're the problem they were sent to solve.`, 
+                `These aren’t your enemies — they’re your reflection. Same training, same codes. But behind their cold eyes is a different agenda. Not justice. Not peace. Something sanctioned in shadow. You thought the Gladiators were united. You were wrong. And now you're the problem they were sent to solve.`,
                 `${refer.name} is not your enemy — ${refer.subject}'s your ally. Same training, same codes. But behind ${refer.possessive} cold eyes is a different agenda. Not justice. Not peace. Something sanctioned in shadow. You thought the Gladiators were united. You were wrong. And now you're the problem ${refer.subject}'s been sent to solve.`);
             break;
         case "Golden Dragons": text = (stance == "Ally" ?
@@ -3952,9 +4107,9 @@ export function motivationText(motivation, group, stance, finalboss, gladiators,
 
         case "Gunslinger":
             text = bM(
-                `They move like ghosts, guns low and eyes sharp. A crew of shooters — deadly, deliberate, and bound by something more than law. They didn’t come for praise. They came because someone had to draw the line. For now, they stand with you. Just remember: gunslingers don’t stay long where the smoke clears.`, 
+                `They move like ghosts, guns low and eyes sharp. A crew of shooters — deadly, deliberate, and bound by something more than law. They didn’t come for praise. They came because someone had to draw the line. For now, they stand with you. Just remember: gunslingers don’t stay long where the smoke clears.`,
                 `You hear the shot before you see ${refer.object}. Calm, focused, lethal — the kind of fighter who speaks in bullets and finishes what others start. ${refer.name} doesn’t take sides easily, but something about this fight made ${refer.object} draw. Maybe it’s a debt. Maybe it’s justice. Whatever the reason, ${refer.possessive} aim is yours — for now.`,
-                `You hear the footsteps first — measured, confident, unhurried. Then the steel glints. A group of gunslingers, eyes cold, weapons ready. Maybe they’re chasing a bounty. Maybe they don’t like your face. Or maybe they just believe you’re the bigger threat. One way or another, they came ready to end this.`, 
+                `You hear the footsteps first — measured, confident, unhurried. Then the steel glints. A group of gunslingers, eyes cold, weapons ready. Maybe they’re chasing a bounty. Maybe they don’t like your face. Or maybe they just believe you’re the bigger threat. One way or another, they came ready to end this.`,
                 `There’s a certain silence before it begins. One figure, one weapon, too steady to be unsure. ${ucInit(refer.subject)}'s made ${refer.possessive} choice. Maybe it’s personal. Maybe it’s a job. Doesn’t matter. ${ucInit(refer.subject)} doesn’t bluff, doesn’t explain, and doesn’t miss. You’d best not give ${refer.object} a reason to shoot.. but it seems too late. You already did.`);
             break;
 
