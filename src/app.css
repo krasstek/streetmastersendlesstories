@@ -361,3 +361,9 @@ label {
 	button:hover {
 		opacity: 0.9;
 	}
+
+
+	.emphasis {
+		font-size: 105%;
+		font-style: normal;
+	}

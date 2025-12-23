@@ -1,54 +1,57 @@
 <script>
-  import {
-    playerCount,
-	  storyLength,
-	  selectedExpansions as expansionStore,
-	  selectedGladiators as gladiatorStore
-	  } from '$lib/stores/preferences';
+	import {
+		playerCount,
+		storyLength,
+		selectedExpansions as expansionStore,
+		selectedGladiators as gladiatorStore,
+	} from "$lib/stores/preferences";
 
-	  $: players = $playerCount;
-    $: stages = $storyLength;
+	$: players = $playerCount;
+	$: stages = $storyLength;
 
-  import template from 'lodash/template';
-	import { expansions as initialExpansions } from '$lib/expansions';
-	import { getGladiators } from '$lib/stages';
-	import { createStory } from '$lib/story_utils';
-	import { pageContent } from '$lib/stores/pageContent';
-	import StoryPageRenderer from '$lib/components/StoryPageRenderer.svelte';
-	import LoadHandler from '$lib/components/LoadHandler.svelte';
-	import { clickOutside } from '$lib/actions/clickOutside';
+	import { expansions as initialExpansions } from "$lib/expansions";
+	import { getGladiators } from "$lib/stages";
+	import { createStory } from "$lib/story_utils";
+	import { pageContent } from "$lib/stores/pageContent";
+	import StoryPageRenderer from "$lib/components/StoryPageRenderer.svelte";
+	import LoadHandler from "$lib/components/LoadHandler.svelte";
+	import { clickOutside } from "$lib/actions/clickOutside";
 
 	let storyRendererRef;
 
-  function goToStartFromHandler(page = 0) {
+	function goToStartFromHandler(page = 0) {
 		storyRendererRef?.goToStart(page);
-	  }
+	}
 
 	let showExpansionDropdown = false;
-	let expansions = initialExpansions.map(e => ({
-	...e,
-	selected: $expansionStore.includes(e.name)
-}));
+	let expansions = initialExpansions.map((e) => ({
+		...e,
+		selected: $expansionStore.includes(e.name),
+	}));
 
 	function toggleDropdown() {
 		showExpansionDropdown = !showExpansionDropdown;
 	}
 
 	function toggleExpansion(index) {
-	if (!expansions[index].disabled) {
-		expansions[index].selected = !expansions[index].selected;
-		expansionStore.set(expansions.filter(e => e.selected).map(e => e.name));
+		if (!expansions[index].disabled) {
+			expansions[index].selected = !expansions[index].selected;
+			expansionStore.set(
+				expansions.filter((e) => e.selected).map((e) => e.name)
+			);
+		}
 	}
-}
 
-	$: selectedExpansions = expansions.filter(e => e.selected | e.name == "riseofthekingdom").map(e => e.name);
+	$: selectedExpansions = expansions
+		.filter((e) => e.selected | (e.name == "riseofthekingdom"))
+		.map((e) => e.name);
 
-	$: filteredGladiators = getGladiators(selectedExpansions).map(g => ({
+	$: filteredGladiators = getGladiators(selectedExpansions).map((g) => ({
 		...g,
-		selected: false
+		selected: false,
 	}));
 
-  let showGladiatorDropdown = false;
+	let showGladiatorDropdown = false;
 
 	function toggleGladiatorDropdown() {
 		showGladiatorDropdown = !showGladiatorDropdown;
@@ -58,54 +61,92 @@
 		filteredGladiators[index].selected = !filteredGladiators[index].selected;
 	}
 
-  function handleStoryGeneration() {
-  const result = createStory(selectedExpansions, filteredGladiators.filter(e => e.selected).map(e => e.name), players, stages)
-//  console.log(result)
-  pageContent.set(result); // Trigger render
-  storyRendererRef?.goToStart();
+	let showShowdownDropdown
+
+	function toggleShowdownDropdown() {
+		showShowdownDropdown = !showShowdownDropdown;
+	}
+
+	$: showDownOptions = ["Allow"].map(c => ({name: c, selected: true}));
+
+	function toggleShowdown(index) {
+		showDownOptions[index].selected = !showDownOptions[index].selected
+	}
+
+
+	function handleStoryGeneration() {
+		//	  console.log("click")
+		let result = undefined;
+
+		try {
+			result = createStory(
+				selectedExpansions,
+				filteredGladiators.filter((e) => e.selected).map((e) => e.name),
+				players,
+				stages,
+				showDownOptions[0].selected
+			);
+			pageContent.set(result); // Trigger render
+			storyRendererRef?.goToStart();
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	//$: console.log('pageContent updated:', $pageContent);
-
 </script>
 
 {#if typeof players === 'number' && typeof stages === 'number'}
-<div class="app-selects">
-<label for="players">Number of players:</label>
-<select bind:value={$playerCount} id="players" class="dropdown">
-	{#each [1, 2, 3, 4] as n}
-		<option value={n} selected={n === players} >{n}</option>
-	{/each}
-</select>
-<label for="stages">Number of stages:</label>
-<select bind:value={$storyLength} id="stages" class="dropdown">
-	{#each [1, 2, 3, 4, 5] as n}
-		<option value={n} selected={n === stages}>{n === 1 ? '1 (Arcade Mode)' : n}</option>
-	{/each}
-</select>
-</div>
+	<div class="app-selects">
+		<label for="players">Number of players:</label>
+		<select bind:value={$playerCount} id="players" class="dropdown">
+			{#each [1, 2, 3, 4] as n}
+				<option value={n} selected={n === players}>{n}</option>
+			{/each}
+		</select>
+		<label for="stages">Number of stages:</label>
+		<select bind:value={$storyLength} id="stages" class="dropdown">
+			{#each [1, 2, 3, 4, 5] as n}
+				<option value={n} selected={n === stages}>
+					{n === 1 ? '1 (Arcade Mode)' : n}
+				</option>
+			{/each}
+		</select>
+	</div>
+{/if}
+{#if ["stretchgoals18","essenceofevil","aftershock",,"tideofthedragon","rumblepack"].some(item => selectedExpansions.includes(item)) && $storyLength > 1}
+	<button class="menu-button" on:click={toggleShowdownDropdown}>
+		USE SHOWDOWNS
+	</button>
+{/if}
 
+{#if showShowdownDropdown && ["stretchgoals18","essenceofevil","aftershock",,"tideofthedragon","rumblepack"].some(item => selectedExpansions.includes(item))}
+	<div
+		use:clickOutside={() => (showShowdownDropdown = false)}
+		class="exp-dropdown">
+		{#each showDownOptions as item, i}
+			<button class="exp-item" on:click={() => toggleShowdown(i)}>
+				{item.name}
+				<span class="exp-icon"> {item.selected ? '✔️' : '◻️'} </span>
+			</button>
+		{/each}
+	</div>
 {/if}
 <button class="menu-button" on:click={handleStoryGeneration}>GENERATE A STORY</button>
 <StoryPageRenderer bind:this={storyRendererRef} />
-<LoadHandler {goToStartFromHandler}/>
+<LoadHandler {goToStartFromHandler} />
 <button class="menu-button" on:click={toggleDropdown}>SELECT EXPANSIONS</button>
 {#if showExpansionDropdown}
-	<div use:clickOutside={() => showExpansionDropdown = false} class="exp-dropdown">
+	<div
+		use:clickOutside={() => (showExpansionDropdown = false)}
+		class="exp-dropdown">
 		{#each expansions as exp, i}
 			<button
 				class="exp-item {exp.disabled ? 'disabled' : ''}"
-				on:click={() => toggleExpansion(i)}
-			>
+				on:click={() => toggleExpansion(i)}>
 				{exp.label}
 				<span class="exp-icon">
-					{#if exp.disabled}
-						➖
-					{:else if exp.selected}
-						✔️
-					{:else}
-						◻️
-					{/if}
+					{#if exp.disabled}➖{:else if exp.selected}✔️{:else}◻️{/if}
 				</span>
 			</button>
 		{/each}
@@ -116,23 +157,26 @@
 </button>
 
 {#if showGladiatorDropdown}
-	<div use:clickOutside={() => showGladiatorDropdown = false} class="exp-dropdown">
+	<div
+		use:clickOutside={() => (showGladiatorDropdown = false)}
+		class="exp-dropdown">
 		{#each filteredGladiators as glad, i}
-			<button
-				class="exp-item"
-				on:click={() => toggleGladiator(i)}
-			>
+			<button class="exp-item" on:click={() => toggleGladiator(i)}>
 				{glad.name}
-				<span class="exp-icon">
-					{glad.selected ? '✔️' : '◻️'}
-				</span>
+				<span class="exp-icon"> {glad.selected ? '✔️' : '◻️'} </span>
 			</button>
 		{/each}
 	</div>
 {/if}
-			<footer class="app-footer">
+
+<footer class="app-footer">
 	<p>
-		Created by <strong>krasstek</strong>. Street Masters and all associated artwork is owned by
-		<a href="https://steamforged.com" target="_blank" rel="noopener noreferrer">Steamforged Games</a>.
+		Created by
+		<strong>krasstek</strong>. Street Masters and all associated artwork is
+		owned by
+		<a
+			href="https://steamforged.com"
+			target="_blank"
+			rel="noopener noreferrer">Steamforged Games</a>.
 	</p>
 </footer>
