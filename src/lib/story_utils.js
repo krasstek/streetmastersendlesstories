@@ -1053,6 +1053,86 @@ function getPropertyValue(obj1, obj2, propName, defaultValue = undefined) {
     }
 }
 
+// segue can be intel, rescue, retreat, or combination. look for generalization of some items below
+// maybe let result handler decide on the segue element
+function hostageLoseResult(enemy, stage, contact, captured, segue) {
+    const hostages = getPropertyValue(enemy, stage, "hostages")
+    if (!hostages) {
+        return undefined
+    }
+    return randFrom([
+        `${captured ? `You are lying on the ground, defeated and helpless, as` : `Despite all of your efforts,`} ${enemy.boss} executes another one of the ${the_hostages}.<br><br>${segue}`,
+        `You weren't able to save the ${the_hostages}, and now their lives are on your hands.<br><br>${segue}`,
+        captured ? segue: `"We've failed to save them," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch was right.`,
+        `"Go! Now! Get to the chopper!" one of the ${hostages} shouts as ${enemy.boss} steps over ${gPron(contact, "subject")}. ${captured ? `You are in no shape to move.` : ``}<br><br>${segue}`,
+        ]
+        )
+
+}
+
+function ritualLoseResult(enemy, stage, captured, segue) {
+    const ritual = getPropertyValue(enemy, stage, "ritual")
+    if (!ritual) {
+        return undefined
+    }
+    let this_blade = getPropertyValue(enemy, stage, "blade", "ritual blade")
+    return randFrom([
+        `Standing before you, the ${mysticalSynonym()} power of ${ritual} fills ${enemy.boss}. ${ucInit(gPron(enemy, "subject"))} rises up off the ground, the ${mysticalSynonym()} powers swirling around ${gPron(enemy, "object")}. You watch as ${gPron(enemy, "possessive")} muscles grow, ${gPron(enemy, "possessive")} eyes burn, and ${gPron(enemy, "possessive")} body pulses with the ${mysticalSynonym()} energies! ${captured ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!`}`,
+        `You were not able to stop ${enemy.boss} from completing the ritual! ${getTransformationSequence(enemy, this_blade, ritual_focus)} ${captured ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!`}`,
+        `You're thrown to the ground by a blast of ${mysticalSynonym()} force, ${captured ? `and you are sucked through a shimmering, twisting portal.` : `and the ${enemy.bosstitle()} disappears in a flash of brilliant purple light. ${segue}`}`,
+        `${enemy.boss} looks down at you, a smug smirk spreading across ${gPron(enemy, "possessive")} face. ${ucInit(gPron(enemy, "subject"))} reaches up and recites a few strange words in a language you've never heard before. In an instant, the world blows away around you in a deafening explosion of ${mysticalSynonym()} energy${captured ? ` and then` : `, and for a moment,`} all you can see is the blackness.${captured ? `` : `<br><br>${segue}`}`
+    ])
+
+}
+
+function explosionLoseResult(enemy, stage, capture, segue) {
+    const explosions = getPropertyValue(enemy, stage, "explosions")
+    if (!explosions) {
+        return undefined
+    }
+    randFrom([`You barely clear the area when the ${explosions} finally bring everything crumbling down. ${segue}`])
+}
+
+function bladeLoseResult(enemy, stage, captured, segue) {
+    const blade = getPropertyValue(enemy, stage, "blade")
+    if (!blade) {
+        return undefined
+    }
+    randFrom([
+        `With multiple superficial and some severe cuts from ${possessiveSuffix(enemy.boss)} mastery with ${gPron(enemy, "possessive")} ${blade}, you ${captured ? `feel you strength sapping.<br><br>${segue}` : `have to choose: retreat or die. As you are yet to stop ${finalboss.boss}, the choice is obvious.<br><br>${segue}`}`,
+        `${enemy.boss} draws your head back, with ${gPron(enemy, "possessive")} ${blade} on your throat. ${captured ? `"Wait!" ${randFrom(enemy.minionnames)} shouts. "I hear ${nextenemy.boss} is looking for them."` : `Suddenly, ${gPron(enemy, "subject")} lets you drop. "No. I will not soil my blade with such an unworthy opponent."<br><br>${segue}`}`
+    ])
+}
+
+function gunkLoseResult(enemy, stage, captured, segue) {
+    const gunk = getPropertyValue(enemy, stage, "gunk")
+    if (!gunk) {
+        return undefined
+    }
+    randFrom([`You are forced to duck from ${getPropertyValue(enemy, stage, "antiair", "a relentless assault")}. You lose your balance and fall straight into ${stage.gunk}. You try to desperately not to swallow any of the ${randFrom(revolting_words)} liquid${captured ? ` but fail, and start to lose your consciousness. When almost passed out, you feel you're dragged back to the surface. "Clean them up," you think you hear ${enemy.boss} say. "${nextenemy.boss} won't want them like that."` : `, and when you finally manage to get to the surface, ${enemy.boss} has disappeared with ${gPron(enemy, "possessive")} ${enemy.minions()}.<br><br>${segue}`}`])
+}
+
+function experimentLoseResult(enemy, stage, captured, segue) {
+    const experiment = getPropertyValue(enemy, stage, "experiment")
+    if (!experiment) {
+        return undefined
+    }
+    randFrom([
+        captured ? `You are strapped in a metal apparatus, and ${randFrom(enemy.minionnames)} injects you with the vile substance. Immediately you start to lose consciousness. "The serum is not working as expected, we need to run more tests," you hear ${enemy.boss} saying, before you're out cold.` : `"Should we not test the serum on the Gladiators?" ${randFrom(enemy.minionnames)} asks ${enemy.boss}. "No. They are completely worthless."<br><br>${segue}`]
+    )
+}
+
+function gunmenLoseResult(enemy, stage, captured, segue) {
+    const gunmen = getPropertyValue(enemy, stage, "gunmen")
+    if (!gunmen) {
+        return undefined
+    }
+    randFrom([
+        `You duck behind cover as the ${gunmen} fire on you. To move would be a a suicide, and you are forced to watch as the ${enemy.name} leaves with ${stage_loot}. ${captured ? `You are pinned by the fire, and after a while you are surrounded by gun-toting enemies from all sides. ${randFrom(capture)}` : `You hunker down to avoid being hit by stray bullets.<br><br>${segue}`}`,
+        `Bullets are flying everywhere as you flit from cover to cover. The ${gunmen} pour fire on you, and ${captured ? `finally you have nowhere to run. ${randFrom(capture)}` : `you are running out of places to go to.<br><br>${segue}`}`,
+        `Torrents of fire from the ${gunmen} force you to pull back${captured ? ` until you are cornered. ${randFrom(capture)}` : `, leaving the ${enemy.name} free to go through with their plan.<br><br>${segue}`}`])
+}
+
 export function loseResult(stageindex, story, nextstage, gizmo, wincondition, rival, rivalpresence, ally, nstages) {
 
     let finalboss = story[Math.max(nstages * 2 - 3, 0)].enemy
@@ -1090,10 +1170,12 @@ export function loseResult(stageindex, story, nextstage, gizmo, wincondition, ri
         `You have no option but to retreat.`
     ]
 
-    let rescue = [`Suddenly, Citadel agents rappel down out of nowhere. ${enemy.boss} and ${gPron(enemy, "possessive")} ${enemy.minions()} flee as the agents free you.`,
+    let rescue = [
+        `Suddenly, Citadel agents rappel down out of nowhere. ${enemy.boss} and ${gPron(enemy, "possessive")} ${enemy.minions()} flee as the agents free you.`,
         `You slowly awaken in a helicopter, confused on how you wound up there.`,
         `A squad of Citadel soldiers rushes in and sends the enemies focused on you fleeing.`,
-    `When all seems lost, a Citadel operative pilots an armored transport through the ${enemy.minions()} and knocks ${enemy.boss} aside. "Come with me if you want to live!"`]
+        `When all seems lost, a Citadel operative pilots an armored transport through the ${enemy.minions()} and knocks ${enemy.boss} aside. "Come with me if you want to live!"`
+        ]
 
     let fletch_gadget = getGizmo()
 
@@ -1142,11 +1224,6 @@ After all, who better to think ${enemy.boss == finalboss.boss ? `the Master` : f
 
     let this_blade = getPropertyValue(enemy, stage, "blade", "blade")
 
-    let blade = [
-        `With multiple superficial and some severe cuts from ${possessiveSuffix(enemy.boss)} mastery with ${gPron(enemy, "possessive")} ${this_blade}, you ${captured ? `feel you strength sapping.<br><br>${randFrom(capture)}` : `have to choose: retreat or die. As you are yet to stop ${finalboss.boss}, the choice is obvious.<br><br>${randFrom(intel)}`}`,
-        `${enemy.boss} draws your head back, with ${gPron(enemy, "possessive")} ${this_blade} on your throat. ${captured ? `"Wait!" ${randFrom(enemy.minionnames)} shouts. "I hear ${nextenemy.boss} is looking for them."` : `Suddenly, ${gPron(enemy, "subject")} lets you drop. "No. I will not soil my blade with such an unworthy opponent."<br><br>${randFrom(intel)}`}`
-    ]
-
     let escort = [
         `Spitting up blood, you look up just in time to see ${ally.name} getting dragged away. ${captured ? randFrom(capture) : `${randFrom([`As ${ally.name} is carted off, you see the ${possessiveSuffix(gPron(ally, "sex"))} ${getGizmo()} fall, apparently unseen, onto the ground as the enemy retreats.`, `<br><br>${generic}`])}`}`,
         `You became so obsessed with your fight, that you barely caught the sight of ${ally.name} taken away by the ${enemy.minions()}. ${captured ? randFrom(capture) : `Not only were you unable to retrieve any ${randFrom(intel_words)} on ${finalboss.boss}, but also got a valuable ally captured in the process.<br><br>${randFrom(intel)}`}`,
@@ -1155,8 +1232,6 @@ After all, who better to think ${enemy.boss == finalboss.boss ? `the Master` : f
         captured ? randFrom(capture) : `"We've failed ${gPron(ally, "object")}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`,
         `"Go! Now! Get to the chopper!" ${ally.name} shouts as ${enemy.boss} steps over ${gPron(ally, "object")}. ${captured ? `You are in no shape to move. ${randFrom(capture)}` : `<br><br>${randFrom(retreat)} ${randFrom(intel)}`}`,
     ]
-
-    let experiment = [captured ? `You are strapped in a metal apparatus, and ${randFrom(enemy.minionnames)} injects you with the vile substance. Immediately you start to lose consciousness. "The serum is not working as expected, we need to run more tests," you hear ${enemy.boss} saying, before you're out cold.` : `"Should we not test the serum on the Gladiators?" ${randFrom(enemy.minionnames)} asks ${enemy.boss}. "No. They are completely worthless."<br><br>${randFrom(intel)}`]
 
     let explosion_cause = []
     stage.hasOwnProperty("explosions") ? explosion_cause = [stage.explosions, ...explosion_cause] : () => { }
