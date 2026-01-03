@@ -1185,6 +1185,104 @@ function getPropertyValue(obj1, obj2, propName, defaultValue = undefined) {
     }
 }
 
+export function enemyExecution(enemy, stage, victim) {
+
+    let boss = getPropertyValue(enemy, stage, "execution")
+
+    if (boss !== undefined) boss = boss(victim)
+
+    let generic = randFrom([
+      `ends the ${gPron(victim, "sex")} without ceremony`,
+      `kills the ${gPron(victim, "sex")} where ${gPron(victim, "subject")} stands`,
+      `finishes the ${gPron(victim, "sex")} with a single, deliberate motion`,
+      `shows no hesitation as ${gPron(enemy, "subject")} takes the ${gPron(victim, "sex")}'s life`,
+      `executes the ${gPron(victim, "sex")} swiftly and without remorse`,
+      `grips the ${gPron(victim, 'sex')}'s jaw, forces eye contact, and ends ${gPron(victim, 'possessive')} life with a swift, practiced strike`
+    ])
+  
+
+    let martialartist = getPropertyValue(enemy, stage, "martialartist")
+    if (martialartist !== undefined) martialartist = randFrom([
+        `places ${gPron(enemy, "possessive")} palm against the ${gPron(victim, 'sex')}'s chest, exhales once, and strikes with a furious force, leaving the victim dead`
+      ])
+
+    let gun = getPropertyValue(enemy, stage, "gun")
+    
+    if (gun !== undefined) gun = randFrom([
+        `puts a bullet between the ${gPron(victim, 'sex')}'s eyes`,
+        `fires once, killing the ${gPron(victim, "sex")} instantly`,
+        `levels ${gPron(enemy, "possessive")} ${getPropertyValue(enemy, stage, "gun")} and puts an end to the ${gPron(victim, "sex")}`,
+        `pulls the trigger without looking away as the ${gPron(victim, "sex")} collapses`,
+        `ends the ${gPron(victim, "sex")}'s life with a single, precise shot`,
+        `shoots the ${gPron(victim, "sex")} dead`
+    ])
+  
+    let gunmen = getPropertyValue(enemy, stage, "gunmen")
+    if (gunmen !== undefined) gunmen = randFrom([
+      `gestures once, and the ${gunmen} cut the ${gPron(victim, "sex")} in a storm of fire`,
+      `gives a short command, and the ${gunmen} execute the ${gPron(victim, "sex")} on the spot`,
+      `doesn’t need to lift a finger as ${gPron(victim, "sex")} is gunned down by the ${gunmen}`,
+      `turns away as the ${gunmen} put the ${gPron(victim, "sex")} down`,
+      `lets the ${gunmen} deal with the ${gPron(victim, "sex")}, leaving a smoking corpse behind`
+    ])
+  
+    let brute = getPropertyValue(enemy, stage, "brute") 
+    if (brute !== undefined) brute = randFrom([
+        `grabs the ${gPron(victim, "sex")} by the throat, lifts ${gPron(victim, "object")} up, and snaps ${gPron(victim, "possessive")} neck with a wet crack`,
+        `drives a fist straight through the ${gPron(victim, "sex")}, rips it free, and lets the body collapse in a spray of blood`,
+        `wraps both hands around the ${gPron(victim, "sex")}'s head and twists until bone and sinew give way`,
+        `hoists ${gPron(victim, "object")} overhead and slams ${gPron(victim, "object")} down so hard the ground gets painted red`,
+        `locks ${gPron(victim, "object")} in place and tears ${gPron(victim, "object")} in half with savage, effortless force`,
+        `knees ${gPron(victim, "sex")} brutally, then finishes with a stomp that leaves a shattered mess behind`,
+        `grips ${gPron(victim, "sex")}'s arm, wrenches until it tears loose, and beats ${gPron(victim, "object")} to death with it`,
+        `drives ${gPron(victim, "object")} face-first into the floor until ${gPron(victim, "subject")} stops moving`,
+        `seizes ${gPron(victim, "object")} from behind and crushes the ribcage until it caves in with a sickening crunch`,
+        `rips ${gPron(victim, "sex")}'s jaw wide open and ends it in a spray of teeth and blood`,
+        `slams ${gPron(victim, "object")} against a hard surface again and again until ${gPron(victim, "subject")} stops resembling anything alive`,
+        `plants a boot on ${gPron(victim, "sex")}'s chest and tears something vital free in a triumphant burst of gore`,
+        `lifts ${gPron(victim, "object")} high, pauses just long enough to savor it, then brings ${gPron(victim, "object")} down in a fatal explosion of bone and blood`
+      ])
+    
+    let blade = getPropertyValue(enemy, stage, "blade")
+    if (blade !== undefined) blade = randFrom([
+        `raises ${gPron(enemy, "possessive")} ${blade} in a controlled arc and ends the ${gPron(victim, 'sex')} with a single, flawless motion`,
+        `slices the ${gPron(victim, 'sex')} open from gut to throat`,
+        `steps in close and opens the ${gPron(victim, "sex")} from throat to chest in a single, practiced motion`,
+        `drives the ${blade} into the ${gPron(victim, "sex")}, twists it slowly, and pulls free in a wash of blood`,
+        `hooks the ${blade} under the ${gPron(victim, "sex")}'s jaw and rips upward, ending it instantly`,
+        `slashes ${gPron(victim, "object")} again and again until ${gPron(victim, "subject")} collapses in pieces`,
+        `takes the ${gPron(victim, "sex")}'s arm clean off, then finishes the job before the scream can start`,
+        `buries the ${blade} deep and holds ${gPron(victim, "object")} in place as life drains away`,
+        `carves a brutal line across the ${gPron(victim, "sex")}, then another, until there’s nothing left to fight with`,
+        `pins ${gPron(victim, "object")} in place and opens ${gPron(victim, "object")} up with deliberate, surgical cuts`,
+        `drags the ${blade} across the ${gPron(victim, "sex")}'s midsection, spilling blood and insides onto the floor`,
+        `runs the ${gPron(victim, "sex")} through and lifts ${gPron(victim, "object")} off the ground before letting the body slide free`,
+        `steps past ${gPron(victim, "object")} as the delayed wound finally catches up and drops them in a red heap`,
+        `finishes the ${gPron(victim, "sex")} with a precise cut that leaves the body standing for a heartbeat too long`
+      ])
+
+      let ritual = getPropertyValue(enemy, stage, "ritual")
+      if (ritual !== undefined) ritual = randFrom([
+        `calls on ${ritual}, and the ${gPron(victim, "sex")} is torn apart by forces no one can see`,
+        `channels the ${mysticalSynonym()} power of ${ritual} through ${gPron(victim, "object")}, burning them from the inside out`,
+        `utters ${whichPreposition(mysticalSynonym())} word of ${possessiveSuffix(ritual)} power, and ${gPron(victim, "subject")} collapses as something rips free`,
+        `brands the ${gPron(victim, "sex")} with the power of ${ritual}, leaving nothing behind but ash and screaming echoes`,
+        `forces the ${gPron(victim, "sex")} to kneel as the ${mysticalSynonym()} force of ${ritual} consumes ${gPron(victim, "object")} in a violent eruption`,
+        `opens a conduit to ${ritual} and feeds ${gPron(victim, "object")} into it piece by piece`,
+        `lets the ${mysticalSynonym()} power of ${ritual} take hold of ${gPron(victim, "sex")}, twisting flesh and soul until both give out`,
+        `drags ${gPron(victim, "object")} screaming into a portal to ${ritual}, sealing it shut behind them`,
+        `floods the ${gPron(victim, "sex")} with the raw ${mysticalSynonym()} power of ${ritual} until ${gPron(victim, "possessive")} body bursts`,
+        `marks the ${gPron(victim, "sex")} as an offering to ${ritual}, and the offering is violently accepted`
+      ])
+      
+      
+  
+    let execution = [boss, gun, gunmen, brute, blade, ritual, generic].filter(e => e !== undefined)
+    execution = randFrom(execution)
+    return execution
+  }
+
+  
 // segue can be intel, rescue, retreat, or combination. look for generalization of some items below
 // maybe let result handler decide on the segue element
 function hostageLoseResult(enemy, stage, contact, captured, segue) {
@@ -1193,14 +1291,14 @@ function hostageLoseResult(enemy, stage, contact, captured, segue) {
         return undefined
     }
     return randFrom([
-        `"You think you're heroes," ${enemy.boss} says softly, almost amused. ${gPron(enemy, "subject", true)} pulls one of the ${hostages} close — close enough that you can see ${gPron(contact, "possessive")} shaking hands — and forces  ${gPron(contact, "object")} to look at you. "Tell them why this happened." Then ${enemy.execution({contact: contact})}.<br><br>${segue}`,
-        `You try to rise and fail. Your body refuses. ${enemy.boss} pauses as if considering mercy — then makes a show of choosing otherwise. "Still think you can stop me?" ${gPron(enemy, "subject", true)} says, steps at the nearest of the ${hostages} and ${enemy.execution({contact: contact})}. The sound of ${gPron(contact, "possessive")} death is smaller than you expected. That makes it worse.<br><br>${segue}`,
-        `You have been thoroughly beaten and can no longer fight. ${enemy.boss} looks directly in your eyes as ${gPron(enemy, "subject")} strides at one of the ${hostages}. "This one is for you intervening," ${gPron(enemy, "subject")} says and ${enemy.execution({contact: contact})}.<br><br>${segue}`,
-        `${bossDescription(enemy)} turns ${gPron(enemy, "possessive")} attention to the ${hostages} as you obviously have no fight left in you. ${gPron(enemy, "subject", true)} calmly approaches one, and ${enemy.execution({contact: contact})}.<br><br>${segue}`,
+        `"You think you're heroes," ${enemy.boss} says softly, almost amused. ${gPron(enemy, "subject", true)} pulls one of the ${hostages} close — close enough that you can see ${gPron(contact, "possessive")} shaking hands — and forces ${gPron(contact, "object")} to look at you. "Tell them why this happened." Then ${gPron(enemy, "subject")} ${enemyExecution(enemy, stage, contact)}.<br><br>${segue}`,
+        `You try to rise and fail. Your body refuses. ${enemy.boss} pauses as if considering mercy — then makes a show of choosing otherwise. "Still think you can stop me?" ${gPron(enemy, "subject", true)} says, steps at the nearest of the ${hostages} and ${enemyExecution(enemy, stage, contact)}. The sound of ${gPron(contact, "possessive")} death is smaller than you expected. That makes it worse.<br><br>${segue}`,
+        `You have been thoroughly beaten and can no longer fight. ${enemy.boss} looks directly in your eyes as ${gPron(enemy, "subject")} strides at one of the ${hostages}. "This one is for you intervening," ${gPron(enemy, "subject")} says and ${enemyExecution(enemy, stage, contact)}.<br><br>${segue}`,
+        `${bossDescription(enemy)} turns ${gPron(enemy, "possessive")} attention to the ${hostages} as you obviously have no fight left in you. ${gPron(enemy, "subject", true)} calmly approaches one, and ${enemyExecution(enemy, stage, contact)}.<br><br>${segue}`,
         `${captured ? `You are lying on the ground, defeated and helpless, as` : `Despite all of your efforts,`} ${enemy.boss} executes another one of the ${hostages}.<br><br>${segue}`,
         `You weren't able to save the ${hostages}, and now their lives are on your hands.<br><br>${segue}`,
         captured ? segue: `"We've failed to save them," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch was right.`,
-        `"Go! Now! Get to the chopper!" one of the ${hostages} shouts as ${enemy.boss} steps over ${gPron(contact, "subject")}. ${captured ? `You are in no shape to move.` : ``}<br><br>${segue}`,
+        `"Go! Now! Get to the chopper!" one of the ${hostages} shouts as ${enemy.boss} steps over ${gPron(contact, "object")}. ${captured ? `You are in no shape to move.` : ``}<br><br>${segue}`,
         ]
         )
 
@@ -1213,7 +1311,7 @@ function ritualLoseResult(enemy, stage, captured, segue) {
     }
     let this_blade = getPropertyValue(enemy, stage, "blade", "ritual blade")
     return randFrom([
-        `${bossDescription(enemy)} reaches up, and the air goes syrup-thick with the power of ${ritual}. Dust rises from the floor and hangs there, frozen, as if time itself is holding its breath. ${gPron(enemy, "subject", true)} finishes the final syllable and the world answers — lights die, shadows sharpen, and something unseen leans close. ${captured ? `You try to scream, but your lungs forget how.` : `You grab your team and fall back before the ${mysticalSynonym()} power takes you!`}`,
+        `${bossDescription(enemy)} reaches up, and the air goes syrup-thick with the power of ${ritual}. Dust rises from the ground and hangs there, frozen, as if time itself is holding its breath. ${gPron(enemy, "subject", true)} finishes the final syllable and the world answers - lights die, shadows sharpen, and something unseen leans close. ${captured ? `You try to scream, but your lungs forget how.` : `You grab your team and fall back before the ${mysticalSynonym()} power takes you!`}`,
         `Standing before you, the ${mysticalSynonym()} power of ${ritual} fills ${enemy.boss}. ${ucInit(gPron(enemy, "subject"))} rises up off the ground, the ${mysticalSynonym()} powers swirling around ${gPron(enemy, "object")}. You watch as ${gPron(enemy, "possessive")} muscles grow, ${gPron(enemy, "possessive")} eyes burn, and ${gPron(enemy, "possessive")} body pulses with the ${mysticalSynonym()} energies! ${captured ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!`}`,
         `You were not able to stop ${enemy.boss} from completing the ritual! ${getTransformationSequence(enemy, this_blade, ritual)} ${captured ? `You lose consciousness in front of that ${mysticalSynonym()} power!` : `You have no choice but to flee for your lives!`}`,
         `You're thrown to the ground by a blast of ${mysticalSynonym()} force, ${captured ? `and you are sucked through a shimmering, twisting portal.` : `and the ${enemy.bosstitle()} disappears in a flash of brilliant purple light. ${segue}`}`,
@@ -1324,6 +1422,162 @@ function swarmedLoseResult(enemy, stage, captured, contact, segue) {
     ])
 }
 
+function pitLoseResult(enemy, stage, captured, segue) {
+    const pit = getPropertyValue(enemy, stage, "pit")
+    if (pit == undefined) return undefined
+
+    const minion = (enemy.minionnames && enemy.minionnames.length)
+      ? randFrom(enemy.minionnames)
+      : "one of their crew"
+  
+    const options = []
+  
+    // --- Keep a little bumbling (but not all of it) ---
+    options.push(
+      `The edge gives way beneath you and there’s no time to recover. You drop over at ${pit}, the world turning end over end as distance swallows you. Impact comes hard and wrong, knocking the breath from your lungs and scattering your thoughts.<br><br>${captured ? segue : `By the time you can move again, whatever you were fighting for is far out of reach.`}`,
+  
+      `You skid, scramble, and almost save it — but gravity finishes the argument. You plunge to ${pit}, scraping and slamming against whatever juts out along the way. Pain blooms everywhere at once. When the motion finally stops, silence rushes in, broken only by your own ragged breathing.${segue}`
+    )
+  
+    // --- Enemy agency (boss + minions) ---
+    options.push(
+      `${enemy.boss} doesn’t chase the win — they call it. “Now.” ${minion} rams you hard at the worst possible moment. Your heel finds air instead of ground and the world tilts. You go over into ${pit}, taking the hit in a burst of pain and breathless shock.${segue}`,
+      `${minion} hooks you — a shove, a trip, an ugly little wrench that steals your balance. For half a heartbeat you’re fighting the fall, and then there’s only the drop into ${pit}. You hit, you skid, you stop. Above, footsteps retreat with purpose. ${segue}`,
+      `You try to reset your footing, but the ${enemy.boss} reads it like a script. Someone blocks your retreat; someone else forces you sideways. There’s nowhere left to go but one — into ${pit}. ${segue}`
+    )
+  
+    // --- Captured-focused variant with agency ---
+    options.push(
+      captured
+        ? `You’re forced back step by step — not panicked, not random, just controlled. ${enemy.boss} keeps you exactly where they want you until the final shove. You fall to ${pit}, the impact making your vision stutter. Before you can crawl, shapes appear at the rim — ropes, hooks, hands. “Alive,” someone says, almost impressed. Then they take you.`
+        : `They don’t need to finish you. They just need you gone. ${enemy.boss} drives the tempo until you’re off-balance, then ${minion} commits — a decisive shove that sends you tumbling into ${pit}. You survive the landing, but the moment above moves on without you. ${segue}`
+    )
+  
+    // --- Gunmen-specific pressure: suppressing fire, ricochets, forced movement ---
+    const gunmen = getPropertyValue(enemy, stage, "gunmen")
+    const gun = getPropertyValue(enemy, stage, "gun")
+    if (gunmen !== undefined | gun !== undefined) {
+      options.push(
+        `Gunfire snaps past your head to herd you, forcing you to move where ${enemy.boss} wants you. You pivot, you lunge for cover — and find only open air. The drop into ${pit} steals your breath before the impact steals everything else.${segue}`,  
+        `A burst of fire stitches the ledge in front of you. You flinch, you recoil, you misjudge the space behind you. There’s a sickening moment where your boot finds nothing — then you’re falling into ${pit}, the world above reduced to muzzle flashes and shouting.${segue}`
+      )
+    }
+  
+    const blade = getPropertyValue(enemy, stage, "blade")
+    if (blade !== undefined) {
+      options.push(
+          `${enemy.boss} closes just enough to make it personal. The ${blade} hooks your guard, turns it, and opens your stance. The follow-up is a shove with intent. You go over into ${pit}, pain and gravity doing the rest. ${segue}`
+      )
+    }
+  
+    const brute = getPropertyValue(enemy, stage, "brute")
+    if (gunmen === "brute") {
+      options.push(
+        `The ${brute} hit you like a vehicle. No finesse, no warning — just mass and momentum. You slam backward, heels skidding, arms windmilling for purchase. The ${pit} arrives too fast, and you topple over, the landing a brutal punctuation mark. ${segue}`,
+        `${enemy.boss} gets ${gPron(enemy, "possessive")} hands on you. For a second you think you can break the grip — then ${gPron(enemy, "subject")} lifts and turns, using you like a problem to be removed. You’re thrown into ${pit}. You hit hard, ribs screaming, while laughter and boots fade above. ${segue}`
+      )
+    }
+  
+     return randFrom(options)
+  }
+  
+  
+
+function labyrinthLoseResult(enemy, stage, finalboss, captured, segue) {
+    const labyrinth = getPropertyValue(enemy, stage, "labyrinth")
+    if(labyrinth == undefined) {
+        return undefined
+    }
+    return randFrom(
+        [
+            `The relentless ${enemy.bosstitle()} forces you to full rout, and you soon find yourselves lost in the ${labyrinth}. You rush through the area to escape, ${captured ? `but suddenly you find yourself surrounded by ${enemy.minions()}. You feel exhausted, and cannot push on. "How could you face the ${finalboss.name} if you can't even find your own way?" ${enemy.boss} says, eyeing you with contempt.` : `and suddenly you are in the clear.<br><br>${segue}`}`,
+            captured ? segue : `Beaten, you are left where you were. You awaken hours later in the dark, disoriented, and spend a good while trying to find your way out of the lightless ${labyrinth}. A rescue team of Citadel soldiers eventually finds you and speeds you back to HQ.`
+          ]
+    )
+}
+
+
+function intelLoseResult(wincondition, enemy, stage, captured, finalboss, nextenemy, gizmo, segue) {
+    if(wincondition !== "intel") {return (undefined)}
+    let loot = getPropertyValue(enemy, stage, "loot", "haste")
+    return randFrom([
+        `${captured ? `"Looking for this?" ${enemy.boss} holds ${whichPreposition(gizmo)} in front of you. ${segue}` : `You could not obtain whatever ${intel_words_2()} ${enemy.boss} had. ${segue}`}`,
+        `${captured ? segue : `The ${enemy.name} escaped with ${loot}, and the ${gizmo} in your hands looks damaged. "Agent Fletch," you got into your communications device. "I've got the ${gizmo}, but it looks damaged." "At least we have it," Agent Fletch replied in your ear. "Bring it back to Citadel HQ and we'll see what data we can pull from it.`}`,
+        `"${captured ? nextenemy.boss : finalboss.boss} will hear of your interference," ${enemy.boss} says. "And you will beg for ${gPron(captured ? nextenemy : finalboss, "possessive")} mercy." ${gPron(enemy, "subject", true)} then reaches out to a ${gizmo}. "This is what you were after?"${captured ? `` : `<br><br>${segue}`}`,
+        captured ? segue : `"We've failed to secure the ${intel_words_2()}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`
+    ])
+}
+
+function escortLoseResult(wincondition, enemy, stage, ally, finalboss, captured, segue) {
+    if(wincondition !== "escort") {
+        return(undefined)
+    }
+    return randFrom([
+        `Spitting up blood, you look up just in time to see ${ally.name} getting dragged away. ${captured ? segue : `${randFrom([`As ${ally.name} is carted off, you see the ${possessiveSuffix(gPron(ally, "sex"))} ${getGizmo()} fall, apparently unseen, onto the ground as the enemy retreats.`, `<br><br>${segue}`])}`}`,
+        `You became so obsessed with your fight, that you barely caught the sight of ${ally.name} taken away by the ${enemy.minions()}. ${captured ? segue : `Not only were you unable to retrieve any ${intel_words_2()} on ${finalboss.boss}, but also got a valuable ally captured in the process.<br><br>${segue}`}`,
+        `With defeat inevitable, you back up with ${ally.name}. Your only hope of escape is ${stage.hasOwnProperty("pit") ? stage.pit : "a bottomless pit"}. ${ally.name} offers to help you climb down. As you descend, ${ally.name} is overwhelmed${captured ? `, and the ${enemy.minions()} pull you back. ${segue}` : `. Clenching your jaw, you turn away and make your escape.<br><br>${segue}`}`,
+        `${ally.name} had limped away, bleeding, and the others had gone after ${gPron(ally, "object")}, probably to finish ${gPron(ally, "object")} off.${captured ? `<br><br> ${segue}` : ` You could do nothing. They'd already finished with you.<br><br>${segue}`}`,
+        captured ? segue : `"We've failed ${gPron(ally, "object")}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`,
+        `"Go! Now! Get to the chopper!" ${ally.name} shouts as ${enemy.boss} steps over ${gPron(ally, "object")}. ${captured ? `You are in no shape to move. ${segue}` : `<br><br>${segue}`}`,
+    ])
+
+}
+
+function guideLoseResult(wincondition, ally, enemy, captured, segue) {
+    if(wincondition !== "guide") {
+        return(undefined)
+    }
+    return randFrom([
+        `"Unfortunate that ${gPron(enemy, "subject")} came out on top this time," ${ally.name} says afterward. "${gPron(enemy, "subject", true)} won't be challenged again for some time. By you or by anyone else". You look at ${ally.name} in question, but the ${gPron(ally, "sex")} had vanished! ${captured ? segue : `You are left to contemplate your place in the world, alone. ${segue}`}`,
+        `"You led me into a deathtrap," you say. "A rush like this is against everything we know." You and ${ally.name} stare hard at each other for a moment. "Very well. Strike your own path," ${ally.name} says, and turns, ${captured ? `leaving you in a heap. ${segue}` : `striding into the distance. ${segue}`}`,
+        `"You cannot expect to win every conflict," ${ally.name} says. "You almost got me killed!" you shout back, looking down at your bruised body. You are about to apologize, but when you look up, ${captured ? `you are faced with ${enemy.minions()}. ${segue}` : ` ${gPron(ally, "subject")} is gone. ${segue}`}`,
+        `${captured ? segue : `"Dammit!" you say to ${ally.name}. "They got away."<br><br>"It was a long shot. I'm sorry." ${gPron(ally, "subject")} answers. "Don't be," you answer. "We caused a stir. That's something." ${segue}`}`,
+        `"Go! Now! Get to the chopper!" ${ally.name} shouts as ${enemy.boss} steps over ${gPron(ally, "object")}. ${captured ? `You are in no shape to move. ${segue}` : `<br><br>${segue}`}`,
+    ])
+}
+
+function lootLoseResult(enemy, stage, captured, segue) {
+    const loot = getPropertyValue(enemy, stage, "loot")
+    if(loot == undefined) {
+        return undefined
+    }
+    return randFrom([
+        `${captured ? `The ${enemy.name} collects the last of ${loot}. ${segue}` : `The ${enemy.name} was able to escape with ${loot}. ${segue}`}`,
+        `Even with the prepared positioning and the upper hand in the fight, ${enemy.boss} and ${gPron(enemy, "possessive")} ${randFrom(["forces", enemy.minions()])} beat you ${captured ? `down. ${segue}` : `back and slow your down, giving them time to get ${loot} and retreat. ${segue}`}`,
+        `${captured ? captured : `"Dammit!" you contact Agent Fletch with your communicator. "They got ${loot}." "It was a long shot," he answers. "We caused a stir. That's something." You disconnect and pick yourselves up.<br><br>${segue}`}`,
+        captured ? segue : `"We've failed to secure ${loot}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`])
+}
+
+function rivalLoseResult(wincondition, enemy, rival, finalboss, nextenemy, captured, segue) {
+    if(wincondition !== "rival") {
+        return(undefined)
+    }
+    return randFrom([
+        `${captured ? `${rival.name} smirks at you as you are beaten. ${segue}` : `Despite your best efforts, ${rival.name} has slipped away. ${segue}`}`,
+        `${captured ? segue : `The ${enemy.name} was able to escape with ${rival.name}. ${segue}`}`,
+        `${captured ? segue : `${rival.name} showed ${gPron(rival, "reflexive")} to be a true coward and fled before you could make ${gPron(rival, "object")} reveal what ${intel_words_2()} ${gPron(rival, "subject")} has. ${segue}`}`,
+        `"${captured ? nextenemy.boss : finalboss.boss} will hear of your interference," ${rival.name} says. "And you will beg for ${gPron(captured ? nextenemy : finalboss, "possessive")} mercy." ${gPron(rival, "subject", true)} then reaches out to a ${getGizmo()}. "This is what you were after?"`,
+        `You could not reach ${intel_words_2()}, ${rival.name} evading you at every opportunity. With a screech, ${gPron(rival, "subject")} leaps down on you from the shadows, ${captured ? `and you lose your balance.<br><br>${segue}` : `and you react the only way you can. You knock ${gPron(rival, "object")} away, and use the opportunity to escape. ${segue}`}`,
+        `${captured ? segue : `"Dammit!" you contact Agent Fletch with your communicator. "${rival.name} got away."<br><br>"It was a long shot," he answers. "We caused a stir. That's something." You hang up and pick yourselves up. ${segue}`}`,
+        captured ? segue : `"We've failed to catch ${rival.name}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`])
+
+}
+
+function winConditionLoseResult(wincondition, enemy, stage, ally, rival, finalboss, nextenemy, gizmo, captured, segue) {
+    let e = escortLoseResult(wincondition, enemy, stage, ally, finalboss, captured, segue)
+    let i = intelLoseResult(wincondition, enemy, stage, captured, finalboss, nextenemy, gizmo, segue)
+    let g = guideLoseResult(wincondition, ally, enemy, captured, segue)
+    let r = rivalLoseResult(wincondition, enemy, rival, finalboss, nextenemy, captured, segue)
+
+    let loseresult = [e,i,g,r];
+    loseresult = loseresult.filter(entry => entry !== undefined)
+    if(loseresult.length == 0) {
+        return (undefined)
+    } else {
+        return (randFrom([loseresult, loseresult, loseresult, loseresult, undefined]))
+    }
+}
+
 export function loseResult(stageindex, story, nextstage, gizmo, wincondition, rival, rivalpresence, ally, nstages, contact) {
 
     let finalboss = story[Math.max(nstages * 2 - 3, 0)].enemy
@@ -1333,17 +1587,13 @@ export function loseResult(stageindex, story, nextstage, gizmo, wincondition, ri
 
     let nextenemy = story[nextstage].enemy
     let nextmission = story[nextstage].stage
-    let altstage = (nextstage - 1)
 
     let minion = randFrom(enemy.minionnames)
     let nextminion = randFrom(nextenemy.minionnames)
 
-    let evilplace = evilPlace()
-
     let is_captured = nextmission.hasOwnProperty("captured") && nextmission.knowledge == "captured" ? true : false
-    let captured = nextmission.hasOwnProperty("captured") && nextmission.knowledge == "captured" ? true : false
 
-    let retreat = [`You were unable to learn anything important before your retreat, and when you reconnect with Agent Fletch, he has little time to debrief you.`,
+    let retreat = randFrom([`You were unable to learn anything important before your retreat, and when you reconnect with Agent Fletch, he has little time to debrief you.`,
         `You retreat and regroup nearby, having lost to ${enemy.boss} and ${gPron(enemy, "possessive")} forces.`,
         `You are regrouping some distance away.`,
         `Overwhelmed by the might of the ${enemy.name}, you're forced to flee.`,
@@ -1359,18 +1609,35 @@ export function loseResult(stageindex, story, nextstage, gizmo, wincondition, ri
         `You gasp for breath, refusing this defeat to stop you from confronting ${finalboss.boss}.`,
         `"I am done with you," the ${enemy.bosstitle()} says, and tosses you aside like a rag. You are left in a heap, beaten and humiliated.`,
         `You have no option but to retreat.`
-    ]
+    ])
 
-    let rescue = [
+    let rescue = randFrom([
         `Suddenly, Citadel agents rappel down out of nowhere. ${enemy.boss} and ${gPron(enemy, "possessive")} ${enemy.minions()} flee as the agents free you.`,
-        `You slowly awaken in a helicopter, confused on how you wound up there.`,
+        `You slowly awaken in a helicopter, confused about how you wound up there. An agent leans over you. "Easy. You're safe. For now."`,
         `A squad of Citadel soldiers rushes in and sends the enemies focused on you fleeing.`,
-        `When all seems lost, a Citadel operative pilots an armored transport through the ${enemy.minions()} and knocks ${enemy.boss} aside. "Come with me if you want to live!"`
-        ]
+        `When all seems lost, a Citadel operative pilots an armored transport through the ${enemy.minions()} and knocks ${enemy.boss} aside. "Come with me if you want to live!"`,
+        `Explosions rip through the battlefield as Citadel fire support rains down with brutal precision. Amid the chaos, agents drag you clear before the smoke settles.`,
+        `A familiar voice crackles through your comms: "We have you." Moments later, Citadel operatives emerge from cover, laying down suppressing fire as they extract you.`,
+        `You feel hands seize your collar and haul you backward just as a killing blow falls where you were moments before. A masked Citadel agent pulls you to your feet and shoves you toward cover.`,
+        `A stun blast detonates nearby, disorienting everyone — including you. When your vision clears, Citadel troops have driven ${enemy.boss} to a rout.`,
+        `A low-flying gunship roars overhead, forcing ${enemy.boss} and ${gPron(enemy, "possessive")} forces to scatter. A rope drops beside you. "Grab on!"`,
+        `You come to in a darkened safehouse, wounds hastily treated. A Citadel agent watches you from the corner. "We barely got you out."`,
+        `Just as ${enemy.boss} moves in to finish you, a sniper round slams into the ground at ${gPron(enemy, "possessive")} feet. Red targeting lasers sweep the area. The enemy retreats.`,
+        `A Citadel breaching team crashes through a nearby wall, weapons blazing. Amid shouted orders and gunfire, you're dragged out of the kill zone.`,
+        `An armored drone descends, projecting a kinetic barrier around you. Citadel operatives move in behind it, pulling you clear as enemy fire pings uselessly off the shield.`,
+        `"Extraction now!" a Citadel commander barks. Smoke grenades bloom around you, and by the time they clear, you're gone.`,
+        `You black out from blood loss. When you wake, the hum of Citadel medical equipment fills your ears. Someone says, "We thought we lost you."`,
+        `A flashbang detonates at your feet. As the enemy reels, Citadel agents rush in, hoisting you up and retreating under covering fire.`,
+        `The sound of heavy boots and disciplined gunfire cuts through the chaos. Citadel forces push forward methodically, reclaiming ground long enough to extract you.`,
+        `An unmarked vehicle skids into view, doors flung open. Hands pull you inside as gunfire erupts behind you. The doors slam shut, and you're gone.`,
+        `You feel yourself being dragged away as consciousness fades. Later, you learn the Citadel paid a steep price to pull you out.`,
+        `Citadel operatives arrive too late to save the fight — but not too late to save you. They recover you from the wreckage and disappear before ${enemy.name} reinforcements arrive.`
+])
+    
 
     let fletch_gadget = getGizmo()
 
-    let intel = [`While you were bumbling, Citadel's efforts have paid off, and you have a little time to recover before you're sent off to your next target, where ${nextenemy.boss} has been seen.`,
+    let intel = randFrom([`While you were bumbling, Citadel's efforts have paid off, and you have a little time to recover before you're sent off to your next target, where ${nextenemy.boss} has been seen.`,
     `You overheard a lead, but it will be a struggle for you to catch up with the ${possessiveSuffix(finalboss.name)} plans now.`,
         `You have no real leads to follow up on. However, after returning to HQ, the news report on a situation that guides you on where to go next.`,
         `Ashamed and frustrated, you have no choice but to return to Ransom and hope someone at the police department would hear you out. You can't think of any other option at this point.`,
@@ -1383,9 +1650,9 @@ export function loseResult(stageindex, story, nextstage, gizmo, wincondition, ri
     `You vow to catch the ${finalboss.name} before their ${getMasterPlan()} is complete!`,
     `This was only a delay in the inevitable. You know ${enemy.boss} is only a beatstick, not the mastermind. ${ucInit(gPron(enemy, "subject"))} will lead you to ${finalboss.boss == enemy.boss ? `The Master` : finalboss.boss}, and you will be making examples of them both.`,
         `Just then, you got a call on your communicator from Agent Fletch. "Heads up, Gladiators." Agent Fletch said. "We've got a problem."`
-    ]
+    ])
 
-    let capture = [
+    let capture = randFrom([
         `${enemy.boss} kicks you while you're down, and then pushes you hard into the ground. You look up slowly to see two others join him — ${nextenemy.boss} and ${nextminion} of the ${nextenemy.name}. "Wholly unimpressive," ${nextenemy.boss} comments.  "Perhaps, with a little more work, they can become somehow... useful?" `,
         `${enemy.boss} looks down at you. "So this is the sad excuse for a fighter that has been harrying the ${finalboss.name}?" ${gPron(enemy, "subject")} says looking you over. "You've thrown a wrench
 in our plans, ${enemy.addressing}." And then ${gPron(enemy, "subject")} grins, and you feel your heart stop. "And so now you will go to ${nextenemy.boss}!" and then laughs at your fate.`,
@@ -1399,78 +1666,22 @@ ${enemy.boss} says. "Bind them. Perhaps ${nextenemy.boss} will have a use for th
         `"You were close, ${defineAddressing(enemy)}", ${enemy.boss} calls to you. "But not close enough." ${ucInit(gPron(enemy, "subject"))} clutches at ${gPron(enemy, "possessive")} wounds, and though they are serious, at least ${gPron(enemy, "subject")} is still standing. ${ucInit(gPron(enemy, "subject"))} watches you writhe on the ground for a moment longer, and spits in your direction. "Subdue them," ${gPron(enemy, "subject")} orders the ${enemy.minions()}.`,
         `You fall on your back, and ${enemy.boss} rushes in, planting ${gPron(enemy, "possessive")} foot on your chest, keeping you down. "No more," ${enemy.boss} says and ${enemy.threat}, ready, should you try to retaliate. "We are done."`,
         `"You want to bring me down? You have to do it yourself, ${enemy.boss}! Take your shot!" you challenge the ${enemy.bosstitle()}, ignoring the ${enemy.minions()}, even though you can barely stand. "I need not fight you. I have done as I was bid," ${gPron(enemy, "subject")} answers. "None shall harm you here, angry little ${defineAddressing(enemy)}. You are awaited.. by ${nextenemy.boss}!"`
-    ]
+    ])
 
-    let intel_words = [`intel`, `evidence`, `knowledge`, `information`]
-    let revolting_words = [`disgusting`, `revolting`, `repulsive`, `nauseating`, `stomach-churning`]
+    let generic = "FILL-IN"//is_captured ? capture : `${randFrom([retreat, retreat, rescue])}<br><br>${intel}`
+    let segues = [`${randFrom([retreat, retreat, retreat, rescue, rescue, intel])}`,
+    `${randFrom([retreat, retreat, rescue])}<br><br>${intel}`]
+    segues = segues.sort((a, b) => b.length - a.length);
 
-    let stage_loot = stage.loot != undefined ? stage.loot : "haste"
-    let stage_swarm = []
-    stage.hasOwnProperty("swarm") ? stage_swarm = [stage.swarm, ...stage_swarm] : () => { }
-    enemy.hasOwnProperty("swarm") ? stage_swarm = [enemy.swarm, ...stage_swarm] : () => { }
-
-
-    let generic = captured ? randFrom(capture) : `${randFrom([...retreat, ...rescue])}<br><br>${randFrom(intel)}`
-
-    let this_blade = getPropertyValue(enemy, stage, "blade", "blade")
-
-    let escort = [
-        `Spitting up blood, you look up just in time to see ${ally.name} getting dragged away. ${captured ? randFrom(capture) : `${randFrom([`As ${ally.name} is carted off, you see the ${possessiveSuffix(gPron(ally, "sex"))} ${getGizmo()} fall, apparently unseen, onto the ground as the enemy retreats.`, `<br><br>${generic}`])}`}`,
-        `You became so obsessed with your fight, that you barely caught the sight of ${ally.name} taken away by the ${enemy.minions()}. ${captured ? randFrom(capture) : `Not only were you unable to retrieve any ${randFrom(intel_words)} on ${finalboss.boss}, but also got a valuable ally captured in the process.<br><br>${randFrom(intel)}`}`,
-        `With defeat inevitable, you back up with ${ally.name}. Your only hope of escape is ${stage.hasOwnProperty("pit") ? stage.pit : "a bottomless pit"}. ${ally.name} offers to help you climb down. As you descend, ${ally.name} is overwhelmed${captured ? `, and the ${enemy.minions()} pull you back. ${randFrom(capture)}` : `. Clenching your jaw, you turn away and make your escape.<br><br>${randFrom(intel)}`}`,
-        `${ally.name} had limped away, bleeding, and the others had gone after ${gPron(ally, "object")}, probably to finish ${gPron(ally, "object")} off.${captured ? `<br><br> ${randFrom(capture)}` : ` You could do nothing. They'd already finished with you.<br><br>${randFrom(intel)}`}`,
-        captured ? randFrom(capture) : `"We've failed ${gPron(ally, "object")}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`,
-        `"Go! Now! Get to the chopper!" ${ally.name} shouts as ${enemy.boss} steps over ${gPron(ally, "object")}. ${captured ? `You are in no shape to move. ${randFrom(capture)}` : `<br><br>${randFrom(retreat)} ${randFrom(intel)}`}`,
-    ]
-
-    let explosion_cause = []
-    stage.hasOwnProperty("explosions") ? explosion_cause = [stage.explosions, ...explosion_cause] : () => { }
-    enemy.hasOwnProperty("explosions") ? explosion_cause = [enemy.explosions, ...explosion_cause] : () => { }
-    let explosion = [`You barely clear the area when the ${randFrom(explosion_cause)} finally bring everything crumbling down. ${captured ? randFrom(capture) : generic} `]
-
-    let find_intel = [
-        `${captured ? `"Looking for this?" ${enemy.boss} holds ${whichPreposition(gizmo)} in front of you. ${randFrom(capture)}` : `You could not obtain whatever ${randFrom(intel_words)} ${enemy.boss} had. ${generic}`}`,
-        `${captured ? randFrom(capture) : `The ${enemy.name} escaped with ${stage_loot}, and the ${gizmo} in your hands looks damaged. "Agent Fletch," you got into your communications device. "I've got the ${gizmo}, but it looks damaged." "At least we have it," Agent Fletch replied in your ear. "Bring it back to Citadel HQ and we'll see what data we can pull from it.`}`,
-        `"${captured ? nextenemy.boss : finalboss.boss} will hear of your interference," ${enemy.boss} says. "And you will beg for ${gPron(captured ? nextenemy : finalboss, "possessive")} mercy." ${ucInit(gPron(enemy, "subject"))} then reaches out to a ${gizmo}. "This is what you were after?"${captured ? `` : `<br><br>${generic}`}`,
-        captured ? randFrom(capture) : `"We've failed to secure the ${randFrom(intel_words)}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`
-    ]
-
-    let guide = [
-        `"Unfortunate that ${gPron(enemy, "subject")} came out on top this time," ${ally.name} says afterward. "${ucInit(gPron(enemy, "subject"))} won't be challenged again for some time. By you or by anyone else". You look at ${ally.name} in question, but the ${gPron(ally, "sex")} had vanished! ${captured ? randFrom(capture) : `You are left to contemplate your place in the world, alone. ${randFrom(intel)}`}`,
-        `"You led me into a deathtrap," you say. "A rush like this is against everything we know." You and ${ally.name} stare hard at each other for a moment. "Very well. Strike your own path," ${ally.name} says, and turns, ${capture ? `leaving you in a heap. ${randFrom(capture)}` : `striding into the distance. ${randFrom(intel)}`}`,
-        `"You cannot expect to win every conflict," ${ally.name} says. "You almost got me killed!" you shout back, looking down at your bruised body. You are about to apologize, but when you look up, ${captured ? `you are faced with ${enemy.minions()}. ${randFrom(capture)}` : ` ${gPron(ally, "subject")} is gone. ${randFrom(intel)}`}`,
-        `${captured ? randFrom(capture) : `"Dammit!" you say to ${ally.name}. "They got away."<br><br>"It was a long shot. I'm sorry." ${gPron(ally, "subject")} answers. "Don't be," you answer. "We caused a stir. That's something." ${randFrom(intel)}`}`,
-        `"Go! Now! Get to the chopper!" ${ally.name} shouts as ${enemy.boss} steps over ${gPron(ally, "object")}. ${captured ? `You are in no shape to move. ${randFrom(capture)}` : `<br><br>${randFrom(retreat)} ${randFrom(intel)}`}`,
-    ]
-
-    let heights = [captured ? `${enemy.boss} holds you on the edge of a drop to oblivion. "Wait!" ${randFrom(enemy.minionnames)} shouts. "I hear ${nextenemy.boss} is looking for them." ` : `"Get rid of them. They are useless," ${enemy.boss} orders the ${enemy.minions()}. You have no strength to resist as you are dragged to the edge and thrown to your deaths.<br><br>You are falling toward a certain death, when suddenly a daring Citadel pilot comes to rescue with incredible vehicular acrobacy, and you are caught by the chopper!<br><br>${randFrom(intel)}`]
-
-      let labyrinth = [
-        `The relentless ${enemy.bosstitle()} forces you to full rout, and you soon find yourselves lost in the ${stage.labyrinth}. You rush through the area to escape, ${captured ? `but suddenly you find yourself surrounded by ${enemy.minions()}. You feel exhausted, and cannot push on. "How could you face the ${finalboss.name} if you can't even find your own way?" ${enemy.boss} says, eyeing you with contempt.` : `and suddenly you are in the clear.<br><br>${randFrom(intel)}`}`,
-        captured ? randFrom(capture) : `Beaten, you are left where you were. You awaken hours later in the dark, disoriented, and spend a good while trying to find your way out of the lightless ${stage.labyrinth}. A rescue team of Citadel soldiers eventually finds you and speeds you back to HQ.`
-    ]
-
-    let retrieval = [
-        `${captured ? `The ${enemy.name} collects the last of ${stage.loot}. ${randFrom(capture)}` : `The ${enemy.name} was able to escape with ${stage.loot}. ${randFrom(intel)}`}`,
-        `Even with the prepared positioning and the upper hand in the fight, ${enemy.boss} and ${gPron(enemy, "possessive")} ${randFrom(["forces", enemy.minions()])} beat you ${captured ? `down. ${randFrom(capture)}` : `back and slow your down, giving them time to get ${stage.loot} and retreat. ${randFrom(intel)}`}`,
-        `${captured ? randFrom(capture) : `"Dammit!" you contact Agent Fletch with your communicator. "They got ${stage.loot}." "It was a long shot," he answers. "We caused a stir. That's something." You disconnect and pick yourselves up.<br><br>${randFrom(intel)}`}`,
-        captured ? randFrom(capture) : `"We've failed to secure ${stage.loot}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`]
-
-    let rival_interrogate = [
-        `${captured ? `${rival.name} smirks at you as you are beaten. ${randFrom(captured)}` : `Despite your best efforts, ${rival.name} has slipped away. ${generic}`}`,
-        `${captured ? randFrom(capture) : `The ${enemy.name} was able to escape with ${rival.name}. ${randFrom(intel)}`}`,
-        `${captured ? randFrom(capture) : `${rival.name} showed ${gPron(rival, "reflexive")} to be a true coward and fled before you could make ${gPron(rival, "object")} reveal what ${randFrom(intel_words)} ${gPron(rival, "subject")} has. ${generic}`}`,
-        `"${captured ? nextenemy.boss : finalboss.boss} will hear of your interference," ${rival.name} says. "And you will beg for ${gPron(captured ? nextenemy : finalboss, "possessive")} mercy." ${ucInit(gPron(rival, "subject"))} then reaches out to a ${getGizmo()}. "This is what you were after?"`,
-        `You could not reach ${randFrom(intel_words)}, ${rival.name} evading you at every opportunity. With a screech, ${gPron(rival, "subject")} leaps down on you from the shadows, ${captured ? `and you lose your balance.<br><br>${randFrom(capture)}` : `and you react the only way you can. You knock ${gPron(rival, "object")} away, and use the opportunity to escape. ${randFrom(intel)}`}`,
-        `${captured ? randFrom(capture) : `"Dammit!" you contact Agent Fletch with your communicator. "${rival.name} got away."<br><br>"It was a long shot," he answers. "We caused a stir. That's something." You hang up and pick yourselves up. ${randFrom(intel)}`}`,
-        captured ? randFrom(capture) : `"We've failed to catch ${rival.name}," you say, clenching your fist by your side. "This doesn't mean you're done," Agent Fletch responds. "You can do better next time." Agent Fletch is right.`]
+    wincondition = winConditionLoseResult(wincondition, enemy, stage, ally, rival, finalboss, nextenemy, gizmo, is_captured, generic)
+    if(wincondition !== undefined) {
+        let winsegue = is_captured ? capture : (wincondition.length + segues[0].length) > 450 ? segues[1] : segues [0]
+        wincondition = wincondition[0].replace("FILL-IN", winsegue)
+//        console.log(wincondition)
+        return(wincondition)
+    }
 
     let loseresult
-
-    let keywords = ["generic"]
-
-    wincondition != "" ? keywords = [wincondition, wincondition, wincondition, wincondition, ...keywords] : () => { }
-
     
     const hostagelose = hostageLoseResult(enemy, stage, contact, is_captured, generic)
     const bladelose = bladeLoseResult(enemy, stage, is_captured, nextenemy, generic, finalboss)
@@ -1480,69 +1691,29 @@ ${enemy.boss} says. "Bind them. Perhaps ${nextenemy.boss} will have a use for th
     const gunklose = gunkLoseResult(enemy, stage, is_captured, nextenemy, generic)
     const explosionlose = explosionLoseResult(enemy, stage, is_captured, generic)
     const swarmedlose = swarmedLoseResult(enemy, stage, is_captured, contact, generic)
+    const pitlose = pitLoseResult(enemy, stage, is_captured, generic)
+    const labyrinthlose = labyrinthLoseResult(enemy, stage, finalboss, is_captured, generic)
+    const lootlose = lootLoseResult(enemy, stage, is_captured, generic)
     loseresult = [generic, bladelose, rituallose, hostagelose, 
-    swarmedlose, //pitlose, detonationlose, 
+    swarmedlose, pitlose, 
+    //detonationlose, 
     explosionlose, 
     //gunlose, 
+    lootlose,
     gunklose, 
     gunmenlose, 
+    labyrinthlose,
     //brutelose, 
     lablose
     ];
     loseresult = loseresult.filter(entry => entry !== undefined)
     loseresult = randFrom(loseresult)
-    //console.log(loseresult)
+//    if(hostagelose !== undefined) console.log(hostagelose)
+    let segue = is_captured ? capture : (loseresult.length + segues[1].length) > 450 ? segues[1] : segues[0]
+    loseresult = loseresult.replace("FILL-IN", segue).replace("<br><br><br><br>","<br><br>")
     return (loseresult)
     
-    stage.hasOwnProperty("keywords") ? keywords = [...keywords, ...stage.keywords, ...stage.keywords] : () => { }
-    enemy.hasOwnProperty("keywords") ? keywords = [...keywords, ...enemy.keywords, ...stage.keywords] : () => { }
-    let keyword = randFrom(keywords)
-
-    switch (keyword) {
-        case "generic": loseresult = generic;
-            break;
-//        case "blade": loseresult = randFrom(blade);
- //           break;
-        case "escort": loseresult = randFrom(escort);
-            break;
-//        case "experiment": loseresult = randFrom(experiment)
-//            break;
-        case "explosion": loseresult = randFrom(explosion)
-            break;
-        case "guns": loseresult = randFrom(guns)
-            break;
-        case "guide": loseresult = randFrom(guide)
-            break;
-        case "gunk": loseresult = randFrom(gunk)
-            break;
-        case "heights": loseresult = randFrom(heights)
-            break;
-        case "hostages": loseresult = randFrom(hostages)
-            break;
-        case "intel": loseresult = randFrom(find_intel)
-            break;
-        case "labyrinth": loseresult = randFrom(labyrinth)
-            break;
-        case "oni": loseresult = randFrom(oni)
-            break;
-        case "retrieval": loseresult = randFrom(retrieval);
-            break;
-        case "ritual": loseresult = randFrom(ritual);
-            break;
-        case "rival": loseresult = randFrom(rival_interrogate);
-            break;
-        case "swarmed": loseresult = randFrom(swarmed)
-            break;
-        case "undead": loseresult = randFrom(undead);
-            break;
-        default: loseresult = generic;
-    }
-    //    if(wincondition === keyword) {
-    //        console.log(wincondition);
-    //       console.log(enemy.boss)
-    //      console.log(loseresult)
-    //    }
-    return loseresult
+    
 }
 
 export function victoryResult(stageindex, story, nextstage, gizmo, masterplan, wincondition, ally, rival, nstages, showdown, contact) {
@@ -2224,7 +2395,7 @@ function default_clues(enemy, _hence, _citadel_word, _intel_word, _investigator_
     ])
 }
 
-function winConditionLeadIn(wincondition, default_text, enemy, this_boss, this_finalboss, ally, rival) {
+function winConditionLeadIn(wincondition, default_text, enemy, this_boss, stage, this_finalboss, ally, rival) {
 
     let wincondition_txt;
     let _priority_word = randFrom([`a priority`, `a first concern`, `the most pressing matter`, `the most important consideration`, `most important`, `takes precedence`]);
@@ -2298,9 +2469,19 @@ function winConditionLeadIn(wincondition, default_text, enemy, this_boss, this_f
 
     } else if (wincondition == "hostages") {
 
-        let bystander_words = [`bystanders`, `people`]
+        const hostages = getPropertyValue(enemy, stage, "hostages", randFrom([`bystanders`, `people`]))
 
-        let protection_prologue = [`there are numerous innocent ${randFrom(bystander_words)} in the area, and protecting them is ${_priority_word}`]
+        let protection_prologue = [
+            `there are numerous innocent ${hostages} in the area, and protecting them is ${_priority_word}`,
+            `the area is crowded with ${hostages}, forcing you to divide your attention between the enemy and keeping civilians alive`,
+            `${ucInit(hostages)} are scattered throughout the battlefield, panicked and exposed, making their safety ${_priority_word}`,
+            `the fight spills dangerously close to groups of ${hostages}, any misstep putting lives at risk`,
+            `the presence of ${hostages} limits your options — reckless force could get them killed`,
+            `${hostages} are trapped in the chaos, and every second you delay could cost lives`,
+            `the enemy is using the surrounding ${hostages} as cover, making restraint ${_priority_word}`,
+            `this isn’t a clean battlefield — ${hostages} are everywhere, and they can’t defend themselves`,
+            `protecting the ${hostages} means you can’t fight the way you normally would`,
+          ]
 
         wincondition_txt = `${default_text} ${find_out_words} ${randFrom(protection_prologue)}. ${_hence}`
 
@@ -2335,7 +2516,7 @@ export function createLeadIn(pregameprologue, stageindex, wincondition, enemy, s
 
     let d_clues = default_clues(enemy, _hence, _citadel_word, _intel_word_2, _investigator_word)
 
-    let wincondition_txt = winConditionLeadIn(wincondition, d_clues, enemy, this_boss, this_finalboss, ally, rival)
+    let wincondition_txt = winConditionLeadIn(wincondition, d_clues, enemy, this_boss, stage, this_finalboss, ally, rival)
 
     let lead_in = pregameprologue + first_is_final + wincondition_txt
 
@@ -2498,7 +2679,7 @@ export function createPrologue(stageindex, story, alliesandrivals, heronames, en
         "casino": casino,
         "vip": vip,
         "approach": approach,
-        "contact": {contact: contact},
+        "contact": contact,
         "blade": getPropertyValue(enemy, stage, "blade", "blade")
     }
 
@@ -2587,7 +2768,7 @@ export function changeOfPlans(trail, finalboss, enemy, stage, wincondition, ally
     let clues = default_clues(enemy, _hence, _citadel, _intel, _investigator)
 
     if (wincondition != "") {
-        return `${winConditionLeadIn(wincondition, "", enemy, enemy.boss, finalboss.boss, ally, rival)}`
+        return `${winConditionLeadIn(wincondition, "", enemy, enemy.boss, stage, finalboss.boss, ally, rival)}`
     }
 
     let newintel = randFrom([
@@ -2854,7 +3035,7 @@ function hostageFinalResult(enemy, stage, gloat, _subject, _possessive, contact,
         }
 
         let results = [
-            `You try to rise, but the world spins and drops you again. ${enemy.boss} doesn’t hesitate; one of the ${hostages} is picked out like a piece chosen from a board. Your vision narrows, and through the darkening blur you see only one thing clearly — ${enemy.boss} ${enemy.execution({contact: contact})}, carried out with the same cold precision that broke you.`,
+            `You try to rise, but the world spins and drops you again. ${enemy.boss} doesn’t hesitate; one of the ${hostages} is picked out like a piece chosen from a board. Your vision narrows, and through the darkening blur you see only one thing clearly — ${enemy.boss} ${enemyExecution(enemy, stage, contact)}, carried out with the same cold precision that broke you.`,
             `You stagger toward the ${hostages}, heart pounding. Before you reach them, ${enemy.boss} cuts you down effortlessly. As you fall, you wonder bitterly if it was all for nothing. "${gloat[0]}" echoes distantly, but you’re already beyond hearing.`,
             `Everything slows as ${enemy.boss} advances toward the ${hostages}, their fate sealed. You move to intercept, knowing it’s your last act. Silence falls as you collapse, the world fading to a shadowy quiet.`,
             `Your limbs refuse to move. ${enemy.boss} steps past your broken form toward the ${hostages}. "${gloat[0]}" ${_subject} says softly. Helpless, you can only close your eyes as ${_possessive} laughter fills your final moments. "${gloat[1]}"`,
@@ -4530,5 +4711,6 @@ _.templateSettings.imports = {
     getMotivation,
     numberAsString,
     getPropertyValue,
-    lowerCaseInitial
+    lowerCaseInitial,
+    enemyExecution
 };
